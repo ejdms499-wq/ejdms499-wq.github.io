@@ -227,7 +227,11 @@ body:not(.dev) #speed,body:not(.dev) #jumpBtn{display:none!important}
 
 /* ───── 2026-11 리디자인: 장치를 걷어내고 창과 글 한 줄만 ───── */
 #top,#route,#bar,#clock{display:none!important}
-#stage{height:max(100%,calc(min(100vw,560px)*2.62))!important}
+#stage{aspect-ratio:864/1536!important;height:max(100%,calc(min(100vw,560px)*1.7778))!important}
+#app:not(.gaze) #win{left:10%!important;top:21.5%!important;width:80.4%!important;height:50.9%!important}
+#cabinDay{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;opacity:0;transition:opacity 4s}
+#app.gaze #cabinDay{opacity:0!important;transition:none!important}
+#sun,#lampglow{display:none!important}
 #app.gaze #stage{height:100%!important;width:100%!important}
 @media (orientation:landscape) and (max-height:540px){#app{max-width:none!important}}
 #cap{position:absolute;left:0;right:0;bottom:calc(26px + env(safe-area-inset-bottom));z-index:9;text-align:center;font-family:'Noto Serif KR',serif;color:rgba(239,230,214,.94);text-shadow:0 1px 12px rgba(0,0,0,.75),0 0 2px rgba(0,0,0,.5);padding:12px 20px;transition:opacity .8s;cursor:pointer}
@@ -296,6 +300,10 @@ body:not(.dev) #speed,body:not(.dev) #jumpBtn{display:none!important}
 .postcard .seal em{font-style:normal;font-size:26px;letter-spacing:.06em;margin-top:10px}
 .postcard.sealed .back .msg span,.postcard.sealed .back .msg small,.postcard.sealed .pst{visibility:hidden}
 .postcard.sealed .back .msg .from{font-size:13px;opacity:.75;margin-top:6px}
+#app.day #cap{color:rgba(48,38,28,.92);text-shadow:0 1px 8px rgba(255,248,236,.7)}
+#app.day #cap .c3{color:rgba(48,38,28,.85)}
+#app.day #menuBtn,#app.day #sndBtn{background:rgba(255,250,240,.35)}
+#app.day #menuBtn svg,#app.day #sndBtn svg{stroke:rgba(48,38,28,.8)}
 </style>
 </head>
 <body>
@@ -313,7 +321,7 @@ body:not(.dev) #speed,body:not(.dev) #jumpBtn{display:none!important}
       <button id="speed">미리보기 1×</button><button id="jumpBtn">구간 이동</button>
       <button id="mail"><svg viewBox="0 0 24 24" fill="none" stroke="#3a2a1e" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="1.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></svg><span id="mailtxt">엽서 도착</span></button>
     </div>
-    <img id="cabinImg" src="img/cabin.webp" alt="">
+    <img id="cabinImg" src="img/cabin_n.webp" alt=""><img id="cabinDay" src="img/cabin_d.webp" alt="">
     <button class="hs" id="hsTea" aria-label="차" style="left:36.8%;top:60.1%;width:11.6%;height:8.2%"></button>
     <button class="hs" id="hsLamp" aria-label="창가 불" style="left:55%;top:60.4%;width:11%;height:5%"></button>
     <button class="hs" id="hsBook" aria-label="여행 수첩" style="left:48.6%;top:66%;width:15%;height:5%"></button>
@@ -417,7 +425,7 @@ body:not(.dev) #speed,body:not(.dev) #jumpBtn{display:none!important}
 (()=>{
 const $=id=>document.getElementById(id);
 const ST_N=[
- {k:'부산',e:'BUSAN',km:0,lat:35.115,lon:129.04,tm:15,ta:10,bg:'busanport',lm:'',msg:'출발했다. 바다 냄새가 났다.'},
+ {k:'부산',e:'BUSAN',km:0,lat:35.115,lon:129.04,tm:15,ta:10,bg:'bplat',lm:'',msg:'출발했다. 바다 냄새가 났다.'},
  {k:'서울',e:'SEOUL',km:420,lat:37.556,lon:126.97,tm:12.5,ta:14,bg:'kseoul',lm:'namsan',msg:'한강을 건넜다.'},
  {k:'원산',e:'WONSAN',km:640,lat:39.15,lon:127.44,tm:11,ta:12,bg:'coast',lm:'',msg:'바다가 다시 보였다.'},
  {k:'두만강',e:'TUMANGANG',km:1290,lat:42.42,lon:130.6,tm:5,ta:16,bg:'river',lm:'',msg:'강을 건너면 대륙.'},
@@ -443,7 +451,7 @@ const BI_N=[[0,2.2,'busanport'],[2.2,5.4,'tunnel'],[5.4,16,'kr01'],[16,19,'kr02'
  [5660,7470,'birch'],[7470,7510,'rcity'],[7510,8970,'birch'],[8970,9010,'rcity'],[9010,10700,'birch'],[10700,10800,'rcity'],[10800,12010,'fields'],[12010,12060,'ecity'],
  [12060,12580,'fields'],[12580,12640,'ecity'],[12640,13620,'country'],[13620,13690,'ecity'],[13690,13860,'fields'],[13860,13910,'tunnel'],[13910,14070,'country'],[14070,14200,'ecity']];
 const ST_S=[
- {k:'부산',e:'BUSAN',km:0,lat:35.115,lon:129.04,tm:15,ta:10,bg:'busanport',lm:'',msg:'출발했다. 바다 냄새가 났다.'},
+ {k:'부산',e:'BUSAN',km:0,lat:35.115,lon:129.04,tm:15,ta:10,bg:'bplat',lm:'',msg:'출발했다. 바다 냄새가 났다.'},
  {k:'서울',e:'SEOUL',km:420,lat:37.556,lon:126.97,tm:12.5,ta:14,bg:'kseoul',lm:'namsan',msg:'한강을 건넜다.'},
  {k:'신의주',e:'SINUIJU',km:850,lat:40.1,lon:124.4,tm:9,ta:14,bg:'river',lm:'',msg:'강 하나를 건너면 대륙.'},
  {k:'베이징',e:'BEIJING',km:1970,lat:39.9,lon:116.4,tm:12.5,ta:15,bg:'ccity',lm:'temple',msg:'대륙의 아침.'},
@@ -477,7 +485,7 @@ const B={
  korea:{far:'mount',trees:'mix',town:'k',ground:'paddy',near:.55}, mountain:{far:'mount',trees:'pine',near:.75},
  river:{far:'hills',water:'river',trees:'mix',near:.3}, plain:{far:'flat',trees:'birch',ground:'field',near:.45},
  taiga:{far:'hills',trees:'mix',near:.8}, baikal:{far:'mount',water:'lake',near:.2}, birch:{far:'flat',trees:'birch',near:.75},
- fields:{far:'flat',trees:'sparse',ground:'field',town:'e',near:.35}, country:{far:'hills',trees:'sparse',town:'e',ground:'field',near:.5}, tunnel:{tunnel:true}, busanport:{photo:'busan',far:'hills',water:'sea'}, kcountry:{photo:'country',far:'mount',trees:'mix',town:'k',ground:'paddy',near:.55}, kseoul:{photo:'seoul',far:'mount',town:'kcity'},kr01:{photo:'kr01',far:'mount',trees:'mix',town:'k',ground:'paddy',near:.5},kr02:{photo:'kr02',far:'mount',trees:'mix',town:'k',ground:'paddy',near:.5},kr03:{photo:'kr03',far:'mount',trees:'mix',town:'k',ground:'paddy',near:.5},kr04:{photo:'kr04',far:'mount',trees:'mix',town:'k',ground:'paddy',near:.5},kr05:{photo:'kr05',far:'mount',trees:'mix',town:'k',ground:'paddy',near:.5},kr06:{photo:'kr06',far:'mount',trees:'mix',town:'k',ground:'paddy',near:.5},kr07:{photo:'kr07',far:'mount',trees:'mix',town:'k',ground:'paddy',near:.5},kr08:{photo:'kr08',far:'mount',trees:'mix',town:'k',ground:'paddy',near:.5},kr09:{photo:'kr09',far:'mount',trees:'mix',town:'k',ground:'paddy',near:.5},kr10:{photo:'kr10',far:'mount',trees:'mix',town:'k',ground:'paddy',near:.5},kr11:{photo:'kr11',far:'mount',trees:'mix',town:'k',ground:'paddy',near:.5},kr12:{photo:'kr12',far:'mount',trees:'mix',town:'k',ground:'paddy',near:.5},kr13:{photo:'kr13',far:'mount',trees:'mix',town:'k',ground:'paddy',near:.5},kr14:{photo:'kr14',far:'mount',trees:'mix',town:'k',ground:'paddy',near:.5},kr15:{photo:'kr15',far:'mount',trees:'mix',town:'k',ground:'paddy',near:.5},kr16:{photo:'kr16',far:'mount',trees:'mix',town:'k',ground:'paddy',near:.5},kr17:{photo:'kr17',far:'mount',trees:'mix',town:'k',ground:'paddy',near:.5},
+ fields:{far:'flat',trees:'sparse',ground:'field',town:'e',near:.35}, country:{far:'hills',trees:'sparse',town:'e',ground:'field',near:.5}, tunnel:{tunnel:true}, bplat:{photo:'plat'},busanport:{photo:'busan',far:'hills',water:'sea'}, kcountry:{photo:'country',far:'mount',trees:'mix',town:'k',ground:'paddy',near:.55}, kseoul:{photo:'seoul',far:'mount',town:'kcity'},kr01:{photo:'kr01',far:'mount',trees:'mix',town:'k',ground:'paddy',near:.5},kr02:{photo:'kr02',far:'mount',trees:'mix',town:'k',ground:'paddy',near:.5},kr03:{photo:'kr03',far:'mount',trees:'mix',town:'k',ground:'paddy',near:.5},kr04:{photo:'kr04',far:'mount',trees:'mix',town:'k',ground:'paddy',near:.5},kr05:{photo:'kr05',far:'mount',trees:'mix',town:'k',ground:'paddy',near:.5},kr06:{photo:'kr06',far:'mount',trees:'mix',town:'k',ground:'paddy',near:.5},kr07:{photo:'kr07',far:'mount',trees:'mix',town:'k',ground:'paddy',near:.5},kr08:{photo:'kr08',far:'mount',trees:'mix',town:'k',ground:'paddy',near:.5},kr09:{photo:'kr09',far:'mount',trees:'mix',town:'k',ground:'paddy',near:.5},kr10:{photo:'kr10',far:'mount',trees:'mix',town:'k',ground:'paddy',near:.5},kr11:{photo:'kr11',far:'mount',trees:'mix',town:'k',ground:'paddy',near:.5},kr12:{photo:'kr12',far:'mount',trees:'mix',town:'k',ground:'paddy',near:.5},kr13:{photo:'kr13',far:'mount',trees:'mix',town:'k',ground:'paddy',near:.5},kr14:{photo:'kr14',far:'mount',trees:'mix',town:'k',ground:'paddy',near:.5},kr15:{photo:'kr15',far:'mount',trees:'mix',town:'k',ground:'paddy',near:.5},kr16:{photo:'kr16',far:'mount',trees:'mix',town:'k',ground:'paddy',near:.5},kr17:{photo:'kr17',far:'mount',trees:'mix',town:'k',ground:'paddy',near:.5},
  cnfields:{far:'flat',trees:'sparse',town:'c',ground:'field',near:.35}, ccity:{far:'hills',town:'c',trees:'sparse',near:.3}, loess:{far:'hills',pal:'loess',trees:'sparse',town:'c',ground:'field',near:.3},
  desert:{far:'dunes',pal:'sand',trees:'shrub'}, dunes:{far:'dunes',pal:'sand'}, steppe:{far:'flat',pal:'steppe',trees:'shrub',near:.15}, mcity:{far:'mount',town:'m',trees:'sparse',near:.25},
  alpine:{far:'mount',trees:'pine',town:'e',ground:'field',near:.5}, ferry:{ferry:true}};
@@ -574,24 +582,25 @@ function rr(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);
 const PHOTO={};
 // ───────── 장면 그림: img 폴더에서 필요한 것만 불러오고 지나간 건 비움 ─────────
 // pass = 한 번 지나감(구간 길이에 맞춰 한 번 흐름) / 나머지 = 끝과 끝이 이어진 반복 그림
-const SCN={busan:{pass:1},seoul:{pass:1},country:{keep:1},fg:{keep:1},
+const SCN={platd:{pass:1},platn:{pass:1},busan:{pass:1},seoul:{pass:1},country:{keep:1},fg:{keep:1},
  kr01:{},kr02:{pass:1},kr03:{},kr04:{pass:1},kr05:{},kr06:{},kr07:{pass:1},kr08:{},kr09:{pass:1},kr10:{},kr11:{},kr12:{},kr13:{},kr14:{pass:1},kr15:{},kr16:{},kr17:{}};
 const CITY={busan:1,seoul:1,kr01:1,kr07:1,kr08:1,kr14:1,kr16:1,kr17:1};
-function loadPhoto(key){if(PHOTO[key])return;const o=SCN[key]||{};PHOTO[key]={loading:true};const img=new Image();
+function loadPhoto(key){if(key==='plat'){loadPhoto('platd');loadPhoto('platn');return}if(PHOTO[key])return;const o=SCN[key]||{};PHOTO[key]={loading:true};const img=new Image();
   img.onload=()=>{PHOTO[key]={t0:performance.now(),tile:img,w:img.naturalWidth,h:img.naturalHeight,ready:true,spd:o.spd||.08,img,pass:!!o.pass,key}};
   img.onerror=()=>{PHOTO[key]={missing:true}};img.src='img/'+key+'.webp'}
 function spanOf(key){let a=1e9,b=-1;for(const e of BI){if(B[e[2]]&&B[e[2]].photo===key){a=Math.min(a,e[0]);b=Math.max(b,e[1])}}return [a,b]}
-function photoFor(key){const p=PHOTO[key];if(p&&p.ready)return p;const f=PHOTO.country;return f&&f.ready?f:null}
+function photoFor(key){if(key==='plat'){const d=PHOTO.platd,n=PHOTO.platn,day=cur&&cur.light>.45;const a=day?d:n,b=day?n:d;if(a&&a.ready)return a;if(b&&b.ready)return b}const p=PHOTO[key];if(p&&p.ready)return p;const f=PHOTO.country;return f&&f.ready?f:null}
 let lastNeed=0;loadPhoto('country');loadPhoto('fg');
 function managePhotos(km){const now=performance.now();if(now-lastNeed<500)return;lastNeed=now;
   const need=new Set(['country','fg']);
   for(const e of BI){if(e[1]>=km-3&&e[0]<=km+14){const b=B[e[2]];if(b&&b.photo)need.add(b.photo)}}
   try{for(const st of [ST[cur.i],ST[cur.next]])if(st&&B[st.bg]&&B[st.bg].photo&&Math.abs(st.km-km)<14)need.add(B[st.bg].photo)}catch(e){}
   for(const k of need)loadPhoto(k);
+  if(need.has('plat')){need.delete('plat');need.add('platd');need.add('platn')}
   for(const k of Object.keys(PHOTO)){if(!need.has(k)&&!(SCN[k]&&SCN[k].keep)&&PHOTO[k].ready){PHOTO[k].img.src='';delete PHOTO[k]}}}
 function drawPhoto(c,S,ph,pxm){
   const sc=H/ph.h;
-  if(ph.pass){const sp=spanOf(ph.key),tw=ph.img.naturalWidth*sc,p=Math.min(1,Math.max(0,(S.km-sp[0])/(sp[1]-sp[0])));c.drawImage(ph.img,-p*Math.max(0,tw-W),0,tw,H)}
+  if(ph.pass){const sp=spanOf(ph.key),tw=ph.img.naturalWidth*sc,p=sp[1]<sp[0]?.42:Math.min(1,Math.max(0,(S.km-sp[0])/(sp[1]-sp[0])));c.drawImage(ph.img,-p*Math.max(0,tw-W),0,tw,H)}
   else{const tw=ph.w*sc, off=((S.vo*pxm*ph.spd)%tw+tw)%tw;for(let x=-off;x<W;x+=tw)c.drawImage(ph.tile,x,0,tw,H)}
   // 낮에는 살짝 밝게 (사진은 밤 기준)
   if(S.light>.5){c.fillStyle='rgba(255,240,220,'+((S.light-.5)*.25)+')';c.fillRect(0,0,W,H)}
@@ -1262,7 +1271,7 @@ function arrivalTime(i){return ticket?ticket.dep+SC[i].arr:Date.now()}
 function fmtDate(ms){const a=kd(ms);return a.y+'.'+pd(a.m)+'.'+pd(a.d)+' '+pd(a.h)+':'+pd(a.mi)}
 
 // ───────── 엽서: 지금 창밖 풍경을 엽서로 ─────────
-const PNAME={busan:['부산항','BUSAN'],kr01:['부산 북구','BUSAN'],kr02:['구포','GUPO'],kr03:['낙동강','NAKDONG RIVER'],kr04:['밀양','MIRYANG'],kr05:['청도','CHEONGDO'],kr06:['경산','GYEONGSAN'],kr07:['대구','DAEGU'],kr08:['대구','DAEGU'],kr09:['왜관','WAEGWAN'],kr10:['구미','GUMI'],kr11:['김천','GIMCHEON'],kr12:['추풍령','CHUPUNGNYEONG'],kr13:['영동','YEONGDONG'],kr14:['대전','DAEJEON'],kr15:['조치원','JOCHIWON'],country:['천안','CHEONAN'],kr16:['평택','PYEONGTAEK'],kr17:['수원','SUWON'],seoul:['한강','SEOUL']};
+const PNAME={platd:['부산역','BUSAN STATION'],platn:['부산역','BUSAN STATION'],busan:['부산항','BUSAN'],kr01:['부산 북구','BUSAN'],kr02:['구포','GUPO'],kr03:['낙동강','NAKDONG RIVER'],kr04:['밀양','MIRYANG'],kr05:['청도','CHEONGDO'],kr06:['경산','GYEONGSAN'],kr07:['대구','DAEGU'],kr08:['대구','DAEGU'],kr09:['왜관','WAEGWAN'],kr10:['구미','GUMI'],kr11:['김천','GIMCHEON'],kr12:['추풍령','CHUPUNGNYEONG'],kr13:['영동','YEONGDONG'],kr14:['대전','DAEJEON'],kr15:['조치원','JOCHIWON'],country:['천안','CHEONAN'],kr16:['평택','PYEONGTAEK'],kr17:['수원','SUWON'],seoul:['한강','SEOUL']};
 function viewNow(){const S=cur,b=B[S.bk];if(!b||!b.photo)return null;const ph=photoFor(b.photo);if(!ph||!ph.ready)return null;
   const sc=H/ph.h;let f;if(ph.pass){const sp=spanOf(ph.key),tw=ph.img.naturalWidth*sc,p=Math.min(1,Math.max(0,(S.km-sp[0])/(sp[1]-sp[0])));f=(p*Math.max(0,tw-W)+W/2)/tw}
   else{const tw=ph.w*sc,off=((S.vo*(W/40)*ph.spd)%tw+tw)%tw;f=((off+W/2)%tw)/tw}return {sk:ph.key,sf:Math.round(f*1000)}}
@@ -1529,7 +1538,7 @@ function frame(now){
   $('sun').style.opacity=(sunOp*.6).toFixed(2);
   const lampOn=night>.35||B[S.bk].tunnel;
   $('lampglow').style.opacity=lampOn?'1':'0';const inTun=!!B[S.bk].tunnel;glcv.style.opacity=(inTun?1:.5+.5*night).toFixed(2);$('glassrefl').style.opacity=lampOn?(inTun?'1':(.35+.55*night).toFixed(2)):'0';$('glassrefl').style.filter=inTun?'brightness(2.2)':'none';$('bulb').setAttribute('opacity',lampOn?'1':'.35');
-  $('cabinImg').style.filter='brightness('+((0.92+0.3*S.light)*(window.LIGHTS_OFF?.3:1)).toFixed(2)+') saturate('+((0.95-0.1*S.light)*(window.LIGHTS_OFF?.8:1)).toFixed(2)+')';if(window.LIGHTS_OFF)$('glassrefl').style.opacity='0';$('nightdim').style.background='rgba(10,14,30,'+(B[S.bk].tunnel?.15:0)+')';if(0)$('cabinlight').style.background=lampOn?'radial-gradient(ellipse 80% 45% at 85% 4%,rgba(255,190,110,.22),transparent),rgba(10,8,14,.35)':'transparent';
+  $('cabinImg').style.filter=window.LIGHTS_OFF?'brightness(.32) saturate(.8)':'none';$('cabinDay').style.filter=window.LIGHTS_OFF?'brightness(.5)':'none';{const dn=B[S.bk].tunnel?0:clamp((S.light-.35)/.4,0,1);const ds=dn.toFixed(2);if($('cabinDay').dataset.o!==ds){$('cabinDay').dataset.o=ds;$('cabinDay').style.opacity=ds;$('app').classList.toggle('day',dn>.6)}}if(window.LIGHTS_OFF)$('glassrefl').style.opacity='0';$('nightdim').style.background='rgba(10,14,30,'+(B[S.bk].tunnel?.15:0)+')';if(0)$('cabinlight').style.background=lampOn?'radial-gradient(ellipse 80% 45% at 85% 4%,rgba(255,190,110,.22),transparent),rgba(10,8,14,.35)':'transparent';
   if(ticket){
     if(S.mode==='run'&&S.eta<8*60e3&&announced!==S.next){announced=S.next;announceStation(S.next)}
     if(S.mode==='wait'&&S.eta<10*60e3&&announced!==0){announced=0;announce('곧 출발합니다 · 부산발 런던행 '+trainNo(ticket.dep)+'호')}

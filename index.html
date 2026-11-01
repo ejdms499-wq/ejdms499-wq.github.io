@@ -6,7 +6,7 @@
 <title>부산발 런던행</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root{--amber:#f0b45c;--brass:#b8925a;--cream:#efe6d6;--wood:#4c3324}
 *{box-sizing:border-box}
@@ -153,7 +153,7 @@ body:not(.dev) #speed,body:not(.dev) #jumpBtn{display:none!important}
 .postcard .from{font-family:'Noto Sans KR',sans-serif;font-size:11px;opacity:.6;margin-bottom:2px}
 .postcard .back{display:flex;gap:12px;padding:12px 4px 4px;align-items:flex-start;min-height:96px;
   background:linear-gradient(90deg,transparent calc(100% - 92px),rgba(58,45,34,.12) calc(100% - 92px),rgba(58,45,34,.12) calc(100% - 91px),transparent calc(100% - 91px))}
-.postcard .msg{flex:1;font-family:'Nanum Pen Script',cursive;font-size:23px;line-height:1.2;word-break:keep-all}
+.postcard .msg{flex:1;font-family:'Noto Serif KR',serif;font-size:23px;line-height:1.2;word-break:keep-all}
 .postcard .msg .own{display:block;color:#2f4a3f}
 .postcard .msg small{display:block;font-family:'Noto Sans KR',sans-serif;font-size:10px;opacity:.5;margin-top:6px;line-height:1.5}
 .pst{position:relative;width:66px;height:80px;flex:none;margin-right:8px;transform:rotate(3deg);background:#fffdf8;padding:5px;outline:3px dotted #f7f1e4;outline-offset:-1.5px;box-shadow:0 1px 3px rgba(0,0,0,.25)}
@@ -179,11 +179,11 @@ body:not(.dev) #speed,body:not(.dev) #jumpBtn{display:none!important}
 .paper{background:#fbf6ea;color:#3a2d22;border-radius:3px;padding:18px 20px 16px;transform:rotate(-1deg);box-shadow:0 20px 44px rgba(0,0,0,.5);
   background-image:repeating-linear-gradient(transparent 0 29px,rgba(80,110,140,.18) 29px 30px);background-position:0 12px}
 .paper .nh{font-family:'Noto Sans KR',sans-serif;font-size:10.5px;letter-spacing:.14em;opacity:.5;margin-bottom:6px}
-.paper .nt{font-family:'Nanum Pen Script',cursive;font-size:26px;line-height:30px;min-height:60px;word-break:keep-all;white-space:pre-wrap}
+.paper .nt{font-family:'Noto Serif KR',serif;font-size:26px;line-height:30px;min-height:60px;word-break:keep-all;white-space:pre-wrap}
 .paper .nm{font-family:'Noto Sans KR',sans-serif;font-size:10.5px;opacity:.5;text-align:right;margin-top:6px}
 .leave{margin-top:14px;background:rgba(20,15,11,.85);border-radius:8px;padding:12px;box-shadow:inset 0 0 0 1px rgba(184,146,90,.3)}
 .leave .lh{font-size:11.5px;opacity:.7;margin-bottom:6px}
-.leave textarea{width:100%;font-family:'Nanum Pen Script',cursive;font-size:22px;line-height:1.2;padding:8px 10px;border-radius:4px;border:0;background:#fbf6ea;color:#3a2d22;outline:none;resize:none;user-select:text;-webkit-user-select:text}
+.leave textarea{width:100%;font-family:'Noto Serif KR',serif;font-size:22px;line-height:1.2;padding:8px 10px;border-radius:4px;border:0;background:#fbf6ea;color:#3a2d22;outline:none;resize:none;user-select:text;-webkit-user-select:text}
 .leave button{width:100%;margin-top:8px;padding:9px;border-radius:4px;background:var(--brass);color:#1a120d;font-size:13px}
 #noteMsg{font-size:11px;opacity:.6;text-align:center;margin-top:6px;min-height:14px}
 .closer{display:block;width:100%;margin-top:10px;padding:9px;border-radius:4px;border:1px solid rgba(239,230,214,.25);color:var(--cream);font-size:13px}
@@ -222,6 +222,38 @@ body:not(.dev) #speed,body:not(.dev) #jumpBtn{display:none!important}
 #top,#route,#bar,.curtain,#table,#speed,#jumpBtn,#mail,#clock,#drawer,#bento{transition:opacity .45s}
 #app.zooming #top,#app.zooming #route,#app.zooming #bar,#app.zooming .curtain,#app.zooming #table,#app.zooming #speed,#app.zooming #jumpBtn,#app.zooming #mail,#app.zooming #clock,#app.zooming #drawer,#app.zooming #bento,#app.zooming #blind,#app.zooming #rail,#app.zooming #lamp,#app.zooming #sun{opacity:0!important;pointer-events:none}
 #mIssue{background:linear-gradient(rgba(8,8,10,.35),rgba(8,8,10,.55)),url("img/hero.webp") center/cover!important}
+
+/* ───── 2026-11 리디자인: 장치를 걷어내고 창과 글 한 줄만 ───── */
+#top,#route,#bar,#clock{display:none!important}
+#stage{height:max(100%,calc(min(100vw,560px)*2.62))!important}
+#app.gaze #stage{height:100%!important;width:100%!important}
+@media (orientation:landscape) and (max-height:540px){#app{max-width:none!important}}
+#cap{position:absolute;left:0;right:0;bottom:calc(26px + env(safe-area-inset-bottom));z-index:9;text-align:center;font-family:'Noto Serif KR',serif;color:rgba(239,230,214,.94);text-shadow:0 1px 12px rgba(0,0,0,.75),0 0 2px rgba(0,0,0,.5);padding:12px 20px;transition:opacity .8s;cursor:pointer}
+#cap .c1{font-size:15.5px;letter-spacing:.05em;font-weight:400}
+#cap .c2{font-size:11.5px;opacity:.66;margin-top:7px;letter-spacing:.04em;font-family:'Noto Sans KR',sans-serif;font-weight:300}
+#cap .c3{display:inline-block;margin-top:12px;font-size:10px;letter-spacing:.32em;opacity:.38;font-family:'Noto Sans KR',sans-serif}
+#sndBtn{position:absolute;right:14px;top:calc(14px + env(safe-area-inset-top));z-index:9;width:36px;height:36px;border-radius:50%;background:rgba(8,8,10,.22);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;transition:opacity .6s}
+#sndBtn svg{width:17px;height:17px;stroke:rgba(239,230,214,.85);fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+#app.gaze #cap,#app.gaze #sndBtn,#app.zooming #cap,#app.zooming #sndBtn{opacity:0!important;pointer-events:none}
+#menu{position:absolute;inset:0;z-index:45;display:none;align-items:flex-end;background:rgba(4,4,6,.38)}
+#menu.on{display:flex;animation:fade .3s}
+#menu .sheet{width:100%;padding:8px 22px calc(18px + env(safe-area-inset-bottom));background:rgba(14,14,16,.82);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-radius:18px 18px 0 0;font-family:'Noto Serif KR',serif;animation:rise .35s ease}
+#menu .grab{width:36px;height:4px;border-radius:2px;background:rgba(239,230,214,.18);margin:6px auto 10px}
+#menu button.it{display:flex;width:100%;align-items:baseline;justify-content:space-between;padding:15px 2px;border-bottom:1px solid rgba(239,230,214,.08);font-size:15.5px;letter-spacing:.03em;text-align:left}
+#menu button.it:last-of-type{border-bottom:0}
+#menu button.it small{font-family:'Noto Sans KR',sans-serif;font-size:11px;opacity:.45;letter-spacing:.02em;font-weight:300}
+#menu .fine{text-align:center;font-size:10px;letter-spacing:.3em;opacity:.3;margin-top:12px;font-family:'Noto Sans KR',sans-serif}
+#veil{position:absolute;inset:0;z-index:70;background:radial-gradient(ellipse at 50% 45%,rgba(14,16,20,.86),rgba(4,5,7,.97));display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;transition:opacity 1.8s ease;cursor:pointer;font-family:'Noto Serif KR',serif;color:#efe6d6}
+#veil.off{opacity:0;pointer-events:none}
+#veil .v1{font-size:27px;letter-spacing:.12em;font-weight:400}
+#veil .v2{font-size:10px;letter-spacing:.42em;opacity:.5;margin-top:12px;font-family:'Noto Sans KR',sans-serif}
+#veil .v3{font-size:13px;opacity:.78;margin-top:42px;line-height:1.9;letter-spacing:.04em}
+#veil .v4{font-size:11px;opacity:.42;margin-top:46px;letter-spacing:.12em;font-family:'Noto Sans KR',sans-serif;animation:breathe 3.2s ease-in-out infinite}
+@keyframes breathe{50%{opacity:.15}}
+#toast{background:transparent!important;box-shadow:none!important;text-shadow:0 1px 14px rgba(0,0,0,.8)}
+#toast .t2{opacity:.75!important}
+#announce{background:transparent!important;color:rgba(239,230,214,.92)!important;text-shadow:0 1px 10px rgba(0,0,0,.8)!important;font-family:'Noto Serif KR',serif!important;top:calc(22px + env(safe-area-inset-top))!important;font-size:13px!important;letter-spacing:.04em}
+#drawer{opacity:.0001}
 </style>
 </head>
 <body>
@@ -253,6 +285,19 @@ body:not(.dev) #speed,body:not(.dev) #jumpBtn{display:none!important}
     <button id="btnSleep"><svg viewBox="0 0 24 24" fill="none" stroke="#d9b77c" stroke-width="1.4"><path d="M19 14.5A7.5 7.5 0 0 1 9.5 5a7.5 7.5 0 1 0 9.5 9.5z"/></svg>잠들기</button>
   </div>
   <div id="hint">화면을 누르면 자리로 돌아와요</div>
+  <div id="cap"><div class="c1" id="c1">부산발 런던행</div><div class="c2" id="c2"></div></div>
+  <button id="sndBtn" aria-label="소리"><svg viewBox="0 0 24 24" id="icoSnd2"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M16 9l5 6M21 9l-5 6"/></svg></button>
+  <div id="menu"><div class="sheet"><div class="grab"></div>
+    <button class="it" data-a="gaze">창밖 보기<small>폰을 가로로 돌려도 돼요</small></button>
+    <button class="it" data-a="card">엽서 보내기<small id="mCardSub">지금 지나는 곳에서</small></button>
+    <button class="it" data-a="note">서랍 속 쪽지<small>앞 승객이 남긴 한 줄</small></button>
+    <button class="it" data-a="ticket">승차권<small id="mTkSub"></small></button>
+    <button class="it" data-a="board">지금 달리는 열차로 옮겨 타기<small id="mBdSub"></small></button>
+    <button class="it" data-a="route">다른 길로 가기<small id="mRtSub"></small></button>
+    <button class="it" data-a="sleep">잠들기<small>소리만 남기고</small></button>
+    <div class="fine">본 열차는 아직 존재하지 않습니다</div>
+  </div></div>
+  <div id="veil"><div class="v1">부산발 런던행</div><div class="v2">BUSAN — LONDON</div><div class="v3" id="v3"></div><div class="v4">화면을 누르면 소리와 함께 탑승합니다</div></div>
   <div id="toast"><div class="t1" id="t1"></div><div class="t2" id="t2"></div></div>
   <div id="sleep"><div class="z">덜컹 · 덜컹</div><div class="s">누르면 깨어나요</div></div>
 
@@ -433,9 +478,9 @@ const cv=$('cv'), cx=cv.getContext('2d');
 let W=300,H=400,DPR=1;
 const offA=document.createElement('canvas'), offB=document.createElement('canvas');
 let GOX=0,GOY=0,WIN_A=1.2;
-function resize(){const r=cv.getBoundingClientRect(),oD=DPR||1,oX=GOX,oY=GOY,oW=W,oH=H;DPR=Math.min(2,window.devicePixelRatio||1);const RW=Math.max(50,r.width),RH=Math.max(50,r.height);
+function resize(){const r=cv.getBoundingClientRect(),oD=DPR||1,oX=GOX,oY=GOY,oW=W,oH=H;DPR=Math.min(matchMedia('(pointer:coarse)').matches?1.6:2,window.devicePixelRatio||1);const RW=Math.max(50,r.width),RH=Math.max(50,r.height);
   W=RW;H=RH;GOX=GOY=0;
-  if(document.getElementById('app').classList.contains('gaze')){if(RW/RH<WIN_A){W=RH*WIN_A;GOX=(RW-W)/2}else{H=RW/WIN_A;GOY=(RH-H)/2}}
+  if(document.getElementById('app').classList.contains('gaze')&&RW/RH<1.25){if(RW/RH<WIN_A){W=RH*WIN_A;GOX=(RW-W)/2}else{H=RW/WIN_A;GOY=(RH-H)/2}}
   let tmp=null;if(cv.width>2){tmp=document.createElement('canvas');tmp.width=cv.width;tmp.height=cv.height;tmp.getContext('2d').drawImage(cv,0,0)}
   for(const c of [cv,offA,offB]){c.width=Math.round(RW*DPR);c.height=Math.round(RH*DPR)}
   if(tmp&&oW){const g=cv.getContext('2d');try{g.drawImage(tmp,-oX*oD,-oY*oD,oW*oD,oH*oD,GOX*DPR,GOY*DPR,W*DPR,H*DPR)}catch(e){}}
@@ -533,9 +578,9 @@ function buildBelt(){const q=Math.min(2,DPR||1),bh=Math.round(H*.5*q),bw=Math.ro
   const gen=(lim)=>{let x=0;rs=97;while(x<lim){const t=rnd();
       if(t<.34){const n=1+Math.floor(rnd()*4);for(let k=0;k<n;k++){bare(x+rnd()*bh*.2,bh,bh*(.5+rnd()*.5));x+=bh*(.12+rnd()*.25)}x+=bh*.2}
       else if(t<.5){const n=1+Math.floor(rnd()*3);for(let k=0;k<n;k++){pine(x,bh,bh*(.55+rnd()*.45));x+=bh*(.25+rnd()*.25)}}
-      else if(t<.66){const w=bh*(.8+rnd()*2.2);bush(x,w,bh*(.14+rnd()*.2));x+=w}
+      else if(t<.66){x+=bh*(1.2+rnd()*2)}
       else if(t<.73){const w=bh*(.3+rnd()*.18);house(x,w);x+=w*1.25}
-      else x+=bh*(.8+rnd()*2.6)}};
+      else x+=bh*(2.2+rnd()*4.5)}};
   gen(bw);
   // 끝과 처음이 이어지도록: 처음 구간을 끝 너머에 한 번 더
   g.save();g.translate(bw,0);gen(bh*1.4);g.restore();
@@ -543,7 +588,7 @@ function buildBelt(){const q=Math.min(2,DPR||1),bh=Math.round(H*.5*q),bw=Math.ro
   gb.globalCompositeOperation='lighter';for(const L of lights){const [lx,ly,lw,lh]=L;if(lx>bw)continue;const gr=gb.createRadialGradient(lx+lw/2,ly+lh/2,0,lx+lw/2,ly+lh/2,lw*2.4);gr.addColorStop(0,'rgba(255,190,110,.4)');gr.addColorStop(1,'rgba(255,170,90,0)');gb.fillStyle=gr;gb.fillRect(lx-lw*2,ly-lw*2,lw*5,lw*5);gb.fillStyle='rgba(255,214,150,.85)';gb.fillRect(lx,ly,lw,lh)}
   belt={c:cb,w:bw,h:bh}}
 try{buildBelt()}catch(e){}
-function drawBelt(c,S,kind){if(!belt||!BELTK[kind]||!GRASS[kind])return;const sc=(H*.5)/belt.h,tw=belt.w*sc,th=belt.h*sc,off=((S.vo*(W/40)*.36)%tw+tw)%tw,y=H*.8-th;
+function drawBelt(c,S,kind){if(!belt||!BELTK[kind]||!GRASS[kind])return;const sc=(H*.36)/belt.h,tw=belt.w*sc,th=belt.h*sc,off=((S.vo*(W/40)*.36)%tw+tw)%tw,y=H*.8-th;
   c.globalAlpha=S.light>.5?.7:1;for(let x=-off;x<W;x+=tw)c.drawImage(belt.c,x,y,tw,th);c.globalAlpha=1}
 const BRIDGES=[[131.4,132.5],[238.2,239.1],[418.15,419.45]];
 function drawLineside(c,S,kind){
@@ -1174,16 +1219,31 @@ const hexD=h=>{try{return new TextDecoder().decode(new Uint8Array((h.match(/../g
 let pcCur=null;
 function arrivalTime(i){return ticket?ticket.dep+SC[i].arr:Date.now()}
 function fmtDate(ms){const a=kd(ms);return a.y+'.'+pd(a.m)+'.'+pd(a.d)+' '+pd(a.h)+':'+pd(a.mi)}
+
+// ───────── 엽서: 지금 창밖 풍경을 엽서로 ─────────
+const PNAME={busan:['부산항','BUSAN'],kr01:['부산 북구','BUSAN'],kr02:['구포','GUPO'],kr03:['낙동강','NAKDONG RIVER'],kr04:['밀양','MIRYANG'],kr05:['청도','CHEONGDO'],kr06:['경산','GYEONGSAN'],kr07:['대구','DAEGU'],kr08:['대구','DAEGU'],kr09:['왜관','WAEGWAN'],kr10:['구미','GUMI'],kr11:['김천','GIMCHEON'],kr12:['추풍령','CHUPUNGNYEONG'],kr13:['영동','YEONGDONG'],kr14:['대전','DAEJEON'],kr15:['조치원','JOCHIWON'],country:['천안','CHEONAN'],kr16:['평택','PYEONGTAEK'],kr17:['수원','SUWON'],seoul:['한강','SEOUL']};
+function viewNow(){const S=cur,b=B[S.bk];if(!b||!b.photo)return null;const ph=photoFor(b.photo);if(!ph||!ph.ready)return null;
+  const sc=H/ph.h;let f;if(ph.pass){const sp=spanOf(ph.key),tw=ph.img.naturalWidth*sc,p=Math.min(1,Math.max(0,(S.km-sp[0])/(sp[1]-sp[0])));f=(p*Math.max(0,tw-W)+W/2)/tw}
+  else{const tw=ph.w*sc,off=((S.vo*(W/40)*ph.spd)%tw+tw)%tw;f=((off+W/2)%tw)/tw}return {sk:ph.key,sf:Math.round(f*1000)}}
+function sceneCard(sk,sf,at){return new Promise(res=>{const done=img=>{try{const iw=img.naturalWidth,ih=img.naturalHeight,cw=Math.min(iw,ih*1.5),cx=sf/1000*iw,sx=Math.max(0,Math.min(iw-cw,cx-cw/2));
+      const c=document.createElement('canvas');c.width=1200;c.height=800;const g=c.getContext('2d');g.drawImage(img,sx,0,cw,ih,0,0,1200,800);
+      const vg=g.createRadialGradient(600,420,300,600,420,820);vg.addColorStop(0,'rgba(0,0,0,0)');vg.addColorStop(1,'rgba(0,0,0,.38)');g.fillStyle=vg;g.fillRect(0,0,1200,800);
+      const nm=PNAME[sk]||['',''],a=kd(at||Date.now());g.fillStyle='rgba(239,230,214,.94)';g.shadowColor='rgba(0,0,0,.6)';g.shadowBlur=14;
+      g.font='500 46px "Noto Serif KR",serif';g.fillText(nm[0],56,716);g.font='300 17px "Noto Sans KR",sans-serif';g.globalAlpha=.75;
+      g.fillText((nm[1]?nm[1].split('').join(' ')+'   ·   ':'')+a.y+'.'+pd(a.m)+'.'+pd(a.d)+'  '+pd(a.h)+':'+pd(a.mi),58,752);res(c.toDataURL('image/jpeg',.88))}catch(e){res(null)}};
+    const p=PHOTO[sk];if(p&&p.ready&&p.img&&p.img.src)return done(p.img);const im=new Image();im.onload=()=>done(im);im.onerror=()=>res(null);im.src='img/'+sk+'.webp'})}
 function openPostcard(i,opt={}){
   const s=ST[i],url=postcardArt(i),at=opt.at||arrivalTime(i);
-  pcCur={i,at};
-  $('pcImg').src=url;$('pcSI').style.backgroundImage='url('+url+')';
+  pcCur={i,at,sk:opt.sk,sf:opt.sf};
+  if(opt.sk){sceneCard(opt.sk,opt.sf,at).then(u=>{if(u&&pcCur&&pcCur.sk===opt.sk){$('pcImg').src=u;$('pcSI').style.backgroundImage='url('+u+')'}})}
+  const WH=opt.sk&&PNAME[opt.sk]?PNAME[opt.sk][0]:null;
+  if(!opt.sk){$('pcImg').src=url;$('pcSI').style.backgroundImage='url('+url+')'}else{$('pcImg').removeAttribute('src');$('pcSI').style.backgroundImage='none'}
   $('pcSC').textContent=STAMP[i][0];$('pcSV').textContent=STAMP[i][1];
-  const a=kd(at);$('pcPM').innerHTML='<b>'+esc(LOC[i])+'</b>'+a.y+'.'+pd(a.m)+'.'+pd(a.d);
-  $('pcFrom').textContent=opt.from?opt.from+'님이 '+s.k+'에서 보낸 엽서':'';
-  $('pcOwn').textContent=opt.note||'';$('pcMsg').textContent=opt.note?'':s.msg;
+  const a=kd(at);$('pcPM').innerHTML='<b>'+esc(WH||LOC[i])+'</b>'+a.y+'.'+pd(a.m)+'.'+pd(a.d);
+  $('pcFrom').textContent=opt.from?opt.from+'님이 '+(WH?WH+' 부근':s.k)+'에서 보낸 엽서':'';
+  $('pcOwn').textContent=opt.note||'';$('pcMsg').textContent=opt.note?'':(opt.sk&&PNAME[opt.sk]?PNAME[opt.sk][0]+' 부근을 지나며.':s.msg);
   const d=new Date(at),sun=sunElev(s.lat,s.lon,d),w=weather(s.km,d,sun.sh,sun.doy);
-  $('pcDate').textContent=s.k+'에서 · '+fmtDate(at)+' · '+w.temp+'° '+w.wx;
+  $('pcDate').textContent=(WH||s.k)+'에서 · '+fmtDate(at)+' · '+w.temp+'° '+w.wx;
   const recv=!!opt.from;$('pcBtns').style.display=recv?'none':'flex';$('pcRecv').style.display=recv?'flex':'none';
   $('pcSendBox').classList.remove('on');$('pcCopyMsg').textContent='';$('pcLink').style.display='none';$('pcNote').value='';
   $('mTicket').classList.remove('on');$('mCard').classList.add('on');
@@ -1195,8 +1255,9 @@ $('pcCopy').onclick=()=>{
   const name=(ticket&&ticket.name&&ticket.name!=='승객')?ticket.name:'익명의 승객';
   const note=($('pcNote').value||'').trim().slice(0,40);
   const a=kd(pcCur.at),dk=''+a.y+pd(a.m)+pd(a.d)+pd(a.h)+pd(a.mi);
-  const link=ART_URL+'#pc-'+R_ID+'-'+pcCur.i+'-'+dk+'-'+(hexE(name)||'0')+'-'+(hexE(note)||'0');
+  const link=ART_URL+'#pc-'+R_ID+'-'+pcCur.i+'-'+dk+'-'+(hexE(name)||'0')+'-'+(hexE(note)||'0')+(pcCur.sk?'-'+pcCur.sk+'-'+pcCur.sf:'');
   $('pcLink').value=link;
+  if(navigator.share){navigator.share({title:'부산발 런던행 엽서',text:(name||'누군가')+'님이 '+ST[pcCur.i].k+'에서 엽서를 보냈어요',url:link}).then(()=>{$('pcCopyMsg').textContent='엽서를 보냈어요.'}).catch(()=>{});return}
   const done=()=>{$('pcCopyMsg').textContent='링크를 복사했어요. 친구에게 붙여 넣어 보내세요.'};
   try{navigator.clipboard.writeText(link).then(done,()=>{$('pcLink').style.display='block';$('pcLink').select();$('pcCopyMsg').textContent='아래 링크를 길게 눌러 복사해 주세요.'})}
   catch(e){$('pcLink').style.display='block';$('pcCopyMsg').textContent='아래 링크를 길게 눌러 복사해 주세요.'}
@@ -1204,13 +1265,13 @@ $('pcCopy').onclick=()=>{
 $('pcRecvClose').onclick=()=>{$('mCard').classList.remove('on');try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}};
 $('pcRide').onclick=()=>{$('pcRecvClose').onclick();if(!ticket) openIssue()};
 function checkHash(){
-  let m=(location.hash||'').match(/^#pc-([ns])-(\d+)-(\d{12})-([0-9a-f]+)-([0-9a-f]+)$/);
-  if(m) m=[m[0],m[2],m[3],m[4],m[5],m[1]]; else {m=(location.hash||'').match(/^#pc-(\d+)-(\d{12})-([0-9a-f]+)-([0-9a-f]+)$/);if(m)m=[...m,'n']}
+  let m=(location.hash||'').match(/^#pc-([ns])-(\d+)-(\d{12})-([0-9a-f]+)-([0-9a-f]+)(?:-([a-z0-9]+)-(\d+))?$/),SK=null,SF=0;
+  if(m){SK=m[6]&&PNAME[m[6]]?m[6]:null;SF=+(m[7]||0);m=[m[0],m[2],m[3],m[4],m[5],m[1]]} else {m=(location.hash||'').match(/^#pc-(\d+)-(\d{12})-([0-9a-f]+)-([0-9a-f]+)$/);if(m)m=[...m,'n']}
   if(!m) return false; const rid=m[5], i=+m[1]; if(!(i>=0&&i<ROUTES[rid].ST.length)) return false;
   const prevR=R_ID; setRoute(rid);
   const dk=m[2],at=Date.UTC(+dk.slice(0,4),+dk.slice(4,6)-1,+dk.slice(6,8),+dk.slice(8,10),+dk.slice(10,12))-KST;
   const from=m[3]==='0'?'익명의 승객':hexD(m[3]).slice(0,12), note=m[4]==='0'?'':hexD(m[4]).slice(0,40);
-  openPostcard(i,{from:from||'익명의 승객',note,at}); setRoute(prevR); return true;
+  openPostcard(i,{from:from||'익명의 승객',note,at,sk:SK,sf:SF}); setRoute(prevR); return true;
 }
 window.addEventListener('hashchange',checkHash);
 
@@ -1228,12 +1289,13 @@ const LOCALNOTE='busan-london-note';
 async function openDrawer(){
   $('noteText').textContent='…';$('noteMeta').textContent='';$('noteMsg').textContent='';$('noteIn').value='';show('mNote',true);$('drawer').classList.remove('new');
   let found=null;
-  if(DB){try{const s=await DB.collection('notes').orderBy('at','desc').limit(60).get();
+  try{const list=await notesFetch();if(list){const tk0=(ticket&&ticket.trainKey)||'',mySeat=ticket?ticket.car+'-'+ticket.seat:'',oth=list.filter(x=>x&&typeof x.text==='string'&&x.text.trim());found=oth.find(x=>x.seat===mySeat&&x.train!==tk0)||oth.find(x=>x.train!==tk0)||oth[0]||null}}catch(e){}
+  if(!found&&DB){try{const s=await DB.collection('notes').orderBy('at','desc').limit(60).get();
     const others=s.docs.filter(d=>d.id!==UID).map(d=>d.data()).filter(x=>x&&typeof x.text==='string'&&x.text.trim());
     const mySeat=ticket?ticket.car+'-'+ticket.seat:'';
     found=others.find(x=>x.seat===mySeat&&x.train!==(ticket&&ticket.trainKey))||others.find(x=>x.train!==(ticket&&ticket.trainKey))||others[0]||null}catch(e){}}
   if(found){$('noteText').textContent=String(found.text).slice(0,80);
-    const tk=String(found.train||'');$('noteMeta').textContent=(tk.length===8?(+tk.slice(4,6))+'월 '+(+tk.slice(6,8))+'일 열차, ':'')+(found.seat?found.seat.replace('-','호차 ')+'번 ':'')+'승객이 남긴 쪽지';}
+    const tk=String(found.train||'').replace(/\D/g,'');$('noteMeta').textContent=(tk.length===8?(+tk.slice(4,6))+'월 '+(+tk.slice(6,8))+'일 열차, ':'')+(found.seat?found.seat.replace('-','호차 ')+'번 ':'')+'승객이 남긴 쪽지';}
   else{$('noteText').textContent='이 자리의 첫 손님이십니다.\n내리기 전에 다음 손님에게 한 줄 남겨주세요.';$('noteMeta').textContent='— 차장'}
   try{const mine=localStorage.getItem(LOCALNOTE);if(mine)$('noteIn').value=mine}catch(e){}
 }
@@ -1243,6 +1305,7 @@ $('noteClose').onclick=()=>show('mNote',false);
 $('noteSave').onclick=async()=>{
   const text=($('noteIn').value||'').trim().slice(0,80);if(!text){$('noteMsg').textContent='한 줄을 적어주세요.';return}
   try{localStorage.setItem(LOCALNOTE,text)}catch(e){}
+  try{if(await noteInsert(text)){$('noteMsg').textContent='서랍에 넣어뒀어요. 다음 승객이 보게 돼요.';return}}catch(e){}
   if(DB&&ticket){try{await DB.collection('notes').doc(UID).set({text,seat:ticket.car+'-'+ticket.seat,train:ticket.trainKey||'',at:Date.now()});$('noteMsg').textContent='서랍에 넣어뒀어요. 다음 승객이 보게 돼요.';return}catch(e){}}
   $('noteMsg').textContent='이 기기에만 저장됐어요.';
 };
@@ -1295,11 +1358,13 @@ $('btnIssue').onclick=()=>issue(depTimes(vnow()).next);
 $('btnNow').onclick=()=>issue(depTimes(vnow()).prev);
 $('btnTicket').onclick=openTicket;$('route').onclick=openTicket;
 $('btnBoard').onclick=()=>show('mTicket',false);
-const reset=()=>{ticket=null;try{localStorage.removeItem(KEY)}catch(e){}openIssue()};
+const reset=()=>{try{localStorage.removeItem(KEY)}catch(e){}boardTrain(depTimes(vnow()).next)};
 $('btnReset').onclick=()=>{show('mTicket',false);reset()};
 $('btnAgain').onclick=()=>{show('mArrive',false);reset()};
 $('btnStay').onclick=()=>show('mArrive',false);
 if(/[?&]dev\b/.test(location.search))document.body.classList.add('dev');
+if(navigator.share)try{$('pcCopy').textContent='보내기'}catch(e){}
+if(matchMedia('(pointer:coarse)').matches)$('hint').textContent='폰을 세로로 돌리면 자리로 돌아와요';
 $('speed').onclick=()=>setSpeed(SPEEDS[(SPEEDS.indexOf(speed)+1)%SPEEDS.length]);
 // ───────── 구간 이동 (확인용): 원하는 장면으로 시간을 바로 옮김 ─────────
 (function(){const box=document.createElement('div');box.id='jump';document.getElementById('app').appendChild(box);
@@ -1365,12 +1430,12 @@ new ResizeObserver(drawGlass).observe(cv);
 const bl1=document.createElement('canvas'),bl2=document.createElement('canvas'),grn=document.createElement('canvas');
 grn.width=grn.height=192;{const g=grn.getContext('2d'),im=g.createImageData(192,192);for(let i=0;i<im.data.length;i+=4){const v=128+(Math.random()+Math.random()+Math.random()-1.5)*70;im.data[i]=im.data[i+1]=im.data[i+2]=v;im.data[i+3]=255}g.putImageData(im,0,0)}
 let grnPat=null,grainTick=0,gox=0,goy=0;
-function postFX(night){const w=cv.width,h=cv.height;if(!w)return;cx.setTransform(1,0,0,1,0,0);
+function postFX(night){postFX.m=postFX.m||(matchMedia('(pointer:coarse)').matches?3:1);const w=cv.width,h=cv.height;if(!w)return;cx.setTransform(1,0,0,1,0,0);
   // 빛 번짐: 작게 줄인 뒤 제곱(밝은 곳만 남김) → 크게 펴서 겹치기
   const sw=Math.max(8,Math.round(w/6)),sh=Math.max(8,Math.round(h/6));if(bl1.width!==sw){bl1.width=sw;bl1.height=sh;bl2.width=Math.max(4,sw>>2);bl2.height=Math.max(4,sh>>2)}
-  const b1=bl1.getContext('2d'),b2=bl2.getContext('2d');b1.globalCompositeOperation='copy';b1.drawImage(cv,0,0,sw,sh);
+  const b1=bl1.getContext('2d'),b2=bl2.getContext('2d');if(!postFX.n||(++postFX.n%(postFX.m||1))===0){postFX.n=postFX.n||1;b1.globalCompositeOperation='copy';b1.drawImage(cv,0,0,sw,sh);
   b1.globalCompositeOperation='multiply';b1.drawImage(bl1,0,0);b1.drawImage(bl1,0,0);
-  b2.globalCompositeOperation='copy';b2.drawImage(bl1,0,0,bl2.width,bl2.height);b1.globalCompositeOperation='copy';b1.drawImage(bl2,0,0,sw,sh);
+  b2.globalCompositeOperation='copy';b2.drawImage(bl1,0,0,bl2.width,bl2.height);b1.globalCompositeOperation='copy';b1.drawImage(bl2,0,0,sw,sh)}
   cx.globalCompositeOperation='screen';cx.globalAlpha=.3+.2*night;cx.drawImage(bl1,0,0,w,h);
   // 필름처럼 검정을 살짝 띄움
   cx.globalAlpha=1;cx.fillStyle='rgb(9,11,12)';cx.fillRect(0,0,w,h);
@@ -1433,10 +1498,71 @@ function frame(now){
   else{$('pa').textContent='다음 역 '+ST[S.next].k+' · '+fmt(S.eta);$('pb').textContent=rtxt+'부산에서 '+Math.round(S.km).toLocaleString()+'km · '+(S.ferry?'카스피해 횡단 중 · 배':'시속 '+Math.round(S.v*SPD)+'km')+' · '+wtxt+(B[S.bk].tunnel?' · 해저터널':'')}
   const pct=S.km/TOTAL_KM*100;$('rme').style.left=pct+'%';$('rdone').style.width=pct+'%';
   dots.forEach((d2,i)=>d2.classList.toggle('on',S.km>=ST[i].km));
+  try{updateCap(S)}catch(e){}
   requestAnimationFrame(frame);
 }
 setRoute(ticket?(ticket.route||'n'):'n');
-if(!ticket) openIssue();
+
+// ───────── 리디자인: 바로 탑승 · 한 줄 캡션 · 메뉴 · 엽서 · 함께 ─────────
+const PLACE={busanport:'부산항',kr01:'부산 북구',kr02:'구포',kr03:'낙동강',kr04:'밀양',kr05:'청도',kr06:'경산',kr07:'대구',kr08:'대구 외곽',kr09:'왜관',kr10:'구미',kr11:'김천',kr12:'추풍령',kr13:'영동',kr14:'대전',kr15:'조치원',kcountry:'천안',kr16:'평택',kr17:'수원',kseoul:'한강'};
+const MOBILE=matchMedia('(pointer:coarse)').matches;
+let LUID='';try{LUID=localStorage.getItem('bl-uid')||'';if(!LUID){LUID=Math.random().toString(36).slice(2,10);localStorage.setItem('bl-uid',LUID)}}catch(e){LUID=Math.random().toString(36).slice(2,10)}
+function boardTrain(dep,quiet){const el=vnow()-dep;
+  ticket={route:R_ID,name:(ticket&&ticket.name)||'승객',car:1+Math.floor(Math.random()*12),seat:1+Math.floor(Math.random()*40),no:String(Math.floor(1e5+Math.random()*9e5)),dep,trainKey:trainKey(dep),arrShown:false,seen:passedIdx(el)};
+  saveTicket();announced=-1;try{joinTrain()}catch(e){}try{sbPresence()}catch(e){}
+  if(!quiet)toast(el<0?'승차권을 받았어요':'탑승했어요',trainNo(dep)+'호 · '+ticket.car+'호차 '+ticket.seat+'번',3000)}
+function autoBoard(){const now=vnow(),{next,prev}=depTimes(now),S=state(now-prev);
+  // 달리는 열차가 아직 한국(원산 전)에 있으면 그 열차로, 아니면 오늘 밤 열차를 승강장에서 기다림
+  boardTrain(S.mode!=='end'&&S.km<640?prev:next,true)}
+function ticketValid(){if(!ticket||!ticket.dep)return false;const el=vnow()-ticket.dep;return el<TRIP+6*HMS&&el>-30*HMS}
+let capA='',capB='';
+function setCap(a,b){if(a!==capA){capA=a;$('c1').textContent=a}if(b!==capB){capB=b;$('c2').textContent=b}}
+function placeOf(S){if(S.mode==='stop')return ST[S.i].k+(ST[S.i].ferry?'항':'역');const b=B[S.bk];if(b&&b.tunnel)return '';return PLACE[S.bk]||nearName(S.km)}
+function updateCap(S){if(!ticket)return;const r=riders>1?' · 함께 탄 승객 '+riders+'명':'';const lt=S.ltxt?S.ltxt.replace('현지 ','현지 '):'';
+  if(S.mode==='wait'){setCap(S.eta<10*60e3?'곧 출발합니다':'부산역 · 오늘 밤 9시 출발','출발까지 '+fmt(S.eta)+(riders>1?' · 기다리는 승객 '+riders+'명':''));return}
+  if(S.mode==='end'){setCap('종착역 런던',lt+r);return}
+  if(S.mode==='stop'){setCap(ST[S.i].k+(ST[S.i].ferry?'항':'역')+'에 잠시 정차 중',fmt(S.eta)+' 뒤 출발 · '+lt+r);return}
+  const p=placeOf(S);setCap(p?p+' 부근을 지나는 중':'터널을 지나는 중',(lt?lt+' · ':'')+'다음 역 '+ST[S.next].k+'까지 '+fmt(S.eta)+r)}
+function curStation(){const S=cur;if(S.mode==='stop'||S.mode==='end')return S.i;let b=0;for(let i=0;i<=LAST;i++)if(Math.abs(ST[i].km-S.km)<Math.abs(ST[b].km-S.km))b=i;return b}
+// 소리
+function setSound(on){try{if(!ac)initAudio();ac.resume();soundOn=on;nextClack=0;master.gain.setTargetAtTime(on?.7:0,ac.currentTime,.25)}catch(e){}
+  $('icoSnd2').innerHTML=on?'<path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/>':'<path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M16 9l5 6M21 9l-5 6"/>'}
+$('sndBtn').onclick=e=>{e.stopPropagation();setSound(!soundOn)};
+// 첫 화면 대신: 막 한 장, 누르면 소리와 함께 탑승
+function initVeil(){const v=$('veil');if(location.hash.startsWith('#pc-')){v.classList.add('off');return}
+  const S0=ticket?state(vnow()-ticket.dep):null;
+  $('v3').innerHTML=S0&&S0.mode==='wait'?'오늘 밤 9시, 부산역을 떠납니다.<br>출발까지 '+fmt(S0.eta)+'.':'지금 이 열차는<br>'+(S0?esc(placeOf({...S0,bk:isStop(S0)?ST[S0.i].bg:biomeAt(S0.km)})||'어딘가'):'어딘가')+' 부근을 달리고 있습니다.';
+  v.onclick=()=>{setSound(true);v.classList.add('off');setTimeout(()=>v.style.display='none',1900)}}
+// 메뉴
+function openMenu(){const S=cur;$('mCardSub').textContent=ST[curStation()].k+'에서';
+  $('mTkSub').textContent=ticket?trainNo(ticket.dep)+'호 · '+ticket.car+'호차 '+ticket.seat+'번':'';
+  const {prev}=depTimes(vnow()),Sp=state(vnow()-prev);$('mBdSub').textContent=(ticket&&ticket.dep===prev)?'지금 타고 있어요':trainNo(prev)+'호 · '+(isStop(Sp)?ST[Sp.i].k+'역':nearName(Sp.km)+' 부근');
+  $('mRtSub').textContent=R_ID==='n'?'남쪽 · 실크로드':'북쪽 · 시베리아';show('menu',true)}
+$('cap').onclick=e=>{e.stopPropagation();openMenu()};
+$('menu').onclick=e=>{if(e.target===$('menu'))show('menu',false)};
+document.querySelectorAll('#menu .it').forEach(b=>b.onclick=e=>{e.stopPropagation();show('menu',false);const a=b.dataset.a;
+  if(a==='gaze')gazeAsk();else if(a==='card'){const v=viewNow()||{};openPostcard(curStation(),{at:vnow(),sk:v.sk,sf:v.sf})}else if(a==='note')openDrawer();else if(a==='ticket')openTicket();
+  else if(a==='board'){const {prev}=depTimes(vnow());boardTrain(prev)}else if(a==='route'){setRoute(R_ID==='n'?'s':'n');boardTrain(ticket?ticket.dep:depTimes(vnow()).next)}
+  else if(a==='sleep')show('sleep',true)});
+// 창밖 보기: 폰 세로면 가로로 돌리기(가능하면 자동), 가로면 바로 전체
+const LAND=matchMedia('(orientation: landscape) and (max-height: 540px)');
+function gazeAsk(){if(MOBILE&&!LAND.matches){const el=document.documentElement;
+    const p=el.requestFullscreen?el.requestFullscreen():null;Promise.resolve(p).then(()=>screen.orientation&&screen.orientation.lock?screen.orientation.lock('landscape'):Promise.reject()).catch(()=>{toast('폰을 가로로 돌려 보세요','창밖이 화면 가득 펼쳐져요',3200)});return}
+  enterGaze()}
+function onLand(){const app=$('app');if(LAND.matches){app.classList.add('gaze');app.classList.add('zooming')}else if(app.classList.contains('gaze')&&MOBILE){app.classList.remove('gaze');app.classList.remove('zooming');try{if(document.fullscreenElement)document.exitFullscreen()}catch(e){}}try{resize();drawGlass()}catch(e){}}
+try{LAND.addEventListener('change',onLand)}catch(e){LAND.addListener(onLand)}
+// ───────── 함께: Supabase (주소·키를 넣으면 켜짐, 비어 있으면 혼자 모드) ─────────
+const SB_URL='', SB_KEY='';
+let SBC=null,sbCh=null;
+(async()=>{if(!SB_URL||!SB_KEY)return;try{const m=await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');SBC=m.createClient(SB_URL,SB_KEY);sbPresence()}catch(e){}})();
+function sbPresence(){if(!SBC||!ticket)return;const key='train-'+(ticket.trainKey||'x');if(sbCh&&sbCh._key===key)return;if(sbCh){try{SBC.removeChannel(sbCh)}catch(e){}}
+  sbCh=SBC.channel(key,{config:{presence:{key:LUID}}});sbCh._key=key;sbCh.on('presence',{event:'sync'},()=>{try{riders=Object.keys(sbCh.presenceState()).length}catch(e){}});
+  sbCh.subscribe(async st=>{if(st==='SUBSCRIBED'){try{await sbCh.track({at:Date.now()})}catch(e){}}})}
+async function notesFetch(){if(!SBC)return null;const {data,error}=await SBC.from('notes').select('text,seat,train,created_at').order('created_at',{ascending:false}).limit(60);return error?null:data}
+async function noteInsert(text){if(!SBC)return false;const {error}=await SBC.from('notes').insert({text,seat:ticket?ticket.car+'-'+ticket.seat:'',train:(ticket&&ticket.trainKey)||''});return !error}
+
+if(!ticketValid()) autoBoard(); else {try{sbPresence()}catch(e){}}
+initVeil();
 checkHash();
 requestAnimationFrame(frame);
 window.__pc=i=>openPostcard(i);

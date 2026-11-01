@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="only light">
+<meta name="darkreader-lock">
 <title>부산발 런던행</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -256,6 +258,8 @@ body:not(.dev) #speed,body:not(.dev) #jumpBtn{display:none!important}
 #drawer{opacity:.0001}
 
 /* ───── 손으로 만지는 것들 ───── */
+:root{color-scheme:only light}
+.hs,#steam,.coach,#fogcv{display:none!important}
 #bento{display:none!important}
 #menuBtn{position:absolute;left:14px;top:calc(14px + env(safe-area-inset-top));z-index:9;width:36px;height:36px;border-radius:50%;background:rgba(8,8,10,.22);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;transition:opacity .6s}
 #menuBtn svg{width:17px;height:17px;stroke:rgba(239,230,214,.85);fill:none;stroke-width:1.4;stroke-linecap:round}
@@ -281,6 +285,17 @@ body:not(.dev) #speed,body:not(.dev) #jumpBtn{display:none!important}
 .logbook li.now{font-weight:600}.logbook li.now::after{content:"지금";margin-left:auto;font-size:10px;letter-spacing:.2em;opacity:.6;font-family:'Noto Sans KR',sans-serif}
 .logbook li.next{opacity:.38}
 .logbook .close{display:block;width:100%;margin-top:16px;padding:11px;border:1px solid rgba(60,45,30,.25);border-radius:4px;font-size:13px}
+
+#cap .c3{display:block;margin:12px auto 0;max-width:300px;font-size:12px;letter-spacing:.03em;opacity:0;font-family:'Noto Serif KR',serif;font-style:normal;line-height:1.7;color:rgba(239,230,214,.82);transition:opacity 2.4s ease}
+#cap .c3.on{opacity:.82}
+.postcard.sealed .img img{filter:blur(16px) brightness(.8);transform:scale(1.15)}
+.postcard .seal{display:none;position:absolute;inset:0;align-items:center;justify-content:center;flex-direction:column;text-align:center;color:#f4ecdc;font-family:'Noto Serif KR',serif;text-shadow:0 1px 10px rgba(0,0,0,.6)}
+.postcard.sealed .seal{display:flex}
+.postcard .seal b{font-size:17px;font-weight:500;letter-spacing:.04em}
+.postcard .seal span{font-size:12px;opacity:.85;margin-top:8px;font-family:'Noto Sans KR',sans-serif}
+.postcard .seal em{font-style:normal;font-size:26px;letter-spacing:.06em;margin-top:10px}
+.postcard.sealed .back .msg span,.postcard.sealed .back .msg small,.postcard.sealed .pst{visibility:hidden}
+.postcard.sealed .back .msg .from{font-size:13px;opacity:.75;margin-top:6px}
 </style>
 </head>
 <body>
@@ -322,7 +337,7 @@ body:not(.dev) #speed,body:not(.dev) #jumpBtn{display:none!important}
     <button id="btnSleep"><svg viewBox="0 0 24 24" fill="none" stroke="#d9b77c" stroke-width="1.4"><path d="M19 14.5A7.5 7.5 0 0 1 9.5 5a7.5 7.5 0 1 0 9.5 9.5z"/></svg>잠들기</button>
   </div>
   <div id="hint">화면을 누르면 자리로 돌아와요</div>
-  <div id="cap"><div class="c1" id="c1">부산발 런던행</div><div class="c2" id="c2"></div></div>
+  <div id="cap"><div class="c1" id="c1">부산발 런던행</div><div class="c2" id="c2"></div><div class="c3" id="c3"></div></div>
   <button id="menuBtn" aria-label="메뉴"><svg viewBox="0 0 24 24"><path d="M5 8h14M5 12h14M5 16h9"/></svg></button>
   <button id="sndBtn" aria-label="소리"><svg viewBox="0 0 24 24" id="icoSnd2"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M16 9l5 6M21 9l-5 6"/></svg></button>
   <div id="menu"><div class="sheet"><div class="grab"></div>
@@ -330,7 +345,6 @@ body:not(.dev) #speed,body:not(.dev) #jumpBtn{display:none!important}
     <button class="it" data-a="card">엽서 보내기<small id="mCardSub">지금 지나는 곳에서</small></button>
     <button class="it" data-a="note">서랍 속 쪽지<small>앞 승객이 남긴 한 줄</small></button>
     <button class="it" data-a="log">여행 수첩<small>지나온 곳과 시각</small></button>
-    <button class="it" data-a="fog">창에 입김 불기<small>손가락으로 써 보세요</small></button>
     <button class="it" data-a="lamp">창가 불 끄기<small id="mLampSub">창밖이 더 잘 보여요</small></button>
     <button class="it" data-a="ticket">승차권<small id="mTkSub"></small></button>
     <button class="it" data-a="board">지금 달리는 열차로 옮겨 타기<small id="mBdSub"></small></button>
@@ -377,7 +391,7 @@ body:not(.dev) #speed,body:not(.dev) #jumpBtn{display:none!important}
   </div></div>
 
   <div class="modal" id="mCard"><div class="postcard">
-    <div class="img"><img id="pcImg" alt=""></div>
+    <div class="img"><img id="pcImg" alt=""><div class="seal"><b id="sealT"></b><span id="sealS"></span><em id="sealC"></em></div></div>
     <div class="back">
       <div class="msg"><div class="from" id="pcFrom"></div><span class="own" id="pcOwn"></span><span id="pcMsg"></span><small id="pcDate"></small></div>
       <div class="pst"><div class="si" id="pcSI"></div><div class="sv" id="pcSV"></div><div class="sc" id="pcSC"></div><div class="pm" id="pcPM"></div></div>
@@ -1274,7 +1288,12 @@ function openPostcard(i,opt={}){
   const recv=!!opt.from;$('pcBtns').style.display=recv?'none':'flex';$('pcRecv').style.display=recv?'flex':'none';
   $('pcSendBox').classList.remove('on');$('pcCopyMsg').textContent='';$('pcLink').style.display='none';$('pcNote').value='';
   $('mTicket').classList.remove('on');$('mCard').classList.add('on');
+  sealTick(opt);
 }
+let sealI=0;
+function sealTick(opt){clearInterval(sealI);const card=document.querySelector('.postcard');card.classList.remove('sealed');if(!opt.from||!opt.dv||Date.now()>=opt.dv)return;
+  const stn=opt.nx!=null&&ROUTES[R_ID].ST[opt.nx]?ROUTES[R_ID].ST[opt.nx].k:'다음';card.classList.add('sealed');$('sealT').textContent='아직 기차 안에 있는 엽서';$('sealS').textContent='열차가 '+stn+'역에 닿으면 열려요';
+  const up=()=>{const r=opt.dv-Date.now();if(r<=0){clearInterval(sealI);card.classList.remove('sealed');toast('엽서가 도착했어요',stn+'역에서',2600);return}const h=Math.floor(r/HMS),mi=Math.floor(r%HMS/60e3),se=Math.floor(r%60e3/1e3);$('sealC').textContent=(h?h+':'+pd(mi):mi)+':'+pd(se)};up();sealI=setInterval(up,1000)}
 $('pcClose').onclick=()=>$('mCard').classList.remove('on');
 $('pcSend').onclick=()=>{$('pcSendBox').classList.toggle('on')};
 $('pcCopy').onclick=()=>{
@@ -1282,23 +1301,24 @@ $('pcCopy').onclick=()=>{
   const name=(ticket&&ticket.name&&ticket.name!=='승객')?ticket.name:'익명의 승객';
   const note=($('pcNote').value||'').trim().slice(0,40);
   const a=kd(pcCur.at),dk=''+a.y+pd(a.m)+pd(a.d)+pd(a.h)+pd(a.mi);
-  const link=ART_URL+'#pc-'+R_ID+'-'+pcCur.i+'-'+dk+'-'+(hexE(name)||'0')+'-'+(hexE(note)||'0')+(pcCur.sk?'-'+pcCur.sk+'-'+pcCur.sf:'');
+  const nx=(cur.mode==='run'||cur.mode==='wait')?cur.next:Math.min(LAST,cur.i+1),dv=ticket?ticket.dep+SC[nx].arr:Date.now(),da=kd(dv),dd=''+da.y+pd(da.m)+pd(da.d)+pd(da.h)+pd(da.mi);
+  const link=ART_URL+'#pc-'+R_ID+'-'+pcCur.i+'-'+dk+'-'+(hexE(name)||'0')+'-'+(hexE(note)||'0')+(pcCur.sk?'-'+pcCur.sk+'-'+pcCur.sf:'-x-0')+'-'+nx+'-'+dd;pcCur.nx=nx;pcCur.dv=dv;
   $('pcLink').value=link;
-  if(navigator.share){navigator.share({title:'부산발 런던행 엽서',text:(name||'누군가')+'님이 '+ST[pcCur.i].k+'에서 엽서를 보냈어요',url:link}).then(()=>{$('pcCopyMsg').textContent='엽서를 보냈어요.'}).catch(()=>{});return}
-  const done=()=>{$('pcCopyMsg').textContent='링크를 복사했어요. 친구에게 붙여 넣어 보내세요.'};
+  if(navigator.share){navigator.share({title:'부산발 런던행 엽서',text:(name||'누군가')+'님이 기차에서 엽서를 부쳤어요. 열차가 '+ST[pcCur.nx].k+'역에 닿으면 열려요.',url:link}).then(()=>{$('pcCopyMsg').textContent='엽서를 부쳤어요. 열차가 '+ST[pcCur.nx].k+'역에 닿으면 친구가 열어 볼 수 있어요.'}).catch(()=>{});return}
+  const done=()=>{$('pcCopyMsg').textContent='링크를 복사했어요. 열차가 '+ST[pcCur.nx].k+'역에 닿으면 친구가 열어 볼 수 있어요.'};
   try{navigator.clipboard.writeText(link).then(done,()=>{$('pcLink').style.display='block';$('pcLink').select();$('pcCopyMsg').textContent='아래 링크를 길게 눌러 복사해 주세요.'})}
   catch(e){$('pcLink').style.display='block';$('pcCopyMsg').textContent='아래 링크를 길게 눌러 복사해 주세요.'}
 };
 $('pcRecvClose').onclick=()=>{$('mCard').classList.remove('on');try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}};
 $('pcRide').onclick=()=>{$('pcRecvClose').onclick();if(!ticket) openIssue()};
 function checkHash(){
-  let m=(location.hash||'').match(/^#pc-([ns])-(\d+)-(\d{12})-([0-9a-f]+)-([0-9a-f]+)(?:-([a-z0-9]+)-(\d+))?$/),SK=null,SF=0;
-  if(m){SK=m[6]&&PNAME[m[6]]?m[6]:null;SF=+(m[7]||0);m=[m[0],m[2],m[3],m[4],m[5],m[1]]} else {m=(location.hash||'').match(/^#pc-(\d+)-(\d{12})-([0-9a-f]+)-([0-9a-f]+)$/);if(m)m=[...m,'n']}
+  let m=(location.hash||'').match(/^#pc-([ns])-(\d+)-(\d{12})-([0-9a-f]+)-([0-9a-f]+)(?:-([a-z0-9]+)-(\d+))?(?:-(\d+)-(\d{12}))?$/),SK=null,SF=0,NX=null,DV=0;
+  if(m){SK=m[6]&&PNAME[m[6]]?m[6]:null;SF=+(m[7]||0);if(m[9]){NX=+m[8];const q=m[9];DV=Date.UTC(+q.slice(0,4),+q.slice(4,6)-1,+q.slice(6,8),+q.slice(8,10),+q.slice(10,12))-9*HMS}m=[m[0],m[2],m[3],m[4],m[5],m[1]]} else {m=(location.hash||'').match(/^#pc-(\d+)-(\d{12})-([0-9a-f]+)-([0-9a-f]+)$/);if(m)m=[...m,'n']}
   if(!m) return false; const rid=m[5], i=+m[1]; if(!(i>=0&&i<ROUTES[rid].ST.length)) return false;
   const prevR=R_ID; setRoute(rid);
   const dk=m[2],at=Date.UTC(+dk.slice(0,4),+dk.slice(4,6)-1,+dk.slice(6,8),+dk.slice(8,10),+dk.slice(10,12))-KST;
   const from=m[3]==='0'?'익명의 승객':hexD(m[3]).slice(0,12), note=m[4]==='0'?'':hexD(m[4]).slice(0,40);
-  openPostcard(i,{from:from||'익명의 승객',note,at,sk:SK,sf:SF}); setRoute(prevR); return true;
+  openPostcard(i,{from:from||'익명의 승객',note,at,sk:SK,sf:SF,nx:NX,dv:DV}); setRoute(prevR); return true;
 }
 window.addEventListener('hashchange',checkHash);
 
@@ -1524,7 +1544,7 @@ function frame(now){
   else{$('pa').textContent='다음 역 '+ST[S.next].k+' · '+fmt(S.eta);$('pb').textContent=rtxt+'부산에서 '+Math.round(S.km).toLocaleString()+'km · '+(S.ferry?'카스피해 횡단 중 · 배':'시속 '+Math.round(S.v*SPD)+'km')+' · '+wtxt+(B[S.bk].tunnel?' · 해저터널':'')}
   const pct=S.km/TOTAL_KM*100;$('rme').style.left=pct+'%';$('rdone').style.width=pct+'%';
   dots.forEach((d2,i)=>d2.classList.toggle('on',S.km>=ST[i].km));
-  try{updateCap(S)}catch(e){}
+  try{updateCap(S);placeNote(S);ambientTick(S)}catch(e){}
   requestAnimationFrame(frame);
 }
 setRoute(ticket?(ticket.route||'n'):'n');
@@ -1560,7 +1580,7 @@ $('sndBtn').onclick=e=>{e.stopPropagation();setSound(!soundOn)};
 function blip(f,d,v){try{if(!soundOn||!ac)return;const o=ac.createOscillator(),g=ac.createGain();o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(0,ac.currentTime);g.gain.linearRampToValueAtTime(v||.05,ac.currentTime+.01);g.gain.exponentialRampToValueAtTime(.0001,ac.currentTime+d);o.connect(g);g.connect(ac.destination);o.start();o.stop(ac.currentTime+d+.05)}catch(e){}}
 function hush(d,v){try{if(!soundOn||!ac||!noiseBuf)return;const n=ac.createBufferSource(),f=ac.createBiquadFilter(),g=ac.createGain();n.buffer=noiseBuf;f.type='bandpass';f.frequency.value=900;f.Q.value=.6;g.gain.setValueAtTime(0,ac.currentTime);g.gain.linearRampToValueAtTime(v||.12,ac.currentTime+.15);g.gain.linearRampToValueAtTime(0,ac.currentTime+d);n.connect(f);f.connect(g);g.connect(ac.destination);n.start();n.stop(ac.currentTime+d+.1)}catch(e){}}
 let teaLeft=4;
-$('steam').classList.add('on');
+
 $('hsTea').onclick=e=>{e.stopPropagation();if(cur.mode==='stop'&&teaLeft<4){teaLeft=4;toast('차를 새로 받았어요',ST[cur.i].k+'역에서',2200)}
   if(teaLeft<=0){toast('차를 다 마셨어요','다음 역에서 다시 채워 드릴게요',2600);return}
   teaLeft--;blip(1650,.18,.04);setTimeout(()=>blip(1240,.22,.03),120);const st=$('steam');st.classList.remove('on');void st.offsetWidth;st.classList.add('puff');setTimeout(()=>{st.classList.remove('puff');if(teaLeft>0)st.classList.add('on')},1900);
@@ -1587,9 +1607,9 @@ function fogFill(){const r=fog.getBoundingClientRect(),d=Math.min(2,devicePixelR
 function breathe(){if($('app').classList.contains('gaze'))return;fogFill();fog.classList.add('on');fogOn=true;hush(1.4,.1);clearTimeout(fogT);fogT=setTimeout(()=>{fog.classList.remove('on');fogOn=false},38000);
   try{if(!localStorage.getItem('bl-fog')){localStorage.setItem('bl-fog','1');toast('손가락으로 써 보세요','김은 잠시 뒤 사라져요',2600)}}catch(e){}}
 function fogPt(e){const r=fog.getBoundingClientRect();return [e.clientX-r.left,e.clientY-r.top]}
-const win=$('win');win.style.touchAction='none';
-win.addEventListener('pointerdown',e=>{if($('app').classList.contains('gaze')||e.target.closest('button'))return;fogLast=fogPt(e);if(!fogOn){clearTimeout(fogHold);fogHold=setTimeout(breathe,480)}});
-win.addEventListener('pointermove',e=>{if(!fogLast)return;const p=fogPt(e);if(!fogOn){if(Math.hypot(p[0]-fogLast[0],p[1]-fogLast[1])>12)clearTimeout(fogHold);return}
+const win=$('win');
+if(0)win.addEventListener('pointerdown',e=>{if($('app').classList.contains('gaze')||e.target.closest('button'))return;fogLast=fogPt(e);if(!fogOn){clearTimeout(fogHold);fogHold=setTimeout(breathe,480)}});
+if(0)win.addEventListener('pointermove',e=>{if(!fogLast)return;const p=fogPt(e);if(!fogOn){if(Math.hypot(p[0]-fogLast[0],p[1]-fogLast[1])>12)clearTimeout(fogHold);return}
   const g=fog.getContext('2d');g.globalCompositeOperation='destination-out';g.lineCap=g.lineJoin='round';g.lineWidth=13;g.strokeStyle='rgba(0,0,0,.92)';g.beginPath();g.moveTo(fogLast[0],fogLast[1]);g.lineTo(p[0],p[1]);g.stroke();g.globalCompositeOperation='source-over';fogLast=p;
   clearTimeout(fogT);fogT=setTimeout(()=>{fog.classList.remove('on');fogOn=false},26000)});
 ['pointerup','pointercancel','pointerleave'].forEach(t=>win.addEventListener(t,()=>{clearTimeout(fogHold);fogLast=null}));
@@ -1597,10 +1617,23 @@ $('menuBtn').onclick=e=>{e.stopPropagation();openMenu()};
 document.querySelectorAll('#menu .it[data-a=log],#menu .it[data-a=fog],#menu .it[data-a=lamp]').forEach(b=>b.addEventListener('click',()=>{const a=b.dataset.a;if(a==='log')openLog();else if(a==='fog')breathe();else if(a==='lamp')toggleLamp()}));
 function coach(){try{if(localStorage.getItem('bl-coach'))return;localStorage.setItem('bl-coach','1')}catch(e){}setTimeout(()=>{$('app').classList.add('coaching');setTimeout(()=>$('app').classList.remove('coaching'),7000)},1400)}
 
+
+// ───────── 지나는 곳의 한 줄 (실제 한국) ─────────
+const NOTE={busanport:'부산항대교 아래로 밤새 배들이 드나든다',kr01:'산비탈을 따라 올라간 불빛들, 부산의 밤',kr02:'구포 — 낙동강 바람에 국수를 말리던 동네',kr03:'원동 강변은 봄이면 매화로 하얗게 덮인다',kr04:'영남루 — 조선의 3대 누각으로 꼽히던 곳',kr05:'청도 반시는 씨가 없는 감이다',kr06:'경산은 대추가 많이 나는 고장',kr07:'두류공원 언덕 위 83타워',kr08:'금호강을 따라 불 켜진 공장들',kr09:'왜관철교 — 1905년 경부선과 함께 놓인 다리',kr10:'구미 — 들판 너머가 공단 도시',kr11:'김천은 자두와 포도의 고장',kr12:'추풍령 — 경부선이 소백산맥을 넘는 고개',kr13:'영동 — 국악의 아버지 박연의 고향',kr14:'대전 — 철길이 만든 도시',kr15:'조치원은 복숭아로 이름난 곳',kcountry:'천안 — 호두과자가 태어난 곳',kr16:'평택 — 들판이 서해까지 이어진다',kr17:'수원 — 정조가 쌓은 화성이 있는 도시',kseoul:'한강철교 — 1900년에 놓인 한강의 첫 다리'};
+let noteKey='',noteT=0;
+function placeNote(S){const k=S.mode==='stop'?'':S.bk;if(k===noteKey)return;noteKey=k;const el=$('c3');el.classList.remove('on');clearTimeout(noteT);
+  if(!NOTE[k])return;noteT=setTimeout(()=>{el.textContent=NOTE[k];el.classList.add('on');noteT=setTimeout(()=>el.classList.remove('on'),26000)},2600)}
+// ───────── 건널목 소리 (시골 구간에서 가끔) ─────────
+const RURAL={country:1,kr05:1,kr06:1,kr10:1,kr11:1,kr13:1,kr15:1};let nextBell=performance.now()+90000;
+function crossingBell(){try{if(!soundOn||!ac)return;const t0=ac.currentTime,dur=4.2,g=ac.createGain(),f=ac.createBiquadFilter();f.type='lowpass';f.frequency.value=2600;g.connect(f);f.connect(master||ac.destination);
+  for(let i=0;i<14;i++){const t=t0+i*.3,o=ac.createOscillator(),og=ac.createGain();o.type='triangle';o.frequency.setValueAtTime(760*(1+.035*(1-i/7)),t);og.gain.setValueAtTime(0,t);og.gain.linearRampToValueAtTime(.05*Math.sin(Math.PI*i/13),t+.01);og.gain.exponentialRampToValueAtTime(.0001,t+.26);o.connect(og);og.connect(g);o.start(t);o.stop(t+.3)}
+  g.gain.value=1}catch(e){}}
+function ambientTick(S){const now=performance.now();if(S.mode==='run'&&S.v>.6&&RURAL[S.bk]&&now>nextBell){nextBell=now+180000+Math.random()*240000;crossingBell()}}
+
 function initVeil(){const v=$('veil');if(location.hash.startsWith('#pc-')){v.classList.add('off');return}
   const S0=ticket?state(vnow()-ticket.dep):null;
   $('v3').innerHTML=S0&&S0.mode==='wait'?'오늘 밤 9시, 부산역을 떠납니다.<br>출발까지 '+fmt(S0.eta)+'.':'지금 이 열차는<br>'+(S0?esc(placeOf({...S0,bk:isStop(S0)?ST[S0.i].bg:biomeAt(S0.km)})||'어딘가'):'어딘가')+' 부근을 달리고 있습니다.';
-  v.onclick=()=>{setSound(true);v.classList.add('off');setTimeout(()=>v.style.display='none',1900);coach()}}
+  v.onclick=()=>{setSound(true);v.classList.add('off');setTimeout(()=>v.style.display='none',1900)}}
 // 메뉴
 function openMenu(){const S=cur;$('mCardSub').textContent=ST[curStation()].k+'에서';
   $('mTkSub').textContent=ticket?trainNo(ticket.dep)+'호 · '+ticket.car+'호차 '+ticket.seat+'번':'';

@@ -475,6 +475,9 @@ body:not(.dev) #speed,body:not(.dev) #jumpBtn{display:none!important}
 .pxph.ill .cap{position:absolute;left:0;right:0;bottom:7px;font:400 21px/1 'Nanum Pen Script','Gowun Batang',serif;color:#5b4a3a;font-style:normal;transform:rotate(-1deg);opacity:0;animation:capin .8s 1.6s ease forwards}
 @keyframes ink{0%{clip-path:inset(0 100% 0 0);filter:grayscale(1) contrast(1.9) brightness(1.18)}50%{clip-path:inset(0 0 0 0);filter:grayscale(1) contrast(1.9) brightness(1.18)}100%{clip-path:inset(0);filter:none}}
 @keyframes capin{to{opacity:.85}}
+.pxph.gf{height:250px}.pxph.gf .art{animation:none;mix-blend-mode:multiply}.pxph.gf b.gfb{display:grid;place-items:center;height:100%;font:400 30px/1.2 'Nanum Pen Script','Gowun Batang',serif;color:#6b5a48;word-break:keep-all;padding:0 10px}
+.gffact{font:12.5px/1.75 'Gowun Batang','Noto Serif KR',serif;margin:14px 8px 6px;padding:12px 14px;border-top:1px dashed rgba(239,230,214,.3);text-align:left;opacity:.9;word-break:keep-all}.gffact b{display:block;font:600 10px 'Noto Sans KR',sans-serif;letter-spacing:.2em;opacity:.55;margin-bottom:6px}
+.gfs{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:8px 0 2px}.gfs i{width:34px;height:34px;border-radius:3px;background:#f3ead8 center/contain no-repeat;border:1px dashed rgba(60,45,30,.25);display:grid;place-items:center;font:400 15px 'Nanum Pen Script',serif;color:#a08d72;font-style:normal;cursor:pointer}.gfs i.on{border:1px solid rgba(60,45,30,.35);box-shadow:0 1px 3px rgba(0,0,0,.2);color:#5b4a3a;transform:rotate(-3deg)}
 .skt{margin:14px 0 0;text-align:center;font:400 19px/1 'Nanum Pen Script','Gowun Batang',serif;color:#6b5a48}
 .skb{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:10px 0 2px}.skb i{width:30px;height:30px;border-radius:50%;background:#e8dcc6 center/cover;border:1.5px solid #fbf6ea;box-shadow:0 1px 3px rgba(0,0,0,.25);display:grid;place-items:center;font:400 13px 'Nanum Pen Script',serif;color:#a08d72;font-style:normal}
 .pxname{font:500 19px 'Noto Serif KR',serif;margin-top:20px;letter-spacing:.04em}
@@ -652,6 +655,7 @@ body:not(.dev) #speed,body:not(.dev) #jumpBtn{display:none!important}
   <div class="modal" id="mPax"><div class="paxwrap"><div class="pxph" id="pxPh"></div><div class="pxname" id="pxName"></div><div class="pxwho" id="pxWho"></div><div class="pxsay" id="pxSay"></div>
     <div class="pcbtns"><button class="ghost" id="pxTalk">말 걸기</button><button id="pxGift">선물 받기</button></div><button class="closer" id="pxClose">자리로 돌아가기</button></div></div>
   <div class="modal" id="mMenu"><div class="menuwrap"><div class="menucard" id="menuCard"></div><button class="closer" id="menuClose">닫기</button></div></div>
+  <div class="modal" id="mGift"><div class="foodwrap"><div class="pxph ill gf" id="gfPh"></div><div class="fdname" id="gfName"></div><div class="fdtext" id="gfText"></div><div class="gffact" id="gfFact"></div><button class="closer" id="gfClose">수첩에 넣기</button></div></div>
   <div class="modal" id="mFood"><div class="foodwrap"><div class="fdph" id="fdPh"></div><div class="fdname" id="fdName"></div><div class="fdtext" id="fdText"></div><div class="fdnote">맛있게 드세요</div><button class="closer" id="fdClose">잘 먹었습니다</button></div></div>
   <div id="moment"><div class="mst" id="momSt"></div><div class="mt1" id="momT"></div><div class="mt2" id="momS"></div><div class="mt3" id="momN"></div></div>
   <div class="modal" id="mLog"><div class="logbook"><h3>여행 수첩</h3><div class="sub" id="logSub"></div><div id="logStamps"></div><ol id="logList"></ol><button class="close" id="logClose">수첩 덮기</button></div></div>
@@ -1887,10 +1891,11 @@ function openLog(){if(!ticket)return;const now=vnow(),rows=[];let last='';
   rows.sort((a,b)=>a[0]-b[0]);const km=cur.km;let html='',shownNext=false;
   for(const r of rows){const a=kd(r[0]),tt=pd(a.h)+':'+pd(a.mi);if(r[0]<=now){const isNow=km>=r[2]&&km<r[3];html+='<li class="'+(isNow?'now':'')+'"><b>'+tt+'</b>'+esc(r[1])+'</li>'}else if(!shownNext){shownNext=true;html+='<li class="next"><b>'+tt+'</b>'+esc(r[1])+'</li>'}}
   const skb='<div class="skt">스케치북 · 만난 승객 '+Object.keys(MET).length+' / '+PAX.length+'</div><div class="skb">'+PAX.map(p=>MET[p.id]?'<i style="background-image:url(img/pxc_'+p.id+'.webp),url(img/px_'+p.id+'.webp)"></i>':'<i>?</i>').join('')+'</div>';
-  $('logStamps').innerHTML=stampsHtml()+skb+'<div class="stc"><span>모은 도장 '+Object.keys(STAMPS).length+' / '+MOM.length+'</span><span>받은 선물 '+Object.keys(GIFTS).length+' / '+PAX.length+' · 먹은 음식 '+Object.keys(FOODS).length+'</span></div>';
+  const gfs='<div class="skt">선물 서랍 · '+Object.keys(GIFTS).length+' / '+PAX.length+'</div><div class="gfs">'+PAX.map(p=>GIFTS[p.id]?'<i class="on" data-g="'+p.id+'" style="background-image:url(img/gf_'+p.id+'.webp)" title="'+esc(p.g[0])+'">'+esc(p.g[0][0])+'</i>':'<i>?</i>').join('')+'</div>';
+  $('logStamps').innerHTML=stampsHtml()+skb+gfs+'<div class="stc"><span>모은 도장 '+Object.keys(STAMPS).length+' / '+MOM.length+'</span><span>받은 선물 '+Object.keys(GIFTS).length+' / '+PAX.length+' · 먹은 음식 '+Object.keys(FOODS).length+'</span></div>';
   $('logList').innerHTML=html||'<li class="next"><b>21:00</b>부산역 출발</li>';const d=kd(ticket.dep);$('logSub').textContent=trainNo(ticket.dep)+'호 · '+ticket.car+'호차 '+ticket.seat+'번 · '+d.m+'월 '+d.d+'일 출발';show('mLog',true);blip(900,.08,.02);
   setTimeout(()=>{const n=document.querySelector('#logList .now');if(n)n.scrollIntoView({block:'center'})},50)}
-$('hsBook').onclick=e=>{e.stopPropagation();openLog()};$('logClose').onclick=()=>show('mLog',false);
+$('hsBook').onclick=e=>{e.stopPropagation();openLog()};$('logClose').onclick=()=>show('mLog',false);$('logStamps').addEventListener('click',e=>{const g=e.target.closest('[data-g]');if(!g)return;const p=PAX.find(x=>x.id===g.dataset.g);if(p){show('mLog',false);openGift(p)}});
 // 입김: 창을 길게 누르면 김이 서리고, 손가락으로 쓰면 지워짐
 const fog=$('fogcv');let fogOn=false,fogT=0,fogHold=0,fogLast=null;
 function fogFill(){const r=fog.getBoundingClientRect(),d=Math.min(2,devicePixelRatio||1);fog.width=Math.round(r.width*d);fog.height=Math.round(r.height*d);const g=fog.getContext('2d');g.setTransform(d,0,0,d,0,0);
@@ -2084,6 +2089,7 @@ const MOM=[
 ];
 const LS=(k,d)=>{try{return JSON.parse(localStorage.getItem(k)||'null')||d}catch(e){return d}},LSset=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
 let STAMPS=LS('bl-stamps',{}),GIFTS=LS('bl-gifts',{}),FOODS=LS('bl-foods',{}),MET=LS('bl-met',{});
+const GFACT={"p01": "자갈치시장은 한국에서 가장 큰 수산시장. 옛날 이 일대가 자갈밭이라 '자갈치'라는 이름이 붙었다는 이야기가 전해진다.", "p02": "원산에는 '명사십리'라는 바닷가가 있다. 십 리(약 4km)에 걸쳐 고운 모래가 깔려 있고, 여름이면 붉은 해당화가 핀다.", "p03": "마트료시카는 1890년대 모스크바 근교 아브람체보의 공방에서 처음 만들어졌다. 일본의 겹쳐 넣는 인형에서 영감을 받았다는 이야기가 유명하다.", "p04": "이 금속 컵받침의 이름은 '포드스타칸니크'. 흔들리는 기차에서 뜨거운 유리잔을 잡기 좋아서, 러시아 기차에선 지금도 차를 이렇게 내준다.", "p05": "바이칼은 세계에서 가장 깊은 호수(약 1,642m). 지구의 얼지 않은 민물 가운데 약 5분의 1이 이 호수 하나에 담겨 있다.", "p06": "'우샨카'는 러시아어 '우시(귀)'에서 온 이름. 귀 덮개를 내려 턱 밑에서 묶으면 영하 40도의 바람도 막아 준다.", "p07": "체스판에서 다른 말을 뛰어넘을 수 있는 건 '나이트' 하나뿐. 러시아어로는 그냥 '말(코니)'이라고 부른다.", "p08": "토슈즈 리본은 무용수가 자기 발에 맞춰 직접 바느질해 단다. 주역 무용수는 공연 한 번에 한 켤레를 다 닳게 하기도 한다.", "p09": "녹턴을 많이 남긴 쇼팽은 폴란드 사람. 그의 심장은 유언대로 고향에 돌아와 바르샤바 성십자가 성당 기둥 안에 모셔져 있다.", "p10": "호두까기 인형의 고향은 독일 에르츠산맥의 자이펜 마을. 차이콥스키의 발레 「호두까기 인형」(1892) 덕분에 크리스마스의 상징이 됐다.", "p11": "몽마르트르 테르트르 광장에선 지금도 거리 화가들이 초상화를 그려 준다. 젊은 피카소도 이 언덕의 낡은 작업실 '세탁선'에 살았다.", "p12": "사실 셜록 홈즈 원작 소설에는 '사냥모자'라는 말이 직접 나오지 않는다. 잡지 삽화가 시드니 패짓이 그려 넣으면서 홈즈의 상징이 됐다."};
 const paxAt=km=>PAX.find(p=>km>=p.a&&km<p.b),menuAt=km=>MENU.find(m=>km>=m.a&&km<m.b);
 function nextMoment(km){return MOM.find(m=>m.km>km+.2)}
 // 이미지가 있으면 쓰고, 없으면 글자 카드
@@ -2102,7 +2108,9 @@ function openPax(){const p=paxCur;if(!p)return;$('pxName').textContent=p.n;$('px
   const got=!!GIFTS[p.id];$('pxGift').textContent=got?'받은 선물 · '+p.g[0]:'선물 받기';$('pxGift').classList.toggle('done',got);show('mPax',true);blip(620,.08,.02)}
 $('pxTalk').onclick=e=>{e.stopPropagation();const p=paxCur;if(!p)return;paxLine=(paxLine+1)%p.say.length;const el=$('pxSay');el.classList.remove('in');void el.offsetWidth;el.textContent='“'+p.say[paxLine]+'”';el.classList.add('in');blip(880,.05,.015)};
 $('pxGift').onclick=e=>{e.stopPropagation();const p=paxCur;if(!p||GIFTS[p.id])return;GIFTS[p.id]=Date.now();LSset('bl-gifts',GIFTS);logAdd(p.n+'에게 '+p.g[0]+JO(p.g[0],'을','를')+' 받았다');
-  $('pxGift').textContent='받은 선물 · '+p.g[0];$('pxGift').classList.add('done');toast(p.g[0],p.g[1],3400);blip(1320,.16,.04);renderPaxChip()};
+  $('pxGift').textContent='받은 선물 · '+p.g[0];$('pxGift').classList.add('done');blip(1320,.16,.04);renderPaxChip();show('mPax',false);setTimeout(()=>openGift(p),250)};
+function openGift(p){$('gfName').textContent=p.g[0];$('gfText').textContent=p.g[1];$('gfFact').innerHTML='<b>알고 보니</b>'+esc(GFACT[p.id]||'');const ph=$('gfPh');ph.style.backgroundImage='';ph.innerHTML='<b class="gfb">'+esc(p.g[0])+'</b>';tryImg('gf_'+p.id,ph,()=>{},im=>{ph.style.backgroundImage='';ph.innerHTML='<i class="art" style="background-image:url('+im.src+')"></i><em class="cap">'+esc(p.n)+'에게 받음</em>'});show('mGift',true)}
+$('gfClose').onclick=()=>show('mGift',false);$('mGift').onclick=e=>{if(e.target===$('mGift'))show('mGift',false)};
 $('pxClose').onclick=()=>show('mPax',false);$('mPax').onclick=e=>{if(e.target===$('mPax'))show('mPax',false)};
 // 식당칸
 let foodT=0;

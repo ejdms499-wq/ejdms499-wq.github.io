@@ -241,6 +241,7 @@ body:not(.dev) #speed,body:not(.dev) #jumpBtn{display:none!important}
 /* ───── 2026-11 리디자인: 장치를 걷어내고 창과 글 한 줄만 ───── */
 #top,#route,#bar,#clock{display:none!important}
 #stage{aspect-ratio:864/1536!important;height:max(100%,calc(min(100vw,560px)*1.7778))!important}
+@media (min-aspect-ratio:3/4){#app:not(.gaze) #stage{height:100%!important}#app:not(.gaze){max-width:min(560px,56.25vh)!important}}
 #app:not(.gaze) #win{left:10%!important;top:21.5%!important;width:80.4%!important;height:50.9%!important}
 #cabinDay{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;opacity:0;transition:opacity 4s}
 #app.gaze #cabinDay{opacity:0!important;transition:none!important}
@@ -455,6 +456,7 @@ body:not(.dev) #speed,body:not(.dev) #jumpBtn{display:none!important}
 .tkst span{opacity:.28}.tkst span.on{opacity:.92;cursor:pointer;border-bottom:1px solid rgba(239,230,214,.35)}.tkst span.cur{opacity:.92;color:#e9c27d}
 .tkbtns{display:flex;gap:8px}
 .tklink{display:block;margin:14px auto 0;font-family:'Noto Sans KR',sans-serif;font-size:11px;opacity:.42;color:#efe6d6;text-decoration:underline;text-underline-offset:3px}
+#cap .c3.link{opacity:.85!important;letter-spacing:.06em;font-size:11px;text-decoration:underline;text-underline-offset:4px;cursor:pointer;pointer-events:auto}
 </style>
 </head>
 <body>
@@ -560,14 +562,6 @@ body:not(.dev) #speed,body:not(.dev) #jumpBtn{display:none!important}
     <div class="tkbtns"><button class="ghost" id="btnSwitch">다른 열차로 갈아타기</button><button id="btnBoard">자리로 돌아가기</button></div>
     <button class="tklink" id="btnReset">부산에서 다시 출발하기</button>
   </div></div>
-      <div class="grid" id="tGrid"></div>
-      <div class="perf"></div>
-      <div class="sectitle">지나온 역 · 도장을 누르면 엽서를 볼 수 있습니다</div>
-      <div class="stamps" id="tStamps"></div>
-      <button class="btn" id="btnBoard">자리로 돌아가기</button>
-      <button class="btn ghost" id="btnReset">부산에서 다시 출발하기</button>
-      <div class="fine" style="margin-top:10px">본 열차는 아직 존재하지 않습니다.</div>
-    </div></div></div>
 
   <div class="modal" id="mNote"><div class="nwrap">
     <div class="memo" id="memoRead"><div class="mh">서랍 속 쪽지</div><div class="mt" id="noteText"></div><div class="mm" id="noteMeta"></div></div>
@@ -871,6 +865,7 @@ function drawScene(c,bk,S){
   const g=c.createLinearGradient(0,0,0,hz);g.addColorStop(0,rgb(sky0));g.addColorStop(1,rgb(sky1));c.fillStyle=g;c.fillRect(0,0,W,H);
   const ph0=b.photo&&photoFor(b.photo);if(ph0){const now=performance.now();if(ph0!==XF.cur){XF.prev=XF.cur;XF.cur=ph0;XF.t=now}
     let fa=Math.min(1,(now-XF.t)/2600);fa=fa*fa*(3-2*fa);const fb=XF.prev;if(fa<1&&fb&&fb.ready&&fb.img&&fb.img.src)drawPhoto(c,S,fb,pxm);else fa=Math.min(fa,Math.min(1,(now-(ph0.t0||0))/900));c.globalAlpha=fa;drawPhoto(c,S,ph0,pxm);c.globalAlpha=1;drawLineside(c,S,b.photo);if(S.mode==='run'&&S.pass)drawPassLights(c,S);return}
+  if(b.photo&&SCN[b.photo]&&SCN[b.photo].baked){const pv=XF.cur;if(pv&&pv.ready&&pv.img&&pv.img.src){drawPhoto(c,S,pv,pxm)}return}
   if(b.tunnel){drawTunnel(c,S,pxm);return}
   if(b.ferry){drawFerry(c,S,pxm,hz);return}
   const night=1-S.light;
@@ -1153,7 +1148,8 @@ function kd(ms){const k=new Date(ms+KST);return {y:k.getUTCFullYear(),m:k.getUTC
 const trainKey=dep=>{const a=kd(dep);return R_ID+a.y+pd(a.m)+pd(a.d)};
 const trainNo=dep=>{const a=kd(dep);return (R_ID==='s'?'남':'북')+' '+pd(a.m)+pd(a.d)};
 const passedIdx=el=>{let k=0;for(let i=1;i<=LAST;i++)if(el>=SC[i].arr)k=i;return k};
-const nearName=km=>{let b=0;for(let i=0;i<=LAST;i++)if(Math.abs(ST[i].km-km)<Math.abs(ST[b].km-km))b=i;return ST[b].k};
+const TOWNS=[[1650,'우수리스크'],[1790,'스파스크달니'],[1930,'레소자보드스크'],[2190,'뱌젬스키'],[2480,'비로비잔'],[2990,'벨로고르스크'],[3560,'스코보로디노'],[3960,'모고차'],[4330,'체르니솁스크'],[4620,'치타'],[5030,'페트롭스크자바이칼스키'],[5940,'지마'],[6290,'타이셰트'],[6440,'칸스크'],[6730,'크라스노야르스크'],[6890,'아친스크'],[7090,'마린스크'],[7240,'타이가'],[7760,'바라빈스크'],[8090,'옴스크'],[8370,'이심'],[8650,'튜멘'],[9360,'페름'],[9600,'발레지노'],[9840,'키로프'],[10330,'니즈니노브고로드'],[10580,'블라디미르'],[11200,'스몰렌스크'],[11330,'오르샤'],[11480,'민스크'],[11680,'바라노비치'],[11830,'브레스트'],[12340,'포즈난'],[12540,'프랑크푸르트(오데르)'],[12900,'하노버'],[13180,'쾰른'],[13420,'브뤼셀'],[13900,'칼레'],[14030,'애슈퍼드']];
+const nearName=km=>{if(R_ID==='n'){let best=null,bd=1e9;for(const t of TOWNS){const d=Math.abs(t[0]-km);if(d<bd){bd=d;best=t[1]}}for(const s of ST){const d=Math.abs(s.km-km);if(d<=bd){bd=d;best=s.k}}if(best)return best}let b=0;for(let i=0;i<=LAST;i++)if(Math.abs(ST[i].km-km)<Math.abs(ST[b].km-km))b=i;return ST[b].k};
 
 // ───────── 엽서 그림 (나라별 빈티지 포스터) ─────────
 const LOC_N=['부산','서울','원산','두만강','Владивосток','Хабаровск','Улан-Удэ','Слюдянка','Иркутск','Новосибирск','Екатеринбург','Москва','Warszawa','Berlin','Paris','London'];
@@ -1435,7 +1431,7 @@ const ANN={ko:(s,l)=>'이번 역은 '+s.k+'역입니다.',ru:(s,l)=>'Следу�
  en:(s,l)=>'The next station is '+l+'.',az:(s,l)=>'Növbəti stansiya — '+l+'.',tr:(s,l)=>'Sıradaki istasyon: '+l+'.',hu:(s,l)=>'Következő állomás: '+l+'.'};
 const VLANG={ko:'ko-KR',ru:'ru-RU',zh:'zh-CN',pl:'pl-PL',de:'de-DE',fr:'fr-FR',en:'en-GB',az:'az-AZ',tr:'tr-TR',hu:'hu-HU'};
 const MINI={ko:'간이역',ru:'Разъезд',zh:'乘降所',pl:'Przystanek',de:'Haltepunkt',fr:'Halte',en:'Halt',az:'Dayanacaq',tr:'Durak',hu:'Megálló'};
-function setRoute(id){if(!ROUTES[id])id='n';const r=ROUTES[id];R_ID=id;TZ=r.TZ;EU=r.EU;LANG=r.LANG;ST=r.ST;FOOD=r.FOOD;BI=r.BI;LOC=r.LOC;STAMP=r.STAMP;BANDS=r.BAND;ART=r.ART;LAST=ST.length-1;TOTAL_KM=ST[LAST].km;buildSC();buildDots();try{curBk=null}catch(e){}}
+function setRoute(id){id='n';const r=ROUTES[id];R_ID=id;TZ=r.TZ;EU=r.EU;LANG=r.LANG;ST=r.ST;FOOD=r.FOOD;BI=r.BI;LOC=r.LOC;STAMP=r.STAMP;BANDS=r.BAND;ART=r.ART;LAST=ST.length-1;TOTAL_KM=ST[LAST].km;buildSC();buildDots();try{curBk=null}catch(e){}}
 const pcCache={};
 function postcardArt(i){
   const ck=R_ID+i;if(pcCache[ck]) return pcCache[ck];
@@ -1627,7 +1623,7 @@ $('btnIssue').onclick=()=>issue(depTimes(vnow()).next);
 $('btnNow').onclick=()=>issue(depTimes(vnow()).prev);
 $('btnTicket').onclick=openTicket;$('route').onclick=openTicket;
 $('btnBoard').onclick=()=>show('mTicket',false);
-const reset=()=>{try{localStorage.removeItem(KEY)}catch(e){}boardTrain(depTimes(vnow()).next)};
+const reset=()=>{openVeil()};
 $('btnReset').onclick=()=>{show('mTicket',false);reset()};
 $('btnAgain').onclick=()=>{show('mArrive',false);reset()};
 $('btnStay').onclick=()=>show('mArrive',false);
@@ -1769,7 +1765,7 @@ function frame(now){
   try{updateCap(S);placeNote(S);ambientTick(S);cartTick(S)}catch(e){}
   requestAnimationFrame(frame);
 }
-setRoute(ticket?(ticket.route||'n'):'n');
+setRoute('n');if(ticket&&ticket.route&&ticket.route!=='n'){ticket.route='n';ticket.trainKey=trainKey(ticket.dep);ticket.punched=null;saveTicket()}
 
 // ───────── 리디자인: 바로 탑승 · 한 줄 캡션 · 메뉴 · 엽서 · 함께 ─────────
 const PLACE={busanport:'부산항',kr01:'부산 북구',kr02:'구포',kr03:'낙동강',kr04:'밀양',kr05:'청도',kr06:'경산',kr07:'대구',kr08:'대구 외곽',kr09:'왜관',kr10:'구미',kr11:'김천',kr12:'추풍령',kr13:'영동',kr14:'대전',kr15:'조치원',kcountry:'천안',kr16:'평택',kr17:'수원',kseoul:'한강'};Object.assign(PLACE,{"ru27b":"우랄 숲","k18": "의정부·동두천", "k19": "연천·철원", "nk1": "북한 강원도", "nk2": "원산 앞바다", "nk3": "함흥 평야", "nk4": "동해 바닷가", "nk5": "칠보산", "nk6": "청진", "nk7": "라선", "nk8": "두만강 철교", "ru1": "하산", "ru2": "우수리 평원", "ru3": "하바롭스크 외곽", "ru4": "아무르강 철교", "ru5": "유대인 자치주", "ru6": "아무르 타이가", "ru7": "아무르 타이가", "ru8": "자바이칼", "ru9": "실카강", "ru10": "통나무집 마을", "ru11": "자바이칼 초원", "ru12": "자바이칼 초원", "ru13": "셀렝가강", "ru14": "바이칼", "ru15": "바이칼 호숫가", "ru16": "이르쿠츠크 가는 숲", "ru17": "앙가라 숲초원", "ru18": "시베리아 숲초원", "ru19": "서시베리아", "ru20": "자작나무 평원", "ru21": "시베리아 시골", "ru22": "오비강 철교", "ru23": "바라바 초원", "ru24": "튜멘", "ru25": "우랄 앞 들판", "ru26": "우랄", "ru27": "우랄 숲", "ru28": "우랄", "ru29": "러시아 시골", "ru30": "오카강 철교", "ru31": "블라디미르", "ru32": "모스크바 근교", "ru33": "스몰렌스크 길", "eu1": "폴란드 동부", "eu2": "바르샤바 외곽", "eu3": "마조프셰 들판", "eu4": "포즈난 근교", "eu5": "폴란드 서부", "eu6": "샹파뉴", "eu7": "파리 외곽", "eu8": "피카르디", "eu9": "켄트", "eu10": "런던 근교"});
@@ -1781,13 +1777,14 @@ function boardTrain(dep,quiet){const el=vnow()-dep;
   if(!quiet)toast(el<0?'승차권을 받았어요':'탑승했어요',trainNo(dep)+'호 · '+ticket.car+'호차 '+ticket.seat+'번',3000)}
 function autoBoard(){const now=vnow(),{next,prev}=depTimes(now),S=state(now-prev);
   // 달리는 열차가 아직 한국(원산 전)에 있으면 그 열차로, 아니면 오늘 밤 열차를 승강장에서 기다림
-  boardTrain(S.mode!=='end'&&S.km<640?prev:next,true);ticket.auto=1;saveTicket()}
+  boardTrain(prev,true);ticket.auto=1;saveTicket()}
 function ticketValid(){if(!ticket||!ticket.dep)return false;const el=vnow()-ticket.dep;return el<TRIP+6*HMS&&el>-30*HMS}
 let capA='',capB='';
 function setCap(a,b){if(a!==capA){capA=a;$('c1').textContent=a}if(b!==capB){capB=b;$('c2').textContent=b}}
 function placeOf(S){if(S.mode==='stop')return ST[S.i].k+(ST[S.i].ferry?'항':'역');const b=B[S.bk];if(b&&b.tunnel)return '';return PLACE[S.bk]||nearName(S.km)}
-function updateCap(S){if(!ticket)return;const r=riders>1?' · 함께 탄 승객 '+riders+'명':'';const lt=S.ltxt?S.ltxt.replace('현지 ','현지 '):'';
-  if(S.mode==='wait'){setCap(S.eta<10*60e3?'곧 출발합니다':'부산역 · 오늘 밤 9시 출발','출발까지 '+fmt(S.eta)+(riders>1?' · 기다리는 승객 '+riders+'명':''));return}
+const WAITTXT='기다리는 동안 지금 달리는 열차로 갈아타기 →';
+function updateCap(S){if(!ticket)return;if(S.mode!=='wait'&&$('c3').classList.contains('link')){$('c3').classList.remove('link','on');$('c3').textContent=''}const r=riders>1?' · 함께 탄 승객 '+riders+'명':'';const lt=S.ltxt?S.ltxt.replace('현지 ','현지 '):'';
+  if(S.mode==='wait'){setCap(S.eta<10*60e3?'곧 출발합니다':'부산역 · 오늘 밤 9시 출발','출발까지 '+fmt(S.eta)+(riders>1?' · 기다리는 승객 '+riders+'명':''));$('c3').classList.toggle('on',S.eta>30*60e3);$('c3').classList.toggle('link',S.eta>30*60e3);if(S.eta>30*60e3&&$('c3').textContent!==WAITTXT)$('c3').textContent=WAITTXT;return}
   if(S.mode==='end'){setCap('종착역 런던',lt+r);return}
   if(S.mode==='stop'){setCap(ST[S.i].k+(ST[S.i].ferry?'항':'역')+'에 잠시 정차 중',fmt(S.eta)+' 뒤 출발 · '+lt+r);return}
   const p=placeOf(S);setCap(p?p+' 부근을 지나는 중':'터널을 지나는 중',(lt?lt+' · ':'')+'다음 역 '+ST[S.next].k+'까지 '+fmt(S.eta)+r)}
@@ -1865,7 +1862,7 @@ function trainInfo(dep,now){const el=now-dep,S=state(el);let pl,sub;const day=Ma
 function trRow(dep,now,mine){const t=trainInfo(dep,now),a=kd(dep);
   return '<span class="no"><b>'+trainNo(dep).replace(' ',' ')+'</b>'+(mine?'내 열차':pd(a.m)+'.'+pd(a.d)+' 출발')+'</span><span class="pl">'+esc(t.pl)+'<small>'+esc(t.sub)+'</small></span>'+(t.lt?'<span class="lt"><b>'+t.lt+'</b><i class="dot '+t.cls+'"></i>'+t.lw+'</span>':'')}
 function renderVeil(){const now=vnow(),{next,prev}=depTimes(now);let h='';
-  const deps=[next];for(let d=0;d<12;d++){const dep=prev-d*864e5;if(now-dep>TRIP)break;deps.push(dep)}
+  const deps=[];for(let d=0;d<12;d++){const dep=prev-d*864e5;if(now-dep>TRIP)break;deps.push(dep)}deps.push(next);
   for(const dep of deps)if(!(ticketValid()&&!ticket.auto&&ticket.dep===dep))h+='<button class="tr" data-dep="'+dep+'">'+trRow(dep,now,false)+'</button>';
   $('vList').innerHTML=h;const k=kd(now);$('vNow').textContent='서울 '+pd(k.h)+':'+pd(k.mi);
   const mine=ticketValid()&&!ticket.auto?ticket.dep:0,vm=$('vMine');vm.classList.toggle('on',!!mine);if(mine){vm.innerHTML=trRow(mine,now,true).replace('<small>','<small>내 자리로 돌아가기 · ');vm.dataset.dep=mine}
@@ -1879,6 +1876,7 @@ function openMenu(){const S=cur;$('mCardSub').textContent=ST[curStation()].k+'�
   const {prev}=depTimes(vnow()),Sp=state(vnow()-prev);$('mBdSub').textContent=(ticket&&ticket.dep===prev)?'지금 타고 있어요':trainNo(prev)+'호 · '+(isStop(Sp)?ST[Sp.i].k+'역':nearName(Sp.km)+' 부근');
   $('mRtSub').textContent=R_ID==='n'?'남쪽 · 실크로드':'북쪽 · 시베리아';show('menu',true)}
 $('cap').onclick=e=>{e.stopPropagation()};
+$('c3').onclick=e=>{e.stopPropagation();if(cur&&cur.mode==='wait')openVeil()};
 $('menu').onclick=e=>{if(e.target===$('menu'))show('menu',false)};
 document.querySelectorAll('#menu .it').forEach(b=>b.onclick=e=>{e.stopPropagation();show('menu',false);const a=b.dataset.a;
   if(a==='gaze')gazeAsk();else if(a==='room')openRoom();else if(a==='card'){const v=viewNow()||{};openPostcard(curStation(),{at:vnow(),sk:v.sk,sf:v.sf})}else if(a==='note')openDrawer();else if(a==='ticket')openTicket();
@@ -1891,6 +1889,7 @@ function gazeAsk(){if(MOBILE&&!LAND.matches){const el=document.documentElement;
   enterGaze()}
 function onLand(){const app=$('app');if(LAND.matches){app.classList.add('gaze');app.classList.add('zooming')}else if(app.classList.contains('gaze')&&MOBILE){app.classList.remove('gaze');app.classList.remove('zooming');try{if(document.fullscreenElement)document.exitFullscreen()}catch(e){}}try{resize();drawGlass()}catch(e){}}
 try{LAND.addEventListener('change',onLand)}catch(e){LAND.addListener(onLand)}
+setTimeout(()=>{try{if(LAND.matches)onLand()}catch(e){}},300);
 // ───────── 함께: Supabase · 같은 열차 · 4인 침대칸 합석 ─────────
 const SB_URL='https://vuxqlfockqxvocjlntgv.supabase.co', SB_KEY='sb_publishable_IUPtobU60cCTWGpLAW6AxQ_kBtD7L38';
 let SBC=null,trainCh=null,roomCh=null,myRoom=null,myBed=null,myFrom='',roomMates={},roomFirst=true;
@@ -1975,7 +1974,7 @@ setInterval(sillTick,3000);setTimeout(sillTick,800);
   for(let k=0;k<d.length;k+=4){const n=Math.random();const v=n<.5?0:255;d[k]=d[k+1]=d[k+2]=v;d[k+3]=Math.random()*14}
   g.putImageData(im,0,0);g.globalAlpha=.05;g.strokeStyle='#6b5a44';for(let k=0;k<70;k++){g.lineWidth=.4+Math.random()*.5;g.beginPath();const x=Math.random()*180,y=Math.random()*180,a=Math.random()*6.28,l=4+Math.random()*12;g.moveTo(x,y);g.quadraticCurveTo(x+Math.cos(a)*l/2+Math.random()*3,y+Math.sin(a)*l/2,x+Math.cos(a)*l,y+Math.sin(a)*l);g.stroke()}
   document.documentElement.style.setProperty('--paper','url('+c.toDataURL()+')')}catch(e){}})();
-if(/[?&]dev/.test(location.search)||window.__SBMOCK)window.__T={boardTrain,openTicket,openPostcard,openDrawer,viewNow,depTimes,vnow:()=>vnow(),get cur(){return cur},get riders(){return riders},sayPhrase,showCart,CART,openRoom,openLog,show,get ticket(){return ticket}};$('roomSheet').onclick=e=>{if(e.target===$('roomSheet'))show('roomSheet',false)};
+if(/[?&]dev/.test(location.search)||window.__SBMOCK)window.__T={get BI(){return BI},B,get ST(){return ST},get SC(){return SC},PHOTO,photoFor,biomeAt,state,get TRIP(){return TRIP},boardTrain,openTicket,openPostcard,openDrawer,viewNow,depTimes,vnow:()=>vnow(),get cur(){return cur},get riders(){return riders},sayPhrase,showCart,CART,openRoom,openLog,show,get ticket(){return ticket}};$('roomSheet').onclick=e=>{if(e.target===$('roomSheet'))show('roomSheet',false)};
 
 if(!ticketValid()) autoBoard(); else {try{sbPresence()}catch(e){}}
 initVeil();

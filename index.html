@@ -21,7 +21,7 @@
 <link rel="icon" href="icon.png"><link rel="apple-touch-icon" href="icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@300;400;500&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
 <style>
 :root{--amber:#f0b45c;--brass:#b8925a;--cream:#efe6d6;--wood:#4c3324}
 *{box-sizing:border-box}
@@ -469,8 +469,14 @@ body:not(.dev) #speed,body:not(.dev) #jumpBtn{display:none!important}
 .paxwrap,.foodwrap{width:min(340px,100%);text-align:center;color:#efe6d6;animation:rise .5s ease}
 .pxph{width:150px;height:190px;margin:0 auto;border-radius:3px;background:#e9dfcb center/cover;border:6px solid #f6f0e3;box-shadow:0 18px 40px rgba(0,0,0,.5);display:grid;place-items:center;transform:rotate(-1.5deg)}
 .pxph b{font:400 46px 'Noto Serif KR',serif;color:#8a7a64}.pxph.has b{display:none}
-.pxph.ill{width:232px;height:232px;border-radius:2px;background:#f3e8d2 center/contain no-repeat;border:9px solid #fbf6ea;border-bottom-width:30px;box-shadow:0 1px 0 rgba(0,0,0,.08),0 18px 38px rgba(0,0,0,.5);transform:rotate(-2deg);position:relative}
-.pxph.ill::before{content:'';position:absolute;left:50%;top:-16px;width:74px;height:22px;margin-left:-37px;background:rgba(236,224,196,.78);box-shadow:0 1px 2px rgba(0,0,0,.18);transform:rotate(3deg)}
+.pxph.ill{width:236px;height:272px;border-radius:3px 3px 4px 4px;background-color:#f6eedd;border:0;padding:30px 14px 34px;box-shadow:0 1px 0 rgba(0,0,0,.06),0 20px 40px rgba(0,0,0,.55);transform:rotate(-1.6deg);position:relative;display:block;background-image:repeating-linear-gradient(0deg,rgba(120,100,70,.035) 0 1px,transparent 1px 3px)}
+.pxph.ill::before{content:'';position:absolute;left:12px;right:12px;top:-7px;height:22px;background:radial-gradient(circle at 50% 7px,#3a3128 0 3px,transparent 3.6px) 0 0/17px 22px repeat-x,radial-gradient(ellipse 4px 11px at 50% 11px,transparent 0 2px,#9a8f80 2.4px 3.6px,transparent 4px) 0 0/17px 22px repeat-x}
+.pxph.ill .art{display:block;width:100%;height:100%;background:center/contain no-repeat;mix-blend-mode:multiply;animation:ink 2.2s ease both}
+.pxph.ill .cap{position:absolute;left:0;right:0;bottom:7px;font:400 21px/1 'Nanum Pen Script','Gowun Batang',serif;color:#5b4a3a;font-style:normal;transform:rotate(-1deg);opacity:0;animation:capin .8s 1.6s ease forwards}
+@keyframes ink{0%{clip-path:inset(0 100% 0 0);filter:grayscale(1) contrast(1.9) brightness(1.18)}50%{clip-path:inset(0 0 0 0);filter:grayscale(1) contrast(1.9) brightness(1.18)}100%{clip-path:inset(0);filter:none}}
+@keyframes capin{to{opacity:.85}}
+.skt{margin:14px 0 0;text-align:center;font:400 19px/1 'Nanum Pen Script','Gowun Batang',serif;color:#6b5a48}
+.skb{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:10px 0 2px}.skb i{width:30px;height:30px;border-radius:50%;background:#e8dcc6 center/cover;border:1.5px solid #fbf6ea;box-shadow:0 1px 3px rgba(0,0,0,.25);display:grid;place-items:center;font:400 13px 'Nanum Pen Script',serif;color:#a08d72;font-style:normal}
 .pxname{font:500 19px 'Noto Serif KR',serif;margin-top:20px;letter-spacing:.04em}
 .pxwho{font:12px/1.6 'Noto Sans KR',sans-serif;opacity:.6;margin-top:6px}
 .pxsay{font:16px/1.75 'Gowun Batang','Noto Serif KR',serif;margin:18px 6px 4px;min-height:58px;word-break:keep-all}
@@ -1880,7 +1886,8 @@ function openLog(){if(!ticket)return;const now=vnow(),rows=[];let last='';
   for(const L of (ticket.log||[]))rows.push([L[0],'· '+L[1],-1,-1]);
   rows.sort((a,b)=>a[0]-b[0]);const km=cur.km;let html='',shownNext=false;
   for(const r of rows){const a=kd(r[0]),tt=pd(a.h)+':'+pd(a.mi);if(r[0]<=now){const isNow=km>=r[2]&&km<r[3];html+='<li class="'+(isNow?'now':'')+'"><b>'+tt+'</b>'+esc(r[1])+'</li>'}else if(!shownNext){shownNext=true;html+='<li class="next"><b>'+tt+'</b>'+esc(r[1])+'</li>'}}
-  $('logStamps').innerHTML=stampsHtml()+'<div class="stc"><span>모은 도장 '+Object.keys(STAMPS).length+' / '+MOM.length+'</span><span>받은 선물 '+Object.keys(GIFTS).length+' / '+PAX.length+' · 먹은 음식 '+Object.keys(FOODS).length+'</span></div>';
+  const skb='<div class="skt">스케치북 · 만난 승객 '+Object.keys(MET).length+' / '+PAX.length+'</div><div class="skb">'+PAX.map(p=>MET[p.id]?'<i style="background-image:url(img/pxc_'+p.id+'.webp),url(img/px_'+p.id+'.webp)"></i>':'<i>?</i>').join('')+'</div>';
+  $('logStamps').innerHTML=stampsHtml()+skb+'<div class="stc"><span>모은 도장 '+Object.keys(STAMPS).length+' / '+MOM.length+'</span><span>받은 선물 '+Object.keys(GIFTS).length+' / '+PAX.length+' · 먹은 음식 '+Object.keys(FOODS).length+'</span></div>';
   $('logList').innerHTML=html||'<li class="next"><b>21:00</b>부산역 출발</li>';const d=kd(ticket.dep);$('logSub').textContent=trainNo(ticket.dep)+'호 · '+ticket.car+'호차 '+ticket.seat+'번 · '+d.m+'월 '+d.d+'일 출발';show('mLog',true);blip(900,.08,.02);
   setTimeout(()=>{const n=document.querySelector('#logList .now');if(n)n.scrollIntoView({block:'center'})},50)}
 $('hsBook').onclick=e=>{e.stopPropagation();openLog()};$('logClose').onclick=()=>show('mLog',false);
@@ -2076,7 +2083,7 @@ const MOM=[
  {km:14120,id:'m16',t:'런던',s:'부산에서 14,120km',st:'LONDON'},
 ];
 const LS=(k,d)=>{try{return JSON.parse(localStorage.getItem(k)||'null')||d}catch(e){return d}},LSset=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
-let STAMPS=LS('bl-stamps',{}),GIFTS=LS('bl-gifts',{}),FOODS=LS('bl-foods',{});
+let STAMPS=LS('bl-stamps',{}),GIFTS=LS('bl-gifts',{}),FOODS=LS('bl-foods',{}),MET=LS('bl-met',{});
 const paxAt=km=>PAX.find(p=>km>=p.a&&km<p.b),menuAt=km=>MENU.find(m=>km>=m.a&&km<m.b);
 function nextMoment(km){return MOM.find(m=>m.km>km+.2)}
 // 이미지가 있으면 쓰고, 없으면 글자 카드
@@ -2091,7 +2098,7 @@ function renderPaxChip(){const el=$('pax');if(!el)return;if(!paxCur){el.innerHTM
   const nm=paxCur.n.split(' ').pop();el.innerHTML='<i class="pxa" id="pxChipA">'+esc(paxCur.n[0])+'</i><span>'+esc(nm.length>5?nm.slice(0,5):nm)+'</span>';el.classList.add('on');el.classList.toggle('dot',!GIFTS[paxCur.id]);
   const a=$('pxChipA'),id=paxCur.id;tryImg('pxc_'+id,a,()=>tryImg('px_'+id,a,()=>{}))}
 function openPax(){const p=paxCur;if(!p)return;$('pxName').textContent=p.n;$('pxWho').textContent=p.w;paxLine=0;$('pxSay').textContent='“'+p.say[0]+'”';
-  const ph=$('pxPh');ph.classList.remove('has');ph.style.backgroundImage='';ph.innerHTML='<b>'+esc(p.n[0])+'</b>';ph.classList.remove('ill');tryImg('px_'+p.id,ph,()=>{},im=>ph.classList.toggle('ill',im.naturalWidth/im.naturalHeight>.9));
+  const ph=$('pxPh');ph.classList.remove('has');ph.style.backgroundImage='';ph.innerHTML='<b>'+esc(p.n[0])+'</b>';ph.classList.remove('ill');tryImg('px_'+p.id,ph,()=>{},im=>{if(im.naturalWidth/im.naturalHeight<=.9)return;const k=kd(vnow());ph.classList.add('ill');ph.style.backgroundImage='';ph.innerHTML='<i class="art" style="background-image:url('+im.src+')"></i><em class="cap">'+k.m+'.'+k.d+' · '+esc(nearName(cur.km))+'에서</em>'});if(!MET[p.id]){MET[p.id]=Date.now();LSset('bl-met',MET)}
   const got=!!GIFTS[p.id];$('pxGift').textContent=got?'받은 선물 · '+p.g[0]:'선물 받기';$('pxGift').classList.toggle('done',got);show('mPax',true);blip(620,.08,.02)}
 $('pxTalk').onclick=e=>{e.stopPropagation();const p=paxCur;if(!p)return;paxLine=(paxLine+1)%p.say.length;const el=$('pxSay');el.classList.remove('in');void el.offsetWidth;el.textContent='“'+p.say[paxLine]+'”';el.classList.add('in');blip(880,.05,.015)};
 $('pxGift').onclick=e=>{e.stopPropagation();const p=paxCur;if(!p||GIFTS[p.id])return;GIFTS[p.id]=Date.now();LSset('bl-gifts',GIFTS);logAdd(p.n+'에게 '+p.g[0]+JO(p.g[0],'을','를')+' 받았다');

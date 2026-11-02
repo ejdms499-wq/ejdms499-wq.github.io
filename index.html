@@ -304,6 +304,29 @@ body:not(.dev) #speed,body:not(.dev) #jumpBtn{display:none!important}
 #app.day #cap .c3{color:rgba(48,38,28,.85)}
 #app.day #menuBtn,#app.day #sndBtn{background:rgba(255,250,240,.35)}
 #app.day #menuBtn svg,#app.day #sndBtn svg{stroke:rgba(48,38,28,.8)}
+
+#room{font-family:'Noto Sans KR',sans-serif;font-size:10.5px;letter-spacing:.04em;opacity:.7;margin-bottom:12px;display:flex;flex-wrap:wrap;justify-content:center;gap:4px 10px;min-height:14px}
+#room span{opacity:.95}#room i{font-style:normal;opacity:.85}#room i::before{content:"·";margin-right:8px;opacity:.6}#room i.e{opacity:.55}
+#bubble{position:absolute;left:50%;top:calc(15% + env(safe-area-inset-top));z-index:9;transform:translate(-50%,6px);opacity:0;transition:opacity .6s,transform .6s;pointer-events:none;max-width:84%;text-align:center;font-family:'Noto Serif KR',serif;font-size:14px;color:#2f261d;background:rgba(246,239,226,.94);padding:10px 16px 11px;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+#bubble b{display:block;font-family:'Noto Sans KR',sans-serif;font-weight:400;font-size:10.5px;letter-spacing:.06em;opacity:.55;margin-bottom:3px}
+#bubble.on{opacity:1;transform:translate(-50%,0)}
+#cart{position:absolute;left:50%;bottom:calc(150px + env(safe-area-inset-bottom));z-index:12;transform:translate(-50%,10px);opacity:0;pointer-events:none;transition:opacity .7s,transform .7s;width:min(320px,86%);text-align:center;font-family:'Noto Serif KR',serif;color:#efe6d6;background:rgba(14,13,12,.78);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-radius:14px;padding:16px 16px 12px;border:1px solid rgba(239,230,214,.1)}
+#cart.on{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+#cartT{font-size:11.5px;opacity:.6;font-family:'Noto Sans KR',sans-serif;letter-spacing:.04em}#cartD{font-size:17px;margin-top:6px;letter-spacing:.03em}
+#cart .cb{display:flex;gap:8px;margin-top:14px}#cart .cb button{flex:1;padding:10px;border-radius:10px;font-size:13px;border:1px solid rgba(239,230,214,.18)}#cart .cb #cartBuy{background:#efe6d6;color:#221c16;border:0}
+#roomSheet{position:absolute;inset:0;z-index:46;display:none;align-items:flex-end;background:rgba(4,4,6,.38)}#roomSheet.on{display:flex;animation:fade .3s}
+#roomSheet .sheet{width:100%;padding:8px 20px calc(20px + env(safe-area-inset-bottom));background:rgba(14,14,16,.86);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-radius:18px 18px 0 0;font-family:'Noto Serif KR',serif;color:#efe6d6;animation:rise .35s ease}
+#roomSheet .grab{width:36px;height:4px;border-radius:2px;background:rgba(239,230,214,.18);margin:6px auto 12px}
+#roomSheet h4{margin:0 0 12px;font-weight:500;font-size:15px;letter-spacing:.04em}
+#roomSheet .mates{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+#roomSheet .bed{border:1px solid rgba(239,230,214,.1);border-radius:10px;padding:10px 12px;font-size:12.5px;opacity:.45;font-family:'Noto Sans KR',sans-serif}
+#roomSheet .bed b{display:block;font-family:'Noto Serif KR',serif;font-size:11px;opacity:.6;margin-bottom:3px;font-weight:400}#roomSheet .bed b::after{content:"번 침대"}
+#roomSheet .bed.on{opacity:1;border-color:rgba(239,230,214,.28)}#roomSheet .bed.me{opacity:1;background:rgba(239,230,214,.08)}
+#roomSheet .sub{font-size:11px;opacity:.5;margin:16px 0 8px;font-family:'Noto Sans KR',sans-serif;letter-spacing:.04em}
+#roomSheet .phr{display:flex;flex-wrap:wrap;gap:7px}#roomSheet .phr button{padding:8px 12px;border-radius:999px;border:1px solid rgba(239,230,214,.16);font-size:12.5px}
+#roomSheet .none{font-size:12px;opacity:.45;font-family:'Noto Sans KR',sans-serif}
+#app.gaze #bubble{top:12%}#app.gaze #cart{bottom:12%}
+#app.day #room{color:rgba(48,38,28,.85)}
 </style>
 </head>
 <body>
@@ -345,11 +368,15 @@ body:not(.dev) #speed,body:not(.dev) #jumpBtn{display:none!important}
     <button id="btnSleep"><svg viewBox="0 0 24 24" fill="none" stroke="#d9b77c" stroke-width="1.4"><path d="M19 14.5A7.5 7.5 0 0 1 9.5 5a7.5 7.5 0 1 0 9.5 9.5z"/></svg>잠들기</button>
   </div>
   <div id="hint">화면을 누르면 자리로 돌아와요</div>
-  <div id="cap"><div class="c1" id="c1">부산발 런던행</div><div class="c2" id="c2"></div><div class="c3" id="c3"></div></div>
+  <div id="bubble"></div>
+  <div id="cart"><div id="cartT"></div><div id="cartD"></div><div class="cb"><button id="cartNo">괜찮아요</button><button id="cartBuy">하나 사기</button></div></div>
+  <div id="roomSheet"><div class="sheet"></div></div>
+  <div id="cap"><div id="room"></div><div class="c1" id="c1">부산발 런던행</div><div class="c2" id="c2"></div><div class="c3" id="c3"></div></div>
   <button id="menuBtn" aria-label="메뉴"><svg viewBox="0 0 24 24"><path d="M5 8h14M5 12h14M5 16h9"/></svg></button>
   <button id="sndBtn" aria-label="소리"><svg viewBox="0 0 24 24" id="icoSnd2"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M16 9l5 6M21 9l-5 6"/></svg></button>
   <div id="menu"><div class="sheet"><div class="grab"></div>
     <button class="it" data-a="gaze">창밖 보기<small>폰을 가로로 돌려도 돼요</small></button>
+    <button class="it" data-a="room">같은 칸<small>합석한 승객 · 한마디 · 건네기</small></button>
     <button class="it" data-a="card">엽서 보내기<small id="mCardSub">지금 지나는 곳에서</small></button>
     <button class="it" data-a="note">서랍 속 쪽지<small>앞 승객이 남긴 한 줄</small></button>
     <button class="it" data-a="log">여행 수첩<small>지나온 곳과 시각</small></button>
@@ -1553,7 +1580,7 @@ function frame(now){
   else{$('pa').textContent='다음 역 '+ST[S.next].k+' · '+fmt(S.eta);$('pb').textContent=rtxt+'부산에서 '+Math.round(S.km).toLocaleString()+'km · '+(S.ferry?'카스피해 횡단 중 · 배':'시속 '+Math.round(S.v*SPD)+'km')+' · '+wtxt+(B[S.bk].tunnel?' · 해저터널':'')}
   const pct=S.km/TOTAL_KM*100;$('rme').style.left=pct+'%';$('rdone').style.width=pct+'%';
   dots.forEach((d2,i)=>d2.classList.toggle('on',S.km>=ST[i].km));
-  try{updateCap(S);placeNote(S);ambientTick(S)}catch(e){}
+  try{updateCap(S);placeNote(S);ambientTick(S);cartTick(S)}catch(e){}
   requestAnimationFrame(frame);
 }
 setRoute(ticket?(ticket.route||'n'):'n');
@@ -1603,6 +1630,7 @@ function elAtKm(km){let lo=-1,hi=TRIP;for(let k=0;k<44;k++){const m=(lo+hi)/2;if
 function openLog(){if(!ticket)return;const now=vnow(),rows=[];let last='';
   for(const e of BI){const nm=PLACE[e[2]];if(!nm||nm===last)continue;last=nm;const t=ticket.dep+elAtKm(e[0]+.01);rows.push([t,nm,e[0],e[1]])}
   for(let i=1;i<=LAST;i++){rows.push([ticket.dep+SC[i].arr,ST[i].k+(ST[i].ferry?'항':'역')+' 도착',ST[i].km,ST[i].km+.001])}
+  for(const L of (ticket.log||[]))rows.push([L[0],'· '+L[1],-1,-1]);
   rows.sort((a,b)=>a[0]-b[0]);const km=cur.km;let html='',shownNext=false;
   for(const r of rows){const a=kd(r[0]),tt=pd(a.h)+':'+pd(a.mi);if(r[0]<=now){const isNow=km>=r[2]&&km<r[3];html+='<li class="'+(isNow?'now':'')+'"><b>'+tt+'</b>'+esc(r[1])+'</li>'}else if(!shownNext){shownNext=true;html+='<li class="next"><b>'+tt+'</b>'+esc(r[1])+'</li>'}}
   $('logList').innerHTML=html||'<li class="next"><b>21:00</b>부산역 출발</li>';const d=kd(ticket.dep);$('logSub').textContent=trainNo(ticket.dep)+'호 · '+ticket.car+'호차 '+ticket.seat+'번 · '+d.m+'월 '+d.d+'일 출발';show('mLog',true);blip(900,.08,.02);
@@ -1631,7 +1659,8 @@ function coach(){try{if(localStorage.getItem('bl-coach'))return;localStorage.set
 const NOTE={busanport:'부산항대교 아래로 밤새 배들이 드나든다',kr01:'산비탈을 따라 올라간 불빛들, 부산의 밤',kr02:'구포 — 낙동강 바람에 국수를 말리던 동네',kr03:'원동 강변은 봄이면 매화로 하얗게 덮인다',kr04:'영남루 — 조선의 3대 누각으로 꼽히던 곳',kr05:'청도 반시는 씨가 없는 감이다',kr06:'경산은 대추가 많이 나는 고장',kr07:'두류공원 언덕 위 83타워',kr08:'금호강을 따라 불 켜진 공장들',kr09:'왜관철교 — 1905년 경부선과 함께 놓인 다리',kr10:'구미 — 들판 너머가 공단 도시',kr11:'김천은 자두와 포도의 고장',kr12:'추풍령 — 경부선이 소백산맥을 넘는 고개',kr13:'영동 — 국악의 아버지 박연의 고향',kr14:'대전 — 철길이 만든 도시',kr15:'조치원은 복숭아로 이름난 곳',kcountry:'천안 — 호두과자가 태어난 곳',kr16:'평택 — 들판이 서해까지 이어진다',kr17:'수원 — 정조가 쌓은 화성이 있는 도시',kseoul:'한강철교 — 1900년에 놓인 한강의 첫 다리'};
 let noteKey='',noteT=0;
 function placeNote(S){const k=S.mode==='stop'?'':S.bk;if(k===noteKey)return;noteKey=k;const el=$('c3');el.classList.remove('on');clearTimeout(noteT);
-  if(!NOTE[k])return;noteT=setTimeout(()=>{el.textContent=NOTE[k];el.classList.add('on');noteT=setTimeout(()=>el.classList.remove('on'),26000)},2600)}
+  const tun=B[k]&&B[k].tunnel,shared=riders>1&&(tun||k==='kseoul'),txt=shared?'지금 '+riders+'명이 같이 '+(tun?'터널을 지나는':'한강을 건너는')+' 중':NOTE[k];
+  if(!txt)return;noteT=setTimeout(()=>{el.textContent=txt;el.classList.add('on');noteT=setTimeout(()=>el.classList.remove('on'),26000)},2600)}
 // ───────── 건널목 소리 (시골 구간에서 가끔) ─────────
 const RURAL={country:1,kr05:1,kr06:1,kr10:1,kr11:1,kr13:1,kr15:1};let nextBell=performance.now()+90000;
 function crossingBell(){try{if(!soundOn||!ac)return;const t0=ac.currentTime,dur=4.2,g=ac.createGain(),f=ac.createBiquadFilter();f.type='lowpass';f.frequency.value=2600;g.connect(f);f.connect(master||ac.destination);
@@ -1651,7 +1680,7 @@ function openMenu(){const S=cur;$('mCardSub').textContent=ST[curStation()].k+'�
 $('cap').onclick=e=>{e.stopPropagation();openMenu()};
 $('menu').onclick=e=>{if(e.target===$('menu'))show('menu',false)};
 document.querySelectorAll('#menu .it').forEach(b=>b.onclick=e=>{e.stopPropagation();show('menu',false);const a=b.dataset.a;
-  if(a==='gaze')gazeAsk();else if(a==='card'){const v=viewNow()||{};openPostcard(curStation(),{at:vnow(),sk:v.sk,sf:v.sf})}else if(a==='note')openDrawer();else if(a==='ticket')openTicket();
+  if(a==='gaze')gazeAsk();else if(a==='room')openRoom();else if(a==='card'){const v=viewNow()||{};openPostcard(curStation(),{at:vnow(),sk:v.sk,sf:v.sf})}else if(a==='note')openDrawer();else if(a==='ticket')openTicket();
   else if(a==='board'){const {prev}=depTimes(vnow());boardTrain(prev)}else if(a==='route'){setRoute(R_ID==='n'?'s':'n');boardTrain(ticket?ticket.dep:depTimes(vnow()).next)}
   else if(a==='sleep')show('sleep',true)});
 // 창밖 보기: 폰 세로면 가로로 돌리기(가능하면 자동), 가로면 바로 전체
@@ -1661,15 +1690,79 @@ function gazeAsk(){if(MOBILE&&!LAND.matches){const el=document.documentElement;
   enterGaze()}
 function onLand(){const app=$('app');if(LAND.matches){app.classList.add('gaze');app.classList.add('zooming')}else if(app.classList.contains('gaze')&&MOBILE){app.classList.remove('gaze');app.classList.remove('zooming');try{if(document.fullscreenElement)document.exitFullscreen()}catch(e){}}try{resize();drawGlass()}catch(e){}}
 try{LAND.addEventListener('change',onLand)}catch(e){LAND.addListener(onLand)}
-// ───────── 함께: Supabase (주소·키를 넣으면 켜짐, 비어 있으면 혼자 모드) ─────────
-const SB_URL='', SB_KEY='';
-let SBC=null,sbCh=null;
-(async()=>{if(!SB_URL||!SB_KEY)return;try{const m=await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');SBC=m.createClient(SB_URL,SB_KEY);sbPresence()}catch(e){}})();
-function sbPresence(){if(!SBC||!ticket)return;const key='train-'+(ticket.trainKey||'x');if(sbCh&&sbCh._key===key)return;if(sbCh){try{SBC.removeChannel(sbCh)}catch(e){}}
-  sbCh=SBC.channel(key,{config:{presence:{key:LUID}}});sbCh._key=key;sbCh.on('presence',{event:'sync'},()=>{try{riders=Object.keys(sbCh.presenceState()).length}catch(e){}});
-  sbCh.subscribe(async st=>{if(st==='SUBSCRIBED'){try{await sbCh.track({at:Date.now()})}catch(e){}}})}
-async function notesFetch(){if(!SBC)return null;const {data,error}=await SBC.from('notes').select('text,seat,train,created_at').order('created_at',{ascending:false}).limit(60);return error?null:data}
-async function noteInsert(text){if(!SBC)return false;const {error}=await SBC.from('notes').insert({text,seat:ticket?ticket.car+'-'+ticket.seat:'',train:(ticket&&ticket.trainKey)||''});return !error}
+// ───────── 함께: Supabase · 같은 열차 · 4인 침대칸 합석 ─────────
+const SB_URL='https://vuxqlfockqxvocjlntgv.supabase.co', SB_KEY='sb_publishable_IUPtobU60cCTWGpLAW6AxQ_kBtD7L38';
+let SBC=null,trainCh=null,roomCh=null,myRoom=null,myBed=null,myFrom='',roomMates={},roomFirst=true;
+const PHR=['안녕하세요','창밖 좋네요','어디까지 가세요?','저는 런던까지 가요','잠이 안 오네요','같이 가서 좋네요','잘 자요','좋은 여행 되세요'];
+const josa=(w,a,b)=>{const c=w.charCodeAt(w.length-1);return w+((c>=0xAC00&&c<=0xD7A3&&(c-0xAC00)%28)?a:b)};
+const ITEMS={egg:'삶은 달걀',cider:'사이다',hodu:'호두과자',dosirak:'컵라면 도시락'};
+function sbLoad(){if(SBC)return;if(window.__SBMOCK){SBC=window.__SBMOCK;sbPresence();checkOldRoom();return}
+  const sc=document.createElement('script');sc.src='supabase.min.js';sc.onload=()=>{try{SBC=window.supabaseCreateClient(SB_URL,SB_KEY,{auth:{persistSession:false}});sbPresence();checkOldRoom()}catch(e){}};document.head.appendChild(sc)}
+setTimeout(sbLoad,400);
+function boardPlace(){try{const S=cur;if(!S||S.mode==='wait')return '부산역';return placeOf(S)||nearName(S.km)}catch(e){return ''}}
+function sbPresence(){if(!SBC||!ticket)return;const key='train-'+ticket.trainKey;if(trainCh&&trainCh._key===key)return;
+  try{if(trainCh)SBC.removeChannel(trainCh);if(roomCh)SBC.removeChannel(roomCh)}catch(e){}trainCh=roomCh=null;myRoom=myBed=null;roomMates={};roomFirst=true;renderRoom();
+  let saved=null;try{saved=JSON.parse(localStorage.getItem('bl-room-'+ticket.trainKey)||'null')}catch(e){}
+  const ch=SBC.channel(key,{config:{presence:{key:LUID}}});ch._key=key;trainCh=ch;
+  const onSync=()=>{let st={};try{st=ch.presenceState()}catch(e){}riders=Object.keys(st).length;
+    if(myRoom==null){const used={};for(const k in st){if(k===LUID)continue;const m=(st[k]||[])[0];if(m&&m.room!=null)(used[m.room]=used[m.room]||[]).push(m.bed)}
+      let r,b;if(saved&&saved.room!=null){r=saved.room;b=saved.bed;myFrom=saved.from||''}else{r=0;while(used[r]&&used[r].length>=3)r++;const u=used[r]||[];b=[1,2,3,4].find(x=>!u.includes(x))||1;myFrom=boardPlace()}
+      myRoom=r;myBed=b;try{localStorage.setItem('bl-room-'+ticket.trainKey,JSON.stringify({room:r,bed:b,from:myFrom}));localStorage.setItem('bl-curroom',ticket.trainKey+'-'+r)}catch(e){}
+      try{ch.track({room:r,bed:b,from:myFrom,at:Date.now()})}catch(e){}joinRoom()}
+    // 동시에 탄 경우 침대가 겹치면 키가 큰 쪽이 양보
+    {const o=[];for(const k in st){if(k===LUID)continue;const m=(st[k]||[])[0];if(m&&m.room===myRoom)o.push([k,m])}
+     const clash=o.some(([k,m])=>m.bed===myBed&&k<LUID),full=o.length>=4&&o.filter(([k])=>k<LUID).length>=4;
+     if(clash||full){let r=myRoom,b=myBed;if(full){r=myRoom+1}else{const u=o.map(x=>x[1].bed);b=[1,2,3,4].find(x=>!u.includes(x));if(!b){r=myRoom+1;b=1}}
+       if(r!==myRoom){const u=[];for(const k in st){const m=(st[k]||[])[0];if(k!==LUID&&m&&m.room===r)u.push(m.bed)}b=[1,2,3,4].find(x=>!u.includes(x))||1}
+       const moved=r!==myRoom;myRoom=r;myBed=b;try{localStorage.setItem('bl-room-'+ticket.trainKey,JSON.stringify({room:r,bed:b,from:myFrom}));localStorage.setItem('bl-curroom',ticket.trainKey+'-'+r)}catch(e){}
+       try{ch.track({room:r,bed:b,from:myFrom,at:Date.now()})}catch(e){}if(moved){roomFirst=true;joinRoom()}}}
+    const mates={};for(const k in st){if(k===LUID)continue;const m=(st[k]||[])[0];if(m&&m.room===myRoom)mates[k]=m}
+    if(!roomFirst){for(const k in mates)if(!roomMates[k])toast(mates[k].bed+'번 침대에 승객이 탔어요',mates[k].from?mates[k].from+'에서':'',2600);
+      for(const k in roomMates)if(!mates[k])toast(roomMates[k].bed+'번 침대 승객이 내렸어요','',2200)}
+    roomFirst=false;roomMates=mates;renderRoom()};
+  ch.on('presence',{event:'sync'},onSync);ch.subscribe(st=>{if(st==='SUBSCRIBED')setTimeout(()=>{if(myRoom==null&&trainCh===ch)onSync()},1800)})}
+function joinRoom(){if(!SBC||myRoom==null)return;try{if(roomCh)SBC.removeChannel(roomCh)}catch(e){}
+  roomCh=SBC.channel('room-'+ticket.trainKey+'-'+myRoom,{config:{broadcast:{self:false}}});
+  roomCh.on('broadcast',{event:'say'},m=>onSay(m.payload||{})).on('broadcast',{event:'give'},m=>onGive(m.payload||{})).subscribe()}
+function bubble(who,text){const el=$('bubble');el.innerHTML='<b>'+esc(who)+'</b>'+esc(text);el.classList.remove('on');void el.offsetWidth;el.classList.add('on');clearTimeout(bubble.t);bubble.t=setTimeout(()=>el.classList.remove('on'),6500)}
+function onSay(p){const i=+p.i;if(!(i>=0&&i<PHR.length))return;const bd=+p.bed||0;bubble(bd?bd+'번 침대':'같은 칸 승객',PHR[i]);blip(980,.12,.03)}
+function onGive(p){const it=String(p.item||'');if(!ITEMS[it])return;const bd=+p.bed||0;ticket.items=ticket.items||{};ticket.items[it]=(ticket.items[it]||0)+1;logAdd((bd?bd+'번 침대 승객에게 ':'같은 칸 승객에게 ')+josa(ITEMS[it],'을','를')+' 받았다');saveTicket();
+  toast((bd?bd+'번 침대 승객이 ':'같은 칸 승객이 ')+josa(ITEMS[it],'을','를')+' 건넸어요','',3200);blip(1320,.16,.04);renderRoomSheet()}
+function sayPhrase(i){if(roomCh){try{roomCh.send({type:'broadcast',event:'say',payload:{bed:myBed,i}})}catch(e){}}bubble('나',PHR[i])}
+function giveItem(it){ticket.items=ticket.items||{};if(!(ticket.items[it]>0))return;if(!Object.keys(roomMates).length){toast('같은 칸에 아직 아무도 없어요','누가 타면 건넬 수 있어요',2400);return}
+  ticket.items[it]--;saveTicket();try{roomCh.send({type:'broadcast',event:'give',payload:{bed:myBed,item:it}})}catch(e){}logAdd('같은 칸 승객에게 '+josa(ITEMS[it],'을','를')+' 건넸다');toast(josa(ITEMS[it],'을','를')+' 건넸어요','같은 칸 승객에게',2400);renderRoomSheet()}
+function logAdd(text){if(!ticket)return;ticket.log=ticket.log||[];ticket.log.push([vnow(),text]);if(ticket.log.length>60)ticket.log.shift();saveTicket()}
+function renderRoom(){const el=$('room');if(!el)return;if(!SBC||myRoom==null){el.textContent='';return}
+  const ms=Object.values(roomMates).sort((a,b)=>a.bed-b.bed);el.innerHTML='<span>'+(myRoom+1)+'번 칸 · '+myBed+'번 침대</span>'+(ms.length?ms.map(m=>'<i>'+m.bed+'번 침대'+(m.from?' · '+esc(m.from)+'에서':'')+'</i>').join(''):'<i class="e">빈 침대 3개</i>')}
+function renderRoomSheet(){if(!$('roomSheet').classList.contains('on'))return;openRoom()}
+function openRoom(){const ms=Object.values(roomMates).sort((a,b)=>a.bed-b.bed);const it=(ticket&&ticket.items)||{};
+  let h='<div class="grab"></div><h4>'+(myRoom!=null?(myRoom+1)+'번 칸 · 4인 침대칸':'같은 칸')+'</h4><div class="mates">';
+  for(let b=1;b<=4;b++){const m=ms.find(x=>x.bed===b);h+='<div class="bed'+(b===myBed?' me':m?' on':'')+'"><b>'+b+'</b>'+(b===myBed?'나':m?(m.from?esc(m.from)+'에서':'승객'):'빈 침대')+'</div>'}
+  h+='</div><div class="sub">한마디 건네기</div><div class="phr">'+PHR.map((p,i)=>'<button data-p="'+i+'">'+p+'</button>').join('')+'</div>';
+  const own=Object.keys(ITEMS).filter(k=>it[k]>0);h+='<div class="sub">가진 것</div>'+(own.length?'<div class="phr">'+own.map(k=>'<button data-g="'+k+'">'+ITEMS[k]+' '+it[k]+' · 건네기</button>').join('')+'</div>':'<div class="none">판매 카트가 지나가면 살 수 있어요</div>');
+  if(!SBC)h+='<div class="none">연결 중…</div>';
+  $('roomSheet').querySelector('.sheet').innerHTML=h;show('roomSheet',true);
+  $('roomSheet').querySelectorAll('[data-p]').forEach(b=>b.onclick=e=>{e.stopPropagation();sayPhrase(+b.dataset.p);show('roomSheet',false)});
+  $('roomSheet').querySelectorAll('[data-g]').forEach(b=>b.onclick=e=>{e.stopPropagation();giveItem(b.dataset.g)})}
+// 어젯밤 같은 칸 승객의 쪽지
+async function checkOldRoom(){try{const last=localStorage.getItem('bl-lastroom'),mine=localStorage.getItem(LOCALNOTE)||'';if(!last||!SBC||!ticket||last.startsWith(ticket.trainKey+'-'))return;
+  const {data}=await SBC.from('notes').select('text,seat,train,room,created_at').eq('room',last).order('created_at',{ascending:false}).limit(5);
+  const f=(data||[]).find(x=>x.text&&x.text!==mine);if(f){window.ROOMNOTE=f;setTimeout(()=>toast('지난번 같은 칸 승객이 쪽지를 남겼어요','서랍을 열어 보세요',4200),3500)}}catch(e){}}
+async function notesFetch(){if(!SBC)return null;if(window.ROOMNOTE){const r=[window.ROOMNOTE];window.ROOMNOTE=null;return r}const {data,error}=await SBC.from('notes').select('text,seat,train,created_at').order('created_at',{ascending:false}).limit(60);return error?null:data}
+async function noteInsert(text){if(!SBC)return false;const room=ticket&&myRoom!=null?ticket.trainKey+'-'+myRoom:'';const row={text,seat:ticket?ticket.car+'-'+ticket.seat:'',train:(ticket&&ticket.trainKey)||''};let {error}=await SBC.from('notes').insert(Object.assign({room},row));if(error)({error}=await SBC.from('notes').insert(row));if(!error&&room)try{localStorage.setItem('bl-lastroom',room)}catch(e){}return !error}
+// ───────── 판매 카트 (그림 없이 소리와 글로) ─────────
+const CART=[{id:'egg',items:['egg','cider'],t:'덜컹 — 판매 카트가 지나갑니다',d:'삶은 달걀과 사이다',ok:S=>S.mode==='run'&&S.km>22&&S.km<60},
+  {id:'hodu',items:['hodu'],t:'천안을 지납니다',d:'따끈한 호두과자 있어요',ok:S=>S.mode==='run'&&S.bk==='kcountry'},
+  {id:'dosirak',items:['dosirak'],t:'차장이 뜨거운 물을 들고 지나갑니다',d:'컵라면 도시락 하나 어때요',ok:S=>S.mode==='run'&&(S.bk==='taiga'||S.bk==='birch')}];
+let cartOpen=null;
+function cartTick(S){if(!ticket||cartOpen)return;ticket.cart=ticket.cart||{};for(const c of CART){if(!ticket.cart[c.id]&&c.ok(S)){ticket.cart[c.id]=1;saveTicket();showCart(c);break}}}
+function cartSound(){try{if(!soundOn||!ac||!noiseBuf)return;const n=ac.createBufferSource(),f=ac.createBiquadFilter(),g=ac.createGain();n.buffer=noiseBuf;n.loop=true;f.type='bandpass';f.frequency.value=320;f.Q.value=1.2;g.gain.setValueAtTime(0,ac.currentTime);g.gain.linearRampToValueAtTime(.09,ac.currentTime+1.4);g.gain.linearRampToValueAtTime(0,ac.currentTime+4);n.connect(f);f.connect(g);g.connect(master||ac.destination);n.start();n.stop(ac.currentTime+4.2);setTimeout(()=>{blip(1560,.5,.035);setTimeout(()=>blip(1560,.5,.03),260)},900)}catch(e){}}
+function showCart(c){cartOpen=c;$('cartT').textContent=c.t;$('cartD').textContent=c.d;show('cart',true);cartSound();clearTimeout(showCart.t);showCart.t=setTimeout(()=>{show('cart',false);cartOpen=null},26000)}
+$('cartBuy').onclick=e=>{e.stopPropagation();const c=cartOpen;if(!c)return;ticket.items=ticket.items||{};c.items.forEach(k=>ticket.items[k]=(ticket.items[k]||0)+2);logAdd(josa(c.items.map(k=>ITEMS[k]).join('와 ').replace('달걀와','달걀과'),'을','를')+' 샀다');saveTicket();show('cart',false);cartOpen=null;
+  toast('샀어요',Object.keys(roomMates).length?'같은 칸 승객에게 건넬 수도 있어요':'',2600);blip(880,.1,.04)};
+$('cartNo').onclick=e=>{e.stopPropagation();show('cart',false);cartOpen=null};
+$('room').onclick=e=>{e.stopPropagation();openRoom()};
+if(/[?&]dev/.test(location.search)||window.__SBMOCK)window.__T={get riders(){return riders},sayPhrase,showCart,CART,openRoom,openLog,show,get ticket(){return ticket}};$('roomSheet').onclick=e=>{if(e.target===$('roomSheet'))show('roomSheet',false)};
 
 if(!ticketValid()) autoBoard(); else {try{sbPresence()}catch(e){}}
 initVeil();

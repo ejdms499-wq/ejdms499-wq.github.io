@@ -863,9 +863,11 @@ const WREADY=['ru1','ngt_forest','ngt_town','st_vlad','ru2','ru3','ru4','st_khab
   for(const key of WREADY){if(!inW(key))continue;const wk=key+'_w';SCN[wk]=Object.assign({},SCN[key]);for(const b in B)if(B[b].photo===key)B[b].photo=wk;setTimeout(()=>{try{if(PNAME[key])PNAME[wk]=PNAME[key]}catch(e){}},0)}}catch(e){}})();
 
 const CITY={busan:1,seoul:1,kr01:1,kr07:1,kr08:1,kr14:1,kr16:1,kr17:1};
-function loadPhoto(key){if(key==='plat'){loadPhoto('platd');loadPhoto('platn');return}if(PHOTO[key])return;const o=SCN[key]||{};PHOTO[key]={loading:true};const img=new Image();
-  img.onload=()=>{PHOTO[key]={t0:performance.now(),tile:img,w:img.naturalWidth,h:img.naturalHeight,ready:true,spd:o.spd||.2,img,pass:!!o.pass,key}};
-  img.onerror=()=>{PHOTO[key]={missing:true}};img.src='img/'+key+'.webp'}
+function loadPhoto(key){if(key==='plat'){loadPhoto('platd');loadPhoto('platn');return}if(PHOTO[key])return;const o=SCN[key]||{};PHOTO[key]={loading:true};
+  const mk=(im,low,t0)=>({t0:t0||performance.now(),tile:im,w:im.naturalWidth,h:im.naturalHeight,ready:true,low,spd:o.spd||.2,img:im,pass:!!o.pass,key});
+  const th=new Image();th.onload=()=>{const p=PHOTO[key];if(p&&p.loading)PHOTO[key]=mk(th,true)};th.src='img/t/'+key+'.webp';
+  const img=new Image();img.onload=()=>{const p=PHOTO[key];PHOTO[key]=mk(img,false,p&&p.t0)};
+  img.onerror=()=>{const p=PHOTO[key];if(!(p&&p.low))PHOTO[key]={missing:true}};img.src='img/'+key+'.webp'}
 function spanAt(key,km){for(const e of BI){if(km>=e[0]-.01&&km<=e[1]+.01&&B[e[2]]&&B[e[2]].photo===key)return [e[0],e[1]]}return spanOf(key)}
 function spanOf(key){let a=1e9,b=-1;for(const e of BI){if(B[e[2]]&&B[e[2]].photo===key){a=Math.min(a,e[0]);b=Math.max(b,e[1])}}return [a,b]}
 function photoFor(key){if(key==='plat'){const d=PHOTO.platd,n=PHOTO.platn,day=cur&&cur.light>.45;const a=day?d:n,b=day?n:d;if(a&&a.ready)return a;if(b&&b.ready)return b}const p=PHOTO[key];if(p&&p.ready)return p;if(SCN[key]&&SCN[key].baked)return null;const f=PHOTO.country;return f&&f.ready?f:null}

@@ -547,6 +547,13 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
 .pcd i{display:block;aspect-ratio:3/2;background:#ddd3bf center/cover no-repeat}.pcd b{position:absolute;left:12px;bottom:9px;font:500 14px 'Noto Serif KR',serif;color:#3a2d22;letter-spacing:.04em}.pcd s{position:absolute;right:12px;bottom:11px;font:400 10px 'Noto Sans KR',sans-serif;letter-spacing:.22em;color:#5a4a3a;text-decoration:none}
 .pcd::after{content:'';position:absolute;right:-12px;top:-14px;width:58px;height:58px;border-radius:50%;border:2px solid rgba(60,40,30,.5);background:repeating-linear-gradient(0deg,transparent 0 6px,rgba(60,40,30,.32) 6px 7.5px);opacity:0;transform:rotate(-14deg);transition:opacity .4s .5s}.pcd.has::after{opacity:.5}
 .gfs.pcs i{width:46px;height:32px}
+
+#cam{position:absolute;left:7%;bottom:6%;z-index:4;width:46px;height:46px;border-radius:50%;background:rgba(20,15,10,.55);display:grid;place-items:center;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);box-shadow:0 2px 10px rgba(0,0,0,.35)}
+#cam svg{width:24px;height:24px}#cam em{position:absolute;right:-4px;top:-4px;min-width:18px;height:18px;border-radius:9px;background:#f3ead8;color:#3a2d22;font:600 10px/18px 'Noto Sans KR',sans-serif;font-style:normal;text-align:center;padding:0 4px}
+#cam.hot{animation:camhot 1s ease-in-out infinite;background:rgba(200,120,40,.75)}@keyframes camhot{50%{transform:scale(1.12);box-shadow:0 0 0 8px rgba(233,180,95,.25)}}
+#flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:5}#flash.go{animation:flash .45s ease-out}@keyframes flash{0%{opacity:.9}100%{opacity:0}}
+body.dev #cam{left:auto;right:24%}
+.gfs.shs i{width:46px;height:32px;background-size:auto 100%}.gfs.shs i.hero{outline:2px solid #e9b45f;outline-offset:1px}
 </style>
 </head>
 <body>
@@ -562,6 +569,7 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
   <div id="stage"><div id="cabin">
     <div id="win"><canvas id="cv"></canvas><canvas id="glasscv"></canvas><canvas id="fogcv"></canvas><div id="glassrefl"></div><div id="tunrefl"></div><div id="glass"></div>
       <button id="speed">미리보기 1×</button><button id="jumpBtn">구간 이동</button>
+      <button id="cam" aria-label="사진 찍기"><svg viewBox="0 0 24 24" fill="none" stroke="#f3ead8" stroke-width="1.6"><rect x="3" y="7" width="18" height="12" rx="2"/><path d="M8.5 7l1.5-2.5h4L15.5 7"/><circle cx="12" cy="13" r="3.4"/></svg><em id="camN"></em></button><div id="flash"></div>
       <button id="mail"><svg viewBox="0 0 24 24" fill="none" stroke="#3a2a1e" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="1.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></svg><span id="mailtxt">엽서 도착</span></button>
     </div>
     <img id="cabinImg" src="img/cabin_n.webp" alt=""><img id="cabinDay" src="img/cabin_d.webp" alt="">
@@ -685,6 +693,7 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
   <div class="modal" id="mPass"><div class="passbook"><div class="ph2"><b>PASSPORT</b><span>여권 · 사증</span></div><div class="pzstamps" id="psSt"></div><div class="pn" id="psN"></div><button class="closer" id="psClose">여권 넣기</button></div></div>
   <div class="modal" id="mWatch"><div class="foodwrap watchwrap"><svg viewBox="0 0 220 200" class="wsvg"><circle cx="100" cy="100" r="82" fill="#f4ecdc" stroke="#b08a52" stroke-width="7"/><circle cx="100" cy="100" r="74" fill="none" stroke="rgba(60,45,30,.15)"/><line x1="100" y1="30" x2="100" y2="40" stroke="#3a2d22" stroke-width="3" transform="rotate(0 100 100)"/><line x1="100" y1="34" x2="100" y2="40" stroke="#3a2d22" stroke-width="1.5" transform="rotate(30 100 100)"/><line x1="100" y1="34" x2="100" y2="40" stroke="#3a2d22" stroke-width="1.5" transform="rotate(60 100 100)"/><line x1="100" y1="30" x2="100" y2="40" stroke="#3a2d22" stroke-width="3" transform="rotate(90 100 100)"/><line x1="100" y1="34" x2="100" y2="40" stroke="#3a2d22" stroke-width="1.5" transform="rotate(120 100 100)"/><line x1="100" y1="34" x2="100" y2="40" stroke="#3a2d22" stroke-width="1.5" transform="rotate(150 100 100)"/><line x1="100" y1="30" x2="100" y2="40" stroke="#3a2d22" stroke-width="3" transform="rotate(180 100 100)"/><line x1="100" y1="34" x2="100" y2="40" stroke="#3a2d22" stroke-width="1.5" transform="rotate(210 100 100)"/><line x1="100" y1="34" x2="100" y2="40" stroke="#3a2d22" stroke-width="1.5" transform="rotate(240 100 100)"/><line x1="100" y1="30" x2="100" y2="40" stroke="#3a2d22" stroke-width="3" transform="rotate(270 100 100)"/><line x1="100" y1="34" x2="100" y2="40" stroke="#3a2d22" stroke-width="1.5" transform="rotate(300 100 100)"/><line x1="100" y1="34" x2="100" y2="40" stroke="#3a2d22" stroke-width="1.5" transform="rotate(330 100 100)"/><line id="wH" x1="100" y1="104" x2="100" y2="58" stroke="#2b2119" stroke-width="5" stroke-linecap="round"/><line id="wM" x1="100" y1="108" x2="100" y2="38" stroke="#2b2119" stroke-width="3" stroke-linecap="round"/><circle cx="100" cy="100" r="4.5" fill="#2b2119"/><g id="wCrown" style="cursor:pointer"><rect x="182" y="88" width="20" height="24" rx="4" fill="#c49a5c" stroke="#8a6a3a" stroke-width="2"/><line x1="187" y1="92" x2="187" y2="108" stroke="#8a6a3a"/><line x1="192" y1="92" x2="192" y2="108" stroke="#8a6a3a"/><line x1="197" y1="92" x2="197" y2="108" stroke="#8a6a3a"/></g></svg><div class="fdname" id="wT"></div><div class="fdtext" id="wS"></div><div class="pcbtns"><button class="ghost" id="wSkip">알아서 맞춰 줘</button><button id="wTurn">용두 돌리기</button></div></div></div>
   <div class="modal" id="mPCard"><div class="foodwrap"><div class="pcd" id="pcdPh"><i id="pcdImg"></i><b id="pcdK"></b><s id="pcdE"></s></div><div class="fdname" id="pcdName"></div><div class="fdtext" id="pcdPlace"></div><div class="gffact" id="pcdFact"></div><div class="fdno" id="pcdN"></div><button class="closer" id="pcdClose">수첩에 넣기</button></div></div>
+  <div class="modal" id="mShot"><div class="foodwrap"><div class="fdph has" id="shPh"></div><div class="fdname" id="shName"></div><div class="fdtext" id="shTxt"></div><button class="closer" id="shClose">닫기</button></div></div>
   <div class="modal" id="mGift"><div class="foodwrap"><div class="pxph ill gf" id="gfPh"></div><div class="fdname" id="gfName"></div><div class="fdtext" id="gfText"></div><div class="gffact" id="gfFact"></div><button class="closer" id="gfClose">수첩에 넣기</button></div></div>
   <div class="modal" id="mFood"><div class="foodwrap"><div class="fdph" id="fdPh"></div><div class="fdname" id="fdName"></div><div class="fdtext" id="fdText"></div><div class="fdno" id="fdNo"></div><button class="closer" id="fdClose">잘 먹었습니다</button></div></div>
   <div id="moment"><div class="mst" id="momSt"></div><div class="mt1" id="momT"></div><div class="mt2" id="momS"></div><div class="mt3" id="momN"></div></div>
@@ -888,7 +897,7 @@ function managePhotos(km){const now=performance.now();if(now-lastNeed<500)return
 function drawPhoto(c,S,ph,pxm){
   const sc=H/ph.h;
   if(ph.pass){const sp=spanAt(ph.key,S.km),tw=ph.img.naturalWidth*sc,p=sp[1]<sp[0]?.42:Math.min(1,Math.max(0,(S.km-sp[0])/(sp[1]-sp[0])));c.drawImage(ph.img,-p*Math.max(0,tw-W),0,tw,H)}
-  else{const tw=ph.w*sc, off=((S.vo*pxm*ph.spd)%tw+tw)%tw;for(let x=-off;x<W;x+=tw)c.drawImage(ph.tile,x,0,tw,H)}
+  else{const tw=ph.w*sc, off=((S.vo*pxm*ph.spd*PAN)%tw+tw)%tw;for(let x=-off;x<W;x+=tw)c.drawImage(ph.tile,x,0,tw,H)}
   // 낮에는 살짝 밝게 (사진은 밤 기준)
   if(S.light>.5&&!(SCN[ph.key]&&SCN[ph.key].baked)){c.fillStyle='rgba(255,240,220,'+((S.light-.5)*.25)+')';c.fillRect(0,0,W,H)}
   if(ph.dusk&&S.light<.55){c.fillStyle='rgba(6,12,28,'+Math.min(.5,(.55-S.light)*1.1)+')';c.fillRect(0,0,W,H)}
@@ -945,6 +954,12 @@ try{buildBelt()}catch(e){}
 function drawBelt(c,S,kind){if(!belt||!BELTK[kind]||!GRASS[kind])return;const sc=(H*.36)/belt.h,tw=belt.w*sc,th=belt.h*sc,off=((S.vo*(W/40)*.36)%tw+tw)%tw,y=H*.8-th;
   c.globalAlpha=S.light>.5?.7:1;for(let x=-off;x<W;x+=tw)c.drawImage(belt.c,x,y,tw,th);c.globalAlpha=1}
 const BRIDGES=[[131.4,132.5],[238.2,239.1],[418.15,419.45]];
+const PAN=2.3;
+function drawPoles(c,S){if(S.mode!=='run'||S.v<.25||S.ferry)return;const b=B[S.bk];if(!b||b.tunnel)return;
+  const period=W*2.1,sp=S.vo*(W/40)*9,x0=W-((sp%period)+period)%period,night=S.light<.35,a=Math.min(1,S.v*1.6)*(night?.55:.42),pw=W*.045;
+  for(const x of [x0,x0+period]){if(x<-pw*3||x>W+pw*3)continue;
+    for(let k=0;k<4;k++){const xx=x+k*pw*.55,al=a*(1-k*.24);const g=c.createLinearGradient(xx-pw,0,xx+pw,0);g.addColorStop(0,'rgba(18,14,10,0)');g.addColorStop(.5,'rgba(18,14,10,'+al.toFixed(3)+')');g.addColorStop(1,'rgba(18,14,10,0)');c.fillStyle=g;c.fillRect(xx-pw,0,pw*2,H)}
+    const g2=c.createLinearGradient(0,H*.1,0,H*.135);g2.addColorStop(0,'rgba(18,14,10,0)');g2.addColorStop(.5,'rgba(18,14,10,'+(a*.6).toFixed(3)+')');g2.addColorStop(1,'rgba(18,14,10,0)');c.fillStyle=g2;c.fillRect(x-pw*1.2,H*.1,W*.22,H*.035)}}
 function drawLineside(c,S,kind){
   // 코드로 그린 나무·전철주·가로등은 없앰 — 사진 풀숲만, 철교에서는 철골 그림자만 스치게
   drawFG(c,S,W/40);
@@ -970,7 +985,7 @@ function drawScene(c,bk,S){
   c.setTransform(DPR,0,0,DPR,GOX*DPR,GOY*DPR);
   const g=c.createLinearGradient(0,0,0,hz);g.addColorStop(0,rgb(sky0));g.addColorStop(1,rgb(sky1));c.fillStyle=g;c.fillRect(0,0,W,H);
   const ph0=b.photo&&photoFor(b.photo);if(ph0){const now=performance.now();if(ph0!==XF.cur){XF.prev=XF.cur;XF.cur=ph0;XF.t=now}
-    let fa=Math.min(1,(now-XF.t)/2600);fa=fa*fa*(3-2*fa);const fb=XF.prev;if(fa<1&&fb&&fb.ready&&fb.img&&fb.img.src)drawPhoto(c,S,fb,pxm);else fa=Math.min(fa,Math.min(1,(now-(ph0.t0||0))/900));c.globalAlpha=fa;drawPhoto(c,S,ph0,pxm);c.globalAlpha=1;drawLineside(c,S,b.photo);if(S.mode==='run'&&S.pass)drawPassLights(c,S);return}
+    let fa=Math.min(1,(now-XF.t)/2600);fa=fa*fa*(3-2*fa);const fb=XF.prev;if(fa<1&&fb&&fb.ready&&fb.img&&fb.img.src)drawPhoto(c,S,fb,pxm);else fa=Math.min(fa,Math.min(1,(now-(ph0.t0||0))/900));c.globalAlpha=fa;drawPhoto(c,S,ph0,pxm);c.globalAlpha=1;drawLineside(c,S,b.photo);drawPoles(c,S);if(S.mode==='run'&&S.pass)drawPassLights(c,S);return}
   if(b.photo&&SCN[b.photo]&&SCN[b.photo].baked){let pv=null;{for(const d of [6,-6,12,-12]){const bb=B[biomeAt(S.km-d)];const q=bb&&bb.photo&&photoFor(bb.photo);if(q&&!q.pass){pv=q;break}}}if(pv&&pv.ready&&pv.img&&pv.img.src){drawPhoto(c,S,pv,pxm)}return}
   if(b.tunnel){drawTunnel(c,S,pxm);return}
   if(b.ferry){drawFerry(c,S,pxm,hz);return}
@@ -1927,11 +1942,12 @@ function openLog(){if(!ticket)return;const now=vnow(),rows=[];let last='';
   const skb='<div class="skt">스케치북 · 만난 승객 '+Object.keys(MET).length+' / '+PAX.length+'</div><div class="skb">'+PAX.map(p=>MET[p.id]?'<i style="background-image:url(img/pxc_'+p.id+'.webp'+IMGV+'),url(img/px_'+p.id+'.webp'+IMGV+')"></i>':'<i>?</i>').join('')+'</div>';
   const pss='<div class="skt">여권 도장 · '+Object.keys(PASSD).length+' / '+PASS.length+'</div><div class="gfs pss">'+PASS.map(p=>PASSD[p[1]]?'<i class="on" data-pass="1" style="border-color:'+p[5]+';color:'+p[5]+'">'+p[1]+'</i>':'<i>?</i>').join('')+'</div>';
   const pcs='<div class="skt">엽서함 · '+Object.keys(PCD).length+' / '+PCARD.length+'</div><div class="gfs pcs">'+PCARD.map(p=>PCD[p[1]]?'<i class="on" data-pc="'+p[1]+'" style="background-image:url(img/'+p[1]+'.webp'+IMGV+')"></i>':'<i>?</i>').join('')+'</div>';
+  const myS=SHOTS.map((x,i)=>[x,i]).filter(([x])=>ticket&&x.tk===ticket.trainKey);const shs='<div class="skt">필름 사진 · '+myS.length+' / '+FILM+'</div><div class="gfs shs">'+(myS.length?myS.map(([x,i])=>'<i class="on'+(x.hero?' hero':'')+'" data-sh="'+i+'" style="background-image:url(img/t/'+x.sk+'.webp);background-position:'+(x.sf/10).toFixed(1)+'% 50%"></i>').join(''):'<span style="opacity:.5;font-size:11px">아직 찍은 사진이 없어요</span>')+'</div>';
   const gfs='<div class="skt">선물 서랍 · '+Object.keys(GIFTS).length+' / '+PAX.length+'</div><div class="gfs">'+PAX.map(p=>GIFTS[p.id]?'<i class="on" data-g="'+p.id+'" style="background-image:url(img/gf_'+p.id+'.webp'+IMGV+')" title="'+esc(p.g[0])+'">'+esc(p.g[0][0])+'</i>':'<i>?</i>').join('')+'</div>';
-  $('logStamps').innerHTML=stampsHtml()+pss+skb+gfs+pcs+'<div class="stc"><span>모은 도장 '+Object.keys(STAMPS).length+' / '+MOM.length+'</span><span>받은 선물 '+Object.keys(GIFTS).length+' / '+PAX.length+' · 먹은 음식 '+Object.keys(FOODS).length+'</span></div>';
+  $('logStamps').innerHTML=stampsHtml()+shs+pss+skb+gfs+pcs+'<div class="stc"><span>모은 도장 '+Object.keys(STAMPS).length+' / '+MOM.length+'</span><span>받은 선물 '+Object.keys(GIFTS).length+' / '+PAX.length+' · 먹은 음식 '+Object.keys(FOODS).length+'</span></div>';
   $('logList').innerHTML=html||'<li class="next"><b>21:00</b>부산역 출발</li>';const d=kd(ticket.dep);$('logSub').textContent=trainNo(ticket.dep)+'호 · '+ticket.car+'호차 '+ticket.seat+'번 · '+d.m+'월 '+d.d+'일 출발';show('mLog',true);blip(900,.08,.02);
   setTimeout(()=>{const n=document.querySelector('#logList .now');if(n)n.scrollIntoView({block:'center'})},50)}
-$('hsBook').onclick=e=>{e.stopPropagation();openLog()};$('logClose').onclick=()=>show('mLog',false);$('logStamps').addEventListener('click',e=>{if(e.target.closest('[data-pass]')){show('mLog',false);openPass();return}{const q=e.target.closest('[data-pc]');if(q){show('mLog',false);openPCard(q.dataset.pc);return}}const g=e.target.closest('[data-g]');if(!g)return;const p=PAX.find(x=>x.id===g.dataset.g);if(p){show('mLog',false);openGift(p)}});
+$('hsBook').onclick=e=>{e.stopPropagation();openLog()};$('logClose').onclick=()=>show('mLog',false);$('logStamps').addEventListener('click',e=>{if(e.target.closest('[data-pass]')){show('mLog',false);openPass();return}{const q2=e.target.closest('[data-sh]');if(q2){show('mLog',false);openShot(+q2.dataset.sh);return}}{const q=e.target.closest('[data-pc]');if(q){show('mLog',false);openPCard(q.dataset.pc);return}}const g=e.target.closest('[data-g]');if(!g)return;const p=PAX.find(x=>x.id===g.dataset.g);if(p){show('mLog',false);openGift(p)}});
 // 입김: 창을 길게 누르면 김이 서리고, 손가락으로 쓰면 지워짐
 const fog=$('fogcv');let fogOn=false,fogT=0,fogHold=0,fogLast=null;
 function fogFill(){const r=fog.getBoundingClientRect(),d=Math.min(2,devicePixelRatio||1);fog.width=Math.round(r.width*d);fog.height=Math.round(r.height*d);const g=fog.getContext('2d');g.setTransform(d,0,0,d,0,0);
@@ -2205,7 +2221,32 @@ function openPCard(id){const p=PCARD.find(x=>x[1]===id);if(!p)return;const ph=$(
 $('pcdClose').onclick=()=>show('mPCard',false);$('mPCard').onclick=e=>{if(e.target===$('mPCard'))show('mPCard',false)};
 function pcardTick(S){if(!ticket||S.mode==='wait')return;for(const p of PCARD){if(S.km>=p[0]&&!PCD[p[1]]){const k=kd(vnow());PCD[p[1]]=k.m+'.'+k.d;LSset('bl-pcard',PCD);logAdd(p[3]+' 엽서 「'+p[2]+'」');if(S.km-p[0]<30)pcQ=p[1];break}}
   if(pcQ&&!anyOpen()&&!passQ){const id=pcQ;pcQ=null;openPCard(id);clearTimeout(pcardTick.t);pcardTick.t=setTimeout(()=>{if($('mPCard').classList.contains('on'))show('mPCard',false)},9000)}}
-function eventsTick(S){try{paxTick(S);momentTick(S);microTick(S);hopTick(S)}catch(e){}try{passTick(S)}catch(e){}try{lightsTick(S)}catch(e){}try{pcardTick(S)}catch(e){}}
+
+// 창밖 찰칵: 필름 24장
+let SHOTS=LS('bl-shots',[]);const FILM=24;
+function filmLeft(){if(!ticket)return 0;return FILM-(SHOTS.filter(x=>x.tk===ticket.trainKey).length)}
+function camUI(){const n=$('camN');if(n)n.textContent=ticket?filmLeft():''}
+let heroHot=null;
+function takeShot(){if(!ticket||cur.mode==='wait'){toast('기차가 출발하면 찍을 수 있어요','',2200);return}
+  if(filmLeft()<=0){toast('필름을 다 썼어요','24장을 모두 찍었어요 · 수첩에서 볼 수 있어요',2800);return}
+  const v=viewNow();if(!v){toast('지금은 창밖이 안 보여요','',2000);return}
+  $('flash').classList.remove('go');void $('flash').offsetWidth;$('flash').classList.add('go');
+  try{if(soundOn&&ac){blip(2200,.03,.05);setTimeout(()=>blip(1400,.05,.04),60)}}catch(e){}
+  const hero=!!heroHot,pl=(placeOf(cur)||nearName(cur.km));SHOTS.push({tk:ticket.trainKey,sk:v.sk,sf:v.sf,at:vnow(),pl,hero});if(SHOTS.length>120)SHOTS=SHOTS.slice(-120);LSset('bl-shots',SHOTS);
+  if(hero){heroHot=null;$('cam').classList.remove('hot');toast('명장면 찰칵!',pl+' · 남은 필름 '+filmLeft()+'장',2800);logAdd('명장면 사진: '+pl)}else toast('찰칵',pl+' · 남은 필름 '+filmLeft()+'장',2000);camUI()}
+$('cam').onclick=e=>{e.stopPropagation();takeShot()};
+function openShot(ix){const x=SHOTS[ix];if(!x)return;const ph=$('shPh');ph.style.backgroundImage='';ph.dataset.cap=(x.hero?'★ ':'')+x.pl;$('shName').textContent=x.hero?'명장면':'창밖 사진';const k=kd(x.at);$('shTxt').textContent=k.m+'월 '+k.d+'일 '+pd(k.h)+':'+pd(k.mi)+' (서울)';
+  show('mShot',true);sceneCard(x.sk,x.sf,x.at).then(u=>{if(u)ph.style.backgroundImage='url('+u+')'})}
+$('shClose').onclick=()=>show('mShot',false);$('mShot').onclick=e=>{if(e.target===$('mShot'))show('mShot',false)};
+function camTick(S){camUI();if(!ticket||S.mode!=='run')return;const b=B[S.bk],pk=b&&b.photo;const isHero=pk&&SCN[pk]&&SCN[pk].hero&&photoFor(pk);
+  if(isHero&&heroHot!==pk){ticket.hh=ticket.hh||{};heroHot=pk;$('cam').classList.add('hot');if(!ticket.hh[pk]&&!anyOpen()){ticket.hh[pk]=1;saveTicket();toast('명장면이 지나가요','지금 카메라를 눌러 찍어요',3200)}}
+  else if(!isHero&&heroHot){heroHot=null;$('cam').classList.remove('hot')}}
+// 타자마자: 맞은편 승객 인사 + 카메라 안내
+let greetT=0,greetA=false,greetB=false;
+function greetTick(S){if(greetB||!ticket||S.mode==='wait')return;if(!greetT){greetT=performance.now();return}const dt=performance.now()-greetT;
+  if(dt>6000&&!greetA){greetA=true;if(paxCur&&!anyOpen()){bubble(paxCur.n,paxCur.say[0]);$('pax').classList.add('dot')}}
+  if(dt>16000){greetB=true;if(!anyOpen()){try{if(!localStorage.getItem('bl-camhint')){localStorage.setItem('bl-camhint','1');toast('창밖을 찍어 보세요','왼쪽 아래 카메라 · 필름 24장',3600)}}catch(e){}}}}
+function eventsTick(S){try{paxTick(S);momentTick(S);microTick(S);hopTick(S)}catch(e){}try{passTick(S)}catch(e){}try{lightsTick(S)}catch(e){}try{pcardTick(S)}catch(e){}try{camTick(S);greetTick(S)}catch(e){}}
 
 // ───────── 작은 사건들: 들어와 있는 동안 1~2분마다 무언가 일어남 ─────────
 const FACTS=[

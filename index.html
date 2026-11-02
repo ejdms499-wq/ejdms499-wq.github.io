@@ -361,7 +361,7 @@ body:not(.dev) #speed,body:not(.dev) #jumpBtn{display:none!important}
 /* ── 종이 물건들 ── */
 :root{--ink:#27334b;--paper:none}
 #menuBtn,#menu{display:none!important}
-#sill{display:flex;justify-content:center;align-items:flex-end;gap:24px;margin:0 auto 20px}
+#sill{position:absolute;left:0;right:0;top:73.6%;z-index:8;display:flex;justify-content:center;align-items:flex-end;gap:24px;margin:0;color:rgba(239,230,214,.94);text-shadow:0 1px 8px rgba(0,0,0,.6)}
 #sill .ob{display:flex;flex-direction:column;align-items:center;gap:8px;color:inherit;padding:0;background:none;transition:transform .25s}
 #sill .ob:active{transform:translateY(-3px)}
 #sill .ob span{font-family:'Noto Sans KR',sans-serif;font-size:9.5px;letter-spacing:.14em;opacity:.62}
@@ -459,17 +459,13 @@ body:not(.dev) #speed,body:not(.dev) #jumpBtn{display:none!important}
 #cap .c3.link{opacity:.85!important;letter-spacing:.06em;font-size:11px;text-decoration:underline;text-underline-offset:4px;cursor:pointer;pointer-events:auto}
 
 /* 이벤트 */
-#sill{gap:18px!important}
+#sill{gap:15px!important}
 .o-mn{width:30px;height:38px;background:#f2ead8 var(--paper);border-radius:1px;transform:rotate(-2deg);padding:5px 4px 0;text-align:center;font-style:normal;border-top:3px solid #6b2a24}
 .o-mn b{display:block;font:700 6.5px 'Noto Serif KR',serif;letter-spacing:.12em;color:#6b2a24}
 .o-mn s{display:block;height:1px;background:rgba(60,40,30,.28);margin:4px 2px 0;text-decoration:none}
-#pax{display:none;align-items:center;justify-content:center;gap:9px;margin:0 auto 10px;font-family:'Noto Sans KR',sans-serif;font-size:11px;letter-spacing:.03em;cursor:pointer;width:max-content;padding:5px 12px 5px 5px;border-radius:999px;background:rgba(0,0,0,.18);position:relative}
-#pax.on{display:flex;animation:fade .8s}
-#pax b{font-family:'Noto Serif KR',serif;font-weight:500;font-size:12px}
-#pax .pxa{width:24px;height:24px;border-radius:50%;background:#e9dfcb center/cover;color:#3a2d22;display:grid;place-items:center;font:500 11px 'Noto Serif KR',serif;font-style:normal;overflow:hidden}
+#sill #pax{display:none}#sill #pax.on{display:flex;animation:fade .8s}
+#pax .pxa{width:32px;height:32px;border-radius:50%;background:#e9dfcb center/cover;color:#3a2d22;display:grid;place-items:center;font:500 13px 'Noto Serif KR',serif;font-style:normal;border:2px solid #f6f1e6;box-shadow:0 1px 1px rgba(0,0,0,.25),0 5px 10px rgba(0,0,0,.35)}
 #pax .pxa.has{color:transparent}
-#pax em{position:absolute;right:-2px;top:-2px;width:7px;height:7px;border-radius:50%;background:#e9b45f;box-shadow:0 0 8px rgba(233,180,95,.9)}
-#app.day #pax{background:rgba(255,250,240,.35)}
 .paxwrap,.foodwrap{width:min(340px,100%);text-align:center;color:#efe6d6;animation:rise .5s ease}
 .pxph{width:150px;height:190px;margin:0 auto;border-radius:3px;background:#e9dfcb center/cover;border:6px solid #f6f0e3;box-shadow:0 18px 40px rgba(0,0,0,.5);display:grid;place-items:center;transform:rotate(-1.5deg)}
 .pxph b{font:400 46px 'Noto Serif KR',serif;color:#8a7a64}.pxph.has b{display:none}
@@ -508,6 +504,10 @@ body:not(.dev) #speed,body:not(.dev) #jumpBtn{display:none!important}
 .stp span{aspect-ratio:1;border-radius:50%;border:1px dashed rgba(60,45,30,.22);display:grid;place-items:center;font:700 5.5px/1.1 'Noto Sans KR',sans-serif;letter-spacing:.04em;text-align:center;color:rgba(176,52,40,.9);overflow:hidden;padding:2px}
 .stp span.on{border:1.4px solid rgba(176,52,40,.8);transform:rotate(-10deg)}
 .stc{font:10.5px 'Noto Sans KR',sans-serif;opacity:.55;margin-top:8px;display:flex;justify-content:space-between}
+#hop{display:none;margin:10px auto 0;font:11px 'Noto Sans KR',sans-serif;letter-spacing:.03em;opacity:.85;padding:6px 12px;border-radius:999px;border:1px solid rgba(239,230,214,.3);width:max-content;max-width:92%;cursor:pointer}
+#hop.on{display:block;animation:fade .8s}#hop b{font-weight:500}
+#app.day #hop{border-color:rgba(48,38,28,.3)}
+#pax.ping .pxa{box-shadow:0 0 0 3px rgba(233,194,125,.85);transition:box-shadow .4s}
 </style>
 </head>
 <body>
@@ -526,6 +526,14 @@ body:not(.dev) #speed,body:not(.dev) #jumpBtn{display:none!important}
       <button id="mail"><svg viewBox="0 0 24 24" fill="none" stroke="#3a2a1e" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="1.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></svg><span id="mailtxt">엽서 도착</span></button>
     </div>
     <img id="cabinImg" src="img/cabin_n.webp" alt=""><img id="cabinDay" src="img/cabin_d.webp" alt="">
+    <div id="sill">
+    <button class="ob" id="obTicket"><i class="o-tk"><b>부산 → 런던</b><em id="obTkNo"></em></i><span>승차권</span></button>
+    <button class="ob" id="obCard"><i class="o-pc" id="obCardImg"></i><span>엽서</span></button>
+    <button class="ob" id="obMenu"><i class="o-mn"><b>MENU</b><s></s><s></s><s></s></i><span>식당칸</span></button>
+    <button class="ob" id="obNote"><i class="o-nt"></i><span>쪽지</span></button>
+    <button class="ob" id="obLog"><i class="o-lg"></i><span>수첩</span></button>
+    <button class="ob" id="pax"></button>
+  </div>
     <button class="hs" id="hsTea" aria-label="차" style="left:36.8%;top:60.1%;width:11.6%;height:8.2%"></button>
     <button class="hs" id="hsLamp" aria-label="창가 불" style="left:55%;top:60.4%;width:11%;height:5%"></button>
     <button class="hs" id="hsBook" aria-label="여행 수첩" style="left:48.6%;top:66%;width:15%;height:5%"></button>
@@ -552,13 +560,7 @@ body:not(.dev) #speed,body:not(.dev) #jumpBtn{display:none!important}
   <div id="bubble"></div>
   <div id="cart"><div id="cartT"></div><div id="cartD"></div><div class="cb"><button id="cartNo">괜찮아요</button><button id="cartBuy">하나 사기</button></div></div>
   <div id="roomSheet"><div class="sheet"></div></div>
-  <div id="cap"><div id="sill">
-    <button class="ob" id="obTicket"><i class="o-tk"><b>부산 → 런던</b><em id="obTkNo"></em></i><span>승차권</span></button>
-    <button class="ob" id="obCard"><i class="o-pc" id="obCardImg"></i><span>엽서</span></button>
-    <button class="ob" id="obMenu"><i class="o-mn"><b>MENU</b><s></s><s></s><s></s></i><span>식당칸</span></button>
-    <button class="ob" id="obNote"><i class="o-nt"></i><span>쪽지</span></button>
-    <button class="ob" id="obLog"><i class="o-lg"></i><span>수첩</span></button>
-  </div><div id="pax"></div><div id="room"></div><div class="c1" id="c1">부산발 런던행</div><div class="c2" id="c2"></div><div class="c3" id="c3"></div></div>
+  <div id="cap"><div id="room"></div><div class="c1" id="c1">부산발 런던행</div><div class="c2" id="c2"></div><div id="hop"></div><div class="c3" id="c3"></div></div>
   <button id="menuBtn" aria-label="메뉴"><svg viewBox="0 0 24 24"><path d="M5 8h14M5 12h14M5 16h9"/></svg></button>
   <button id="sndBtn" aria-label="소리"><svg viewBox="0 0 24 24" id="icoSnd2"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M16 9l5 6M21 9l-5 6"/></svg></button>
   <div id="menu"><div class="sheet"><div class="grab"></div>
@@ -825,7 +827,7 @@ const WREADY=['ru1','ngt_forest','ngt_town','st_vlad'];
 
 const CITY={busan:1,seoul:1,kr01:1,kr07:1,kr08:1,kr14:1,kr16:1,kr17:1};
 function loadPhoto(key){if(key==='plat'){loadPhoto('platd');loadPhoto('platn');return}if(PHOTO[key])return;const o=SCN[key]||{};PHOTO[key]={loading:true};const img=new Image();
-  img.onload=()=>{PHOTO[key]={t0:performance.now(),tile:img,w:img.naturalWidth,h:img.naturalHeight,ready:true,spd:o.spd||.08,img,pass:!!o.pass,key}};
+  img.onload=()=>{PHOTO[key]={t0:performance.now(),tile:img,w:img.naturalWidth,h:img.naturalHeight,ready:true,spd:o.spd||.2,img,pass:!!o.pass,key}};
   img.onerror=()=>{PHOTO[key]={missing:true}};img.src='img/'+key+'.webp'}
 function spanOf(key){let a=1e9,b=-1;for(const e of BI){if(B[e[2]]&&B[e[2]].photo===key){a=Math.min(a,e[0]);b=Math.max(b,e[1])}}return [a,b]}
 function photoFor(key){if(key==='plat'){const d=PHOTO.platd,n=PHOTO.platn,day=cur&&cur.light>.45;const a=day?d:n,b=day?n:d;if(a&&a.ready)return a;if(b&&b.ready)return b}const p=PHOTO[key];if(p&&p.ready)return p;if(SCN[key]&&SCN[key].baked)return null;const f=PHOTO.country;return f&&f.ready?f:null}
@@ -845,8 +847,9 @@ function drawPhoto(c,S,ph,pxm){
   if(S.light>.5&&!(SCN[ph.key]&&SCN[ph.key].baked)){c.fillStyle='rgba(255,240,220,'+((S.light-.5)*.25)+')';c.fillRect(0,0,W,H)}
   if(ph.dusk&&S.light<.55){c.fillStyle='rgba(6,12,28,'+Math.min(.5,(.55-S.light)*1.1)+')';c.fillRect(0,0,W,H)}
 }
-const GRASS={country:1,kr05:1,kr06:1,kr10:1,kr11:1,kr15:1,kr16:1};
-function drawFG(c,S,pxm){const ph=PHOTO.fg;if(!ph||!ph.ready||!GRASS[B[S.bk].photo]||BRIDGES.some(q=>S.km>q[0]&&S.km<q[1]))return;
+const GRASS={nk3:1,nk7:1,ru2:1,ru5:1,ru6:1,ru7:1,ru11:1,ru12:1,ru17:1,ru18:1,ru19:1,ru20:1,ru21:1,ru23:1,ru24:1,ru25:1,ru29:1,ru31:1,eu1:1,eu3:1,eu4:1,eu5:1,eu8:1,eu9:1,country:1,kr05:1,kr06:1,kr10:1,kr11:1,kr15:1,kr16:1};
+function drawFG(c,S,pxm){const ph=PHOTO.fg,pk=B[S.bk].photo;if(!ph||!ph.ready||!GRASS[pk]||BRIDGES.some(q=>S.km>q[0]&&S.km<q[1]))return;
+  if(SCN[pk]&&SCN[pk].baked){if(S.light<.38||S.v<.05)return;const th=H*.34,sc=th/ph.h,tw=ph.w*sc,off=((S.vo*pxm*1.6)%tw+tw)%tw;c.globalAlpha=.8*Math.min(1,(S.light-.38)/.25)*Math.min(1,S.v*1.5);for(let x=-off;x<W;x+=tw)c.drawImage(ph.tile,x,H-th,tw,th);c.globalAlpha=1;return}
   const th=H*.46,sc=th/ph.h,tw=ph.w*sc,off=((S.vo*pxm*1.5)%tw+tw)%tw;
   const bg=c.createLinearGradient(0,H*.7,0,H*.84);bg.addColorStop(0,'rgba(13,14,11,0)');bg.addColorStop(1,'rgba(13,14,11,1)');c.fillStyle=bg;c.fillRect(0,H*.7,W,H*.3);
   c.globalAlpha=S.light>.5?.75:.95;
@@ -2080,8 +2083,8 @@ function paxTick(S){if(!ticket||S.mode==='wait'||S.mode==='end'){if(paxCur){paxC
   const p=paxAt(S.km);if(p!==paxCur){const was=paxCur;paxCur=p;paxLine=0;renderPaxChip();
     if(p&&was&&paxShownFor!==ticket.trainKey+p.id){toast(p.n+'이(가) 맞은편 자리에 탔어요',p.w.split(' · ')[0],3600);blip(700,.1,.03)}
     paxShownFor=ticket.trainKey+(p?p.id:'')}}
-function renderPaxChip(){const el=$('pax');if(!el)return;if(!paxCur){el.innerHTML='';el.classList.remove('on');return}
-  el.innerHTML='<i class="pxa" id="pxChipA">'+esc(paxCur.n[0])+'</i><span>맞은편 · <b>'+esc(paxCur.n)+'</b></span>'+(GIFTS[paxCur.id]?'':'<em></em>');el.classList.add('on');
+function renderPaxChip(){const el=$('pax');if(!el)return;if(!paxCur){el.innerHTML='';el.classList.remove('on','dot');return}
+  const nm=paxCur.n.split(' ').pop();el.innerHTML='<i class="pxa" id="pxChipA">'+esc(paxCur.n[0])+'</i><span>'+esc(nm.length>5?nm.slice(0,5):nm)+'</span>';el.classList.add('on');el.classList.toggle('dot',!GIFTS[paxCur.id]);
   const a=$('pxChipA');tryImg('px_'+paxCur.id,a,()=>{})}
 function openPax(){const p=paxCur;if(!p)return;$('pxName').textContent=p.n;$('pxWho').textContent=p.w;paxLine=0;$('pxSay').textContent='“'+p.say[0]+'”';
   const ph=$('pxPh');ph.classList.remove('has');ph.style.backgroundImage='';ph.innerHTML='<b>'+esc(p.n[0])+'</b>';tryImg('px_'+p.id,ph,()=>{});
@@ -2115,7 +2118,44 @@ function showMoment(m){const fresh=!STAMPS[m.id];if(fresh){STAMPS[m.id]=Date.now
   const el=$('moment');el.classList.remove('on');void el.offsetWidth;el.classList.add('on');try{knock()}catch(e){}setTimeout(()=>blip(220,.12,.08),900);clearTimeout(showMoment.t);showMoment.t=setTimeout(()=>el.classList.remove('on'),9000)}
 $('moment').onclick=e=>{e.stopPropagation();$('moment').classList.remove('on')};
 function stampsHtml(){return '<div class="stp">'+MOM.map(m=>'<span class="'+(STAMPS[m.id]?'on':'')+'" title="'+esc(m.t)+'">'+(STAMPS[m.id]?esc(m.st):'')+'</span>').join('')+'</div>'}
-function eventsTick(S){try{paxTick(S);momentTick(S)}catch(e){}}
+function eventsTick(S){try{paxTick(S);momentTick(S);microTick(S);hopTick(S)}catch(e){}}
+
+// ───────── 작은 사건들: 들어와 있는 동안 1~2분마다 무언가 일어남 ─────────
+const FACTS=[
+ [0,420,['경부선은 1905년에 개통했다. 부산에서 서울까지 그때는 14시간이 걸렸다.','이 밤기차가 서울에 닿을 무렵, 첫 지하철은 아직 차고에서 잠들어 있다.','창밖 불빛 하나하나가 누군가의 늦은 밤이다.']],
+ [420,1290,['원산에서 두만강까지 철길은 동해 바다를 거의 끝까지 따라간다.','칠보산은 바위가 너무 기이해서 "함북의 금강"이라 불린다.','이 길로 기차가 다시 달리는 날을, 아직 아무도 모른다.']],
+ [1290,2310,['연해주는 러시아에서 호랑이가 사는 거의 유일한 땅이다. 시베리아호랑이 500여 마리.','블라디보스토크는 "동방을 지배하라"라는 뜻이다.','여기서부터 시베리아 횡단철도 9,288km가 시작된다.']],
+ [2310,5190,['시베리아 횡단철도는 1916년에 완공됐다. 25년이 걸렸다.','러시아 기차의 차장은 칸마다 한 명씩, 사모바르의 물을 밤새 끓인다.','이 구간은 하루 반 동안 큰 도시가 거의 없다.']],
+ [5190,5640,['바이칼에는 지구 민물의 20%가 담겨 있다.','바이칼물범은 바다에서 수천 km 떨어진 호수에 사는 유일한 물범이다.','바이칼 호숫가 철길은 한때 "황제의 벨트 버클"이라 불렸다. 터널만 서른아홉 개.']],
+ [5640,8990,['시베리아의 겨울은 영하 40도까지 내려간다. 그래서 기차 창은 이중이다.','노보시비르스크는 시베리아에서 가장 큰 도시, 러시아에서 세 번째 도시다.','러시아 열차에서는 낯선 사람과 음식을 나눠 먹는 게 예의다.']],
+ [8990,10790,['우랄산맥은 아시아와 유럽을 가른다. 생각보다 낮고 완만하다.','모스크바까지의 모든 기차 시간표는 오랫동안 모스크바 시간으로 적혀 있었다.','볼가강은 유럽에서 가장 긴 강이다. 3,530km.']],
+ [10790,12610,['브레스트 국경에서는 차량을 들어 올려 바퀴를 통째로 갈아 끼운다.','바르샤바 구시가지는 전쟁 뒤 옛 그림을 보고 벽돌 한 장까지 다시 지었다.','쇼팽은 바르샤바를 떠날 때 고향 흙 한 줌을 가지고 갔다.']],
+ [12610,14121,['쾰른 대성당은 짓는 데 632년이 걸렸다.','해저 터널은 바다 밑 최대 75m를 지난다. 기차로 20분.','런던 세인트판크라스역의 시계는 1868년부터 시간을 알려 왔다.']],
+];
+const factAt=km=>{const f=FACTS.find(x=>km>=x[0]&&km<x[1]);return f?f[2]:null};
+let microT=0,microN=0,microLastFact=-1;
+function anyOpen(){return !!document.querySelector('.modal.on,#roomSheet.on,#cart.on,#moment.on')||($('veil')&&$('veil').style.display!=='none'&&!$('veil').classList.contains('off'))}
+function offer(t,d,yes,no,onYes){$('cartT').textContent=t;$('cartD').textContent=d;$('cartBuy').textContent=yes;$('cartNo').textContent=no;cartOpen={custom:onYes};show('cart',true);blip(780,.1,.03);
+  clearTimeout(showCart.t);showCart.t=setTimeout(()=>{show('cart',false);cartOpen=null;$('cartBuy').textContent='하나 사기';$('cartNo').textContent='괜찮아요'},20000)}
+function microTick(S){const now=performance.now();if(!ticket||S.mode==='wait'||S.mode==='end'){microT=now+20000;return}
+  if(!microT){microT=now+22000;return}if(now<microT)return;if(anyOpen()){microT=now+8000;return}
+  microT=now+70000+Math.random()*60000;microN++;
+  const kinds=[];if(paxCur)kinds.push('pax','pax');kinds.push('fact','fact');if(S.mode==='run')kinds.push('announce');kinds.push(microN%3===0?'tea':'snack');
+  const k=kinds[Math.floor(Math.random()*kinds.length)];
+  if(k==='pax'){const p=paxCur;bubble(p.n,p.say[Math.floor(Math.random()*p.say.length)]);blip(880,.08,.02);$('pax').classList.add('ping');setTimeout(()=>$('pax').classList.remove('ping'),4000)}
+  else if(k==='fact'){const f=factAt(S.km);if(!f)return;let i=Math.floor(Math.random()*f.length);if(i===microLastFact)i=(i+1)%f.length;microLastFact=i;const el=$('c3');el.classList.remove('on');setTimeout(()=>{el.textContent=f[i];el.classList.add('on')},600);clearTimeout(noteT);noteT=setTimeout(()=>el.classList.remove('on'),30000)}
+  else if(k==='announce'){const nx=ST[S.next];if(!nx)return;announce('안내 방송 · 다음 정차역은 '+nx.k+'역입니다 · '+fmt(S.eta)+' 뒤 도착');try{chime()}catch(e){}}
+  else if(k==='tea'){const ru=S.km>2310&&S.km<10790;offer(ru?'차장 갈리나가 문을 두드려요':'차장이 문을 두드려요',ru?'홍차 한 잔 드릴까요? 은빛 컵받침에 담아 드려요':'따뜻한 차 한 잔 드릴까요?','네, 주세요','괜찮아요',()=>{logAdd(ru?'차장에게 은빛 컵받침 홍차를 받았다':'차장에게 따뜻한 차를 받았다');toast('차를 받았어요','김이 모락모락',2400);blip(1650,.18,.04)})}
+  else if(k==='snack'){const m=menuAt(S.km);if(!m)return;const d=m.d[Math.floor(Math.random()*m.d.length)];offer('덜컹 — 판매 카트가 지나가요',d.n+(d.p?' · '+d.p:''),'하나 주세요','괜찮아요',()=>{ticket.orders=ticket.orders||{};ticket.orders[d.id]=vnow();saveTicket();setTimeout(()=>serveFood(d),1500)})}}
+// 다음 볼거리로 건너가기: 지금 달리는 열차 중 곧 명소에 닿는 열차
+function bestHop(){const now=vnow(),{prev}=depTimes(now);let best=null;
+  for(let d=0;d<12;d++){const dep=prev-d*864e5,el=now-dep;if(el>TRIP)break;const S=state(el);if(S.mode==='end')continue;const n=nextMoment(S.km);if(!n)continue;const eta=elAtKm(n.km)-el;
+    if(eta>60e3&&(!best||eta<best.eta))best={dep,eta,m:n}}return best}
+let hopT=0,hopCur=null;
+function hopTick(S){const now=performance.now();if(now<hopT)return;hopT=now+30000;const el=$('hop');if(!el||!ticket)return;
+  const mine=S.mode==='wait'?null:nextMoment(S.km),myEta=mine&&S.mode!=='end'?elAtKm(mine.km)-(vnow()-ticket.dep):1e12;
+  const h=bestHop();if(!h||h.dep===ticket.dep||myEta<45*60e3||h.eta>myEta){el.classList.remove('on');hopCur=null;return}
+  hopCur=h;el.innerHTML='▶ '+fmt(h.eta)+' 뒤 <b>'+esc(h.m.t)+'</b> — 그 열차로 건너가기';el.classList.add('on')}
 
 // ───────── 판매 카트 (그림 없이 소리와 글로) ─────────
 const CART=[{id:'egg',items:['egg','cider'],t:'덜컹 — 판매 카트가 지나갑니다',d:'삶은 달걀과 사이다',ok:S=>S.mode==='run'&&S.km>22&&S.km<60},
@@ -2125,9 +2165,9 @@ let cartOpen=null;
 function cartTick(S){if(!ticket||cartOpen)return;ticket.cart=ticket.cart||{};for(const c of CART){if(!ticket.cart[c.id]&&c.ok(S)){ticket.cart[c.id]=1;saveTicket();showCart(c);break}}}
 function cartSound(){try{if(!soundOn||!ac||!noiseBuf)return;const n=ac.createBufferSource(),f=ac.createBiquadFilter(),g=ac.createGain();n.buffer=noiseBuf;n.loop=true;f.type='bandpass';f.frequency.value=320;f.Q.value=1.2;g.gain.setValueAtTime(0,ac.currentTime);g.gain.linearRampToValueAtTime(.09,ac.currentTime+1.4);g.gain.linearRampToValueAtTime(0,ac.currentTime+4);n.connect(f);f.connect(g);g.connect(master||ac.destination);n.start();n.stop(ac.currentTime+4.2);setTimeout(()=>{blip(1560,.5,.035);setTimeout(()=>blip(1560,.5,.03),260)},900)}catch(e){}}
 function showCart(c){cartOpen=c;$('cartT').textContent=c.t;$('cartD').textContent=c.d;show('cart',true);cartSound();clearTimeout(showCart.t);showCart.t=setTimeout(()=>{show('cart',false);cartOpen=null},26000)}
-$('cartBuy').onclick=e=>{e.stopPropagation();const c=cartOpen;if(!c)return;ticket.items=ticket.items||{};c.items.forEach(k=>ticket.items[k]=(ticket.items[k]||0)+2);logAdd(josa(c.items.map(k=>ITEMS[k]).join('와 ').replace('달걀와','달걀과'),'을','를')+' 샀다');saveTicket();show('cart',false);cartOpen=null;
+$('cartBuy').onclick=e=>{e.stopPropagation();const c=cartOpen;if(!c)return;if(c.custom){const f=c.custom;show('cart',false);cartOpen=null;setTimeout(()=>{$('cartBuy').textContent='하나 사기';$('cartNo').textContent='괜찮아요'},400);f();return}ticket.items=ticket.items||{};c.items.forEach(k=>ticket.items[k]=(ticket.items[k]||0)+2);logAdd(josa(c.items.map(k=>ITEMS[k]).join('와 ').replace('달걀와','달걀과'),'을','를')+' 샀다');saveTicket();show('cart',false);cartOpen=null;
   toast('샀어요',Object.keys(roomMates).length?'같은 칸 승객에게 건넬 수도 있어요':'',2600);blip(880,.1,.04)};
-$('cartNo').onclick=e=>{e.stopPropagation();show('cart',false);cartOpen=null};
+$('cartNo').onclick=e=>{e.stopPropagation();show('cart',false);cartOpen=null;setTimeout(()=>{$('cartBuy').textContent='하나 사기';$('cartNo').textContent='괜찮아요'},400)};
 $('room').onclick=e=>{e.stopPropagation();openRoom()};
 $('obTicket').onclick=e=>{e.stopPropagation();openTicket()};
 $('obCard').onclick=e=>{e.stopPropagation();const v=viewNow()||{};openPostcard(curStation(),{at:vnow(),sk:v.sk,sf:v.sf})};
@@ -2135,6 +2175,7 @@ $('obNote').onclick=e=>{e.stopPropagation();openDrawer()};
 $('obLog').onclick=e=>{e.stopPropagation();openLog()};
 $('obMenu').onclick=e=>{e.stopPropagation();openMenu2()};
 $('pax').onclick=e=>{e.stopPropagation();openPax()};
+$('hop').onclick=e=>{e.stopPropagation();const h=hopCur;if(!h)return;boardTrain(h.dep,true);ticket.auto=0;saveTicket();toast(trainNo(h.dep)+'호로 건너갔어요',fmt(h.eta)+' 뒤 '+h.m.t,3000);$('hop').classList.remove('on');hopT=0}
 $('win').addEventListener('click',e=>{if(e.target.closest('button')||$('app').classList.contains('gaze')||gzBusy)return;gazeAsk()});
 function sillTick(){try{const v=viewNow(),el=$('obCardImg');if(v&&v.sk){const u='img/'+v.sk+'.webp';if(el.dataset.u!==u){el.dataset.u=u;el.style.backgroundImage='url('+u+')'}el.style.backgroundPosition=(v.sf/10)+'% 50%'}
   if(ticket){$('obTkNo').textContent='№'+String(ticket.no).slice(-5);const p=Math.max(0,passedIdx(vnow()-ticket.dep));if(ticket.punched!=null&&p>ticket.punched)$('obTicket').classList.add('dot')}}catch(e){}}

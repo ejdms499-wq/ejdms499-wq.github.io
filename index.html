@@ -1511,7 +1511,9 @@ const TZ_S=[9,9,9,8,8,8,8,5,5,4,4,3,1,1,1,1,0], EU_S=[0,0,0,0,0,0,0,0,0,0,0,0,1,
 let TZ=TZ_N,EU=EU_N,LANG=LANG_N;
 const ROUTES={n:{TZ:TZ_N,EU:EU_N,LANG:LANG_N,ST:ST_N,FOOD:FOOD_N,BI:BI_N,LOC:LOC_N,STAMP:STAMP_N,BAND:BAND_N,ART:ART_N,name:'북쪽 길 · 시베리아'},s:{TZ:TZ_S,EU:EU_S,LANG:LANG_S,ST:ST_S,FOOD:FOOD_S,BI:BI_S,LOC:LOC_S,STAMP:STAMP_S,BAND:BAND_S,ART:ART_S,name:'남쪽 길 · 실크로드'}};
 function euDST(ms){const y=new Date(ms).getUTCFullYear();const ls=m=>{const d=new Date(Date.UTC(y,m+1,0,1));d.setUTCDate(d.getUTCDate()-d.getUTCDay());return d.getTime()};return ms>=ls(2)&&ms<ls(9)}
-function tzAt(km,ms){let i=0;while(i<LAST&&km>=ST[i+1].km)i++;let k=i;if(i<LAST){const mid=(ST[i].km+ST[i+1].km)/2;if(km>=mid)k=i+1}return TZ[k]+(EU[k]&&euDST(ms)?1:0)}
+const TZB=[[1290,10],[2590,9],[5030,8],[6320,7],[7940,6],[8250,5],[9570,4],[9690,3],[11840,1],[13885,0]],TZEU=11840;
+function tzAt(km,ms){if(ST[LAST].km!==14120){let i=0;while(i<LAST&&km>=ST[i+1].km)i++;let k=i;if(i<LAST){const mid=(ST[i].km+ST[i+1].km)/2;if(km>=mid)k=i+1}return TZ[k]+(EU[k]&&euDST(ms)?1:0)}
+ let tz=9;for(const b of TZB)if(km>=b[0])tz=b[1];return tz+(km>=TZEU&&euDST(ms)?1:0)}
 const ANN={ko:(s,l)=>'이번 역은 '+s.k+'역입니다.',ru:(s,l)=>'Следующая станция — '+l+'.',zh:(s,l)=>'下一站，'+l+'。',pl:(s,l)=>'Następna stacja: '+l+'.',de:(s,l)=>'Nächster Halt: '+l+'.',fr:(s,l)=>'Prochain arrêt : '+l+'.',
  en:(s,l)=>'The next station is '+l+'.',az:(s,l)=>'Növbəti stansiya — '+l+'.',tr:(s,l)=>'Sıradaki istasyon: '+l+'.',hu:(s,l)=>'Következő állomás: '+l+'.'};
 const VLANG={ko:'ko-KR',ru:'ru-RU',zh:'zh-CN',pl:'pl-PL',de:'de-DE',fr:'fr-FR',en:'en-GB',az:'az-AZ',tr:'tr-TR',hu:'hu-HU'};
@@ -1809,7 +1811,7 @@ function frame(now){
   const tz=tzAt(S.km,vt),lt=new Date(vt+tz*HMS),lh=lt.getUTCHours(),lm=lt.getUTCMinutes();
   $('hH').setAttribute('transform','rotate('+((lh%12)*30+lm*.5)+' 21 21)');$('hM').setAttribute('transform','rotate('+(lm*6)+' 21 21)');
   $('tzl').textContent='UTC'+(tz>=0?'+':'')+tz;
-  if(prevTz!=null&&tz!==prevTz&&ticket){const d=tz-prevTz;announce('시간대가 바뀌었습니다 · 시계를 '+Math.abs(d)+'시간 '+(d<0?'늦춥니다':'당깁니다')+' (UTC'+(tz>=0?'+':'')+tz+')');$('clock').classList.add('flash');setTimeout(()=>$('clock').classList.remove('flash'),2000)}
+  if(prevTz!=null&&tz!==prevTz&&ticket){const d=tz-prevTz;announce('시간대가 바뀌었습니다 · 시계를 '+Math.abs(d)+'시간 '+(d<0?'늦춥니다':'당깁니다')+' · '+(tz===9?'서울과 같은 시간':'서울보다 '+Math.abs(tz-9)+'시간 '+(tz<9?'늦어요':'빨라요')));$('clock').classList.add('flash');setTimeout(()=>$('clock').classList.remove('flash'),2000)}
   prevTz=tz;S.ltxt='현지 '+pd(lh)+':'+pd(lm);
   // 해 뜨고 지는 순간
   if(ticket&&now>sunCheck){sunCheck=now+20000;sunEv=predictSun(vt,el)}
@@ -1868,7 +1870,7 @@ let capA='',capB='';
 function setCap(a,b){if(a!==capA){capA=a;$('c1').textContent=a}if(b!==capB){capB=b;$('c2').textContent=b}}
 function placeOf(S){if(S.mode==='stop')return ST[S.i].k+(ST[S.i].ferry?'항':'역');let b=B[S.bk];if(b&&SCN[b.photo]&&SCN[b.photo].hero&&!photoFor(b.photo)){const k2=biomeAt(S.km-5);return PLACE[k2]||nearName(S.km)}if(b&&b.tunnel)return '';return PLACE[S.bk]||nearName(S.km)}
 const WAITTXT='기다리는 동안 지금 달리는 열차로 갈아타기 →';
-function updateCap(S){if(!ticket)return;if(S.mode!=='wait'&&$('c3').classList.contains('link')){$('c3').classList.remove('link','on');$('c3').textContent=''}const r=riders>1?' · 함께 탄 승객 '+riders+'명':'';const lt=S.ltxt?S.ltxt.replace('현지 ','현지 '):'';
+function updateCap(S){if(!ticket)return;if(S.mode!=='wait'&&$('c3').classList.contains('link')){$('c3').classList.remove('link','on');$('c3').textContent=''}const r=riders>1?' · 함께 탄 승객 '+riders+'명':'';let lt=S.ltxt?S.ltxt.replace('현지 ','현지 '):'';{const vt=vnow(),tz=tzAt(S.km,vt);if(lt&&tz!==9){const k=kd(vt);lt+=' (서울 '+pd(k.h)+':'+pd(k.mi)+')'}}
   if(S.mode==='wait'){setCap(S.eta<10*60e3?'곧 출발합니다':'부산역 · 오늘 밤 9시 출발','출발까지 '+fmt(S.eta)+(riders>1?' · 기다리는 승객 '+riders+'명':''));$('c3').classList.toggle('on',S.eta>30*60e3);$('c3').classList.toggle('link',S.eta>30*60e3);if(S.eta>30*60e3&&$('c3').textContent!==WAITTXT)$('c3').textContent=WAITTXT;return}
   if(S.mode==='end'){setCap('종착역 런던',lt+r);return}
   if(S.mode==='stop'){setCap(ST[S.i].k+(ST[S.i].ferry?'항':'역')+'에 잠시 정차 중',fmt(S.eta)+' 뒤 출발 · '+lt+r);return}

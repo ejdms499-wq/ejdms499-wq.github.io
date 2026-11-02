@@ -8,7 +8,7 @@
 <title>부산발 런던행</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root{--amber:#f0b45c;--brass:#b8925a;--cream:#efe6d6;--wood:#4c3324}
 *{box-sizing:border-box}
@@ -249,12 +249,28 @@ body:not(.dev) #speed,body:not(.dev) #jumpBtn{display:none!important}
 #menu button.it:last-of-type{border-bottom:0}
 #menu button.it small{font-family:'Noto Sans KR',sans-serif;font-size:11px;opacity:.45;letter-spacing:.02em;font-weight:300}
 #menu .fine{text-align:center;font-size:10px;letter-spacing:.3em;opacity:.3;margin-top:12px;font-family:'Noto Sans KR',sans-serif}
-#veil{position:absolute;inset:0;z-index:70;background:radial-gradient(ellipse at 50% 45%,rgba(14,16,20,.86),rgba(4,5,7,.97));display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;transition:opacity 1.8s ease;cursor:pointer;font-family:'Noto Serif KR',serif;color:#efe6d6}
+#veil{position:absolute;inset:0;z-index:70;background:linear-gradient(180deg,rgba(6,7,9,.9),rgba(6,7,9,.97) 40%);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);transition:opacity 1.4s ease;font-family:'Noto Serif KR',serif;color:#efe6d6;overflow-y:auto;-webkit-overflow-scrolling:touch}
 #veil.off{opacity:0;pointer-events:none}
-#veil .v1{font-size:27px;letter-spacing:.12em;font-weight:400}
-#veil .v2{font-size:10px;letter-spacing:.42em;opacity:.5;margin-top:12px;font-family:'Noto Sans KR',sans-serif}
-#veil .v3{font-size:13px;opacity:.78;margin-top:42px;line-height:1.9;letter-spacing:.04em}
-#veil .v4{font-size:11px;opacity:.42;margin-top:46px;letter-spacing:.12em;font-family:'Noto Sans KR',sans-serif;animation:breathe 3.2s ease-in-out infinite}
+#veil .vin{max-width:440px;margin:0 auto;padding:calc(56px + env(safe-area-inset-top)) 22px calc(40px + env(safe-area-inset-bottom));animation:fade 1.6s ease}
+#veil .v1{font-size:26px;letter-spacing:.14em;text-align:center}
+#veil .v2{font-size:9.5px;letter-spacing:.46em;opacity:.45;margin-top:10px;text-align:center;font-family:'Noto Sans KR',sans-serif}
+#veil .v5{font-size:12.5px;line-height:1.9;opacity:.62;text-align:center;margin:26px 0 30px;letter-spacing:.03em}
+#veil .vl{display:flex;justify-content:space-between;align-items:baseline;font-family:'Noto Sans KR',sans-serif;font-size:10.5px;letter-spacing:.12em;opacity:.5;padding:0 2px 10px;border-bottom:1px solid rgba(239,230,214,.14)}
+#veil .vl i{font-style:normal;letter-spacing:.04em}
+#veil .tr{display:flex;align-items:center;gap:14px;width:100%;text-align:left;padding:14px 2px;border-bottom:1px solid rgba(239,230,214,.08);color:inherit;font-family:inherit;transition:background .2s}
+#veil .tr:active{background:rgba(239,230,214,.05)}
+#veil .tr .no{flex:0 0 58px;font-family:'Noto Sans KR',sans-serif;font-size:10.5px;letter-spacing:.06em;opacity:.55;line-height:1.5}
+#veil .tr .no b{display:block;font-family:'Noto Serif KR',serif;font-weight:400;font-size:13px;opacity:1;letter-spacing:.04em;color:#efe6d6}
+#veil .tr .pl{flex:1;font-size:15px;letter-spacing:.03em;line-height:1.35}
+#veil .tr .pl small{display:block;font-family:'Noto Sans KR',sans-serif;font-size:11px;opacity:.5;margin-top:4px;letter-spacing:.02em}
+#veil .tr .lt{flex:0 0 auto;text-align:right;font-family:'Noto Sans KR',sans-serif;font-size:11px;opacity:.6;line-height:1.5}
+#veil .tr .lt b{display:block;font-weight:400;font-size:15px;letter-spacing:.04em;opacity:1;color:#efe6d6;font-variant-numeric:tabular-nums}
+#veil .tr .dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:5px;vertical-align:1px;background:#e9c27d;box-shadow:0 0 8px rgba(233,194,125,.7)}
+#veil .tr .dot.n{background:#6d7fa6;box-shadow:none}#veil .tr .dot.t{background:#d98b6a;box-shadow:0 0 6px rgba(217,139,106,.6)}
+#veil .mine{display:none;margin:0 0 26px;border:1px solid rgba(239,230,214,.3);border-radius:14px;padding:16px 16px}
+#veil .mine.on{display:flex}
+#veil .mine .pl small{opacity:.6}
+#veil .v4{font-size:10.5px;opacity:.36;margin-top:24px;letter-spacing:.06em;text-align:center;font-family:'Noto Sans KR',sans-serif;line-height:1.8}
 @keyframes breathe{50%{opacity:.15}}
 #toast{background:transparent!important;box-shadow:none!important;text-shadow:0 1px 14px rgba(0,0,0,.8)}
 #toast .t2{opacity:.75!important}
@@ -327,6 +343,105 @@ body:not(.dev) #speed,body:not(.dev) #jumpBtn{display:none!important}
 #roomSheet .none{font-size:12px;opacity:.45;font-family:'Noto Sans KR',sans-serif}
 #app.gaze #bubble{top:12%}#app.gaze #cart{bottom:12%}
 #app.day #room{color:rgba(48,38,28,.85)}
+
+/* ── 종이 물건들 ── */
+:root{--ink:#27334b;--paper:none}
+#menuBtn,#menu{display:none!important}
+#sill{display:flex;justify-content:center;align-items:flex-end;gap:24px;margin:0 auto 20px}
+#sill .ob{display:flex;flex-direction:column;align-items:center;gap:8px;color:inherit;padding:0;background:none;transition:transform .25s}
+#sill .ob:active{transform:translateY(-3px)}
+#sill .ob span{font-family:'Noto Sans KR',sans-serif;font-size:9.5px;letter-spacing:.14em;opacity:.62}
+#sill .ob i{display:block;position:relative;box-shadow:0 1px 1px rgba(0,0,0,.25),0 5px 10px rgba(0,0,0,.35)}
+#sill .ob.dot i::after{content:"";position:absolute;right:-4px;top:-4px;width:7px;height:7px;border-radius:50%;background:#e9b45f;box-shadow:0 0 8px rgba(233,180,95,.9);animation:breathe 2.4s ease-in-out infinite}
+.o-tk{width:50px;height:27px;border-radius:2px;background-color:#cddbc9;background-image:var(--paper),repeating-linear-gradient(115deg,rgba(40,80,60,.13) 0 1px,transparent 1px 3px);transform:rotate(-4deg);font-style:normal;text-align:center;padding-top:5px}
+.o-tk b{display:block;font-family:'Noto Serif KR',serif;font-size:7px;font-weight:700;color:#1f3a2e;letter-spacing:.06em}
+.o-tk em{display:block;font:600 6px 'Courier New',monospace;color:#b2342a;font-style:normal;margin-top:2px}
+.o-pc{width:46px;height:33px;border:3px solid #f6f1e6;border-bottom-width:6px;background:#3a3631 center/auto 100%;transform:rotate(3deg)}
+.o-nt{width:34px;height:27px;background:#efe6d3 var(--paper);transform:rotate(-3deg);border-radius:1px;background-image:var(--paper),linear-gradient(180deg,rgba(255,255,255,.35),transparent 48%,rgba(0,0,0,.06) 50%,transparent 54%)}
+.o-nt::before{content:"";position:absolute;right:0;top:0;border-style:solid;border-width:0 8px 8px 0;border-color:transparent #2a2622 #d6ccb8 transparent;opacity:.85}
+.o-lg{width:29px;height:38px;border-radius:2px 4px 4px 2px;background:#2c3644;background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 2px),repeating-linear-gradient(90deg,rgba(0,0,0,.08) 0 1px,transparent 1px 3px);transform:rotate(2deg)}
+.o-lg::before{content:"";position:absolute;right:5px;top:0;bottom:0;width:2px;background:#151a22}
+#app.gaze #sill{display:none}
+#app.day #sill .ob span{color:rgba(48,38,28,.9)}
+#room{cursor:pointer}
+/* 쪽지 */
+.nwrap{width:min(340px,100%)}
+.memo{position:relative;background-color:#f5eedf;background-image:var(--paper),linear-gradient(180deg,rgba(255,255,255,.4),rgba(255,255,255,0) 49%,rgba(0,0,0,.05) 50%,rgba(0,0,0,0) 53%);color:#2b2620;padding:22px 22px 18px;border-radius:2px;box-shadow:0 1px 1px rgba(0,0,0,.15),0 18px 40px rgba(0,0,0,.45);transform:rotate(-1.4deg);animation:unfold .7s cubic-bezier(.2,.8,.2,1) both}
+.memo .mh{font-family:'Noto Sans KR',sans-serif;font-size:9.5px;letter-spacing:.32em;opacity:.42}
+.memo .mt{font-family:'Gowun Batang','Noto Serif KR',serif;font-size:19px;line-height:1.8;color:var(--ink);margin-top:14px;white-space:pre-wrap;word-break:keep-all;min-height:68px}
+.memo .mm{font-family:'Gowun Batang','Noto Serif KR',serif;font-size:12px;opacity:.62;text-align:right;margin-top:16px;color:var(--ink)}
+.memo.blank{margin-top:18px;transform:rotate(.9deg);background-color:#f1e8d6;padding:16px 18px 10px;animation-delay:.15s}
+.memo textarea{display:block;width:100%;border:0;background:transparent;font-family:'Gowun Batang','Noto Serif KR',serif;font-size:17px;line-height:1.75;color:var(--ink);resize:none;outline:none;padding:0;user-select:text;-webkit-user-select:text}
+.memo textarea::placeholder{color:rgba(39,51,75,.36)}
+.mrow{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:6px;border-top:1px solid rgba(43,38,32,.1);padding-top:9px}
+.mrow button{font-family:'Gowun Batang','Noto Serif KR',serif;font-size:13.5px;color:var(--ink);padding:4px 0;letter-spacing:.04em;white-space:nowrap}
+.mrow span{font-size:10.5px;opacity:.55;font-family:'Noto Sans KR',sans-serif;color:#2b2620}
+@keyframes unfold{from{opacity:0;transform:translateY(22px) rotate(-5deg) scaleY(.6)}}
+.closer{border-radius:999px!important;margin-top:18px!important}
+/* 엽서 */
+.pcwrap{width:min(360px,100%);animation:rise .55s ease}
+.pc3d{position:relative;aspect-ratio:1.42;perspective:1500px;cursor:pointer}
+.pc3d .in{position:absolute;inset:0;transition:transform 1s cubic-bezier(.3,.75,.2,1);transform-style:preserve-3d}
+.pc3d.flip .in{transform:rotateY(180deg)}
+.pcf{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:3px;background-color:#f6f0e3;background-image:var(--paper);box-shadow:0 1px 1px rgba(0,0,0,.2),0 24px 50px rgba(0,0,0,.55);color:#2b2620}
+.pcfront{padding:9px 9px 25px}
+.pcfront .img{position:relative;width:100%;height:100%;overflow:hidden;background:#cfc6b6}
+.pcfront .img img{width:100%;height:100%;object-fit:cover;display:block;transition:filter .8s,transform .8s}
+.pcfront .cap{position:absolute;left:11px;right:11px;bottom:7px;display:flex;justify-content:space-between;font-family:'Noto Sans KR',sans-serif;font-size:8.5px;letter-spacing:.22em;color:#6a5f50}
+.pcfront .cap span:first-child{font-family:'Noto Serif KR',serif;letter-spacing:.12em;font-size:9.5px;color:#3e352b}
+.pcback{transform:rotateY(180deg);padding:13px 15px 12px}
+.ph{display:flex;align-items:baseline;gap:9px;padding-bottom:6px;border-bottom:1px solid rgba(43,38,32,.16)}
+.ph b{font-family:'Noto Serif KR',serif;font-weight:500;font-size:11.5px;letter-spacing:.55em}
+.ph span{font-family:'Noto Sans KR',sans-serif;font-size:7.5px;letter-spacing:.32em;opacity:.5}
+.cols{display:flex;height:calc(100% - 28px);padding-top:10px}
+.msg{flex:1;min-width:0;padding-right:12px;border-right:1px solid rgba(43,38,32,.16);display:flex;flex-direction:column;font-family:'Gowun Batang','Noto Serif KR',serif;color:var(--ink)}
+.msg .from{font-size:10.5px;opacity:.6;margin-bottom:4px;line-height:1.5}
+.msg .own,.msg #pcMsg{font-size:15.5px;line-height:1.65;word-break:keep-all}
+.msg .own:empty{display:none}
+.msg textarea{display:none;width:100%;flex:1;border:0;background:transparent;font-family:inherit;font-size:15.5px;line-height:1.65;color:var(--ink);resize:none;outline:none;padding:0;user-select:text;-webkit-user-select:text}
+.msg textarea::placeholder{color:rgba(39,51,75,.35)}
+.pcwrap.writing .msg textarea{display:block}.pcwrap.writing #pcMsg,.pcwrap.writing .own{display:none}
+.msg small{margin-top:auto;font-family:'Noto Sans KR',sans-serif;font-size:8.5px;opacity:.5;color:#2b2620;line-height:1.5;padding-top:4px}
+.addr{flex:0 0 42%;position:relative}
+.pst{position:absolute;right:0;top:0;width:50px;height:62px;background:#fffdf7;padding:4px 4px 0;outline:3px dotted #f6f0e3;outline-offset:-1.5px;box-shadow:0 1px 2px rgba(0,0,0,.25);transform:rotate(2deg)}
+.pst .si{height:40px;background:#9a9081 center/cover}
+.pst .sc{font-family:'Noto Serif KR',serif;font-size:5.6px;letter-spacing:.08em;text-align:center;margin-top:3px;color:#4a4034;white-space:nowrap}
+.pst .sv{position:absolute;left:6px;top:6px;font:600 6.5px 'Courier New',monospace;color:#fff;text-shadow:0 0 2px rgba(0,0,0,.7)}
+.pm{position:absolute;right:26px;top:24px;width:56px;height:56px;border-radius:50%;border:1.3px solid rgba(46,52,98,.62);color:rgba(46,52,98,.75);transform:rotate(-13deg);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-family:'Noto Sans KR',sans-serif;font-size:6.5px;line-height:1.35;letter-spacing:.04em;mix-blend-mode:multiply;pointer-events:none}
+.pm::before{content:"";position:absolute;inset:3px;border-radius:50%;border:.8px solid rgba(46,52,98,.4)}
+.pm::after{content:"";position:absolute;left:-46px;top:17px;width:48px;height:20px;background:repeating-linear-gradient(180deg,rgba(46,52,98,.5) 0 1px,transparent 1px 5px);-webkit-mask:linear-gradient(90deg,transparent,#000 40%);mask:linear-gradient(90deg,transparent,#000 40%)}
+.pm b{font-size:7.5px;font-weight:500;max-width:46px;overflow:hidden;white-space:nowrap}
+.to{position:absolute;left:12px;right:0;bottom:2px}.to i{display:block;height:17px;border-bottom:1px solid rgba(43,38,32,.18)}
+.pc3d .seal{display:none;position:absolute;inset:0;align-items:center;justify-content:center;flex-direction:column;text-align:center;color:#f4ecdc;font-family:'Noto Serif KR',serif;text-shadow:0 1px 10px rgba(0,0,0,.6)}
+.pc3d.sealed .seal{display:flex}.pc3d.sealed .img img{filter:blur(14px) brightness(.8);transform:scale(1.15)}
+.pc3d .seal b{font-size:16px;font-weight:500;letter-spacing:.04em}.pc3d .seal span{font-size:11.5px;opacity:.85;margin-top:8px;font-family:'Noto Sans KR',sans-serif}.pc3d .seal em{font-style:normal;font-size:24px;letter-spacing:.06em;margin-top:10px}
+.pchint{text-align:center;font-family:'Noto Sans KR',sans-serif;font-size:10.5px;opacity:.48;color:#efe6d6;margin:14px 0 2px;letter-spacing:.12em}
+.pcbtns{display:flex;gap:8px;margin-top:12px}
+.pcbtns button,.tkbtns button{flex:1;padding:12px;border-radius:999px;background:#efe6d6;color:#221c16;font-size:13px;letter-spacing:.04em;border:0}
+.pcbtns button.ghost,.tkbtns button.ghost{background:transparent;color:#efe6d6;border:1px solid rgba(239,230,214,.3)}
+#pcSendBox{display:none}#pcSendBox.on{display:block}#pcLink{display:none;width:100%;margin-top:8px;font-size:11px;padding:8px;border-radius:6px;border:0}
+#pcCopyMsg{font-size:11px;opacity:.7;text-align:center;margin-top:8px;min-height:14px;font-family:'Noto Sans KR',sans-serif;color:#efe6d6;line-height:1.6}
+/* 승차권 (경권) */
+.tkwrap{width:min(350px,100%);color:#efe6d6}
+.edm{position:relative;aspect-ratio:1.88;border-radius:5px;background-color:#ccdac8;background-image:var(--paper),repeating-linear-gradient(115deg,rgba(40,84,62,.11) 0 1px,transparent 1px 4px),repeating-linear-gradient(65deg,rgba(40,84,62,.08) 0 1px,transparent 1px 4px);color:#1d382c;padding:22px 20px 12px;box-shadow:0 1px 1px rgba(0,0,0,.2),0 22px 46px rgba(0,0,0,.5);animation:rise .5s ease;font-family:'Noto Serif KR',serif;overflow:hidden}
+.edm .micro{position:absolute;left:-10px;right:-10px;top:46%;font-size:5px;line-height:6px;letter-spacing:.12em;opacity:.16;white-space:nowrap;overflow:hidden;font-family:'Noto Sans KR',sans-serif;pointer-events:none}
+.eh{display:flex;justify-content:space-between;font-family:'Noto Sans KR',sans-serif;font-size:9.5px;letter-spacing:.24em;opacity:.78}
+.er{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:9px}
+.es{text-align:center}.es b{display:block;font-size:30px;font-weight:700;letter-spacing:.2em;line-height:1;margin-right:-.2em}.es small{display:block;font-family:'Noto Sans KR',sans-serif;font-size:7.5px;letter-spacing:.38em;opacity:.6;margin-top:5px}
+.ea{width:34px;height:1px;background:#1d382c;position:relative;opacity:.7;margin-top:-12px}.ea::after{content:"";position:absolute;right:-1px;top:-3px;border-left:7px solid #1d382c;border-top:3.5px solid transparent;border-bottom:3.5px solid transparent}
+.ei{text-align:center;font-size:12px;margin-top:10px;letter-spacing:.06em}
+.ef{position:absolute;left:20px;right:20px;bottom:10px;display:flex;justify-content:space-between;align-items:flex-end;font-family:'Noto Sans KR',sans-serif;font-size:7px;line-height:1.5;opacity:.8}
+.ef em{font:700 12.5px 'Courier New',monospace;color:#b0332a;font-style:normal;letter-spacing:.08em}
+.edate{position:absolute;right:-12px;top:50%;transform:translateY(-50%) rotate(90deg);font:700 10px 'Courier New',monospace;color:#5d3d8f;opacity:.72;letter-spacing:.16em}
+.eholes{position:absolute;left:16px;right:16px;top:6px;height:10px}
+.eholes i{position:absolute;top:0;width:9px;height:9px;margin-left:-4.5px;background:#141110;box-shadow:inset 0 1px 1px rgba(0,0,0,.7)}
+.eholes i.new{animation:punch .45s cubic-bezier(.3,1.6,.5,1) both}
+@keyframes punch{from{transform:scale(0)}}
+.tkpunch{text-align:center;font-family:'Noto Sans KR',sans-serif;font-size:10.5px;opacity:.55;margin:14px 0 6px;letter-spacing:.1em}
+.tkst{display:flex;flex-wrap:wrap;justify-content:center;gap:5px 11px;font-size:12px;margin:6px 0 16px;font-family:'Noto Serif KR',serif;line-height:1.5}
+.tkst span{opacity:.28}.tkst span.on{opacity:.92;cursor:pointer;border-bottom:1px solid rgba(239,230,214,.35)}.tkst span.cur{opacity:.92;color:#e9c27d}
+.tkbtns{display:flex;gap:8px}
+.tklink{display:block;margin:14px auto 0;font-family:'Noto Sans KR',sans-serif;font-size:11px;opacity:.42;color:#efe6d6;text-decoration:underline;text-underline-offset:3px}
 </style>
 </head>
 <body>
@@ -371,7 +486,12 @@ body:not(.dev) #speed,body:not(.dev) #jumpBtn{display:none!important}
   <div id="bubble"></div>
   <div id="cart"><div id="cartT"></div><div id="cartD"></div><div class="cb"><button id="cartNo">괜찮아요</button><button id="cartBuy">하나 사기</button></div></div>
   <div id="roomSheet"><div class="sheet"></div></div>
-  <div id="cap"><div id="room"></div><div class="c1" id="c1">부산발 런던행</div><div class="c2" id="c2"></div><div class="c3" id="c3"></div></div>
+  <div id="cap"><div id="sill">
+    <button class="ob" id="obTicket"><i class="o-tk"><b>부산 → 런던</b><em id="obTkNo"></em></i><span>승차권</span></button>
+    <button class="ob" id="obCard"><i class="o-pc" id="obCardImg"></i><span>엽서</span></button>
+    <button class="ob" id="obNote"><i class="o-nt"></i><span>쪽지</span></button>
+    <button class="ob" id="obLog"><i class="o-lg"></i><span>수첩</span></button>
+  </div><div id="room"></div><div class="c1" id="c1">부산발 런던행</div><div class="c2" id="c2"></div><div class="c3" id="c3"></div></div>
   <button id="menuBtn" aria-label="메뉴"><svg viewBox="0 0 24 24"><path d="M5 8h14M5 12h14M5 16h9"/></svg></button>
   <button id="sndBtn" aria-label="소리"><svg viewBox="0 0 24 24" id="icoSnd2"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M16 9l5 6M21 9l-5 6"/></svg></button>
   <div id="menu"><div class="sheet"><div class="grab"></div>
@@ -387,7 +507,14 @@ body:not(.dev) #speed,body:not(.dev) #jumpBtn{display:none!important}
     <button class="it" data-a="sleep">잠들기<small>소리만 남기고</small></button>
     <div class="fine">본 열차는 아직 존재하지 않습니다</div>
   </div></div>
-  <div id="veil"><div class="v1">부산발 런던행</div><div class="v2">BUSAN — LONDON</div><div class="v3" id="v3"></div><div class="v4">화면을 누르면 소리와 함께 탑승합니다</div></div>
+  <div id="veil"><div class="vin">
+    <div class="v1">부산발 런던행</div><div class="v2">BUSAN — LONDON</div>
+    <div class="v5">매일 밤 9시 부산역을 떠나<br>아흐레 동안 실제 시간으로 달리는 침대열차</div>
+    <button id="vMine" class="tr mine"></button>
+    <div class="vl"><span>지금 달리고 있는 열차</span><i id="vNow"></i></div>
+    <div id="vList"></div>
+    <div class="v4">고르면 소리와 함께 탑승합니다 · 본 열차는 아직 존재하지 않습니다</div>
+  </div></div>
   <div id="toast"><div class="t1" id="t1"></div><div class="t2" id="t2"></div></div>
   <div id="sleep"><div class="z">덜컹 · 덜컹</div><div class="s">누르면 깨어나요</div></div>
 
@@ -406,10 +533,20 @@ body:not(.dev) #speed,body:not(.dev) #jumpBtn{display:none!important}
       <div class="fine">본 열차는 아직 존재하지 않습니다.</div>
     </div></div></div>
 
-  <div class="modal" id="mTicket"><div class="ticket">
-    <div class="band"><b>부산발 런던행</b><span>BUSAN — LONDON</span></div>
-    <div class="body">
-      <div class="stations"><div class="st"><div class="k">부산</div><div class="e">BUSAN</div></div><div class="arrow"></div><div class="st"><div class="k">런던</div><div class="e">LONDON</div></div></div>
+  <div class="modal" id="mTicket"><div class="tkwrap">
+    <div class="edm" id="edm"><div class="micro" id="eMicro"></div>
+      <div class="eholes" id="eHoles"></div>
+      <div class="eh"><span>승 차 권</span><span id="eTrain"></span></div>
+      <div class="er"><div class="es"><b>부산</b><small>BUSAN</small></div><div class="ea"></div><div class="es"><b>런던</b><small>LONDON</small></div></div>
+      <div class="ei" id="eInfo"></div>
+      <div class="ef"><span>침대칸 · 발행 당일 1회 유효<br>본 열차는 아직 존재하지 않습니다</span><em id="eNo"></em></div>
+      <div class="edate" id="eDate"></div>
+    </div>
+    <div class="tkpunch" id="tkPunch"></div>
+    <div class="tkst" id="tStamps"></div>
+    <div class="tkbtns"><button class="ghost" id="btnSwitch">다른 열차로 갈아타기</button><button id="btnBoard">자리로 돌아가기</button></div>
+    <button class="tklink" id="btnReset">부산에서 다시 출발하기</button>
+  </div></div>
       <div class="grid" id="tGrid"></div>
       <div class="perf"></div>
       <div class="sectitle">지나온 역 · 도장을 누르면 엽서를 볼 수 있습니다</div>
@@ -419,20 +556,26 @@ body:not(.dev) #speed,body:not(.dev) #jumpBtn{display:none!important}
       <div class="fine" style="margin-top:10px">본 열차는 아직 존재하지 않습니다.</div>
     </div></div></div>
 
-  <div class="modal" id="mNote"><div class="note">
-    <div class="paper"><div class="nh">서랍 속 쪽지</div><div class="nt" id="noteText"></div><div class="nm" id="noteMeta"></div></div>
-    <div class="leave"><div class="lh">다음에 이 자리에 앉을 승객에게 한 줄</div><textarea id="noteIn" maxlength="80" rows="2" placeholder="창밖이 좋았어요"></textarea><button id="noteSave">서랍에 넣어두기</button><div id="noteMsg"></div></div>
+  <div class="modal" id="mNote"><div class="nwrap">
+    <div class="memo" id="memoRead"><div class="mh">서랍 속 쪽지</div><div class="mt" id="noteText"></div><div class="mm" id="noteMeta"></div></div>
+    <div class="memo blank"><textarea id="noteIn" maxlength="80" rows="3" placeholder="다음에 이 자리에 앉을 승객에게 한 줄"></textarea><div class="mrow"><span id="noteMsg"></span><button id="noteSave">서랍에 넣어 두기</button></div></div>
     <button class="closer" id="noteClose">서랍 닫기</button>
   </div></div>
 
-  <div class="modal" id="mCard"><div class="postcard">
-    <div class="img"><img id="pcImg" alt=""><div class="seal"><b id="sealT"></b><span id="sealS"></span><em id="sealC"></em></div></div>
-    <div class="back">
-      <div class="msg"><div class="from" id="pcFrom"></div><span class="own" id="pcOwn"></span><span id="pcMsg"></span><small id="pcDate"></small></div>
-      <div class="pst"><div class="si" id="pcSI"></div><div class="sv" id="pcSV"></div><div class="sc" id="pcSC"></div><div class="pm" id="pcPM"></div></div>
-    </div>
-    <div class="pcbtns" id="pcBtns"><button class="ghost" id="pcSend">친구에게 보내기</button><button id="pcClose">간직하기</button></div>
-    <div id="pcSendBox"><input id="pcNote" maxlength="40" placeholder="엽서에 한 줄 적기 (선택)"><div class="pcbtns" style="margin-top:0"><button id="pcCopy">보낼 링크 복사</button></div><input id="pcLink" readonly><div id="pcCopyMsg"></div></div>
+  <div class="modal" id="mCard"><div class="pcwrap" id="pcWrap">
+    <div class="pc3d" id="pc3d"><div class="in">
+      <div class="pcf pcfront"><div class="img"><img id="pcImg" alt=""><div class="seal"><b id="sealT"></b><span id="sealS"></span><em id="sealC"></em></div></div><div class="cap" id="pcCap"></div></div>
+      <div class="pcf pcback">
+        <div class="ph"><b>우편엽서</b><span>POST CARD</span></div>
+        <div class="cols">
+          <div class="msg"><div class="from" id="pcFrom"></div><span class="own" id="pcOwn"></span><span id="pcMsg"></span><textarea id="pcNote" maxlength="40" rows="3" placeholder="여기에 한 줄 적어 주세요"></textarea><small id="pcDate"></small></div>
+          <div class="addr"><div class="pst"><div class="si" id="pcSI"></div><div class="sc" id="pcSC"></div><div class="sv" id="pcSV"></div></div><div class="pm" id="pcPM"></div><div class="to"><i></i><i></i><i></i></div></div>
+        </div>
+      </div>
+    </div></div>
+    <div class="pchint" id="pcHint">엽서를 누르면 뒤집혀요</div>
+    <div class="pcbtns" id="pcBtns"><button class="ghost" id="pcClose">간직하기</button><button id="pcSend">친구에게 부치기</button></div>
+    <div id="pcSendBox"><div class="pcbtns"><button class="ghost" id="pcBack">그만두기</button><button id="pcCopy">부치기</button></div><input id="pcLink" readonly><div id="pcCopyMsg"></div></div>
     <div class="pcbtns" id="pcRecv" style="display:none"><button class="ghost" id="pcRecvClose">닫기</button><button id="pcRide">나도 이 기차 타기</button></div>
   </div></div>
 
@@ -454,29 +597,26 @@ const $=id=>document.getElementById(id);
 const ST_N=[
  {k:'부산',e:'BUSAN',km:0,lat:35.115,lon:129.04,tm:15,ta:10,bg:'bplat',lm:'',msg:'출발했다. 바다 냄새가 났다.'},
  {k:'서울',e:'SEOUL',km:420,lat:37.556,lon:126.97,tm:12.5,ta:14,bg:'kseoul',lm:'namsan',msg:'한강을 건넜다.'},
- {k:'원산',e:'WONSAN',km:640,lat:39.15,lon:127.44,tm:11,ta:12,bg:'coast',lm:'',msg:'바다가 다시 보였다.'},
- {k:'두만강',e:'TUMANGANG',km:1290,lat:42.42,lon:130.6,tm:5,ta:16,bg:'river',lm:'',msg:'강을 건너면 대륙.'},
- {k:'블라디보스토크',e:'VLADIVOSTOK',km:1540,lat:43.11,lon:131.88,tm:5,ta:15,bg:'port',lm:'bridge',msg:'바다 끝에 있는 도시.'},
- {k:'하바롭스크',e:'KHABAROVSK',km:2310,lat:48.48,lon:135.07,tm:2,ta:22,bg:'rcity',lm:'',msg:'아무르강이 아주 넓었다.'},
- {k:'울란우데',e:'ULAN-UDE',km:5190,lat:51.83,lon:107.6,tm:-1,ta:23,bg:'rcity',lm:'',msg:'하늘이 높다.'},
- {k:'슬류댠카',e:'SLYUDYANKA',km:5520,lat:51.66,lon:103.7,tm:0,ta:18,bg:'baikal',lm:'',msg:'바이칼이다.'},
- {k:'이르쿠츠크',e:'IRKUTSK',km:5640,lat:52.28,lon:104.28,tm:1,ta:20,bg:'rcity',lm:'',msg:'호수를 지나왔다.'},
- {k:'노보시비르스크',e:'NOVOSIBIRSK',km:7490,lat:55.03,lon:82.92,tm:1.5,ta:20,bg:'rcity',lm:'',msg:'시베리아 한가운데.'},
- {k:'예카테린부르크',e:'YEKATERINBURG',km:8990,lat:56.84,lon:60.6,tm:3,ta:17,bg:'rcity',lm:'',msg:'여기서부터 유럽.'},
- {k:'모스크바',e:'MOSKVA',km:10790,lat:55.75,lon:37.62,tm:6,ta:13,bg:'rcity',lm:'domes',msg:'지붕이 양파처럼 생겼다.'},
- {k:'바르샤바',e:'WARSZAWA',km:12040,lat:52.23,lon:21.01,tm:8.5,ta:10,bg:'ecity',lm:'',msg:'다시 들판이 시작됐다.'},
- {k:'베를린',e:'BERLIN',km:12610,lat:52.52,lon:13.40,tm:10,ta:9.5,bg:'ecity',lm:'tvtower',msg:'커피가 맛있었다.'},
- {k:'파리',e:'PARIS',km:13660,lat:48.88,lon:2.36,tm:12.5,ta:8,bg:'ecity',lm:'eiffel',msg:'거의 다 왔다.'},
- {k:'런던',e:'LONDON',km:14120,lat:51.53,lon:-0.12,tm:11.5,ta:7,bg:'ecity',lm:'bigben',msg:'도착했다. 부산이 멀다.'}];
+ {k:'원산',e:'WONSAN',km:640,lat:39.15,lon:127.44,tm:11,ta:12,bg:'st_wonsan',lm:'',msg:'바다가 다시 보였다.'},
+ {k:'두만강',e:'TUMANGANG',km:1290,lat:42.42,lon:130.6,tm:5,ta:16,bg:'st_tumen',lm:'',msg:'강을 건너면 대륙.'},
+ {k:'블라디보스토크',e:'VLADIVOSTOK',km:1540,lat:43.11,lon:131.88,tm:5,ta:15,bg:'st_vlad',lm:'bridge',msg:'바다 끝에 있는 도시.'},
+ {k:'하바롭스크',e:'KHABAROVSK',km:2310,lat:48.48,lon:135.07,tm:2,ta:22,bg:'st_khab',lm:'',msg:'아무르강이 아주 넓었다.'},
+ {k:'울란우데',e:'ULAN-UDE',km:5190,lat:51.83,lon:107.6,tm:-1,ta:23,bg:'st_uu',lm:'',msg:'하늘이 높다.'},
+ {k:'슬류댠카',e:'SLYUDYANKA',km:5520,lat:51.66,lon:103.7,tm:0,ta:18,bg:'st_sly',lm:'',msg:'바이칼이다.'},
+ {k:'이르쿠츠크',e:'IRKUTSK',km:5640,lat:52.28,lon:104.28,tm:1,ta:20,bg:'st_irk',lm:'',msg:'호수를 지나왔다.'},
+ {k:'노보시비르스크',e:'NOVOSIBIRSK',km:7490,lat:55.03,lon:82.92,tm:1.5,ta:20,bg:'st_novo',lm:'',msg:'시베리아 한가운데.'},
+ {k:'예카테린부르크',e:'YEKATERINBURG',km:8990,lat:56.84,lon:60.6,tm:3,ta:17,bg:'st_ekat',lm:'',msg:'여기서부터 유럽.'},
+ {k:'모스크바',e:'MOSKVA',km:10790,lat:55.75,lon:37.62,tm:6,ta:13,bg:'st_msk',lm:'domes',msg:'지붕이 양파처럼 생겼다.'},
+ {k:'바르샤바',e:'WARSZAWA',km:12040,lat:52.23,lon:21.01,tm:8.5,ta:10,bg:'st_waw',lm:'',msg:'다시 들판이 시작됐다.'},
+ {k:'베를린',e:'BERLIN',km:12610,lat:52.52,lon:13.40,tm:10,ta:9.5,bg:'st_ber',lm:'tvtower',msg:'커피가 맛있었다.'},
+ {k:'파리',e:'PARIS',km:13660,lat:48.88,lon:2.36,tm:12.5,ta:8,bg:'st_par',lm:'eiffel',msg:'거의 다 왔다.'},
+ {k:'런던',e:'LONDON',km:14120,lat:51.53,lon:-0.12,tm:11.5,ta:7,bg:'st_ldn',lm:'bigben',msg:'도착했다. 부산이 멀다.'}];
 let ST=ST_N,LAST=ST.length-1,TOTAL_KM=ST[LAST].km;
 const FOOD_N=[['어묵 도시락','부산역에서 산 것'],['김밥 한 줄','서울역 매점'],['삶은 옥수수','창가에서 먹기 좋음'],['찐 감자','아직 따뜻함'],
  ['피로시키','블라디보스토크역 가판대'],['컵라면 「도시락」','러시아 기차의 국민 컵라면'],['부우즈','부랴트식 만두'],['훈제 오물','바이칼에서만 잡히는 생선'],
  ['펠메니','사워크림 듬뿍'],['흑빵과 홍차','유리잔 받침에 담겨 나옴'],['블리니','얇게 부친 팬케이크'],['피에로기','폴란드식 만두'],
  ['프레첼','베를린 중앙역'],['크루아상','파리 동역'],['피시 앤 칩스','종착역이 가까워짐']];
-const BI_N=[[0,2.2,'busanport'],[2.2,5.4,'tunnel'],[5.4,16,'kr01'],[16,19,'kr02'],[19,44,'kr03'],[44,46.5,'tunnel'],[46.5,50,'kr04'],[50,80,'kr05'],[80,109,'kr06'],[109,112,'kr07'],[112,130,'kr08'],[130,134,'kr09'],[134,165,'kr10'],[165,195,'kr11'],[195,199,'kr12'],[199,200.6,'tunnel'],[200.6,206,'kr12'],[206,207.2,'tunnel'],[207.2,212,'kr12'],[212,259,'kr13'],[259,262,'kr14'],[262,300,'kr15'],[300,330,'kcountry'],[330,385,'kr16'],[385,417.8,'kr17'],[417.8,422.4,'kseoul'],[422.4,424.6,'tunnel'],[424.6,455,'kcountry'],[455,600,'kcountry'],[600,680,'coast'],[680,1240,'mountain'],[1240,1300,'river'],[1300,1500,'plain'],
- [1500,1550,'port'],[1550,2290,'taiga'],[2290,2330,'rcity'],[2330,5160,'taiga'],[5160,5210,'rcity'],[5210,5300,'mountain'],[5300,5610,'baikal'],[5610,5660,'rcity'],
- [5660,7470,'birch'],[7470,7510,'rcity'],[7510,8970,'birch'],[8970,9010,'rcity'],[9010,10700,'birch'],[10700,10800,'rcity'],[10800,12010,'fields'],[12010,12060,'ecity'],
- [12060,12580,'fields'],[12580,12640,'ecity'],[12640,13620,'country'],[13620,13690,'ecity'],[13690,13860,'fields'],[13860,13910,'tunnel'],[13910,14070,'country'],[14070,14200,'ecity']];
+const BI_N=[[0,2.2,'busanport'],[2.2,5.4,'tunnel'],[5.4,16,'kr01'],[16,19,'kr02'],[19,44,'kr03'],[44,46.5,'tunnel'],[46.5,50,'kr04'],[50,80,'kr05'],[80,109,'kr06'],[109,112,'kr07'],[112,130,'kr08'],[130,134,'kr09'],[134,165,'kr10'],[165,195,'kr11'],[195,199,'kr12'],[199,200.6,'tunnel'],[200.6,206,'kr12'],[206,207.2,'tunnel'],[207.2,212,'kr12'],[212,259,'kr13'],[259,262,'kr14'],[262,300,'kr15'],[300,330,'kcountry'],[330,385,'kr16'],[385,417.8,'kr17'],[417.8,422.4,'kseoul'],[422.4,424.6,'tunnel'],[424.6,470,'k18'],[470,540,'k19'],[540,645,'nk1'],[645,720,'nk2'],[720,840,'nk3'],[840,960,'nk4'],[960,1080,'nk5'],[1080,1170,'nk6'],[1170,1262,'nk7'],[1262,1300,'nk8'],[1300,1380,'ru1'],[1380,1500,'ngt_forest'],[1500,1600,'ngt_town'],[1600,2090,'ngt_forest'],[2090,2200,'ru2'],[2200,2295,'ru3'],[2295,2325,'ru4'],[2325,2540,'ru5'],[2540,2690,'ru6'],[2690,2780,'ru7'],[2780,3700,'ngt_forest'],[3700,3830,'ru8'],[3830,4030,'ru9'],[4030,4200,'ru10'],[4200,4330,'ru11'],[4330,4405,'ru12'],[4405,4600,'ngt_open'],[4600,4660,'ngt_town'],[4660,5150,'ngt_forest'],[5150,5205,'ngt_town'],[5205,5330,'ru13'],[5330,5425,'ru14'],[5425,5535,'ru15'],[5535,5655,'ru16'],[5655,5840,'ru17'],[5840,5960,'ru18'],[5960,6700,'ngt_forest'],[6700,6760,'ngt_town'],[6760,6920,'ngt_open'],[6920,7040,'ru19'],[7040,7300,'ru20'],[7300,7465,'ru21'],[7465,7505,'ru22'],[7505,7600,'ru23'],[7600,8090,'ngt_open'],[8090,8140,'ngt_town'],[8140,8570,'ngt_open'],[8570,8700,'ru24'],[8700,8840,'ru25'],[8840,9005,'ru26'],[9005,9120,'ru27'],[9120,9235,'ru28'],[9235,9410,'ngt_forest'],[9410,9450,'ngt_town'],[9450,9850,'ngt_forest'],[9850,9890,'ngt_town'],[9890,10210,'ngt_forest'],[10210,10330,'ru29'],[10330,10355,'ru30'],[10355,10600,'ru31'],[10600,10805,'ru32'],[10805,10880,'ru33'],[10880,11180,'ngt_forest'],[11180,11210,'ngt_town'],[11210,11460,'ngt_open'],[11460,11500,'ngt_town'],[11500,11840,'ngt_open'],[11840,11980,'eu1'],[11980,12055,'eu2'],[12055,12250,'eu3'],[12250,12380,'eu4'],[12380,12470,'eu5'],[12470,12610,'ngt_eu'],[12610,13440,'ngt_eu'],[13440,13560,'eu6'],[13560,13675,'eu7'],[13675,13860,'eu8'],[13860,13910,'tunnel'],[13910,14030,'eu9'],[14030,14200,'eu10']];
 const ST_S=[
  {k:'부산',e:'BUSAN',km:0,lat:35.115,lon:129.04,tm:15,ta:10,bg:'bplat',lm:'',msg:'출발했다. 바다 냄새가 났다.'},
  {k:'서울',e:'SEOUL',km:420,lat:37.556,lon:126.97,tm:12.5,ta:14,bg:'kseoul',lm:'namsan',msg:'한강을 건넜다.'},
@@ -517,6 +657,7 @@ const B={
  desert:{far:'dunes',pal:'sand',trees:'shrub'}, dunes:{far:'dunes',pal:'sand'}, steppe:{far:'flat',pal:'steppe',trees:'shrub',near:.15}, mcity:{far:'mount',town:'m',trees:'sparse',near:.25},
  alpine:{far:'mount',trees:'pine',town:'e',ground:'field',near:.5}, ferry:{ferry:true}};
 
+const NEWB={"k18": "korea", "k19": "korea", "nk1": "korea", "nk2": "mountain", "nk3": "mountain", "nk4": "mountain", "nk5": "mountain", "nk6": "mountain", "nk7": "mountain", "nk8": "river", "ru1": "plain", "ngt_forest": "taiga", "ngt_town": "taiga", "ru2": "taiga", "ru3": "taiga", "ru4": "rcity", "ru5": "taiga", "ru6": "taiga", "ru7": "taiga", "ru8": "taiga", "ru9": "taiga", "ru10": "taiga", "ru11": "taiga", "ru12": "taiga", "ru13": "mountain", "ru14": "baikal", "ru15": "baikal", "ru16": "baikal", "ru17": "birch", "ru18": "birch", "ru19": "birch", "ru20": "birch", "ru21": "birch", "ru22": "rcity", "ru23": "birch", "ngt_open": "taiga", "ru24": "birch", "ru25": "birch", "ru26": "birch", "ru27": "birch", "ru28": "birch", "ru29": "birch", "ru30": "birch", "ru31": "birch", "ru32": "birch", "ru33": "fields", "eu1": "fields", "eu2": "fields", "eu3": "fields", "eu4": "fields", "eu5": "fields", "ngt_eu": "fields", "eu6": "country", "eu7": "country", "eu8": "fields", "eu9": "country", "eu10": "ecity", "st_wonsan": "coast", "st_tumen": "river", "st_vlad": "port", "st_khab": "rcity", "st_uu": "rcity", "st_sly": "baikal", "st_irk": "rcity", "st_novo": "rcity", "st_ekat": "rcity", "st_msk": "rcity", "st_waw": "ecity", "st_ber": "ecity", "st_par": "ecity", "st_ldn": "ecity"};for(const k in NEWB)B[k]=Object.assign({},B[NEWB[k]],{photo:k});
 const FERRY=15, HMS=3600e3, SPD=65, DWELL=15*60e3, BOARD=0, ACC=6*60e3;
 let SC=[],TRIP=0;
 function buildSC(){SC=[];let t=0;ST.forEach((s,i)=>{if(i===0){SC.push({arr:0,dep:BOARD});t=BOARD;return}
@@ -611,12 +752,13 @@ const PHOTO={};
 // pass = 한 번 지나감(구간 길이에 맞춰 한 번 흐름) / 나머지 = 끝과 끝이 이어진 반복 그림
 const SCN={platd:{pass:1},platn:{pass:1},busan:{pass:1},seoul:{pass:1},country:{keep:1},fg:{keep:1},
  kr01:{},kr02:{pass:1},kr03:{},kr04:{pass:1},kr05:{},kr06:{},kr07:{pass:1},kr08:{},kr09:{pass:1},kr10:{},kr11:{},kr12:{},kr13:{},kr14:{pass:1},kr15:{},kr16:{},kr17:{}};
+Object.assign(SCN,{"k18": {"baked": 1}, "k19": {"baked": 1}, "nk1": {"baked": 1}, "nk2": {"baked": 1}, "nk3": {"baked": 1}, "nk4": {"baked": 1}, "nk5": {"baked": 1}, "nk6": {"baked": 1}, "nk7": {"baked": 1}, "nk8": {"pass": 1, "baked": 1}, "ru1": {"baked": 1}, "ngt_forest": {"baked": 1}, "ngt_town": {"baked": 1}, "ru2": {"baked": 1}, "ru3": {"baked": 1}, "ru4": {"pass": 1, "baked": 1}, "ru5": {"baked": 1}, "ru6": {"baked": 1}, "ru7": {"baked": 1}, "ru8": {"baked": 1}, "ru9": {"baked": 1}, "ru10": {"baked": 1}, "ru11": {"baked": 1}, "ru12": {"baked": 1}, "ru13": {"baked": 1}, "ru14": {"baked": 1}, "ru15": {"baked": 1}, "ru16": {"baked": 1}, "ru17": {"baked": 1}, "ru18": {"baked": 1}, "ru19": {"baked": 1}, "ru20": {"baked": 1}, "ru21": {"baked": 1}, "ru22": {"pass": 1, "baked": 1}, "ru23": {"baked": 1}, "ngt_open": {"baked": 1}, "ru24": {"baked": 1}, "ru25": {"baked": 1}, "ru26": {"baked": 1}, "ru27": {"baked": 1}, "ru28": {"baked": 1}, "ru29": {"baked": 1}, "ru30": {"pass": 1, "baked": 1}, "ru31": {"baked": 1}, "ru32": {"baked": 1}, "ru33": {"baked": 1}, "eu1": {"baked": 1}, "eu2": {"baked": 1}, "eu3": {"baked": 1}, "eu4": {"baked": 1}, "eu5": {"baked": 1}, "ngt_eu": {"baked": 1}, "eu6": {"baked": 1}, "eu7": {"baked": 1}, "eu8": {"baked": 1}, "eu9": {"baked": 1}, "eu10": {"baked": 1}, "st_wonsan": {"pass": 1, "baked": 1}, "st_tumen": {"pass": 1, "baked": 1}, "st_vlad": {"pass": 1, "baked": 1}, "st_khab": {"pass": 1, "baked": 1}, "st_uu": {"pass": 1, "baked": 1}, "st_sly": {"pass": 1, "baked": 1}, "st_irk": {"pass": 1, "baked": 1}, "st_novo": {"pass": 1, "baked": 1}, "st_ekat": {"pass": 1, "baked": 1}, "st_msk": {"pass": 1, "baked": 1}, "st_waw": {"pass": 1, "baked": 1}, "st_ber": {"pass": 1, "baked": 1}, "st_par": {"pass": 1, "baked": 1}, "st_ldn": {"pass": 1, "baked": 1}});
 const CITY={busan:1,seoul:1,kr01:1,kr07:1,kr08:1,kr14:1,kr16:1,kr17:1};
 function loadPhoto(key){if(key==='plat'){loadPhoto('platd');loadPhoto('platn');return}if(PHOTO[key])return;const o=SCN[key]||{};PHOTO[key]={loading:true};const img=new Image();
   img.onload=()=>{PHOTO[key]={t0:performance.now(),tile:img,w:img.naturalWidth,h:img.naturalHeight,ready:true,spd:o.spd||.08,img,pass:!!o.pass,key}};
   img.onerror=()=>{PHOTO[key]={missing:true}};img.src='img/'+key+'.webp'}
 function spanOf(key){let a=1e9,b=-1;for(const e of BI){if(B[e[2]]&&B[e[2]].photo===key){a=Math.min(a,e[0]);b=Math.max(b,e[1])}}return [a,b]}
-function photoFor(key){if(key==='plat'){const d=PHOTO.platd,n=PHOTO.platn,day=cur&&cur.light>.45;const a=day?d:n,b=day?n:d;if(a&&a.ready)return a;if(b&&b.ready)return b}const p=PHOTO[key];if(p&&p.ready)return p;const f=PHOTO.country;return f&&f.ready?f:null}
+function photoFor(key){if(key==='plat'){const d=PHOTO.platd,n=PHOTO.platn,day=cur&&cur.light>.45;const a=day?d:n,b=day?n:d;if(a&&a.ready)return a;if(b&&b.ready)return b}const p=PHOTO[key];if(p&&p.ready)return p;if(SCN[key]&&SCN[key].baked)return null;const f=PHOTO.country;return f&&f.ready?f:null}
 let lastNeed=0;loadPhoto('country');loadPhoto('fg');
 function managePhotos(km){const now=performance.now();if(now-lastNeed<500)return;lastNeed=now;
   const need=new Set(['country','fg']);
@@ -630,7 +772,7 @@ function drawPhoto(c,S,ph,pxm){
   if(ph.pass){const sp=spanOf(ph.key),tw=ph.img.naturalWidth*sc,p=sp[1]<sp[0]?.42:Math.min(1,Math.max(0,(S.km-sp[0])/(sp[1]-sp[0])));c.drawImage(ph.img,-p*Math.max(0,tw-W),0,tw,H)}
   else{const tw=ph.w*sc, off=((S.vo*pxm*ph.spd)%tw+tw)%tw;for(let x=-off;x<W;x+=tw)c.drawImage(ph.tile,x,0,tw,H)}
   // 낮에는 살짝 밝게 (사진은 밤 기준)
-  if(S.light>.5){c.fillStyle='rgba(255,240,220,'+((S.light-.5)*.25)+')';c.fillRect(0,0,W,H)}
+  if(S.light>.5&&!(SCN[ph.key]&&SCN[ph.key].baked)){c.fillStyle='rgba(255,240,220,'+((S.light-.5)*.25)+')';c.fillRect(0,0,W,H)}
   if(ph.dusk&&S.light<.55){c.fillStyle='rgba(6,12,28,'+Math.min(.5,(.55-S.light)*1.1)+')';c.fillRect(0,0,W,H)}
 }
 const GRASS={country:1,kr05:1,kr06:1,kr10:1,kr11:1,kr15:1,kr16:1};
@@ -701,13 +843,15 @@ function buildPL(){const w=Math.round(H*9),h=Math.round(H);if(w<50)return;const 
   PL=c}
 function drawPassLights(c,S){if(!PL||PL.height!==Math.round(H))buildPL();if(!PL)return;const p=S.pass,a=Math.min(1,p/.06,(1-p)/.06),x=-p*(PL.width-W);
   c.globalAlpha=Math.max(0,a);for(let k=0;k<3;k++){c.globalAlpha=Math.max(0,a)*(k?.35:1);c.drawImage(PL,x+k*W*.012,0)}c.globalAlpha=1}
+const XF={cur:null,prev:null,t:0};
 function drawScene(c,bk,S){
   const b=B[bk], hz=H*.56, pxm=W/40, vo=S.vo, t=S.t, lights=[];
   const P=b.pal?(PALX[b.pal][S.season]||(S.season==='winter'?PAL.winter:PALX[b.pal].summer)):PAL[S.season], snowy=S.season==='winter'&&b.pal!=='sand', sky0=S.sky[0], sky1=S.sky[1];
   const air=(col,k)=>rgb(mixA(hx(col),sky1,k));
   c.setTransform(DPR,0,0,DPR,GOX*DPR,GOY*DPR);
   const g=c.createLinearGradient(0,0,0,hz);g.addColorStop(0,rgb(sky0));g.addColorStop(1,rgb(sky1));c.fillStyle=g;c.fillRect(0,0,W,H);
-  const ph0=b.photo&&photoFor(b.photo);if(ph0){const fa=Math.min(1,(performance.now()-(ph0.t0||0))/900),fb=PHOTO.country;if(fa<1&&fb&&fb.ready&&fb!==ph0)drawPhoto(c,S,fb,pxm);c.globalAlpha=fa;drawPhoto(c,S,ph0,pxm);c.globalAlpha=1;drawLineside(c,S,b.photo);if(S.mode==='run'&&S.pass)drawPassLights(c,S);return}
+  const ph0=b.photo&&photoFor(b.photo);if(ph0){const now=performance.now();if(ph0!==XF.cur){XF.prev=XF.cur;XF.cur=ph0;XF.t=now}
+    let fa=Math.min(1,(now-XF.t)/2600);fa=fa*fa*(3-2*fa);const fb=XF.prev;if(fa<1&&fb&&fb.ready&&fb.img&&fb.img.src)drawPhoto(c,S,fb,pxm);else fa=Math.min(fa,Math.min(1,(now-(ph0.t0||0))/900));c.globalAlpha=fa;drawPhoto(c,S,ph0,pxm);c.globalAlpha=1;drawLineside(c,S,b.photo);if(S.mode==='run'&&S.pass)drawPassLights(c,S);return}
   if(b.tunnel){drawTunnel(c,S,pxm);return}
   if(b.ferry){drawFerry(c,S,pxm,hz);return}
   const night=1-S.light;
@@ -1298,40 +1442,54 @@ function arrivalTime(i){return ticket?ticket.dep+SC[i].arr:Date.now()}
 function fmtDate(ms){const a=kd(ms);return a.y+'.'+pd(a.m)+'.'+pd(a.d)+' '+pd(a.h)+':'+pd(a.mi)}
 
 // ───────── 엽서: 지금 창밖 풍경을 엽서로 ─────────
-const PNAME={platd:['부산역','BUSAN STATION'],platn:['부산역','BUSAN STATION'],busan:['부산항','BUSAN'],kr01:['부산 북구','BUSAN'],kr02:['구포','GUPO'],kr03:['낙동강','NAKDONG RIVER'],kr04:['밀양','MIRYANG'],kr05:['청도','CHEONGDO'],kr06:['경산','GYEONGSAN'],kr07:['대구','DAEGU'],kr08:['대구','DAEGU'],kr09:['왜관','WAEGWAN'],kr10:['구미','GUMI'],kr11:['김천','GIMCHEON'],kr12:['추풍령','CHUPUNGNYEONG'],kr13:['영동','YEONGDONG'],kr14:['대전','DAEJEON'],kr15:['조치원','JOCHIWON'],country:['천안','CHEONAN'],kr16:['평택','PYEONGTAEK'],kr17:['수원','SUWON'],seoul:['한강','SEOUL']};
+const PNAME={platd:['부산역','BUSAN STATION'],platn:['부산역','BUSAN STATION'],busan:['부산항','BUSAN'],kr01:['부산 북구','BUSAN'],kr02:['구포','GUPO'],kr03:['낙동강','NAKDONG RIVER'],kr04:['밀양','MIRYANG'],kr05:['청도','CHEONGDO'],kr06:['경산','GYEONGSAN'],kr07:['대구','DAEGU'],kr08:['대구','DAEGU'],kr09:['왜관','WAEGWAN'],kr10:['구미','GUMI'],kr11:['김천','GIMCHEON'],kr12:['추풍령','CHUPUNGNYEONG'],kr13:['영동','YEONGDONG'],kr14:['대전','DAEJEON'],kr15:['조치원','JOCHIWON'],country:['천안','CHEONAN'],kr16:['평택','PYEONGTAEK'],kr17:['수원','SUWON'],seoul:['한강','SEOUL']};Object.assign(PNAME,{"k18": ["의정부·동두천", "UIJEONGBU"], "k19": ["연천·철원", "YEONCHEON"], "nk1": ["북한 강원도", "KANGWON"], "nk2": ["원산 앞바다", "WONSAN BAY"], "nk3": ["함흥 평야", "HAMHUNG"], "nk4": ["동해 바닷가", "EAST SEA COAST"], "nk5": ["칠보산", "CHILBOSAN"], "nk6": ["청진", "CHONGJIN"], "nk7": ["라선", "RASON"], "nk8": ["두만강 철교", "TUMEN RIVER"], "ru1": ["하산", "KHASAN"], "ngt_forest": ["러시아의 밤 숲", "SIBERIA AT NIGHT"], "ngt_town": ["러시아 소도시의 밤", "RUSSIAN TOWN"], "ru2": ["우수리 평원", "USSURI"], "ru3": ["하바롭스크 외곽", "KHABAROVSK"], "ru4": ["아무르강 철교", "AMUR BRIDGE"], "ru5": ["유대인 자치주", "BIROBIDZHAN"], "ru6": ["아무르 타이가", "AMUR TAIGA"], "ru7": ["타이가의 노을", "TAIGA SUNSET"], "ru8": ["자바이칼의 새벽", "ZABAYKALSKY"], "ru9": ["실카강", "SHILKA RIVER"], "ru10": ["통나무집 마을", "SIBERIAN VILLAGE"], "ru11": ["자바이칼 초원", "ZABAYKAL STEPPE"], "ru12": ["초원의 노을", "STEPPE SUNSET"], "ru13": ["셀렝가강", "SELENGA"], "ru14": ["바이칼의 아침", "LAKE BAIKAL"], "ru15": ["바이칼 호숫가", "BAIKAL SHORE"], "ru16": ["이르쿠츠크 가는 숲", "TO IRKUTSK"], "ru17": ["앙가라 숲초원", "ANGARA"], "ru18": ["시베리아의 노을", "SIBERIAN SUNSET"], "ru19": ["서시베리아의 새벽", "WEST SIBERIA"], "ru20": ["자작나무 평원", "BIRCH PLAIN"], "ru21": ["시베리아 시골", "SIBERIAN COUNTRYSIDE"], "ru22": ["오비강 철교", "OB RIVER"], "ru23": ["바라바 초원", "BARABA STEPPE"], "ngt_open": ["초원의 밤", "STEPPE AT NIGHT"], "ru24": ["튜멘", "TYUMEN"], "ru25": ["우랄 앞 들판", "URAL FOOTHILLS"], "ru26": ["우랄", "URAL"], "ru27": ["우랄 숲", "URAL FOREST"], "ru28": ["우랄의 노을", "URAL SUNSET"], "ru29": ["러시아 시골의 새벽", "RUSSIAN COUNTRYSIDE"], "ru30": ["오카강 철교", "OKA RIVER"], "ru31": ["블라디미르", "VLADIMIR"], "ru32": ["모스크바 근교", "MOSCOW OUTSKIRTS"], "ru33": ["스몰렌스크 길", "SMOLENSK ROAD"], "eu1": ["폴란드 동부", "EASTERN POLAND"], "eu2": ["바르샤바 외곽", "WARSAW"], "eu3": ["마조프셰 들판", "MASOVIA"], "eu4": ["포즈난 근교", "WIELKOPOLSKA"], "eu5": ["폴란드의 노을", "POLISH SUNSET"], "ngt_eu": ["유럽의 밤", "EUROPE AT NIGHT"], "eu6": ["샹파뉴", "CHAMPAGNE"], "eu7": ["파리 외곽", "PARIS SUBURBS"], "eu8": ["피카르디", "PICARDY"], "eu9": ["켄트", "KENT"], "eu10": ["런던 근교", "LONDON"], "st_wonsan": ["원산역", "WONSAN"], "st_tumen": ["두만강역", "TUMANGANG"], "st_vlad": ["블라디보스토크역", "VLADIVOSTOK"], "st_khab": ["하바롭스크역", "KHABAROVSK"], "st_uu": ["울란우데역", "ULAN-UDE"], "st_sly": ["슬류댠카역", "SLYUDYANKA"], "st_irk": ["이르쿠츠크역", "IRKUTSK"], "st_novo": ["노보시비르스크역", "NOVOSIBIRSK"], "st_ekat": ["예카테린부르크역", "YEKATERINBURG"], "st_msk": ["모스크바역", "MOSCOW"], "st_waw": ["바르샤바역", "WARSAW"], "st_ber": ["베를린 중앙역", "BERLIN HBF"], "st_par": ["파리 북역", "PARIS NORD"], "st_ldn": ["런던 세인트판크라스", "ST PANCRAS"]});
 function viewNow(){const S=cur,b=B[S.bk];if(!b||!b.photo)return null;const ph=photoFor(b.photo);if(!ph||!ph.ready)return null;
   const sc=H/ph.h;let f;if(ph.pass){const sp=spanOf(ph.key),tw=ph.img.naturalWidth*sc,p=Math.min(1,Math.max(0,(S.km-sp[0])/(sp[1]-sp[0])));f=(p*Math.max(0,tw-W)+W/2)/tw}
   else{const tw=ph.w*sc,off=((S.vo*(W/40)*ph.spd)%tw+tw)%tw;f=((off+W/2)%tw)/tw}return {sk:ph.key,sf:Math.round(f*1000)}}
-function sceneCard(sk,sf,at){return new Promise(res=>{const done=img=>{try{const iw=img.naturalWidth,ih=img.naturalHeight,cw=Math.min(iw,ih*1.5),cx=sf/1000*iw,sx=Math.max(0,Math.min(iw-cw,cx-cw/2));
+const SEG=[0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f];
+function seg7(g,str,x,y,h){const w=h*.52,t=h*.13,sk=.12;g.save();g.translate(x,y);g.transform(1,0,-sk,1,0,0);
+  const S=[[t*.6,0,w-t*1.2,t],[w-t,t*.6,t,h/2-t*.9],[w-t,h/2+t*.3,t,h/2-t*.9],[t*.6,h-t,w-t*1.2,t],[0,h/2+t*.3,t,h/2-t*.9],[0,t*.6,t,h/2-t*.9],[t*.6,h/2-t/2,w-t*1.2,t]];
+  let cx=0;for(const ch of str){if(ch===' '){cx+=w*.55;continue}if(ch==="'"){g.fillRect(cx,0,t,h*.3);cx+=t*2.6;continue}const m=SEG[+ch]||0;
+    for(let k=0;k<7;k++)if(m>>k&1){const r=S[k];g.fillRect(cx+r[0],r[1],r[2],r[3])}cx+=w+t*1.6}g.restore()}
+function sceneCard(sk,sf,at){return new Promise(res=>{const done=img=>{try{const iw=img.naturalWidth,ih=img.naturalHeight,cw=Math.min(iw,ih*1.5),cx=(sf==null?500:sf)/1000*iw,sx=Math.max(0,Math.min(iw-cw,cx-cw/2));
       const c=document.createElement('canvas');c.width=1200;c.height=800;const g=c.getContext('2d');g.drawImage(img,sx,0,cw,ih,0,0,1200,800);
-      const vg=g.createRadialGradient(600,420,300,600,420,820);vg.addColorStop(0,'rgba(0,0,0,0)');vg.addColorStop(1,'rgba(0,0,0,.38)');g.fillStyle=vg;g.fillRect(0,0,1200,800);
-      const nm=PNAME[sk]||['',''],a=kd(at||Date.now());g.fillStyle='rgba(239,230,214,.94)';g.shadowColor='rgba(0,0,0,.6)';g.shadowBlur=14;
-      g.font='500 46px "Noto Serif KR",serif';g.fillText(nm[0],56,716);g.font='300 17px "Noto Sans KR",sans-serif';g.globalAlpha=.75;
-      g.fillText((nm[1]?nm[1].split('').join(' ')+'   ·   ':'')+a.y+'.'+pd(a.m)+'.'+pd(a.d)+'  '+pd(a.h)+':'+pd(a.mi),58,752);res(c.toDataURL('image/jpeg',.88))}catch(e){res(null)}};
+      const vg=g.createRadialGradient(600,400,360,600,400,820);vg.addColorStop(0,'rgba(0,0,0,0)');vg.addColorStop(1,'rgba(20,10,0,.28)');g.fillStyle=vg;g.fillRect(0,0,1200,800);
+      const a=kd(at||Date.now()),txt="'"+String(a.y).slice(2)+' '+pd(a.m)+' '+pd(a.d);
+      g.globalCompositeOperation='screen';g.fillStyle='rgba(255,128,40,.55)';g.shadowColor='rgba(255,110,30,.95)';g.shadowBlur=18;seg7(g,txt,850,700,40);
+      g.shadowBlur=4;g.fillStyle='rgba(255,170,90,.9)';seg7(g,txt,850,700,40);g.globalCompositeOperation='source-over';res(c.toDataURL('image/jpeg',.9))}catch(e){res(null)}};
     const p=PHOTO[sk];if(p&&p.ready&&p.img&&p.img.src)return done(p.img);const im=new Image();im.onload=()=>done(im);im.onerror=()=>res(null);im.src='img/'+sk+'.webp'})}
 function openPostcard(i,opt={}){
-  const s=ST[i],url=postcardArt(i),at=opt.at||arrivalTime(i);
-  pcCur={i,at,sk:opt.sk,sf:opt.sf};
-  if(opt.sk){sceneCard(opt.sk,opt.sf,at).then(u=>{if(u&&pcCur&&pcCur.sk===opt.sk){$('pcImg').src=u;$('pcSI').style.backgroundImage='url('+u+')'}})}
-  const WH=opt.sk&&PNAME[opt.sk]?PNAME[opt.sk][0]:null;
-  if(!opt.sk){$('pcImg').src=url;$('pcSI').style.backgroundImage='url('+url+')'}else{$('pcImg').removeAttribute('src');$('pcSI').style.backgroundImage='none'}
-  $('pcSC').textContent=STAMP[i][0];$('pcSV').textContent=STAMP[i][1];
-  const a=kd(at);$('pcPM').innerHTML='<b>'+esc(WH||LOC[i])+'</b>'+a.y+'.'+pd(a.m)+'.'+pd(a.d);
-  $('pcFrom').textContent=opt.from?opt.from+'님이 '+(WH?WH+' 부근':s.k)+'에서 보낸 엽서':'';
-  $('pcOwn').textContent=opt.note||'';$('pcMsg').textContent=opt.note?'':(opt.sk&&PNAME[opt.sk]?PNAME[opt.sk][0]+' 부근을 지나며.':s.msg);
+  const s=ST[i],at=opt.at||arrivalTime(i);let sk=opt.sk;if(!sk){const b=B[s.bg];sk=b&&b.photo?(b.photo==='plat'?'platn':b.photo):null}
+  pcCur={i,at,sk:opt.sk,sf:opt.sf};const tok=pcCur;
+  const nm=sk&&PNAME[sk]?PNAME[sk]:[s.k,s.e],WH=nm[0];
+  $('pcImg').removeAttribute('src');$('pcSI').style.backgroundImage='none';
+  const put=u=>{if(pcCur!==tok)return;$('pcImg').src=u;$('pcSI').style.backgroundImage='url('+u+')'};
+  const art=()=>put(postcardArt(i));
+  const tryKey=(k,next)=>{if(!k)return next();sceneCard(k,opt.sf,at).then(u=>u?put(u):next())};
+  tryKey(sk,()=>tryKey(XF.cur&&XF.cur.key,art));
+  $('pcCap').innerHTML='<span>'+esc(WH)+'</span><span>'+esc(nm[1]||'')+'</span>';
+  $('pcSC').textContent='부산발 런던행';$('pcSV').textContent=ticket?String(trainNo(ticket.dep)).replace(/\D/g,''):'';
+  const a=kd(at);$('pcPM').innerHTML='<b>'+esc(WH)+'</b>'+a.y+'.'+pd(a.m)+'.'+pd(a.d)+'<br>부산발 런던행';
+  $('pcFrom').textContent=opt.from?opt.from+'님이 '+WH+(opt.sk?' 부근':'')+'에서 부친 엽서':'';
+  $('pcOwn').textContent=opt.note||'';$('pcMsg').textContent=opt.note?'':(opt.from?'':WH+(opt.sk?' 부근을':'을')+' 지나며.');
   const d=new Date(at),sun=sunElev(s.lat,s.lon,d),w=weather(s.km,d,sun.sh,sun.doy);
-  $('pcDate').textContent=(WH||s.k)+'에서 · '+fmtDate(at)+' · '+w.temp+'° '+w.wx;
+  $('pcDate').textContent=fmtDate(at)+' · '+w.temp+'° '+w.wx;
   const recv=!!opt.from;$('pcBtns').style.display=recv?'none':'flex';$('pcRecv').style.display=recv?'flex':'none';
   $('pcSendBox').classList.remove('on');$('pcCopyMsg').textContent='';$('pcLink').style.display='none';$('pcNote').value='';
-  $('mTicket').classList.remove('on');$('mCard').classList.add('on');
+  $('pcWrap').classList.remove('writing');$('pc3d').classList.remove('flip');$('pcHint').style.visibility='visible';
+  show('mTicket',false);show('mCard',true);blip(760,.08,.02);
   sealTick(opt);
+  if(recv&&!(opt.dv&&Date.now()<opt.dv))setTimeout(()=>{if(pcCur===tok)$('pc3d').classList.add('flip')},1500);
 }
 let sealI=0;
-function sealTick(opt){clearInterval(sealI);const card=document.querySelector('.postcard');card.classList.remove('sealed');if(!opt.from||!opt.dv||Date.now()>=opt.dv)return;
+function sealTick(opt){clearInterval(sealI);const card=$('pc3d');card.classList.remove('sealed');if(!opt.from||!opt.dv||Date.now()>=opt.dv)return;
   const stn=opt.nx!=null&&ROUTES[R_ID].ST[opt.nx]?ROUTES[R_ID].ST[opt.nx].k:'다음';card.classList.add('sealed');$('sealT').textContent='아직 기차 안에 있는 엽서';$('sealS').textContent='열차가 '+stn+'역에 닿으면 열려요';
   const up=()=>{const r=opt.dv-Date.now();if(r<=0){clearInterval(sealI);card.classList.remove('sealed');toast('엽서가 도착했어요',stn+'역에서',2600);return}const h=Math.floor(r/HMS),mi=Math.floor(r%HMS/60e3),se=Math.floor(r%60e3/1e3);$('sealC').textContent=(h?h+':'+pd(mi):mi)+':'+pd(se)};up();sealI=setInterval(up,1000)}
 $('pcClose').onclick=()=>$('mCard').classList.remove('on');
-$('pcSend').onclick=()=>{$('pcSendBox').classList.toggle('on')};
+$('pcSend').onclick=()=>{$('pc3d').classList.add('flip');$('pcWrap').classList.add('writing');$('pcBtns').style.display='none';$('pcSendBox').classList.add('on');$('pcHint').style.visibility='hidden';setTimeout(()=>{try{$('pcNote').focus()}catch(e){}},700)};
+$('pcBack').onclick=()=>{$('pcWrap').classList.remove('writing');$('pcBtns').style.display='flex';$('pcSendBox').classList.remove('on');$('pcCopyMsg').textContent='';$('pcHint').style.visibility='visible'};
+$('pc3d').onclick=e=>{if(e.target.closest('textarea')||$('pc3d').classList.contains('sealed'))return;$('pc3d').classList.toggle('flip');blip(520,.06,.015)};
+$('pcNote').addEventListener('input',()=>{$('pcOwn').textContent=$('pcNote').value});
 $('pcCopy').onclick=()=>{
   if(!pcCur) return;
   const name=(ticket&&ticket.name&&ticket.name!=='승객')?ticket.name:'익명의 승객';
@@ -1339,7 +1497,7 @@ $('pcCopy').onclick=()=>{
   const a=kd(pcCur.at),dk=''+a.y+pd(a.m)+pd(a.d)+pd(a.h)+pd(a.mi);
   const nx=(cur.mode==='run'||cur.mode==='wait')?cur.next:Math.min(LAST,cur.i+1),dv=ticket?ticket.dep+SC[nx].arr:Date.now(),da=kd(dv),dd=''+da.y+pd(da.m)+pd(da.d)+pd(da.h)+pd(da.mi);
   const link=ART_URL+'#pc-'+R_ID+'-'+pcCur.i+'-'+dk+'-'+(hexE(name)||'0')+'-'+(hexE(note)||'0')+(pcCur.sk?'-'+pcCur.sk+'-'+pcCur.sf:'-x-0')+'-'+nx+'-'+dd;pcCur.nx=nx;pcCur.dv=dv;
-  $('pcLink').value=link;
+  $('pcLink').value=link;$('pcOwn').textContent=note;$('pcMsg').textContent=note?'':$('pcMsg').textContent;
   if(navigator.share){navigator.share({title:'부산발 런던행 엽서',text:(name||'누군가')+'님이 기차에서 엽서를 부쳤어요. 열차가 '+ST[pcCur.nx].k+'역에 닿으면 열려요.',url:link}).then(()=>{$('pcCopyMsg').textContent='엽서를 부쳤어요. 열차가 '+ST[pcCur.nx].k+'역에 닿으면 친구가 열어 볼 수 있어요.'}).catch(()=>{});return}
   const done=()=>{$('pcCopyMsg').textContent='링크를 복사했어요. 열차가 '+ST[pcCur.nx].k+'역에 닿으면 친구가 열어 볼 수 있어요.'};
   try{navigator.clipboard.writeText(link).then(done,()=>{$('pcLink').style.display='block';$('pcLink').select();$('pcCopyMsg').textContent='아래 링크를 길게 눌러 복사해 주세요.'})}
@@ -1370,7 +1528,7 @@ async function joinTrain(){
 }
 const LOCALNOTE='busan-london-note';
 async function openDrawer(){
-  $('noteText').textContent='…';$('noteMeta').textContent='';$('noteMsg').textContent='';$('noteIn').value='';show('mNote',true);$('drawer').classList.remove('new');
+  $('noteText').textContent='…';$('noteMeta').textContent='';$('noteMsg').textContent='';$('noteIn').value='';show('mNote',true);$('drawer').classList.remove('new');$('obNote').classList.remove('dot');
   let found=null;
   try{const list=await notesFetch();if(list){const tk0=(ticket&&ticket.trainKey)||'',mySeat=ticket?ticket.car+'-'+ticket.seat:'',oth=list.filter(x=>x&&typeof x.text==='string'&&x.text.trim());found=oth.find(x=>x.seat===mySeat&&x.train!==tk0)||oth.find(x=>x.train!==tk0)||oth[0]||null}}catch(e){}
   if(!found&&DB){try{const s=await DB.collection('notes').orderBy('at','desc').limit(60).get();
@@ -1427,16 +1585,25 @@ function issue(dep){
   else toast('탑승 완료',trainNo(dep)+'호 · '+ticket.car+'호차 '+ticket.seat+'번',3200);
   joinTrain();
 }
+const PUNCH=['circle(50%)','polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)','polygon(50% 0,100% 50%,50% 100%,0 50%)','polygon(50% 100%,8% 52%,4% 28%,16% 8%,36% 6%,50% 22%,64% 6%,84% 8%,96% 28%,92% 52%)','polygon(50% 4%,100% 96%,0 96%)','inset(8% round 2px)','polygon(30% 0,70% 0,100% 30%,100% 70%,70% 100%,30% 100%,0 70%,0 30%)','polygon(20% 0,80% 0,100% 50%,80% 100%,20% 100%,0 50%)'];
 function openTicket(){
-  if(!ticket) return openIssue();
-  const d=kd(ticket.dep);
-  $('tGrid').innerHTML='<div><small>승객</small>'+esc(ticket.name)+'</div><div><small>노선</small>'+ROUTES[R_ID].name+'</div><div><small>열차</small>'+(ticket.trainKey?trainNo(ticket.dep)+'호':'BL-'+ticket.no)+'</div>'+
-   '<div><small>출발</small>'+d.y+'.'+pd(d.m)+'.'+pd(d.d)+' '+pd(d.h)+':'+pd(d.mi)+'</div><div><small>좌석</small>'+ticket.car+'호차 '+ticket.seat+'번 · 침대칸</div><div><small>거리</small>'+TOTAL_KM.toLocaleString()+'km</div><div><small>검표</small>'+(ticket.punches?'<span style="letter-spacing:3px">'+'●'.repeat(Math.min(ticket.punches,10))+'</span>':'아직 없음')+'</div>';
-  $('tStamps').innerHTML=ST.map((s,i)=>{const on=(vnow()-ticket.dep)>=SC[i].arr,fs=s.k.length>5?8:s.k.length>3?9.5:11;
-    return '<div class="stamp'+(on?' on':'')+'" data-i="'+i+'" style="--r:'+((hash(i,4)-.5)*30)+'deg;font-size:'+fs+'px">'+s.k+'<small>'+s.e+'</small></div>'}).join('');
-  show('mTicket',true);
+  if(!ticket)return;const d=kd(ticket.dep),el=vnow()-ticket.dep,passed=Math.max(0,passedIdx(el));
+  $('eTrain').textContent=trainNo(ticket.dep)+' 열차';
+  $('eInfo').textContent=ticket.car+'호차 '+ticket.seat+'번 침대 · '+d.m+'월 '+d.d+'일 '+pd(d.h)+':'+pd(d.mi)+' 발';
+  $('eNo').textContent='№ '+String(ticket.no).padStart(7,'0');$('eDate').textContent=String(d.y).slice(2)+'.'+pd(d.m)+'.'+pd(d.d);
+  $('eMicro').innerHTML=Array(12).fill('부산발런던행 BUSAN LONDON '.repeat(10)).join('<br>');
+  if(ticket.punched==null)ticket.punched=Math.min(passed,ticket.seen||0);
+  const old=ticket.punched,nw=passed;let h='';
+  for(let k=1;k<=nw;k++){const x=(k-1)/(LAST-1)*100;h+='<i class="'+(k>old?'new':'')+'" style="left:'+x+'%;clip-path:'+PUNCH[k%PUNCH.length]+';animation-delay:'+((k-old-1)*.28+.5)+'s"></i>'}
+  $('eHoles').innerHTML=h;
+  if(nw>old){for(let k=0;k<nw-old;k++)setTimeout(()=>{blip(240,.04,.07);setTimeout(()=>blip(180,.05,.05),40)},500+k*280);setTimeout(()=>toast('차장이 검표했어요',(nw-old)+'개 역',2200),700+(nw-old)*280);ticket.punched=nw;saveTicket()}
+  $('tkPunch').textContent='검표 '+nw+' / '+LAST;
+  const ci=curStation();
+  $('tStamps').innerHTML=ST.map((s,i)=>'<span class="'+(i<=passed?'on':'')+(i===ci&&cur.mode==='stop'?' cur':'')+'" data-i="'+i+'">'+s.k+'</span>').join('');
+  show('mTicket',true);$('obTicket').classList.remove('dot');blip(640,.06,.02);
 }
-$('tStamps').onclick=e=>{const el=e.target.closest('.stamp.on');if(el)openPostcard(+el.dataset.i)};
+$('tStamps').onclick=e=>{const el=e.target.closest('span.on');if(el)openPostcard(+el.dataset.i)};
+$('btnSwitch').onclick=()=>{show('mTicket',false);openVeil()};
 $('btnIssue').onclick=()=>issue(depTimes(vnow()).next);
 $('btnNow').onclick=()=>issue(depTimes(vnow()).prev);
 $('btnTicket').onclick=openTicket;$('route').onclick=openTicket;
@@ -1586,16 +1753,16 @@ function frame(now){
 setRoute(ticket?(ticket.route||'n'):'n');
 
 // ───────── 리디자인: 바로 탑승 · 한 줄 캡션 · 메뉴 · 엽서 · 함께 ─────────
-const PLACE={busanport:'부산항',kr01:'부산 북구',kr02:'구포',kr03:'낙동강',kr04:'밀양',kr05:'청도',kr06:'경산',kr07:'대구',kr08:'대구 외곽',kr09:'왜관',kr10:'구미',kr11:'김천',kr12:'추풍령',kr13:'영동',kr14:'대전',kr15:'조치원',kcountry:'천안',kr16:'평택',kr17:'수원',kseoul:'한강'};
+const PLACE={busanport:'부산항',kr01:'부산 북구',kr02:'구포',kr03:'낙동강',kr04:'밀양',kr05:'청도',kr06:'경산',kr07:'대구',kr08:'대구 외곽',kr09:'왜관',kr10:'구미',kr11:'김천',kr12:'추풍령',kr13:'영동',kr14:'대전',kr15:'조치원',kcountry:'천안',kr16:'평택',kr17:'수원',kseoul:'한강'};Object.assign(PLACE,{"k18": "의정부·동두천", "k19": "연천·철원", "nk1": "북한 강원도", "nk2": "원산 앞바다", "nk3": "함흥 평야", "nk4": "동해 바닷가", "nk5": "칠보산", "nk6": "청진", "nk7": "라선", "nk8": "두만강 철교", "ru1": "하산", "ru2": "우수리 평원", "ru3": "하바롭스크 외곽", "ru4": "아무르강 철교", "ru5": "유대인 자치주", "ru6": "아무르 타이가", "ru7": "아무르 타이가", "ru8": "자바이칼", "ru9": "실카강", "ru10": "통나무집 마을", "ru11": "자바이칼 초원", "ru12": "자바이칼 초원", "ru13": "셀렝가강", "ru14": "바이칼", "ru15": "바이칼 호숫가", "ru16": "이르쿠츠크 가는 숲", "ru17": "앙가라 숲초원", "ru18": "시베리아 숲초원", "ru19": "서시베리아", "ru20": "자작나무 평원", "ru21": "시베리아 시골", "ru22": "오비강 철교", "ru23": "바라바 초원", "ru24": "튜멘", "ru25": "우랄 앞 들판", "ru26": "우랄", "ru27": "우랄 숲", "ru28": "우랄", "ru29": "러시아 시골", "ru30": "오카강 철교", "ru31": "블라디미르", "ru32": "모스크바 근교", "ru33": "스몰렌스크 길", "eu1": "폴란드 동부", "eu2": "바르샤바 외곽", "eu3": "마조프셰 들판", "eu4": "포즈난 근교", "eu5": "폴란드 서부", "eu6": "샹파뉴", "eu7": "파리 외곽", "eu8": "피카르디", "eu9": "켄트", "eu10": "런던 근교"});
 const MOBILE=matchMedia('(pointer:coarse)').matches;
 let LUID='';try{LUID=localStorage.getItem('bl-uid')||'';if(!LUID){LUID=Math.random().toString(36).slice(2,10);localStorage.setItem('bl-uid',LUID)}}catch(e){LUID=Math.random().toString(36).slice(2,10)}
 function boardTrain(dep,quiet){const el=vnow()-dep;
   ticket={route:R_ID,name:(ticket&&ticket.name)||'승객',car:1+Math.floor(Math.random()*12),seat:1+Math.floor(Math.random()*40),no:String(Math.floor(1e5+Math.random()*9e5)),dep,trainKey:trainKey(dep),arrShown:false,seen:passedIdx(el)};
-  saveTicket();announced=-1;try{joinTrain()}catch(e){}try{sbPresence()}catch(e){}
+  saveTicket();announced=-1;try{prevTz=null}catch(e){}try{joinTrain()}catch(e){}try{sbPresence()}catch(e){}
   if(!quiet)toast(el<0?'승차권을 받았어요':'탑승했어요',trainNo(dep)+'호 · '+ticket.car+'호차 '+ticket.seat+'번',3000)}
 function autoBoard(){const now=vnow(),{next,prev}=depTimes(now),S=state(now-prev);
   // 달리는 열차가 아직 한국(원산 전)에 있으면 그 열차로, 아니면 오늘 밤 열차를 승강장에서 기다림
-  boardTrain(S.mode!=='end'&&S.km<640?prev:next,true)}
+  boardTrain(S.mode!=='end'&&S.km<640?prev:next,true);ticket.auto=1;saveTicket()}
 function ticketValid(){if(!ticket||!ticket.dep)return false;const el=vnow()-ticket.dep;return el<TRIP+6*HMS&&el>-30*HMS}
 let capA='',capB='';
 function setCap(a,b){if(a!==capA){capA=a;$('c1').textContent=a}if(b!==capB){capB=b;$('c2').textContent=b}}
@@ -1656,7 +1823,7 @@ function coach(){try{if(localStorage.getItem('bl-coach'))return;localStorage.set
 
 
 // ───────── 지나는 곳의 한 줄 (실제 한국) ─────────
-const NOTE={busanport:'부산항대교 아래로 밤새 배들이 드나든다',kr01:'산비탈을 따라 올라간 불빛들, 부산의 밤',kr02:'구포 — 낙동강 바람에 국수를 말리던 동네',kr03:'원동 강변은 봄이면 매화로 하얗게 덮인다',kr04:'영남루 — 조선의 3대 누각으로 꼽히던 곳',kr05:'청도 반시는 씨가 없는 감이다',kr06:'경산은 대추가 많이 나는 고장',kr07:'두류공원 언덕 위 83타워',kr08:'금호강을 따라 불 켜진 공장들',kr09:'왜관철교 — 1905년 경부선과 함께 놓인 다리',kr10:'구미 — 들판 너머가 공단 도시',kr11:'김천은 자두와 포도의 고장',kr12:'추풍령 — 경부선이 소백산맥을 넘는 고개',kr13:'영동 — 국악의 아버지 박연의 고향',kr14:'대전 — 철길이 만든 도시',kr15:'조치원은 복숭아로 이름난 곳',kcountry:'천안 — 호두과자가 태어난 곳',kr16:'평택 — 들판이 서해까지 이어진다',kr17:'수원 — 정조가 쌓은 화성이 있는 도시',kseoul:'한강철교 — 1900년에 놓인 한강의 첫 다리'};
+const NOTE={busanport:'부산항대교 아래로 밤새 배들이 드나든다',kr01:'산비탈을 따라 올라간 불빛들, 부산의 밤',kr02:'구포 — 낙동강 바람에 국수를 말리던 동네',kr03:'원동 강변은 봄이면 매화로 하얗게 덮인다',kr04:'영남루 — 조선의 3대 누각으로 꼽히던 곳',kr05:'청도 반시는 씨가 없는 감이다',kr06:'경산은 대추가 많이 나는 고장',kr07:'두류공원 언덕 위 83타워',kr08:'금호강을 따라 불 켜진 공장들',kr09:'왜관철교 — 1905년 경부선과 함께 놓인 다리',kr10:'구미 — 들판 너머가 공단 도시',kr11:'김천은 자두와 포도의 고장',kr12:'추풍령 — 경부선이 소백산맥을 넘는 고개',kr13:'영동 — 국악의 아버지 박연의 고향',kr14:'대전 — 철길이 만든 도시',kr15:'조치원은 복숭아로 이름난 곳',kcountry:'천안 — 호두과자가 태어난 곳',kr16:'평택 — 들판이 서해까지 이어진다',kr17:'수원 — 정조가 쌓은 화성이 있는 도시',kseoul:'한강철교 — 1900년에 놓인 한강의 첫 다리'};Object.assign(NOTE,{"k18": "경원선 — 서울에서 원산까지 이어졌던 옛 철길", "k19": "남쪽 철길이 끝나는 곳. 철책 불빛이 밤새 켜져 있다", "nk1": "밤이 되면 불빛이 거의 없는 땅", "nk2": "갈마 해안에 새 호텔들이 늘어섰다", "nk3": "함흥 — 냉면의 고향", "nk4": "철길이 바다에 바짝 붙어 달린다", "nk5": "칠보산 — 일곱 가지 보물을 숨겼다는 바위산", "nk6": "청진 — 함경북도의 항구도시", "nk7": "세 나라 국경이 모이는 바닷가", "nk8": "우정의 다리 — 북한과 러시아를 잇는 단 하나의 철길", "ru1": "하산 — 러시아에서 처음 만나는 마을", "ru2": "우수리강 너머는 중국이다", "ru3": "하바롭스크 — 극동에서 가장 큰 도시 가운데 하나", "ru4": "아무르강 철교 — 시베리아 횡단철도에서 가장 긴 다리", "ru5": "비로비잔 — 러시아 속 유대인 자치주", "ru6": "낙엽송은 가을이면 노랗게 물들고 잎을 떨군다", "ru7": "여기서 해가 지면 다음 마을까지 한참이다", "ru8": "자바이칼 — 바이칼 너머라는 뜻", "ru9": "실카강은 흘러 아무르강이 된다", "ru10": "창틀마다 깎아 칠한 나무 장식이 달려 있다", "ru11": "몽골 초원이 국경을 넘어 이어진다", "ru12": "치타는 맑은 날이 많기로 유명하다", "ru13": "셀렝가강 — 바이칼로 흘러드는 가장 큰 강", "ru14": "바이칼 — 세계에서 가장 깊고 오래된 호수", "ru15": "지구 민물의 5분의 1이 여기 있다", "ru16": "바이칼에서 흘러나가는 강은 앙가라 하나뿐", "ru17": "자작나무 숲이 섬처럼 떠 있는 들판", "ru19": "크라스노야르스크를 지나 서시베리아 평원으로", "ru20": "세상에서 가장 넓은 평원 가운데 하나", "ru21": "바냐 굴뚝에서 연기가 오르는 마을", "ru22": "노보시비르스크는 이 다리 때문에 생긴 도시", "ru23": "바라바 — 호수가 수천 개 흩어진 초원", "ru24": "튜멘 — 시베리아에 처음 세워진 러시아 도시", "ru25": "우랄산맥이 가까워진다", "ru26": "우랄 — 아시아와 유럽을 가르는 낮은 산맥", "ru27": "이제부터 유럽이다", "ru29": "양파 지붕 교회가 안개 위로 떠 있다", "ru30": "니즈니노브고로드 — 볼가강과 오카강이 만나는 도시", "ru31": "블라디미르 — 모스크바보다 먼저 수도였던 도시", "ru32": "모스크바를 둘러싼 오래된 아파트 단지들", "ru33": "나폴레옹도 이 길로 모스크바에 왔다", "eu1": "국경에서 바퀴를 바꿔 끼운다 — 선로 폭이 다르다", "eu2": "바르샤바 — 전쟁 뒤 옛 모습 그대로 다시 지은 도시", "eu3": "쇼팽이 태어난 마조프셰 들판", "eu4": "호수와 소나무숲이 이어지는 땅", "eu6": "샹파뉴 — 이 언덕에서 나는 술이 샴페인", "eu7": "곧 파리", "eu8": "피카르디 — 솜 전투가 있던 들판", "eu9": "켄트 — 고깔 지붕은 홉을 말리던 오스트 하우스", "eu10": "굴뚝이 줄지어 선 붉은 벽돌집들"});
 let noteKey='',noteT=0;
 function placeNote(S){const k=S.mode==='stop'?'':S.bk;if(k===noteKey)return;noteKey=k;const el=$('c3');el.classList.remove('on');clearTimeout(noteT);
   const tun=B[k]&&B[k].tunnel,shared=riders>1&&(tun||k==='kseoul'),txt=shared?'지금 '+riders+'명이 같이 '+(tun?'터널을 지나는':'한강을 건너는')+' 중':NOTE[k];
@@ -1668,16 +1835,31 @@ function crossingBell(){try{if(!soundOn||!ac)return;const t0=ac.currentTime,dur=
   g.gain.value=1}catch(e){}}
 function ambientTick(S){const now=performance.now();if(S.mode==='run'&&S.v>.6&&RURAL[S.bk]&&now>nextBell){nextBell=now+180000+Math.random()*240000;crossingBell()}}
 
-function initVeil(){const v=$('veil');if(location.hash.startsWith('#pc-')){v.classList.add('off');return}
-  const S0=ticket?state(vnow()-ticket.dep):null;
-  $('v3').innerHTML=S0&&S0.mode==='wait'?'오늘 밤 9시, 부산역을 떠납니다.<br>출발까지 '+fmt(S0.eta)+'.':'지금 이 열차는<br>'+(S0?esc(placeOf({...S0,bk:isStop(S0)?ST[S0.i].bg:biomeAt(S0.km)})||'어딘가'):'어딘가')+' 부근을 달리고 있습니다.';
-  v.onclick=()=>{setSound(true);v.classList.add('off');setTimeout(()=>v.style.display='none',1900)}}
+function trainInfo(dep,now){const el=now-dep,S=state(el);let pl,sub;const day=Math.floor(el/864e5)+1;
+  if(S.mode==='wait'){return {pl:'오늘 밤 9시 부산역 출발',sub:'승강장에서 기다리기 · '+fmt(S.eta)+' 남음',lt:'',lw:'',cls:'n',S}}
+  if(S.mode==='end'){return {pl:'런던 도착',sub:'종착역',lt:'',lw:'',cls:'n',S}}
+  if(S.mode==='stop')pl=ST[S.i].k+'역에 정차 중';else{const bk=biomeAt(S.km),b=B[bk];pl=(b&&b.tunnel)?nearName(S.km)+' 부근 터널':(PLACE[bk]||nearName(S.km))+(PLACE[bk]?'':' 부근')}
+  const tz=tzAt(S.km,now),lt=new Date(now+tz*HMS),h=lt.getUTCHours(),m=lt.getUTCMinutes();
+  const e=sunElev(interp(S.km,'lat'),interp(S.km,'lon'),new Date(now)).elev;
+  const lw=e>10?'낮':e>0?(h<12?'아침':'해 질 녘'):e>-6?(h<12?'새벽':'저녁'):'밤',cls=e>0?'':e>-6?'t':'n';
+  return {pl,sub:day+'일째 · '+ST[Math.min(S.next||S.i,LAST)].k+' 방면',lt:pd(h)+':'+pd(m),lw,cls,S}}
+function trRow(dep,now,mine){const t=trainInfo(dep,now),a=kd(dep);
+  return '<span class="no"><b>'+trainNo(dep).replace(' ',' ')+'</b>'+(mine?'내 열차':pd(a.m)+'.'+pd(a.d)+' 출발')+'</span><span class="pl">'+esc(t.pl)+'<small>'+esc(t.sub)+'</small></span>'+(t.lt?'<span class="lt"><b>'+t.lt+'</b><i class="dot '+t.cls+'"></i>'+t.lw+'</span>':'')}
+function renderVeil(){const now=vnow(),{next,prev}=depTimes(now);let h='';
+  const deps=[next];for(let d=0;d<12;d++){const dep=prev-d*864e5;if(now-dep>TRIP)break;deps.push(dep)}
+  for(const dep of deps)if(!(ticketValid()&&!ticket.auto&&ticket.dep===dep))h+='<button class="tr" data-dep="'+dep+'">'+trRow(dep,now,false)+'</button>';
+  $('vList').innerHTML=h;const k=kd(now);$('vNow').textContent='서울 '+pd(k.h)+':'+pd(k.mi);
+  const mine=ticketValid()&&!ticket.auto?ticket.dep:0,vm=$('vMine');vm.classList.toggle('on',!!mine);if(mine){vm.innerHTML=trRow(mine,now,true).replace('<small>','<small>내 자리로 돌아가기 · ');vm.dataset.dep=mine}
+  $('veil').querySelectorAll('.tr').forEach(b=>b.onclick=e=>{e.stopPropagation();pickTrain(+b.dataset.dep)})}
+function pickTrain(dep){const v=$('veil');setSound(true);if(!ticketValid()||ticket.dep!==dep)boardTrain(dep);else{ticket.auto=0;saveTicket()}v.classList.add('off');clearInterval(renderVeil.t);setTimeout(()=>{v.style.display='none'},1500)}
+function openVeil(){const v=$('veil');v.style.display='';renderVeil();v.scrollTop=0;requestAnimationFrame(()=>v.classList.remove('off'));clearInterval(renderVeil.t);renderVeil.t=setInterval(renderVeil,20000)}
+function initVeil(){const v=$('veil');if(location.hash.startsWith('#pc-')){v.classList.add('off');v.style.display='none';return}renderVeil();renderVeil.t=setInterval(renderVeil,20000)}
 // 메뉴
 function openMenu(){const S=cur;$('mCardSub').textContent=ST[curStation()].k+'에서';
   $('mTkSub').textContent=ticket?trainNo(ticket.dep)+'호 · '+ticket.car+'호차 '+ticket.seat+'번':'';
   const {prev}=depTimes(vnow()),Sp=state(vnow()-prev);$('mBdSub').textContent=(ticket&&ticket.dep===prev)?'지금 타고 있어요':trainNo(prev)+'호 · '+(isStop(Sp)?ST[Sp.i].k+'역':nearName(Sp.km)+' 부근');
   $('mRtSub').textContent=R_ID==='n'?'남쪽 · 실크로드':'북쪽 · 시베리아';show('menu',true)}
-$('cap').onclick=e=>{e.stopPropagation();openMenu()};
+$('cap').onclick=e=>{e.stopPropagation()};
 $('menu').onclick=e=>{if(e.target===$('menu'))show('menu',false)};
 document.querySelectorAll('#menu .it').forEach(b=>b.onclick=e=>{e.stopPropagation();show('menu',false);const a=b.dataset.a;
   if(a==='gaze')gazeAsk();else if(a==='room')openRoom();else if(a==='card'){const v=viewNow()||{};openPostcard(curStation(),{at:vnow(),sk:v.sk,sf:v.sf})}else if(a==='note')openDrawer();else if(a==='ticket')openTicket();
@@ -1747,7 +1929,7 @@ function openRoom(){const ms=Object.values(roomMates).sort((a,b)=>a.bed-b.bed);c
 // 어젯밤 같은 칸 승객의 쪽지
 async function checkOldRoom(){try{const last=localStorage.getItem('bl-lastroom'),mine=localStorage.getItem(LOCALNOTE)||'';if(!last||!SBC||!ticket||last.startsWith(ticket.trainKey+'-'))return;
   const {data}=await SBC.from('notes').select('text,seat,train,room,created_at').eq('room',last).order('created_at',{ascending:false}).limit(5);
-  const f=(data||[]).find(x=>x.text&&x.text!==mine);if(f){window.ROOMNOTE=f;setTimeout(()=>toast('지난번 같은 칸 승객이 쪽지를 남겼어요','서랍을 열어 보세요',4200),3500)}}catch(e){}}
+  const f=(data||[]).find(x=>x.text&&x.text!==mine);if(f){window.ROOMNOTE=f;$('obNote').classList.add('dot');setTimeout(()=>toast('지난번 같은 칸 승객이 쪽지를 남겼어요','서랍을 열어 보세요',4200),3500)}}catch(e){}}
 async function notesFetch(){if(!SBC)return null;if(window.ROOMNOTE){const r=[window.ROOMNOTE];window.ROOMNOTE=null;return r}const {data,error}=await SBC.from('notes').select('text,seat,train,created_at').order('created_at',{ascending:false}).limit(60);return error?null:data}
 async function noteInsert(text){if(!SBC)return false;const room=ticket&&myRoom!=null?ticket.trainKey+'-'+myRoom:'';const row={text,seat:ticket?ticket.car+'-'+ticket.seat:'',train:(ticket&&ticket.trainKey)||''};let {error}=await SBC.from('notes').insert(Object.assign({room},row));if(error)({error}=await SBC.from('notes').insert(row));if(!error&&room)try{localStorage.setItem('bl-lastroom',room)}catch(e){}return !error}
 // ───────── 판매 카트 (그림 없이 소리와 글로) ─────────
@@ -1762,7 +1944,19 @@ $('cartBuy').onclick=e=>{e.stopPropagation();const c=cartOpen;if(!c)return;ticke
   toast('샀어요',Object.keys(roomMates).length?'같은 칸 승객에게 건넬 수도 있어요':'',2600);blip(880,.1,.04)};
 $('cartNo').onclick=e=>{e.stopPropagation();show('cart',false);cartOpen=null};
 $('room').onclick=e=>{e.stopPropagation();openRoom()};
-if(/[?&]dev/.test(location.search)||window.__SBMOCK)window.__T={get riders(){return riders},sayPhrase,showCart,CART,openRoom,openLog,show,get ticket(){return ticket}};$('roomSheet').onclick=e=>{if(e.target===$('roomSheet'))show('roomSheet',false)};
+$('obTicket').onclick=e=>{e.stopPropagation();openTicket()};
+$('obCard').onclick=e=>{e.stopPropagation();const v=viewNow()||{};openPostcard(curStation(),{at:vnow(),sk:v.sk,sf:v.sf})};
+$('obNote').onclick=e=>{e.stopPropagation();openDrawer()};
+$('obLog').onclick=e=>{e.stopPropagation();openLog()};
+$('win').addEventListener('click',e=>{if(e.target.closest('button')||$('app').classList.contains('gaze')||gzBusy)return;gazeAsk()});
+function sillTick(){try{const v=viewNow(),el=$('obCardImg');if(v&&v.sk){const u='img/'+v.sk+'.webp';if(el.dataset.u!==u){el.dataset.u=u;el.style.backgroundImage='url('+u+')'}el.style.backgroundPosition=(v.sf/10)+'% 50%'}
+  if(ticket){$('obTkNo').textContent='№'+String(ticket.no).slice(-5);const p=Math.max(0,passedIdx(vnow()-ticket.dep));if(ticket.punched!=null&&p>ticket.punched)$('obTicket').classList.add('dot')}}catch(e){}}
+setInterval(sillTick,3000);setTimeout(sillTick,800);
+(function paper(){try{const c=document.createElement('canvas');c.width=c.height=180;const g=c.getContext('2d'),im=g.createImageData(180,180),d=im.data;
+  for(let k=0;k<d.length;k+=4){const n=Math.random();const v=n<.5?0:255;d[k]=d[k+1]=d[k+2]=v;d[k+3]=Math.random()*14}
+  g.putImageData(im,0,0);g.globalAlpha=.05;g.strokeStyle='#6b5a44';for(let k=0;k<70;k++){g.lineWidth=.4+Math.random()*.5;g.beginPath();const x=Math.random()*180,y=Math.random()*180,a=Math.random()*6.28,l=4+Math.random()*12;g.moveTo(x,y);g.quadraticCurveTo(x+Math.cos(a)*l/2+Math.random()*3,y+Math.sin(a)*l/2,x+Math.cos(a)*l,y+Math.sin(a)*l);g.stroke()}
+  document.documentElement.style.setProperty('--paper','url('+c.toDataURL()+')')}catch(e){}})();
+if(/[?&]dev/.test(location.search)||window.__SBMOCK)window.__T={boardTrain,openTicket,openPostcard,openDrawer,viewNow,depTimes,vnow:()=>vnow(),get cur(){return cur},get riders(){return riders},sayPhrase,showCart,CART,openRoom,openLog,show,get ticket(){return ticket}};$('roomSheet').onclick=e=>{if(e.target===$('roomSheet'))show('roomSheet',false)};
 
 if(!ticketValid()) autoBoard(); else {try{sbPresence()}catch(e){}}
 initVeil();

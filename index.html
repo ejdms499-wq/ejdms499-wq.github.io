@@ -531,6 +531,17 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
 .fdno{display:inline-block;margin-top:10px;font:600 9.5px 'Noto Sans KR',sans-serif;letter-spacing:.24em;color:rgba(214,120,96,.95);border:1.4px solid rgba(214,120,96,.8);padding:5px 9px 4px;border-radius:3px;transform:rotate(-4deg)}
 
 #app{background:linear-gradient(to bottom,#0c0d10 0 55%,#6f4d30 55%,#4a321f 100%)!important}
+
+.passbook{width:min(330px,100%);background:#22314a;border-radius:10px;padding:16px 14px 14px;box-shadow:0 20px 44px rgba(0,0,0,.6);animation:rise .4s ease;color:#efe6d6}
+.passbook .ph2{display:flex;justify-content:space-between;align-items:baseline;font-family:'Noto Serif KR',serif;margin:0 4px 10px}.passbook .ph2 b{letter-spacing:.3em;font-weight:500;font-size:13px;color:#e3c27a}.passbook .ph2 span{font-size:10px;opacity:.6;letter-spacing:.1em}
+.pzstamps{background:#f3ead6;border-radius:4px;min-height:230px;padding:14px 10px;display:flex;flex-wrap:wrap;gap:10px 8px;justify-content:center;align-content:flex-start;background-image:repeating-linear-gradient(0deg,rgba(80,60,30,.05) 0 1px,transparent 1px 22px)}
+.pzs{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;border:2px solid var(--c);color:var(--c);border-radius:8px;padding:6px 9px;min-width:92px;font-family:'Noto Sans KR',sans-serif;opacity:.86;mix-blend-mode:multiply}
+.pzs b{font-size:9px;letter-spacing:.12em;font-weight:700}.pzs i{font-style:normal;font-size:8px;letter-spacing:.06em;margin-top:2px}.pzs em{font-style:normal;font-size:7.5px;letter-spacing:.14em;margin-top:2px;opacity:.85}
+.pzs:nth-child(3n){border-radius:50%;padding:12px 8px;min-width:80px}.pzs:nth-child(4n+1){border-style:double;border-width:3px}
+.pzs.new{animation:thunk .5s cubic-bezier(.2,1.6,.4,1) both}@keyframes thunk{0%{transform:scale(1.9) rotate(-12deg);opacity:0}60%{opacity:.95}100%{opacity:.86}}
+.pzempty{color:rgba(60,45,30,.5);font-size:12px;margin-top:90px}.passbook .pn{text-align:center;font:13px 'Noto Serif KR',serif;margin:12px 0 4px;opacity:.9}
+.watchwrap .wsvg{width:220px;height:200px;display:block;margin:0 auto;filter:drop-shadow(0 14px 26px rgba(0,0,0,.5))}#wH,#wM{transition:transform .25s ease}
+.gfs.pss i{border-radius:50%}
 </style>
 </head>
 <body>
@@ -666,6 +677,8 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
   <div class="modal" id="mPax"><div class="paxwrap"><div class="pxph" id="pxPh"></div><div class="pxname" id="pxName"></div><div class="pxwho" id="pxWho"></div><div class="pxsay" id="pxSay"></div>
     <div class="pcbtns"><button class="ghost" id="pxTalk">말 걸기</button><button id="pxGift">선물 받기</button></div><button class="closer" id="pxClose">자리로 돌아가기</button></div></div>
   <div class="modal" id="mMenu"><div class="menuwrap"><div class="menucard" id="menuCard"></div><button class="closer" id="menuClose">닫기</button></div></div>
+  <div class="modal" id="mPass"><div class="passbook"><div class="ph2"><b>PASSPORT</b><span>여권 · 사증</span></div><div class="pzstamps" id="psSt"></div><div class="pn" id="psN"></div><button class="closer" id="psClose">여권 넣기</button></div></div>
+  <div class="modal" id="mWatch"><div class="foodwrap watchwrap"><svg viewBox="0 0 220 200" class="wsvg"><circle cx="100" cy="100" r="82" fill="#f4ecdc" stroke="#b08a52" stroke-width="7"/><circle cx="100" cy="100" r="74" fill="none" stroke="rgba(60,45,30,.15)"/><line x1="100" y1="30" x2="100" y2="40" stroke="#3a2d22" stroke-width="3" transform="rotate(0 100 100)"/><line x1="100" y1="34" x2="100" y2="40" stroke="#3a2d22" stroke-width="1.5" transform="rotate(30 100 100)"/><line x1="100" y1="34" x2="100" y2="40" stroke="#3a2d22" stroke-width="1.5" transform="rotate(60 100 100)"/><line x1="100" y1="30" x2="100" y2="40" stroke="#3a2d22" stroke-width="3" transform="rotate(90 100 100)"/><line x1="100" y1="34" x2="100" y2="40" stroke="#3a2d22" stroke-width="1.5" transform="rotate(120 100 100)"/><line x1="100" y1="34" x2="100" y2="40" stroke="#3a2d22" stroke-width="1.5" transform="rotate(150 100 100)"/><line x1="100" y1="30" x2="100" y2="40" stroke="#3a2d22" stroke-width="3" transform="rotate(180 100 100)"/><line x1="100" y1="34" x2="100" y2="40" stroke="#3a2d22" stroke-width="1.5" transform="rotate(210 100 100)"/><line x1="100" y1="34" x2="100" y2="40" stroke="#3a2d22" stroke-width="1.5" transform="rotate(240 100 100)"/><line x1="100" y1="30" x2="100" y2="40" stroke="#3a2d22" stroke-width="3" transform="rotate(270 100 100)"/><line x1="100" y1="34" x2="100" y2="40" stroke="#3a2d22" stroke-width="1.5" transform="rotate(300 100 100)"/><line x1="100" y1="34" x2="100" y2="40" stroke="#3a2d22" stroke-width="1.5" transform="rotate(330 100 100)"/><line id="wH" x1="100" y1="104" x2="100" y2="58" stroke="#2b2119" stroke-width="5" stroke-linecap="round"/><line id="wM" x1="100" y1="108" x2="100" y2="38" stroke="#2b2119" stroke-width="3" stroke-linecap="round"/><circle cx="100" cy="100" r="4.5" fill="#2b2119"/><g id="wCrown" style="cursor:pointer"><rect x="182" y="88" width="20" height="24" rx="4" fill="#c49a5c" stroke="#8a6a3a" stroke-width="2"/><line x1="187" y1="92" x2="187" y2="108" stroke="#8a6a3a"/><line x1="192" y1="92" x2="192" y2="108" stroke="#8a6a3a"/><line x1="197" y1="92" x2="197" y2="108" stroke="#8a6a3a"/></g></svg><div class="fdname" id="wT"></div><div class="fdtext" id="wS"></div><div class="pcbtns"><button class="ghost" id="wSkip">알아서 맞춰 줘</button><button id="wTurn">용두 돌리기</button></div></div></div>
   <div class="modal" id="mGift"><div class="foodwrap"><div class="pxph ill gf" id="gfPh"></div><div class="fdname" id="gfName"></div><div class="fdtext" id="gfText"></div><div class="gffact" id="gfFact"></div><button class="closer" id="gfClose">수첩에 넣기</button></div></div>
   <div class="modal" id="mFood"><div class="foodwrap"><div class="fdph" id="fdPh"></div><div class="fdname" id="fdName"></div><div class="fdtext" id="fdText"></div><div class="fdno" id="fdNo"></div><button class="closer" id="fdClose">잘 먹었습니다</button></div></div>
   <div id="moment"><div class="mst" id="momSt"></div><div class="mt1" id="momT"></div><div class="mt2" id="momS"></div><div class="mt3" id="momN"></div></div>
@@ -1811,7 +1824,7 @@ function frame(now){
   const tz=tzAt(S.km,vt),lt=new Date(vt+tz*HMS),lh=lt.getUTCHours(),lm=lt.getUTCMinutes();
   $('hH').setAttribute('transform','rotate('+((lh%12)*30+lm*.5)+' 21 21)');$('hM').setAttribute('transform','rotate('+(lm*6)+' 21 21)');
   $('tzl').textContent='UTC'+(tz>=0?'+':'')+tz;
-  if(prevTz!=null&&tz!==prevTz&&ticket){const d=tz-prevTz;announce('시간대가 바뀌었습니다 · 시계를 '+Math.abs(d)+'시간 '+(d<0?'늦춥니다':'당깁니다')+' · '+(tz===9?'서울과 같은 시간':'서울보다 '+Math.abs(tz-9)+'시간 '+(tz<9?'늦어요':'빨라요')));$('clock').classList.add('flash');setTimeout(()=>$('clock').classList.remove('flash'),2000)}
+  if(prevTz!=null&&tz!==prevTz&&ticket&&!anyOpen()&&typeof openWatch==='function'&&Math.abs(tz-prevTz)<=3){openWatch(prevTz,tz,lh,lm)}else if(prevTz!=null&&tz!==prevTz&&ticket){const d=tz-prevTz;announce('시간대가 바뀌었습니다 · 시계를 '+Math.abs(d)+'시간 '+(d<0?'늦춥니다':'당깁니다')+' · '+(tz===9?'서울과 같은 시간':'서울보다 '+Math.abs(tz-9)+'시간 '+(tz<9?'늦어요':'빨라요')));$('clock').classList.add('flash');setTimeout(()=>$('clock').classList.remove('flash'),2000)}
   prevTz=tz;S.ltxt='현지 '+pd(lh)+':'+pd(lm);
   // 해 뜨고 지는 순간
   if(ticket&&now>sunCheck){sunCheck=now+20000;sunEv=predictSun(vt,el)}
@@ -1904,11 +1917,12 @@ function openLog(){if(!ticket)return;const now=vnow(),rows=[];let last='';
   rows.sort((a,b)=>a[0]-b[0]);const km=cur.km;let html='',shownNext=false;
   for(const r of rows){const a=kd(r[0]),tt=pd(a.h)+':'+pd(a.mi);if(r[0]<=now){const isNow=km>=r[2]&&km<r[3];html+='<li class="'+(isNow?'now':'')+'"><b>'+tt+'</b>'+esc(r[1])+'</li>'}else if(!shownNext){shownNext=true;html+='<li class="next"><b>'+tt+'</b>'+esc(r[1])+'</li>'}}
   const skb='<div class="skt">스케치북 · 만난 승객 '+Object.keys(MET).length+' / '+PAX.length+'</div><div class="skb">'+PAX.map(p=>MET[p.id]?'<i style="background-image:url(img/pxc_'+p.id+'.webp),url(img/px_'+p.id+'.webp)"></i>':'<i>?</i>').join('')+'</div>';
+  const pss='<div class="skt">여권 도장 · '+Object.keys(PASSD).length+' / '+PASS.length+'</div><div class="gfs pss">'+PASS.map(p=>PASSD[p[1]]?'<i class="on" data-pass="1" style="border-color:'+p[5]+';color:'+p[5]+'">'+p[1]+'</i>':'<i>?</i>').join('')+'</div>';
   const gfs='<div class="skt">선물 서랍 · '+Object.keys(GIFTS).length+' / '+PAX.length+'</div><div class="gfs">'+PAX.map(p=>GIFTS[p.id]?'<i class="on" data-g="'+p.id+'" style="background-image:url(img/gf_'+p.id+'.webp)" title="'+esc(p.g[0])+'">'+esc(p.g[0][0])+'</i>':'<i>?</i>').join('')+'</div>';
-  $('logStamps').innerHTML=stampsHtml()+skb+gfs+'<div class="stc"><span>모은 도장 '+Object.keys(STAMPS).length+' / '+MOM.length+'</span><span>받은 선물 '+Object.keys(GIFTS).length+' / '+PAX.length+' · 먹은 음식 '+Object.keys(FOODS).length+'</span></div>';
+  $('logStamps').innerHTML=stampsHtml()+pss+skb+gfs+'<div class="stc"><span>모은 도장 '+Object.keys(STAMPS).length+' / '+MOM.length+'</span><span>받은 선물 '+Object.keys(GIFTS).length+' / '+PAX.length+' · 먹은 음식 '+Object.keys(FOODS).length+'</span></div>';
   $('logList').innerHTML=html||'<li class="next"><b>21:00</b>부산역 출발</li>';const d=kd(ticket.dep);$('logSub').textContent=trainNo(ticket.dep)+'호 · '+ticket.car+'호차 '+ticket.seat+'번 · '+d.m+'월 '+d.d+'일 출발';show('mLog',true);blip(900,.08,.02);
   setTimeout(()=>{const n=document.querySelector('#logList .now');if(n)n.scrollIntoView({block:'center'})},50)}
-$('hsBook').onclick=e=>{e.stopPropagation();openLog()};$('logClose').onclick=()=>show('mLog',false);$('logStamps').addEventListener('click',e=>{const g=e.target.closest('[data-g]');if(!g)return;const p=PAX.find(x=>x.id===g.dataset.g);if(p){show('mLog',false);openGift(p)}});
+$('hsBook').onclick=e=>{e.stopPropagation();openLog()};$('logClose').onclick=()=>show('mLog',false);$('logStamps').addEventListener('click',e=>{if(e.target.closest('[data-pass]')){show('mLog',false);openPass();return}const g=e.target.closest('[data-g]');if(!g)return;const p=PAX.find(x=>x.id===g.dataset.g);if(p){show('mLog',false);openGift(p)}});
 // 입김: 창을 길게 누르면 김이 서리고, 손가락으로 쓰면 지워짐
 const fog=$('fogcv');let fogOn=false,fogT=0,fogHold=0,fogLast=null;
 function fogFill(){const r=fog.getBoundingClientRect(),d=Math.min(2,devicePixelRatio||1);fog.width=Math.round(r.width*d);fog.height=Math.round(r.height*d);const g=fog.getContext('2d');g.setTransform(d,0,0,d,0,0);
@@ -1986,7 +2000,7 @@ const SB_URL='https://vuxqlfockqxvocjlntgv.supabase.co', SB_KEY='sb_publishable_
 let SBC=null,trainCh=null,roomCh=null,myRoom=null,myBed=null,myFrom='',roomMates={},roomFirst=true;
 const PHR=['안녕하세요','창밖 좋네요','어디까지 가세요?','저는 런던까지 가요','잠이 안 오네요','같이 가서 좋네요','잘 자요','좋은 여행 되세요'];
 const josa=(w,a,b)=>{const c=w.charCodeAt(w.length-1);return w+((c>=0xAC00&&c<=0xD7A3&&(c-0xAC00)%28)?a:b)};
-const ITEMS={egg:'삶은 달걀',cider:'사이다',hodu:'호두과자',dosirak:'컵라면 도시락'};
+const ITEMS={egg:'삶은 달걀',cider:'사이다',hodu:'호두과자',dosirak:'컵라면 도시락',piro:'피로시키',potato:'딜 뿌린 삶은 감자',buuz:'부우즈',omul:'훈제 오물',kedr:'잣 한 봉지',berry:'블루베리 한 컵',shanga:'샤니가',kvass:'크바스',plombir:'플롬비르 아이스크림'};
 function sbLoad(){if(SBC)return;if(window.__SBMOCK){SBC=window.__SBMOCK;sbPresence();checkOldRoom();return}
   const sc=document.createElement('script');sc.src='supabase.min.js';sc.onload=()=>{try{SBC=window.supabaseCreateClient(SB_URL,SB_KEY,{auth:{persistSession:false}});sbPresence();checkOldRoom()}catch(e){}};document.head.appendChild(sc)}
 setTimeout(sbLoad,400);
@@ -2150,7 +2164,30 @@ function showMoment(m){const fresh=!STAMPS[m.id];if(fresh){STAMPS[m.id]=Date.now
   const el=$('moment');el.classList.remove('on');void el.offsetWidth;el.classList.add('on');try{knock()}catch(e){}setTimeout(()=>blip(220,.12,.08),900);clearTimeout(showMoment.t);showMoment.t=setTimeout(()=>el.classList.remove('on'),9000)}
 $('moment').onclick=e=>{e.stopPropagation();$('moment').classList.remove('on')};
 function stampsHtml(){return '<div class="stp">'+MOM.map(m=>'<span class="'+(STAMPS[m.id]?'on':'')+'" title="'+esc(m.t)+'">'+(STAMPS[m.id]?esc(m.st):'')+'</span>').join('')+'</div>'}
-function eventsTick(S){try{paxTick(S);momentTick(S);microTick(S);hopTick(S)}catch(e){}}
+
+const PASS=[[0,'KR','REPUBLIC OF KOREA','DEPARTURE','BUSAN','#2f5fa8','대한민국'],[535,'KP','DPR KOREA','ENTRY','DMZ','#9b3a2f','북한'],[1287,'RU','RUSSIA','ENTRY','KHASAN','#b0342a','러시아'],[11240,'BY','BELARUS','ENTRY','','#3f7a4a','벨라루스'],[11840,'PL','POLAND · SCHENGEN','ENTRY','TERESPOL','#7a2a5a','폴란드'],[12555,'DE','GERMANY','SCHENGEN · 검사 없음','FRANKFURT (ODER)','#4a4a4a','독일'],[13265,'BE','BELGIUM','SCHENGEN · 검사 없음','','#a8762a','벨기에'],[13480,'FR','FRANCE','SCHENGEN · 검사 없음','','#2a4f8a','프랑스'],[13885,'GB','UNITED KINGDOM','ENTRY','CHANNEL TUNNEL','#6a2a2a','영국']];
+let PASSD=LS('bl-pass',{});
+function stampHtml(p,date,isNew){const r=((p[1].charCodeAt(0)*7+p[1].charCodeAt(1)*3)%17)-8;return '<span class="pzs'+(isNew?' new':'')+'" style="--c:'+p[5]+';transform:rotate('+r+'deg)"><b>'+p[2]+'</b><i>'+p[3]+(date?' · '+date:'')+'</i>'+(p[4]?'<em>'+p[4]+'</em>':'')+'</span>'}
+function openPass(newId){const k=Object.keys(PASSD);$('psSt').innerHTML=PASS.filter(p=>PASSD[p[1]]).map(p=>stampHtml(p,PASSD[p[1]],p[1]===newId)).join('')||'<div class="pzempty">아직 도장이 없어요</div>';
+  const p=PASS.find(x=>x[1]===newId);$('psN').textContent=p?p[6]+(p[3].indexOf('검사 없음')>=0?' · 국경을 넘었어요 (검사 없이 통과)':' · 여권 도장 쾅'):'여권 도장 '+k.length+' / '+PASS.length;show('mPass',true);if(newId){blip(180,.18,.08);setTimeout(()=>blip(140,.12,.05),90)}}
+$('psClose').onclick=()=>show('mPass',false);$('mPass').onclick=e=>{if(e.target===$('mPass'))show('mPass',false)};
+let passQ=null;
+function passTick(S){if(!ticket||S.mode==='wait')return;for(const p of PASS){if(S.km>=p[0]&&!PASSD[p[1]]){const k=kd(vnow());PASSD[p[1]]=k.m+'.'+k.d;LSset('bl-pass',PASSD);logAdd(p[6]+' 여권 도장');if(S.km-p[0]<40)passQ=p[1];break}}
+  if(passQ&&!anyOpen()){const id=passQ;passQ=null;openPass(id);clearTimeout(passTick.t);passTick.t=setTimeout(()=>{if($('mPass').classList.contains('on'))show('mPass',false)},5200)}}
+// 시계 맞추기
+let WCH=null;
+function drawWatch(){if(!WCH)return;const t=WCH.base+WCH.off,h=((t/60)%12+12)%12,m=((t%60)+60)%60;$('wH').setAttribute('transform','rotate('+(h*30)+' 100 100)');$('wM').setAttribute('transform','rotate('+(m*6)+' 100 100)')}
+function openWatch(fromTz,toTz,lh,lm){const d=toTz-fromTz;WCH={base:(lh*60+lm)-d*60,off:0,target:d*60};$('wT').textContent='시계를 '+Math.abs(d)+'시간 '+(d<0?'늦추세요':'당기세요');
+  $('wS').textContent='새 시간대 UTC'+(toTz>=0?'+':'')+toTz+' · '+(toTz===9?'서울과 같은 시간':'서울보다 '+Math.abs(toTz-9)+'시간 '+(toTz<9?'늦어요':'빨라요'));drawWatch();show('mWatch',true);
+  clearTimeout(openWatch.t);openWatch.t=setTimeout(()=>{if($('mWatch').classList.contains('on')){WCH.off=WCH.target;drawWatch();setTimeout(()=>show('mWatch',false),600)}},25000)}
+function turnWatch(){if(!WCH||WCH.off===WCH.target)return;WCH.off+=WCH.target<0?-15:15;drawWatch();blip(1800,.015,.02);if(WCH.off===WCH.target){setTimeout(()=>{blip(980,.12,.04);toast('딸깍, 맞췄어요','',1800);logAdd('시계를 '+Math.abs(WCH.target/60)+'시간 '+(WCH.target<0?'늦췄다':'당겼다'));setTimeout(()=>show('mWatch',false),700)},150)}}
+$('wTurn').onclick=e=>{e.stopPropagation();turnWatch()};$('wCrown').addEventListener('click',e=>{e.stopPropagation();turnWatch()});
+$('wSkip').onclick=e=>{e.stopPropagation();if(WCH){WCH.off=WCH.target;drawWatch()}setTimeout(()=>show('mWatch',false),300)};
+// 소등 시간
+function lightsTick(S){if(!ticket||S.mode==='wait'||S.mode==='end'||anyOpen())return;const vt=vnow(),tz=tzAt(S.km,vt),lt=new Date(vt+tz*HMS),h=lt.getUTCHours(),dk=lt.getUTCFullYear()+'-'+lt.getUTCMonth()+'-'+lt.getUTCDate();ticket.lo=ticket.lo||{};
+  if(h===23&&!ticket.lo['n'+dk]&&!window.LIGHTS_OFF){ticket.lo['n'+dk]=1;saveTicket();if(cartOpen)return;showCart({id:'lights',t:'밤 11시 · 소등 시간이에요',d:'차장이 복도 불을 끄고 지나갑니다. 불을 끄면 창밖 별과 마을 불빛이 더 잘 보여요',custom:()=>{if(!window.LIGHTS_OFF)toggleLamp()}});$('cartBuy').textContent='불 끄기';$('cartNo').textContent='조금 더 켜 둘래요'}
+  else if(h===6&&lt.getUTCMinutes()>=30&&window.LIGHTS_OFF&&!ticket.lo['m'+dk]){ticket.lo['m'+dk]=1;saveTicket();toggleLamp();toast('좋은 아침이에요','차장이 불을 켰어요',2600)}}
+function eventsTick(S){try{paxTick(S);momentTick(S);microTick(S);hopTick(S)}catch(e){}try{passTick(S)}catch(e){}try{lightsTick(S)}catch(e){}}
 
 // ───────── 작은 사건들: 들어와 있는 동안 1~2분마다 무언가 일어남 ─────────
 const FACTS=[
@@ -2193,6 +2230,8 @@ function hopTick(S){const now=performance.now();if(now<hopT)return;hopT=now+3000
 const CART=[{id:'egg',items:['egg','cider'],t:'덜컹 — 판매 카트가 지나갑니다',d:'삶은 달걀과 사이다',ok:S=>S.mode==='run'&&S.km>22&&S.km<60},
   {id:'hodu',items:['hodu'],t:'천안을 지납니다',d:'따끈한 호두과자 있어요',ok:S=>S.mode==='run'&&S.bk==='kcountry'},
   {id:'dosirak',items:['dosirak'],t:'차장이 뜨거운 물을 들고 지나갑니다',d:'컵라면 도시락 하나 어때요',ok:S=>S.mode==='run'&&(S.bk==='taiga'||S.bk==='birch')}];
+const STALL=[['하바롭스크',['piro','potato'],'피로시키와 딜 뿌린 삶은 감자'],['울란우데',['buuz'],'김이 나는 부랴트 만두, 부우즈'],['슬류댠카',['omul'],'바이칼에서만 잡히는 훈제 오물'],['이르쿠츠크',['kedr'],'시베리아 잣나무에서 딴 잣 한 봉지'],['노보시비르스크',['berry'],'숲에서 딴 블루베리 한 컵'],['예카테린부르크',['shanga','kvass'],'샤니가와 시원한 크바스'],['모스크바',['plombir'],'모스크바 플롬비르 아이스크림']];
+STALL.forEach(([st,it,d])=>CART.push({id:'st_'+st,items:it,t:st+'역 플랫폼 · 할머니 노점이 섰어요',d:d+' — 정차 시간에만 팔아요',ok:S=>S.mode==='stop'&&ST[S.i].k===st}));
 let cartOpen=null;
 const JO=(w,a,b)=>{const c=(w||'').trim().slice(-1).charCodeAt(0);return c>=0xAC00&&c<=0xD7A3&&(c-0xAC00)%28?a:b};
 function cartTick(S){if(!ticket||cartOpen||anyOpen())return;ticket.cart=ticket.cart||{};for(const c of CART){if(!ticket.cart[c.id]&&c.ok(S)){ticket.cart[c.id]=1;saveTicket();showCart(c);break}}}

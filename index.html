@@ -948,9 +948,14 @@ const WREADY=['ru1','ngt_forest','ngt_town','st_vlad','ru2','ru3','ru4','st_khab
 (function(){try{const k=new Date(Date.now()+9*36e5),md=(k.getUTCMonth()+1)*100+k.getUTCDate();
   const late={ru14:1,ru15:1,st_sly:1},inW=key=>late[key]?(md>=110&&md<=420):(md>=1201||md<=320);
   for(const key of WREADY){if(!inW(key))continue;const wk=key+'_w';SCN[wk]=Object.assign({},SCN[key]);for(const b in B)if(B[b].photo===key)B[b].photo=wk;setTimeout(()=>{try{if(PNAME[key])PNAME[wk]=PNAME[key]}catch(e){}},0)}}catch(e){}})();
+// 밤 풍경 돌려쓰기 (가을판일 때만): 같은 밤 그림이 반복되지 않게
+(function(){try{const V={ngt_forest:['ngt_forest','ngt_forest2','ngt_forest3','ngt_forest4'],ngt_open:['ngt_open','ngt_open2'],ngt_eu:['ngt_eu','ngt_eu2']};
+  for(const base in V){if(!B[base]||B[base].photo!==base)continue;
+    V[base].forEach(k=>{if(k===base)return;B[k]=Object.assign({},B[base],{photo:k});SCN[k]=Object.assign({},SCN[base]||{});setTimeout(()=>{try{if(PNAME[base])PNAME[k]=PNAME[base]}catch(e){}},0)});
+    for(const arr of [BI_N,BI_S]){let n=0;for(const e of arr){if(e[2]===base){e[2]=V[base][n%V[base].length];n++}}}}}catch(e){}})();
 
 const CITY={busan:1,seoul:1,kr01:1,kr07:1,kr08:1,kr14:1,kr16:1,kr17:1};
-const PV='?p=3';
+const PV='?p=4';
 function loadPhoto(key){if(key==='plat'){loadPhoto('platd');loadPhoto('platn');return}if(PHOTO[key])return;const o=SCN[key]||{};PHOTO[key]={loading:true};
   const mk=(im,low,t0)=>({t0:t0||performance.now(),tile:im,w:im.naturalWidth,h:im.naturalHeight,ready:true,low,spd:o.spd||.2,img:im,pass:!!o.pass,key});
   const th=new Image();th.onload=()=>{const p=PHOTO[key];if(p&&p.loading)PHOTO[key]=mk(th,true)};th.src='img/t/'+key+'.webp'+PV;

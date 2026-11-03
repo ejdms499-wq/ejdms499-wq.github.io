@@ -648,6 +648,22 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
 .rdo{display:flex;flex-direction:column;gap:8px;margin-top:14px}.rdo button{padding:11px;border-radius:999px;border:1px solid rgba(239,230,214,.3);color:#efe6d6;font:13.5px 'Noto Sans KR',sans-serif;background:transparent}
 .rdo button.y{background:#9fcf8f;color:#1d2a1a;border-color:#9fcf8f}.rdo button.n{opacity:.4;text-decoration:line-through}
 #pxPlay{display:none;margin-top:8px}#pxPlay.on{display:block}
+
+/* 승객 미니 놀이 */
+#mgA{margin:14px auto 0;min-height:120px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
+.mgbig{font-size:84px;line-height:1;cursor:pointer;user-select:none;-webkit-user-select:none;transition:transform .15s;font-family:'Noto Color Emoji','Apple Color Emoji','Segoe UI Emoji',sans-serif}
+.mgbig:active{transform:scale(.92)}.mgbig.pop{animation:mgpop .35s}@keyframes mgpop{40%{transform:scale(1.18) rotate(-6deg)}}
+.mgbar{width:220px;height:10px;border-radius:5px;background:rgba(239,230,214,.15);overflow:hidden}.mgbar i{display:block;height:100%;width:0;background:#e9c27d;transition:width .15s}
+.tea{width:70px;height:96px;border:3px solid rgba(239,230,214,.7);border-top:0;border-radius:0 0 14px 14px;position:relative;overflow:hidden;background:rgba(255,255,255,.05)}
+.tea i{position:absolute;left:0;right:0;bottom:0;height:78%;background:#e9d8a8}.tea::after{content:"";position:absolute;inset:auto -8px 30px -8px;height:44px;border:3px solid rgba(200,170,110,.8);border-radius:6px;pointer-events:none}
+.teab{display:flex;gap:4px;font:11px 'Noto Sans KR',sans-serif;opacity:.6}
+.simon{display:grid;grid-template-columns:repeat(4,58px);gap:8px}.simon button{height:72px;border-radius:10px;border:0;font:600 15px 'Noto Sans KR',sans-serif;color:#221c16;opacity:.75;transition:opacity .1s,transform .1s}
+.simon button.lit{opacity:1;transform:translateY(-4px);box-shadow:0 0 18px rgba(255,230,180,.6)}
+.simon button:nth-child(1){background:#e8a87c}.simon button:nth-child(2){background:#e9d8a8}.simon button:nth-child(3){background:#9fcf8f}.simon button:nth-child(4){background:#8fb3cf}
+.letter{width:min(300px,84vw);background:#f3ead8;color:#3a2d22;border-radius:4px;padding:16px 16px 14px;text-align:left;font:400 21px/1.5 'Nanum Pen Script','Gowun Batang',serif;box-shadow:0 12px 30px rgba(0,0,0,.4);min-height:110px;transform:rotate(-1deg)}
+.letter b{font-weight:400;color:#8a3b2e}
+#mgSk{margin-bottom:28px;width:min(300px,84vw);aspect-ratio:3/2;background:#f6f0e3;border:8px solid #f6f0e3;box-shadow:0 14px 34px rgba(0,0,0,.5);display:grid;place-items:center;font:12px 'Noto Sans KR',sans-serif;color:#7a6f61;position:relative}
+#mgSk canvas{width:100%;height:100%;display:block}#mgSk::after{content:attr(data-cap);position:absolute;left:0;right:0;bottom:-26px;text-align:center;font:400 18px 'Nanum Pen Script',serif;color:#efe6d6}
 </style>
 </head>
 <body>
@@ -800,6 +816,7 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
   <div class="modal" id="mDev"><div class="foodwrap" id="devWrap"><img id="devImg" alt="현상한 필름"><div class="fdname" id="devName">필름 현상</div><div class="fdtext" id="devTxt"></div><button class="closer" id="devSave">사진 저장 · 공유</button><button class="closer" id="devNew" style="display:none">새 필름 넣기</button><button class="closer" id="devClose">닫기</button></div></div>
   <div class="modal" id="mChess"><div class="chwrap"><div class="chh">표트르 할아버지의 체스 문제</div><div class="chs" id="chSay"></div><div id="chBoard"></div><div class="chn" id="chN"></div>
     <div class="pcbtns" style="margin-top:12px"><button class="ghost" id="chHint">힌트</button><button id="chNext">다음 문제</button></div><button class="closer" id="chClose">그만 둘래요</button></div></div>
+  <div class="modal" id="mPlay"><div class="rdwrap"><div class="chh" id="mgT"></div><div class="chs" id="mgSay"></div><div id="mgA"></div><div class="rdq" id="mgQ" style="display:none"></div><div class="rdo" id="mgO"></div><div class="chn" id="mgN" style="margin-top:12px"></div><button class="closer" id="mgClose">자리로 돌아가기</button></div></div>
   <div class="modal" id="mRiddle"><div class="rdwrap"><div class="chh">탐정의 수수께끼</div><div class="chs" id="rdSay"></div><div class="rdq" id="rdQ"></div><div class="rdo" id="rdO"></div><div class="chn" id="rdN" style="margin-top:12px"></div><button class="closer" id="rdClose">자리로 돌아가기</button></div></div>
   <div class="modal" id="mShot"><div class="foodwrap"><div class="fdph has" id="shPh"></div><div class="fdname" id="shName"></div><div class="fdtext" id="shTxt"></div><button class="closer" id="shClose">닫기</button></div></div>
   <div class="modal" id="mGift"><div class="foodwrap"><div class="pxph ill gf" id="gfPh"></div><div class="fdname" id="gfName"></div><div class="fdtext" id="gfText"></div><div class="gffact" id="gfFact"></div><button class="closer" id="gfClose">수첩에 넣기</button></div></div>
@@ -2422,6 +2439,81 @@ $('devSave').onclick=()=>{if(!devCanvas)return;devCanvas.toBlob(async b=>{if(!b)
 $('devNew').onclick=()=>{if(!ticket)return;ticket.roll=ROLL()+1;saveTicket();camUI();show('mDev',false);toast('새 필름을 넣었어요','24장 · 또 찍어 보세요',2600)};
 $('devClose').onclick=()=>show('mDev',false);$('mDev').onclick=e=>{if(e.target===$('mDev'))show('mDev',false)};
 
+
+// ───────── 앞쪽 승객들의 짧은 놀이 ─────────
+const MQ={
+ p01:{t:'자갈치 아지매의 사투리 퀴즈',hi:'“부산 말 쫌 아나? 맞혀 보이소.”',q:[
+  {q:'“단디 해라”는 무슨 뜻일까요?',o:['빨리 해라','야무지게 똑바로 해라','그만 해라'],a:1,ok:'“맞다! 단디 하이소.”'},
+  {q:'“머라카노?”는 무슨 뜻일까요?',o:['뭐라고 하니?','어디 가니?','배고프니?'],a:0,ok:'“하모! 잘 아네.”'},
+  {q:'“고마 해라”는 무슨 뜻일까요?',o:['고맙다','그만 해라','더 해라'],a:1,ok:'“고마 맞혔다, 고마!”'}],end:'“서울 가면 손녀한테 자랑해야겠다. 부산 말 하는 외국 손님 만났다꼬.”'},
+ p05:{t:'사얀의 바이칼 퀴즈',hi:'“우리 바다(바이칼)에 대해 얼마나 알아요?”',q:[
+  {q:'바이칼에만 사는 물범의 이름은?',o:['네르파','바다코끼리','물개'],a:0,ok:'“맞아요. 민물에 사는 물범이에요.”'},
+  {q:'바이칼에만 사는 물고기로, 훈제해서 역 앞에서 파는 것은?',o:['연어','오물','청어'],a:1,ok:'“슬류댠카 역에서 꼭 사 먹어요.”'},
+  {q:'지구의 얼지 않은 민물 가운데 바이칼에 담긴 양은?',o:['약 100분의 1','약 5분의 1','절반'],a:1,ok:'“그래서 우린 바다라고 불러요.”'}],end:'“다음엔 말 타러 와요. 초원에서 보는 별은 기차보다 더 많아요.”'},
+ p08:{t:'발레리나 마샤의 발레 용어 퀴즈',hi:'“오디션 전에 머리 좀 식히고 싶어요. 같이 해요.”',q:[
+  {q:'“플리에”는 어떤 동작일까요?',o:['무릎을 굽히기','한 바퀴 돌기','높이 뛰기'],a:0,ok:'“모든 동작은 플리에에서 시작해요.”'},
+  {q:'한 다리로 서서 다른 다리를 뒤로 길게 뻗는 동작은?',o:['아라베스크','피루엣','그랑 주테'],a:0,ok:'“브라보!”'},
+  {q:'「백조의 호수」를 작곡한 사람은?',o:['쇼팽','차이콥스키','모차르트'],a:1,ok:'“맞아요. 모스크바에서 처음 무대에 올랐어요.”'}],end:'“오디션 붙으면 표 보낼게요. 진짜로요.”'},
+ p09:{t:'피아니스트 아냐의 쇼팽 퀴즈',hi:'“콩쿠르 전이라 손이 떨려요. 문제 내 볼게요.”',q:[
+  {q:'쇼팽 콩쿠르는 몇 년마다 열릴까요?',o:['매년','5년마다','10년마다'],a:1,ok:'“그래서 한 번 놓치면 5년을 기다려요.”'},
+  {q:'쇼팽의 심장은 지금 어디에 있을까요?',o:['파리의 묘지','바르샤바의 성십자가 성당','빈의 박물관'],a:1,ok:'“몸은 파리에, 마음은 바르샤바에.”'},
+  {q:'쇼팽이 태어난 해는?',o:['1810년','1890년','1756년'],a:0,ok:'“정답! 바르샤바 근처 젤라조바볼라에서요.”'}],end:'“덕분에 떨림이 멎었어요. 무대에서 당신 생각하며 칠게요.”'}};
+let mgP=null,mgI=0,mgOK=0,mgTm=[];
+function mgClear(){mgTm.forEach(clearTimeout);mgTm=[];$('mgA').onclick=null;$('mgA').innerHTML='';$('mgO').innerHTML='';$('mgQ').style.display='none';$('mgN').textContent=''}
+function openMini(p){mgP=p;mgClear();$('mgT').textContent=PLAY[p.id];show('mPlay',true);blip(520,.08,.03);
+  if(MQ[p.id]){mgI=0;mgOK=0;$('mgT').textContent=MQ[p.id].t;$('mgSay').textContent=MQ[p.id].hi;mqShow();return}
+  ({p02:mgLetter,p03:mgDoll,p04:mgTea,p06:mgSimon,p10:mgNut,p11:mgSketch})[p.id]()}
+function mgDone(txt){logAdd(mgP.n+'와 '+PLAY[mgP.id]+(txt?' · '+txt:''))}
+function mqShow(){const D=MQ[mgP.id],L=D.q;if(mgI>=L.length){$('mgQ').textContent=mgOK+' / '+L.length+' 맞힘';$('mgO').innerHTML='';$('mgN').textContent='';$('mgSay').textContent=D.end;mgDone(mgOK+'개 맞힘');return}
+  const x=L[mgI];$('mgQ').style.display='';$('mgQ').textContent=x.q;$('mgN').textContent=(mgI+1)+' / '+L.length;$('mgO').innerHTML=x.o.map((t,i)=>'<button data-i="'+i+'">'+esc(t)+'</button>').join('')}
+$('mgO').onclick=e=>{const b=e.target.closest('button[data-i]');if(!b||!mgP||!MQ[mgP.id]||$('mgO').dataset.lock)return;const x=MQ[mgP.id].q[mgI],i=+b.dataset.i;
+  if(i===x.a){b.classList.add('y');mgOK++;$('mgSay').textContent=x.ok;blip(980,.12,.05)}else{b.classList.add('n');$('mgO').querySelectorAll('button')[x.a].classList.add('y');$('mgSay').textContent='“아이고, 정답은 '+x.o[x.a]+'.”';blip(240,.12,.04)}
+  $('mgO').dataset.lock=1;mgTm.push(setTimeout(()=>{delete $('mgO').dataset.lock;mgI++;mqShow()},2200))};
+// 김 할아버지: 고향 바다에 엽서 쓰기 (문장 고르기)
+function mgLetter(){const S=[['원산 바다야,','명사십리 모래야,','고향 하늘아,'],['여덟 살에 떠난 내가','칠십 년 만에','손주 같은 길동무랑'],['이제야 너를 보러 간다.','파도 소리를 아직 기억한다.','해당화는 올해도 붉었니?']];let k=0,txt=[];
+  $('mgSay').textContent='“글씨가 떨려서 그래. 대신 엽서 한 장 써 줄 수 있나? 한 줄씩 골라 줘.”';
+  const draw=()=>{$('mgA').innerHTML='<div class="letter">'+(txt.length?txt.map(t=>esc(t)).join('<br>'):'<span style="opacity:.4">…</span>')+(k>=S.length?'<br><b>— 원산에서, 김</b>':'')+'</div>'+(k<S.length?'<div class="rdo" style="width:100%">'+S[k].map((t,i)=>'<button data-l="'+i+'">'+esc(t)+'</button>').join('')+'</div>':'');
+    if(k>=S.length){$('mgSay').textContent='“…고맙다. 이건 내가 바다에 띄워 보낼게.”';mgDone()}};
+  draw();$('mgA').onclick=e=>{const b=e.target.closest('[data-l]');if(!b||k>=S.length)return;txt.push(S[k][+b.dataset.l]);k++;blip(760,.06,.03);draw()}}
+// 마트료시카 할머니: 인형 열기
+function mgDoll(){const W=['엄마 인형','큰딸','둘째','셋째','막내','아기','가장 작은 아기'];let n=0;$('mgSay').textContent='“열어 봐요. 안에 누가 있는지.” — 한 번씩 눌러서 열어요';
+  $('mgA').innerHTML='<div class="mgbig" id="mgD">🪆</div><div class="chn" id="mgDn">1 / 7 · '+W[0]+'</div>';
+  $('mgD').onclick=()=>{if(n>=6)return;n++;const d=$('mgD');d.style.fontSize=(84-n*9)+'px';d.classList.remove('pop');void d.offsetWidth;d.classList.add('pop');blip(600+n*80,.06,.03);$('mgDn').textContent=(n+1)+' / 7 · '+W[n];
+    if(n>=6){$('mgSay').textContent='“가장 작은 아기는 속이 꽉 차서 열리지 않아요. 그래서 제일 소중해요.”';mgDone()}}}
+// 갈리나 차장: 차 우리기 (색이 알맞을 때 누르기)
+function mgTea(){let t0=performance.now(),tries=0,best=null,run=true;$('mgSay').textContent='“차 색이 호박색이 되면 \'지금!\'을 눌러요. 너무 연하면 맹물, 너무 진하면 써요.”';
+  $('mgA').innerHTML='<div class="tea"><i id="mgTc"></i></div><div class="teab"><span>연함</span><span>·</span><span style="color:#e9b45f">호박색</span><span>·</span><span>진함</span></div>';
+  $('mgO').innerHTML='<button id="mgTb">지금!</button>';const col=v=>{const a=[233,216,168],b=[176,96,28],c=[70,30,12];const m=(x,y,f)=>x.map((q,i)=>Math.round(q+(y[i]-q)*f));return 'rgb('+(v<.5?m(a,b,v*2):m(b,c,(v-.5)*2)).join(',')+')'};
+  const tick=()=>{if(!run||!$('mgTc')||!$('mPlay').classList.contains('on'))return;const v=((performance.now()-t0)/3200)%1;$('mgTc').style.background=col(v);$('mgTc').dataset.v=v;requestAnimationFrame(tick)};tick();
+  $('mgTb').onclick=()=>{if(!$('mgTc'))return;const v=+$('mgTc').dataset.v,d=Math.abs(v-.5);tries++;
+    if(d<.07){run=false;$('mgSay').textContent='“완벽해요! 30년 차장도 이렇게는 못 우려요.” — 은빛 컵받침에 담아 줘요';blip(980,.14,.05);$('mgO').innerHTML='';mgDone('완벽한 호박색')}
+    else{$('mgSay').textContent=v<.5?'“너무 연해요. 다시!”':'“써요, 써! 다시!”';blip(260,.1,.04);t0=performance.now();if(tries>=4){run=false;$('mgSay').textContent='“괜찮아요, 제가 우릴게요. 기차에선 차가 제일 맛있어요.”';$('mgO').innerHTML='';mgDone()}}}}
+// 바얀 할아버지: 아코디언 따라 치기
+function mgSimon(){const F=[262,294,330,392],N=['도','레','미','솔'];let seq=[],pos=0,lock=true,round=0;$('mgSay').textContent='“내가 먼저 칠게. 똑같이 따라 쳐 봐.”';
+  $('mgA').innerHTML='<div class="simon">'+N.map((n,i)=>'<button data-s="'+i+'">'+n+'</button>').join('')+'</div>';
+  const lit=i=>{const b=$('mgA').querySelectorAll('button')[i];b.classList.add('lit');blip(F[i],.32,.07);mgTm.push(setTimeout(()=>b.classList.remove('lit'),300))};
+  const play=()=>{lock=true;seq.push(Math.floor(Math.random()*4));if(seq.length<3){seq.push(Math.floor(Math.random()*4));seq.push(Math.floor(Math.random()*4))}pos=0;$('mgN').textContent=(round+1)+' / 3 · '+seq.length+'음';
+    seq.forEach((n,i)=>mgTm.push(setTimeout(()=>lit(n),600+i*520)));mgTm.push(setTimeout(()=>{lock=false;$('mgSay').textContent='“자, 이제 네 차례.”'},600+seq.length*520))};
+  $('mgA').onclick=e=>{const b=e.target.closest('[data-s]');if(!b||lock)return;const i=+b.dataset.s;lit(i);
+    if(i!==seq[pos]){lock=true;$('mgSay').textContent='“하하, 음이 미끄러졌네. 다시 해 보자.”';seq=[];round=0;mgTm.push(setTimeout(play,1400));return}
+    pos++;if(pos>=seq.length){round++;if(round>=3){lock=true;$('mgSay').textContent='“브라보! 다음 역에서 같이 연주하자고.”';$('mgN').textContent='';mgDone('세 소절 성공');return}
+      $('mgSay').textContent='“좋아! 한 음 더.”';mgTm.push(setTimeout(play,900))}};play()}
+// 호두까기 장인: 호두 깨기 (빠르게 톡톡)
+function mgNut(){let n=0,t=null;$('mgSay').textContent='“이 인형 입에 호두를 넣고 빠르게 눌러 봐요. 4초 안에 10번!”';
+  $('mgA').innerHTML='<div class="mgbig" id="mgN2">🌰</div><div class="mgbar"><i id="mgNb"></i></div>';
+  $('mgN2').onclick=()=>{if(n<0)return;if(!t)t=setTimeout(()=>{if(!$('mgNb'))return;if(n<10){$('mgSay').textContent='“아직 단단하네. 다시!”';n=0;t=null;$('mgNb').style.width='0'}},4000);n++;$('mgNb').style.width=Math.min(100,n*10)+'%';const d=$('mgN2');d.classList.remove('pop');void d.offsetWidth;d.classList.add('pop');blip(420+n*30,.04,.03);
+    if(n>=10){clearTimeout(t);n=-1;d.textContent='🥜';blip(1400,.1,.05);$('mgSay').textContent='“딱! 우리 할아버지가 깎은 인형도 이렇게 소리가 좋았지.”';mgDone()}}}
+// 몽마르트르 화가: 지금 창밖을 연필 그림으로
+function mgSketch(){$('mgSay').textContent='“가만히 있어 봐요… 창밖 풍경을 그려 줄게요.”';$('mgA').innerHTML='<div id="mgSk">그리는 중…</div>';
+  const v=viewNow();if(!v){$('mgA').innerHTML='';$('mgSay').textContent='“지금은 창밖이 안 보이네. 밝을 때 다시.”';return}
+  sceneCard(v.sk,v.sf,vnow()).then(u=>{if(!u)return;const im=new Image();im.onload=()=>{const W2=600,H2=400,c=document.createElement('canvas');c.width=W2;c.height=H2;const g=c.getContext('2d');g.drawImage(im,0,0,W2,H2);
+    const d=g.getImageData(0,0,W2,H2),a=d.data,G=new Float32Array(W2*H2);for(let i=0;i<G.length;i++)G[i]=a[i*4]*.3+a[i*4+1]*.59+a[i*4+2]*.11;
+    const bl=new Float32Array(G.length),r=6;for(let y=0;y<H2;y++){let acc=0;for(let x=-r;x<W2;x++){if(x+r<W2)acc+=255-G[y*W2+x+r];if(x-r-1>=0)acc-=255-G[y*W2+x-r-1];if(x>=0)bl[y*W2+x]=acc/(2*r+1)}}
+    const bl2=new Float32Array(G.length);for(let x=0;x<W2;x++){let acc=0;for(let y=-r;y<H2;y++){if(y+r<H2)acc+=bl[(y+r)*W2+x];if(y-r-1>=0)acc-=bl[(y-r-1)*W2+x];if(y>=0)bl2[y*W2+x]=acc/(2*r+1)}}
+    for(let i=0;i<G.length;i++){let v2=Math.min(255,G[i]*255/Math.max(1,255-bl2[i]));v2=255-(255-v2)*1.35;v2=Math.max(0,Math.min(255,v2));a[i*4]=v2*.97+8;a[i*4+1]=v2*.94+6;a[i*4+2]=v2*.86+4}
+    g.putImageData(d,0,0);const box=$('mgSk');box.textContent='';box.appendChild(c);const k=kd(vnow());box.dataset.cap=k.m+'.'+k.d+' · '+nearName(cur.km)+' — 몽마르트르 화가';
+    $('mgSay').textContent='“자, 당신이 본 창밖이에요. 사진보다 오래 남을 거예요.”';blip(880,.1,.04);mgDone(nearName(cur.km))};im.src=u})}
+$('mgClose').onclick=()=>{mgClear();show('mPlay',false)};$('mPlay').onclick=e=>{if(e.target===$('mPlay')){mgClear();show('mPlay',false)}};
 // ───────── 국경 바퀴 교체 (실제: 러시아·벨라루스 선로 1,520mm, 그 밖은 1,435mm) ─────────
 const GAUGE=[{id:'g1',km:1290,stop:1,k:'TUMANGANG',place:'두만강역',from:'1,435',to:'1,520',note:'러시아 선로는 8.5cm 더 넓어요. 객차를 통째로 들어 올려 바퀴 뭉치(대차)를 바꿔 끼워요.'},
   {id:'g2',km:11834,k:'BREST',place:'브레스트 국경',from:'1,520',to:'1,435',note:'다시 유럽 선로로. 실제로도 승객을 태운 채 2시간쯤 걸려요.'}];
@@ -2438,8 +2530,8 @@ function runGauge(g){gaugeOn=g;const el=$('gauge');el.className='';$('gK').textC
     [19800,()=>{show('gauge',false);gaugeOn=null;logAdd(g.place+'에서 바퀴를 갈아 끼웠다 ('+g.from+' → '+g.to+'mm)');toast('바퀴 교체 끝',g.to+'mm 선로를 달려요',3200)}]];
   T.forEach(([t,f])=>setTimeout(f,t))}
 // ───────── 승객과 놀기: 표트르 할아버지 체스 · 탐정 수수께끼 ─────────
-const PLAY={p07:'체스 문제 한 판',p12:'탐정의 수수께끼'};
-$('pxPlay').onclick=e=>{e.stopPropagation();const p=paxCur;if(!p)return;show('mPax',false);setTimeout(()=>p.id==='p07'?openChess():openRiddle(),200)};
+const PLAY={p01:'부산 사투리 퀴즈',p02:'고향 바다에 엽서 쓰기',p03:'마트료시카 열어 보기',p04:'차 우리기',p05:'바이칼 퀴즈',p06:'아코디언 따라 치기',p07:'체스 문제 한 판',p08:'발레 용어 퀴즈',p09:'쇼팽 퀴즈',p10:'호두 깨기',p11:'초상화 부탁하기',p12:'탐정의 수수께끼'};
+$('pxPlay').onclick=e=>{e.stopPropagation();const p=paxCur;if(!p)return;show('mPax',false);setTimeout(()=>p.id==='p07'?openChess():p.id==='p12'?openRiddle():openMini(p),200)};
 const VS='︎',PC={K:'♔',Q:'♕',R:'♖',B:'♗',N:'♘',P:'♙',k:'♚',q:'♛',r:'♜',b:'♝',n:'♞',p:'♟'};
 const CHP=[
  {fen:'6k1/5ppp/8/8/8/8/5PPP/R5K1',mv:['a1','a8'],say:'백이 한 수 만에 이기는 수가 있어. 왕이 갇혀 있는 걸 봐.',ok:'그렇지! 뒷줄이 막힌 왕은 이렇게 무너져. 기관사들은 이걸 "막다른 선로"라고 불렀지.'},
@@ -2551,7 +2643,7 @@ setInterval(sillTick,3000);setTimeout(sillTick,800);
   for(let k=0;k<d.length;k+=4){const n=Math.random();const v=n<.5?0:255;d[k]=d[k+1]=d[k+2]=v;d[k+3]=Math.random()*14}
   g.putImageData(im,0,0);g.globalAlpha=.05;g.strokeStyle='#6b5a44';for(let k=0;k<70;k++){g.lineWidth=.4+Math.random()*.5;g.beginPath();const x=Math.random()*180,y=Math.random()*180,a=Math.random()*6.28,l=4+Math.random()*12;g.moveTo(x,y);g.quadraticCurveTo(x+Math.cos(a)*l/2+Math.random()*3,y+Math.sin(a)*l/2,x+Math.cos(a)*l,y+Math.sin(a)*l);g.stroke()}
   document.documentElement.style.setProperty('--paper','url('+c.toDataURL()+')')}catch(e){}})();
-if(/[?&]dev/.test(location.search)||window.__SBMOCK)window.__T={runGauge:i=>runGauge(GAUGE[i]),openChess,openRiddle,elAtKm,openPax,openMenu2,serveFood:()=>serveFood(MENU[3].d[0]),showMoment:()=>showMoment(MOM[5]),get BI(){return BI},B,get ST(){return ST},get SC(){return SC},PHOTO,photoFor,biomeAt,state,get TRIP(){return TRIP},boardTrain,openTicket,openPostcard,openDrawer,viewNow,depTimes,vnow:()=>vnow(),get cur(){return cur},get riders(){return riders},sayPhrase,showCart,CART,openRoom,openLog,show,get ticket(){return ticket}};$('roomSheet').onclick=e=>{if(e.target===$('roomSheet'))show('roomSheet',false)};
+if(/[?&]dev/.test(location.search)||window.__SBMOCK)window.__T={runGauge:i=>runGauge(GAUGE[i]),openChess,openRiddle,openMini:id=>openMini(PAX.find(x=>x.id===id)),elAtKm,openPax,openMenu2,serveFood:()=>serveFood(MENU[3].d[0]),showMoment:()=>showMoment(MOM[5]),get BI(){return BI},B,get ST(){return ST},get SC(){return SC},PHOTO,photoFor,biomeAt,state,get TRIP(){return TRIP},boardTrain,openTicket,openPostcard,openDrawer,viewNow,depTimes,vnow:()=>vnow(),get cur(){return cur},get riders(){return riders},sayPhrase,showCart,CART,openRoom,openLog,show,get ticket(){return ticket}};$('roomSheet').onclick=e=>{if(e.target===$('roomSheet'))show('roomSheet',false)};
 
 if(!ticketValid()) autoBoard(); else {try{sbPresence()}catch(e){}}
 initVeil();

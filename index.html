@@ -572,6 +572,30 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
 #devImg{display:block;max-width:100%;max-height:60vh;margin:0 auto;border-radius:2px;box-shadow:0 12px 34px rgba(0,0,0,.55);opacity:0}
 #devWrap.done #devImg{animation:devin 2.6s ease both}@keyframes devin{0%{opacity:0;filter:brightness(.15) sepia(1) contrast(.5)}35%{opacity:1}100%{opacity:1;filter:none}}
 #devSave{background:#efe6d6;color:#221c16;border:0}
+
+/* 승차권 카드 버튼: 밝은 종이 위에서 보이게 */
+#mTicket .tkbtns button.ghost{color:#2d241c!important;border-color:rgba(45,36,28,.32)!important}
+#mTicket .tkbtns #btnBoard{background:#3a2d22;color:#f3ead8}
+#mTicket .tklink{color:#2d241c;opacity:.55}
+/* 닫기 X (마우스 쓰는 화면) */
+.mx{display:none;position:fixed;right:22px;top:18px;z-index:60;width:40px;height:40px;border-radius:50%;background:rgba(20,15,10,.55);color:#efe6d6;font:300 26px/38px 'Noto Sans KR',sans-serif;text-align:center;border:1px solid rgba(239,230,214,.25);cursor:pointer}
+@media (hover:hover) and (pointer:fine){.mx{display:block}.modal button,#sill .ob,#pax,#hop,#cam,#sndBtn{cursor:pointer}}
+/* ── 웹(가로 넓은 화면) 전용 ── */
+@media (min-width:900px) and (min-aspect-ratio:5/4) and (min-height:560px){
+ body #app,body #app:not(.gaze){max-width:none!important}
+ #app:not(.gaze) #stage{left:0!important;top:0!important;transform:none!important;width:100%!important;height:100%!important;aspect-ratio:auto!important}
+ #app:not(.gaze) #cabinImg,#app:not(.gaze) #cabinDay,#app:not(.gaze) #nightdim{display:none!important}
+ body #app{background:#2a1d14!important}
+ #app::before{content:"";position:absolute;inset:-60px;z-index:0;background:url(img/cabin_n.webp) center 60%/cover;filter:blur(34px) brightness(.5) saturate(1.15);pointer-events:none}
+ #app.day::before{background-image:url(img/cabin_d.webp);filter:blur(34px) brightness(.8)}
+ #app.gaze::before{display:none}
+ #app:not(.gaze) #win{left:50%!important;top:5%!important;width:min(88vw,calc(60vh*2.1))!important;height:60%!important;transform:translateX(-50%);border-radius:22px!important;overflow:hidden;box-shadow:0 0 0 9px rgba(28,20,14,.92),0 0 0 11px rgba(214,184,140,.32),0 30px 70px rgba(0,0,0,.6)!important}
+ #app:not(.gaze) #sill{top:68%!important;gap:40px!important;transform:scale(1.28);transform-origin:50% 0}
+ #app:not(.gaze) #sill .ob span{font-size:11px}
+ #cap{top:80%!important;bottom:auto!important}
+ #app.day #cap,#app.day #cap .c3{color:rgba(243,234,216,.95)!important;text-shadow:0 1px 12px rgba(0,0,0,.6)!important}#app.day #sill .ob span{color:rgba(243,234,216,.9)!important}#app.day #hop{border-color:rgba(239,230,214,.35)!important}#cap .c1{font-size:19px}#cap .c2{font-size:13px}
+ #pxbub,#bubble{max-width:420px}
+}
 </style>
 </head>
 <body>
@@ -2018,7 +2042,7 @@ function renderVeil(){const now=vnow(),{next,prev}=depTimes(now);let h='';
   $('vList').innerHTML=h;const k=kd(now);$('vNow').textContent='서울 '+pd(k.h)+':'+pd(k.mi);
   const mine=ticketValid()&&!ticket.auto?ticket.dep:0,vm=$('vMine');vm.classList.toggle('on',!!mine);if(mine){vm.innerHTML=trRow(mine,now,true).replace('<small>','<small>내 자리로 돌아가기 · ');vm.dataset.dep=mine}
   $('veil').querySelectorAll('.tr').forEach(b=>b.onclick=e=>{e.stopPropagation();pickTrain(+b.dataset.dep)})}
-function pickTrain(dep){const v=$('veil');setSound(true);if(!ticketValid()||ticket.dep!==dep)boardTrain(dep);else{ticket.auto=0;saveTicket()}v.classList.add('off');clearInterval(renderVeil.t);setTimeout(()=>{v.style.display='none'},1500)}
+function pickTrain(dep){if(!isFinite(dep))return;const v=$('veil');setSound(true);if(!ticketValid()||ticket.dep!==dep)boardTrain(dep);else{ticket.auto=0;saveTicket()}v.classList.add('off');clearInterval(renderVeil.t);setTimeout(()=>{v.style.display='none'},1500)}
 function openVeil(){const v=$('veil');v.style.display='';renderVeil();v.scrollTop=0;requestAnimationFrame(()=>v.classList.remove('off'));clearInterval(renderVeil.t);renderVeil.t=setInterval(renderVeil,20000)}
 function initVeil(){const v=$('veil');if(location.hash.startsWith('#pc-')){v.classList.add('off');v.style.display='none';return}renderVeil();renderVeil.t=setInterval(renderVeil,20000)}
 // 메뉴
@@ -2414,6 +2438,11 @@ window.__pass=()=>{nextPass=0};
 window.__ev=k=>{if(k==='mini')nextMini=0;if(k==='f')nextF=0;if(k==='c'){nextCond=0;if(ticket)ticket.lastPunch=0}if(k==='a')announceStation(cur.next)};
 })();
 
+
+// 닫기 X + ESC (웹)
+(function(){const mods=[...document.querySelectorAll('.modal')];const closeTop=()=>{const m=[...document.querySelectorAll('.modal.on')].pop();if(!m)return false;m.dispatchEvent(new MouseEvent('click',{bubbles:true}));if(m.classList.contains('on')){const c=m.querySelector('.closer,#logClose,#btnBoard,#pcClose');if(c)c.click();else{m.classList.remove('on');document.body.classList.toggle('mopen',!!document.querySelector('.modal.on'))}}return true};
+  mods.forEach(m=>{const x=document.createElement('button');x.className='mx';x.setAttribute('aria-label','닫기');x.textContent='×';x.onclick=e=>{e.stopPropagation();closeTop()};m.appendChild(x)});
+  addEventListener('keydown',e=>{if(e.key==='Escape'){if(!closeTop()){const v=document.getElementById('veil');}}})})();
 function fitLayout(){const $=id=>document.getElementById(id),cab=$('cabin'),sill=$('sill'),cap=$('cap');if(!cab||!sill||!cap)return;
   if(innerWidth>innerHeight||getComputedStyle(sill).display==='none'){window.LIFT=0;cap.style.top='';cap.style.bottom='';cap.classList.remove('tight');return}
   cap.classList.remove('tight');

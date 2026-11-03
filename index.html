@@ -917,6 +917,20 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
 #app.tv #cart #cartBuy{background:#c94a33!important;color:#fff6e4!important;border-color:#c94a33!important}
 #app.tv #tvTip{bottom:calc(var(--th) + 98px + env(safe-area-inset-bottom))}
 #tvSeat #tsOut{color:#2b2118!important;border:0!important}
+
+.car .who.say .bb{pointer-events:auto}
+.car .who .bb .acts{display:flex;gap:6px;margin-top:7px;flex-wrap:wrap}
+.car .who .bb .acts button{font:700 11.5px/1 'Noto Sans KR',sans-serif;color:#fff6e4;background:#c94a33;border:0;border-radius:12px;padding:7px 10px}
+.car .who .bb .acts button+button{background:#2b2118}
+.car .who.wait{opacity:0}
+.car .who.arrive img{animation:seatEnter 1.2s cubic-bezier(.3,.7,.3,1)}
+.walker{position:absolute;z-index:4;transform:translateX(-50%);pointer-events:none}
+.walker.flip{transform:translateX(-50%) scaleX(-1)}
+.walker img{height:100%;width:auto;display:block;animation:walkHop .38s ease-in-out infinite alternate;filter:drop-shadow(0 3px 2px rgba(0,0,0,.35))}
+@keyframes walkHop{from{transform:translateY(0) rotate(-3deg)}to{transform:translateY(-7%) rotate(3deg)}}
+.car .memo{position:absolute;left:40%;bottom:36%;z-index:3;transform:rotate(-5deg);background:#fff8e6;color:#3a2410;font:600 11px/1.35 'Noto Sans KR',sans-serif;padding:6px 9px;border-radius:2px;box-shadow:0 3px 8px rgba(0,0,0,.35);cursor:pointer;white-space:nowrap;animation:memoIn .6s cubic-bezier(.3,1.5,.5,1)}
+.car .memo::before{content:'';position:absolute;left:50%;top:-6px;width:26px;height:10px;margin-left:-13px;background:rgba(230,215,170,.85);transform:rotate(3deg)}
+@keyframes memoIn{from{transform:rotate(-30deg) scale(.4);opacity:0}}
 /* ===== 시작 화면 ===== */
 #st0{position:absolute;inset:0;overflow:hidden;background:#0b1020;transition:transform .95s cubic-bezier(.6,0,.3,1),opacity .9s;--th:clamp(150px,31vh,290px)}
 #veil.list #st0{display:none}
@@ -3093,7 +3107,7 @@ function tvBuild(){if(tvBuilt)return;tvBuilt=true;const tr=$('tvTrain');let h=''
   trk.addEventListener('scroll',()=>{$('tvTip').classList.add('off')},{passive:true});
   tr.addEventListener('click',e=>{if(moved>6)return;if($('app').classList.contains('tvclose')){const w0=e.target.closest('.who');if(w0){e.stopPropagation();tvTalk(w0)}return}const w=e.target.closest('.who');if(w){e.stopPropagation();tvTalk(w);return}const c=e.target.closest('.car');if(c)tvCar(c.dataset.k,c)});
   document.querySelectorAll('#tvBtns button').forEach(b=>b.onclick=e=>{e.stopPropagation();try{$(b.dataset.t).click()}catch(x){}});
-  $('tsTalk').onclick=e=>{e.stopPropagation();if(paxCur)openPax()};$('tsShot').onclick=e=>{e.stopPropagation();try{takeShot()}catch(x){}};$('tsSleep').onclick=e=>{e.stopPropagation();show('sleep',true)};$('tsOut').onclick=e=>{e.stopPropagation();tvZoom(false)};
+  $('tsTalk').onclick=e=>{e.stopPropagation();const p=paxCur;if(!p)return;const k=tvLoc[p.id];if(k&&k!=='sleep'){tvGoCar(k,()=>{const w=$('tvTrain').querySelector('.car[data-k="'+k+'"] .who[data-id="'+p.id+'"]');if(w)tvTalk(w)})}else openPax()};$('tsShot').onclick=e=>{e.stopPropagation();try{takeShot()}catch(x){}};$('tsSleep').onclick=e=>{e.stopPropagation();show('sleep',true)};$('tsOut').onclick=e=>{e.stopPropagation();tvZoom(false)};
   $('tvSignB').onclick=e=>{e.stopPropagation();const f=$('tvSign').dataset.f;if(f)$(f).click()};$('tsTk').onclick=e=>{e.stopPropagation();$('obTicket').click()};
   document.addEventListener('click',e=>{if(!e.target.closest('#tvSheet')&&!e.target.closest('.car'))$('tvSheet').classList.remove('on')});
   $('tvPure').onclick=()=>{$('app').classList.remove('tvpure')};
@@ -3120,19 +3134,8 @@ function tvArchive(){const met=Object.keys(MET||{});const S=cur||{};let h='<div 
   if(!gone.length)h+='<div><span class="st">☾</span><span>아직 비어 있어요<small>첫 승객이 내리면 여기에 꿈이 남아요</small></span></div>';
   for(const p of gone.slice().reverse()){const by=(BYE[p.id]||[])[0]||p.say[0];h+='<div class="gh"><img src="img/pf_'+p.id+'.webp'+IMGV+'" alt=""><span>'+esc(p.n)+(met.includes(p.id)?'':' <small style="display:inline">(못 만났어요)</small>')+'<small>“'+esc(by)+'”</small></span></div>'}
   h+='</div><button class="closer" id="drClose">닫기</button>';$('drBox').innerHTML=h;show('mDream',true);$('drClose').onclick=()=>show('mDream',false)}
-function tvTalk(w){const id=w.dataset.id,role=w.dataset.role;const p=PAX.find(x=>x.id===id);
-  if(role==='cur'){w.classList.add('talk');setTimeout(()=>{w.classList.remove('talk');try{openPax()}catch(e){}},300);return}
-  let t='';if(role==='robot')t=['오늘의 메뉴, 보여 드릴까요? 삐빅.','별빛 소스는 리필 무료예요.','식당칸은 언제나 열려 있어요.'][Math.floor(Math.random()*3)];
-  else if(role==='next')t='다음 구간에 탈 '+(p?p.n:'')+'… 꿈으로 먼저 와 있어요.';
-  else if(role==='ghost')t=((BYE[id]||[])[1]||(BYE[id]||[])[0]||'잘 가.');
-  else if(p)t=p.say[Math.floor(Math.random()*p.say.length)];
-  const bb=w.querySelector('.bb');bb.textContent=t;w.classList.add('say','talk');blip(980,.05,.02);clearTimeout(w._t);w._t=setTimeout(()=>w.classList.remove('say','talk'),3200)}
-function tvPeople(S){if(!tvBuilt)return;const km=S.km||0,i=tvPaxIdx(km),c=paxCur,nx=PAX[i<0?PAX.findIndex(p=>p.a>km):i+1],pv=PAX[i>0?i-1:-1];
-  const want={sleep:c?[[c.id,'cur',54]]:[],dine:[['robot','robot',26]],dome:nx&&S.mode!=='end'?[[nx.id,'next',58]]:[],case:(!c||c.id!=='p01')?[['p01','res',60]]:[],post:(!c||c.id!=='p02')?[['p02','res',36]]:[],tail:pv&&km>=pv.b?[[pv.id,'ghost',50]]:[]};
-  for(const k in want){const key=JSON.stringify(want[k]);if(tvWho[k]===key)continue;tvWho[k]=key;const box=$('tvTrain').querySelector('.car[data-k="'+k+'"] .ppl');if(!box)continue;
-    box.innerHTML=want[k].map(([id,role,x])=>'<span class="who'+(role==='ghost'||role==='next'?' ghost':'')+'" data-id="'+id+'" data-role="'+role+'" style="left:'+x+'%;'+(role==='robot'?'height:40%;':'')+'"><img src="img/'+(id==='robot'?'zrobot':'pf_'+id)+'.webp'+IMGV+'" alt=""><span class="bb"></span></span>').join('');
-    box.querySelectorAll('.who').forEach(w=>{const im=w.querySelector('img');im.onload=()=>{w.style.marginLeft=(-im.offsetWidth/2)+'px'}});
-    const em=$('tvTrain').querySelector('.car[data-k="'+k+'"] .lbl em');if(em){const p=want[k][0];em.textContent=k==='sleep'&&p?'· '+(PAX.find(x=>x.id===p[0])||{}).n:k==='dome'&&p?'· 다음 승객':''}}}
+
+
 function tvDream(){const m=(performance.now()-tvT0)/60000+(+tvQ.get('dream')||0)*10;const L=m>=25?3:m>=10?2:m>=3?1:0;if(L<=tvLvl)return;const fx=$('dfx');
   for(let l=tvLvl+1;l<=L;l++){if(l===1)for(let i=0;i<16;i++){const e=document.createElement('i');e.className='ff';e.style.left=Math.random()*100+'%';e.style.top=(15+Math.random()*55)+'%';e.style.animationDelay=(-Math.random()*7)+'s';e.style.animationDuration=(5+Math.random()*5)+'s';fx.appendChild(e)}
     if(l===2)for(let i=0;i<10;i++){const e=document.createElement('i'),s=10+Math.random()*26;e.className='bub';e.style.width=e.style.height=s+'px';e.style.left=Math.random()*100+'%';e.style.animationDelay=(-Math.random()*14)+'s';e.style.animationDuration=(11+Math.random()*8)+'s';fx.appendChild(e)}
@@ -3156,7 +3159,7 @@ function dreamTick(S){if(!S)return;const a=$('app');a.classList.toggle('tvstop',
 
 function tvCenter(){const trk=$('tvTrack'),me=$('tvTrain').querySelector('.car.me');if(!me)return;const f=$('app').classList.contains('tvclose')?.54:.5;trk.scrollLeft=me.offsetLeft+me.offsetWidth*f-trk.clientWidth/2}
 function tvZoom(on){$('tvSheet').classList.remove('on');const a=$('app');if(on===a.classList.contains('tvclose'))return;a.classList.toggle('tvclose',on);blip(on?760:620,.08,.02);const t0=performance.now();(function f(){tvCenter();if(performance.now()-t0<1000)requestAnimationFrame(f)})();
-  if(on){try{$('tsTk').querySelector('em').textContent=$('obTkNo').textContent}catch(e){}const p=paxCur;$('tsTalk').innerHTML=p?'<img src="img/px_'+p.id+'.webp'+IMGV+'" alt="">'+esc(p.n)+'와 대화':'맞은편이 비어 있어요';$('tsTalk').disabled=!p}}
+  if(on){try{$('tsTk').querySelector('em').textContent=$('obTkNo').textContent}catch(e){}const p=paxCur,aw=p&&tvLoc[p.id]&&tvLoc[p.id]!=='sleep';$('tsTalk').innerHTML=p?'<img src="img/px_'+p.id+'.webp'+IMGV+'" alt="">'+esc(p.n)+(aw?' · '+CARN[tvLoc[p.id]]+'으로 찾아가기':'와 대화'):'맞은편이 비어 있어요';$('tsTalk').disabled=!p}}
 function tvMirror(){for(const [id,src] of [['tvGo','getoff'],['tvHop','hop']]){const s=$(src),d=$(id);if(!s||!d)continue;const on=s.classList.contains('on')&&!s.classList.contains('soon')||(id==='tvGo'&&s.classList.contains('on'));d.style.display=on?'':'none';if(on&&d.textContent!==s.textContent)d.textContent=s.textContent;d.classList.toggle('soon',s.classList.contains('soon'))}}
 let tvWxT=0,tvWxKm=-1e9;
 function tvWx(S){if(!ticket||S.mode==='wait')return;const now=performance.now();if(now<tvWxT&&Math.abs(S.km-tvWxKm)<60)return;tvWxT=now+60e3;tvWxKm=S.km;
@@ -3173,6 +3176,71 @@ function tvBoard(S){const a1=$('c1').textContent,a2=$('c2').textContent;const se
 function tvSignTick(){const sg=$('tvSign'),go=$('getoff'),hop=$('hop'),busy=$('cart').classList.contains('on')||$('app').classList.contains('tvclose')||anyOpen();
   let t='',f=null,soon=false;if(go&&go.classList.contains('on')){t=go.textContent;f='getoff';soon=go.classList.contains('soon')}else if(hop&&hop.classList.contains('on')){t=hop.textContent.replace(/^▶\s*/,'');f='hop'}
   const on=!!t&&!busy;sg.classList.toggle('on',on);sg.classList.toggle('soon',soon);if(on&&sg.dataset.t!==t){sg.dataset.t=t;sg.dataset.f=f;$('tvSignB').textContent=t}}
+
+/* ===== 칸 사이를 돌아다니는 승객 ===== */
+const CARN={sleep:'내 침대칸',dine:'식당칸',dome:'별 전망칸',case:'탐정 사무소',post:'우체국칸',tail:'꿈 보관소',loco:'기관실'};
+const CARL={
+ p01:{dine:'홍차는 우유를 나중에 붓는 거야. 이건 추리가 아니라 상식이지.',dome:'별자리도 단서야. 저 별은 오늘 밤 세 번 깜빡였지.',post:'수상한 엽서가 한 장 있어. 소인이 내일 날짜야.',sleep:'자네 자리, 잠깐 빌렸네. 생각하기 좋은 의자야.'},
+ p02:{dine:'어묵 국물 리필 되나? 끼룩.',dome:'바다 냄새가 안 나니까 좀 허전하네.',case:'탐정 양반이 내 깃털을 증거라고 가져갔데이!',post:'편지 배달은 내 전문 아이가. 부리로 콕!',sleep:'니 침대 폭신하네. 잠깐만 누워 볼게.'},
+ p03:{dine:'불 맛 나는 건 다 좋아. 나는 불을 먹거든.',dome:'하늘 문 지키는 것도 내 일이야.',case:'옳고 그름은 내가 가려 주지. 뿔로.',post:'광화문으로 엽서 한 장 보내야겠어.'},
+ p04:{dine:'메밀묵 없어? 도깨비는 메밀묵이야.',dome:'별 하나 따다 줄까? 뚝딱!',case:'범인은… 나 아니야. 이번엔 진짜.',post:'금 나와라 뚝딱 하면 우표도 나오나?'},
+ p05:{dine:'우주식보다 이게 백 배 맛있어. 라이카도 동의.',dome:'저기 저 빛, 오로라 아니면 위성이야. 같이 세어 볼래?',case:'궤도 계산이면 나도 좀 하지. 단서 줘 봐.',post:'지구에서 보내는 엽서는 처음이야.',sleep:'라이카가 네 베개를 마음에 들어 해.'},
+ p06:{dine:'이거 먹어, 저것도 먹어. 너 너무 말랐어!',dome:'별 보면서도 잔소리할 수 있어. 따뜻하게 입어.',case:'우리 집 인형 하나가 없어졌어. 제일 작은 애.',post:'모스크바 우리 언니한테, 그 안의 언니한테, 그 안의…'},
+ p07:{dine:'디저트는 한 입만. 내일 공연이 있거든.',dome:'유리 천장 아래서 한 바퀴만 돌게. 쉿.',case:'흑조 의상이 사라졌다면, 그건 내 쌍둥이 짓이야.',post:'파리 극장에 무대 순서표를 보내는 중이야.'},
+ p08:{dine:'호두 까 줄까? 턱이 아프지만 괜찮아.',dome:'크리스마스 별이 벌써 떴네.',case:'병정은 증언할 때 차렷 자세야.',post:'시장에 납품서 보내야 해. 딱, 딱.'},
+ p09:{dine:'늑대가 내 빵을 또 먹었어! …아니래.',dome:'숲보다 하늘이 덜 무서워.',case:'잠옷 입은 수상한 자를 제보합니다.',post:'할머니한테 곧 간다고 엽서 쓰는 중.'},
+ p10:{dine:'공연하면 밥 주나요? 한 곡 할게요!',dome:'별 아래서 연습하면 음이 잘 맞아.',case:'도둑을 쫓아낸 건 우리 넷이었다고!',post:'브레멘 주소 아는 사람?'},
+ p11:{dine:'치즈를 불에 녹여 빵에 올리면 최고야!',dome:'알프스 별이랑 똑같아. 할아버지 보고 싶다.',case:'염소가 없어졌어요! …아, 원래 안 데려왔지.',post:'할아버지께 기차 처음 탄 얘기 쓰는 중!'},
+ p12:{dine:'하나는 모두를 위해, 디저트는 각자 하나씩!',dome:'영국 별은 덜 반짝일 거야. 분명해.',case:'추리? 우린 칼로 해결하는데.',post:'왕비님께 비밀 편지를… 아, 들었어?'},
+ p13:{dine:'늦었다 늦었어! 한 입만 먹고 갈게.',dome:'별 볼 시간 없어! …삼 초만.',case:'내 회중시계가 어디 갔지? 탐정님!',post:'지각 사유서를 미리 부쳐 둬야 해.'},
+ p14:{dine:'근무 중엔 웃으면 안 되는데… 이 푸딩은 반칙이야.',dome:'…(움직이지 않음)',case:'수상한 자는 궁 안에 못 들어갑니다.',post:'교대 시간 변경 공문 발송 중.'},
+ p15:{dine:'이게 육지 음식이구나. 포크로 머리 빗는 거 아니야?',dome:'바다 밑에선 별이 일렁여. 여긴 가만히 있네.',case:'목소리를 잃은 사건이라면, 범인을 알아.',post:'바닷속 언니들한테 병 편지를 보낼 거야.'},
+ p16:{dine:'해초 샐러드가 없군. 노틸러스호가 그립다.',dome:'수심 2만 리보다 하늘이 더 깊어 보이는군.',case:'바다의 미스터리라면 내가 전문가지.',post:'육지 사람에게 편지라니, 오랜만이야.'}};
+const CARG={dine:'{dish}, 꼭 먹어 봐. 창가 자리가 제일 좋아.',dome:'여기선 열차가 안 보여. 하늘만 있지.',case:'코르크판 봤어? 실이 다 얽혀 있어.',post:'엽서 한 장 쓰는 중이야. 받는 사람은 비밀.',sleep:'네 자리 좀 빌렸어.'};
+const CARA={dine:['같이 먹기',()=>openMenu2()],dome:['같이 별 보기',()=>{$('app').classList.add('tvpure');toast('별 전망칸','화면을 누르면 돌아와요',2600)}],case:['단서 맞춰 보기',()=>openCase()],post:['쪽지 쓰기',()=>$('obNote').click()]};
+let tvLoc={},tvMoveQ=0;
+const tvSlot=()=>+(tvQ.get('roam')||12)*60e3;
+function tvRoam(id,opts){const slot=Math.floor(vnow()/tvSlot());let h=7;const k=(ticket?ticket.trainKey:'x')+id+slot;for(const ch of k)h=(h*31+ch.charCodeAt(0))>>>0;return opts[h%opts.length]}
+function tvCast(S){const km=S.km||0,i=tvPaxIdx(km),c=paxCur,nx=PAX[i<0?PAX.findIndex(p=>p.a>km):i+1],pv=PAX[i>0?i-1:-1],L=[];
+  if(c)L.push([c.id,'cur',tvRoam(c.id,['sleep','sleep','sleep','sleep','dine','dome','case','post'])]);
+  if(nx&&S.mode!=='end'&&(!c||nx.id!==c.id))L.push([nx.id,'next','dome']);
+  if(pv&&km>=pv.b&&(!c||pv.id!==c.id))L.push([pv.id,'ghost','tail']);
+  const has=id=>L.some(x=>x[0]===id);
+  if(!has('p01'))L.push(['p01','res',tvRoam('p01',['case','case','case','dine','post','dome'])]);
+  if(!has('p02'))L.push(['p02','res',tvRoam('p02',['post','post','post','dine','dome'])]);
+  L.push(['robot','robot','dine']);return L}
+function tvGoCar(k,then){tvZoom(false);const trk=$('tvTrack'),c=$('tvTrain').querySelector('.car[data-k="'+k+'"]');if(!c)return;trk.scrollTo({left:c.offsetLeft+c.offsetWidth/2-trk.clientWidth/2,behavior:'smooth'});if(then)setTimeout(then,700)}
+function tvWalk(id,from,to,fx,tx,done){const tr=$('tvTrain'),a=tr.querySelector('.car[data-k="'+from+'"]'),b=tr.querySelector('.car[data-k="'+to+'"]');if(!a||!b||!$('app').classList.contains('tv')){done();return}
+  const ch=a.offsetHeight,w=document.createElement('span');w.className='walker';w.innerHTML='<img src="img/'+(id==='robot'?'zrobot':'pf_'+id)+'.webp'+IMGV+'" alt="">';
+  const x0=a.offsetLeft+a.offsetWidth*fx/100,x1=b.offsetLeft+b.offsetWidth*tx/100;w.style.cssText='left:'+x0+'px;bottom:'+(ch*.275)+'px;height:'+(ch*.47)+'px';if(x1<x0)w.classList.add('flip');tr.appendChild(w);
+  const dur=Math.min(9,Math.max(2.5,Math.abs(x1-x0)/160));requestAnimationFrame(()=>requestAnimationFrame(()=>{w.style.transition='left '+dur+'s linear';w.style.left=x1+'px'}));
+  setTimeout(()=>{w.remove();done()},dur*1000+60)}
+function tvPeople(S){if(!tvBuilt)return;const cast=tvCast(S),by={},SL=[56,30,76,43];
+  for(const [id,role,car] of cast){(by[car]=by[car]||[]).push([id,role,car])}
+  const moves=[];for(const [id,role,car] of cast){const was=tvLoc[id];if(was&&was!==car&&role!=='next'&&role!=='ghost')moves.push([id,role,was,car]);tvLoc[id]=car}
+  const c=paxCur,away=c&&tvLoc[c.id]!=='sleep';
+  for(const k of ['sleep','dine','dome','case','post','tail']){const L=(by[k]||[]).map((x,j)=>[...x,x[0]==='robot'?26:SL[j%SL.length]]);
+    const key=JSON.stringify(L)+(k==='sleep'&&away?'away':'');if(tvWho[k]===key)continue;tvWho[k]=key;const box=$('tvTrain').querySelector('.car[data-k="'+k+'"] .ppl');if(!box)continue;
+    let h=L.map(([id,role,car,x])=>'<span class="who'+(role==='ghost'||role==='next'?' ghost':'')+(moves.some(m=>m[0]===id)?' wait':'')+'" data-id="'+id+'" data-role="'+role+'" data-car="'+car+'" style="left:'+x+'%;'+(role==='robot'?'height:40%;':'')+'"><img src="img/'+(id==='robot'?'zrobot':'pf_'+id)+'.webp'+IMGV+'" alt=""><span class="bb"></span></span>').join('');
+    if(k==='sleep'&&away)h+='<span class="memo" data-go="'+tvLoc[c.id]+'">'+esc(c.n)+'<br>'+CARN[tvLoc[c.id]]+'에 가 있어요 →</span>';
+    box.innerHTML=h;box.querySelectorAll('.who').forEach(w=>{const im=w.querySelector('img');const f=()=>{w.style.marginLeft=(-im.offsetWidth/2)+'px'};im.onload=f;if(im.complete)f()});
+    const m=box.querySelector('.memo');if(m)m.onclick=e=>{e.stopPropagation();const k2=m.dataset.go;tvGoCar(k2,()=>{const w=$('tvTrain').querySelector('.car[data-k="'+k2+'"] .who[data-id="'+c.id+'"]');if(w)tvTalk(w)})};
+    const em=$('tvTrain').querySelector('.car[data-k="'+k+'"] .lbl em');if(em){const cur=L.find(x=>x[1]==='cur');em.textContent=cur?'· '+c.n:k==='dome'&&L.some(x=>x[1]==='next')?'· 다음 승객':''}}
+  for(const [id,role,from,to] of moves){const fx=56,tx=56;const show=()=>{$('tvTrain').querySelectorAll('.who.wait[data-id="'+id+'"]').forEach(w=>{w.classList.remove('wait');w.classList.add('arrive');setTimeout(()=>w.classList.remove('arrive'),1500)})};setTimeout(show,11000);
+    tvWalk(id,from,to,fx,tx,show);const n=id==='robot'?'로봇':(PAX.find(p=>p.id===id)||{}).n||'';
+    tvChatL=n+' → '+CARN[to]+'으로 가는 중';tvMqS='';tvChat=performance.now()+45000;
+    if(role==='cur')toast(n+JO(n,'이','가')+' '+CARN[to]+(to==='sleep'?'으로 돌아왔어요':'으로 갔어요'),to==='sleep'?'맞은편 자리에 다시 앉았어요':'칸을 따라가면 만날 수 있어요',3400)}}
+function tvTalk(w){const id=w.dataset.id,role=w.dataset.role,car=w.dataset.car||'';const p=PAX.find(x=>x.id===id);
+  if(role==='cur'&&car==='sleep'){w.classList.add('talk');setTimeout(()=>{w.classList.remove('talk');try{openPax()}catch(e){}},300);return}
+  let t='',acts=[];
+  if(role==='robot'){t=['오늘의 메뉴, 보여 드릴까요? 삐빅.','별빛 소스는 리필 무료예요.','식당칸은 밤새 열려 있어요.'][Math.floor(Math.random()*3)];acts=[['메뉴 보기',()=>openMenu2()]]}
+  else if(role==='next')t='다음 구간에 탈 '+(p?p.n:'')+'… 꿈으로 먼저 와 있어요.';
+  else if(role==='ghost')t=((BYE[id]||[])[1]||(BYE[id]||[])[0]||'잘 가.');
+  else{let d='';try{const m=menuAt(cur.km);d=m.d[Math.floor(Math.random()*m.d.length)].n}catch(e){}t=((CARL[id]||{})[car]||CARG[car]||(p?p.say[0]:'')).replace('{dish}',d||'오늘의 메뉴');
+    if(CARA[car])acts.push(CARA[car]);if(role==='cur')acts.push(['더 이야기하기',()=>openPax()])}
+  const bb=w.querySelector('.bb');bb.innerHTML=esc(t)+(acts.length?'<span class="acts">'+acts.map((a,i)=>'<button data-i="'+i+'">'+a[0]+'</button>').join('')+'</span>':'');
+  bb.querySelectorAll('button').forEach(b=>b.onclick=e=>{e.stopPropagation();w.classList.remove('say');try{acts[+b.dataset.i][1]()}catch(x){}});
+  w.classList.add('say','talk');blip(980,.05,.02);clearTimeout(w._t);w._t=setTimeout(()=>w.classList.remove('say','talk'),acts.length?6500:3400)}
 let tvInit=0;
 function eventsTick(S){try{if(!tvInit){tvInit=1;if(!tvQ.has("notv"))tvEnter()}dreamTick(S)}catch(e){console.error(e)}try{bgmTick(S)}catch(e){}try{clueTick(S);cameoTick(S)}catch(e){}if(ticket&&ticket.stay){try{platTick(S)}catch(e){}return}try{paxTick(S);momentTick(S);microTick(S);hopTick(S)}catch(e){}try{passTick(S)}catch(e){}try{lightsTick(S)}catch(e){}try{pcardTick(S)}catch(e){}try{camTick(S);greetTick(S)}catch(e){}try{gaugeTick(S)}catch(e){}try{resvTick(S)}catch(e){}try{platTick(S);byeTick(S)}catch(e){}}
 

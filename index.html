@@ -821,7 +821,7 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
 #tvHud b{font:500 12px/1 'Noto Sans KR',sans-serif;color:#f3ead8;background:rgba(20,16,12,.5);padding:6px 10px;border-radius:14px;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
 #tvHud b i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#ffd36b;box-shadow:0 0 8px #ffcf55;margin-right:6px;vertical-align:1px;animation:tvLit 2.4s ease-in-out infinite}
 @keyframes tvLit{50%{opacity:.4}}
-#tvTip{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(var(--th) + 92px + env(safe-area-inset-bottom));font:400 12px/1.4 'Noto Sans KR',sans-serif;color:rgba(255,248,232,.92);text-shadow:0 1px 8px rgba(0,0,0,.8);white-space:nowrap;pointer-events:none!important;transition:opacity 1s}
+#tvTip{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(var(--th) + 96px + env(safe-area-inset-bottom));font:400 12px/1.4 'Noto Sans KR',sans-serif;color:rgba(255,248,232,.92);text-shadow:0 1px 8px rgba(0,0,0,.8);white-space:nowrap;pointer-events:none!important;transition:opacity 1s}
 #tvTip.off{opacity:0}
 #app.tvpure #tvTrack,#app.tvpure #tvHud,#app.tvpure #tvTip,#app.tvpure #tvShade,#app.tvpure #top,#app.tvpure #route,#app.tvpure #menuBtn{opacity:0!important;pointer-events:none!important;transition:opacity 1.2s}
 #tvPure{position:absolute;inset:0;display:none}
@@ -858,6 +858,24 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
 @media (max-width:420px){#tvHud{top:calc(124px + env(safe-area-inset-top))!important}}
 #app.tv #cameo img{height:min(20%,180px);bottom:calc(var(--th) + 96px)}
 #app.tv #cameo.fly img{bottom:auto;top:24%}
+
+.car{transition:height .9s cubic-bezier(.5,0,.2,1)}
+#app.tv.tvclose{--th:clamp(250px,54vh,560px)}
+#app.tvclose #tvTrack{bottom:calc(132px + env(safe-area-inset-bottom));overflow:hidden;touch-action:none;transition:bottom .9s}
+#tvTrack{transition:bottom .9s}
+#app.tvclose .car .lbl,#app.tvclose #tvTip,#app.tvclose #tvBtns,#app.tvclose #tvHud{opacity:0;pointer-events:none!important}
+#app.tvclose .car:not(.me){filter:brightness(.55) saturate(.8);transition:filter .9s}
+#app.tvclose .car{animation:none}
+#tvSeat{position:absolute;left:0;right:0;bottom:calc(18px + env(safe-area-inset-bottom));display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:0 14px;opacity:0;pointer-events:none!important;transform:translateY(20px);transition:.5s}
+#app.tvclose #tvSeat{opacity:1;pointer-events:auto!important;transform:none;transition:.5s .5s}
+#tvSeat button{display:flex;align-items:center;gap:7px;font:600 13px/1 'Noto Sans KR',sans-serif;color:#2b2118;background:#f6ecd6;border:0;border-radius:22px;padding:11px 15px;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+#tvSeat button img{width:24px;height:24px;border-radius:50%;object-fit:cover;object-position:50% 15%;margin:-5px 0 -5px -6px;background:#e8d6b4}
+#tvSeat #tsTalk{background:#c94a33;color:#fff6e4;flex-basis:100%;max-width:340px;justify-content:center}
+#tvSeat #tsOut{background:rgba(20,16,12,.55);color:#f6ecd6;border:1px solid rgba(246,236,214,.3)}
+#tvChips{position:absolute;left:0;right:0;bottom:calc(var(--th) + 118px + env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:center;gap:6px}
+#app.tvclose #tvChips{opacity:0;pointer-events:none!important}
+#tvChips button{font:600 12.5px/1.2 'Noto Sans KR',sans-serif;color:#2b2118;background:#f6ecd6;border:0;border-radius:18px;padding:9px 14px;box-shadow:0 4px 14px rgba(0,0,0,.35);max-width:90vw}
+#tvChips button.soon{background:rgba(20,16,12,.6);color:#f6ecd6;border:1px solid rgba(246,236,214,.3)}
 /* ===== 시작 화면 ===== */
 #st0{position:absolute;inset:0;overflow:hidden;background:#0b1020;transition:transform .95s cubic-bezier(.6,0,.3,1),opacity .9s;--th:clamp(150px,31vh,290px)}
 #veil.list #st0{display:none}
@@ -911,7 +929,7 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
 .s0c:first-child{margin-left:auto}.s0c:last-child{margin-right:auto}
 #s0cards::-webkit-scrollbar{display:none}
 .s0c{flex:none;width:132px;scroll-snap-align:center;text-align:left;background:rgba(18,16,24,.62);border:1px solid rgba(255,236,200,.18);border-radius:14px;padding:0 0 9px;overflow:hidden;color:#f6ecd6;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);transition:transform .25s,border-color .25s,background .25s}
-.s0c i{display:block;height:42px;background-size:auto 100%;background-position:30% 50%;margin-bottom:7px;filter:saturate(1.05)}
+.s0c i{display:block;height:48px;background-size:auto 100%;background-position:30% 50%;margin-bottom:7px;filter:saturate(1.05)}
 .s0c b{display:flex;align-items:baseline;justify-content:space-between;font:700 13px/1 'Noto Serif KR',serif;padding:0 10px}
 .s0c b em{font:500 10px/1 'Noto Sans KR',sans-serif;font-style:normal;color:rgba(255,236,200,.65)}
 .s0c span{display:block;font:500 11.5px/1.35 'Noto Sans KR',sans-serif;padding:5px 10px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -925,6 +943,25 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
 #s0bot .ft button{font:500 10.5px/1 'Noto Sans KR',sans-serif;color:rgba(255,240,215,.7);background:none;border:0;text-decoration:underline;padding:4px}
 @media (min-width:900px){#st0{--th:clamp(180px,34vh,320px)}#s0top .t1{font-size:32px}#s0train{bottom:250px}}
 #vSky{display:block;margin:0 auto 18px;font:500 12px/1 'Noto Sans KR',sans-serif;color:#efe6d6;background:transparent;border:1px solid rgba(239,230,214,.3);border-radius:16px;padding:8px 14px}
+.s0c i{position:relative}
+.s0c i u{position:absolute;right:6px;top:6px;width:34px;height:34px;border-radius:50%;background-size:cover;background-position:50% 18%;border:2px solid #f6ecd6;background-color:#efe1c4;box-shadow:0 2px 6px rgba(0,0,0,.35)}
+.s0c i .wx{position:absolute;left:6px;top:5px;font:600 9.5px/1 'Noto Sans KR',sans-serif;font-style:normal;color:#fff;background:rgba(10,12,20,.55);padding:3px 5px;border-radius:6px}
+.s0c b{padding-right:10px!important}
+.s0c b em{position:absolute;right:10px;margin-top:-1px}
+.s0c{position:relative}
+#s0wx{z-index:0}
+.wxfx{position:absolute;inset:0;pointer-events:none!important;overflow:hidden;z-index:1}
+.wx-snow i{position:absolute;top:-10px;aspect-ratio:1;border-radius:50%;background:#fff;opacity:.85;filter:blur(.4px);animation:wxSnow 9s linear infinite}
+@keyframes wxSnow{0%{transform:translate(0,0)}50%{transform:translate(-30px,52vh)}100%{transform:translate(-80px,105vh)}}
+.wx-rain i,.wx-storm i{position:absolute;top:-40px;width:1.2px;height:34px;background:linear-gradient(transparent,rgba(220,235,255,.7));transform:rotate(14deg);animation:wxRain .8s linear infinite}
+@keyframes wxRain{to{transform:translate(-28vh,110vh) rotate(14deg)}}
+.wx-rain,.wx-storm{background:rgba(30,40,60,.18)}
+.wx-storm{animation:wxFlash 9s infinite}
+@keyframes wxFlash{0%,93%,97%,100%{background:rgba(30,40,60,.22)}95%{background:rgba(230,236,255,.35)}}
+.wx-fog b{position:absolute;left:-30%;right:-30%;height:45%;background:radial-gradient(ellipse at center,rgba(235,238,240,.55),rgba(235,238,240,0) 70%);filter:blur(10px);animation:wxFog 26s ease-in-out infinite alternate}
+.wx-fog b:first-child{top:30%}.wx-fog b:last-child{top:52%;animation-duration:34s;animation-delay:-10s}
+@keyframes wxFog{from{transform:translateX(-12%)}to{transform:translateX(12%)}}
+.wx-cloud{background:linear-gradient(180deg,rgba(80,90,105,.28),rgba(80,90,105,0) 55%)}
 </style>
 </head>
 <body>
@@ -969,7 +1006,7 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
     <svg id="bento" viewBox="0 0 96 40"><rect x="2" y="4" width="92" height="32" rx="3" fill="#3a2a1e"/><rect x="6" y="8" width="50" height="24" rx="2" fill="#f3ede1"/><rect x="60" y="8" width="30" height="11" rx="2" fill="#c9883f"/><rect x="60" y="21" width="30" height="11" rx="2" fill="#6f8a55"/><circle cx="20" cy="18" r="3.5" fill="#a8463a"/><rect x="28" y="22" width="22" height="6" rx="2" fill="#d6bb85"/></svg>
     <div style="display:none"><div id="lampglow"></div><svg><ellipse id="bulb"/></svg><div id="tea"></div></div>
   </div></div>
-  <div id="tv"><div id="dfx"></div><div id="tvShade"></div><div id="tvPure"></div><div id="tvWhere"></div><div id="tvBtns"><button data-t="obTicket">승차권</button><button data-t="obNote">쪽지</button><button data-t="obLog">수첩</button></div><div id="tvHud"><b id="tvRiders"></b></div><div id="tvTip">옆으로 밀어 칸을 걸어 보세요 · 칸을 누르면 들어가요</div><div id="tvTrack"><div id="tvTrain"></div></div></div><button id="tvBack"><svg viewBox="0 0 30 20" fill="none" stroke="#2b2118" stroke-width="1.6"><rect x="2" y="3" width="26" height="12" rx="5"/><circle cx="8" cy="17" r="2"/><circle cx="22" cy="17" r="2"/><path d="M7 7h4M14 7h4"/></svg>열차 전체</button>
+  <div id="tv"><div id="tvWx" class="wxfx"></div><div id="dfx"></div><div id="tvShade"></div><div id="tvPure"></div><div id="tvWhere"></div><div id="tvBtns"><button data-t="obTicket">승차권</button><button data-t="obNote">쪽지</button><button data-t="obLog">수첩</button></div><div id="tvHud"><b id="tvRiders"></b></div><div id="tvTip">옆으로 밀어 칸을 걸어 보세요 · 칸을 누르면 들어가요</div><div id="tvChips"><button id="tvGo" style="display:none"></button><button id="tvHop" style="display:none"></button></div><div id="tvTrack"><div id="tvTrain"></div></div><div id="tvSeat"><button id="tsTalk"></button><button id="tsShot">창밖 찍기</button><button id="tsSleep">잠들기</button><button id="tsOut">열차 전체</button></div></div><button id="tvBack"><svg viewBox="0 0 30 20" fill="none" stroke="#2b2118" stroke-width="1.6"><rect x="2" y="3" width="26" height="12" rx="5"/><circle cx="8" cy="17" r="2"/><circle cx="22" cy="17" r="2"/><path d="M7 7h4M14 7h4"/></svg>열차 전체</button>
   <div id="bar">
     <button id="btnGaze"><svg viewBox="0 0 24 24" fill="none" stroke="#d9b77c" stroke-width="1.4"><rect x="4" y="3.5" width="16" height="17" rx="3"/><path d="M4 15c3-3 5-1 8-3s5-2 8 0"/><path d="M7 3.5v3h10v-3"/></svg>창밖 보기</button>
     <button id="btnEat"><svg viewBox="0 0 24 24" fill="none" stroke="#d9b77c" stroke-width="1.4"><rect x="3" y="8" width="18" height="11" rx="2"/><path d="M12 8v11M12 13.5h9"/><path d="M8 3.5l1 3M16 3.5l-1 3"/></svg>도시락</button>
@@ -1005,7 +1042,7 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
     <button class="it" data-a="sleep">잠들기<small>소리만 남기고</small></button>
     <div class="fine">본 열차는 아직 존재하지 않습니다</div>
   </div></div>
-  <div id="veil"><div id="st0"><div class="s0bg on" id="s0bgA"></div><div class="s0bg" id="s0bgB"></div><div id="s0night"></div><div id="s0dusk"></div><div id="s0grad"></div><div id="s0top"><div class="t1">부산발 런던행</div><div class="t2">BUSAN — LONDON</div><div id="s0live"></div></div><div id="s0train"></div><div id="s0bot"><div class="lb"><span>지금 대륙을 달리는 열차<i id="s0n"></i></span><span id="s0pn"></span></div><div id="s0cards"></div><button id="s0go">탑승하기</button><div class="ft"><span>매일 밤 9시 부산역 출발 · 실제 시간으로 나흘</span><button id="s0list">목록</button></div></div></div><div class="vin"><button id="vSky">← 처음 화면으로</button>
+  <div id="veil"><div id="st0"><div class="s0bg on" id="s0bgA"></div><div class="s0bg" id="s0bgB"></div><div id="s0wx" class="wxfx"></div><div id="s0night"></div><div id="s0dusk"></div><div id="s0grad"></div><div id="s0top"><div class="t1">부산발 런던행</div><div class="t2">BUSAN — LONDON</div><div id="s0live"></div></div><div id="s0train"></div><div id="s0bot"><div class="lb"><span>지금 대륙을 달리는 열차<i id="s0n"></i></span><span id="s0pn"></span></div><div id="s0cards"></div><button id="s0go">탑승하기</button><div class="ft"><span>매일 밤 9시 부산역 출발 · 실제 시간으로 나흘</span><button id="s0list">목록</button></div></div></div><div class="vin"><button id="vSky">← 처음 화면으로</button>
     <div class="vL"><img class="vtrain" src="img/zveil.webp" alt=""><div class="v1">부산발 런던행</div><div class="v2">BUSAN — LONDON</div>
     <div class="v5">매일 밤 9시 부산역을 떠나<br>나흘 동안 실제 시간으로 달리는 환상 침대열차</div>
     <div class="v6"><span style="white-space:nowrap">부산 ·</span> <span style="white-space:nowrap">서울 ·</span> <span style="white-space:nowrap">☁ 구름 위 ·</span> <span style="white-space:nowrap">바이칼 ·</span> <span style="white-space:nowrap">🌌 오로라 ·</span> <span style="white-space:nowrap">모스크바 ·</span> <span style="white-space:nowrap">동화의 숲 ·</span> <span style="white-space:nowrap">노이슈반슈타인 ·</span> <span style="white-space:nowrap">알프스 ·</span> <span style="white-space:nowrap">루체른 ·</span> <span style="white-space:nowrap">파리 ·</span> <span style="white-space:nowrap">🐋 해저터널 ·</span> <span style="white-space:nowrap">런던</span></div></div>
@@ -2400,6 +2437,22 @@ function renderVeil(){const now=vnow(),{next,prev}=depTimes(now);let h='';
   $('veil').querySelectorAll('.tr').forEach(b=>b.onclick=e=>{e.stopPropagation();pickTrain(+b.dataset.dep)})}
 function pickTrain(dep){if(!isFinite(dep))return;const v=$('veil');setSound(true);if(!ticketValid()||ticket.dep!==dep){boardTrain(dep);try{waitAsk(dep)}catch(e){}}else{ticket.auto=0;saveTicket()}v.classList.add('off');clearInterval(renderVeil.t);setTimeout(()=>{v.style.display='none'},1500)}
 function openVeil(){try{platClose(true)}catch(e){}const v=$('veil');v.style.display='';renderVeil();v.scrollTop=0;requestAnimationFrame(()=>v.classList.remove('off'));clearInterval(renderVeil.t);renderVeil.t=setInterval(renderVeil,20000)}
+/* ===== 실제 날씨 (open-meteo, 키 없음) ===== */
+var WXC={};
+function wxKind(c){if(c==null)return '';if(c>=95)return 'storm';if((c>=71&&c<=77)||c===85||c===86)return 'snow';if((c>=51&&c<=67)||(c>=80&&c<=82))return 'rain';if(c===45||c===48)return 'fog';if(c>=2)return 'cloud';return 'clear'}
+function wxName(c){const k=wxKind(c);return {storm:'뇌우',snow:'눈',rain:c>=51&&c<=57?'이슬비':'비',fog:'안개',cloud:c===2?'구름 조금':'흐림',clear:'맑음'}[k]||''}
+function wxKey(km){const la=interp(Math.min(km,TOTAL_KM),'lat'),lo=interp(Math.min(km,TOTAL_KM),'lon');return {k:la.toFixed(1)+','+lo.toFixed(1),la,lo}}
+function wxSkip(km){try{const bk=biomeAt(km),b=B[bk];if(b&&b.tunnel)return true;const p=b&&b.photo||'';return /sea|cloud/.test(p)}catch(e){return false}}
+async function wxFetch(kms){const need=[];for(const km of kms){const q=wxKey(km);const c=WXC[q.k];if(!c||Date.now()-c.t>15*60e3)need.push(q)}
+  if(!need.length)return;const u='https://api.open-meteo.com/v1/forecast?latitude='+need.map(q=>q.la.toFixed(2)).join(',')+'&longitude='+need.map(q=>q.lo.toFixed(2)).join(',')+'&current=temperature_2m,weather_code';
+  try{const r=await fetch(u);if(!r.ok)return;let j=await r.json();if(!Array.isArray(j))j=[j];j.forEach((d,i)=>{if(d&&d.current)WXC[need[i].k]={t:Date.now(),c:d.current.weather_code,T:Math.round(d.current.temperature_2m)}})}catch(e){}}
+function wxAt(km){if(wxSkip(km))return null;return WXC[wxKey(km).k]||null}
+function wxTxt(w){return w?wxName(w.c)+' '+w.T+'°':''}
+function wxFx(el,kind){if(!el||el.dataset.k===kind)return;el.dataset.k=kind;el.className='wxfx '+(kind?'wx-'+kind:'');let h='';
+  if(kind==='snow')for(let i=0;i<46;i++)h+='<i style="left:'+(Math.random()*100).toFixed(1)+'%;animation-delay:'+(-Math.random()*9).toFixed(2)+'s;animation-duration:'+(6+Math.random()*6).toFixed(1)+'s;width:'+(2+Math.random()*4).toFixed(1)+'px"></i>';
+  else if(kind==='rain'||kind==='storm')for(let i=0;i<70;i++)h+='<i style="left:'+(Math.random()*110-5).toFixed(1)+'%;animation-delay:'+(-Math.random()*1.2).toFixed(2)+'s;animation-duration:'+(.55+Math.random()*.4).toFixed(2)+'s"></i>';
+  else if(kind==='fog')h='<b></b><b></b>';
+  el.innerHTML=h}
 
 /* ===== 시작 화면: 지금 이 순간 달리는 열차 ===== */
 const S0={on:false,sel:null,deps:[],x:0,last:0,bg:{},cur:'A',dir:-1,boarding:false};
@@ -2411,17 +2464,18 @@ function s0Img(k){if(S0.bg[k])return S0.bg[k];const im=new Image();im.src='img/'
 function s0Cards(){const {list,mine}=s0List(),now=vnow();S0.deps=list;let h='';
   for(const dep of list){const S=state(now-dep),inf=trainInfo(dep,now),k=s0Scene(dep),day=Math.floor((now-dep)/864e5)+1;s0Img(k);
     const top=dep===mine?'내 열차':S.mode==='wait'?'오늘 밤':day+'일째',pl=S.mode==='wait'?'부산역 21:00':inf.pl.replace(/ 부근을 지나는 중| 부근$| 부근/,'');
-    h+='<button class="s0c'+(S0.sel===dep?' on':'')+(dep===mine?' mine':'')+'" data-dep="'+dep+'"><i style="background-image:url(img/'+k+'.webp'+IMGV+')"></i><b>'+trainNo(dep)+'<em>'+top+'</em></b><span>'+esc(pl)+'</span><small>'+(S.mode==='wait'?fmt(S.eta)+' 뒤 출발':(inf.lt?'현지 '+inf.lt+' · '+inf.lw:''))+'</small></button>'}
+    const px=S.mode==='wait'?PAX[0]:paxAt(S.km),w=S.mode==='wait'?wxAt(0):wxAt(S.km);h+='<button class="s0c'+(S0.sel===dep?' on':'')+(dep===mine?' mine':'')+'" data-dep="'+dep+'"><i style="background-image:url(img/'+k+'.webp'+IMGV+');background-position:'+(-(Math.round(S.km*3.1)%160))+'px 50%">'+(px?'<u style="background-image:url(img/px_'+px.id+'.webp'+IMGV+')"></u>':'')+(w?'<em class="wx">'+wxTxt(w)+'</em>':'')+'</i><b>'+trainNo(dep)+'<em>'+top+'</em></b><span>'+esc(pl)+'</span><small>'+(S.mode==='wait'?fmt(S.eta)+' 뒤 출발':(inf.lt?'현지 '+inf.lt+' · '+inf.lw:''))+'</small></button>'}
   $('s0cards').innerHTML=h;$('s0n').textContent=list.filter(d=>state(now-d).mode!=='wait').length+'대';
   $('s0cards').querySelectorAll('.s0c').forEach(b=>b.onclick=e=>{e.stopPropagation();s0Pick(+b.dataset.dep);blip(1050,.05,.02)})}
 function s0Pick(dep,first){S0.sel=dep;const now=vnow(),S=state(now-dep),inf=trainInfo(dep,now),k=s0Scene(dep),mine=ticketValid()&&!ticket.auto&&ticket.dep===dep;
   document.querySelectorAll('#s0cards .s0c').forEach(b=>b.classList.toggle('on',+b.dataset.dep===dep));
   const c=document.querySelector('#s0cards .s0c.on');if(c){const cs=$('s0cards');cs.scrollTo({left:c.offsetLeft-(cs.clientWidth-c.offsetWidth)/2,behavior:first?'auto':'smooth'})}
   // 배경 교차
-  const nx=S0.cur==='A'?'B':'A',el=$('s0bg'+nx),im=s0Img(k);const put=()=>{el.style.backgroundImage='url('+im.src+')';el.dataset.k=k;el.dataset.w=im.naturalWidth;el.dataset.h=im.naturalHeight;el.dataset.hero=k.startsWith('zh_')?1:0;S0.x=0;S0.dir=-1;el.classList.add('on');$('s0bg'+S0.cur).classList.remove('on');S0.cur=nx};
+  const nx=S0.cur==='A'?'B':'A',el=$('s0bg'+nx),im=s0Img(k);const put=()=>{el.style.backgroundImage='url('+im.src+')';el.dataset.k=k;el.dataset.w=im.naturalWidth;el.dataset.h=im.naturalHeight;el.dataset.hero=k.startsWith('zh_')?1:0;const ww=(el.clientHeight||innerHeight)*im.naturalWidth/im.naturalHeight;S0.x=k.startsWith('zh_')?-Math.min(Math.max(0,ww-innerWidth),(S.km*7)%Math.max(1,ww-innerWidth)):-((S.km*41)%ww);S0.dir=-1;el.classList.add('on');$('s0bg'+S0.cur).classList.remove('on');S0.cur=nx};
   if(im.complete&&im.naturalWidth)put();else im.onload=put;
   const st=$('st0');st.classList.toggle('night',inf.cls==='n'||S.mode==='wait');st.classList.toggle('dusk',inf.cls==='t');
-  $('s0live').innerHTML=S.mode==='wait'?'<b>오늘 밤 9시, 부산역</b><span>'+fmt(S.eta)+' 뒤 출발해요 · 미리 예매할 수 있어요</span>':'<b>'+esc(inf.pl)+'</b><span>'+esc(inf.sub)+(inf.lt?' · 현지 '+inf.lt+' '+inf.lw:'')+'</span>';
+  const wq=S.mode==='wait'?wxAt(0):wxAt(S.km);wxFx($('s0wx'),wq?wxKind(wq.c):'');const wt=wq?' · '+wxTxt(wq):'';
+  $('s0live').innerHTML=S.mode==='wait'?'<b>오늘 밤 9시, 부산역</b><span>'+fmt(S.eta)+' 뒤 출발해요'+(wq?' · 지금 부산 '+wxTxt(wq):' · 미리 예매할 수 있어요')+'</span>':'<b>'+esc(inf.pl)+'</b><span>'+esc(inf.sub)+(inf.lt?' · 현지 '+inf.lt+' '+inf.lw:'')+wt+'</span>';
   $('s0go').textContent=mine?'내 자리로 돌아가기':S.mode==='wait'?'오늘 밤 열차 예매하기':trainNo(dep)+'에 타기';
   // 승객
   const p=S.mode==='wait'?PAX[0]:paxAt(S.km),w=$('s0who');w.classList.remove('in','say');
@@ -2437,6 +2491,7 @@ function s0Board(){if(S0.boarding||!S0.sel)return;S0.boarding=true;const st=$('s
 function s0Start(){if(S0.on)return;S0.on=true;$('veil').classList.remove('list');s0Cards();const {list,mine}=s0List(),now=vnow();
   const run=list.filter(d=>state(now-d).mode==='run'||state(now-d).mode==='stop');const def=mine||run.sort((a,b)=>b-a)[0]||list[0];
   const st=$('st0');st.classList.remove('arrived');void st.offsetWidth;s0Pick(def,true);requestAnimationFrame(()=>st.classList.add('arrived'));S0.last=0;requestAnimationFrame(s0Loop);
+  wxFetch(list.map(d=>Math.max(0,state(now-d).km||0))).then(()=>{if(!S0.on)return;s0Cards();const d=S0.sel;document.querySelectorAll('#s0cards .s0c').forEach(b=>b.classList.toggle('on',+b.dataset.dep===d));const S=state(vnow()-d),wq=S.mode==='wait'?wxAt(0):wxAt(S.km);wxFx($('s0wx'),wq?wxKind(wq.c):'');const sp=$('s0live').querySelector('span');if(wq&&sp&&!/°/.test(sp.textContent))sp.textContent+=' · '+(S.mode==='wait'?'지금 부산 ':'')+wxTxt(wq)});
   clearInterval(s0Start.t);s0Start.t=setInterval(()=>{if(S0.on){s0Cards();const d=S0.sel;document.querySelectorAll('#s0cards .s0c').forEach(b=>b.classList.toggle('on',+b.dataset.dep===d))}},30000)}
 function s0Center(){const tr=$('s0train'),c=tr.querySelector('.car[data-k="sleep"]');if(!c||!c.offsetWidth)return;tr.style.setProperty('--tx',(innerWidth/2-(c.offsetLeft+c.offsetWidth/2))+'px')}
 function s0Init(){window.__S0=S0;const tr=$('s0train');tr.innerHTML=['dome','dine','sleep','loco'].map(k=>'<div class="car'+(k==='loco'?' loco':'')+'" data-k="'+k+'"><img class="sh" src="img/zc_'+k+'.webp'+IMGV+'" alt="" draggable="false">'+(k==='sleep'?'<span id="s0who" class="who"><img alt=""><span class="bb"></span></span>':'')+(k==='dine'?'<span class="who rb"><img src="img/zrobot.webp'+IMGV+'" alt=""></span>':'')+(k==='loco'?'<span class="smk">'+'<i></i>'.repeat(7)+'</span>':'')+'</div>').join('');
@@ -2995,8 +3050,10 @@ function tvBuild(){if(tvBuilt)return;tvBuilt=true;const tr=$('tvTrain');let h=''
   addEventListener('pointerup',()=>{if(dx!==null){dx=null;trk.classList.remove('drag');setTimeout(()=>moved=0,30)}});
   trk.addEventListener('wheel',e=>{if(Math.abs(e.deltaY)>Math.abs(e.deltaX)){trk.scrollLeft+=e.deltaY;e.preventDefault()}},{passive:false});
   trk.addEventListener('scroll',()=>{$('tvTip').classList.add('off')},{passive:true});
-  tr.addEventListener('click',e=>{if(moved>6)return;const w=e.target.closest('.who');if(w){e.stopPropagation();tvTalk(w);return}const c=e.target.closest('.car');if(c)tvCar(c.dataset.k,c)});
+  tr.addEventListener('click',e=>{if(moved>6)return;if($('app').classList.contains('tvclose')){const w0=e.target.closest('.who');if(w0){e.stopPropagation();tvTalk(w0)}return}const w=e.target.closest('.who');if(w){e.stopPropagation();tvTalk(w);return}const c=e.target.closest('.car');if(c)tvCar(c.dataset.k,c)});
   document.querySelectorAll('#tvBtns button').forEach(b=>b.onclick=e=>{e.stopPropagation();try{$(b.dataset.t).click()}catch(x){}});
+  $('tsTalk').onclick=e=>{e.stopPropagation();if(paxCur)openPax()};$('tsShot').onclick=e=>{e.stopPropagation();try{takeShot()}catch(x){}};$('tsSleep').onclick=e=>{e.stopPropagation();show('sleep',true)};$('tsOut').onclick=e=>{e.stopPropagation();tvZoom(false)};
+  $('tvGo').onclick=e=>{e.stopPropagation();$('getoff').click()};$('tvHop').onclick=e=>{e.stopPropagation();$('hop').click()};
   $('tvPure').onclick=()=>{$('app').classList.remove('tvpure')};
   $('tvBack').onclick=e=>{e.stopPropagation();tvEnter()};
   const go=()=>{const me=tr.querySelector('.car.me');if(me&&me.offsetWidth)trk.scrollLeft=me.offsetLeft+me.offsetWidth/2-trk.clientWidth/2;else setTimeout(go,200)};
@@ -3005,7 +3062,7 @@ function tvEnter(){const a=$('app');tvBuild();if(a.classList.contains('gaze')){t
 function tvLeave(org){const a=$('app'),tv=$('tv');if(org){const r=org.getBoundingClientRect();tv.style.transformOrigin=(r.left+r.width/2)+'px '+(r.top+r.height/2)+'px'}
   a.classList.add('tvzoom');blip(880,.08,.02);setTimeout(()=>{a.classList.remove('tv','tvzoom');tv.style.transformOrigin='';try{resize()}catch(e){}},620)}
 function tvCar(k,el){el.classList.add('pick');setTimeout(()=>el.classList.remove('pick'),500);blip(760,.06,.02);
-  if(k==='sleep')return tvLeave(el);
+  if(k==='sleep')return tvZoom(true);
   if(k==='dine')return setTimeout(()=>{try{openMenu2()}catch(e){}},180);
   if(k==='post')return setTimeout(()=>{try{$('obCard').click()}catch(e){}},180);
   if(k==='case')return setTimeout(()=>{try{openCase()}catch(e){}},180);
@@ -3048,11 +3105,20 @@ function tvSleptCheck(S){if(tvSlept||!ticket||!S||S.km==null)return;tvSlept=true
   for(const p of off)h+='<div class="gh"><img src="img/pf_'+p.id+'.webp'+IMGV+'" alt=""><span>'+esc(p.n)+JO(p.n,'이','가')+' 내렸어요<small>“'+esc(((BYE[p.id]||[])[0])||'잘 가.')+'” — 쪽지를 남겼어요</small></span></div>';
   for(const p of on)if(!off.includes(p)||p===paxCur)h+='<div><img src="img/pf_'+p.id+'.webp'+IMGV+'" alt=""><span>'+esc(p.n)+JO(p.n,'이','가')+' 탔어요<small>'+esc(p.w.split(' · ')[0])+'</small></span></div>';
   h+='</div><button class="closer" id="drClose">계속 달리기</button>';setTimeout(()=>{$('drBox').innerHTML=h;show('mDream',true);$('drClose').onclick=()=>show('mDream',false)},1800)}
-const tvWhere={a:''};
+const tvWhere={a:'',w:''};
 function dreamTick(S){if(!S)return;const a=$('app');a.classList.toggle('tvstop',S.mode!=='run');tvPeople(S);tvDream();
-  try{const a1=$('c1').textContent,a2=$('c2').textContent;if(tvWhere.a!==a1+a2){tvWhere.a=a1+a2;$('tvWhere').innerHTML='<b>'+esc(a1)+'</b><span>'+esc(a2)+'</span>'}}catch(e){}
+  try{const a1=$('c1').textContent,a2=$('c2').textContent+(tvWhere.w?' · '+tvWhere.w:'');if(tvWhere.a!==a1+a2){tvWhere.a=a1+a2;$('tvWhere').innerHTML='<b>'+esc(a1)+'</b><span>'+esc(a2)+'</span>'}}catch(e){}
+  try{tvMirror();tvWx(S)}catch(e){}
   try{$('tvRiders').innerHTML='<i></i>지금 이 열차에 '+Math.max(1,riders||0)+'명'}catch(e){}
   if(ticket&&S.km!=null&&S.mode!=='wait'){tvSleptCheck(S);if(performance.now()-tvSeenAt>15000){tvSeenAt=performance.now();try{localStorage.setItem('bl-seen',JSON.stringify({k:ticket.trainKey,km:S.km}))}catch(e){}}}}
+
+function tvCenter(){const trk=$('tvTrack'),me=$('tvTrain').querySelector('.car.me');if(!me)return;const f=$('app').classList.contains('tvclose')?.54:.5;trk.scrollLeft=me.offsetLeft+me.offsetWidth*f-trk.clientWidth/2}
+function tvZoom(on){const a=$('app');if(on===a.classList.contains('tvclose'))return;a.classList.toggle('tvclose',on);blip(on?760:620,.08,.02);const t0=performance.now();(function f(){tvCenter();if(performance.now()-t0<1000)requestAnimationFrame(f)})();
+  if(on){const p=paxCur;$('tsTalk').innerHTML=p?'<img src="img/px_'+p.id+'.webp'+IMGV+'" alt="">'+esc(p.n)+'와 대화':'맞은편이 비어 있어요';$('tsTalk').disabled=!p}}
+function tvMirror(){for(const [id,src] of [['tvGo','getoff'],['tvHop','hop']]){const s=$(src),d=$(id);if(!s||!d)continue;const on=s.classList.contains('on')&&!s.classList.contains('soon')||(id==='tvGo'&&s.classList.contains('on'));d.style.display=on?'':'none';if(on&&d.textContent!==s.textContent)d.textContent=s.textContent;d.classList.toggle('soon',s.classList.contains('soon'))}}
+let tvWxT=0,tvWxKm=-1e9;
+function tvWx(S){if(!ticket||S.mode==='wait')return;const now=performance.now();if(now<tvWxT&&Math.abs(S.km-tvWxKm)<60)return;tvWxT=now+60e3;tvWxKm=S.km;
+  wxFetch([S.km]).then(()=>{const w=wxAt(S.km);wxFx($('tvWx'),w?wxKind(w.c):'');tvWhere.w=w?wxTxt(w):'';tvWhere.a=''})}
 let tvInit=0;
 function eventsTick(S){try{if(!tvInit){tvInit=1;if(!tvQ.has("notv"))tvEnter()}dreamTick(S)}catch(e){console.error(e)}try{bgmTick(S)}catch(e){}try{clueTick(S);cameoTick(S)}catch(e){}if(ticket&&ticket.stay){try{platTick(S)}catch(e){}return}try{paxTick(S);momentTick(S);microTick(S);hopTick(S)}catch(e){}try{passTick(S)}catch(e){}try{lightsTick(S)}catch(e){}try{pcardTick(S)}catch(e){}try{camTick(S);greetTick(S)}catch(e){}try{gaugeTick(S)}catch(e){}try{resvTick(S)}catch(e){}try{platTick(S);byeTick(S)}catch(e){}}
 
@@ -3109,7 +3175,7 @@ $('obLog').onclick=e=>{e.stopPropagation();openLog()};
 $('obMenu').onclick=e=>{e.stopPropagation();openMenu2()};
 $('pax').onclick=e=>{e.stopPropagation();openPax()};
 $('hop').onclick=e=>{e.stopPropagation();const h=hopCur;if(!h)return;boardTrain(h.dep,true);ticket.auto=0;saveTicket();toast(trainNo(h.dep)+'호로 건너갔어요',fmt(h.eta)+' 뒤 '+h.m.t,3000);$('hop').classList.remove('on');hopT=0}
-$('win').addEventListener('click',e=>{if(e.target.closest('button')||$('app').classList.contains('gaze')||gzBusy)return;gazeAsk()});
+$('win').addEventListener('click',e=>{if(e.target.closest('button')||$('app').classList.contains('gaze')||$('app').classList.contains('tv')||gzBusy)return;gazeAsk()});
 function sillTick(){try{const v=viewNow(),el=$('obCardImg');if(v&&v.sk){const u='img/'+v.sk+'.webp';if(el.dataset.u!==u){el.dataset.u=u;el.style.backgroundImage='url('+u+')'}el.style.backgroundPosition=(v.sf/10)+'% 50%'}
   if(ticket){$('obTkNo').textContent='№'+String(ticket.no).slice(-5);const p=Math.max(0,passedIdx(vnow()-ticket.dep));if(ticket.punched!=null&&p>ticket.punched)$('obTicket').classList.add('dot')}}catch(e){}}
 setInterval(sillTick,3000);setTimeout(sillTick,800);

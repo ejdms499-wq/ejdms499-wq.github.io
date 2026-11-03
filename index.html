@@ -583,17 +583,20 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
 /* ── 웹(가로 넓은 화면) 전용 ── */
 @media (min-width:900px) and (min-aspect-ratio:5/4) and (min-height:560px){
  body #app,body #app:not(.gaze){max-width:none!important}
- #app:not(.gaze) #stage{left:0!important;top:0!important;transform:none!important;width:100%!important;height:100%!important;aspect-ratio:auto!important}
- #app:not(.gaze) #cabinImg,#app:not(.gaze) #cabinDay,#app:not(.gaze) #nightdim{display:none!important}
  body #app{background:#2a1d14!important}
- #app::before{content:"";position:absolute;inset:-60px;z-index:0;background:url(img/cabin_n.webp) center 60%/cover;filter:blur(34px) brightness(.5) saturate(1.15);pointer-events:none}
- #app.day::before{background-image:url(img/cabin_d.webp);filter:blur(34px) brightness(.8)}
+ #app::before{content:"";position:absolute;inset:-60px;z-index:0;background:url(img/cabin_wn_bg.jpg) center 70%/cover;filter:blur(18px);pointer-events:none}
+ #app.day::before{background-image:url(img/cabin_wd_bg.jpg)}
  #app.gaze::before{display:none}
- #app:not(.gaze) #win{left:50%!important;top:5%!important;width:min(88vw,calc(60vh*2.1))!important;height:60%!important;transform:translateX(-50%);border-radius:22px!important;overflow:hidden;box-shadow:0 0 0 9px rgba(28,20,14,.92),0 0 0 11px rgba(214,184,140,.32),0 30px 70px rgba(0,0,0,.6)!important}
- #app:not(.gaze) #sill{top:68%!important;gap:40px!important;transform:scale(1.28);transform-origin:50% 0}
- #app:not(.gaze) #sill .ob span{font-size:11px}
- #cap{top:80%!important;bottom:auto!important}
- #app.day #cap,#app.day #cap .c3{color:rgba(243,234,216,.95)!important;text-shadow:0 1px 12px rgba(0,0,0,.6)!important}#app.day #sill .ob span{color:rgba(243,234,216,.9)!important}#app.day #hop{border-color:rgba(239,230,214,.35)!important}#cap .c1{font-size:19px}#cap .c2{font-size:13px}
+ #app:not(.gaze) #stage{left:50%!important;top:0!important;transform:translateX(-50%)!important;height:min(86vh,66.6667vw)!important;width:auto!important;aspect-ratio:1536/1024!important;-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent),linear-gradient(180deg,#000 84%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent),linear-gradient(180deg,#000 84%,transparent);mask-composite:intersect}
+ #app:not(.gaze) #win{left:7.65%!important;top:15.1%!important;width:84.5%!important;height:61%!important;border-radius:3.2%/5.2%!important}
+ #app:not(.gaze) #sill{top:79.3%!important;gap:clamp(30px,3.4vw,52px)!important;transform:scale(1.22);transform-origin:50% 0}
+ #app:not(.gaze) .hs,#app:not(.gaze) .coach,#app:not(.gaze) #drawer,#app:not(.gaze) #bento,#app:not(.gaze) #clock,#app:not(.gaze) #steam{display:none!important}
+ #cap{top:calc(min(86vh,66.6667vw)*.905)!important;bottom:auto!important}#cap .c1{font-size:19px}#cap .c2{font-size:13px}
+ #cap,#cap .c3,#app.day #cap,#app.day #cap .c3{color:rgba(44,30,18,.92)!important;text-shadow:0 1px 10px rgba(255,244,226,.55)!important}
+ #app:not(.gaze) #sill .ob span{color:rgba(44,30,18,.85)!important;text-shadow:0 1px 6px rgba(255,244,226,.6)!important;opacity:1}
+ #hop{border-color:rgba(44,30,18,.3)!important}
+ #app.lo #cap,#app.lo #cap .c3,#app.lo:not(.gaze) #sill .ob span{color:rgba(243,234,216,.92)!important;text-shadow:0 1px 10px rgba(0,0,0,.7)!important}#app.lo #hop{border-color:rgba(239,230,214,.3)!important}
+ #app.lo::before{filter:blur(18px) brightness(.32)}
  #pxbub,#bubble{max-width:420px}
 }
 
@@ -1930,7 +1933,7 @@ function frame(now){
   $('sun').style.opacity=(sunOp*.6).toFixed(2);
   const lampOn=night>.35||B[S.bk].tunnel;
   $('lampglow').style.opacity=lampOn?'1':'0';const inTun=!!B[S.bk].tunnel;glcv.style.opacity=(inTun?1:.5+.5*night).toFixed(2);$('tunrefl').style.opacity=inTun?'.22':'0';$('glassrefl').style.opacity=lampOn?(inTun?'1':(.35+.55*night).toFixed(2)):'0';$('glassrefl').style.filter=inTun?'brightness(2.2)':'none';$('bulb').setAttribute('opacity',lampOn?'1':'.35');
-  $('cabinImg').style.filter=window.LIGHTS_OFF?'brightness(.32) saturate(.8)':'none';$('cabinDay').style.filter=window.LIGHTS_OFF?'brightness(.5)':'none';{const dn=B[S.bk].tunnel?0:clamp((S.light-.35)/.4,0,1);const ds=dn.toFixed(2);if($('cabinDay').dataset.o!==ds){$('cabinDay').dataset.o=ds;$('cabinDay').style.opacity=ds;$('app').classList.toggle('day',dn>.6)}}if(window.LIGHTS_OFF)$('glassrefl').style.opacity='0';$('nightdim').style.background='rgba(10,14,30,'+(B[S.bk].tunnel?.15:0)+')';if(0)$('cabinlight').style.background=lampOn?'radial-gradient(ellipse 80% 45% at 85% 4%,rgba(255,190,110,.22),transparent),rgba(10,8,14,.35)':'transparent';
+  $('app').classList.toggle('lo',!!window.LIGHTS_OFF);$('cabinImg').style.filter=window.LIGHTS_OFF?'brightness(.32) saturate(.8)':'none';$('cabinDay').style.filter=window.LIGHTS_OFF?'brightness(.5)':'none';{const dn=B[S.bk].tunnel?0:clamp((S.light-.35)/.4,0,1);const ds=dn.toFixed(2);if($('cabinDay').dataset.o!==ds){$('cabinDay').dataset.o=ds;$('cabinDay').style.opacity=ds;$('app').classList.toggle('day',dn>.6)}}if(window.LIGHTS_OFF)$('glassrefl').style.opacity='0';$('nightdim').style.background='rgba(10,14,30,'+(B[S.bk].tunnel?.15:0)+')';if(0)$('cabinlight').style.background=lampOn?'radial-gradient(ellipse 80% 45% at 85% 4%,rgba(255,190,110,.22),transparent),rgba(10,8,14,.35)':'transparent';
   if(ticket){
     if(S.mode==='run'&&S.eta<8*60e3&&announced!==S.next){announced=S.next;announceStation(S.next)}
     if(S.mode==='wait'&&S.eta<10*60e3&&announced!==0){announced=0;announce('곧 출발합니다 · 부산발 런던행 '+trainNo(ticket.dep)+'호')}
@@ -2454,6 +2457,9 @@ window.__ev=k=>{if(k==='mini')nextMini=0;if(k==='f')nextF=0;if(k==='c'){nextCond
 })();
 
 
+
+// 웹: 가로 객실 사진으로 교체
+(function(){const mq=matchMedia('(min-width:900px) and (min-aspect-ratio:5/4) and (min-height:560px)');const sw=()=>{const w=mq.matches,a=document.getElementById('cabinImg'),b=document.getElementById('cabinDay');if(!a||!b)return;const na='img/cabin_'+(w?'wn':'n')+'.webp',nb='img/cabin_'+(w?'wd':'d')+'.webp';if(!a.src.endsWith(na))a.src=na;if(!b.src.endsWith(nb))b.src=nb};sw();try{mq.addEventListener('change',sw)}catch(e){mq.addListener(sw)}})();
 // 닫기 X + ESC (웹)
 (function(){const mods=[...document.querySelectorAll('.modal')];const closeTop=()=>{const m=[...document.querySelectorAll('.modal.on')].pop();if(!m)return false;m.dispatchEvent(new MouseEvent('click',{bubbles:true}));if(m.classList.contains('on')){const c=m.querySelector('.closer,#logClose,#btnBoard,#pcClose');if(c)c.click();else{m.classList.remove('on');document.body.classList.toggle('mopen',!!document.querySelector('.modal.on'))}}return true};
   mods.forEach(m=>{const x=document.createElement('button');x.className='mx';x.setAttribute('aria-label','닫기');x.textContent='×';x.onclick=e=>{e.stopPropagation();closeTop()};m.appendChild(x)});

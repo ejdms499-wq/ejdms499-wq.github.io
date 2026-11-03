@@ -596,6 +596,20 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
  #app.day #cap,#app.day #cap .c3{color:rgba(243,234,216,.95)!important;text-shadow:0 1px 12px rgba(0,0,0,.6)!important}#app.day #sill .ob span{color:rgba(243,234,216,.9)!important}#app.day #hop{border-color:rgba(239,230,214,.35)!important}#cap .c1{font-size:19px}#cap .c2{font-size:13px}
  #pxbub,#bubble{max-width:420px}
 }
+
+#veil .v6{display:none}
+@media (min-width:900px) and (min-aspect-ratio:5/4) and (min-height:560px){
+ #veil{background:linear-gradient(90deg,rgba(6,7,9,.9),rgba(6,7,9,.72) 48%,rgba(6,7,9,.9))!important;-webkit-backdrop-filter:blur(22px)!important;backdrop-filter:blur(22px)!important}
+ #veil .vin{max-width:1120px;display:grid;grid-template-columns:1fr 1.05fr;gap:0 90px;align-items:start;padding:13vh 56px 60px!important}
+ #veil .vL{position:sticky;top:13vh;padding-top:8px}
+ #veil .v1{font-size:50px;letter-spacing:.1em;text-align:left}
+ #veil .v2{text-align:left;font-size:11px;margin-top:16px}
+ #veil .v5{text-align:left;font-size:16px;line-height:2;margin:40px 0 0;opacity:.7}
+ #veil .v6{display:block;margin-top:44px;padding-top:22px;border-top:1px solid rgba(239,230,214,.14);font:12.5px/2.1 'Noto Sans KR',sans-serif;letter-spacing:.06em;opacity:.45;max-width:400px}
+ #veil .tr{padding:16px 6px;border-radius:8px}#veil .tr:hover{background:rgba(239,230,214,.06)}
+ #veil .tr .pl{font-size:17px}#veil .tr .lt b{font-size:17px}
+ #veil .v4{text-align:left}
+}
 </style>
 </head>
 <body>
@@ -667,12 +681,13 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
     <div class="fine">본 열차는 아직 존재하지 않습니다</div>
   </div></div>
   <div id="veil"><div class="vin">
-    <div class="v1">부산발 런던행</div><div class="v2">BUSAN — LONDON</div>
+    <div class="vL"><div class="v1">부산발 런던행</div><div class="v2">BUSAN — LONDON</div>
     <div class="v5">매일 밤 9시 부산역을 떠나<br>아흐레 동안 실제 시간으로 달리는 침대열차</div>
-    <button id="vMine" class="tr mine"></button>
+    <div class="v6"><span style="white-space:nowrap">부산 ·</span> <span style="white-space:nowrap">서울 ·</span> <span style="white-space:nowrap">원산 ·</span> <span style="white-space:nowrap">두만강 ·</span> <span style="white-space:nowrap">하바롭스크 ·</span> <span style="white-space:nowrap">바이칼 ·</span> <span style="white-space:nowrap">모스크바 ·</span> <span style="white-space:nowrap">바르샤바 ·</span> <span style="white-space:nowrap">베를린 ·</span> <span style="white-space:nowrap">파리 ·</span> <span style="white-space:nowrap">런던</span></div></div>
+    <div class="vR"><button id="vMine" class="tr mine"></button>
     <div class="vl"><span>지금 달리고 있는 열차</span><i id="vNow"></i></div>
     <div id="vList"></div>
-    <div class="v4">고르면 소리와 함께 탑승합니다 · 본 열차는 아직 존재하지 않습니다</div>
+    <div class="v4">고르면 소리와 함께 탑승합니다 · 본 열차는 아직 존재하지 않습니다</div></div>
   </div></div>
   <div id="toast"><div class="t1" id="t1"></div><div class="t2" id="t2"></div></div>
   <div id="sleep"><div class="z">덜컹 · 덜컹</div><div class="s">누르면 깨어나요</div></div>

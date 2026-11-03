@@ -684,6 +684,30 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
 .wkwrap{width:min(340px,100%);text-align:center;color:#efe6d6;animation:rise .5s ease}.wkwrap .fdph{margin-top:8px}
 @media (min-width:900px) and (min-aspect-ratio:5/4) and (min-height:560px){.plp{zoom:1.25}}
 #resv{display:none;margin:10px auto 0;font:12px 'Noto Sans KR',sans-serif;padding:7px 14px;border-radius:999px;background:rgba(233,194,125,.18);border:1px solid rgba(233,194,125,.55);width:max-content;max-width:92%;cursor:pointer;pointer-events:auto}#resv.on{display:block}#resv b{font-weight:500;font-variant-numeric:tabular-nums}
+
+/* 승객 카드: 앱 버튼 대신 쪽지와 글자 */
+#mPax .pxname{font:400 23px 'Gowun Batang','Noto Serif KR',serif;margin-top:22px;letter-spacing:.06em}
+#mPax .pxwho{font:12px/1.7 'Gowun Batang','Noto Serif KR',serif;opacity:.6;margin:6px 18px 0;word-break:keep-all}
+.pxleave{font:11.5px 'Noto Sans KR',sans-serif;color:#e9c27d;opacity:.85;margin-top:8px;letter-spacing:.03em;min-height:14px}
+.pxme{font:400 19px/1.3 'Nanum Pen Script',serif;color:rgba(239,230,214,.6);margin:14px 10px -6px;min-height:0}
+.pxme:not(:empty)::before{content:"나 — ";opacity:.7}
+#mPax .pxsay{font:16px/1.8 'Gowun Batang','Noto Serif KR',serif;margin:16px 10px 2px;min-height:52px}
+#mPax .pxsrc{font:10.5px/1.6 'Noto Sans KR',sans-serif;opacity:.42;margin:4px 14px 0;min-height:14px}
+#mPax .pxask{position:relative;margin:18px auto 0;width:min(300px,92%);background:#f3ead8;border-radius:2px;padding:10px 12px 8px;transform:rotate(-1deg);box-shadow:0 10px 24px rgba(0,0,0,.4);
+  background-image:repeating-linear-gradient(180deg,transparent 0 27px,rgba(90,70,50,.18) 27px 28px);display:flex;align-items:center;gap:8px}
+#mPax .pxask::before{content:"";position:absolute;left:50%;top:-8px;width:56px;height:16px;transform:translateX(-50%) rotate(2deg);background:rgba(233,214,170,.75);box-shadow:0 1px 2px rgba(0,0,0,.15)}
+#mPax .pxask input{flex:1;min-width:0;border:0;background:transparent;padding:2px 0;border-radius:0;color:#3a2d22;font:400 22px/1.2 'Nanum Pen Script','Gowun Batang',serif;outline:none}
+#mPax .pxask input::placeholder{color:rgba(58,45,34,.42)}
+#mPax .pxask button{width:auto;border-radius:0;background:transparent;color:#8a3b2e;font:400 20px 'Nanum Pen Script',serif;padding:0 2px;border-bottom:1px solid rgba(138,59,46,.4)}
+.pxmenu{display:flex;justify-content:center;flex-wrap:wrap;gap:4px 0;margin:24px 8px 0}
+.pxmenu button{background:none;border:0;color:#efe6d6;font:14px 'Gowun Batang','Noto Serif KR',serif;padding:6px 12px;opacity:.85;position:relative}
+.pxmenu button+button::before{content:"·";position:absolute;left:-3px;opacity:.4}
+.pxmenu button:active{opacity:1;color:#e9c27d}.pxmenu button.done{color:#e9c27d;opacity:.75}
+#pxPlay{display:none!important;margin:0}#pxPlay.on{display:inline-block!important}
+.pxback{display:block;margin:18px auto 0;background:none;border:0;color:rgba(239,230,214,.5);font:12px 'Noto Sans KR',sans-serif;letter-spacing:.12em;padding:8px}
+#getoff.soon{background:rgba(20,15,10,.5);color:#f3ead8;border:1px solid rgba(233,194,125,.55);box-shadow:none;cursor:default;font-weight:400;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+#veil .tr .can{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:999px;background:#e9c27d;color:#221c16;font:500 10px 'Noto Sans KR',sans-serif;letter-spacing:.02em;vertical-align:2px}
+#mPax .pxmenu #pxGift.done{border:0;font-size:14px;background:none}
 </style>
 </head>
 <body>
@@ -827,8 +851,8 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
     <div class="pcbtns" id="pcRecv" style="display:none"><button class="ghost" id="pcRecvClose">닫기</button><button id="pcRide">나도 이 기차 타기</button></div>
   </div></div>
 
-  <div class="modal" id="mPax"><div class="paxwrap"><div class="pxph" id="pxPh"></div><div class="pxname" id="pxName"></div><div class="pxwho" id="pxWho"></div><div class="pxsay" id="pxSay"></div><div class="pxask"><input id="pxIn" maxlength="120" placeholder="물어보기 (예: 여기는 뭐가 유명해요?)" autocomplete="off"><button id="pxSend" aria-label="보내기">↑</button></div><div class="pxsrc" id="pxSrc"></div>
-    <div class="pcbtns"><button class="ghost" id="pxTalk">말 걸기</button><button id="pxGift">선물 받기</button></div><button class="closer" id="pxPlay"></button><button class="closer" id="pxClose">자리로 돌아가기</button></div></div>
+  <div class="modal" id="mPax"><div class="paxwrap"><div class="pxph" id="pxPh"></div><div class="pxname" id="pxName"></div><div class="pxwho" id="pxWho"></div><div class="pxleave" id="pxLeave"></div><div class="pxme" id="pxMe"></div><div class="pxsay" id="pxSay"></div><div class="pxsrc" id="pxSrc"></div><div class="pxask"><input id="pxIn" maxlength="120" placeholder="쪽지에 한 줄 적어 건네기…" autocomplete="off"><button id="pxSend" aria-label="건네기">건네기</button></div>
+    <div class="pxmenu"><button id="pxTalk">말 걸기</button><button id="pxGift">선물 받기</button><button id="pxPlay"></button></div><button class="pxback" id="pxClose">자리로 돌아가기</button></div></div>
   <div class="modal" id="mMenu"><div class="menuwrap"><div class="menucard" id="menuCard"></div><button class="closer" id="menuClose">닫기</button></div></div>
   <div class="modal" id="mPass"><div class="passbook"><div class="ph2"><b>PASSPORT</b><span>여권 · 사증</span></div><div class="pzstamps" id="psSt"></div><div class="pn" id="psN"></div><button class="closer" id="psClose">여권 넣기</button></div></div>
   <div class="modal" id="mWatch"><div class="foodwrap watchwrap"><svg viewBox="0 0 220 200" class="wsvg"><circle cx="100" cy="100" r="82" fill="#f4ecdc" stroke="#b08a52" stroke-width="7"/><circle cx="100" cy="100" r="74" fill="none" stroke="rgba(60,45,30,.15)"/><line x1="100" y1="30" x2="100" y2="40" stroke="#3a2d22" stroke-width="3" transform="rotate(0 100 100)"/><line x1="100" y1="34" x2="100" y2="40" stroke="#3a2d22" stroke-width="1.5" transform="rotate(30 100 100)"/><line x1="100" y1="34" x2="100" y2="40" stroke="#3a2d22" stroke-width="1.5" transform="rotate(60 100 100)"/><line x1="100" y1="30" x2="100" y2="40" stroke="#3a2d22" stroke-width="3" transform="rotate(90 100 100)"/><line x1="100" y1="34" x2="100" y2="40" stroke="#3a2d22" stroke-width="1.5" transform="rotate(120 100 100)"/><line x1="100" y1="34" x2="100" y2="40" stroke="#3a2d22" stroke-width="1.5" transform="rotate(150 100 100)"/><line x1="100" y1="30" x2="100" y2="40" stroke="#3a2d22" stroke-width="3" transform="rotate(180 100 100)"/><line x1="100" y1="34" x2="100" y2="40" stroke="#3a2d22" stroke-width="1.5" transform="rotate(210 100 100)"/><line x1="100" y1="34" x2="100" y2="40" stroke="#3a2d22" stroke-width="1.5" transform="rotate(240 100 100)"/><line x1="100" y1="30" x2="100" y2="40" stroke="#3a2d22" stroke-width="3" transform="rotate(270 100 100)"/><line x1="100" y1="34" x2="100" y2="40" stroke="#3a2d22" stroke-width="1.5" transform="rotate(300 100 100)"/><line x1="100" y1="34" x2="100" y2="40" stroke="#3a2d22" stroke-width="1.5" transform="rotate(330 100 100)"/><line id="wH" x1="100" y1="104" x2="100" y2="58" stroke="#2b2119" stroke-width="5" stroke-linecap="round"/><line id="wM" x1="100" y1="108" x2="100" y2="38" stroke="#2b2119" stroke-width="3" stroke-linecap="round"/><circle cx="100" cy="100" r="4.5" fill="#2b2119"/><g id="wCrown" style="cursor:pointer"><rect x="182" y="88" width="20" height="24" rx="4" fill="#c49a5c" stroke="#8a6a3a" stroke-width="2"/><line x1="187" y1="92" x2="187" y2="108" stroke="#8a6a3a"/><line x1="192" y1="92" x2="192" y2="108" stroke="#8a6a3a"/><line x1="197" y1="92" x2="197" y2="108" stroke="#8a6a3a"/></g></svg><div class="fdname" id="wT"></div><div class="fdtext" id="wS"></div><div class="pcbtns"><button class="ghost" id="wSkip">알아서 맞춰 줘</button><button id="wTurn">용두 돌리기</button></div></div></div>
@@ -2145,7 +2169,7 @@ function trainInfo(dep,now){const el=now-dep,S=state(el);let pl,sub;const day=Ma
   sub=day+'일째 · '+ST[Math.min(S.next||S.i,LAST)].k+' 방면';try{const n=nextMoment(S.km);if(n){const eta=elAtKm(n.km)-el;if(eta>0&&eta<6*HMS)sub=day+'일째 · '+fmt(eta)+' 뒤 '+n.t}}catch(e){}
   return {pl,sub,lt:pd(h)+':'+pd(m),lw,cls,S}}
 function trRow(dep,now,mine){const t=trainInfo(dep,now),a=kd(dep);
-  return '<span class="no"><b>'+trainNo(dep).replace(' ',' ')+'</b>'+(mine?'내 열차':pd(a.m)+'.'+pd(a.d)+' 출발')+'</span><span class="pl">'+esc(t.pl)+'<small>'+esc(t.sub)+'</small></span>'+(t.lt?'<span class="lt"><b>'+t.lt+'</b><i class="dot '+t.cls+'"></i>'+t.lw+'</span>':'')}
+  const S0=state(now-dep),canOff=S0.mode==='stop'&&S0.i>0&&S0.eta>3*60e3;return '<span class="no"><b>'+trainNo(dep).replace(' ',' ')+'</b>'+(mine?'내 열차':pd(a.m)+'.'+pd(a.d)+' 출발')+'</span><span class="pl">'+esc(t.pl)+(canOff?'<i class="can">지금 내릴 수 있어요</i>':'')+'<small>'+esc(t.sub)+'</small></span>'+(t.lt?'<span class="lt"><b>'+t.lt+'</b><i class="dot '+t.cls+'"></i>'+t.lw+'</span>':'')}
 function renderVeil(){const now=vnow(),{next,prev}=depTimes(now);let h='';
   const deps=[];for(let d=0;d<12;d++){const dep=prev-d*864e5;if(now-dep>TRIP)break;deps.push(dep)}deps.push(next);
   for(const dep of deps)if(!(ticketValid()&&!ticket.auto&&ticket.dep===dep))h+='<button class="tr" data-dep="'+dep+'">'+trRow(dep,now,false)+'</button>';
@@ -2312,10 +2336,10 @@ function renderPaxChip(){const el=$('pax');if(!el)return;if(!paxCur){el.innerHTM
   const a=$('pxChipA'),id=paxCur.id;tryImg('pxc_'+id,a,()=>tryImg('px_'+id,a,()=>{}))}
 function openPax(){const p=paxCur;if(!p)return;dayInc('talk');$('pxName').textContent=p.n;$('pxWho').textContent=p.w;paxLine=0;$('pxSay').textContent='“'+p.say[0]+'”';
   const ph=$('pxPh');ph.classList.remove('has');ph.style.backgroundImage='';ph.innerHTML='<b>'+esc(p.n[0])+'</b>';ph.classList.remove('ill');tryImg('px_'+p.id,ph,()=>{},im=>{if(im.naturalWidth/im.naturalHeight<=.9)return;const k=kd(vnow());ph.classList.add('ill');ph.style.backgroundImage='';ph.innerHTML='<i class="art" style="background-image:url('+im.src+')"></i><em class="cap">'+k.m+'.'+k.d+' · '+esc(nearName(cur.km))+'에서</em>'});if(!MET[p.id]){MET[p.id]=Date.now();LSset('bl-met',MET)}
-  $('pxSrc').textContent='';$('pxIn').value='';const got=!!GIFTS[p.id];$('pxGift').textContent=got?'받은 선물 · '+p.g[0]:'선물 받기';$('pxGift').classList.toggle('done',got);{const pl=PLAY[p.id];$('pxPlay').classList.toggle('on',!!pl);if(pl)$('pxPlay').textContent=pl}show('mPax',true);blip(620,.08,.02)}
-$('pxTalk').onclick=e=>{e.stopPropagation();const p=paxCur;if(!p)return;paxLine=(paxLine+1)%p.say.length;const el=$('pxSay');el.classList.remove('in');void el.offsetWidth;el.textContent='“'+p.say[paxLine]+'”';el.classList.add('in');blip(880,.05,.015)};
+  $('pxSrc').textContent='';$('pxMe').textContent='';$('pxIn').value='';{const si=ST.findIndex(x=>Math.abs(x.km-p.b)<2);if(si>0){const left=elAtKm(ST[si].km)-(vnow()-ticket.dep);$('pxLeave').textContent=ST[si].k+(ST[si].ferry?'항':'역')+'에서 내려요'+(left>60e3?' · '+fmt(left)+' 뒤':' · 곧')}else $('pxLeave').textContent=''}const got=!!GIFTS[p.id];$('pxGift').textContent=got?'받은 선물':'선물 받기';$('pxGift').classList.toggle('done',got);{const pl=PLAY[p.id];$('pxPlay').classList.toggle('on',!!pl);if(pl)$('pxPlay').textContent=pl}show('mPax',true);blip(620,.08,.02)}
+$('pxTalk').onclick=e=>{$('pxMe').textContent='';$('pxSrc').textContent='';e.stopPropagation();const p=paxCur;if(!p)return;paxLine=(paxLine+1)%p.say.length;const el=$('pxSay');el.classList.remove('in');void el.offsetWidth;el.textContent='“'+p.say[paxLine]+'”';el.classList.add('in');blip(880,.05,.015)};
 $('pxGift').onclick=e=>{e.stopPropagation();const p=paxCur;if(!p||GIFTS[p.id])return;GIFTS[p.id]=Date.now();LSset('bl-gifts',GIFTS);logAdd(p.n+'에게 '+p.g[0]+JO(p.g[0],'을','를')+' 받았다');
-  $('pxGift').textContent='받은 선물 · '+p.g[0];$('pxGift').classList.add('done');blip(1320,.16,.04);renderPaxChip();show('mPax',false);setTimeout(()=>openGift(p),250)};
+  $('pxGift').textContent='받은 선물';$('pxGift').classList.add('done');blip(1320,.16,.04);renderPaxChip();show('mPax',false);setTimeout(()=>openGift(p),250)};
 function openGift(p){$('gfName').textContent=p.g[0];$('gfText').textContent=p.g[1];$('gfFact').innerHTML='<b>알고 보니</b>'+esc(GFACT[p.id]||'');const ph=$('gfPh');ph.style.backgroundImage='';ph.innerHTML='<b class="gfb">'+esc(p.g[0])+'</b>';ph.className='pxph ill gf';delete ph.dataset.cap;tryImg('gf_'+p.id,ph,()=>{},im=>{if(im.naturalWidth/im.naturalHeight>1.15){ph.className='fdph has';ph.innerHTML='';ph.style.backgroundImage='url('+im.src+')';ph.dataset.cap=p.n+'에게 받은 선물';return}ph.style.backgroundImage='';ph.innerHTML='<i class="art" style="background-image:url('+im.src+')"></i><em class="cap">'+esc(p.n)+'에게 받음</em>'});show('mGift',true)}
 $('gfClose').onclick=()=>show('mGift',false);$('mGift').onclick=e=>{if(e.target===$('mGift'))show('mGift',false)};
 $('pxClose').onclick=()=>show('mPax',false);$('mPax').onclick=e=>{if(e.target===$('mPax'))show('mPax',false)};
@@ -2542,7 +2566,7 @@ $('mgClose').onclick=()=>{mgClear();show('mPlay',false)};$('mPlay').onclick=e=>{
 // ───────── 승객과 대화하기 (RAG: 기차 이야기 자료에서 찾아 승객 말투로 대답) ─────────
 const CHAT_URL=SB_URL+'/functions/v1/pax-chat',CHAT={};let chatBusy=false;
 async function askPax(){const p=paxCur,inp=$('pxIn'),msg=inp.value.trim();if(!p||!msg||chatBusy)return;chatBusy=true;inp.value='';$('pxSend').disabled=true;
-  const H=CHAT[p.id]=CHAT[p.id]||[];$('pxSay').classList.add('think');$('pxSay').textContent='“'+msg+'” …';$('pxSrc').textContent='';
+  const H=CHAT[p.id]=CHAT[p.id]||[];$('pxSay').classList.add('think');$('pxMe').textContent=msg;$('pxSay').textContent='…';$('pxSrc').textContent='';
   try{const r=await fetch(CHAT_URL,{method:'POST',headers:{'Content-Type':'application/json',apikey:SB_KEY},body:JSON.stringify({pax:p.id,km:Math.round(cur.km),place:nearName(cur.km),msg,hist:H.slice(-6)})});
     const j=await r.json().catch(()=>({}));if(!r.ok||!j.reply)throw new Error(j.error||r.status);
     H.push({r:'me',c:msg},{r:'pax',c:j.reply});$('pxSay').textContent='“'+j.reply+'”';$('pxSrc').textContent=j.src&&j.src.length?'떠올린 이야기 · '+j.src.join(' · '):'';blip(660,.06,.02);
@@ -2593,7 +2617,7 @@ $('wkNext').onclick=()=>{wkI=Math.min(wkI+1,wkL.length-1);walkShow();blip(700,.0
 function stayHere(why){const i=plI,old=ticket.dep;boardTrain(old+864e5,true);ticket.stay={i,why};ticket.auto=0;saveTicket();show('mWalk',false);
   logAdd(why==='missed'?ST[i].k+'역에서 기차를 놓쳤다. 내일 기차를 기다린다':ST[i].k+'에서 하룻밤 묵기로 했다');platOpen(i,'stay')}
 function platTick(S){if(!ticket)return;const now=performance.now();
-  const go=$('getoff'),can=S.mode==='stop'&&!ticket.stay&&S.i>0&&!$('plat').classList.contains('on')&&S.eta>60e3;go.classList.toggle('on',can);
+  const go=$('getoff'),can=S.mode==='stop'&&!ticket.stay&&S.i>0&&!$('plat').classList.contains('on')&&S.eta>60e3;const soon=!can&&S.mode==='run'&&S.next<LAST&&S.eta<90*60e3&&!ticket.stay;go.classList.toggle('on',can||soon);go.classList.toggle('soon',soon);if(now-(platTick.gt||0)>1000){platTick.gt=now;const t=can?'플랫폼에 내리기 · '+fmtMS(S.eta)+' 뒤 출발':soon?fmt(S.eta)+' 뒤 '+ST[S.next].k+(ST[S.next].ferry?'항':'역')+' 정차 · 내려서 걸을 수 있어요':'';if(go.textContent!==t)go.textContent=t}
   if(ticket.stay){const st=ST[ticket.stay.i],arr=ticket.dep+SC[ticket.stay.i].arr-vnow();
     if(arr<=0){delete ticket.stay;saveTicket();if($('plat').classList.contains('on'))platClose(true);toast('기차가 들어왔어요',st.k+(st.ferry?'항':'역')+' · '+trainNo(ticket.dep)+'호에 탔어요',3600);try{knock()}catch(e){};return}
     if(!$('plat').classList.contains('on')&&!anyOpen()){platOpen(ticket.stay.i,'stay')}
@@ -2604,7 +2628,7 @@ function platTick(S){if(!ticket)return;const now=performance.now();
     if(now-plT>500){plT=now;const k=kd(vnow()),late=S.eta<3*60e3;$('plat').classList.toggle('late',late);$('plT').innerHTML='출발까지 <b>'+fmtMS(S.eta)+'</b> · '+(S.ltxt||'')+(late?'<br>곧 출발해요! 기차로 돌아가세요':'');walkTime();
       if(late&&!platTick.bell){platTick.bell=1;try{knock();setTimeout(knock,500)}catch(e){}toast('기적 소리','출발 3분 전이에요',2600)}}}
   else platTick.bell=0}
-$('getoff').onclick=e=>{e.stopPropagation();const S=cur;if(S.mode!=='stop')return;platOpen(S.i,'plat')};
+$('getoff').onclick=e=>{e.stopPropagation();const S=cur;if(S.mode!=='stop'||$('getoff').classList.contains('soon'))return;platOpen(S.i,'plat')};
 // 배웅: 승객이 내리는 역
 const BYE={p01:['손녀 기다린다, 먼저 간다이. 런던까지 밥 잘 챙겨 묵고!','아이고 손도 잘 흔드네. 어묵 아껴 묵어래이.'],p02:['고향 바다, 덕분에 잘 봤다. 남은 길은 젊은 사람 몫이야.','…고맙다. 바다에 띄운 엽서가 언젠가 닿을 거야.'],
  p03:['여기서 손녀가 기다려요. 인형 속 인형처럼, 좋은 일이 겹겹이 있길.','다스비다니야! 안녕히!'],p04:['제 근무는 여기까지예요. 다음 차장도 차는 잘 우려요. 아마도요.','30년 동안 손 흔들어 준 승객은 손에 꼽아요. 고마워요.'],

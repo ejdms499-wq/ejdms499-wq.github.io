@@ -752,6 +752,27 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
 @keyframes cmFly{0%{left:100%;transform:translateY(0) rotate(-4deg)}25%{transform:translateY(-12%) rotate(3deg)}50%{left:38%;transform:translateY(8%) rotate(-3deg)}75%{transform:translateY(-6%) rotate(4deg)}100%{left:-45%;transform:translateY(0) rotate(-2deg)}}
 #cameo.got img{animation:none!important;transform:scale(1.25)!important;opacity:0;transition:transform .9s,opacity .9s;filter:brightness(1.3) drop-shadow(0 0 18px #fff6c8)}
 .gfs.cms i.on{background-size:contain;background-repeat:no-repeat;background-position:center bottom}
+
+/* 앉은 승객 · 움직임 */
+#app:not(.gaze) #seat{left:58%!important;width:34%!important;bottom:20%!important;height:30%!important}
+.seatfg{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none}
+#fgD{opacity:0;transition:opacity 4s}
+#app.gaze .seatfg{display:none}
+#seat img{transform-origin:50% 100%}
+#seat.on img{animation:seatIdle 4.2s ease-in-out infinite}
+@keyframes seatIdle{0%,100%{transform:translateY(0) scale(1,1) rotate(0)}30%{transform:translateY(-.6%) scale(1.004,1.016) rotate(-.6deg)}60%{transform:translateY(.3%) scale(1,1.004) rotate(.5deg)}}
+#seat.talk img{animation:seatTalk .62s ease-in-out 3!important}
+@keyframes seatTalk{0%,100%{transform:translateY(0) rotate(0)}40%{transform:translateY(-4%) rotate(-2.5deg) scale(1.02,.99)}70%{transform:translateY(-1%) rotate(1.5deg)}}
+#seat.enter img{animation:seatEnter 1.6s cubic-bezier(.3,.7,.3,1)!important}
+@keyframes seatEnter{0%{transform:translateX(70%) translateY(0);opacity:0}25%{opacity:1;transform:translateX(48%) translateY(-5%)}45%{transform:translateX(30%) translateY(0)}65%{transform:translateX(12%) translateY(-4%)}100%{transform:none;opacity:1}}
+#seat.leave img{opacity:1!important;animation:seatLeave 1s ease-in forwards!important}
+@keyframes seatLeave{0%{transform:none}30%{transform:translateY(-6%) rotate(3deg)}100%{transform:translateX(90%) translateY(0);opacity:0}}
+#rbt{bottom:-3%!important;height:20%!important}
+#rbt.go{animation:rbtGo2 9s linear forwards!important}
+@keyframes rbtGo2{0%{left:100%;opacity:1}100%{left:-45%;opacity:1}}
+#cart{bottom:auto!important;top:calc(64px + env(safe-area-inset-top))!important}
+#cartBot{margin:-6px auto 4px!important;width:48px!important}
+@media (min-width:900px) and (min-aspect-ratio:5/4) and (min-height:560px){#app:not(.gaze) #seat{left:76%!important;width:22%!important;bottom:3%!important;height:46%!important}#rbt{height:30%!important;bottom:-4%!important}}
 </style>
 </head>
 <body>
@@ -770,7 +791,7 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
       <div id="flash"></div>
       <button id="mail"><svg viewBox="0 0 24 24" fill="none" stroke="#3a2a1e" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="1.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></svg><span id="mailtxt">엽서 도착</span></button>
     </div>
-    <img id="cabinImg" src="img/zcab_m_n.webp" alt=""><img id="cabinDay" src="img/zcab_m_d.webp" alt=""><div id="seat"><img id="seatImg" alt=""></div><div id="rbt"><img src="img/zrobot.webp" alt=""></div>
+    <img id="cabinImg" src="img/zcab_m_n.webp" alt=""><img id="cabinDay" src="img/zcab_m_d.webp" alt=""><div id="seat"><img id="seatImg" alt=""></div><img id="fgN" class="seatfg" src="img/zfg_m_n.webp" alt=""><img id="fgD" class="seatfg" src="img/zfg_m_d.webp" alt=""><div id="rbt"><img src="img/zrobot.webp" alt=""></div>
     <div id="sill">
     <button class="ob" id="obTicket"><i class="o-tk"><b>부산 → 런던</b><em id="obTkNo"></em></i><span>승차권</span></button>
     <button class="ob" id="obCard"><i class="o-pc" id="obCardImg"></i><span>엽서</span></button>
@@ -2094,7 +2115,7 @@ function frame(now){
   $('sun').style.opacity=(sunOp*.6).toFixed(2);
   const lampOn=night>.35||B[S.bk].tunnel;
   $('lampglow').style.opacity=lampOn?'1':'0';const inTun=!!B[S.bk].tunnel;glcv.style.opacity=(inTun?1:.5+.5*night).toFixed(2);$('tunrefl').style.opacity=inTun?'.22':'0';$('glassrefl').style.opacity=lampOn?(inTun?'1':(.15+.25*night).toFixed(2)):'0';$('glassrefl').style.filter=inTun?'brightness(2.2)':'none';$('bulb').setAttribute('opacity',lampOn?'1':'.35');
-  $('app').classList.toggle('lo',!!window.LIGHTS_OFF);$('cabinImg').style.filter=window.LIGHTS_OFF?'brightness(.32) saturate(.8)':'none';$('cabinDay').style.filter=window.LIGHTS_OFF?'brightness(.5)':'none';{const dn=B[S.bk].tunnel?0:clamp((S.light-.35)/.4,0,1);const ds=dn.toFixed(2);if($('cabinDay').dataset.o!==ds){$('cabinDay').dataset.o=ds;$('cabinDay').style.opacity=ds;$('app').classList.toggle('day',dn>.6)}}if(window.LIGHTS_OFF)$('glassrefl').style.opacity='0';$('nightdim').style.background='rgba(10,14,30,'+(B[S.bk].tunnel?.15:0)+')';if(0)$('cabinlight').style.background=lampOn?'radial-gradient(ellipse 80% 45% at 85% 4%,rgba(255,190,110,.22),transparent),rgba(10,8,14,.35)':'transparent';
+  $('app').classList.toggle('lo',!!window.LIGHTS_OFF);$('cabinImg').style.filter=window.LIGHTS_OFF?'brightness(.32) saturate(.8)':'none';$('cabinDay').style.filter=window.LIGHTS_OFF?'brightness(.5)':'none';$('fgN').style.filter=$('cabinImg').style.filter;$('fgD').style.filter=$('cabinDay').style.filter;{const dn=B[S.bk].tunnel?0:clamp((S.light-.35)/.4,0,1);const ds=dn.toFixed(2);if($('cabinDay').dataset.o!==ds){$('cabinDay').dataset.o=ds;$('cabinDay').style.opacity=ds;$('fgD').style.opacity=ds;$('app').classList.toggle('day',dn>.6)}}if(window.LIGHTS_OFF)$('glassrefl').style.opacity='0';$('nightdim').style.background='rgba(10,14,30,'+(B[S.bk].tunnel?.15:0)+')';if(0)$('cabinlight').style.background=lampOn?'radial-gradient(ellipse 80% 45% at 85% 4%,rgba(255,190,110,.22),transparent),rgba(10,8,14,.35)':'transparent';
   if(ticket){
     if(S.mode==='run'&&S.eta<8*60e3&&announced!==S.next){announced=S.next;announceStation(S.next)}
     if(S.mode==='wait'&&S.eta<10*60e3&&announced!==0){announced=0;announce('곧 출발합니다 · 부산발 런던행 '+trainNo(ticket.dep)+'호')}
@@ -2137,7 +2158,7 @@ function updateCap(S){if(!ticket)return;if(S.mode!=='wait'&&$('c3').classList.co
   const p=placeOf(S),bk0=biomeAt(S.km);setCap(bk0==='chunnel'?'영불해협 터널, 바다 밑을 지나는 중':p?p+' 부근을 지나는 중':'터널을 지나는 중',(lt?lt+' · ':'')+'다음 역 '+ST[S.next].k+'까지 '+fmt(S.eta)+r)}
 function curStation(){const S=cur;if(S.mode==='stop'||S.mode==='end')return S.i;let b=0;for(let i=0;i<=LAST;i++)if(Math.abs(ST[i].km-S.km)<Math.abs(ST[b].km-S.km))b=i;return b}
 // 소리
-function setSound(on){try{if(!ac)initAudio();ac.resume();soundOn=on;nextClack=0;master.gain.setTargetAtTime(on?.7:0,ac.currentTime,.25)}catch(e){}
+function setSound(on){try{bgmSet(on)}catch(e){}try{if(!ac)initAudio();ac.resume();soundOn=on;nextClack=0;master.gain.setTargetAtTime(on?.7:0,ac.currentTime,.25)}catch(e){}
   $('icoSnd2').innerHTML=on?'<path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/>':'<path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M16 9l5 6M21 9l-5 6"/>'}
 $('sndBtn').onclick=e=>{e.stopPropagation();setSound(!soundOn)};
 // 첫 화면 대신: 막 한 장, 누르면 소리와 함께 탑승
@@ -2280,7 +2301,7 @@ function sbPresence(){if(!SBC||!ticket)return;const key='train-'+ticket.trainKey
 function joinRoom(){if(!SBC||myRoom==null)return;try{if(roomCh)SBC.removeChannel(roomCh)}catch(e){}
   roomCh=SBC.channel('room-'+ticket.trainKey+'-'+myRoom,{config:{broadcast:{self:false}}});
   roomCh.on('broadcast',{event:'say'},m=>onSay(m.payload||{})).on('broadcast',{event:'give'},m=>onGive(m.payload||{})).subscribe()}
-function bubble(who,text){const el=$('bubble');el.innerHTML='<b>'+esc(who)+'</b>'+esc(text);el.classList.remove('on');void el.offsetWidth;el.classList.add('on');clearTimeout(bubble.t);bubble.t=setTimeout(()=>el.classList.remove('on'),6500)}
+function bubble(who,text){try{if(paxCur&&who===paxCur.n){const st=$('seat');st.classList.remove('talk');void st.offsetWidth;st.classList.add('talk');clearTimeout(bubble.st);bubble.st=setTimeout(()=>st.classList.remove('talk'),2600)}}catch(e){}const el=$('bubble');el.innerHTML='<b>'+esc(who)+'</b>'+esc(text);el.classList.remove('on');void el.offsetWidth;el.classList.add('on');clearTimeout(bubble.t);bubble.t=setTimeout(()=>el.classList.remove('on'),6500)}
 function onSay(p){const i=+p.i;if(!(i>=0&&i<PHR.length))return;const bd=+p.bed||0;bubble(bd?bd+'번 침대':'같은 칸 승객',PHR[i]);blip(980,.12,.03)}
 function onGive(p){const it=String(p.item||'');if(!ITEMS[it])return;const bd=+p.bed||0;ticket.items=ticket.items||{};ticket.items[it]=(ticket.items[it]||0)+1;logAdd((bd?bd+'번 침대 승객에게 ':'같은 칸 승객에게 ')+josa(ITEMS[it],'을','를')+' 받았다');saveTicket();
   toast((bd?bd+'번 침대 승객이 ':'같은 칸 승객이 ')+josa(ITEMS[it],'을','를')+' 건넸어요','',3200);blip(1320,.16,.04);renderRoomSheet()}
@@ -2316,14 +2337,14 @@ const GFACT={"p01": "셜록 홈즈는 1887년 아서 코난 도일의 소설 「
 const paxAt=km=>PAX.find(p=>km>=p.a&&km<p.b),menuAt=km=>MENU.find(m=>km>=m.a&&km<m.b);
 function nextMoment(km){return MOM.find(m=>m.km>km+.2)}
 // 이미지가 있으면 쓰고, 없으면 글자 카드
-const IMGV='?v=z1103';const IMGOK={};function tryImg(key,el,fb,ok){if(IMGOK[key]===false){fb();return}const im=new Image();im.onload=()=>{IMGOK[key]=true;el.style.backgroundImage='url('+im.src+')';el.classList.add('has');ok&&ok(im)};im.onerror=()=>{IMGOK[key]=false;fb()};im.src='img/'+key+'.webp'+IMGV}
+const IMGV='?v=z1104';const IMGOK={};function tryImg(key,el,fb,ok){if(IMGOK[key]===false){fb();return}const im=new Image();im.onload=()=>{IMGOK[key]=true;el.style.backgroundImage='url('+im.src+')';el.classList.add('has');ok&&ok(im)};im.onerror=()=>{IMGOK[key]=false;fb()};im.src='img/'+key+'.webp'+IMGV}
 // 승객
 let paxCur=null,paxLine=0,paxShownFor='';
 function paxTick(S){if(!ticket||S.mode==='wait'||S.mode==='end'){if(paxCur){paxCur=null;renderPaxChip()}return}
   const p=paxAt(S.km);if(p!==paxCur){const was=paxCur;paxCur=p;paxLine=0;renderPaxChip();
     if(p&&was&&paxShownFor!==ticket.trainKey+p.id){toast(p.n+JO(p.n,'이','가')+' 맞은편 자리에 탔어요',p.w.split(' · ')[0],3600);blip(700,.1,.03)}
     paxShownFor=ticket.trainKey+(p?p.id:'')}}
-function renderSeat(){const st=$('seat'),im=$('seatImg');if(!st||!im)return;const id=paxCur?paxCur.id:'';if(st.dataset.id===id)return;st.dataset.id=id;st.classList.remove('on');if(!id)return;const n=new Image();n.onload=()=>{im.src=n.src;const r=n.naturalWidth/n.naturalHeight;im.style.height=r>.72?'76%':r>.6?'88%':'100%';st.classList.add('on')};n.src='img/pf_'+id+'.webp'+IMGV}
+function renderSeat(){const st=$('seat'),im=$('seatImg');if(!st||!im)return;const id=paxCur?paxCur.id:'';if(st.dataset.id===id)return;st.dataset.id=id;const was=st.classList.contains('on');st.classList.remove('on','enter');if(was)st.classList.add('leave');if(!id){setTimeout(()=>st.classList.remove('leave'),1200);return}const n=new Image();n.onload=()=>setTimeout(()=>{st.classList.remove('leave');im.src=n.src;st.classList.add('enter');setTimeout(()=>st.classList.remove('enter'),1700);const r=n.naturalWidth/n.naturalHeight;im.style.height=r>.72?'76%':r>.6?'88%':'100%';st.classList.add('on')},was?900:0);n.src='img/pf_'+id+'.webp'+IMGV}
 function renderPaxChip(){renderSeat();const el=$('pax');if(!el)return;if(!paxCur){el.innerHTML='';el.classList.remove('on','dot');return}
   const nm=paxCur.n.split(' ').pop();el.innerHTML='<i class="pxa" id="pxChipA">'+esc(paxCur.n[0])+'</i><span>'+esc(nm.length>5?nm.slice(0,5):nm)+'</span>';el.classList.add('on');el.classList.toggle('dot',!GIFTS[paxCur.id]);
   const a=$('pxChipA'),id=paxCur.id;tryImg('pxc_'+id,a,()=>tryImg('px_'+id,a,()=>{}))}
@@ -2336,7 +2357,7 @@ $('pxGift').onclick=e=>{e.stopPropagation();const p=paxCur;if(!p||GIFTS[p.id])re
 function openGift(p){$('gfName').textContent=p.g[0];$('gfText').textContent=p.g[1];$('gfFact').innerHTML='<b>알고 보니</b>'+esc(GFACT[p.id]||'');const ph=$('gfPh');ph.style.backgroundImage='';ph.innerHTML='<b class="gfb">'+esc(p.g[0])+'</b>';ph.className='pxph ill gf';delete ph.dataset.cap;tryImg('gf_'+p.id,ph,()=>{},im=>{if(im.naturalWidth/im.naturalHeight>1.15){ph.className='fdph has';ph.innerHTML='';ph.style.backgroundImage='url('+im.src+')';ph.dataset.cap=p.n+'에게 받은 선물';return}ph.style.backgroundImage='';ph.innerHTML='<i class="art" style="background-image:url('+im.src+')"></i><em class="cap">'+esc(p.n)+'에게 받음</em>'});show('mGift',true)}
 $('gfClose').onclick=()=>show('mGift',false);$('mGift').onclick=e=>{if(e.target===$('mGift'))show('mGift',false)};
 $('cameo').onclick=catchCameo;document.addEventListener('click',e=>{if(e.target&&e.target.id==='logCase'){e.stopPropagation();show('mLog',false);setTimeout(openCase,200)}});
-$('seatImg').onclick=e=>{e.stopPropagation();if(paxCur)openPax()};
+$('seatImg').onclick=e=>{e.stopPropagation();const st=$('seat');st.classList.remove('talk');void st.offsetWidth;st.classList.add('talk');setTimeout(()=>st.classList.remove('talk'),900);if(paxCur)setTimeout(openPax,260)};
 $('pxClose').onclick=()=>show('mPax',false);$('mPax').onclick=e=>{if(e.target===$('mPax'))show('mPax',false)};
 // 식당칸
 let foodT=0;
@@ -2347,7 +2368,7 @@ function openMenu2(){const m=menuAt(cur.km);if(!m||cur.mode==='wait'){toast('식
   $('menuCard').querySelectorAll('[data-o]').forEach(b=>b.onclick=e=>{e.stopPropagation();orderFood(b.dataset.o)})}
 function orderFood(id){const m=MENU.find(x=>x.d.some(d=>d.id===id)),d=m.d.find(x=>x.id===id);ticket.orders=ticket.orders||{};ticket.orders[id]=vnow();saveTicket();show('mMenu',false);
   toast('주문했어요',d.n+' · 곧 가져다 드려요',2600);blip(980,.08,.03);clearTimeout(foodT);foodT=setTimeout(()=>serveFood(d),45000+Math.random()*30000)}
-function serveFood(d){FOODS[d.id]=Date.now();LSset('bl-foods',FOODS);dayInc('food');logAdd('식당칸에서 '+d.n+JO(d.n,'을','를')+' 먹었다');
+function serveFood(d){try{const r=$('rbt');r.classList.remove('go');void r.offsetWidth;r.classList.add('go')}catch(e){}FOODS[d.id]=Date.now();LSset('bl-foods',FOODS);dayInc('food');logAdd('식당칸에서 '+d.n+JO(d.n,'을','를')+' 먹었다');
   $('fdName').textContent=d.n;$('fdText').textContent=d.t;const ph=$('fdPh');ph.classList.remove('has');ph.style.backgroundImage='';ph.innerHTML='<b>'+esc(d.n)+'</b>';const kk=kd(vnow());ph.dataset.cap=kk.m+'.'+kk.d+' · '+nearName(cur.km)+' 식당칸';tryImg('fd_'+d.id,ph,()=>{});$('fdNo').textContent='식당칸 기록 '+Object.keys(FOODS).length+' / '+MENU.reduce((n,m)=>n+m.d.length,0);
   show('mFood',true);blip(1500,.2,.04);setTimeout(()=>blip(1180,.25,.03),180)}
 $('fdClose').onclick=()=>show('mFood',false);$('mFood').onclick=e=>{if(e.target===$('mFood'))show('mFood',false)};
@@ -2744,7 +2765,12 @@ function catchCameo(e){e&&e.stopPropagation();const c=cameoOn;if(!c)return;const
   if(c.clue&&!CLUES[c.clue]){CLUES[c.clue]=Date.now();LSset('bl-clues',CLUES);setTimeout(()=>toast('🔍 단서를 주웠어요','하얀 꼬리가 눈밭 위를 달려갔다',3600),2200)}
   setTimeout(()=>{el.className='';cameoOn=null},1100)}
 
-function eventsTick(S){try{clueTick(S);cameoTick(S)}catch(e){}if(ticket&&ticket.stay){try{platTick(S)}catch(e){}return}try{paxTick(S);momentTick(S);microTick(S);hopTick(S)}catch(e){}try{passTick(S)}catch(e){}try{lightsTick(S)}catch(e){}try{pcardTick(S)}catch(e){}try{camTick(S);greetTick(S)}catch(e){}try{gaugeTick(S)}catch(e){}try{resvTick(S)}catch(e){}try{platTick(S);byeTick(S)}catch(e){}}
+const BGM=[["kr", 0, 614.25], ["ru", 614.25, 4127.5], ["eu", 4127.5, 5076.5], ["sea", 5076.5, 5964.75]];const BGA={};let bgmCur=null,bgmOn=false;
+function bgmEl(k){if(BGA[k]!==undefined)return BGA[k];const a=new Audio('audio/bgm_'+k+'.mp3');a.loop=true;a.preload='auto';a.volume=0;a.onerror=()=>{BGA[k]=null};BGA[k]=a;return a}
+function bgmFade(a,to,ms){if(!a)return;clearInterval(a._f);const from=a.volume,t0=performance.now();if(to>0&&a.paused){a.play().catch(()=>{})}a._f=setInterval(()=>{const f=Math.min(1,(performance.now()-t0)/ms);a.volume=Math.max(0,Math.min(1,from+(to-from)*f));if(f>=1){clearInterval(a._f);if(to===0)a.pause()}},60)}
+function bgmTick(S){if(!bgmOn)return;const km=S.km||0,b=BGM.find(x=>km>=x[1]&&km<x[2])||BGM[0];if(b[0]===bgmCur)return;const old=bgmCur;bgmCur=b[0];if(old&&BGA[old])bgmFade(BGA[old],0,4000);const a=bgmEl(b[0]);if(a)bgmFade(a,window.BGV||.32,4000)}
+function bgmSet(on){bgmOn=on;if(!on){for(const k in BGA)if(BGA[k])bgmFade(BGA[k],0,800);bgmCur=null}else{try{bgmTick(cur)}catch(e){}}}
+function eventsTick(S){try{bgmTick(S)}catch(e){}try{clueTick(S);cameoTick(S)}catch(e){}if(ticket&&ticket.stay){try{platTick(S)}catch(e){}return}try{paxTick(S);momentTick(S);microTick(S);hopTick(S)}catch(e){}try{passTick(S)}catch(e){}try{lightsTick(S)}catch(e){}try{pcardTick(S)}catch(e){}try{camTick(S);greetTick(S)}catch(e){}try{gaugeTick(S)}catch(e){}try{resvTick(S)}catch(e){}try{platTick(S);byeTick(S)}catch(e){}}
 
 // ───────── 작은 사건들: 들어와 있는 동안 1~2분마다 무언가 일어남 ─────────
 const FACTS=[[0, 162.5, ["피란 시절 사람들은 \"헤어지면 영도다리에서 만나자\"고 약속했다.", "영도에는 질투 많은 산신 할매가 살아서, 이사 온 사람이 오래 못 버틴다는 이야기가 있다.", "이 밤기차가 서울에 닿을 무렵, 첫 지하철은 아직 차고에서 잠들어 있다."]], [162.5, 633.75, ["경복궁 마당의 큰 물그릇 \"드므\"는 불귀신이 비친 제 얼굴에 놀라 도망가라고 놓았다고 한다.", "도깨비는 메밀묵을 좋아하고, 씨름할 땐 왼다리가 약하다는 옛이야기가 있다.", "도깨비불은 사람을 홀려 같은 자리를 빙빙 돌게 만든다는 옛말이 있다."]], [633.75, 1332.5, ["바이칼엔 강이 300개 넘게 흘러들지만, 나가는 강은 앙가라 하나뿐이다.", "바이칼물범 \"네르파\"는 바다에서 수천 km 떨어진 호수에 사는 민물 물범이다.", "바이칼은 세계에서 가장 깊은 호수다. 약 1,642m."]], [1332.5, 3071.25, ["1908년 퉁구스카에선 서울 세 배가 넘는 넓이의 숲이 한순간에 쓰러졌다.", "라이카는 1957년 지구 궤도를 돈 첫 번째 동물이다.", "한겨울 시베리아의 밤은 열여섯 시간이 넘는다."]], [3071.25, 4550.0, ["모스크바 지하엔 지도에 없는 비밀 지하철 \"메트로-2\"가 있다는 소문이 있다.", "마트료시카는 1890년대 모스크바 근교 공방에서 처음 만들어졌다.", "차이콥스키는 백조의 호수와 호두까기 인형을 모두 작곡했다."]], [4550.0, 4956.25, ["노이슈반슈타인을 지은 루트비히 2세는 1886년 호수에서 수수께끼처럼 세상을 떠났다.", "하멜른엔 1284년 피리 부는 사나이가 아이 130명을 데려갔다는 기록이 남아 있다.", "하이디는 1880년 스위스 작가 요한나 슈피리가 쓴 소설이다."]], [4956.25, 5200.0, ["루체른 필라투스 산엔 용이 떨어뜨린 \"용의 돌\"이 병을 고쳤다는 전설이 있다.", "카펠 다리는 유럽에서 가장 오래된 지붕 덮인 나무다리로 꼽힌다.", "파리 오페라 극장 지하엔 진짜 물탱크 호수가 있다. 「오페라의 유령」의 무대."]], [5200.0, 5964.75, ["1925년 사기꾼 빅토르 뤼스티그는 에펠탑을 고철로 팔아 치우고, 한 번 더 팔려고 했다.", "런던탑의 까마귀가 모두 떠나면 왕국이 무너진다는 전설 때문에 지금도 까마귀를 키운다.", "베이커가 221B로는 지금도 셜록 앞으로 편지가 온다."]]];
@@ -2822,7 +2848,7 @@ window.__ev=k=>{if(k==='mini')nextMini=0;if(k==='f')nextF=0;if(k==='c'){nextCond
 
 
 // 웹: 가로 객실 사진으로 교체
-(function(){const mq=matchMedia('(min-width:900px) and (min-aspect-ratio:5/4) and (min-height:560px)');const sw=()=>{const w=mq.matches,a=document.getElementById('cabinImg'),b=document.getElementById('cabinDay');if(!a||!b)return;const na='img/zcab_'+(w?'w':'m')+'_n.webp',nb='img/zcab_'+(w?'w':'m')+'_d.webp';if(!a.src.endsWith(na))a.src=na;if(!b.src.endsWith(nb))b.src=nb};sw();try{mq.addEventListener('change',sw)}catch(e){mq.addListener(sw)}})();
+(function(){const mq=matchMedia('(min-width:900px) and (min-aspect-ratio:5/4) and (min-height:560px)');const sw=()=>{const w=mq.matches,a=document.getElementById('cabinImg'),b=document.getElementById('cabinDay');if(!a||!b)return;const na='img/zcab_'+(w?'w':'m')+'_n.webp',nb='img/zcab_'+(w?'w':'m')+'_d.webp';if(!a.src.endsWith(na))a.src=na;if(!b.src.endsWith(nb))b.src=nb;const fn='img/zfg_'+(w?'w':'m')+'_n.webp',fd='img/zfg_'+(w?'w':'m')+'_d.webp',x=document.getElementById('fgN'),y=document.getElementById('fgD');if(x&&!x.src.endsWith(fn))x.src=fn;if(y&&!y.src.endsWith(fd))y.src=fd};sw();try{mq.addEventListener('change',sw)}catch(e){mq.addListener(sw)}})();
 // 닫기 X + ESC (웹)
 (function(){const mods=[...document.querySelectorAll('.modal')];const closeTop=()=>{const m=[...document.querySelectorAll('.modal.on')].pop();if(!m)return false;m.dispatchEvent(new MouseEvent('click',{bubbles:true}));if(m.classList.contains('on')){const c=m.querySelector('.closer,#logClose,#btnBoard,#pcClose');if(c)c.click();else{m.classList.remove('on');document.body.classList.toggle('mopen',!!document.querySelector('.modal.on'))}}return true};
   mods.forEach(m=>{const x=document.createElement('button');x.className='mx';x.setAttribute('aria-label','닫기');x.textContent='×';x.onclick=e=>{e.stopPropagation();closeTop()};m.appendChild(x)});

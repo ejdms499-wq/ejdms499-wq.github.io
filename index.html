@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="only light">
 <meta name="darkreader-lock">
-<title>부산발 런던행 — 실제 시간으로 달리는 침대열차</title>
-<meta name="description" content="매일 밤 9시 부산역을 떠나 아흐레 동안 실제 시간으로 달리는 침대열차. 창밖은 지금 이 순간, 열차가 지나는 곳의 풍경입니다.">
+<title>부산발 런던행 — 실제 시간으로 달리는 환상 침대열차</title>
+<meta name="description" content="매일 밤 9시 부산역을 떠나 나흘 동안 실제 시간으로 달리는 환상 침대열차. 창밖은 지금 이 순간, 열차가 지나는 곳의 풍경입니다.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="부산발 런던행">
 <meta property="og:title" content="부산발 런던행">
-<meta property="og:description" content="매일 밤 9시 부산역을 떠나 아흐레 동안 실제 시간으로 달리는 침대열차. 지금 이 열차는 어디를 지나고 있을까요.">
+<meta property="og:description" content="매일 밤 9시 부산역을 떠나 나흘 동안 실제 시간으로 달리는 환상 침대열차. 지금 이 열차는 어디를 지나고 있을까요.">
 <meta property="og:url" content="https://ejdms499-wq.github.io/">
 <meta property="og:image" content="https://ejdms499-wq.github.io/og.jpg">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
@@ -72,7 +72,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
 #win{position:absolute;inset:0;border-radius:18px;overflow:hidden;background:#8aa;
   box-shadow:0 0 0 3px #2b1c12,0 0 0 5px #a3824f,0 0 0 7px #2b1c12,inset 0 0 0 1px rgba(0,0,0,.4)}
 #win canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
-#cv{filter:saturate(1.2) contrast(1.13)}
+#cv{filter:saturate(1.04) contrast(1.02)}
 #glasscv{pointer-events:none;transition:opacity 1.2s}
 #glassrefl{position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;transition:opacity 1.5s;opacity:0;background:radial-gradient(ellipse 9% 7% at 61% 97%,rgba(255,216,160,.30),transparent 70%),radial-gradient(ellipse 48% 30% at 53% 104%,rgba(255,190,120,.22),transparent 70%),radial-gradient(ellipse 30% 20% at 20% 100%,rgba(255,200,140,.06),transparent 70%)}
 #glass{position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 30px rgba(0,0,0,.45);
@@ -240,9 +240,9 @@ body:not(.dev) #speed,body:not(.dev) #jumpBtn{display:none!important}
 
 /* ───── 2026-11 리디자인: 장치를 걷어내고 창과 글 한 줄만 ───── */
 #top,#route,#bar,#clock{display:none!important}
-#stage{aspect-ratio:864/1536!important;height:max(100%,calc(min(100vw,560px)*1.7778))!important}
+#stage{aspect-ratio:816/1456!important;height:max(100%,calc(min(100vw,560px)*1.7843))!important}
 @media (min-aspect-ratio:3/4){#app:not(.gaze) #stage{height:100%!important}#app:not(.gaze){max-width:min(560px,56.25vh)!important}}
-#app:not(.gaze) #win{left:10%!important;top:21.5%!important;width:80.4%!important;height:50.9%!important}
+#app:not(.gaze) #win{left:23.6%!important;top:20.8%!important;width:54.6%!important;height:40%!important}
 #cabinDay{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;opacity:0;transition:opacity 4s}
 #app.gaze #cabinDay{opacity:0!important;transition:none!important}
 #sun,#lampglow{display:none!important}
@@ -523,7 +523,7 @@ body:not(.dev) #speed,body:not(.dev) #jumpBtn{display:none!important}
 
 .modal{background:rgba(10,8,6,.82)!important;-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px)}
 body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transition:opacity .25s}
-#tunrefl{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity 1.2s;background:url(img/cabin_n.webp) center 62%/160% auto no-repeat;transform:scaleX(-1);filter:blur(2.5px) brightness(.9);mix-blend-mode:screen}
+#tunrefl{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity 1.2s;background:url(img/zcab_m_n.webp) center 62%/160% auto no-repeat;transform:scaleX(-1);filter:blur(2.5px) brightness(.9);mix-blend-mode:screen}
 #cap.tight .c3{display:none!important}#cap.tight #room{margin-bottom:6px}#cap.tight #hop{margin-top:6px}
 .fdph.has{border:10px solid #fbf8f0;border-bottom-width:48px;border-radius:2px;transform:rotate(-1.4deg);position:relative;overflow:visible;box-shadow:0 2px 0 rgba(0,0,0,.08),0 22px 44px rgba(0,0,0,.55)}
 .fdph.has::before{content:'';position:absolute;left:50%;top:-22px;width:86px;height:24px;margin-left:-43px;background:rgba(236,224,196,.8);box-shadow:0 1px 2px rgba(0,0,0,.2);transform:rotate(-3deg)}
@@ -584,11 +584,15 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
 @media (min-width:900px) and (min-aspect-ratio:5/4) and (min-height:560px){
  body #app,body #app:not(.gaze){max-width:none!important}
  body #app{background:#2a1d14!important}
- #app::before{content:"";position:absolute;inset:-60px;z-index:0;background:url(img/cabin_wn_bg.jpg) center 70%/cover;filter:blur(18px);pointer-events:none}
- #app.day::before{background-image:url(img/cabin_wd_bg.jpg)}
+ #app::before{content:"";position:absolute;inset:-60px;z-index:0;background:url(img/zcab_wn_bg.jpg) center 70%/cover;filter:blur(18px);pointer-events:none}
+ #app.day::before{background-image:url(img/zcab_w_bg.jpg)}
  #app.gaze::before{display:none}
  #app:not(.gaze) #stage{left:50%!important;top:0!important;transform:translateX(-50%)!important;height:min(86vh,66.6667vw)!important;width:auto!important;aspect-ratio:1536/1024!important;-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent),linear-gradient(180deg,#000 84%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent),linear-gradient(180deg,#000 84%,transparent);mask-composite:intersect}
- #app:not(.gaze) #win{left:7.65%!important;top:15.1%!important;width:84.5%!important;height:61%!important;border-radius:3.2%/5.2%!important}
+ #app:not(.gaze) #win{left:19.6%!important;top:20.8%!important;width:62.2%!important;height:49.4%!important;border-radius:0!important}
+ #app:not(.gaze) #seat{left:66%;width:26%;bottom:6%;height:52%}
+ #app:not(.gaze) #rbt{height:34%}
+ #cap,#cap .c3,#app.day #cap,#app.day #cap .c3{color:rgba(243,234,216,.94)!important;text-shadow:0 1px 10px rgba(0,0,0,.75)!important}
+ #app:not(.gaze) #sill .ob span{color:rgba(243,234,216,.9)!important;text-shadow:0 1px 6px rgba(0,0,0,.7)!important}
  #app:not(.gaze) #sill{top:79.3%!important;gap:clamp(30px,3.4vw,52px)!important;transform:scale(1.22);transform-origin:50% 0}
  #app:not(.gaze) .hs,#app:not(.gaze) .coach,#app:not(.gaze) #drawer,#app:not(.gaze) #bento,#app:not(.gaze) #clock,#app:not(.gaze) #steam{display:none!important}
  #cap{top:calc(min(86vh,66.6667vw)*.905)!important;bottom:auto!important}#cap .c1{font-size:19px}#cap .c2{font-size:13px}
@@ -711,6 +715,24 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
 #veil .vtabs{display:flex;gap:6px;margin:0 0 18px}#veil .vtabs button{flex:1;padding:10px 8px;border-radius:999px;border:1px solid rgba(239,230,214,.25);color:rgba(239,230,214,.75);font:13px 'Noto Sans KR',sans-serif;background:transparent}
 #veil .vtabs button.on{background:#efe6d6;color:#221c16;border-color:#efe6d6}
 #veil .tr.spot .pl small b{color:#e9c27d;font-weight:400}#veil .spoth{font:10.5px 'Noto Sans KR',sans-serif;letter-spacing:.2em;opacity:.45;margin:18px 2px 4px}
+
+/* 환상열차: 맞은편 승객 · 로봇 카트 */
+#seat{position:absolute;left:59%;width:30%;bottom:14%;height:23%;z-index:3;display:flex;align-items:flex-end;justify-content:center;pointer-events:none}
+#seat img{max-width:100%;max-height:100%;object-fit:contain;object-position:bottom;opacity:0;transform:translateY(8px);transition:opacity 1.2s,transform 1.2s;filter:drop-shadow(0 6px 10px rgba(0,0,0,.35));pointer-events:auto;cursor:pointer}
+#seat.on img{opacity:1;transform:none}
+#app.lo #seat img{filter:brightness(.42) saturate(.8) drop-shadow(0 6px 10px rgba(0,0,0,.35))}
+#seat.on img{animation:seatBob 5.5s ease-in-out infinite}
+@keyframes seatBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.2%)}}
+#app.gaze #seat,#app.gaze #rbt{display:none}
+#rbt{position:absolute;bottom:1%;height:26%;left:100%;z-index:3;pointer-events:none;opacity:0}
+#rbt img{height:100%;filter:drop-shadow(0 6px 8px rgba(0,0,0,.35))}
+#rbt.go{animation:rbtGo 11s linear forwards}
+@keyframes rbtGo{0%{left:100%;opacity:1}45%{left:42%;opacity:1}60%{left:42%;opacity:1}100%{left:-40%;opacity:1}}
+#rbt.go img{animation:rbtWob .5s ease-in-out infinite}
+@keyframes rbtWob{0%,100%{transform:rotate(-1.5deg)}50%{transform:rotate(1.5deg)}}
+#cartBot{display:block;width:62px;margin:-46px auto 4px;filter:drop-shadow(0 4px 6px rgba(0,0,0,.4))}
+#veil .vtrain{display:block;width:100%;border-radius:10px;margin:0 0 22px;box-shadow:0 10px 30px rgba(0,0,0,.45)}
+@media (max-width:899px){#veil .vtrain{max-height:30vh;object-fit:cover}}
 </style>
 </head>
 <body>
@@ -729,7 +751,7 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
       <div id="flash"></div>
       <button id="mail"><svg viewBox="0 0 24 24" fill="none" stroke="#3a2a1e" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="1.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></svg><span id="mailtxt">엽서 도착</span></button>
     </div>
-    <img id="cabinImg" src="img/cabin_n.webp" alt=""><img id="cabinDay" src="img/cabin_d.webp" alt="">
+    <img id="cabinImg" src="img/zcab_m_n.webp" alt=""><img id="cabinDay" src="img/zcab_m_d.webp" alt=""><div id="seat"><img id="seatImg" alt=""></div><div id="rbt"><img src="img/zrobot.webp" alt=""></div>
     <div id="sill">
     <button class="ob" id="obTicket"><i class="o-tk"><b>부산 → 런던</b><em id="obTkNo"></em></i><span>승차권</span></button>
     <button class="ob" id="obCard"><i class="o-pc" id="obCardImg"></i><span>엽서</span></button>
@@ -770,7 +792,7 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
   <rect x="0" y="87" width="300" height="3" fill="#8b8172"/></svg>
   <div class="gw" id="gW">1,435 <small>mm</small></div><div class="gs" id="gS"></div><div class="gn" id="gN"></div></div>
   <div id="plat"><div id="plBg"></div><div class="plp"><div class="plk" id="plK"></div><div class="ple" id="plE"></div><div class="plt" id="plT"></div><div class="plb" id="plB"></div></div></div>
-  <div id="cart"><div id="cartT"></div><div id="cartD"></div><div class="cb"><button id="cartNo">괜찮아요</button><button id="cartBuy">하나 사기</button></div></div>
+  <div id="cart"><img id="cartBot" src="img/zrobot.webp" alt=""><div id="cartT"></div><div id="cartD"></div><div class="cb"><button id="cartNo">괜찮아요</button><button id="cartBuy">하나 사기</button></div></div>
   <div id="roomSheet"><div class="sheet"></div></div>
   <div id="cap"><div id="room"></div><div class="c1" id="c1">부산발 런던행</div><div class="c2" id="c2"></div><div id="hop"></div><div id="getoff">플랫폼에 내리기</div><div id="resv"></div><div class="c3" id="c3"></div></div>
   <button id="menuBtn" aria-label="메뉴"><svg viewBox="0 0 24 24"><path d="M5 8h14M5 12h14M5 16h9"/></svg></button>
@@ -790,9 +812,9 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
     <div class="fine">본 열차는 아직 존재하지 않습니다</div>
   </div></div>
   <div id="veil"><div class="vin">
-    <div class="vL"><div class="v1">부산발 런던행</div><div class="v2">BUSAN — LONDON</div>
-    <div class="v5">매일 밤 9시 부산역을 떠나<br>아흐레 동안 실제 시간으로 달리는 침대열차</div>
-    <div class="v6"><span style="white-space:nowrap">부산 ·</span> <span style="white-space:nowrap">서울 ·</span> <span style="white-space:nowrap">원산 ·</span> <span style="white-space:nowrap">두만강 ·</span> <span style="white-space:nowrap">하바롭스크 ·</span> <span style="white-space:nowrap">바이칼 ·</span> <span style="white-space:nowrap">모스크바 ·</span> <span style="white-space:nowrap">바르샤바 ·</span> <span style="white-space:nowrap">베를린 ·</span> <span style="white-space:nowrap">파리 ·</span> <span style="white-space:nowrap">런던</span></div></div>
+    <div class="vL"><img class="vtrain" src="img/zveil.webp" alt=""><div class="v1">부산발 런던행</div><div class="v2">BUSAN — LONDON</div>
+    <div class="v5">매일 밤 9시 부산역을 떠나<br>나흘 동안 실제 시간으로 달리는 환상 침대열차</div>
+    <div class="v6"><span style="white-space:nowrap">부산 ·</span> <span style="white-space:nowrap">서울 ·</span> <span style="white-space:nowrap">☁ 구름 위 ·</span> <span style="white-space:nowrap">바이칼 ·</span> <span style="white-space:nowrap">🌌 오로라 ·</span> <span style="white-space:nowrap">모스크바 ·</span> <span style="white-space:nowrap">동화의 숲 ·</span> <span style="white-space:nowrap">노이슈반슈타인 ·</span> <span style="white-space:nowrap">알프스 ·</span> <span style="white-space:nowrap">루체른 ·</span> <span style="white-space:nowrap">파리 ·</span> <span style="white-space:nowrap">🐋 해저터널 ·</span> <span style="white-space:nowrap">런던</span></div></div>
     <div class="vR"><button id="vMine" class="tr mine"></button>
     <div class="vtabs"><button class="on" data-t="list">지금 달리는 열차</button><button data-t="spot">명소 골라 타기</button></div>
     <div class="vl"><span id="vLbl">지금 달리고 있는 열차</span><i id="vNow"></i></div>
@@ -890,28 +912,18 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
 (()=>{
 const $=id=>document.getElementById(id);
 const ST_N=[
- {k:'부산',e:'BUSAN',km:0,lat:35.115,lon:129.04,tm:15,ta:10,bg:'bplat',lm:'',msg:'출발했다. 바다 냄새가 났다.'},
- {k:'서울',e:'SEOUL',km:420,lat:37.556,lon:126.97,tm:12.5,ta:14,bg:'kseoul',lm:'namsan',msg:'한강을 건넜다.'},
- {k:'원산',e:'WONSAN',km:640,lat:39.15,lon:127.44,tm:11,ta:12,bg:'st_wonsan',lm:'',msg:'바다가 다시 보였다.'},
- {k:'두만강',e:'TUMANGANG',km:1290,lat:42.42,lon:130.6,tm:5,ta:16,bg:'st_tumen',lm:'',msg:'강을 건너면 대륙.'},
- {k:'블라디보스토크',e:'VLADIVOSTOK',km:1540,lat:43.11,lon:131.88,tm:5,ta:15,bg:'st_vlad',lm:'bridge',msg:'바다 끝에 있는 도시.'},
- {k:'하바롭스크',e:'KHABAROVSK',km:2310,lat:48.48,lon:135.07,tm:2,ta:22,bg:'st_khab',lm:'',msg:'아무르강이 아주 넓었다.'},
- {k:'울란우데',e:'ULAN-UDE',km:5190,lat:51.83,lon:107.6,tm:-1,ta:23,bg:'st_uu',lm:'',msg:'하늘이 높다.'},
- {k:'슬류댠카',e:'SLYUDYANKA',km:5520,lat:51.66,lon:103.7,tm:0,ta:18,bg:'st_sly',lm:'',msg:'바이칼이다.'},
- {k:'이르쿠츠크',e:'IRKUTSK',km:5640,lat:52.28,lon:104.28,tm:1,ta:20,bg:'st_irk',lm:'',msg:'호수를 지나왔다.'},
- {k:'노보시비르스크',e:'NOVOSIBIRSK',km:7490,lat:55.03,lon:82.92,tm:1.5,ta:20,bg:'st_novo',lm:'',msg:'시베리아 한가운데.'},
- {k:'예카테린부르크',e:'YEKATERINBURG',km:8990,lat:56.84,lon:60.6,tm:3,ta:17,bg:'st_ekat',lm:'',msg:'여기서부터 유럽.'},
- {k:'모스크바',e:'MOSKVA',km:10790,lat:55.75,lon:37.62,tm:6,ta:13,bg:'st_msk',lm:'domes',msg:'지붕이 양파처럼 생겼다.'},
- {k:'바르샤바',e:'WARSZAWA',km:12040,lat:52.23,lon:21.01,tm:8.5,ta:10,bg:'st_waw',lm:'',msg:'다시 들판이 시작됐다.'},
- {k:'베를린',e:'BERLIN',km:12610,lat:52.52,lon:13.40,tm:10,ta:9.5,bg:'st_ber',lm:'tvtower',msg:'커피가 맛있었다.'},
- {k:'파리',e:'PARIS',km:13660,lat:48.88,lon:2.36,tm:12.5,ta:8,bg:'st_par',lm:'eiffel',msg:'거의 다 왔다.'},
- {k:'런던',e:'LONDON',km:14120,lat:51.53,lon:-0.12,tm:11.5,ta:7,bg:'st_ldn',lm:'bigben',msg:'도착했다. 부산이 멀다.'}];
+ {k:"부산",e:"BUSAN",km:0.0,lat:35.115,lon:129.04,tm:15,ta:10,bg:"zh_busan",lm:'',msg:"출발했다. 굴뚝에서 별 연기가 피어올랐다."},
+ {k:"서울",e:"SEOUL",km:162.5,lat:37.556,lon:126.97,tm:12.5,ta:14,bg:"zh_seoul",lm:'',msg:"한강의 불빛을 건넜다."},
+ {k:"바이칼",e:"BAIKAL",km:633.75,lat:51.66,lon:103.7,tm:0,ta:18,bg:"zh_baikal_am",lm:'',msg:"구름 아래로 내려오니 호수였다."},
+ {k:"크라스노야르스크",e:"KRASNOYARSK",km:1332.5,lat:56.01,lon:92.85,tm:1,ta:20,bg:"zt_taiga",lm:'',msg:"자작나무가 금빛으로 탔다."},
+ {k:"모스크바",e:"MOSKVA",km:3071.25,lat:55.75,lon:37.62,tm:6,ta:13,bg:"zh_moscow",lm:'',msg:"양파 지붕이 반짝였다."},
+ {k:"퓌센",e:"FÜSSEN",km:4550.0,lat:47.57,lon:10.7,tm:8,ta:10,bg:"zh_castle",lm:'',msg:"동화 속 성이 보였다."},
+ {k:"루체른",e:"LUZERN",km:4956.25,lat:47.05,lon:8.31,tm:9,ta:9,bg:"zh_lake",lm:'',msg:"호수에 노을이 졌다."},
+ {k:"파리",e:"PARIS",km:5200.0,lat:48.88,lon:2.36,tm:12.5,ta:8,bg:"zh_paris",lm:'',msg:"탑이 반짝반짝 빛났다."},
+ {k:"런던",e:"LONDON",km:5963.75,lat:51.53,lon:-0.12,tm:11.5,ta:7,bg:"zh_london",lm:'',msg:"도착했다. 별 연기는 어디로 갔을까."}];
 let ST=ST_N,LAST=ST.length-1,TOTAL_KM=ST[LAST].km;
-const FOOD_N=[['어묵 도시락','부산역에서 산 것'],['김밥 한 줄','서울역 매점'],['삶은 옥수수','창가에서 먹기 좋음'],['찐 감자','아직 따뜻함'],
- ['피로시키','블라디보스토크역 가판대'],['컵라면 「도시락」','러시아 기차의 국민 컵라면'],['부우즈','부랴트식 만두'],['훈제 오물','바이칼에서만 잡히는 생선'],
- ['펠메니','사워크림 듬뿍'],['흑빵과 홍차','유리잔 받침에 담겨 나옴'],['블리니','얇게 부친 팬케이크'],['피에로기','폴란드식 만두'],
- ['프레첼','베를린 중앙역'],['크루아상','파리 동역'],['피시 앤 칩스','종착역이 가까워짐']];
-const BI_N=[[0,2.2,'busanport'],[2.2,5.4,'tunnel'],[5.4,16,'kr01'],[16,19,'kr02'],[19,44,'kr03'],[44,46.5,'tunnel'],[46.5,50,'kr04'],[50,80,'kr05'],[80,109,'kr06'],[109,112,'kr07'],[112,130,'kr08'],[130,134,'kr09'],[134,165,'kr10'],[165,195,'kr11'],[195,199,'kr12'],[199,200.6,'tunnel'],[200.6,206,'kr12'],[206,207.2,'tunnel'],[207.2,212,'kr12'],[212,259,'kr13'],[259,262,'kr14'],[262,300,'kr15'],[300,330,'kcountry'],[330,385,'kr16'],[385,417.8,'kr17'],[417.8,422.4,'kseoul'],[422.4,424.6,'tunnel'],[424.6,470,'k18'],[470,540,'k19'],[540,645,'nk1'],[645,649.5,'nk2'],[649.5,654.5,'hz01'],[654.5,720,'nk2'],[720,840,'nk3'],[840,960,'nk4'],[960,1005.5,'nk5'],[1005.5,1010.5,'hz02'],[1010.5,1080,'nk5'],[1080,1170,'nk6'],[1170,1247.5,'nk7'],[1247.5,1252.5,'hz03'],[1252.5,1262,'nk7'],[1262,1300,'nk8'],[1300,1302.5,'ru1'],[1302.5,1307.5,'hz04'],[1307.5,1380,'ru1'],[1380,1500,'ngt_forest'],[1500,1529.5,'ngt_town'],[1529.5,1534.5,'hz05'],[1534.5,1600,'ngt_town'],[1600,1688,'ngt_forest'],[1688,1692,'hn01'],[1692,1858,'ngt_forest'],[1858,1862,'hn02'],[1862,2090,'ngt_forest'],[2090,2147.5,'ru2'],[2147.5,2152.5,'hz06'],[2152.5,2200,'ru2'],[2200,2295,'ru3'],[2295,2325,'ru4'],[2325,2477.5,'ru5'],[2477.5,2482.5,'hz07'],[2482.5,2540,'ru5'],[2540,2690,'ru6'],[2690,2717.5,'ru7'],[2717.5,2722.5,'hz08'],[2722.5,2780,'ru7'],[2780,2868,'ngt_forest'],[2868,2872,'hn01'],[2872,3038,'ngt_forest'],[3038,3042,'hn02'],[3042,3208,'ngt_forest'],[3208,3212,'hn01'],[3212,3378,'ngt_forest'],[3378,3382,'hn02'],[3382,3548,'ngt_forest'],[3548,3552,'hn01'],[3552,3700,'ngt_forest'],[3700,3787.5,'ru8'],[3787.5,3792.5,'hz09'],[3792.5,3830,'ru8'],[3830,3957.5,'ru9'],[3957.5,3962.5,'hz10'],[3962.5,4030,'ru9'],[4030,4200,'ru10'],[4200,4267.5,'ru11'],[4267.5,4272.5,'hz11'],[4272.5,4330,'ru11'],[4330,4405,'ru12'],[4405,4600,'ngt_open'],[4600,4660,'ngt_town'],[4660,4748,'ngt_forest'],[4748,4752,'hn02'],[4752,4918,'ngt_forest'],[4918,4922,'hn01'],[4922,5150,'ngt_forest'],[5150,5205,'ngt_town'],[5205,5330,'ru13'],[5330,5337.5,'ru14'],[5337.5,5342.5,'hz12'],[5342.5,5425,'ru14'],[5425,5477.5,'ru15'],[5477.5,5482.5,'hz13'],[5482.5,5535,'ru15'],[5535,5597.5,'ru16'],[5597.5,5602.5,'hz14'],[5602.5,5655,'ru16'],[5655,5840,'ru17'],[5840,5902.5,'ru18'],[5902.5,5907.5,'hz15'],[5907.5,5960,'ru18'],[5960,6048,'ngt_forest'],[6048,6052,'hn02'],[6052,6218,'ngt_forest'],[6218,6222,'hn01'],[6222,6388,'ngt_forest'],[6388,6392,'hn02'],[6392,6558,'ngt_forest'],[6558,6562,'hn01'],[6562,6700,'ngt_forest'],[6700,6760,'ngt_town'],[6760,6920,'ngt_open'],[6920,6957.5,'ru19'],[6957.5,6962.5,'hz16'],[6962.5,7040,'ru19'],[7040,7247.5,'ru20'],[7247.5,7252.5,'hz17'],[7252.5,7300,'ru20'],[7300,7465,'ru21'],[7465,7505,'ru22'],[7505,7557.5,'ru23'],[7557.5,7562.5,'hz18'],[7562.5,7600,'ru23'],[7600,7688,'ngt_open'],[7688,7692,'hn02'],[7692,7858,'ngt_open'],[7858,7862,'hn01'],[7862,8090,'ngt_open'],[8090,8140,'ngt_town'],[8140,8228,'ngt_open'],[8228,8232,'hn02'],[8232,8398,'ngt_open'],[8398,8402,'hn01'],[8402,8570,'ngt_open'],[8570,8657.5,'ru24'],[8657.5,8662.5,'hz19'],[8662.5,8700,'ru24'],[8700,8840,'ru25'],[8840,9005,'ru26'],[9005,9019.5,'ru27'],[9019.5,9024.5,'hz20'],[9024.5,9062.5,'ru27'],[9062.5,9120,'ru27b'],[9120,9157.5,'ru28'],[9157.5,9162.5,'hz21'],[9162.5,9235,'ru28'],[9235,9410,'ngt_forest'],[9410,9450,'ngt_town'],[9450,9538,'ngt_forest'],[9538,9542,'hn02'],[9542,9708,'ngt_forest'],[9708,9712,'hn01'],[9712,9850,'ngt_forest'],[9850,9890,'ngt_town'],[9890,9978,'ngt_forest'],[9978,9982,'hn02'],[9982,10210,'ngt_forest'],[10210,10330,'ru29'],[10330,10355,'ru30'],[10355,10557.5,'ru31'],[10557.5,10562.5,'hz22'],[10562.5,10600,'ru31'],[10600,10757.5,'ru32'],[10757.5,10762.5,'hz23'],[10762.5,10805,'ru32'],[10805,10880,'ru33'],[10880,10968,'ngt_forest'],[10968,10972,'hn01'],[10972,11180,'ngt_forest'],[11180,11210,'ngt_town'],[11210,11298,'ngt_open'],[11298,11302,'hn02'],[11302,11460,'ngt_open'],[11460,11500,'ngt_town'],[11500,11588,'ngt_open'],[11588,11592,'hn01'],[11592,11758,'ngt_open'],[11758,11762,'hn02'],[11762,11840,'ngt_open'],[11840,11917.5,'eu1'],[11917.5,11922.5,'hz24'],[11922.5,11980,'eu1'],[11980,12033.5,'eu2'],[12033.5,12038.5,'hz25'],[12038.5,12055,'eu2'],[12055,12250,'eu3'],[12250,12380,'eu4'],[12380,12470,'eu5'],[12470,12592.5,'ngt_eu'],[12592.5,12597.5,'hz26'],[12597.5,12685.5,'ngt_eu'],[12685.5,12689.5,'hn03'],[12689.5,12855.5,'ngt_eu'],[12855.5,12859.5,'hn03'],[12859.5,13025.5,'ngt_eu'],[13025.5,13029.5,'hn03'],[13029.5,13179.5,'ngt_eu'],[13179.5,13184.5,'hz27'],[13184.5,13272.5,'ngt_eu'],[13272.5,13276.5,'hn03'],[13276.5,13440,'ngt_eu'],[13440,13482.5,'eu6'],[13482.5,13487.5,'hz28'],[13487.5,13560,'eu6'],[13560,13642.5,'eu7'],[13642.5,13647.5,'hz29'],[13647.5,13675,'eu7'],[13675,13860,'eu8'],[13860,13910,'chunnel'],[13910,13987.5,'eu9'],[13987.5,13992.5,'hz30'],[13992.5,14030,'eu9'],[14030,14200,'eu10']];
+const FOOD_N=[["어묵 꼬치", "부산역에서 산 것"], ["김밥 한 줄", "서울역 매점"], ["훈제 오물", "바이칼 할머니 노점"], ["홍차와 잼", "유리잔 받침에 담겨 나옴"], ["피로시키", "모스크바역 가판대"], ["생강 하트 쿠키", "퓌센 크리스마스 시장"], ["라클렛", "루체른역 노점"], ["크루아상", "파리 북역"], ["피시 앤 칩스", "종착역"]];
+const BI_N=[[0, 9, "zh_busan"], [9, 155.5, "zt_krnight"], [155.5, 168.5, "zh_seoul"], [168.5, 191.75, "zt_krnight"], [191.75, 614.25, "zt_cloud"], [614.25, 625.75, "zt_baikal"], [625.75, 641.75, "zh_baikal_am"], [641.75, 1163.5, "zt_baikal"], [1163.5, 1355.25, "zt_taiga"], [1355.25, 2096.25, "zt_aurora"], [2096.25, 2551.25, "zt_snowforest"], [2551.25, 2741.25, "zt_volga"], [2741.25, 2751.25, "zh_volga"], [2751.25, 2980.25, "zt_volga"], [2980.25, 3063.25, "zt_moscow"], [3063.25, 3077.25, "zh_moscow"], [3077.25, 3120.0, "zt_moscow"], [3120.0, 4127.5, "zt_snowforest"], [4127.5, 4290.0, "zt_fairy"], [4290.0, 4504.5, "zt_romantic"], [4504.5, 4542.0, "zt_castle"], [4542.0, 4557.0, "zh_castle"], [4557.0, 4676.75, "zt_castle"], [4676.75, 4749.75, "zt_alps"], [4749.75, 4759.75, "zh_alps"], [4759.75, 4832.75, "zt_alps"], [4832.75, 4949.25, "zt_lake"], [4949.25, 4962.25, "zh_lake"], [4962.25, 5076.5, "zt_lake"], [5076.5, 5192.0, "zt_paris"], [5192.0, 5207.0, "zh_paris"], [5207.0, 5255.25, "zt_paris"], [5255.25, 5671.25, "zt_sea"], [5671.25, 5951.75, "zt_england"], [5951.75, 5963.76, "zh_london"], [5963.76, 5970.25, "zt_england"]];
 const ST_S=[
  {k:'부산',e:'BUSAN',km:0,lat:35.115,lon:129.04,tm:15,ta:10,bg:'bplat',lm:'',msg:'출발했다. 바다 냄새가 났다.'},
  {k:'서울',e:'SEOUL',km:420,lat:37.556,lon:126.97,tm:12.5,ta:14,bg:'kseoul',lm:'namsan',msg:'한강을 건넜다.'},
@@ -953,6 +965,7 @@ const B={
  alpine:{far:'mount',trees:'pine',town:'e',ground:'field',near:.5}, ferry:{ferry:true}};
 
 const NEWB={"hz01": "taiga", "hz02": "taiga", "hz03": "taiga", "hz04": "taiga", "hz05": "taiga", "hz06": "taiga", "hz07": "taiga", "hz08": "taiga", "hz09": "taiga", "hz10": "taiga", "hz11": "taiga", "hz12": "taiga", "hz13": "taiga", "hz14": "taiga", "hz15": "taiga", "hz16": "taiga", "hz17": "taiga", "hz18": "taiga", "hz19": "taiga", "hz20": "taiga", "hz21": "taiga", "hz22": "taiga", "hz23": "taiga", "hz24": "fields", "hz25": "fields", "hz26": "fields", "hz27": "fields", "hz28": "fields", "hz29": "fields", "hz30": "fields", "hn01": "taiga", "hn02": "taiga", "hn03": "fields","ru27b":"mountain","k18": "korea", "k19": "korea", "nk1": "korea", "nk2": "mountain", "nk3": "mountain", "nk4": "mountain", "nk5": "mountain", "nk6": "mountain", "nk7": "mountain", "nk8": "river", "ru1": "plain", "ngt_forest": "taiga", "ngt_town": "taiga", "ru2": "taiga", "ru3": "taiga", "ru4": "rcity", "ru5": "taiga", "ru6": "taiga", "ru7": "taiga", "ru8": "taiga", "ru9": "taiga", "ru10": "taiga", "ru11": "taiga", "ru12": "taiga", "ru13": "mountain", "ru14": "baikal", "ru15": "baikal", "ru16": "baikal", "ru17": "birch", "ru18": "birch", "ru19": "birch", "ru20": "birch", "ru21": "birch", "ru22": "rcity", "ru23": "birch", "ngt_open": "taiga", "ru24": "birch", "ru25": "birch", "ru26": "birch", "ru27": "birch", "ru28": "birch", "ru29": "birch", "ru30": "birch", "ru31": "birch", "ru32": "birch", "ru33": "fields", "eu1": "fields", "eu2": "fields", "eu3": "fields", "eu4": "fields", "eu5": "fields", "ngt_eu": "fields", "eu6": "country", "eu7": "country", "eu8": "fields", "eu9": "country", "eu10": "ecity", "st_wonsan": "coast", "st_tumen": "river", "st_vlad": "port", "st_khab": "rcity", "st_uu": "rcity", "st_sly": "baikal", "st_irk": "rcity", "st_novo": "rcity", "st_ekat": "rcity", "st_msk": "rcity", "st_waw": "ecity", "st_ber": "ecity", "st_par": "ecity", "st_ldn": "ecity"};for(const k in NEWB)B[k]=Object.assign({},B[NEWB[k]],{photo:k});
+for(const k of ["zh_alps", "zh_baikal_am", "zh_busan", "zh_castle", "zh_lake", "zh_london", "zh_moscow", "zh_paris", "zh_seoul", "zh_volga", "zt_alps", "zt_aurora", "zt_baikal", "zt_castle", "zt_cloud", "zt_england", "zt_fairy", "zt_krnight", "zt_lake", "zt_moscow", "zt_paris", "zt_romantic", "zt_sea", "zt_snowforest", "zt_taiga", "zt_volga"])B[k]=Object.assign({},B.taiga,{photo:k});
 const FERRY=15, HMS=3600e3, SPD=65, DWELL=15*60e3, BOARD=0, ACC=6*60e3;
 let SC=[],TRIP=0;
 function buildSC(){SC=[];let t=0;ST.forEach((s,i)=>{if(i===0){SC.push({arr:0,dep:BOARD});t=BOARD;return}
@@ -1049,16 +1062,17 @@ const SCN={platd:{pass:1},platn:{pass:1},busan:{pass:1},seoul:{pass:1},country:{
  kr01:{},kr02:{pass:1},kr03:{},kr04:{pass:1},kr05:{},kr06:{},kr07:{pass:1},kr08:{},kr09:{pass:1},kr10:{},kr11:{},kr12:{},kr13:{},kr14:{pass:1},kr15:{},kr16:{},kr17:{}};
 Object.assign(SCN,{"hz01": {"pass": 1, "baked": 1, "hero": 1}, "hz02": {"pass": 1, "baked": 1, "hero": 1}, "hz03": {"pass": 1, "baked": 1, "hero": 1}, "hz04": {"pass": 1, "baked": 1, "hero": 1}, "hz05": {"pass": 1, "baked": 1, "hero": 1}, "hz06": {"pass": 1, "baked": 1, "hero": 1}, "hz07": {"pass": 1, "baked": 1, "hero": 1}, "hz08": {"pass": 1, "baked": 1, "hero": 1}, "hz09": {"pass": 1, "baked": 1, "hero": 1}, "hz10": {"pass": 1, "baked": 1, "hero": 1}, "hz11": {"pass": 1, "baked": 1, "hero": 1}, "hz12": {"pass": 1, "baked": 1, "hero": 1}, "hz13": {"pass": 1, "baked": 1, "hero": 1}, "hz14": {"pass": 1, "baked": 1, "hero": 1}, "hz15": {"pass": 1, "baked": 1, "hero": 1}, "hz16": {"pass": 1, "baked": 1, "hero": 1}, "hz17": {"pass": 1, "baked": 1, "hero": 1}, "hz18": {"pass": 1, "baked": 1, "hero": 1}, "hz19": {"pass": 1, "baked": 1, "hero": 1}, "hz20": {"pass": 1, "baked": 1, "hero": 1}, "hz21": {"pass": 1, "baked": 1, "hero": 1}, "hz22": {"pass": 1, "baked": 1, "hero": 1}, "hz23": {"pass": 1, "baked": 1, "hero": 1}, "hz24": {"pass": 1, "baked": 1, "hero": 1}, "hz25": {"pass": 1, "baked": 1, "hero": 1}, "hz26": {"pass": 1, "baked": 1, "hero": 1}, "hz27": {"pass": 1, "baked": 1, "hero": 1}, "hz28": {"pass": 1, "baked": 1, "hero": 1}, "hz29": {"pass": 1, "baked": 1, "hero": 1}, "hz30": {"pass": 1, "baked": 1, "hero": 1}, "hn01": {"pass": 1, "baked": 1, "hero": 1}, "hn02": {"pass": 1, "baked": 1, "hero": 1}, "hn03": {"pass": 1, "baked": 1, "hero": 1},"ru27b":{"baked":1},"k18": {"baked": 1}, "k19": {"baked": 1}, "nk1": {"baked": 1}, "nk2": {"baked": 1}, "nk3": {"baked": 1}, "nk4": {"baked": 1}, "nk5": {"baked": 1}, "nk6": {"baked": 1}, "nk7": {"baked": 1}, "nk8": {"pass": 1, "baked": 1}, "ru1": {"baked": 1}, "ngt_forest": {"baked": 1}, "ngt_town": {"baked": 1}, "ru2": {"baked": 1}, "ru3": {"baked": 1}, "ru4": {"pass": 1, "baked": 1}, "ru5": {"baked": 1}, "ru6": {"baked": 1}, "ru7": {"baked": 1}, "ru8": {"baked": 1}, "ru9": {"baked": 1}, "ru10": {"baked": 1}, "ru11": {"baked": 1}, "ru12": {"baked": 1}, "ru13": {"baked": 1}, "ru14": {"baked": 1}, "ru15": {"baked": 1}, "ru16": {"baked": 1}, "ru17": {"baked": 1}, "ru18": {"baked": 1}, "ru19": {"baked": 1}, "ru20": {"baked": 1}, "ru21": {"baked": 1}, "ru22": {"pass": 1, "baked": 1}, "ru23": {"baked": 1}, "ngt_open": {"baked": 1}, "ru24": {"baked": 1}, "ru25": {"baked": 1}, "ru26": {"baked": 1}, "ru27": {"baked": 1}, "ru28": {"baked": 1}, "ru29": {"baked": 1}, "ru30": {"pass": 1, "baked": 1}, "ru31": {"baked": 1}, "ru32": {"baked": 1}, "ru33": {"baked": 1}, "eu1": {"baked": 1}, "eu2": {"baked": 1}, "eu3": {"baked": 1}, "eu4": {"baked": 1}, "eu5": {"baked": 1}, "ngt_eu": {"baked": 1}, "eu6": {"baked": 1}, "eu7": {"baked": 1}, "eu8": {"baked": 1}, "eu9": {"baked": 1}, "eu10": {"baked": 1}, "st_wonsan": {"pass": 1, "baked": 1}, "st_tumen": {"pass": 1, "baked": 1}, "st_vlad": {"pass": 1, "baked": 1}, "st_khab": {"pass": 1, "baked": 1}, "st_uu": {"pass": 1, "baked": 1}, "st_sly": {"pass": 1, "baked": 1}, "st_irk": {"pass": 1, "baked": 1}, "st_novo": {"pass": 1, "baked": 1}, "st_ekat": {"pass": 1, "baked": 1}, "st_msk": {"pass": 1, "baked": 1}, "st_waw": {"pass": 1, "baked": 1}, "st_ber": {"pass": 1, "baked": 1}, "st_par": {"pass": 1, "baked": 1}, "st_ldn": {"pass": 1, "baked": 1}});
 // 겨울판: 그림이 준비된 장면만, 해당 기간에 _w 그림으로 바꿔 씀
-const WREADY=['ru1','ngt_forest','ngt_town','st_vlad','ru2','ru3','ru4','st_khab','ru5','ru6','ru7','ru8','ru9','ru10','ru11','ru12','ngt_open','st_uu','ru13','ru14','ru15','st_sly','ru16','st_irk','ru17','ru18','ru19','ru20','ru21','ru22','st_novo','ru23','ru24','ru25','ru26','st_ekat','ru27','ru28','ru29','ru30','ru31','ru32','st_msk','ru33'];
+const WREADY0=['ru1','ngt_forest','ngt_town','st_vlad','ru2','ru3','ru4','st_khab','ru5','ru6','ru7','ru8','ru9','ru10','ru11','ru12','ngt_open','st_uu','ru13','ru14','ru15','st_sly','ru16','st_irk','ru17','ru18','ru19','ru20','ru21','ru22','st_novo','ru23','ru24','ru25','ru26','st_ekat','ru27','ru28','ru29','ru30','ru31','ru32','st_msk','ru33'];
 (function(){try{const k=new Date(Date.now()+9*36e5),md=(k.getUTCMonth()+1)*100+k.getUTCDate();
   const late={ru14:1,ru15:1,st_sly:1},inW=key=>late[key]?(md>=110&&md<=420):(md>=1201||md<=320);
-  for(const key of WREADY){if(!inW(key))continue;const wk=key+'_w';SCN[wk]=Object.assign({},SCN[key]);for(const b in B)if(B[b].photo===key)B[b].photo=wk;setTimeout(()=>{try{if(PNAME[key])PNAME[wk]=PNAME[key]}catch(e){}},0)}}catch(e){}})();
+  const WREADY=[];for(const key of WREADY){if(!inW(key))continue;const wk=key+'_w';SCN[wk]=Object.assign({},SCN[key]);for(const b in B)if(B[b].photo===key)B[b].photo=wk;setTimeout(()=>{try{if(PNAME[key])PNAME[wk]=PNAME[key]}catch(e){}},0)}}catch(e){}})();
 // 밤 풍경 돌려쓰기 (가을판일 때만): 같은 밤 그림이 반복되지 않게
 (function(){try{const V={ngt_forest:['ngt_forest','ngt_forest2','ngt_forest3','ngt_forest4'],ngt_open:['ngt_open','ngt_open2'],ngt_eu:['ngt_eu','ngt_eu2']};
   for(const base in V){if(!B[base]||B[base].photo!==base)continue;
     V[base].forEach(k=>{if(k===base)return;B[k]=Object.assign({},B[base],{photo:k});SCN[k]=Object.assign({},SCN[base]||{});setTimeout(()=>{try{if(PNAME[base])PNAME[k]=PNAME[base]}catch(e){}},0)});
     for(const arr of [BI_N,BI_S]){let n=0;for(const e of arr){if(e[2]===base){e[2]=V[base][n%V[base].length];n++}}}}}catch(e){}})();
 
+Object.assign(SCN,{"zh_alps": {"pass": 1, "baked": 1, "hero": 1}, "zh_baikal_am": {"pass": 1, "baked": 1, "hero": 1}, "zh_busan": {"pass": 1, "baked": 1, "hero": 1}, "zh_castle": {"pass": 1, "baked": 1, "hero": 1}, "zh_lake": {"pass": 1, "baked": 1, "hero": 1}, "zh_london": {"pass": 1, "baked": 1, "hero": 1}, "zh_moscow": {"pass": 1, "baked": 1, "hero": 1}, "zh_paris": {"pass": 1, "baked": 1, "hero": 1}, "zh_seoul": {"pass": 1, "baked": 1, "hero": 1}, "zh_volga": {"pass": 1, "baked": 1, "hero": 1}, "zt_alps": {"baked": 1, "spd": 0.12}, "zt_aurora": {"baked": 1, "spd": 0.1}, "zt_baikal": {"baked": 1, "spd": 0.14}, "zt_castle": {"baked": 1, "spd": 0.1}, "zt_cloud": {"baked": 1, "spd": 0.09, "moon": "cloud"}, "zt_england": {"baked": 1, "spd": 0.14}, "zt_fairy": {"baked": 1, "spd": 0.14}, "zt_krnight": {"baked": 1, "spd": 0.16}, "zt_lake": {"baked": 1, "spd": 0.1}, "zt_moscow": {"baked": 1, "spd": 0.12}, "zt_paris": {"baked": 1, "spd": 0.1}, "zt_romantic": {"baked": 1, "spd": 0.14}, "zt_sea": {"baked": 1, "spd": 0.1}, "zt_snowforest": {"baked": 1, "spd": 0.14, "moon": "snowforest"}, "zt_taiga": {"baked": 1, "spd": 0.16}, "zt_volga": {"baked": 1, "spd": 0.12}});
 const CITY={busan:1,seoul:1,kr01:1,kr07:1,kr08:1,kr14:1,kr16:1,kr17:1};
 const PV='?p=6';
 function loadPhoto(key){if(key==='plat'){loadPhoto('platd');loadPhoto('platn');return}if(PHOTO[key])return;const o=SCN[key]||{};PHOTO[key]={loading:true};
@@ -1077,10 +1091,12 @@ function managePhotos(km){const now=performance.now();if(now-lastNeed<500)return
   for(const k of need)loadPhoto(k);
   if(need.has('plat')){need.delete('plat');need.add('platd');need.add('platn')}
   for(const k of Object.keys(PHOTO)){if(!need.has(k)&&!(SCN[k]&&SCN[k].keep)&&PHOTO[k].ready){PHOTO[k].img.src='';delete PHOTO[k]}}}
+const MOONI={};for(const k of ['cloud','snowforest']){const im=new Image();im.src='img/zmoon_'+k+'.png';MOONI[k]=im}
 function drawPhoto(c,S,ph,pxm){
-  const sc=H/ph.h;
+  const sc=H/ph.h;{const sm=SCN[ph.key]&&SCN[ph.key].moon,mi=sm&&MOONI[sm];if(mi&&mi.complete&&mi.naturalWidth){const mh=H*(sm==='cloud'?.36:.2);c.save();c.globalAlpha=0;c.restore();ph._moon=[mi,mh]}else ph._moon=null}
   if(ph.pass){const sp=spanAt(ph.key,S.km),tw=ph.img.naturalWidth*sc,p=sp[1]<sp[0]?.42:Math.min(1,Math.max(0,(S.km-sp[0])/(sp[1]-sp[0])));c.drawImage(ph.img,-p*Math.max(0,tw-W),0,tw,H)}
   else{const tw=ph.w*sc, off=((S.vo*pxm*ph.spd*PAN)%tw+tw)%tw;for(let x=-off;x<W;x+=tw)c.drawImage(ph.tile,x,0,tw,H)}
+  if(ph._moon){const [mi,mh]=ph._moon,mw=mh*mi.naturalWidth/mi.naturalHeight;c.drawImage(mi,W*.68-mw/2,H*.06,mw,mh)}
   // 낮에는 살짝 밝게 (사진은 밤 기준)
   // 낮 밝기 덧칠 제거(사진이 뿌옇게 보이던 원인)
   if(ph.dusk&&S.light<.55){c.fillStyle='rgba(6,12,28,'+Math.min(.5,(.55-S.light)*1.1)+')';c.fillRect(0,0,W,H)}
@@ -1168,7 +1184,7 @@ function drawScene(c,bk,S){
   c.setTransform(DPR,0,0,DPR,GOX*DPR,GOY*DPR);
   const g=c.createLinearGradient(0,0,0,hz);g.addColorStop(0,rgb(sky0));g.addColorStop(1,rgb(sky1));c.fillStyle=g;c.fillRect(0,0,W,H);
   const ph0=b.photo&&photoFor(b.photo);if(ph0){const now=performance.now();if(ph0!==XF.cur){XF.prev=XF.cur;XF.cur=ph0;XF.t=now}
-    let fa=Math.min(1,(now-XF.t)/2600);fa=fa*fa*(3-2*fa);const fb=XF.prev;if(fa<1&&fb&&fb.ready&&fb.img&&fb.img.src)drawPhoto(c,S,fb,pxm);else fa=Math.min(fa,Math.min(1,(now-(ph0.t0||0))/900));c.globalAlpha=fa;drawPhoto(c,S,ph0,pxm);c.globalAlpha=1;drawLineside(c,S,b.photo);drawPoles(c,S);if(S.mode==='run'&&S.pass)drawPassLights(c,S);return}
+    let fa=Math.min(1,(now-XF.t)/2600);fa=fa*fa*(3-2*fa);const fb=XF.prev;if(fa<1&&fb&&fb.ready&&fb.img&&fb.img.src)drawPhoto(c,S,fb,pxm);else fa=Math.min(fa,Math.min(1,(now-(ph0.t0||0))/900));c.globalAlpha=fa;drawPhoto(c,S,ph0,pxm);c.globalAlpha=1;if(!/^z/.test(b.photo)){drawLineside(c,S,b.photo);drawPoles(c,S)}if(S.mode==='run'&&S.pass)drawPassLights(c,S);return}
   if(b.photo&&SCN[b.photo]&&SCN[b.photo].baked){let pv=null;{for(const d of [6,-6,12,-12]){const bb=B[biomeAt(S.km-d)];const q=bb&&bb.photo&&photoFor(bb.photo);if(q&&!q.pass){pv=q;break}}}if(pv&&pv.ready&&pv.img&&pv.img.src){drawPhoto(c,S,pv,pxm)}return}
   if(b.tunnel){drawTunnel(c,S,pxm);return}
   if(b.ferry){drawFerry(c,S,pxm,hz);return}
@@ -1450,16 +1466,16 @@ function depTimes(now){const k=new Date(now+KST),base=Date.UTC(k.getUTCFullYear(
 const pd=n=>String(n).padStart(2,'0');
 function kd(ms){const k=new Date(ms+KST);return {y:k.getUTCFullYear(),m:k.getUTCMonth()+1,d:k.getUTCDate(),h:k.getUTCHours(),mi:k.getUTCMinutes()}}
 const trainKey=dep=>{const a=kd(dep);return R_ID+a.y+pd(a.m)+pd(a.d)};
-const trainNo=dep=>{const a=kd(dep);return (R_ID==='s'?'남':'북')+' '+pd(a.m)+pd(a.d)};
+const trainNo=dep=>{const a=kd(dep);return '별 '+pd(a.m)+pd(a.d)};
 const passedIdx=el=>{let k=0;for(let i=1;i<=LAST;i++)if(el>=SC[i].arr)k=i;return k};
-const TOWNS=[[1650,'우수리스크'],[1790,'스파스크달니'],[1930,'레소자보드스크'],[2190,'뱌젬스키'],[2480,'비로비잔'],[2990,'벨로고르스크'],[3560,'스코보로디노'],[3960,'모고차'],[4330,'체르니솁스크'],[4620,'치타'],[5030,'페트롭스크자바이칼스키'],[5940,'지마'],[6290,'타이셰트'],[6440,'칸스크'],[6730,'크라스노야르스크'],[6890,'아친스크'],[7090,'마린스크'],[7240,'타이가'],[7760,'바라빈스크'],[8090,'옴스크'],[8370,'이심'],[8650,'튜멘'],[9360,'페름'],[9600,'발레지노'],[9840,'키로프'],[10330,'니즈니노브고로드'],[10580,'블라디미르'],[11200,'스몰렌스크'],[11330,'오르샤'],[11480,'민스크'],[11680,'바라노비치'],[11830,'브레스트'],[12340,'포즈난'],[12540,'프랑크푸르트(오데르)'],[12900,'하노버'],[13180,'쾰른'],[13420,'브뤼셀'],[13900,'칼레'],[14030,'애슈퍼드']];
+const TOWNS=[[78.0, "경부선 밤 들판"], [276.25, "구름 위 철길"], [471.25, "구름 위 철길"], [877.5, "바이칼 호숫가"], [1576.25, "시베리아 오로라"], [1836.25, "퉁구스카 하늘"], [2323.75, "눈 덮인 숲"], [2746.25, "볼가 강가"], [3445.0, "벨라루스의 밤 숲"], [3835.0, "폴란드의 밤 숲"], [4192.5, "그림 형제의 숲"], [4387.5, "로맨틱 가도"], [4754.75, "알프스 초원"], [5135.0, "부르고뉴 들판"], [5411.25, "해저터널"], [5768.75, "켄트 들판"]];
 const nearName=km=>{if(R_ID==='n'){let best=null,bd=1e9;for(const t of TOWNS){const d=Math.abs(t[0]-km);if(d<bd){bd=d;best=t[1]}}for(const s of ST){const d=Math.abs(s.km-km);if(d<=bd){bd=d;best=s.k}}if(best)return best}let b=0;for(let i=0;i<=LAST;i++)if(Math.abs(ST[i].km-km)<Math.abs(ST[b].km-km))b=i;return ST[b].k};
 
 // ───────── 엽서 그림 (나라별 빈티지 포스터) ─────────
-const LOC_N=['부산','서울','원산','두만강','Владивосток','Хабаровск','Улан-Удэ','Слюдянка','Иркутск','Новосибирск','Екатеринбург','Москва','Warszawa','Berlin','Paris','London'];
-const STAMP_N=[['KOREA','₩450'],['KOREA','₩450'],['TRANS-EURASIA',''],['TRANS-EURASIA',''],['РОССИЯ','₽35'],['РОССИЯ','₽35'],['РОССИЯ','₽35'],['РОССИЯ','₽35'],['РОССИЯ','₽35'],['РОССИЯ','₽35'],['РОССИЯ','₽35'],['РОССИЯ','₽35'],['POLSKA','4zł'],['DEUTSCHLAND','€1.80'],['FRANCE','€1.80'],['UNITED KINGDOM','£1.70']];
+const LOC_N=['부산','서울','Байкал','Красноярск','Москва','Füssen','Luzern','Paris','London'];
+const STAMP_N=[['KOREA','₩450'],['KOREA','₩450'],['РОССИЯ','₽35'],['РОССИЯ','₽35'],['РОССИЯ','₽35'],['DEUTSCHLAND','€1.80'],['SCHWEIZ','CHF 1.90'],['FRANCE','€1.80'],['UNITED KINGDOM','£1.70']];
 const BK=['#f1e8d8','#3b2f28'],BRU=['#1f3550','#f1e6d2'],BPL=['#a8322d','#f6ecdc'],BDE=['#262626','#e9c46a'],BFR=['#1f3a6b','#f4ead8'],BUK=['#1c2740','#efe2cc'],BCN=['#8e2a24','#f0d08a'],BKZ=['#1d6f8f','#f3d98a'],BAZ=['#1f5e7a','#f1e6d2'],BGE=['#6d2230','#f4e6d6'],BTR=['#b0302a','#f6ecdc'],BHU=['#2f5a3a','#f1e6d2'],BAT=['#a8322d','#f6ecdc'];
-const BAND_N=[BK,BK,BK,BK,BRU,BRU,BRU,BRU,BRU,BRU,BRU,BRU,BPL,BDE,BFR,BUK];
+const BAND_N=[BK,BK,BRU,BRU,BRU,BDE,['#b0302a','#fff3e2'],BFR,BUK];
 const LOC_S=['부산','서울','신의주','北京','西安','敦煌','乌鲁木齐','Алматы','Ақтау','Bakı','Tbilisi','İstanbul','Budapest','Wien','München','Paris','London'];
 const STAMP_S=[['KOREA','₩450'],['KOREA','₩450'],['TRANS-EURASIA',''],['中国','¥2'],['中国','¥2'],['中国','¥2'],['中国','¥2'],['QAZAQSTAN','₸150'],['QAZAQSTAN','₸150'],['AZƏRBAYCAN','₼1'],['GEORGIA','₾2'],['TÜRKİYE','₺20'],['MAGYARORSZÁG','Ft400'],['ÖSTERREICH','€1.80'],['DEUTSCHLAND','€1.80'],['FRANCE','€1.80'],['UNITED KINGDOM','£1.70']];
 const BAND_S=[BK,BK,BK,BCN,BCN,BCN,BCN,BKZ,BKZ,BAZ,BGE,BTR,BHU,BAT,BDE,BFR,BUK];
@@ -1475,6 +1491,9 @@ function pDome(c,x,y,r,col){c.fillStyle=col;c.beginPath();c.moveTo(x,y-r*2.3);c.
 function pPine(c,x,y,h,col){c.fillStyle=col;c.beginPath();c.moveTo(x,y-h);c.lineTo(x+h*.22,y);c.lineTo(x-h*.22,y);c.fill()}
 function pBirch(c,x,y,h,leaf){c.fillStyle='#f2eee6';c.fillRect(x-2,y-h,4,h);c.fillStyle='#3a332d';for(let k=0;k<5;k++)c.fillRect(x-2,y-h*(.2+k*.15),3,1.4);if(leaf){c.fillStyle=leaf;c.beginPath();c.ellipse(x,y-h*.85,h*.14,h*.2,0,0,7);c.fill()}}
 function pRound(c,x,y,r,col){c.fillStyle=col;c.beginPath();c.arc(x,y,r,0,7);c.arc(x-r*.7,y+r*.3,r*.75,0,7);c.arc(x+r*.7,y+r*.25,r*.8,0,7);c.fill()}
+const PCI={};function pcLoad(){for(const k of ["zh_busan", "zh_seoul", "zh_baikal_am", "zt_taiga", "zh_moscow", "zh_castle", "zh_lake", "zh_paris", "zh_london"]){if(PCI[k])continue;const im=new Image();im.src="img/"+k+".webp?p=7";PCI[k]=im}}pcLoad();
+const pcDraw=k=>c=>{const im=PCI[k];c.fillStyle="#e9dfcb";c.fillRect(0,0,PW,AH);if(!im||!im.complete||!im.naturalWidth)return false;const s=Math.max(PW/im.naturalWidth,AH/im.naturalHeight),w=im.naturalWidth*s,h=im.naturalHeight*s;c.drawImage(im,(PW-w)/2,(AH-h)/2,w,h)};
+const ART_Z=[pcDraw("zh_busan"),pcDraw("zh_seoul"),pcDraw("zh_baikal_am"),pcDraw("zt_taiga"),pcDraw("zh_moscow"),pcDraw("zh_castle"),pcDraw("zh_lake"),pcDraw("zh_paris"),pcDraw("zh_london")];
 const ART_N=[
  c=>{ // 부산
   pSky(c,'#f4c9a8','#fbecd9');pSun(c,455,118,44,'#ec7f62','rgba(255,200,150,.5)');pCloud(c,70,80,150,'rgba(255,248,236,.85)');pCloud(c,330,150,110,'rgba(255,248,236,.7)');
@@ -1725,10 +1744,10 @@ const ART_S=[ART_N[0],ART_N[1],
  },
  ART_N[14],ART_N[15]];
 let LOC=LOC_N,STAMP=STAMP_N,BANDS=BAND_N,ART=ART_N,R_ID='n';
-const TZ_N=[9,9,9,9,10,10,8,8,8,7,5,3,1,1,1,0], EU_N=[0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1], LANG_N=['ko','ko','ko','ko','ru','ru','ru','ru','ru','ru','ru','ru','pl','de','fr','en'];
+const TZ_N=[9,9,8,7,3,1,1,1,0], EU_N=[0,0,0,0,0,1,1,1,1], LANG_N=['ko','ko','ru','ru','ru','de','de','fr','en'];
 const TZ_S=[9,9,9,8,8,8,8,5,5,4,4,3,1,1,1,1,0], EU_S=[0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1], LANG_S=['ko','ko','ko','zh','zh','zh','zh','ru','ru','az','en','tr','hu','de','de','fr','en'];
 let TZ=TZ_N,EU=EU_N,LANG=LANG_N;
-const ROUTES={n:{TZ:TZ_N,EU:EU_N,LANG:LANG_N,ST:ST_N,FOOD:FOOD_N,BI:BI_N,LOC:LOC_N,STAMP:STAMP_N,BAND:BAND_N,ART:ART_N,name:'북쪽 길 · 시베리아'},s:{TZ:TZ_S,EU:EU_S,LANG:LANG_S,ST:ST_S,FOOD:FOOD_S,BI:BI_S,LOC:LOC_S,STAMP:STAMP_S,BAND:BAND_S,ART:ART_S,name:'남쪽 길 · 실크로드'}};
+const ROUTES={n:{TZ:TZ_N,EU:EU_N,LANG:LANG_N,ST:ST_N,FOOD:FOOD_N,BI:BI_N,LOC:LOC_N,STAMP:STAMP_N,BAND:BAND_N,ART:ART_Z,name:'환상열차'},s:{TZ:TZ_S,EU:EU_S,LANG:LANG_S,ST:ST_S,FOOD:FOOD_S,BI:BI_S,LOC:LOC_S,STAMP:STAMP_S,BAND:BAND_S,ART:ART_S,name:'남쪽 길 · 실크로드'}};
 function euDST(ms){const y=new Date(ms).getUTCFullYear();const ls=m=>{const d=new Date(Date.UTC(y,m+1,0,1));d.setUTCDate(d.getUTCDate()-d.getUTCDay());return d.getTime()};return ms>=ls(2)&&ms<ls(9)}
 const TZB=[[1290,10],[2590,9],[5030,8],[6320,7],[7940,6],[8250,5],[9570,4],[9690,3],[11840,1],[13885,0]],TZEU=11840;
 function tzAt(km,ms){if(ST[LAST].km!==14120){let i=0;while(i<LAST&&km>=ST[i+1].km)i++;let k=i;if(i<LAST){const mid=(ST[i].km+ST[i+1].km)/2;if(km>=mid)k=i+1}return TZ[k]+(EU[k]&&euDST(ms)?1:0)}
@@ -1742,17 +1761,17 @@ const pcCache={};
 function postcardArt(i){
   const ck=R_ID+i;if(pcCache[ck]) return pcCache[ck];
   const c0=document.createElement('canvas');c0.width=PW*2;c0.height=PH*2;const c=c0.getContext('2d');c.setTransform(2,0,0,2,0,0);
-  c.save();ART[i](c);c.restore();
+  c.save();const artOK=ART[i](c)!==false;c.restore();
   const [bc,tc]=BANDS[i];c.fillStyle=bc;c.fillRect(0,AH,PW,PH-AH);
   c.fillStyle=tc;c.textBaseline='alphabetic';c.textAlign='left';
   const name=LOC[i].toUpperCase();let fs=40;c.font='600 40px "Noto Serif KR",serif';{let w=0;for(const ch of name)w+=c.measureText(ch).width+4.8;if(w>350)fs=40*350/w}c.font='600 '+fs+'px "Noto Serif KR",serif';
   let tx=26;for(const ch of name){c.fillText(ch,tx,AH+50);tx+=c.measureText(ch).width+fs*.12}
-  c.globalAlpha=.75;c.font='11px "Noto Sans KR",sans-serif';c.textAlign='right';c.fillText(ST[i].k+'  ·  '+ST[i].e,PW-24,AH+32);c.fillText('부산발 런던행 · '+(R_ID==='s'?'남쪽 길':'북쪽 길')+'  '+pd(i+1)+' / '+(LAST+1),PW-24,AH+50);c.globalAlpha=1;
+  c.globalAlpha=.75;c.font='11px "Noto Sans KR",sans-serif';c.textAlign='right';c.fillText(ST[i].k+'  ·  '+ST[i].e,PW-24,AH+32);c.fillText('부산발 런던행 · 환상열차  '+pd(i+1)+' / '+(LAST+1),PW-24,AH+50);c.globalAlpha=1;
   // 종이 질감
   for(let k=0;k<5000;k++){c.fillStyle=hash(k,99)>.5?'rgba(255,250,235,.07)':'rgba(40,30,20,.06)';c.fillRect(hash(k,97)*PW,hash(k,98)*PH,1.2,1.2)}
   const vg=c.createRadialGradient(PW/2,PH/2,PH*.3,PW/2,PH/2,PW*.75);vg.addColorStop(0,'rgba(0,0,0,0)');vg.addColorStop(1,'rgba(60,40,20,.22)');c.fillStyle=vg;c.fillRect(0,0,PW,PH);
   c.strokeStyle='#f7f1e4';c.lineWidth=14;c.strokeRect(0,0,PW,PH);
-  return pcCache[ck]=c0.toDataURL('image/jpeg',.9);
+  const du=c0.toDataURL('image/jpeg',.9);if(artOK)pcCache[ck]=du;return du;
 }
 
 // ───────── 엽서 열기 · 보내기 · 받기 ─────────
@@ -1764,6 +1783,7 @@ function fmtDate(ms){const a=kd(ms);return a.y+'.'+pd(a.m)+'.'+pd(a.d)+' '+pd(a.
 
 // ───────── 엽서: 지금 창밖 풍경을 엽서로 ─────────
 const PNAME={platd:['부산역','BUSAN STATION'],platn:['부산역','BUSAN STATION'],busan:['부산항','BUSAN'],kr01:['부산 북구','BUSAN'],kr02:['구포','GUPO'],kr03:['낙동강','NAKDONG RIVER'],kr04:['밀양','MIRYANG'],kr05:['청도','CHEONGDO'],kr06:['경산','GYEONGSAN'],kr07:['대구','DAEGU'],kr08:['대구','DAEGU'],kr09:['왜관','WAEGWAN'],kr10:['구미','GUMI'],kr11:['김천','GIMCHEON'],kr12:['추풍령','CHUPUNGNYEONG'],kr13:['영동','YEONGDONG'],kr14:['대전','DAEJEON'],kr15:['조치원','JOCHIWON'],country:['천안','CHEONAN'],kr16:['평택','PYEONGTAEK'],kr17:['수원','SUWON'],seoul:['한강','SEOUL']};Object.assign(PNAME,{"hz01": ["원산 송도원 해변", "WONSAN"], "hz02": ["칠보산 해칠보", "CHILBOSAN COAST"], "hz03": ["두만강 하구", "TUMEN ESTUARY"], "hz04": ["하산 습지의 두루미", "KHASAN CRANES"], "hz05": ["금각교 야경", "GOLDEN BRIDGE"], "hz06": ["우수리 평원의 아침", "USSURI MORNING"], "hz07": ["비로비잔 언덕", "BIRA HILLS"], "hz08": ["아무르 대평원의 노을", "AMUR SUNSET"], "hz09": ["자바이칼 운해", "ZABAYKAL MIST"], "hz10": ["실카강 협곡", "SHILKA GORGE"], "hz11": ["자바이칼 초원의 말 떼", "STEPPE HORSES"], "hz12": ["바이칼 첫 조망", "FIRST SIGHT OF BAIKAL"], "hz13": ["환바이칼 돌다리", "CIRCUM-BAIKAL"], "hz14": ["앙가라 강", "ANGARA"], "hz15": ["숲초원의 노을", "FOREST-STEPPE SUNSET"], "hz16": ["서리 내린 자작나무 숲", "FROSTED BIRCHES"], "hz17": ["시베리아 목조 교회", "WOODEN CHURCH"], "hz18": ["바라바의 백조 호수", "BARABA SWANS"], "hz19": ["투라 강의 아침", "TURA RIVER"], "hz20": ["유럽-아시아 경계비", "EUROPE · ASIA"], "hz21": ["추소바야 강 절벽", "CHUSOVAYA CLIFFS"], "hz22": ["네를 강의 성당", "CHURCH ON THE NERL"], "hz23": ["모스크바의 노을", "MOSCOW SUNSET"], "hz24": ["폴란드 황새 마을", "POLISH VILLAGE"], "hz25": ["비스와 강", "VISTULA"], "hz26": ["베를린의 저녁", "BERLIN DUSK"], "hz27": ["쾰른 대성당 야경", "KÖLN CATHEDRAL"], "hz28": ["샹파뉴 포도밭", "CHAMPAGNE"], "hz29": ["몽마르트르 언덕", "MONTMARTRE"], "hz30": ["켄트의 노을", "KENT SUNSET"], "hn01": ["눈 내린 간이역의 밤", "NIGHT HALT"], "hn02": ["달빛 강", "MOONLIT RIVER"], "hn03": ["밤의 마을 교회", "NIGHT VILLAGE"],"ru27b":["우랄 숲","URAL FOREST"],"k18": ["의정부·동두천", "UIJEONGBU"], "k19": ["연천·철원", "YEONCHEON"], "nk1": ["북한 강원도", "KANGWON"], "nk2": ["원산 앞바다", "WONSAN BAY"], "nk3": ["함흥 평야", "HAMHUNG"], "nk4": ["동해 바닷가", "EAST SEA COAST"], "nk5": ["칠보산", "CHILBOSAN"], "nk6": ["청진", "CHONGJIN"], "nk7": ["라선", "RASON"], "nk8": ["두만강 철교", "TUMEN RIVER"], "ru1": ["하산", "KHASAN"], "ngt_forest": ["러시아의 밤 숲", "SIBERIA AT NIGHT"], "ngt_town": ["러시아 소도시의 밤", "RUSSIAN TOWN"], "ru2": ["우수리 평원", "USSURI"], "ru3": ["하바롭스크 외곽", "KHABAROVSK"], "ru4": ["아무르강 철교", "AMUR BRIDGE"], "ru5": ["유대인 자치주", "BIROBIDZHAN"], "ru6": ["아무르 타이가", "AMUR TAIGA"], "ru7": ["타이가의 노을", "TAIGA SUNSET"], "ru8": ["자바이칼의 새벽", "ZABAYKALSKY"], "ru9": ["실카강", "SHILKA RIVER"], "ru10": ["통나무집 마을", "SIBERIAN VILLAGE"], "ru11": ["자바이칼 초원", "ZABAYKAL STEPPE"], "ru12": ["초원의 노을", "STEPPE SUNSET"], "ru13": ["셀렝가강", "SELENGA"], "ru14": ["바이칼의 아침", "LAKE BAIKAL"], "ru15": ["바이칼 호숫가", "BAIKAL SHORE"], "ru16": ["이르쿠츠크 가는 숲", "TO IRKUTSK"], "ru17": ["앙가라 숲초원", "ANGARA"], "ru18": ["시베리아의 노을", "SIBERIAN SUNSET"], "ru19": ["서시베리아의 새벽", "WEST SIBERIA"], "ru20": ["자작나무 평원", "BIRCH PLAIN"], "ru21": ["시베리아 시골", "SIBERIAN COUNTRYSIDE"], "ru22": ["오비강 철교", "OB RIVER"], "ru23": ["바라바 초원", "BARABA STEPPE"], "ngt_open": ["초원의 밤", "STEPPE AT NIGHT"], "ru24": ["튜멘", "TYUMEN"], "ru25": ["우랄 앞 들판", "URAL FOOTHILLS"], "ru26": ["우랄", "URAL"], "ru27": ["우랄 숲", "URAL FOREST"], "ru28": ["우랄의 노을", "URAL SUNSET"], "ru29": ["러시아 시골의 새벽", "RUSSIAN COUNTRYSIDE"], "ru30": ["오카강 철교", "OKA RIVER"], "ru31": ["블라디미르", "VLADIMIR"], "ru32": ["모스크바 근교", "MOSCOW OUTSKIRTS"], "ru33": ["스몰렌스크 길", "SMOLENSK ROAD"], "eu1": ["폴란드 동부", "EASTERN POLAND"], "eu2": ["바르샤바 외곽", "WARSAW"], "eu3": ["마조프셰 들판", "MASOVIA"], "eu4": ["포즈난 근교", "WIELKOPOLSKA"], "eu5": ["폴란드의 노을", "POLISH SUNSET"], "ngt_eu": ["유럽의 밤", "EUROPE AT NIGHT"], "eu6": ["샹파뉴", "CHAMPAGNE"], "eu7": ["파리 외곽", "PARIS SUBURBS"], "eu8": ["피카르디", "PICARDY"], "eu9": ["켄트", "KENT"], "eu10": ["런던 근교", "LONDON"], "st_wonsan": ["원산역", "WONSAN"], "st_tumen": ["두만강역", "TUMANGANG"], "st_vlad": ["블라디보스토크역", "VLADIVOSTOK"], "st_khab": ["하바롭스크역", "KHABAROVSK"], "st_uu": ["울란우데역", "ULAN-UDE"], "st_sly": ["슬류댠카역", "SLYUDYANKA"], "st_irk": ["이르쿠츠크역", "IRKUTSK"], "st_novo": ["노보시비르스크역", "NOVOSIBIRSK"], "st_ekat": ["예카테린부르크역", "YEKATERINBURG"], "st_msk": ["모스크바역", "MOSCOW"], "st_waw": ["바르샤바역", "WARSAW"], "st_ber": ["베를린 중앙역", "BERLIN HBF"], "st_par": ["파리 북역", "PARIS NORD"], "st_ldn": ["런던 세인트판크라스", "ST PANCRAS"]});
+Object.assign(PNAME,{"zt_krnight": ["한국의 밤 들판", "KOREAN COUNTRYSIDE"], "zh_busan": ["광안대교 밤바다", "GWANGAN BRIDGE"], "zh_seoul": ["남산과 한강", "NAMSAN · HAN RIVER"], "zt_cloud": ["구름 위 철길", "ABOVE THE CLOUDS"], "zh_baikal_am": ["바이칼 · 샤먼 바위", "SHAMAN ROCK"], "zt_baikal": ["바이칼 호숫가 마을", "LAKE BAIKAL"], "zt_taiga": ["시베리아 자작나무 숲", "SIBERIAN BIRCHES"], "zt_aurora": ["시베리아 오로라", "AURORA"], "zt_snowforest": ["눈 덮인 밤 숲", "SNOW FOREST"], "zt_volga": ["볼가 강가 마을", "VOLGA"], "zh_volga": ["볼가 강가 교회", "VOLGA CHURCH"], "zt_moscow": ["크렘린 성벽", "KREMLIN"], "zh_moscow": ["성 바실리 대성당", "ST. BASIL"], "zt_fairy": ["그림 형제의 숲", "FAIRY-TALE FOREST"], "zt_romantic": ["로맨틱 가도", "ROMANTIC ROAD"], "zt_castle": ["바이에른 알프스", "BAVARIAN ALPS"], "zh_castle": ["노이슈반슈타인 성", "NEUSCHWANSTEIN"], "zt_alps": ["알프스 초원", "ALPINE MEADOW"], "zh_alps": ["알프스의 봉우리", "SWISS ALPS"], "zt_lake": ["루체른 호수", "LAKE LUCERNE"], "zh_lake": ["카펠 다리", "CHAPEL BRIDGE"], "zt_paris": ["파리의 밤", "PARIS"], "zh_paris": ["에펠탑", "EIFFEL TOWER"], "zt_sea": ["해저터널", "UNDER THE SEA"], "zt_england": ["영국 남부 들판", "KENT"], "zh_london": ["빅벤과 템스강", "BIG BEN"]});
 function viewNow(){const S=cur,b=B[S.bk];if(!b||!b.photo)return null;const ph=photoFor(b.photo);if(!ph||!ph.ready)return null;
   const sc=H/ph.h;let f;if(ph.pass){const sp=spanOf(ph.key),tw=ph.img.naturalWidth*sc,p=Math.min(1,Math.max(0,(S.km-sp[0])/(sp[1]-sp[0])));f=(p*Math.max(0,tw-W)+W/2)/tw}
   else{const tw=ph.w*sc,off=((S.vo*(W/40)*ph.spd)%tw+tw)%tw;f=((off+W/2)%tw)/tw}return {sk:ph.key,sf:Math.round(f*1000)}}
@@ -2074,7 +2094,7 @@ function frame(now){
 setRoute('n');if(ticket&&ticket.route&&ticket.route!=='n'){ticket.route='n';ticket.trainKey=trainKey(ticket.dep);ticket.punched=null;saveTicket()}
 
 // ───────── 리디자인: 바로 탑승 · 한 줄 캡션 · 메뉴 · 엽서 · 함께 ─────────
-const PLACE={chunnel:'영불해협 터널',busanport:'부산항',kr01:'부산 북구',kr02:'구포',kr03:'낙동강',kr04:'밀양',kr05:'청도',kr06:'경산',kr07:'대구',kr08:'대구 외곽',kr09:'왜관',kr10:'구미',kr11:'김천',kr12:'추풍령',kr13:'영동',kr14:'대전',kr15:'조치원',kcountry:'천안',kr16:'평택',kr17:'수원',kseoul:'한강'};Object.assign(PLACE,{"hz01": "원산 송도원 해변", "hz02": "칠보산 해칠보", "hz03": "두만강 하구", "hz04": "하산 습지의 두루미", "hz05": "금각교 야경", "hz06": "우수리 평원의 아침", "hz07": "비로비잔 언덕", "hz08": "아무르 대평원의 노을", "hz09": "자바이칼 운해", "hz10": "실카강 협곡", "hz11": "자바이칼 초원의 말 떼", "hz12": "바이칼 첫 조망", "hz13": "환바이칼 돌다리", "hz14": "앙가라 강", "hz15": "숲초원의 노을", "hz16": "서리 내린 자작나무 숲", "hz17": "시베리아 목조 교회", "hz18": "바라바의 백조 호수", "hz19": "투라 강의 아침", "hz20": "유럽-아시아 경계비", "hz21": "추소바야 강 절벽", "hz22": "네를 강의 성당", "hz23": "모스크바의 노을", "hz24": "폴란드 황새 마을", "hz25": "비스와 강", "hz26": "베를린의 저녁", "hz27": "쾰른 대성당 야경", "hz28": "샹파뉴 포도밭", "hz29": "몽마르트르 언덕", "hz30": "켄트의 노을","ru27b":"우랄 숲","k18": "의정부·동두천", "k19": "연천·철원", "nk1": "북한 강원도", "nk2": "원산 앞바다", "nk3": "함흥 평야", "nk4": "동해 바닷가", "nk5": "칠보산", "nk6": "청진", "nk7": "라선", "nk8": "두만강 철교", "ru1": "하산", "ru2": "우수리 평원", "ru3": "하바롭스크 외곽", "ru4": "아무르강 철교", "ru5": "유대인 자치주", "ru6": "아무르 타이가", "ru7": "아무르 타이가", "ru8": "자바이칼", "ru9": "실카강", "ru10": "통나무집 마을", "ru11": "자바이칼 초원", "ru12": "자바이칼 초원", "ru13": "셀렝가강", "ru14": "바이칼", "ru15": "바이칼 호숫가", "ru16": "이르쿠츠크 가는 숲", "ru17": "앙가라 숲초원", "ru18": "시베리아 숲초원", "ru19": "서시베리아", "ru20": "자작나무 평원", "ru21": "시베리아 시골", "ru22": "오비강 철교", "ru23": "바라바 초원", "ru24": "튜멘", "ru25": "우랄 앞 들판", "ru26": "우랄", "ru27": "우랄 숲", "ru28": "우랄", "ru29": "러시아 시골", "ru30": "오카강 철교", "ru31": "블라디미르", "ru32": "모스크바 근교", "ru33": "스몰렌스크 길", "eu1": "폴란드 동부", "eu2": "바르샤바 외곽", "eu3": "마조프셰 들판", "eu4": "포즈난 근교", "eu5": "폴란드 서부", "eu6": "샹파뉴", "eu7": "파리 외곽", "eu8": "피카르디", "eu9": "켄트", "eu10": "런던 근교"});
+const PLACE={"zt_krnight": "한국의 밤 들판", "zh_busan": "광안대교 밤바다", "zh_seoul": "남산과 한강", "zt_cloud": "구름 위 철길", "zh_baikal_am": "바이칼 · 샤먼 바위", "zt_baikal": "바이칼 호숫가 마을", "zt_taiga": "시베리아 자작나무 숲", "zt_aurora": "시베리아 오로라", "zt_snowforest": "눈 덮인 밤 숲", "zt_volga": "볼가 강가 마을", "zh_volga": "볼가 강가 교회", "zt_moscow": "크렘린 성벽", "zh_moscow": "성 바실리 대성당", "zt_fairy": "그림 형제의 숲", "zt_romantic": "로맨틱 가도", "zt_castle": "바이에른 알프스", "zh_castle": "노이슈반슈타인 성", "zt_alps": "알프스 초원", "zh_alps": "알프스의 봉우리", "zt_lake": "루체른 호수", "zh_lake": "카펠 다리", "zt_paris": "파리의 밤", "zh_paris": "에펠탑", "zt_sea": "해저터널", "zt_england": "영국 남부 들판", "zh_london": "빅벤과 템스강"};const PLACE0={chunnel:'영불해협 터널',busanport:'부산항',kr01:'부산 북구',kr02:'구포',kr03:'낙동강',kr04:'밀양',kr05:'청도',kr06:'경산',kr07:'대구',kr08:'대구 외곽',kr09:'왜관',kr10:'구미',kr11:'김천',kr12:'추풍령',kr13:'영동',kr14:'대전',kr15:'조치원',kcountry:'천안',kr16:'평택',kr17:'수원',kseoul:'한강'};Object.assign(PLACE,{"hz01": "원산 송도원 해변", "hz02": "칠보산 해칠보", "hz03": "두만강 하구", "hz04": "하산 습지의 두루미", "hz05": "금각교 야경", "hz06": "우수리 평원의 아침", "hz07": "비로비잔 언덕", "hz08": "아무르 대평원의 노을", "hz09": "자바이칼 운해", "hz10": "실카강 협곡", "hz11": "자바이칼 초원의 말 떼", "hz12": "바이칼 첫 조망", "hz13": "환바이칼 돌다리", "hz14": "앙가라 강", "hz15": "숲초원의 노을", "hz16": "서리 내린 자작나무 숲", "hz17": "시베리아 목조 교회", "hz18": "바라바의 백조 호수", "hz19": "투라 강의 아침", "hz20": "유럽-아시아 경계비", "hz21": "추소바야 강 절벽", "hz22": "네를 강의 성당", "hz23": "모스크바의 노을", "hz24": "폴란드 황새 마을", "hz25": "비스와 강", "hz26": "베를린의 저녁", "hz27": "쾰른 대성당 야경", "hz28": "샹파뉴 포도밭", "hz29": "몽마르트르 언덕", "hz30": "켄트의 노을","ru27b":"우랄 숲","k18": "의정부·동두천", "k19": "연천·철원", "nk1": "북한 강원도", "nk2": "원산 앞바다", "nk3": "함흥 평야", "nk4": "동해 바닷가", "nk5": "칠보산", "nk6": "청진", "nk7": "라선", "nk8": "두만강 철교", "ru1": "하산", "ru2": "우수리 평원", "ru3": "하바롭스크 외곽", "ru4": "아무르강 철교", "ru5": "유대인 자치주", "ru6": "아무르 타이가", "ru7": "아무르 타이가", "ru8": "자바이칼", "ru9": "실카강", "ru10": "통나무집 마을", "ru11": "자바이칼 초원", "ru12": "자바이칼 초원", "ru13": "셀렝가강", "ru14": "바이칼", "ru15": "바이칼 호숫가", "ru16": "이르쿠츠크 가는 숲", "ru17": "앙가라 숲초원", "ru18": "시베리아 숲초원", "ru19": "서시베리아", "ru20": "자작나무 평원", "ru21": "시베리아 시골", "ru22": "오비강 철교", "ru23": "바라바 초원", "ru24": "튜멘", "ru25": "우랄 앞 들판", "ru26": "우랄", "ru27": "우랄 숲", "ru28": "우랄", "ru29": "러시아 시골", "ru30": "오카강 철교", "ru31": "블라디미르", "ru32": "모스크바 근교", "ru33": "스몰렌스크 길", "eu1": "폴란드 동부", "eu2": "바르샤바 외곽", "eu3": "마조프셰 들판", "eu4": "포즈난 근교", "eu5": "폴란드 서부", "eu6": "샹파뉴", "eu7": "파리 외곽", "eu8": "피카르디", "eu9": "켄트", "eu10": "런던 근교"});
 const MOBILE=matchMedia('(pointer:coarse)').matches;
 let LUID='';try{LUID=localStorage.getItem('bl-uid')||'';if(!LUID){LUID=Math.random().toString(36).slice(2,10);localStorage.setItem('bl-uid',LUID)}}catch(e){LUID=Math.random().toString(36).slice(2,10)}
 function boardTrain(dep,quiet){const el=vnow()-dep;
@@ -2153,6 +2173,7 @@ function coach(){try{if(localStorage.getItem('bl-coach'))return;localStorage.set
 // ───────── 지나는 곳의 한 줄 (실제 한국) ─────────
 const NOTE={chunnel:'지금 바다 밑. 가장 깊은 곳은 해수면 아래 약 75m, 해저 구간만 약 38km',busanport:'부산항대교 아래로 밤새 배들이 드나든다',kr01:'산비탈을 따라 올라간 불빛들, 부산의 밤',kr02:'구포 — 낙동강 바람에 국수를 말리던 동네',kr03:'원동 강변은 봄이면 매화로 하얗게 덮인다',kr04:'영남루 — 조선의 3대 누각으로 꼽히던 곳',kr05:'청도 반시는 씨가 없는 감이다',kr06:'경산은 대추가 많이 나는 고장',kr07:'두류공원 언덕 위 83타워',kr08:'금호강을 따라 불 켜진 공장들',kr09:'왜관철교 — 1905년 경부선과 함께 놓인 다리',kr10:'구미 — 들판 너머가 공단 도시',kr11:'김천은 자두와 포도의 고장',kr12:'추풍령 — 경부선이 소백산맥을 넘는 고개',kr13:'영동 — 국악의 아버지 박연의 고향',kr14:'대전 — 철길이 만든 도시',kr15:'조치원은 복숭아로 이름난 곳',kcountry:'천안 — 호두과자가 태어난 곳',kr16:'평택 — 들판이 서해까지 이어진다',kr17:'수원 — 정조가 쌓은 화성이 있는 도시',kseoul:'한강철교 — 1900년에 놓인 한강의 첫 다리'};Object.assign(NOTE,{"hz01": "송도원 — 소나무 숲 앞에 펼쳐진 하얀 모래 해변", "hz02": "해칠보 — 바다에서 솟은 바위 기둥들", "hz03": "세 나라 국경이 만나는 강 하구", "hz04": "두루미가 겨울을 나러 내려오는 습지", "hz05": "금각교 — 블라디보스토크 금각만을 가로지르는 사장교", "hz06": "안개 속 사슴이 강가로 내려온다", "hz07": "참나무가 붉게, 자작나무가 노랗게", "hz08": "아무르 — 중국어로는 헤이룽장, 검은 용의 강", "hz09": "구름 바다 위로 해가 떠오른다", "hz10": "실카강이 바위 협곡을 굽이쳐 흐른다", "hz11": "몽골 말들이 국경을 모르고 달린다", "hz12": "바이칼 — 처음 보이는 순간, 다들 말을 멈춘다", "hz13": "환바이칼 철도 — 돌다리 200여 개와 터널 39개", "hz14": "바이칼에서 흘러나가는 단 하나의 강", "hz15": "자작나무 섬마다 노을이 걸린다", "hz16": "밤새 내린 서리가 나뭇가지마다 하얗다", "hz17": "못 하나 쓰지 않고 지은 목조 교회", "hz18": "백조들이 남쪽으로 가기 전 쉬어 가는 호수", "hz19": "튜멘 — 시베리아의 첫 러시아 도시", "hz20": "한 발은 아시아, 한 발은 유럽", "hz21": "추소바야 — 우랄의 바위 절벽 강", "hz22": "네를 강의 성당 — 1165년부터 들판에 홀로 서 있다", "hz23": "모스크바의 일곱 자매 — 스탈린 시대의 고층 건물들", "hz24": "봄이면 이 둥지마다 황새가 돌아온다", "hz25": "비스와 강 위로 바르샤바", "hz26": "베를린 텔레비전 탑 — 368m", "hz27": "쾰른 대성당 — 기차가 바로 옆을 지나간다", "hz28": "샹파뉴 — 이 언덕의 포도만 샴페인이 된다", "hz29": "사크레쾨르 — 파리에서 가장 높은 언덕", "hz30": "고깔 지붕 오스트 하우스와 양 떼","ru27b":"강을 따라 우랄 서쪽 비탈을 내려간다","k18": "경원선 — 서울에서 원산까지 이어졌던 옛 철길", "k19": "남쪽 철길이 끝나는 곳. 철책 불빛이 밤새 켜져 있다", "nk1": "밤이 되면 불빛이 거의 없는 땅", "nk2": "갈마 해안에 새 호텔들이 늘어섰다", "nk3": "함흥 — 냉면의 고향", "nk4": "철길이 바다에 바짝 붙어 달린다", "nk5": "칠보산 — 일곱 가지 보물을 숨겼다는 바위산", "nk6": "청진 — 함경북도의 항구도시", "nk7": "세 나라 국경이 모이는 바닷가", "nk8": "우정의 다리 — 북한과 러시아를 잇는 단 하나의 철길", "ru1": "하산 — 러시아에서 처음 만나는 마을", "ru2": "우수리강 너머는 중국이다", "ru3": "하바롭스크 — 극동에서 가장 큰 도시 가운데 하나", "ru4": "아무르강 철교 — 시베리아 횡단철도에서 가장 긴 다리", "ru5": "비로비잔 — 러시아 속 유대인 자치주", "ru6": "낙엽송은 가을이면 노랗게 물들고 잎을 떨군다", "ru7": "여기서 해가 지면 다음 마을까지 한참이다", "ru8": "자바이칼 — 바이칼 너머라는 뜻", "ru9": "실카강은 흘러 아무르강이 된다", "ru10": "창틀마다 깎아 칠한 나무 장식이 달려 있다", "ru11": "몽골 초원이 국경을 넘어 이어진다", "ru12": "치타는 맑은 날이 많기로 유명하다", "ru13": "셀렝가강 — 바이칼로 흘러드는 가장 큰 강", "ru14": "바이칼 — 세계에서 가장 깊고 오래된 호수", "ru15": "지구 민물의 5분의 1이 여기 있다", "ru16": "바이칼에서 흘러나가는 강은 앙가라 하나뿐", "ru17": "자작나무 숲이 섬처럼 떠 있는 들판", "ru19": "크라스노야르스크를 지나 서시베리아 평원으로", "ru20": "세상에서 가장 넓은 평원 가운데 하나", "ru21": "바냐 굴뚝에서 연기가 오르는 마을", "ru22": "노보시비르스크는 이 다리 때문에 생긴 도시", "ru23": "바라바 — 호수가 수천 개 흩어진 초원", "ru24": "튜멘 — 시베리아에 처음 세워진 러시아 도시", "ru25": "우랄산맥이 가까워진다", "ru26": "우랄 — 아시아와 유럽을 가르는 낮은 산맥", "ru27": "이제부터 유럽이다", "ru29": "양파 지붕 교회가 안개 위로 떠 있다", "ru30": "니즈니노브고로드 — 볼가강과 오카강이 만나는 도시", "ru31": "블라디미르 — 모스크바보다 먼저 수도였던 도시", "ru32": "모스크바를 둘러싼 오래된 아파트 단지들", "ru33": "나폴레옹도 이 길로 모스크바에 왔다", "eu1": "국경에서 바퀴를 바꿔 끼운다 — 선로 폭이 다르다", "eu2": "바르샤바 — 전쟁 뒤 옛 모습 그대로 다시 지은 도시", "eu3": "쇼팽이 태어난 마조프셰 들판", "eu4": "호수와 소나무숲이 이어지는 땅", "eu6": "샹파뉴 — 이 언덕에서 나는 술이 샴페인", "eu7": "곧 파리", "eu8": "피카르디 — 솜 전투가 있던 들판", "eu9": "켄트 — 고깔 지붕은 홉을 말리던 오스트 하우스", "eu10": "굴뚝이 줄지어 선 붉은 벽돌집들"});
 let noteKey='',noteT=0;
+Object.assign(NOTE,{"zt_krnight": "경부선 밤 들판 — 감나무에 불빛이 걸린다", "zh_busan": "광안대교 — 밤이면 다리 전체에 불이 켜진다", "zh_seoul": "남산 꼭대기 서울타워, 아래로 한강 다리들", "zt_cloud": "구름 위 철길 — 도깨비불이 따라온다", "zh_baikal_am": "샤먼 바위 — 앙가라 전설의 바위", "zt_baikal": "바이칼 호숫가 통나무 마을", "zt_taiga": "시베리아 자작나무 숲, 해 질 녘", "zt_aurora": "오로라 — 태양이 보낸 빛의 커튼", "zt_snowforest": "눈 덮인 전나무 숲의 밤", "zt_volga": "볼가 — 러시아의 어머니 강", "zh_volga": "볼가 강가의 하얀 교회", "zt_moscow": "크렘린의 붉은 성벽", "zh_moscow": "성 바실리 대성당의 양파 지붕", "zt_fairy": "그림 형제가 이야기를 모은 헤센의 숲", "zt_romantic": "로맨틱 가도 — 목조 집들이 늘어선 옛 마을", "zt_castle": "바이에른 알프스 기슭", "zh_castle": "노이슈반슈타인 — 동화왕의 성", "zt_alps": "알프스 초원 — 하이디의 산", "zh_alps": "알프스의 뾰족한 봉우리", "zt_lake": "루체른 호수", "zh_lake": "카펠 다리와 물탑", "zt_paris": "파리의 밤 — 센강의 다리들", "zh_paris": "에펠탑 — 해가 지면 매시 정각에 반짝반짝", "zt_sea": "해저터널 — 창밖으로 고래가", "zt_england": "켄트 들판 — 영국의 정원", "zh_london": "빅벤 — 사실은 종의 이름"});
 function placeNote(S){let k=S.mode==='stop'?'':S.bk;{const b=B[k];if(b&&SCN[b.photo]&&SCN[b.photo].hero&&!photoFor(b.photo))k=noteKey}if(k===noteKey)return;noteKey=k;const el=$('c3');el.classList.remove('on');clearTimeout(noteT);
   const tun=B[k]&&B[k].tunnel,shared=riders>1&&(tun||k==='kseoul'),txt=shared?'지금 '+riders+'명이 같이 '+(tun?'터널을 지나는':'한강을 건너는')+' 중':NOTE[k];
   if(!txt)return;noteT=setTimeout(()=>{el.textContent=txt;el.classList.add('on');noteT=setTimeout(()=>el.classList.remove('on'),26000)},2600)}
@@ -2208,7 +2229,7 @@ const SB_URL='https://vuxqlfockqxvocjlntgv.supabase.co', SB_KEY='sb_publishable_
 let SBC=null,trainCh=null,roomCh=null,myRoom=null,myBed=null,myFrom='',roomMates={},roomFirst=true;
 const PHR=['안녕하세요','창밖 좋네요','어디까지 가세요?','저는 런던까지 가요','잠이 안 오네요','같이 가서 좋네요','잘 자요','좋은 여행 되세요'];
 const josa=(w,a,b)=>{const c=w.charCodeAt(w.length-1);return w+((c>=0xAC00&&c<=0xD7A3&&(c-0xAC00)%28)?a:b)};
-const ITEMS={egg:'삶은 달걀',cider:'사이다',hodu:'호두과자',dosirak:'컵라면 도시락',piro:'피로시키',potato:'딜 뿌린 삶은 감자',buuz:'부우즈',omul:'훈제 오물',kedr:'잣 한 봉지',berry:'블루베리 한 컵',shanga:'샤니가',kvass:'크바스',plombir:'플롬비르 아이스크림'};
+const ITEMS={...{"fishcake": "어묵 꼬치", "hotteok": "씨앗호떡", "cotton": "구름 솜사탕", "omul": "훈제 오물", "tea": "홍차 한 잔", "jelly": "오로라 젤리", "pretzel": "프레첼", "choc": "스위스 초콜릿", "croissant": "크루아상", "pearl": "진주 푸딩"},egg:'삶은 달걀',cider:'사이다',hodu:'호두과자',dosirak:'컵라면 도시락',piro:'피로시키',potato:'딜 뿌린 삶은 감자',buuz:'부우즈',omul:'훈제 오물',kedr:'잣 한 봉지',berry:'블루베리 한 컵',shanga:'샤니가',kvass:'크바스',plombir:'플롬비르 아이스크림'};
 function sbLoad(){if(SBC)return;if(window.__SBMOCK){SBC=window.__SBMOCK;sbPresence();checkOldRoom();return}
   const sc=document.createElement('script');sc.src='supabase.min.js';sc.onload=()=>{try{SBC=window.supabaseCreateClient(SB_URL,SB_KEY,{auth:{persistSession:false}});sbPresence();checkOldRoom()}catch(e){}};document.head.appendChild(sc)}
 setTimeout(sbLoad,400);
@@ -2264,78 +2285,24 @@ async function checkOldRoom(){try{const last=localStorage.getItem('bl-lastroom')
 async function notesFetch(){if(!SBC)return null;if(window.ROOMNOTE){const r=[window.ROOMNOTE];window.ROOMNOTE=null;return r}const {data,error}=await SBC.from('notes').select('text,seat,train,created_at').order('created_at',{ascending:false}).limit(60);return error?null:data}
 async function noteInsert(text){if(!SBC)return false;const room=ticket&&myRoom!=null?ticket.trainKey+'-'+myRoom:'';const row={text,seat:ticket?ticket.car+'-'+ticket.seat:'',train:(ticket&&ticket.trainKey)||''};let {error}=await SBC.from('notes').insert(Object.assign({room},row));if(error)({error}=await SBC.from('notes').insert(row));if(!error&&room)try{localStorage.setItem('bl-lastroom',room)}catch(e){}return !error}
 // ───────── 이벤트: 지역 승객 · 식당칸 · 명소 순간과 도장 ─────────
-const PAX=[
- {a:0,b:420,id:'p01',n:'자갈치 아지매',w:'부산 자갈치 시장 40년 · 서울 사는 손녀 보러 가는 길',
-  say:['오이소, 보이소, 사이소! 아이고, 기차 안이라 습관이 나오네.','손녀가 서울서 첫 월급 탔다고 밥을 산단다. 내가 사 줘야 되는데.','배고프면 말해라. 어묵 싸 왔다, 아직 따끈하다.'],g:['자갈치 어묵 한 봉지','따끈할 때 먹으라고 손에 꼭 쥐여 주셨다']},
- {a:420,b:1290,id:'p02',n:'김 할아버지',w:'원산이 고향 · 여덟 살 겨울에 떠나 처음으로 고향 바다를 보러 가는 길',
-  say:['저기, 해 뜨는 쪽 바다가 원산 바다요.','여름이면 갈마 바닷가에서 해 질 때까지 헤엄을 쳤지.','기차가 이 길로 다시 다닐 줄은 몰랐소. 오래 살고 볼 일이오.'],g:['원산 바닷가 조약돌','주머니에서 꺼내 주며 "고향 돌이오" 하셨다']},
- {a:1290,b:2310,id:'p03',n:'마트료시카 할머니',w:'블라디보스토크 역 앞에서 30년째 손으로 마트료시카를 그려 파는 할머니',
-  say:['열어 봐요. 안에 또 있고, 또 있고, 또 있지.','제일 작은 아기 인형까지 다 내가 붓으로 그렸어요.','러시아 사람들은 이 인형에 소원을 하나씩 넣어 둔대요.'],g:['손바닥만 한 마트료시카','열면 다섯 개가 차례로 나오는 작은 인형']},
- {a:2310,b:5190,id:'p04',n:'갈리나 차장',w:'시베리아 횡단열차 30년 · 침대칸 차장(프로보드니차)',
-  say:['뜨거운 물은 복도 끝 사모바르에서 언제든 받아 가요. 공짜예요.','겨울엔 영하 40도에도 문 앞에 서서 손님을 맞아요.','창밖 낙엽송이 다 노래지면 곧 눈이 와요.'],g:['은빛 컵받침에 담긴 홍차','러시아 기차에서만 볼 수 있는 무늬 새긴 금속 컵받침']},
- {a:5190,b:5640,id:'p05',n:'사얀',w:'말 타는 부랴트 목동 · 바이칼 호숫가 마을로 돌아가는 길',
-  say:['우리는 바이칼을 호수라고 안 해요. 바다라고 불러요.','물이 맑아서 40미터 아래 돌까지 보여요.','겨울엔 얼음이 두꺼워서 그 위로 차가 다녀요.'],g:['바이칼 물 한 병','"세상에서 제일 맑은 물"이라며 건네준 작은 병']},
- {a:5640,b:7490,id:'p06',n:'바얀 할아버지',w:'우샨카 털모자를 쓴 아코디언(바얀) 연주자 · 기차마다 노래를 들려주는 할아버지',
-  say:['한 곡 들어 볼래요? 「카츄샤」를 모르는 러시아 사람은 없어요.','이 털모자는 귀를 내리면 영하 40도도 견뎌요.','시베리아 밤은 길어서 노래가 필요해요.'],g:['우샨카 털모자','"겨울에 다시 오면 쓰고 와요"라며 씌워 주셨다']},
- {a:7490,b:8990,id:'p07',n:'표트르 할아버지',w:'은퇴한 기관사 · 체스판을 늘 들고 다님',
-  say:['한 판 둘래요? 이 기차에선 다들 체스를 둬요.','옴스크에선 도스토옙스키가 유배되어 4년을 지냈지.','나는 40년 동안 이 선로 위에서 기관차를 몰았소.'],g:['나무 체스 말 하나','"기사"라며 손에 쥐여 준 말 모양 체스 말']},
- {a:8990,b:10790,id:'p08',n:'발레리나 마샤',w:'모스크바 「백조의 호수」 오디션에 가는 발레리나',
-  say:['내일 백조가 되느냐 마느냐가 정해져요.','기차 복도가 제일 좋은 연습실이에요. 흔들려서 균형 연습이 돼요.','떨리면 창밖을 봐요. 숲은 아무것도 재촉하지 않으니까요.'],g:['토슈즈 리본 한 줄','"행운이 필요하면 묶어요"라며 풀어 준 분홍 리본']},
- {a:10790,b:12040,id:'p09',n:'피아니스트 아냐',w:'바르샤바 쇼팽 콩쿠르에 나가는 피아니스트',
-  say:['쇼팽 콩쿠르는 5년에 한 번, 바르샤바에서만 열려요.','쇼팽의 심장은 지금도 바르샤바 성당 기둥 안에 있대요.','기차 소리도 리듬이 있어요. 덜컹, 덜컹… 꼭 마주르카 같죠.'],g:['손으로 옮겨 적은 악보 한 장','녹턴 첫 소절이 연필로 적혀 있다']},
- {a:12040,b:12610,id:'p10',n:'호두까기 장인',w:'독일 에르츠산맥에서 3대째 호두까기 인형을 깎는 할아버지',
-  say:['호두까기 인형은 우리 마을에서 처음 만들어졌다오.','이 병정 인형은 입으로 진짜 호두를 깨요. 한번 해 봐요.','곧 크리스마스 시장이 열려요. 독일의 겨울은 그때부터지.'],g:['작은 호두까기 병정','빨간 제복에 큰 이빨, 손가락만 한 나무 인형']},
- {a:12610,b:13660,id:'p11',n:'몽마르트르 화가',w:'줄무늬 셔츠에 베레모 · 파리 언덕 위에서 초상화를 그리는 화가',
-  say:['가만히 있어 봐요. 창가에 앉은 당신, 지금 그림이 돼요.','몽마르트르 언덕엔 백 년 넘게 화가들이 앉아 그림을 그렸어요.','파리는 걷는 도시예요. 바게트 하나 들고 하루 종일 걸어요.'],g:['당신의 크로키 한 장','창가에 앉은 모습을 몇 분 만에 그려 주었다']},
- {a:13660,b:14121,id:'p12',n:'셜록 홈즈',w:'사냥모자에 파이프 · 런던 베이커가 221B로 돌아가는 명탐정',
-  say:['부산에서 오셨군요. 아, 놀라지 말아요. 가방 손잡이에 바다 소금기가 하얗게 남았어요.','곧 바다 밑으로 들어갑니다. 50킬로미터 동안 바다 아래를 달리죠.','기초적인 거예요. 창밖만 잘 보면 다 보입니다.'],g:['돋보기 하나','"런던에선 이게 필요할 거요"라며 건넨 작은 돋보기']},
-];
-const MENU=[
- {a:0,b:420,r:'부산 → 서울',d:[{id:'f01',n:'돼지국밥',p:'₩10,000',t:'뽀얀 국물에 부추를 듬뿍. 밤기차엔 이만한 게 없다.'},{id:'f02',n:'부산 어묵탕',p:'₩6,000',t:'꼬치째 담아 국물까지 다 마시게 되는 맛.'}]},
- {a:420,b:1290,r:'원산 → 두만강',d:[{id:'f03',n:'함흥 농마국수',p:'',t:'감자 전분으로 뽑아 질긴 면. 함흥에선 냉면을 이렇게 부른다.'},{id:'f04',n:'원산 명태국',p:'',t:'동해에서 잡은 명태로 끓인 맑은 국.'}]},
- {a:1290,b:2310,r:'연해주',d:[{id:'f05',n:'블라디보스토크 새우',p:'₽650',t:'연해주 바다에서 잡히는 단맛 나는 새우를 소금물에 삶았다.'},{id:'f06',n:'블리니',p:'₽250',t:'얇게 부친 러시아 팬케이크. 사워크림을 얹어 먹는다.'}]},
- {a:2310,b:5190,r:'아무르 · 자바이칼',d:[{id:'f07',n:'보르시',p:'₽350',t:'비트로 붉게 끓인 수프. 사워크림 한 숟갈을 풀어 먹는다.'},{id:'f08',n:'피로시키',p:'₽120',t:'감자나 양배추를 넣어 튀긴 빵. 역마다 할머니들이 판다.'}]},
- {a:5190,b:5640,r:'바이칼',d:[{id:'f09',n:'훈제 오물',p:'₽400',t:'바이칼에만 사는 물고기 오물을 연기에 익혔다.'},{id:'f10',n:'부우즈',p:'₽300',t:'부랴트식 찐만두. 위쪽 구멍으로 육즙부터 마신다.'}]},
- {a:5640,b:8990,r:'시베리아',d:[{id:'f11',n:'시베리아 펠메니',p:'₽380',t:'겨울 내내 얼려 두고 꺼내 삶던 작은 고기 만두.'},{id:'f12',n:'크바스',p:'₽120',t:'호밀빵을 발효시켜 만든 새콤달콤한 음료.'}]},
- {a:8990,b:10790,r:'우랄 → 모스크바',d:[{id:'f13',n:'샤니가',p:'₽150',t:'으깬 감자를 얹어 구운 우랄 지방의 둥근 빵.'},{id:'f14',n:'올리비에 샐러드',p:'₽250',t:'러시아 사람들이 새해마다 꼭 먹는 감자 샐러드.'}]},
- {a:10790,b:12040,r:'벨라루스',d:[{id:'f15',n:'드라니키',p:'₽280',t:'갈아 부친 벨라루스 감자전. 사워크림과 함께.'}]},
- {a:12040,b:12610,r:'폴란드',d:[{id:'f16',n:'피에로기',p:'28 zł',t:'감자와 치즈를 넣고 빚은 폴란드 만두. 볶은 양파를 얹는다.'},{id:'f17',n:'주렉',p:'22 zł',t:'호밀을 발효시킨 시큼한 수프. 빵 그릇에 담겨 나온다.'}]},
- {a:12610,b:13440,r:'독일 → 벨기에',d:[{id:'f18',n:'커리부어스트',p:'€4.50',t:'케첩과 카레 가루를 뿌린 소시지. 베를린 사람들의 야식.'},{id:'f19',n:'벨기에 와플',p:'€5',t:'설탕 알갱이가 씹히는 리에주식 와플.'}]},
- {a:13440,b:13860,r:'프랑스',d:[{id:'f20',n:'크루아상과 카페오레',p:'€4',t:'파리 근처에선 아침이 이렇게 시작된다.'},{id:'f21',n:'피셀 피카르드',p:'€9',t:'햄과 버섯을 크레프로 말아 구운 피카르디 지방 요리.'}]},
- {a:13860,b:14121,r:'영국',d:[{id:'f22',n:'피시 앤 칩스',p:'£12',t:'바삭하게 튀긴 대구와 두툼한 감자. 식초를 뿌려 먹는다.'},{id:'f23',n:'크림 티',p:'£8',t:'스콘에 클로티드 크림과 잼, 그리고 홍차.'}]},
-];
-const MOM=[
- {km:418,id:'m01',t:'한강철교',s:'1900년에 놓인 한강의 첫 다리를 건넌다',st:'HAN RIVER'},
- {km:535,id:'m02',t:'남쪽 철길이 끝나는 곳',s:'철책 불빛을 지나 북쪽으로 달린다',st:'DMZ'},
- {km:655,id:'m03',t:'원산 갈마 바다',s:'해가 동해에서 떠오른다',st:'WONSAN'},
- {km:1000,id:'m04',t:'칠보산',s:'일곱 가지 보물을 숨겼다는 바위산',st:'CHILBOSAN'},
- {km:1287,id:'m05',t:'두만강 국경',s:'우정의 다리를 건너 러시아로',st:'TUMEN'},
- {km:2302,id:'m06',t:'아무르강 철교',s:'길이 2.6km, 시베리아 횡단철도에서 가장 긴 다리',st:'AMUR'},
- {km:5335,id:'m07',t:'바이칼',s:'세계에서 가장 깊은 호수, 1,642m',st:'BAIKAL'},
- {km:6735,id:'m08',t:'예니세이강',s:'시베리아를 남북으로 가르는 큰 강',st:'YENISEI'},
- {km:7478,id:'m09',t:'오비강 철교',s:'노보시비르스크는 이 다리 때문에 생긴 도시',st:'OB'},
- {km:9022,id:'m10',t:'유럽-아시아 경계비',s:'여기서부터 유럽이다',st:'EUROPE · ASIA'},
- {km:10342,id:'m11',t:'볼가와 오카',s:'두 강이 만나는 니즈니노브고로드',st:'VOLGA'},
- {km:10790,id:'m12',t:'모스크바',s:'시베리아 횡단철도의 끝, 9,288km',st:'MOSCOW'},
- {km:11830,id:'m13',t:'브레스트 국경',s:'선로 폭이 달라 바퀴를 갈아 끼운다 · 1,520mm → 1,435mm',st:'BREST'},
- {km:13180,id:'m14',t:'쾰른 대성당',s:'선로 바로 옆에 선 높이 157m의 성당',st:'KÖLN'},
- {km:13870,id:'m15',t:'해저 터널',s:'바다 밑 최대 75m, 50km를 달린다',st:'MANCHE'},
- {km:14120,id:'m16',t:'런던',s:'부산에서 14,120km',st:'LONDON'},
-];
+const PAX=[{"a": 0.0, "b": 162.5, "id": "p02", "n": "부산 갈매기", "w": "부산항 안내원 · 서울 구경 가는 길", "say": ["어서 오이소! 첫차도 막차도 아이고, 밤차다!", "니 어묵 묵나? …한 입만 주면 안 되나.", "광안대교 봤제? 저 불 다 내가 켠 기다. 뻥이다."], "g": ["어묵 꼬치", "\"뜨끈할 때 무라\" — 반쯤 먹다 만 건 비밀"]}, {"a": 162.5, "b": 282.75, "id": "p03", "n": "해치", "w": "광화문 지킴이 · 구름 입구까지 배웅 나온 길", "say": ["(하품) …불조심. 서울은 내가 지켜.", "거짓말하면 뿔이 간질간질해. 방금 좀 간질했는데?", "구름 위로 올라가면 도깨비가 탈 거야. 내가 째려봐 줄게."], "g": ["해치 뿔 부적", "불과 거짓말을 막아 준다는 작은 부적"]}, {"a": 282.75, "b": 607.75, "id": "p04", "n": "도깨비", "w": "구름 위 장난꾸러기 · 밤에만 타는 손님", "say": ["씨름 한판 할래? 내가 지면 금 나와라 뚝딱!", "메밀묵 있어? 없으면… 네 모자 좀 빌려 간다?", "쉿, 셜록한테는 비밀인데… 아니다, 말 안 할래. 히히."], "g": ["도깨비 금화", "\"금 나와라 뚝딱\"에서 나온 금화 한 닢. 진짜 금인지는 몰라요"]}, {"a": 607.75, "b": 1300.0, "id": "p01", "n": "셜록 홈즈", "w": "베이커가 221B의 탐정 · 사건 의뢰로 동양에 왔다 런던으로 돌아가는 길", "say": ["자네, 방금 창가 팔걸이에 기댔군. 오래 서 있다 앉았어. 맞지?", "이상하군. 출발할 때 굴뚝의 별 연기가 사라졌어. 기차에서 일어나는 일엔 늘 이유가 있지.", "차는 식기 전에 마시게. 추리는 따뜻할 때 잘 되는 법이야."], "g": ["물음표 연기 쪽지", "\"단서는 늘 창밖에 있다\" — 셜록이 수첩을 찢어 적어 준 쪽지"]}, {"a": 1300.0, "b": 2551.25, "id": "p05", "n": "우주비행사와 라이카", "w": "오로라 관측 비행사 · 우주견 라이카와 함께", "say": ["관제탑, 여기는 3호 객실. 창밖 오로라 상태 아주 양호.", "라이카는 1957년에 지구를 돈 첫 번째 동물이야. 잘해 줘.", "저 빛 봤어? 퉁구스카 쪽이야. 별똥별일까… 아니면?"], "g": ["우주식 별사탕", "\"무중력에서도 안 녹아요\" — 라이카가 핥은 흔적 있음"]}, {"a": 2551.25, "b": 3071.25, "id": "p06", "n": "마트료시카", "w": "모스크바 집으로 돌아가는 참견쟁이 안주인", "say": ["차 한 잔 더? 아니면… 비밀 하나 더?", "이 기차 승객들 소문은 내가 다 알지. 늑대 얘기 들었어?", "내 배 속엔 딸이 있고, 그 안에 또 딸이 있고… 비밀도 그렇게 겹겹이야."], "g": ["꼬마 마트료시카", "배 속에서 나온 제일 작은 인형. 흔들면 뭔가 달그락거린다"]}, {"a": 3071.25, "b": 4127.5, "id": "p07", "n": "백조 발레리나", "w": "볼쇼이의 프리마 · 유럽 공연 가는 길", "say": ["낮엔 백조, 밤엔 흑조. 지금은… 몇 시지?", "흑조는 서른두 번을 쉬지 않고 돌아. 기차가 흔들려도 난 안 넘어져.", "호두까기 인형이랑은 같은 작곡가 집안이야. 차이콥스키."], "g": ["백조 깃털", "공연 의상에서 떨어진 깃털 하나. 밤이 되면 검게 보인다"]}, {"a": 4127.5, "b": 4290.0, "id": "p09", "n": "빨간 모자와 늑대", "w": "할머니 댁 가는 길 · 잠옷 입은 늑대가 따라옴", "say": ["할머니, 귀가 왜 그렇게 커요? …아, 늑대 아저씨구나.", "(늑대) 저기… 잠옷은 그냥 편해서 입은 건데요…", "이 숲이 그림 형제가 이야기를 모은 숲이래. 진짜야!"], "g": ["바구니 속 빵", "할머니께 드리려던 빵 하나. 늑대가 침 흘린 흔적 있음"]}, {"a": 4290.0, "b": 4550.0, "id": "p10", "n": "브레멘 음악대", "w": "떠돌이 악단 · 브레멘엔 한 번도 못 가 봄", "say": ["브레멘엔 한 번도 못 갔어. 그래도 우린 브레멘 음악대야!", "한 곡 할까? 당나귀는 트럼펫, 개는 북, 고양이는 바이올린, 닭은 노래!", "파리에서 버스킹 하려고. 근위병만 없으면 돼."], "g": ["악단 공연 티켓", "\"언제 어디서든 공연\"이라고 적힌 손글씨 티켓"]}, {"a": 4550.0, "b": 4676.75, "id": "p08", "n": "호두까기 인형", "w": "크리스마스 시장 납품 중인 병정 · 턱이 딱딱", "say": ["딱! 딱! 본관은 크리스마스 시장으로 이동 중이다!", "쥐… 쥐 소리 났나? 경계 태세!", "호두 하나 줘 보게. 본관의 턱 실력을 보여 주지."], "g": ["호두 속 쪽지", "호두 안에서 나온 작은 쪽지 \"다음 역에서 좋은 일\""]}, {"a": 4676.75, "b": 5200.0, "id": "p11", "n": "하이디", "w": "알프스 소녀 · 처음 기차 타 보는 날", "say": ["기차는 처음이야! 염소 이름 지어 줄래?", "할아버지가 만든 치즈 먹어 볼래? 불에 녹여 먹어야 맛있어.", "도시는 좀 무서워… 그래도 발레리나 언니처럼 멋져지고 싶어."], "g": ["알프스 치즈 한 조각", "할아버지 오두막에서 만든 치즈. 들꽃 냄새가 난다"]}, {"a": 5200.0, "b": 5313.75, "id": "p12", "n": "삼총사", "w": "프랑스 왕의 총사들 · 영국 가는 게 영 내키지 않음", "say": ["하나는 모두를 위해, 모두는 하나를 위해! …근데 누가 표를 샀지?", "(뚱뚱이) 식당칸 크루아상 맛있더라. (꼬마) 칼 뽑을까?!", "영국 근위병이랑 누가 더 멋진지 겨뤄 보고 싶군."], "g": ["총사의 깃털", "모자에서 뽑아 준 깃털. 결투 신청서로도 쓸 수 있다"]}, {"a": 5313.75, "b": 5671.25, "id": "p13", "n": "하얀 토끼", "w": "늘 지각하는 신사 토끼 · 해저터널이 지름길이라 믿음", "say": ["늦었다 늦었어! 이 터널이 토끼굴로 통하는 지름길 맞지?", "내 시계? 맞아, 틀려. 늘 틀려. 그래서 늘 늦지.", "고래 봤어? 고래도 늦었대. 다들 늦어."], "g": ["멈춘 회중시계", "늘 틀린 시간을 가리키는 작은 시계. 그래도 예쁘다"]}, {"a": 5671.25, "b": 5866.25, "id": "p01", "n": "셜록 홈즈", "w": "베이커가 221B의 탐정 · 런던이 가까워졌다", "say": ["다시 만났군. 런던 공기가 벌써 느껴져.", "별 연기의 행방 말인데… 범인은 이 기차 안에 있어.", "베이커가에 들르면 허드슨 부인이 차를 내줄 거야."], "g": ["물음표 연기 쪽지", "\"단서는 늘 창밖에 있다\" — 셜록이 수첩을 찢어 적어 준 쪽지"]}, {"a": 5866.25, "b": 5970.25, "id": "p14", "n": "근위병", "w": "버킹엄 궁 근위병 · 교대 근무 가는 길", "say": ["……", "(모자 위 새) 짹.", "…… (입꼬리가 아주 조금 움직인 것 같다)"], "g": ["근위병 단추", "빨간 제복에서 떨어진 금단추. 근위병은 끝까지 모른 척했다"]}];
+const MENU=[{"a": 0, "b": 162.5, "r": "부산 → 서울", "d": [{"id": "zkr1", "n": "어묵 꼬치", "p": "₩3,000", "t": "국물에 푹 담근 부산 어묵. 갈매기가 노려본다."}, {"id": "zkr2", "n": "돼지국밥", "p": "₩10,000", "t": "뽀얀 국물에 부추를 듬뿍. 밤기차엔 이만한 게 없다."}, {"id": "zkr3", "n": "씨앗호떡", "p": "₩2,500", "t": "견과류가 꽉 찬 부산 호떡. 꿀이 뜨거우니 조심."}, {"id": "zkr7", "n": "삶은 달걀과 사이다", "p": "₩3,000", "t": "기차 여행의 영원한 짝꿍."}]}, {"a": 162.5, "b": 633.75, "r": "서울 → 구름 위", "d": [{"id": "zkr4", "n": "김밥 한 줄", "p": "₩4,000", "t": "서울역 매점에서 막 말아 온 김밥."}, {"id": "zkr5", "n": "떡볶이", "p": "₩5,000", "t": "달고 매운 밀떡볶이."}, {"id": "zkr6", "n": "호두과자", "p": "₩5,000", "t": "천안을 지나면 꼭 생각나는 맛."}, {"id": "zkr8", "n": "메밀묵", "p": "₩6,000", "t": "도깨비가 제일 좋아한다는 그 묵."}, {"id": "zkr9", "n": "구름 솜사탕", "p": "✦", "t": "구름 위 구간에서만 파는 솜사탕. 입에 넣으면 사라진다."}]}, {"a": 633.75, "b": 1332.5, "r": "바이칼", "d": [{"id": "zru1", "n": "훈제 오물", "p": "₽300", "t": "바이칼에서만 잡히는 생선. 역 앞 할머니 노점의 명물."}, {"id": "zru2", "n": "블리니와 연어알", "p": "₽350", "t": "얇게 부친 팬케이크에 연어알과 사워크림."}, {"id": "zru3", "n": "보르시", "p": "₽250", "t": "비트로 끓인 새빨간 수프. 딜을 한 줌."}]}, {"a": 1332.5, "b": 3071.25, "r": "오로라 구간", "d": [{"id": "zru4", "n": "유리잔 홍차와 잼", "p": "₽80", "t": "은빛 컵받침에 담겨 나오는 러시아 기차의 홍차."}, {"id": "zru5", "n": "펠메니", "p": "₽280", "t": "작은 만두에 사워크림 듬뿍."}, {"id": "zru8", "n": "오로라 젤리", "p": "✦", "t": "초록과 보라로 흔들리는 젤리. 오로라 구간 한정."}, {"id": "zru9", "n": "우주식 튜브", "p": "✦", "t": "라이카도 좋아하는 별맛 우주식."}]}, {"a": 3071.25, "b": 4550.0, "r": "모스크바 → 독일", "d": [{"id": "zru6", "n": "피로시키", "p": "₽120", "t": "기름에 튀긴 러시아 고기빵."}, {"id": "zru7", "n": "메도빅", "p": "₽200", "t": "꿀을 겹겹이 바른 케이크."}, {"id": "zde1", "n": "프레첼", "p": "€3", "t": "굵은 소금이 콕콕 박힌 독일 빵."}, {"id": "zde2", "n": "소시지와 자우어크라우트", "p": "€9", "t": "머스터드를 듬뿍."}]}, {"a": 4550.0, "b": 4956.25, "r": "퓌센 → 루체른", "d": [{"id": "zde3", "n": "생강 하트 쿠키", "p": "€4", "t": "크리스마스 시장의 하트 쿠키, 레프쿠헨."}, {"id": "zde6", "n": "블랙 포레스트 케이크", "p": "€6", "t": "체리를 올린 검은 숲 케이크."}, {"id": "zde5", "n": "치즈 퐁듀", "p": "CHF 24", "t": "녹인 치즈에 빵을 푹. 하이디네 할아버지 스타일."}, {"id": "zde4", "n": "감자 샐러드", "p": "€5", "t": "식초로 버무린 독일식 감자 샐러드."}]}, {"a": 4956.25, "b": 5200.0, "r": "루체른 → 파리", "d": [{"id": "zde7", "n": "라클렛", "p": "CHF 18", "t": "녹인 치즈를 감자 위에 긁어 얹는다."}, {"id": "zde8", "n": "스위스 초콜릿", "p": "CHF 5", "t": "알프스 우유로 만든 초콜릿 한 판."}, {"id": "zde9", "n": "핫초코", "p": "CHF 5", "t": "휘핑크림을 산처럼 올린 핫초코."}]}, {"a": 5200.0, "b": 5964.75, "r": "파리 → 바닷속 → 런던", "d": [{"id": "zfr1", "n": "크루아상", "p": "€2.5", "t": "파리 동역 빵집의 갓 구운 크루아상."}, {"id": "zfr2", "n": "마카롱", "p": "€9", "t": "파스텔색 마카롱 탑."}, {"id": "zfr3", "n": "초콜릿 크레프", "p": "€6", "t": "얇은 크레프에 초콜릿을 듬뿍."}, {"id": "zfr9", "n": "진주 푸딩", "p": "✦", "t": "해저 구간 한정. 조개껍데기에 담긴 진주 푸딩."}, {"id": "zfr6", "n": "스콘과 클로티드 크림", "p": "£6", "t": "잼 먼저? 크림 먼저? 영국인들도 싸운다."}, {"id": "zfr7", "n": "밀크티", "p": "£3", "t": "진하게 우린 홍차에 우유."}, {"id": "zfr4", "n": "피시 앤 칩스", "p": "£12", "t": "종착역이 가까워졌다는 맛."}]}];
+const MOM=[{"km": 9.75, "id": "m01", "t": "광안대교", "s": "부산의 밤바다를 가로지르는 다리", "st": "BUSAN"}, {"km": 156.0, "id": "m02", "t": "남산 불빛", "s": "광화문 해치가 불기운을 막는다는 서울", "st": "SEOUL"}, {"km": 201.5, "id": "m03", "t": "구름 위로", "s": "기차가 하늘로 올라갔다. 도깨비불이 따라온다", "st": "ABOVE THE CLOUDS"}, {"km": 630.5, "id": "m04", "t": "샤먼 바위", "s": "아버지 바이칼이 도망치는 딸 앙가라에게 던졌다는 바위", "st": "BAIKAL"}, {"km": 1235.0, "id": "m05", "t": "시베리아 금빛 숲", "s": "자작나무가 해 질 녘에 불타는 것처럼 빛난다", "st": "SIBERIA"}, {"km": 1706.25, "id": "m06", "t": "퉁구스카의 빛", "s": "1908년 숲을 쓰러뜨린 수수께끼의 폭발. 외계 우주선이라는 소문도", "st": "TUNGUSKA"}, {"km": 2746.25, "id": "m07", "t": "볼가 강가 교회", "s": "러시아 사람들이 \"어머니 강\"이라 부르는 볼가", "st": "VOLGA"}, {"km": 3064.75, "id": "m08", "t": "붉은 광장", "s": "너무 아름다워 건축가의 눈을 멀게 했다는 전설의 성당", "st": "MOSKVA"}, {"km": 4192.5, "id": "m09", "t": "그림 형제의 숲", "s": "빨간 모자 이야기가 태어난 헤센의 숲", "st": "MÄRCHEN"}, {"km": 4537.0, "id": "m10", "t": "노이슈반슈타인", "s": "동화왕 루트비히 2세의 성 · 디즈니 성의 모델", "st": "NEUSCHWANSTEIN"}, {"km": 4754.75, "id": "m11", "t": "알프스", "s": "하이디가 염소를 몰던 산", "st": "ALPEN"}, {"km": 4949.75, "id": "m12", "t": "카펠 다리", "s": "용이 떨어뜨린 돌이 병을 고쳤다는 필라투스 산 아래", "st": "LUZERN"}, {"km": 5193.5, "id": "m13", "t": "에펠탑", "s": "1925년 한 사기꾼이 이 탑을 고철로 팔아 치웠다", "st": "PARIS"}, {"km": 5346.25, "id": "m14", "t": "해저터널", "s": "창밖으로 고래가 지나간다", "st": "UNDER THE SEA"}, {"km": 5954.0, "id": "m15", "t": "빅벤", "s": "빅벤은 시계탑이 아니라 종의 이름", "st": "LONDON"}];
 const LS=(k,d)=>{try{return JSON.parse(localStorage.getItem(k)||'null')||d}catch(e){return d}},LSset=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
 let STAMPS=LS('bl-stamps',{}),GIFTS=LS('bl-gifts',{}),FOODS=LS('bl-foods',{}),MET=LS('bl-met',{});
-const GFACT={"p01": "자갈치시장은 한국에서 가장 큰 수산시장. 옛날 이 일대가 자갈밭이라 '자갈치'라는 이름이 붙었다는 이야기가 전해진다.", "p02": "원산에는 '명사십리'라는 바닷가가 있다. 십 리(약 4km)에 걸쳐 고운 모래가 깔려 있고, 여름이면 붉은 해당화가 핀다.", "p03": "마트료시카는 1890년대 모스크바 근교 아브람체보의 공방에서 처음 만들어졌다. 일본의 겹쳐 넣는 인형에서 영감을 받았다는 이야기가 유명하다.", "p04": "이 금속 컵받침의 이름은 '포드스타칸니크'. 흔들리는 기차에서 뜨거운 유리잔을 잡기 좋아서, 러시아 기차에선 지금도 차를 이렇게 내준다.", "p05": "바이칼은 세계에서 가장 깊은 호수(약 1,642m). 지구의 얼지 않은 민물 가운데 약 5분의 1이 이 호수 하나에 담겨 있다.", "p06": "'우샨카'는 러시아어 '우시(귀)'에서 온 이름. 귀 덮개를 내려 턱 밑에서 묶으면 영하 40도의 바람도 막아 준다.", "p07": "체스판에서 다른 말을 뛰어넘을 수 있는 건 '나이트' 하나뿐. 러시아어로는 그냥 '말(코니)'이라고 부른다.", "p08": "토슈즈 리본은 무용수가 자기 발에 맞춰 직접 바느질해 단다. 주역 무용수는 공연 한 번에 한 켤레를 다 닳게 하기도 한다.", "p09": "녹턴을 많이 남긴 쇼팽은 폴란드 사람. 그의 심장은 유언대로 고향에 돌아와 바르샤바 성십자가 성당 기둥 안에 모셔져 있다.", "p10": "호두까기 인형의 고향은 독일 에르츠산맥의 자이펜 마을. 차이콥스키의 발레 「호두까기 인형」(1892) 덕분에 크리스마스의 상징이 됐다.", "p11": "몽마르트르 테르트르 광장에선 지금도 거리 화가들이 초상화를 그려 준다. 젊은 피카소도 이 언덕의 낡은 작업실 '세탁선'에 살았다.", "p12": "사실 셜록 홈즈 원작 소설에는 '사냥모자'라는 말이 직접 나오지 않는다. 잡지 삽화가 시드니 패짓이 그려 넣으면서 홈즈의 상징이 됐다."};
+const GFACT={"p01": "셜록 홈즈는 1887년 아서 코난 도일의 소설 「주홍색 연구」에서 처음 등장했다. 그때 베이커가엔 221번지가 실제로 없었다.", "p02": "갈매기는 부산을 상징하는 새(시조)다. 부산 사람들은 야구장에서도 갈매기를 노래한다.", "p03": "해치(해태)는 옳고 그름을 가리는 상상의 동물. 2008년 서울의 상징으로 정해졌다.", "p04": "도깨비는 사람을 해치기보다 장난을 좋아하는 존재로 전해진다. 혹부리 영감 이야기에선 혹을 떼어 가고 보물을 주었다.", "p05": "라이카는 1957년 스푸트니크 2호를 타고 지구 궤도를 돈 첫 동물이다. 모스크바 거리를 떠돌던 강아지였다.", "p06": "마트료시카는 1890년대 모스크바 근교 아브람체보의 공방에서 처음 만들어졌다. 일본의 겹쳐 넣는 인형에서 영감을 받았다는 이야기가 유명하다.", "p07": "「백조의 호수」에서 백조 오데트와 흑조 오딜은 보통 한 발레리나가 둘 다 춘다. 흑조의 32회전 푸에테가 가장 유명한 장면.", "p08": "호두까기 인형은 독일 에르츠 산지의 목공예에서 유래했다. 차이콥스키 발레의 원작은 독일 작가 E.T.A. 호프만의 이야기.", "p09": "빨간 모자의 빨간 두건은 독일 헤센 슈발름 지방의 전통 모자에서 왔다는 이야기가 있다.", "p10": "브레멘 음악대의 네 동물은 이야기 속에서 끝내 브레멘에 도착하지 못한다. 그래도 브레멘 시청 옆엔 그들의 동상이 서 있다.", "p11": "「하이디」는 1880년 스위스 작가 요한나 슈피리가 쓴 소설. 이야기 속 하이디는 도시에서 지내며 알프스를 그리워한다.", "p12": "「삼총사」는 1844년 알렉상드르 뒤마의 소설. 주인공 다르타냥은 사실 삼총사가 아니라 네 번째 친구다.", "p13": "하얀 토끼는 1865년 루이스 캐럴의 「이상한 나라의 앨리스」에서 앨리스를 토끼굴로 이끈 장본인이다.", "p14": "버킹엄 궁 근위병의 곰털 모자는 높이가 약 45cm. 근무 중엔 웃거나 말을 하지 않는다."};
 const paxAt=km=>PAX.find(p=>km>=p.a&&km<p.b),menuAt=km=>MENU.find(m=>km>=m.a&&km<m.b);
 function nextMoment(km){return MOM.find(m=>m.km>km+.2)}
 // 이미지가 있으면 쓰고, 없으면 글자 카드
-const IMGV='?v=1103b';const IMGOK={};function tryImg(key,el,fb,ok){if(IMGOK[key]===false){fb();return}const im=new Image();im.onload=()=>{IMGOK[key]=true;el.style.backgroundImage='url('+im.src+')';el.classList.add('has');ok&&ok(im)};im.onerror=()=>{IMGOK[key]=false;fb()};im.src='img/'+key+'.webp'+IMGV}
+const IMGV='?v=z1103';const IMGOK={};function tryImg(key,el,fb,ok){if(IMGOK[key]===false){fb();return}const im=new Image();im.onload=()=>{IMGOK[key]=true;el.style.backgroundImage='url('+im.src+')';el.classList.add('has');ok&&ok(im)};im.onerror=()=>{IMGOK[key]=false;fb()};im.src='img/'+key+'.webp'+IMGV}
 // 승객
 let paxCur=null,paxLine=0,paxShownFor='';
 function paxTick(S){if(!ticket||S.mode==='wait'||S.mode==='end'){if(paxCur){paxCur=null;renderPaxChip()}return}
   const p=paxAt(S.km);if(p!==paxCur){const was=paxCur;paxCur=p;paxLine=0;renderPaxChip();
     if(p&&was&&paxShownFor!==ticket.trainKey+p.id){toast(p.n+JO(p.n,'이','가')+' 맞은편 자리에 탔어요',p.w.split(' · ')[0],3600);blip(700,.1,.03)}
     paxShownFor=ticket.trainKey+(p?p.id:'')}}
-function renderPaxChip(){const el=$('pax');if(!el)return;if(!paxCur){el.innerHTML='';el.classList.remove('on','dot');return}
+function renderSeat(){const st=$('seat'),im=$('seatImg');if(!st||!im)return;const id=paxCur?paxCur.id:'';if(st.dataset.id===id)return;st.dataset.id=id;st.classList.remove('on');if(!id)return;const n=new Image();n.onload=()=>{im.src=n.src;const r=n.naturalWidth/n.naturalHeight;im.style.height=r>.72?'76%':r>.6?'88%':'100%';st.classList.add('on')};n.src='img/pf_'+id+'.webp'+IMGV}
+function renderPaxChip(){renderSeat();const el=$('pax');if(!el)return;if(!paxCur){el.innerHTML='';el.classList.remove('on','dot');return}
   const nm=paxCur.n.split(' ').pop();el.innerHTML='<i class="pxa" id="pxChipA">'+esc(paxCur.n[0])+'</i><span>'+esc(nm.length>5?nm.slice(0,5):nm)+'</span>';el.classList.add('on');el.classList.toggle('dot',!GIFTS[paxCur.id]);
   const a=$('pxChipA'),id=paxCur.id;tryImg('pxc_'+id,a,()=>tryImg('px_'+id,a,()=>{}))}
 function openPax(){const p=paxCur;if(!p)return;dayInc('talk');$('pxName').textContent=p.n;$('pxWho').textContent=p.w;paxLine=0;$('pxSay').textContent='“'+p.say[0]+'”';
@@ -2346,6 +2313,7 @@ $('pxGift').onclick=e=>{e.stopPropagation();const p=paxCur;if(!p||GIFTS[p.id])re
   $('pxGift').textContent='받은 선물';$('pxGift').classList.add('done');blip(1320,.16,.04);renderPaxChip();show('mPax',false);setTimeout(()=>openGift(p),250)};
 function openGift(p){$('gfName').textContent=p.g[0];$('gfText').textContent=p.g[1];$('gfFact').innerHTML='<b>알고 보니</b>'+esc(GFACT[p.id]||'');const ph=$('gfPh');ph.style.backgroundImage='';ph.innerHTML='<b class="gfb">'+esc(p.g[0])+'</b>';ph.className='pxph ill gf';delete ph.dataset.cap;tryImg('gf_'+p.id,ph,()=>{},im=>{if(im.naturalWidth/im.naturalHeight>1.15){ph.className='fdph has';ph.innerHTML='';ph.style.backgroundImage='url('+im.src+')';ph.dataset.cap=p.n+'에게 받은 선물';return}ph.style.backgroundImage='';ph.innerHTML='<i class="art" style="background-image:url('+im.src+')"></i><em class="cap">'+esc(p.n)+'에게 받음</em>'});show('mGift',true)}
 $('gfClose').onclick=()=>show('mGift',false);$('mGift').onclick=e=>{if(e.target===$('mGift'))show('mGift',false)};
+$('seatImg').onclick=e=>{e.stopPropagation();if(paxCur)openPax()};
 $('pxClose').onclick=()=>show('mPax',false);$('mPax').onclick=e=>{if(e.target===$('mPax'))show('mPax',false)};
 // 식당칸
 let foodT=0;
@@ -2373,7 +2341,7 @@ function showMoment(m){const fresh=!STAMPS[m.id];if(fresh){STAMPS[m.id]=Date.now
 $('moment').onclick=e=>{e.stopPropagation();$('moment').classList.remove('on')};
 function stampsHtml(){return '<div class="stp">'+MOM.map(m=>'<span class="'+(STAMPS[m.id]?'on':'')+'" title="'+esc(m.t)+'">'+(STAMPS[m.id]?esc(m.st):'')+'</span>').join('')+'</div>'}
 
-const PASS=[[0,'KR','REPUBLIC OF KOREA','DEPARTURE','BUSAN','#2f5fa8','대한민국'],[535,'KP','DPR KOREA','ENTRY','DMZ','#9b3a2f','북한'],[1287,'RU','RUSSIA','ENTRY','KHASAN','#b0342a','러시아'],[11240,'BY','BELARUS','ENTRY','','#3f7a4a','벨라루스'],[11840,'PL','POLAND · SCHENGEN','ENTRY','TERESPOL','#7a2a5a','폴란드'],[12555,'DE','GERMANY','SCHENGEN · 검사 없음','FRANKFURT (ODER)','#4a4a4a','독일'],[13265,'BE','BELGIUM','SCHENGEN · 검사 없음','','#a8762a','벨기에'],[13480,'FR','FRANCE','SCHENGEN · 검사 없음','','#2a4f8a','프랑스'],[13885,'GB','UNITED KINGDOM','ENTRY','CHANNEL TUNNEL','#6a2a2a','영국']];
+const PASS=[[0, "KR", "REPUBLIC OF KOREA", "DEPARTURE", "BUSAN", "#2f5fa8", "대한민국"], [198.25, "SKY", "ABOVE THE CLOUDS", "ENTRY", "CLOUD LINE", "#3a4a8a", "구름 위"], [631.75, "RU", "RUSSIA", "ENTRY", "BAIKAL", "#b0342a", "러시아"], [3380.0, "BY", "BELARUS", "ENTRY", "", "#3f7a4a", "벨라루스"], [3705.0, "PL", "POLAND · SCHENGEN", "ENTRY", "", "#7a2a5a", "폴란드"], [4030.0, "DE", "GERMANY", "SCHENGEN · 검사 없음", "", "#4a4a4a", "독일"], [4813.25, "CH", "SWITZERLAND", "ENTRY", "", "#c8102e", "스위스"], [5089.5, "FR", "FRANCE", "SCHENGEN · 검사 없음", "", "#2a4f8a", "프랑스"], [5261.75, "SEA", "UNDER THE SEA", "ENTRY", "", "#1f6f7a", "바닷속"], [5671.25, "GB", "UNITED KINGDOM", "ENTRY", "CHANNEL TUNNEL", "#6a2a2a", "영국"]];
 let PASSD=LS('bl-pass',{});
 function stampHtml(p,date,isNew){const r=((p[1].charCodeAt(0)*7+p[1].charCodeAt(1)*3)%17)-8;return '<span class="pzs'+(isNew?' new':'')+'" style="--c:'+p[5]+';transform:rotate('+r+'deg)"><b>'+p[2]+'</b><i>'+p[3]+(date?' · '+date:'')+'</i>'+(p[4]?'<em>'+p[4]+'</em>':'')+'</span>'}
 function openPass(newId){const k=Object.keys(PASSD);$('psSt').innerHTML=PASS.filter(p=>PASSD[p[1]]).map(p=>stampHtml(p,PASSD[p[1]],p[1]===newId)).join('')||'<div class="pzempty">아직 도장이 없어요</div>';
@@ -2396,7 +2364,7 @@ function lightsTick(S){if(!ticket||S.mode==='wait'||S.mode==='end'||anyOpen())re
   if(h===23&&!ticket.lo['n'+dk]&&!window.LIGHTS_OFF){ticket.lo['n'+dk]=1;saveTicket();if(cartOpen)return;showCart({id:'lights',t:'밤 11시 · 소등 시간이에요',d:'차장이 복도 불을 끄고 지나갑니다. 불을 끄면 창밖 별과 마을 불빛이 더 잘 보여요',custom:()=>{if(!window.LIGHTS_OFF)toggleLamp()}});$('cartBuy').textContent='불 끄기';$('cartNo').textContent='조금 더 켜 둘래요'}
   else if(h===6&&lt.getUTCMinutes()>=30&&window.LIGHTS_OFF&&!ticket.lo['m'+dk]){ticket.lo['m'+dk]=1;saveTicket();toggleLamp();toast('좋은 아침이에요','차장이 불을 켰어요',2600)}}
 
-const PCARD=[[2, "l01", "자갈치시장", "부산", "한국에서 가장 큰 수산시장. 바닷가 좌판에서 아지매들이 생선을 판다.", "JAGALCHI · BUSAN"], [655, "l02", "명사십리", "원산", "이름 그대로 '밝은 모래가 십 리'. 고운 모래사장이 길게 이어진 바닷가.", "MYEONGSASIMNI · WONSAN"], [1545, "l03", "9288km 기념비", "블라디보스토크", "모스크바에서 여기까지 시베리아 횡단철도 9,288km. 플랫폼에 그 숫자가 새겨진 기념비가 서 있다.", "VLADIVOSTOK · 9288"], [2302, "l04", "아무르강 다리", "하바롭스크", "러시아에서 가장 큰 지폐인 5000루블 뒷면에 그려진 바로 그 다리.", "AMUR BRIDGE · KHABAROVSK"], [3900, "l05", "통나무집 조각 창틀", "자바이칼", "통나무집 창을 두른 나무 레이스. 러시아어로 '날리치니키'라고 부른다.", "NALICHNIKI · ZABAYKALYE"], [5195, "l06", "레닌 머리", "울란우데", "세계에서 가장 큰 레닌 머리 조각. 높이 7.7m, 무게 42t. 1970년 레닌 탄생 100년을 기념해 세웠다.", "ULAN-UDE"], [5335, "l08", "네르파", "바이칼", "세계에서 하나뿐인 민물 물범. 바이칼 호수에만 산다.", "NERPA · BAIKAL"], [5645, "l07", "바브르", "이르쿠츠크", "원래는 검은담비를 문 호랑이. 19세기에 '바브르(호랑이)'를 '보브르(비버)'로 잘못 읽어 비버 꼬리와 물갈퀴가 생겼다.", "BABR · IRKUTSK"], [7490, "l09", "오페라·발레 극장", "노보시비르스크", "러시아에서 가장 큰 극장 건물. 1945년 5월에 문을 열었다.", "NOVOSIBIRSK"], [9022, "l10", "유럽-아시아 경계비", "우랄", "시베리아 횡단철도 1777km 지점. 1957년에 세운 흰 기둥이 창밖으로만 보인다.", "EUROPE · ASIA"], [10342, "l11", "니즈니노브고로드 크렘린", "볼가", "볼가강과 오카강이 만나는 언덕 위의 붉은 벽돌 요새.", "NIZHNY NOVGOROD"], [10600, "l12", "황금의 문", "블라디미르", "800년도 더 된 흰 돌 성문. 옛 도시의 정문이었다.", "GOLDEN GATE · VLADIMIR"], [10790, "l13", "성 바실리 대성당", "모스크바", "붉은 광장 끝의 양파 지붕 성당. 시베리아 횡단철도는 모스크바에서 시작한다.", "MOSCOW"], [11830, "l14", "바퀴 교체", "브레스트", "러시아 선로는 1520mm, 유럽은 1435mm. 객차를 들어 올려 바퀴를 갈아 끼우는 데 약 2시간.", "BREST"], [12040, "l15", "쇼팽 벤치", "바르샤바", "바르샤바 곳곳의 검은 벤치 15개. 버튼을 누르면 쇼팽의 곡이 흘러나온다.", "WARSZAWA"], [12046, "l16", "구시가지 광장", "바르샤바", "전쟁으로 무너진 뒤 18세기 화가 벨로토의 그림을 보고 다시 지었다. 1980년 유네스코 세계유산.", "WARSZAWA"], [12300, "l17", "시청 숫염소", "포즈난", "매일 정오, 시계탑 위에서 숫염소 두 마리가 12번 박치기를 한다. 1551년부터.", "POZNAŃ"], [12610, "l18", "브란덴부르크 문", "베를린", "꼭대기에 네 마리 말이 끄는 전차가 선 베를린의 상징.", "BERLIN"], [12616, "l19", "신호등 아저씨", "베를린", "모자 쓴 동베를린 신호등 아저씨. 1961년 교통심리학자 카를 페글라우가 만들었다.", "BERLIN"], [13180, "l20", "쾰른 대성당", "쾰른", "기차역 바로 옆에 선 거대한 쌍둥이 첨탑 성당.", "KÖLN"], [13400, "l21", "그랑플라스", "브뤼셀", "금빛 장식의 길드 하우스들이 둘러싼 브뤼셀의 큰 광장.", "BRUXELLES"], [13660, "l23", "몽마르트르", "파리", "하얀 사크레쾨르 성당이 선 언덕. 지금도 거리 화가들이 초상화를 그린다.", "MONTMARTRE · PARIS"], [13665, "l22", "에펠탑", "파리", "파리 한가운데 선 철탑. 기차는 북역으로 들어간다.", "PARIS"], [13860, "l24", "해저 터널 입구", "영불해협", "1994년에 개통한 영불해협 터널. 이 입구를 지나면 바다 밑으로 들어간다.", "CHANNEL TUNNEL"], [14115, "l25", "빅벤과 공중전화", "런던", "사실 '빅벤'은 탑이 아니라 그 안의 큰 종 이름. 탑의 이름은 엘리자베스 타워.", "LONDON"]];
+const PCARD=[];
 let PCD=LS('bl-pcard',{});let pcQ=null;
 function openPCard(id){const p=PCARD.find(x=>x[1]===id);if(!p)return;const ph=$('pcdPh');ph.classList.remove('has');$('pcdImg').style.backgroundImage='';$('pcdK').textContent=p[2];$('pcdE').textContent=p[5]||'';
   const im=new Image();im.onload=()=>{$('pcdImg').style.backgroundImage='url('+im.src+')';ph.classList.add('has')};im.src='img/'+p[1]+'.webp'+IMGV;
@@ -2493,28 +2461,12 @@ $('devClose').onclick=()=>show('mDev',false);$('mDev').onclick=e=>{if(e.target==
 
 
 // ───────── 앞쪽 승객들의 짧은 놀이 ─────────
-const MQ={
- p01:{t:'자갈치 아지매의 사투리 퀴즈',hi:'“부산 말 쫌 아나? 맞혀 보이소.”',q:[
-  {q:'“단디 해라”는 무슨 뜻일까요?',o:['빨리 해라','야무지게 똑바로 해라','그만 해라'],a:1,ok:'“맞다! 단디 하이소.”'},
-  {q:'“머라카노?”는 무슨 뜻일까요?',o:['뭐라고 하니?','어디 가니?','배고프니?'],a:0,ok:'“하모! 잘 아네.”'},
-  {q:'“고마 해라”는 무슨 뜻일까요?',o:['고맙다','그만 해라','더 해라'],a:1,ok:'“고마 맞혔다, 고마!”'}],end:'“서울 가면 손녀한테 자랑해야겠다. 부산 말 하는 외국 손님 만났다꼬.”'},
- p05:{t:'사얀의 바이칼 퀴즈',hi:'“우리 바다(바이칼)에 대해 얼마나 알아요?”',q:[
-  {q:'바이칼에만 사는 물범의 이름은?',o:['네르파','바다코끼리','물개'],a:0,ok:'“맞아요. 민물에 사는 물범이에요.”'},
-  {q:'바이칼에만 사는 물고기로, 훈제해서 역 앞에서 파는 것은?',o:['연어','오물','청어'],a:1,ok:'“슬류댠카 역에서 꼭 사 먹어요.”'},
-  {q:'지구의 얼지 않은 민물 가운데 바이칼에 담긴 양은?',o:['약 100분의 1','약 5분의 1','절반'],a:1,ok:'“그래서 우린 바다라고 불러요.”'}],end:'“다음엔 말 타러 와요. 초원에서 보는 별은 기차보다 더 많아요.”'},
- p08:{t:'발레리나 마샤의 발레 용어 퀴즈',hi:'“오디션 전에 머리 좀 식히고 싶어요. 같이 해요.”',q:[
-  {q:'“플리에”는 어떤 동작일까요?',o:['무릎을 굽히기','한 바퀴 돌기','높이 뛰기'],a:0,ok:'“모든 동작은 플리에에서 시작해요.”'},
-  {q:'한 다리로 서서 다른 다리를 뒤로 길게 뻗는 동작은?',o:['아라베스크','피루엣','그랑 주테'],a:0,ok:'“브라보!”'},
-  {q:'「백조의 호수」를 작곡한 사람은?',o:['쇼팽','차이콥스키','모차르트'],a:1,ok:'“맞아요. 모스크바에서 처음 무대에 올랐어요.”'}],end:'“오디션 붙으면 표 보낼게요. 진짜로요.”'},
- p09:{t:'피아니스트 아냐의 쇼팽 퀴즈',hi:'“콩쿠르 전이라 손이 떨려요. 문제 내 볼게요.”',q:[
-  {q:'쇼팽 콩쿠르는 몇 년마다 열릴까요?',o:['매년','5년마다','10년마다'],a:1,ok:'“그래서 한 번 놓치면 5년을 기다려요.”'},
-  {q:'쇼팽의 심장은 지금 어디에 있을까요?',o:['파리의 묘지','바르샤바의 성십자가 성당','빈의 박물관'],a:1,ok:'“몸은 파리에, 마음은 바르샤바에.”'},
-  {q:'쇼팽이 태어난 해는?',o:['1810년','1890년','1756년'],a:0,ok:'“정답! 바르샤바 근처 젤라조바볼라에서요.”'}],end:'“덕분에 떨림이 멎었어요. 무대에서 당신 생각하며 칠게요.”'}};
+const MQ={"p02": {"t": "갈매기의 부산 사투리 퀴즈", "hi": "“부산 말 쫌 아나? 맞혀 보이소. 끼룩.”", "q": [{"q": "“단디 해라”는 무슨 뜻일까요?", "o": ["빨리 해라", "야무지게 똑바로 해라", "그만 해라"], "a": 1, "ok": "“맞다! 단디 하이소.”"}, {"q": "“머라카노?”는 무슨 뜻일까요?", "o": ["뭐라고 하니?", "어디 가니?", "배고프니?"], "a": 0, "ok": "“하모! 잘 아네.”"}, {"q": "“고마 해라”는 무슨 뜻일까요?", "o": ["고맙다", "그만 해라", "더 해라"], "a": 1, "ok": "“고마 맞혔다, 고마!”"}], "end": "“니 부산 사람 다 됐다! 어묵 한 입 줄게. …진짜 한 입만.”"}, "p03": {"t": "해치의 거짓말 찾기", "hi": "“세 문장 중 하나는 거짓말이야. 뿔이 간질거리는 걸 골라.”", "q": [{"q": "어느 게 거짓말일까?", "o": ["해치는 옳고 그름을 가리는 동물이다", "해치는 2008년 서울의 상징이 됐다", "해치는 원래 바닷속에 산다"], "a": 2, "ok": "“맞아. 바다는 갈매기 담당이야.”"}, {"q": "어느 게 거짓말일까?", "o": ["경복궁 드므는 불귀신을 쫓으려 놓은 물그릇이다", "남산타워는 조선 시대에 지어졌다", "관악산은 불기운이 센 산이라는 말이 있다"], "a": 1, "ok": "“그렇지. 남산타워는 1970년대에 생겼어.”"}, {"q": "어느 게 거짓말일까?", "o": ["해치는 뿔이 하나다", "해치는 거짓말쟁이를 뿔로 받는다", "해치는 매일 밤 열 시간씩 잔다"], "a": 2, "ok": "“…열한 시간이야. (하품)”"}], "end": "“너 꽤 정직하구나. 뿔이 하나도 안 간지러워.”"}, "p04": {"t": "도깨비 옛이야기 퀴즈", "hi": "“우리 도깨비에 대해 얼마나 알아? 틀리면 금화 없어!”", "q": [{"q": "도깨비랑 씨름할 때 어느 쪽 다리를 걸어야 이길까?", "o": ["오른다리", "왼다리", "둘 다"], "a": 1, "ok": "“에이, 그건 비밀이었는데!”"}, {"q": "도깨비가 제일 좋아하는 음식은?", "o": ["메밀묵", "떡볶이", "붕어빵"], "a": 0, "ok": "“메밀묵 있으면 줘! 지금!”"}, {"q": "혹부리 영감 이야기에서 도깨비가 혹을 떼어 간 이유는?", "o": ["혹이 아파 보여서", "노래가 혹에서 나온다고 믿어서", "혹을 팔려고"], "a": 1, "ok": "“노래 잘하는 영감이었지. 히히.”"}], "end": "“금 나와라 뚝딱! …오늘은 금화 대신 박수.”"}, "p05": {"t": "우주비행사의 우주 퀴즈", "hi": "“관제탑, 승객과 교신 시작. 문제 나갑니다.”", "q": [{"q": "지구 궤도를 처음 돈 동물은?", "o": ["원숭이", "라이카(강아지)", "고양이"], "a": 1, "ok": "“멍! (라이카가 꼬리를 흔든다)”"}, {"q": "오로라는 무엇 때문에 생길까?", "o": ["달빛이 반사돼서", "태양에서 온 입자가 대기와 부딪혀서", "눈이 빛나서"], "a": 1, "ok": "“정답. 태양이 보내는 편지 같은 거야.”"}, {"q": "1908년 시베리아 퉁구스카에서 일어난 일은?", "o": ["큰 지진", "숲이 한순간에 쓰러진 폭발", "화산 폭발"], "a": 1, "ok": "“운석일까… 우주선일까. 아직도 수수께끼야.”"}], "end": "“교신 완료. 너 우주비행사 해도 되겠어.”"}, "p07": {"t": "백조 발레리나의 발레 퀴즈", "hi": "“발레 좀 알아? 틀리면 흑조 표정 지을 거야.”", "q": [{"q": "발끝으로 서서 추는 것을 무엇이라 할까요?", "o": ["앙 푸앵트", "데미 플리에", "그랑 주테"], "a": 0, "ok": "“그래, 토슈즈는 그래서 있는 거야.”"}, {"q": "흑조가 쉬지 않고 도는 회전은 몇 번일까요?", "o": ["8번", "16번", "32번"], "a": 2, "ok": "“한 번도 안 넘어지고. 흔들리는 기차에서도!”"}, {"q": "「백조의 호수」를 작곡한 사람은?", "o": ["쇼팽", "차이콥스키", "모차르트"], "a": 1, "ok": "“호두까기 인형도 그분이 만들었지.”"}], "end": "“브라보. 다음 공연, 맨 앞줄 자리 줄게.”"}, "p09": {"t": "진짜 할머니 맞히기", "hi": "“할머니한테 물어볼 말을 골라 줘. 늑대면… 어쩌지?”", "q": [{"q": "“할머니, 귀가 왜 그렇게 커요?” 진짜 할머니라면?", "o": ["네 말을 잘 들으려고", "배고파서", "그냥"], "a": 0, "ok": "“휴, 다행히 아직은 할머니 같아.”"}, {"q": "늑대를 알아보는 방법으로 제일 좋은 건?", "o": ["잠옷 색 보기", "꼬리가 있는지 보기", "목소리 크기 듣기"], "a": 1, "ok": "“(늑대) …저 꼬리 숨겨야겠네요.”"}, {"q": "빨간 모자 이야기를 책으로 모은 사람들은?", "o": ["그림 형제", "안데르센", "이솝"], "a": 0, "ok": "“그림 형제! 이 숲에서 이야기를 모았대.”"}], "end": "“(늑대) 저 진짜 착한 늑대예요… 믿어 주세요.”"}, "p13": {"t": "하얀 토끼의 시간 퀴즈", "hi": "“빨리빨리! 늦었어! 문제 세 개만!”", "q": [{"q": "런던은 서울보다 몇 시간 늦을까요? (겨울)", "o": ["3시간", "9시간", "12시간"], "a": 1, "ok": "“9시간이나! 그러니 늘 늦지!”"}, {"q": "앨리스가 토끼를 따라 들어간 곳은?", "o": ["토끼굴", "옷장", "거울"], "a": 0, "ok": "“거울은 다음 이야기야. 늦었어!”"}, {"q": "바다 밑 영불해협 터널의 길이는 대략?", "o": ["5km", "50km", "500km"], "a": 1, "ok": "“약 50km! 고래 구경하다 늦겠다!”"}], "end": "“늦었다 늦었어! 그래도 재밌었어!”"}, "p14": {"t": "근위병 웃기기 챌린지", "hi": "근위병은 근무 중엔 절대 웃지 않아요. 도전!", "q": [{"q": "어떤 농담을 해 볼까요?", "o": ["모자에 새 둥지 있어요", "바지 지퍼 열렸어요", "(아무 말 없이 같이 서 있기)"], "a": 2, "ok": "…근위병의 입꼬리가 아주 살짝 움직였다!"}, {"q": "한 번 더! 무엇을 해 볼까요?", "o": ["우스꽝스러운 표정 짓기", "모자 위 새에게 말 걸기", "근위병 흉내 내기"], "a": 1, "ok": "(새) 짹! …근위병이 숨을 참는다."}, {"q": "마지막 도전!", "o": ["큰 소리로 노래하기", "\"수고 많으세요\" 인사하기", "간지럼 태우기"], "a": 1, "ok": "…근위병이 아주 작게 고개를 끄덕였다."}], "end": "끝내 웃지는 않았다. 하지만 모자 위 새가 당신을 따라왔다."}};
 let mgP=null,mgI=0,mgOK=0,mgTm=[];
 function mgClear(){mgTm.forEach(clearTimeout);mgTm=[];$('mgA').onclick=null;$('mgA').innerHTML='';$('mgO').innerHTML='';$('mgQ').style.display='none';$('mgN').textContent=''}
 function openMini(p){mgP=p;mgClear();$('mgT').textContent=PLAY[p.id];show('mPlay',true);blip(520,.08,.03);
   if(MQ[p.id]){mgI=0;mgOK=0;$('mgT').textContent=MQ[p.id].t;$('mgSay').textContent=MQ[p.id].hi;mqShow();return}
-  ({p02:mgLetter,p03:mgDoll,p04:mgTea,p06:mgSimon,p10:mgNut,p11:mgSketch})[p.id]()}
+  ({p06:mgDoll,p08:mgNut,p10:mgSimon,p11:mgSketch})[p.id]()}
 function mgDone(txt){logAdd(mgP.n+'와 '+PLAY[mgP.id]+(txt?' · '+txt:''))}
 function mqShow(){const D=MQ[mgP.id],L=D.q;if(mgI>=L.length){$('mgQ').textContent=mgOK+' / '+L.length+' 맞힘';$('mgO').innerHTML='';$('mgN').textContent='';$('mgSay').textContent=D.end;mgDone(mgOK+'개 맞힘');return}
   const x=L[mgI];$('mgQ').style.display='';$('mgQ').textContent=x.q;$('mgN').textContent=(mgI+1)+' / '+L.length;$('mgO').innerHTML=x.o.map((t,i)=>'<button data-i="'+i+'">'+esc(t)+'</button>').join('')}
@@ -2541,37 +2493,37 @@ function mgTea(){let t0=performance.now(),tries=0,best=null,run=true;$('mgSay').
     if(d<.07){run=false;$('mgSay').textContent='“완벽해요! 30년 차장도 이렇게는 못 우려요.” — 은빛 컵받침에 담아 줘요';blip(980,.14,.05);$('mgO').innerHTML='';mgDone('완벽한 호박색')}
     else{$('mgSay').textContent=v<.5?'“너무 연해요. 다시!”':'“써요, 써! 다시!”';blip(260,.1,.04);t0=performance.now();if(tries>=4){run=false;$('mgSay').textContent='“괜찮아요, 제가 우릴게요. 기차에선 차가 제일 맛있어요.”';$('mgO').innerHTML='';mgDone()}}}}
 // 바얀 할아버지: 아코디언 따라 치기
-function mgSimon(){const F=[262,294,330,392],N=['도','레','미','솔'];let seq=[],pos=0,lock=true,round=0;$('mgSay').textContent='“내가 먼저 칠게. 똑같이 따라 쳐 봐.”';
+function mgSimon(){const F=[262,294,330,392],N=['도','레','미','솔'];let seq=[],pos=0,lock=true,round=0;$('mgSay').textContent='“우리가 먼저 연주할게. 똑같이 따라 해 봐! 히힝!”';
   $('mgA').innerHTML='<div class="simon">'+N.map((n,i)=>'<button data-s="'+i+'">'+n+'</button>').join('')+'</div>';
   const lit=i=>{const b=$('mgA').querySelectorAll('button')[i];b.classList.add('lit');blip(F[i],.32,.07);mgTm.push(setTimeout(()=>b.classList.remove('lit'),300))};
   const play=()=>{lock=true;seq.push(Math.floor(Math.random()*4));if(seq.length<3){seq.push(Math.floor(Math.random()*4));seq.push(Math.floor(Math.random()*4))}pos=0;$('mgN').textContent=(round+1)+' / 3 · '+seq.length+'음';
     seq.forEach((n,i)=>mgTm.push(setTimeout(()=>lit(n),600+i*520)));mgTm.push(setTimeout(()=>{lock=false;$('mgSay').textContent='“자, 이제 네 차례.”'},600+seq.length*520))};
   $('mgA').onclick=e=>{const b=e.target.closest('[data-s]');if(!b||lock)return;const i=+b.dataset.s;lit(i);
     if(i!==seq[pos]){lock=true;$('mgSay').textContent='“하하, 음이 미끄러졌네. 다시 해 보자.”';seq=[];round=0;mgTm.push(setTimeout(play,1400));return}
-    pos++;if(pos>=seq.length){round++;if(round>=3){lock=true;$('mgSay').textContent='“브라보! 다음 역에서 같이 연주하자고.”';$('mgN').textContent='';mgDone('세 소절 성공');return}
+    pos++;if(pos>=seq.length){round++;if(round>=3){lock=true;$('mgSay').textContent='“브라보! 꼬끼오! 너도 오늘부터 브레멘 음악대야!”';$('mgN').textContent='';mgDone('세 소절 성공');return}
       $('mgSay').textContent='“좋아! 한 음 더.”';mgTm.push(setTimeout(play,900))}};play()}
 // 호두까기 장인: 호두 깨기 (빠르게 톡톡)
-function mgNut(){let n=0,t=null;$('mgSay').textContent='“이 인형 입에 호두를 넣고 빠르게 눌러 봐요. 4초 안에 10번!”';
+function mgNut(){let n=0,t=null;$('mgSay').textContent='“본관의 턱에 호두를 넣고 빠르게 눌러라! 4초 안에 10번! 딱!”';
   $('mgA').innerHTML='<div class="mgbig" id="mgN2">🌰</div><div class="mgbar"><i id="mgNb"></i></div>';
   $('mgN2').onclick=()=>{if(n<0)return;if(!t)t=setTimeout(()=>{if(!$('mgNb'))return;if(n<10){$('mgSay').textContent='“아직 단단하네. 다시!”';n=0;t=null;$('mgNb').style.width='0'}},4000);n++;$('mgNb').style.width=Math.min(100,n*10)+'%';const d=$('mgN2');d.classList.remove('pop');void d.offsetWidth;d.classList.add('pop');blip(420+n*30,.04,.03);
-    if(n>=10){clearTimeout(t);n=-1;d.textContent='🥜';blip(1400,.1,.05);$('mgSay').textContent='“딱! 우리 할아버지가 깎은 인형도 이렇게 소리가 좋았지.”';mgDone()}}}
+    if(n>=10){clearTimeout(t);n=-1;d.textContent='🥜';blip(1400,.1,.05);$('mgSay').textContent='“딱! 훌륭하다! 안에서 쪽지가 나왔다 — ‘다음 역에서 좋은 일’.”';mgDone()}}}
 // 몽마르트르 화가: 지금 창밖을 연필 그림으로
-function mgSketch(){$('mgSay').textContent='“가만히 있어 봐요… 창밖 풍경을 그려 줄게요.”';$('mgA').innerHTML='<div id="mgSk">그리는 중…</div>';
+function mgSketch(){$('mgSay').textContent='“가만히 있어 봐! 창밖 풍경을 그려 줄게. 할아버지한테 배웠어.”';$('mgA').innerHTML='<div id="mgSk">그리는 중…</div>';
   const v=viewNow();if(!v){$('mgA').innerHTML='';$('mgSay').textContent='“지금은 창밖이 안 보이네. 밝을 때 다시.”';return}
   sceneCard(v.sk,v.sf,vnow()).then(u=>{if(!u)return;const im=new Image();im.onload=()=>{const W2=600,H2=400,c=document.createElement('canvas');c.width=W2;c.height=H2;const g=c.getContext('2d');g.drawImage(im,0,0,W2,H2);
     const d=g.getImageData(0,0,W2,H2),a=d.data,G=new Float32Array(W2*H2);for(let i=0;i<G.length;i++)G[i]=a[i*4]*.3+a[i*4+1]*.59+a[i*4+2]*.11;
     const bl=new Float32Array(G.length),r=6;for(let y=0;y<H2;y++){let acc=0;for(let x=-r;x<W2;x++){if(x+r<W2)acc+=255-G[y*W2+x+r];if(x-r-1>=0)acc-=255-G[y*W2+x-r-1];if(x>=0)bl[y*W2+x]=acc/(2*r+1)}}
     const bl2=new Float32Array(G.length);for(let x=0;x<W2;x++){let acc=0;for(let y=-r;y<H2;y++){if(y+r<H2)acc+=bl[(y+r)*W2+x];if(y-r-1>=0)acc-=bl[(y-r-1)*W2+x];if(y>=0)bl2[y*W2+x]=acc/(2*r+1)}}
     for(let i=0;i<G.length;i++){let v2=Math.min(255,G[i]*255/Math.max(1,255-bl2[i]));v2=255-(255-v2)*1.35;v2=Math.max(0,Math.min(255,v2));a[i*4]=v2*.97+8;a[i*4+1]=v2*.94+6;a[i*4+2]=v2*.86+4}
-    g.putImageData(d,0,0);const box=$('mgSk');box.textContent='';box.appendChild(c);const k=kd(vnow());box.dataset.cap=k.m+'.'+k.d+' · '+nearName(cur.km)+' — 몽마르트르 화가';
-    $('mgSay').textContent='“자, 당신이 본 창밖이에요. 사진보다 오래 남을 거예요.”';blip(880,.1,.04);mgDone(nearName(cur.km))};im.src=u})}
+    g.putImageData(d,0,0);const box=$('mgSk');box.textContent='';box.appendChild(c);const k=kd(vnow());box.dataset.cap=k.m+'.'+k.d+' · '+nearName(cur.km)+' — 하이디가 그림';
+    $('mgSay').textContent='“다 그렸다! 염소도 그리고 싶었는데 안 가만히 있어서 못 그렸어.”';blip(880,.1,.04);mgDone(nearName(cur.km))};im.src=u})}
 $('mgClose').onclick=()=>{mgClear();show('mPlay',false)};$('mPlay').onclick=e=>{if(e.target===$('mPlay')){mgClear();show('mPlay',false)}};
 
 // ───────── 승객과 대화하기 (RAG: 기차 이야기 자료에서 찾아 승객 말투로 대답) ─────────
 const CHAT_URL=SB_URL+'/functions/v1/pax-chat',CHAT={};let chatBusy=false;
 async function askPax(){const p=paxCur,inp=$('pxIn'),msg=inp.value.trim();if(!p||!msg||chatBusy)return;chatBusy=true;inp.value='';$('pxSend').disabled=true;
   const H=CHAT[p.id]=CHAT[p.id]||[];$('pxSay').classList.add('think');$('pxMe').textContent=msg;$('pxSay').textContent='…';$('pxSrc').textContent='';
-  try{const r=await fetch(CHAT_URL,{method:'POST',headers:{'Content-Type':'application/json',apikey:SB_KEY},body:JSON.stringify({pax:p.id,km:Math.round(cur.km),place:nearName(cur.km),msg,hist:H.slice(-6)})});
+  try{const r=await fetch(CHAT_URL,{method:'POST',headers:{'Content-Type':'application/json',apikey:SB_KEY},body:JSON.stringify({pax:'z'+p.id,km:Math.round(cur.km),place:nearName(cur.km),msg,hist:H.slice(-6)})});
     const j=await r.json().catch(()=>({}));if(!r.ok||!j.reply)throw new Error(j.error||r.status);
     H.push({r:'me',c:msg},{r:'pax',c:j.reply});$('pxSay').textContent='“'+j.reply+'”';$('pxSrc').textContent=j.src&&j.src.length?'떠올린 이야기 · '+j.src.join(' · '):'';blip(660,.06,.02);
     if(H.length===2)logAdd(p.n+'와 이야기를 나눴다')}
@@ -2581,7 +2533,7 @@ $('pxSend').onclick=e=>{e.stopPropagation();askPax()};$('pxIn').addEventListener
 $('pxIn').addEventListener('click',e=>e.stopPropagation());
 
 // ───────── 플랫폼에 내리기 · 역 밖 한 바퀴 · 하룻밤 묵기 · 배웅 ─────────
-const STAY={'블라디보스토크':'hz05','이르쿠츠크':'hz14','모스크바':'hz23','바르샤바':'hz25','베를린':'hz26','파리':'hz29'};
+const STAY={"서울": "zh_seoul", "바이칼": "zh_baikal_am", "모스크바": "zh_moscow", "퓌센": "zh_castle", "루체른": "zh_lake", "파리": "zh_paris"};
 let PLD=LS('bl-plat',{}),plMode=null,plI=-1,plT=0;
 const stPhoto=i=>{const b=B[ST[i].bg];let k=b&&b.photo||'';if(k==='plat')k=(cur&&cur.light>.45)?'platd':'platn';return k};
 const fmtMS=ms=>{ms=Math.max(0,ms);const m=Math.floor(ms/60e3),s=Math.floor(ms%60e3/1e3);return m+':'+pd(s)};
@@ -2634,16 +2586,11 @@ function platTick(S){if(!ticket)return;const now=performance.now();
   else platTick.bell=0}
 $('getoff').onclick=e=>{e.stopPropagation();const S=cur;if(S.mode!=='stop'||$('getoff').classList.contains('soon'))return;platOpen(S.i,'plat')};
 // 배웅: 승객이 내리는 역
-const BYE={p01:['손녀 기다린다, 먼저 간다이. 런던까지 밥 잘 챙겨 묵고!','아이고 손도 잘 흔드네. 어묵 아껴 묵어래이.'],p02:['고향 바다, 덕분에 잘 봤다. 남은 길은 젊은 사람 몫이야.','…고맙다. 바다에 띄운 엽서가 언젠가 닿을 거야.'],
- p03:['여기서 손녀가 기다려요. 인형 속 인형처럼, 좋은 일이 겹겹이 있길.','다스비다니야! 안녕히!'],p04:['제 근무는 여기까지예요. 다음 차장도 차는 잘 우려요. 아마도요.','30년 동안 손 흔들어 준 승객은 손에 꼽아요. 고마워요.'],
- p05:['여기서 말 타고 바이칼까지 가요. 바다한테 안부 전할게요.','초원에 별 보러 꼭 와요!'],p06:['마지막 곡은 기차가 떠날 때 플랫폼에서 연주해 주지.','들려? 저 소리가 내 인사야.'],
- p07:['체스판은 두고 갈 테니 다음 승객이랑 한 판 해. 아시아는 여기까지야.','기관사들은 이렇게 인사하지. 짧게 두 번, 길게 한 번!'],p08:['오디션 보러 가요. 떨리지만… 백조처럼 우아하게!','붙으면 꼭 표 보낼게요!'],
- p09:['쇼팽의 도시에 왔어요. 무대에서 당신 생각하며 칠게요.','결과는 5년 뒤에 알려 줄게요. 농담이에요!'],p10:['이 인형들은 크리스마스에 다시 찾아갈 거예요. 호두 깨는 소리, 기억해요.','취스! 안녕!'],
- p11:['몽마르트르 언덕이 기다려요. 당신 창밖 그림, 잘 간직해요.','오 르부아르!'],p12:['사건 해결. 범인은… 이 기차를 사랑하게 된 당신이군요.','베이커가에 들르면 노크하세요. 아마 없겠지만.']};
+const BYE={"p02": ["서울 다 왔데이! 런던까지 밥 잘 챙겨 묵고!", "어묵 아껴 묵어래이. 끼룩!"], "p03": ["여기서부턴 하늘이야. 도깨비 조심해.", "…불조심. 잘 가."], "p04": ["아침이다! 난 해 뜨면 사라져. 금 나와라 뚝딱!", "다음 밤에 또 씨름하자. 히히."], "p01": ["식당칸에 단서를 확인하러 가네. 런던 가까이서 다시 보지.", "기억하게. 단서는 늘 창밖에 있어."], "p05": ["관제탑 교신 끝. 라이카도 인사해!", "멍! (라이카)"], "p06": ["우리 집이야! 차 식기 전에 또 와요.", "비밀은 겹겹이, 정은 듬뿍!"], "p07": ["다음 무대가 기다려요. 백조처럼 우아하게, 안녕.", "흑조가 되기 전에 가야겠어요."], "p09": ["할머니 댁 다 왔다! 늑대 아저씨, 내려요!", "(늑대) …안녕히 가세요."], "p10": ["여기서 한 곡 하고 갈게! 브레멘은 다음에!", "꼬끼오! 멍! 야옹! 히힝!"], "p08": ["딱! 납품지 도착. 본관은 여기까지다!", "쥐 조심하게!"], "p11": ["파리다! 무섭지만… 가 볼게!", "염소한테 네 얘기 해 줄게."], "p12": ["하나는 모두를 위해! 잘 가게, 친구!", "영국에선 조심하게. 근위병이 노려볼 거야."], "p13": ["늦었다! 먼저 갈게!", "토끼굴에서 다시 만나!"], "p14": ["……", "(모자 위 새) 짹짹."]};
 let byeP=null;
 function byeTick(S){if(!ticket||(S.mode!=='stop'&&S.mode!=='end')||anyOpen())return;const km=ST[S.i].km;ticket.bye=ticket.bye||{};
   for(const p of PAX){if(ticket.bye[p.id]||Math.abs(p.b-km)>2)continue;ticket.bye[p.id]=1;saveTicket();
-    if(MET[p.id]&&BYE[p.id]){byeOpen(p)}else toast(p.n+'이(가) 내렸어요',ST[S.i].k+(ST[S.i].ferry?'항':'역'),2600);break}}
+    if(MET[p.id]&&BYE[p.id]){byeOpen(p)}else toast(p.n+JO(p.n,'이','가')+' 내렸어요',ST[S.i].k+(ST[S.i].ferry?'항':'역'),2600);break}}
 function byeOpen(p){byeP=p;$('byName').textContent=p.n;$('byWho').textContent=ST[cur.i].k+'에서 내려요';$('bySay').textContent='“'+BYE[p.id][0]+'”';$('byWave').style.display='';$('byWave').textContent='손 흔들기';
   const ph=$('byPh');ph.className='pxph';ph.style.backgroundImage='';ph.innerHTML='<b>'+esc(p.n[0])+'</b>';tryImg('px_'+p.id,ph,()=>{},im=>{ph.classList.add('ill');ph.style.backgroundImage='';ph.innerHTML='<i class="art" style="background-image:url('+im.src+')"></i><em class="cap">'+esc(ST[cur.i].k)+' 플랫폼에서</em>'});
   show('mBye',true);blip(520,.1,.03)}
@@ -2665,22 +2612,22 @@ $('resv').onclick=e=>{e.stopPropagation();if(!ticket||!ticket.reserve)return;con
 $('mWait').onclick=e=>{if(e.target===$('mWait'))show('mWait',false)};
 
 // ───────── 명소 골라 타기: 보고 싶은 명소를 고르면 그곳에 가장 먼저 닿는 열차에 태워 줌 ─────────
-const SPOTX={hz01:1,hz02:1,hz05:1,hz12:1,hz13:1,hz22:1,hz23:1,hz25:1,hz26:1,hz27:1,hz29:1};
+const SPOTX0={hz01:1,hz02:1,hz05:1,hz12:1,hz13:1,hz22:1,hz23:1,hz25:1,hz26:1,hz27:1,hz29:1};
+const SPOTX={zh_baikal_am:1,zh_moscow:1,zh_castle:1,zh_paris:1,zh_london:1};
 function spotList(){const now=vnow(),{prev,next}=depTimes(now),L=[],seen=new Set();
   const add=(km,name,big)=>{if(seen.has(name))return;seen.add(name);let best=null;
     for(let d=-1;d<12;d++){const dep=d<0?next:prev-d*864e5,el=now-dep;if(el>TRIP)continue;const eta=elAtKm(km)-el;if(eta>60e3&&(!best||eta<best.eta))best={dep,eta}}
     if(best)L.push({km,name,big,...best})};
-  for(const e of BI){const k=e[2];if(/^hz/.test(k)&&PNAME[k])add((e[0]+e[1])/2,PNAME[k][0],!!SPOTX[k])}
+  for(const e of BI){const k=e[2];if(/^zh_/.test(k)&&PNAME[k])add((e[0]+e[1])/2,PNAME[k][0],!!SPOTX[k])}
   for(const m of MOM)add(m.km,m.t,true);
   return L.sort((a,b)=>a.km-b.km)}
-function renderSpots(){const L=spotList(),C=[['한국·북한',0,1290],['러시아',1290,11240],['벨라루스·폴란드',11240,12300],['독일·프랑스·영국',12300,99999]];
+function renderSpots(){const L=spotList(),C=[["한국 · 구름 위", 0, 623.75], ["러시아", 623.75, 3111.25], ["독일 · 스위스", 3111.25, 4976.25], ["파리 · 바닷속 · 런던", 4976.25, 99999]];
   $('vSpots').innerHTML=C.map(([g,a,b])=>{const R=L.filter(x=>x.km>=a&&x.km<b);if(!R.length)return'';return '<div class="spoth">'+g+'</div>'+R.map(x=>'<button class="tr spot" data-dep="'+x.dep+'"><span class="no"><b>'+trainNo(x.dep)+'</b>'+(x.dep>vnow()?'오늘 밤':'달리는 중')+'</span><span class="pl">'+(x.big?'★ ':'')+esc(x.name)+'<small>부산에서 '+Math.round(x.km).toLocaleString()+'km · <b>'+fmt(x.eta)+' 뒤</b> 지나가요</small></span></button>').join('')}).join('');
   $('vSpots').querySelectorAll('.tr').forEach(b=>b.onclick=e=>{e.stopPropagation();pickTrain(+b.dataset.dep)})}
 document.querySelector('#veil .vtabs').onclick=e=>{const b=e.target.closest('[data-t]');if(!b)return;e.stopPropagation();const sp=b.dataset.t==='spot';
   document.querySelectorAll('#veil .vtabs button').forEach(x=>x.classList.toggle('on',x===b));$('vList').style.display=sp?'none':'';$('vSpots').style.display=sp?'':'none';$('vLbl').textContent=sp?'고르면 그곳을 가장 먼저 지나는 열차에 태워 드려요':'지금 달리고 있는 열차';if(sp)renderSpots()};
 // ───────── 국경 바퀴 교체 (실제: 러시아·벨라루스 선로 1,520mm, 그 밖은 1,435mm) ─────────
-const GAUGE=[{id:'g1',km:1290,stop:1,k:'TUMANGANG',place:'두만강역',from:'1,435',to:'1,520',note:'러시아 선로는 8.5cm 더 넓어요. 객차를 통째로 들어 올려 바퀴 뭉치(대차)를 바꿔 끼워요.'},
-  {id:'g2',km:11834,k:'BREST',place:'브레스트 국경',from:'1,520',to:'1,435',note:'다시 유럽 선로로. 실제로도 승객을 태운 채 2시간쯤 걸려요.'}];
+const GAUGE=[];
 let gaugeOn=null;
 function gaugeTick(S){if(!ticket||S.mode==='wait'||gaugeOn)return;ticket.gg=ticket.gg||{};
   for(const g of GAUGE){if(ticket.gg[g.id])continue;const hit=g.stop?(S.mode==='stop'&&ST[S.i]&&ST[S.i].km===g.km):(S.km>=g.km&&S.km<g.km+14);
@@ -2694,13 +2641,10 @@ function runGauge(g){gaugeOn=g;const el=$('gauge');el.className='';$('gK').textC
     [19800,()=>{show('gauge',false);gaugeOn=null;logAdd(g.place+'에서 바퀴를 갈아 끼웠다 ('+g.from+' → '+g.to+'mm)');toast('바퀴 교체 끝',g.to+'mm 선로를 달려요',3200)}]];
   T.forEach(([t,f])=>setTimeout(f,t))}
 // ───────── 승객과 놀기: 표트르 할아버지 체스 · 탐정 수수께끼 ─────────
-const PLAY={p01:'부산 사투리 퀴즈',p02:'고향 바다에 엽서 쓰기',p03:'마트료시카 열어 보기',p04:'차 우리기',p05:'바이칼 퀴즈',p06:'아코디언 따라 치기',p07:'체스 문제 한 판',p08:'발레 용어 퀴즈',p09:'쇼팽 퀴즈',p10:'호두 깨기',p11:'초상화 부탁하기',p12:'탐정의 수수께끼'};
-$('pxPlay').onclick=e=>{e.stopPropagation();const p=paxCur;if(!p)return;show('mPax',false);setTimeout(()=>p.id==='p07'?openChess():p.id==='p12'?openRiddle():openMini(p),200)};
+const PLAY={"p01": "셜록의 수수께끼", "p02": "부산 사투리 퀴즈", "p03": "거짓말 찾기", "p04": "도깨비 옛이야기 퀴즈", "p05": "우주 퀴즈", "p06": "마트료시카 열어 보기", "p07": "발레 퀴즈", "p08": "호두 까기", "p09": "진짜 할머니 맞히기", "p10": "합주 따라 하기", "p11": "창밖 그림 그려 받기", "p12": "결투 · 체스 한 판", "p13": "토끼의 시간 퀴즈", "p14": "근위병 웃기기"};
+$('pxPlay').onclick=e=>{e.stopPropagation();const p=paxCur;if(!p)return;show('mPax',false);setTimeout(()=>p.id==='p12'?openChess():p.id==='p01'?openRiddle():openMini(p),200)};
 const VS='︎',PC={K:'♔',Q:'♕',R:'♖',B:'♗',N:'♘',P:'♙',k:'♚',q:'♛',r:'♜',b:'♝',n:'♞',p:'♟'};
-const CHP=[
- {fen:'6k1/5ppp/8/8/8/8/5PPP/R5K1',mv:['a1','a8'],say:'백이 한 수 만에 이기는 수가 있어. 왕이 갇혀 있는 걸 봐.',ok:'그렇지! 뒷줄이 막힌 왕은 이렇게 무너져. 기관사들은 이걸 "막다른 선로"라고 불렀지.'},
- {fen:'r1bqkb1r/pppp1ppp/2n2n2/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR',mv:['h5','f7'],say:'초보들이 제일 많이 당하는 수야. 여왕과 비숍이 한 칸을 같이 노리고 있지.',ok:'체크메이트! 내 손자도 이걸로 나를 이겼단다. 딱 한 번.'},
- {fen:'6rk/6pp/8/q5N1/8/8/5PPP/6K1',mv:['g5','f7'],say:'이번엔 기사(나이트)야. 왕이 자기 편에 둘러싸여 숨을 못 쉬게 만들어 봐.',ok:'숨 막히는 외통수! 자기 편이 벽이 될 때가 있지. 기차도 마찬가지야.'}];
+const CHP=[{"fen": "6k1/5ppp/8/8/8/8/5PPP/R5K1", "mv": ["a1", "a8"], "say": "(길쭉이) 결투다! 백이 한 수 만에 이기는 수가 있지. 왕이 갇힌 걸 보게.", "ok": "(길쭉이) 훌륭해! 뒷줄이 막힌 왕은 이렇게 무너지지."}, {"fen": "r1bqkb1r/pppp1ppp/2n2n2/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR", "mv": ["h5", "f7"], "say": "(뚱뚱이) 여왕과 비숍이 한 칸을 같이 노리고 있어. 크루아상 걸고 한 판!", "ok": "(뚱뚱이) 체크메이트! 크루아상은… 반만 줄게."}, {"fen": "6rk/6pp/8/q5N1/8/8/5PPP/6K1", "mv": ["g5", "f7"], "say": "(꼬마) 이번엔 기사야! 왕이 자기 편에 둘러싸여 숨 못 쉬게 해 봐!", "ok": "(꼬마) 숨 막히는 외통수! 하나는 모두를 위해!"}];
 let CHS=LS('bl-chess',{n:0}),chI=0,chSel=null,chDone=false;
 function chBoardFrom(fen){const B={};fen.split('/').forEach((row,ri)=>{let f=0;for(const c of row){if(/\d/.test(c))f+=+c;else{B['abcdefgh'[f]+(8-ri)]=c;f++}}});return B}
 function chDraw(B){let h='';for(let r=8;r>=1;r--)for(let f=0;f<8;f++){const sq='abcdefgh'[f]+r,pc=B[sq];h+='<i data-sq="'+sq+'" class="'+((f+r)%2?'l':'d')+(pc?(pc===pc.toUpperCase()?' w':' b'):'')+'">'+(pc?PC[pc]+VS:'')+'</i>'}$('chBoard').innerHTML=h}
@@ -2719,10 +2663,10 @@ $('chHint').onclick=()=>{const P=CHP[chI];document.querySelectorAll('#chBoard i'
 $('chNext').onclick=()=>{chI=Math.min(chI+1,CHP.length-1);chLoad()};
 $('chClose').onclick=()=>show('mChess',false);$('mChess').onclick=e=>{if(e.target===$('mChess'))show('mChess',false)};
 const RD=()=>[
- {q:'이 기차는 부산에서 런던까지 몇 개 나라를 지날까요?',o:['7개',PASS.length+'개','12개'],a:1,ok:'정답. 여권 도장이 그 증거지요.'},
- {q:'선로 폭이 달라서 바퀴를 통째로 갈아 끼우는 곳은 어디일까요?',o:['서울과 모스크바','두만강과 브레스트','베를린과 파리'],a:1,ok:'훌륭해요. 러시아 선로가 8.5cm 더 넓답니다.'},
- {q:'창밖으로 본 세계에서 가장 깊은 호수는?',o:['카스피해','바이칼','라도가'],a:1,ok:'맞아요, 1,642m. 바닥까지 63빌딩이 일곱 개쯤 들어가요.'},
- {q:'부산에서 런던까지, 이 기차가 달리는 거리는?',o:['9,288km',TOTAL_KM.toLocaleString()+'km','20,000km'],a:1,ok:'정확합니다. 9,288km는 모스크바까지의 시베리아 횡단철도 길이고요.'}];
+ {q:'출발할 때 사라진 것은 무엇일까요?',o:['기관사의 모자','굴뚝의 별 연기','식당칸 크루아상'],a:1,ok:'그래. 별 연기. 기차에서 일어나는 일엔 늘 이유가 있지.'},
+ {q:'바이칼 호수로 흘러드는 강은 300개가 넘어요. 나가는 강은 몇 개일까요?',o:['하나','열 개','백 개'],a:0,ok:'앙가라 하나뿐이지. 전설 속 도망친 딸의 이름이야.'},
+ {q:'이 기차가 부산에서 런던까지 달리는 거리는?',o:['약 3,000km',TOTAL_KM.toLocaleString()+'km','약 20,000km'],a:1,ok:'정확해. 구름 위로 질러 온 덕분이지.'},
+ {q:'1925년 에펠탑을 고철로 팔아 치운 사람은?',o:['탐정','사기꾼','시장'],a:1,ok:'빅토르 뤼스티그. 나라면 첫 번째 거래에서 잡았을 거야.'}];
 let rdI=0,rdOK=0;
 function openRiddle(){rdI=0;rdOK=0;rdShow();show('mRiddle',true);blip(520,.08,.03)}
 function rdShow(){const L=RD();if(rdI>=L.length){$('rdSay').textContent=rdOK===L.length?'“완벽해요. 단서는 언제나 창밖에 있었죠.”':'“나쁘지 않아요. 창밖을 조금 더 보면 다 보일 거예요.”';$('rdQ').textContent=rdOK+' / '+L.length+' 맞힘';$('rdO').innerHTML='';$('rdN').textContent='';
@@ -2741,17 +2685,7 @@ function greetTick(S){if(greetB||!ticket||S.mode==='wait')return;if(!greetT){gre
 function eventsTick(S){if(ticket&&ticket.stay){try{platTick(S)}catch(e){}return}try{paxTick(S);momentTick(S);microTick(S);hopTick(S)}catch(e){}try{passTick(S)}catch(e){}try{lightsTick(S)}catch(e){}try{pcardTick(S)}catch(e){}try{camTick(S);greetTick(S)}catch(e){}try{gaugeTick(S)}catch(e){}try{resvTick(S)}catch(e){}try{platTick(S);byeTick(S)}catch(e){}}
 
 // ───────── 작은 사건들: 들어와 있는 동안 1~2분마다 무언가 일어남 ─────────
-const FACTS=[
- [0,420,['경부선은 1905년에 개통했다. 부산에서 서울까지 그때는 14시간이 걸렸다.','이 밤기차가 서울에 닿을 무렵, 첫 지하철은 아직 차고에서 잠들어 있다.','창밖 불빛 하나하나가 누군가의 늦은 밤이다.']],
- [420,1290,['원산에서 두만강까지 철길은 동해 바다를 거의 끝까지 따라간다.','칠보산은 바위가 너무 기이해서 "함북의 금강"이라 불린다.','이 길로 기차가 다시 달리는 날을, 아직 아무도 모른다.']],
- [1290,2310,['연해주는 러시아에서 호랑이가 사는 거의 유일한 땅이다. 시베리아호랑이 500여 마리.','블라디보스토크는 "동방을 지배하라"라는 뜻이다.','여기서부터 시베리아 횡단철도 9,288km가 시작된다.']],
- [2310,5190,['시베리아 횡단철도는 1916년에 완공됐다. 25년이 걸렸다.','러시아 기차의 차장은 칸마다 한 명씩, 사모바르의 물을 밤새 끓인다.','이 구간은 하루 반 동안 큰 도시가 거의 없다.']],
- [5190,5640,['바이칼에는 지구 민물의 20%가 담겨 있다.','바이칼물범은 바다에서 수천 km 떨어진 호수에 사는 유일한 물범이다.','바이칼 호숫가 철길은 한때 "황제의 벨트 버클"이라 불렸다. 터널만 서른아홉 개.']],
- [5640,8990,['시베리아의 겨울은 영하 40도까지 내려간다. 그래서 기차 창은 이중이다.','노보시비르스크는 시베리아에서 가장 큰 도시, 러시아에서 세 번째 도시다.','러시아 열차에서는 낯선 사람과 음식을 나눠 먹는 게 예의다.']],
- [8990,10790,['우랄산맥은 아시아와 유럽을 가른다. 생각보다 낮고 완만하다.','모스크바까지의 모든 기차 시간표는 오랫동안 모스크바 시간으로 적혀 있었다.','볼가강은 유럽에서 가장 긴 강이다. 3,530km.']],
- [10790,12610,['브레스트 국경에서는 차량을 들어 올려 바퀴를 통째로 갈아 끼운다.','바르샤바 구시가지는 전쟁 뒤 옛 그림을 보고 벽돌 한 장까지 다시 지었다.','쇼팽은 바르샤바를 떠날 때 고향 흙 한 줌을 가지고 갔다.']],
- [12610,14121,['쾰른 대성당은 짓는 데 632년이 걸렸다.','해저 터널은 바다 밑 최대 75m를 지난다. 기차로 20분.','런던 세인트판크라스역의 시계는 1868년부터 시간을 알려 왔다.']],
-];
+const FACTS=[[0, 162.5, ["피란 시절 사람들은 \"헤어지면 영도다리에서 만나자\"고 약속했다.", "영도에는 질투 많은 산신 할매가 살아서, 이사 온 사람이 오래 못 버틴다는 이야기가 있다.", "이 밤기차가 서울에 닿을 무렵, 첫 지하철은 아직 차고에서 잠들어 있다."]], [162.5, 633.75, ["경복궁 마당의 큰 물그릇 \"드므\"는 불귀신이 비친 제 얼굴에 놀라 도망가라고 놓았다고 한다.", "도깨비는 메밀묵을 좋아하고, 씨름할 땐 왼다리가 약하다는 옛이야기가 있다.", "도깨비불은 사람을 홀려 같은 자리를 빙빙 돌게 만든다는 옛말이 있다."]], [633.75, 1332.5, ["바이칼엔 강이 300개 넘게 흘러들지만, 나가는 강은 앙가라 하나뿐이다.", "바이칼물범 \"네르파\"는 바다에서 수천 km 떨어진 호수에 사는 민물 물범이다.", "바이칼은 세계에서 가장 깊은 호수다. 약 1,642m."]], [1332.5, 3071.25, ["1908년 퉁구스카에선 서울 세 배가 넘는 넓이의 숲이 한순간에 쓰러졌다.", "라이카는 1957년 지구 궤도를 돈 첫 번째 동물이다.", "한겨울 시베리아의 밤은 열여섯 시간이 넘는다."]], [3071.25, 4550.0, ["모스크바 지하엔 지도에 없는 비밀 지하철 \"메트로-2\"가 있다는 소문이 있다.", "마트료시카는 1890년대 모스크바 근교 공방에서 처음 만들어졌다.", "차이콥스키는 백조의 호수와 호두까기 인형을 모두 작곡했다."]], [4550.0, 4956.25, ["노이슈반슈타인을 지은 루트비히 2세는 1886년 호수에서 수수께끼처럼 세상을 떠났다.", "하멜른엔 1284년 피리 부는 사나이가 아이 130명을 데려갔다는 기록이 남아 있다.", "하이디는 1880년 스위스 작가 요한나 슈피리가 쓴 소설이다."]], [4956.25, 5200.0, ["루체른 필라투스 산엔 용이 떨어뜨린 \"용의 돌\"이 병을 고쳤다는 전설이 있다.", "카펠 다리는 유럽에서 가장 오래된 지붕 덮인 나무다리로 꼽힌다.", "파리 오페라 극장 지하엔 진짜 물탱크 호수가 있다. 「오페라의 유령」의 무대."]], [5200.0, 5964.75, ["1925년 사기꾼 빅토르 뤼스티그는 에펠탑을 고철로 팔아 치우고, 한 번 더 팔려고 했다.", "런던탑의 까마귀가 모두 떠나면 왕국이 무너진다는 전설 때문에 지금도 까마귀를 키운다.", "베이커가 221B로는 지금도 셜록 앞으로 편지가 온다."]]];
 const factAt=km=>{const f=FACTS.find(x=>km>=x[0]&&km<x[1]);return f?f[2]:null};
 let microT=0,microN=0,microLastFact=-1;
 function anyOpen(){return !!document.querySelector('.modal.on,#roomSheet.on,#cart.on,#moment.on,#gauge.on,#plat.on')||($('veil')&&$('veil').style.display!=='none'&&!$('veil').classList.contains('off'))}
@@ -2778,16 +2712,20 @@ function hopTick(S){const now=performance.now();if(now<hopT)return;hopT=now+3000
   hopCur=h;el.innerHTML='▶ '+fmt(h.eta)+' 뒤 <b>'+esc(h.m.t)+'</b> — 그 열차로 건너가기';el.classList.add('on')}
 
 // ───────── 판매 카트 (그림 없이 소리와 글로) ─────────
-const CART=[{id:'egg',items:['egg','cider'],t:'덜컹 — 판매 카트가 지나갑니다',d:'삶은 달걀과 사이다',ok:S=>S.mode==='run'&&S.km>22&&S.km<60},
-  {id:'hodu',items:['hodu'],t:'천안을 지납니다',d:'따끈한 호두과자 있어요',ok:S=>S.mode==='run'&&S.bk==='kcountry'},
-  {id:'dosirak',items:['dosirak'],t:'차장이 뜨거운 물을 들고 지나갑니다',d:'컵라면 도시락 하나 어때요',ok:S=>S.mode==='run'&&(S.bk==='taiga'||S.bk==='birch')}];
-const STALL=[['하바롭스크',['piro','potato'],'피로시키와 딜 뿌린 삶은 감자'],['울란우데',['buuz'],'김이 나는 부랴트 만두, 부우즈'],['슬류댠카',['omul'],'바이칼에서만 잡히는 훈제 오물'],['이르쿠츠크',['kedr'],'시베리아 잣나무에서 딴 잣 한 봉지'],['노보시비르스크',['berry'],'숲에서 딴 블루베리 한 컵'],['예카테린부르크',['shanga','kvass'],'샤니가와 시원한 크바스'],['모스크바',['plombir'],'모스크바 플롬비르 아이스크림']];
+const CART=[{id:'r1',items:['fishcake','hotteok'],t:'또르르 — 승무원 로봇 카트가 지나갑니다',d:'어묵 꼬치와 씨앗호떡 있어요. 삐빅.',ok:S=>S.mode==='run'&&S.km>12&&S.km<120},
+  {id:'r2',items:['cotton'],t:'구름 위 · 로봇 카트가 둥실 지나갑니다',d:'구름 솜사탕 있어요. 구름 위에서만 팔아요. 삐빅.',ok:S=>S.mode==='run'&&S.bk==='zt_cloud'},
+  {id:'r3',items:['tea'],t:'로봇이 사모바르를 싣고 지나갑니다',d:'뜨거운 홍차 한 잔 어때요. 은빛 컵받침 포함. 삐빅.',ok:S=>S.mode==='run'&&S.bk==='zt_aurora'},
+  {id:'r4',items:['jelly'],t:'오로라 구간 한정 · 로봇 카트',d:'흔들흔들 오로라 젤리. 삐빅.',ok:S=>S.mode==='run'&&S.bk==='zt_aurora'&&S.km>1706.25},
+  {id:'r5',items:['pretzel'],t:'로봇 카트가 빵 냄새를 싣고 옵니다',d:'갓 구운 프레첼 있어요. 삐빅.',ok:S=>S.mode==='run'&&(S.bk==='zt_fairy'||S.bk==='zt_romantic')},
+  {id:'r6',items:['choc'],t:'알프스 구간 · 로봇 카트',d:'스위스 초콜릿 한 판 어때요. 삐빅.',ok:S=>S.mode==='run'&&(S.bk==='zt_alps'||S.bk==='zh_alps')},
+  {id:'r7',items:['pearl'],t:'바닷속 · 로봇 카트가 보글보글 지나갑니다',d:'조개껍데기에 담긴 진주 푸딩. 삐빅.',ok:S=>S.mode==='run'&&S.bk==='zt_sea'}];
+const STALL=[['바이칼',['omul'],'바이칼에서만 잡히는 훈제 오물'],['모스크바',['tea'],'은빛 컵받침에 담긴 홍차'],['파리',['croissant'],'갓 구운 크루아상']];
 STALL.forEach(([st,it,d])=>CART.push({id:'st_'+st,items:it,t:st+'역 플랫폼 · 할머니 노점이 섰어요',d:d+' — 정차 시간에만 팔아요',ok:S=>S.mode==='stop'&&ST[S.i].k===st}));
 let cartOpen=null;
 const JO=(w,a,b)=>{const c=(w||'').trim().slice(-1).charCodeAt(0);return c>=0xAC00&&c<=0xD7A3&&(c-0xAC00)%28?a:b};
 function cartTick(S){if(!ticket||cartOpen||anyOpen())return;ticket.cart=ticket.cart||{};for(const c of CART){if(!ticket.cart[c.id]&&c.ok(S)){ticket.cart[c.id]=1;saveTicket();showCart(c);break}}}
 function cartSound(){try{if(!soundOn||!ac||!noiseBuf)return;const n=ac.createBufferSource(),f=ac.createBiquadFilter(),g=ac.createGain();n.buffer=noiseBuf;n.loop=true;f.type='bandpass';f.frequency.value=320;f.Q.value=1.2;g.gain.setValueAtTime(0,ac.currentTime);g.gain.linearRampToValueAtTime(.09,ac.currentTime+1.4);g.gain.linearRampToValueAtTime(0,ac.currentTime+4);n.connect(f);f.connect(g);g.connect(master||ac.destination);n.start();n.stop(ac.currentTime+4.2);setTimeout(()=>{blip(1560,.5,.035);setTimeout(()=>blip(1560,.5,.03),260)},900)}catch(e){}}
-function showCart(c){cartOpen=c;$('cartT').textContent=c.t;$('cartD').textContent=c.d;show('cart',true);cartSound();clearTimeout(showCart.t);showCart.t=setTimeout(()=>{show('cart',false);cartOpen=null},26000)}
+function showCart(c){try{const r=$('rbt');r.classList.remove('go');void r.offsetWidth;r.classList.add('go')}catch(e){}cartOpen=c;$('cartT').textContent=c.t;$('cartD').textContent=c.d;show('cart',true);cartSound();clearTimeout(showCart.t);showCart.t=setTimeout(()=>{show('cart',false);cartOpen=null},26000)}
 $('cartBuy').onclick=e=>{e.stopPropagation();const c=cartOpen;if(!c)return;if(c.custom){const f=c.custom;show('cart',false);cartOpen=null;setTimeout(()=>{$('cartBuy').textContent='하나 사기';$('cartNo').textContent='괜찮아요'},400);f();return}ticket.items=ticket.items||{};c.items.forEach(k=>ticket.items[k]=(ticket.items[k]||0)+2);logAdd(josa(c.items.map(k=>ITEMS[k]).join('와 ').replace('달걀와','달걀과'),'을','를')+' 샀다');saveTicket();show('cart',false);cartOpen=null;
   toast('샀어요',Object.keys(roomMates).length?'같은 칸 승객에게 건넬 수도 있어요':'',2600);blip(880,.1,.04)};
 $('cartNo').onclick=e=>{e.stopPropagation();show('cart',false);cartOpen=null;setTimeout(()=>{$('cartBuy').textContent='하나 사기';$('cartNo').textContent='괜찮아요'},400)};
@@ -2822,7 +2760,7 @@ window.__ev=k=>{if(k==='mini')nextMini=0;if(k==='f')nextF=0;if(k==='c'){nextCond
 
 
 // 웹: 가로 객실 사진으로 교체
-(function(){const mq=matchMedia('(min-width:900px) and (min-aspect-ratio:5/4) and (min-height:560px)');const sw=()=>{const w=mq.matches,a=document.getElementById('cabinImg'),b=document.getElementById('cabinDay');if(!a||!b)return;const na='img/cabin_'+(w?'wn':'n')+'.webp',nb='img/cabin_'+(w?'wd':'d')+'.webp';if(!a.src.endsWith(na))a.src=na;if(!b.src.endsWith(nb))b.src=nb};sw();try{mq.addEventListener('change',sw)}catch(e){mq.addListener(sw)}})();
+(function(){const mq=matchMedia('(min-width:900px) and (min-aspect-ratio:5/4) and (min-height:560px)');const sw=()=>{const w=mq.matches,a=document.getElementById('cabinImg'),b=document.getElementById('cabinDay');if(!a||!b)return;const na='img/zcab_'+(w?'w':'m')+'_n.webp',nb='img/zcab_'+(w?'w':'m')+'_d.webp';if(!a.src.endsWith(na))a.src=na;if(!b.src.endsWith(nb))b.src=nb};sw();try{mq.addEventListener('change',sw)}catch(e){mq.addListener(sw)}})();
 // 닫기 X + ESC (웹)
 (function(){const mods=[...document.querySelectorAll('.modal')];const closeTop=()=>{const m=[...document.querySelectorAll('.modal.on')].pop();if(!m)return false;m.dispatchEvent(new MouseEvent('click',{bubbles:true}));if(m.classList.contains('on')){const c=m.querySelector('.closer,#logClose,#btnBoard,#pcClose');if(c)c.click();else{m.classList.remove('on');document.body.classList.toggle('mopen',!!document.querySelector('.modal.on'))}}return true};
   mods.forEach(m=>{const x=document.createElement('button');x.className='mx';x.setAttribute('aria-label','닫기');x.textContent='×';x.onclick=e=>{e.stopPropagation();closeTop()};m.appendChild(x)});

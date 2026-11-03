@@ -598,6 +598,15 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
  #app.lo #cap,#app.lo #cap .c3,#app.lo:not(.gaze) #sill .ob span{color:rgba(243,234,216,.92)!important;text-shadow:0 1px 10px rgba(0,0,0,.7)!important}#app.lo #hop{border-color:rgba(239,230,214,.3)!important}
  #app.lo::before{filter:blur(18px) brightness(.32)}
  #pxbub,#bubble{max-width:420px}
+ .modal{align-items:safe center!important}
+ .modal>:not(.mx){zoom:1.3}
+ #cart{zoom:1.2}
+ #mLog .logbook{zoom:1.08;width:min(920px,90vw);display:grid;grid-template-columns:1fr 1fr;column-gap:44px;align-items:start;padding:30px 34px 24px}
+ #mLog .logbook h3,#mLog .logbook .sub,#mLog .logbook .close{grid-column:1/-1}
+ #mLog #logStamps{grid-column:1;grid-row:3;max-height:66vh;overflow:auto;margin:16px 0 0;padding-right:6px}
+ #mLog #logList{grid-column:2;grid-row:3;max-height:66vh;margin-top:16px}
+ #mLog .logbook h3{font-size:22px}
+
 }
 
 #veil .v6{display:none}
@@ -941,11 +950,12 @@ const WREADY=['ru1','ngt_forest','ngt_town','st_vlad','ru2','ru3','ru4','st_khab
   for(const key of WREADY){if(!inW(key))continue;const wk=key+'_w';SCN[wk]=Object.assign({},SCN[key]);for(const b in B)if(B[b].photo===key)B[b].photo=wk;setTimeout(()=>{try{if(PNAME[key])PNAME[wk]=PNAME[key]}catch(e){}},0)}}catch(e){}})();
 
 const CITY={busan:1,seoul:1,kr01:1,kr07:1,kr08:1,kr14:1,kr16:1,kr17:1};
+const PV='?p=2';
 function loadPhoto(key){if(key==='plat'){loadPhoto('platd');loadPhoto('platn');return}if(PHOTO[key])return;const o=SCN[key]||{};PHOTO[key]={loading:true};
   const mk=(im,low,t0)=>({t0:t0||performance.now(),tile:im,w:im.naturalWidth,h:im.naturalHeight,ready:true,low,spd:o.spd||.2,img:im,pass:!!o.pass,key});
-  const th=new Image();th.onload=()=>{const p=PHOTO[key];if(p&&p.loading)PHOTO[key]=mk(th,true)};th.src='img/t/'+key+'.webp';
+  const th=new Image();th.onload=()=>{const p=PHOTO[key];if(p&&p.loading)PHOTO[key]=mk(th,true)};th.src='img/t/'+key+'.webp'+PV;
   const img=new Image();img.onload=()=>{const p=PHOTO[key];PHOTO[key]=mk(img,false,p&&p.t0)};
-  img.onerror=()=>{const p=PHOTO[key];if(!(p&&p.low))PHOTO[key]={missing:true}};img.src='img/'+key+'.webp'}
+  img.onerror=()=>{const p=PHOTO[key];if(!(p&&p.low))PHOTO[key]={missing:true}};img.src='img/'+key+'.webp'+PV}
 function spanAt(key,km){for(const e of BI){if(km>=e[0]-.01&&km<=e[1]+.01&&B[e[2]]&&B[e[2]].photo===key)return [e[0],e[1]]}return spanOf(key)}
 function spanOf(key){let a=1e9,b=-1;for(const e of BI){if(B[e[2]]&&B[e[2]].photo===key){a=Math.min(a,e[0]);b=Math.max(b,e[1])}}return [a,b]}
 function photoFor(key){if(key==='plat'){const d=PHOTO.platd,n=PHOTO.platn,day=cur&&cur.light>.45;const a=day?d:n,b=day?n:d;if(a&&a.ready)return a;if(b&&b.ready)return b}const p=PHOTO[key];if(p&&p.ready)return p;if(SCN[key]&&SCN[key].baked)return null;const f=PHOTO.country;return f&&f.ready?f:null}
@@ -1658,7 +1668,7 @@ function sceneCard(sk,sf,at){return new Promise(res=>{const done=img=>{try{const
       const a=kd(at||Date.now()),txt="'"+String(a.y).slice(2)+' '+pd(a.m)+' '+pd(a.d);
       g.globalCompositeOperation='screen';g.fillStyle='rgba(255,128,40,.55)';g.shadowColor='rgba(255,110,30,.95)';g.shadowBlur=18;seg7(g,txt,850,700,40);
       g.shadowBlur=4;g.fillStyle='rgba(255,170,90,.9)';seg7(g,txt,850,700,40);g.globalCompositeOperation='source-over';res(c.toDataURL('image/jpeg',.9))}catch(e){res(null)}};
-    const p=PHOTO[sk];if(p&&p.ready&&p.img&&p.img.src)return done(p.img);const im=new Image();im.onload=()=>done(im);im.onerror=()=>res(null);im.src='img/'+sk+'.webp'})}
+    const p=PHOTO[sk];if(p&&p.ready&&p.img&&p.img.src)return done(p.img);const im=new Image();im.onload=()=>done(im);im.onerror=()=>res(null);im.src='img/'+sk+'.webp'+PV})}
 function openPostcard(i,opt={}){
   const s=ST[i],at=opt.at||arrivalTime(i);let sk=opt.sk;if(!sk){const b=B[s.bg];sk=b&&b.photo?(b.photo==='plat'?'platn':b.photo):null}
   pcCur={i,at,sk:opt.sk,sf:opt.sf};const tok=pcCur;
@@ -2005,11 +2015,11 @@ function openLog(){if(!ticket)return;dayInc('log');const now=vnow(),rows=[];let 
   const skb='<div class="skt">스케치북 · 만난 승객 '+Object.keys(MET).length+' / '+PAX.length+'</div><div class="skb">'+PAX.map(p=>MET[p.id]?'<i style="background-image:url(img/pxc_'+p.id+'.webp'+IMGV+'),url(img/px_'+p.id+'.webp'+IMGV+')"></i>':'<i>?</i>').join('')+'</div>';
   const pss='<div class="skt">여권 도장 · '+Object.keys(PASSD).length+' / '+PASS.length+'</div><div class="gfs pss">'+PASS.map(p=>PASSD[p[1]]?'<i class="on" data-pass="1" style="border-color:'+p[5]+';color:'+p[5]+'">'+p[1]+'</i>':'<i>?</i>').join('')+'</div>';
   const pcs='<div class="skt">엽서함 · '+Object.keys(PCD).length+' / '+PCARD.length+'</div><div class="gfs pcs">'+PCARD.map(p=>PCD[p[1]]?'<i class="on" data-pc="'+p[1]+'" style="background-image:url(img/'+p[1]+'.webp'+IMGV+')"></i>':'<i>?</i>').join('')+'</div>';
-  const myS=SHOTS.map((x,i)=>[x,i]).filter(([x])=>ticket&&x.tk===ticket.trainKey&&(x.r|0)===ROLL());const shs='<div class="skt">필름 사진 · '+myS.length+' / '+FILM+'</div><div class="gfs shs">'+(myS.length?myS.map(([x,i])=>'<i class="on'+(x.hero?' hero':'')+'" data-sh="'+i+'" style="background-image:url(img/t/'+x.sk+'.webp);background-position:'+(x.sf/10).toFixed(1)+'% 50%"></i>').join(''):'<span style="opacity:.5;font-size:11px">아직 찍은 사진이 없어요</span>')+'</div>'+(myS.length||ROLL()?'<div class="dvrow">'+(myS.length?'<button class="dvb main" data-dev="'+ROLL()+'">'+(myS.length>=FILM?'필름 현상하기':'지금까지 '+myS.length+'장 현상해 보기')+'</button>':'')+Array.from({length:ROLL()},(_,r)=>'<button class="dvb" data-dev="'+r+'">'+(r+1)+'번째 필름</button>').join('')+'</div>':'');
+  const myS=SHOTS.map((x,i)=>[x,i]).filter(([x])=>ticket&&x.tk===ticket.trainKey&&(x.r|0)===ROLL());const shs='<div class="skt">필름 사진 · '+myS.length+' / '+FILM+'</div><div class="gfs shs">'+(myS.length?myS.map(([x,i])=>'<i class="on'+(x.hero?' hero':'')+'" data-sh="'+i+'" style="background-image:url(img/t/'+x.sk+'.webp'+PV+');background-position:'+(x.sf/10).toFixed(1)+'% 50%"></i>').join(''):'<span style="opacity:.5;font-size:11px">아직 찍은 사진이 없어요</span>')+'</div>'+(myS.length||ROLL()?'<div class="dvrow">'+(myS.length?'<button class="dvb main" data-dev="'+ROLL()+'">'+(myS.length>=FILM?'필름 현상하기':'지금까지 '+myS.length+'장 현상해 보기')+'</button>':'')+Array.from({length:ROLL()},(_,r)=>'<button class="dvb" data-dev="'+r+'">'+(r+1)+'번째 필름</button>').join('')+'</div>':'');
   const gfs='<div class="skt">선물 서랍 · '+Object.keys(GIFTS).length+' / '+PAX.length+'</div><div class="gfs">'+PAX.map(p=>GIFTS[p.id]?'<i class="on" data-g="'+p.id+'" style="background-image:url(img/gf_'+p.id+'.webp'+IMGV+')" title="'+esc(p.g[0])+'">'+esc(p.g[0][0])+'</i>':'<i>?</i>').join('')+'</div>';
   $('logStamps').innerHTML=stampsHtml()+shs+pss+skb+gfs+pcs+'<div class="stc"><span>모은 도장 '+Object.keys(STAMPS).length+' / '+MOM.length+'</span><span>받은 선물 '+Object.keys(GIFTS).length+' / '+PAX.length+' · 먹은 음식 '+Object.keys(FOODS).length+'</span></div>';
   $('logList').innerHTML=html||'<li class="next"><b>21:00</b>부산역 출발</li>';const d=kd(ticket.dep);$('logSub').textContent=trainNo(ticket.dep)+'호 · '+ticket.car+'호차 '+ticket.seat+'번 · '+d.m+'월 '+d.d+'일 출발';show('mLog',true);blip(900,.08,.02);
-  setTimeout(()=>{const n=document.querySelector('#logList .now');if(n)n.scrollIntoView({block:'center'})},50)}
+  setTimeout(()=>{const n=document.querySelector('#logList .now'),ol=$('logList');if(n&&ol){ol.scrollTop+=n.getBoundingClientRect().top-ol.getBoundingClientRect().top-ol.clientHeight/2}},50)}
 $('hsBook').onclick=e=>{e.stopPropagation();openLog()};$('logClose').onclick=()=>show('mLog',false);$('logStamps').addEventListener('click',e=>{{const dv=e.target.closest('[data-dev]');if(dv){show('mLog',false);develop(+dv.dataset.dev);return}}if(e.target.closest('[data-pass]')){show('mLog',false);openPass();return}{const q2=e.target.closest('[data-sh]');if(q2){show('mLog',false);openShot(+q2.dataset.sh);return}}{const q=e.target.closest('[data-pc]');if(q){show('mLog',false);openPCard(q.dataset.pc);return}}const g=e.target.closest('[data-g]');if(!g)return;const p=PAX.find(x=>x.id===g.dataset.g);if(p){show('mLog',false);openGift(p)}});
 // 입김: 창을 길게 누르면 김이 서리고, 손가락으로 쓰면 지워짐
 const fog=$('fogcv');let fogOn=false,fogT=0,fogHold=0,fogLast=null;
@@ -2342,7 +2352,7 @@ async function contactSheet(L,r){try{if(document.fonts&&document.fonts.ready)awa
   const dd=kd(ticket.dep);g.textAlign='center';g.fillStyle='#3a2d22';g.font='500 66px "Noto Serif KR", serif';g.fillText('부산발 런던행',CW/2,150);
   g.fillStyle='rgba(58,45,34,.62)';g.font='26px "Noto Sans KR", sans-serif';g.fillText(dd.y+'.'+pd(dd.m)+'.'+pd(dd.d)+' 21:00 부산 출발  ·  '+trainNo(ticket.dep)+'호  ·  '+(r+1)+'번째 필름',CW/2,204);
   const uniq=[...new Set(L.map(x=>x.sk))],ims={};
-  await Promise.all(uniq.map(async k=>{const P=PHOTO[k];ims[k]=(P&&P.ready&&P.img&&P.img.naturalWidth>600)?P.img:((await loadIm('img/'+k+'.webp'))||(await loadIm('img/t/'+k+'.webp')))}));
+  await Promise.all(uniq.map(async k=>{const P=PHOTO[k];ims[k]=(P&&P.ready&&P.img&&P.img.naturalWidth>600)?P.img:((await loadIm('img/'+k+'.webp'+PV))||(await loadIm('img/t/'+k+'.webp'+PV)))}));
   const cols=4,rows=6,fw=228,fh=152,gx=10,band=34,sh=fh+band*2,sw=cols*fw+(cols-1)*gx+60,sx=(CW-sw)/2,sy=262;
   for(let row=0;row<rows;row++){const y=sy+row*(sh+14);g.save();g.translate(CW/2,y+sh/2);g.rotate((row%2?1:-1)*.0045);g.translate(-CW/2,-(y+sh/2));
     g.shadowColor='rgba(40,25,10,.25)';g.shadowBlur=10;g.shadowOffsetY=3;g.fillStyle='#1c1814';g.fillRect(sx,y,sw,sh);g.shadowColor='transparent';

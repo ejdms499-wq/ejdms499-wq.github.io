@@ -858,6 +858,38 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
 @media (max-width:420px){#tvHud{top:calc(124px + env(safe-area-inset-top))!important}}
 #app.tv #cameo img{height:min(20%,180px);bottom:calc(var(--th) + 96px)}
 #app.tv #cameo.fly img{bottom:auto;top:24%}
+/* ===== 별자리 노선도 ===== */
+#sky{position:absolute;inset:0;overflow:hidden;background:#070c1d}
+#veil.list #sky{display:none}
+#veil:not(.list) .vin{display:none}
+#veil:not(.list){overflow:hidden}
+#skycv{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:pointer}
+#sky::after{content:'';position:absolute;inset:0;pointer-events:none;opacity:.22;mix-blend-mode:overlay;background-image:radial-gradient(rgba(0,0,0,.55) 1px,transparent 1.3px);background-size:4px 4px}
+#skyTop{position:absolute;left:0;right:0;top:calc(30px + env(safe-area-inset-top));text-align:center;pointer-events:none;animation:fade 2s ease}
+#skyTop .s1{font:500 24px/1.2 'Noto Serif KR',serif;letter-spacing:.16em;color:#fff4dc;text-shadow:0 0 18px rgba(255,214,140,.45)}
+#skyTop .s2{font:500 9.5px/1 'Noto Sans KR',sans-serif;letter-spacing:.46em;color:rgba(255,236,200,.55);margin-top:10px}
+#skyTop .s3{font:400 12.5px/1.7 'Noto Serif KR',serif;color:rgba(255,244,224,.8);margin-top:14px}
+#skyNow{position:absolute;right:16px;top:calc(14px + env(safe-area-inset-top));font:500 11px/1 'Noto Sans KR',sans-serif;color:rgba(255,240,215,.6);letter-spacing:.06em;pointer-events:none}
+#skyFoot{position:absolute;left:0;right:0;bottom:calc(16px + env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:center;gap:9px;pointer-events:none}
+#skyFoot .h{font:400 12px/1 'Noto Sans KR',sans-serif;color:rgba(255,244,224,.82);animation:skyH 2.6s ease-in-out infinite}
+@keyframes skyH{50%{opacity:.45}}
+#skyFoot button{pointer-events:auto;font:500 11.5px/1 'Noto Sans KR',sans-serif;color:rgba(255,244,224,.75);background:rgba(10,12,26,.45);border:1px solid rgba(255,236,200,.25);border-radius:16px;padding:7px 13px}
+#skyFoot small{font:400 10px/1 'Noto Sans KR',sans-serif;color:rgba(255,240,215,.38)}
+#skyCard{position:absolute;left:50%;bottom:calc(16px + env(safe-area-inset-bottom));width:min(360px,calc(100% - 28px));transform:translate(-50%,calc(100% + 80px));visibility:hidden;transition:transform .45s cubic-bezier(.3,1.3,.5,1),visibility 0s .45s;background:#f6ecd6;color:#2b2118;border-radius:18px;padding:16px 18px 16px;box-shadow:0 12px 40px rgba(0,0,0,.45);z-index:3;font-family:'Noto Sans KR',sans-serif}
+#skyCard.on{transform:translate(-50%,0);visibility:visible;transition:transform .45s cubic-bezier(.3,1.3,.5,1)}
+#skyCard .scH{display:flex;align-items:baseline;gap:10px}
+#skyCard .scH b{font:700 19px/1.2 'Noto Serif KR',serif}
+#skyCard .scH span{font-size:11.5px;color:#8a6f4e;letter-spacing:.04em}
+#skyCard .scP{font:600 14.5px/1.5 'Noto Serif KR',serif;margin-top:8px}
+#skyCard .scP small{display:block;font:400 12px/1.6 'Noto Sans KR',sans-serif;color:#6d5a44;margin-top:4px}
+#skyCard .scW{display:flex;align-items:center;gap:10px;margin-top:12px;background:rgba(43,33,24,.06);border-radius:12px;padding:8px 10px}
+#skyCard .scW img{width:46px;height:46px;border-radius:50%;object-fit:cover;object-position:50% 15%;background:#efe1c4}
+#skyCard .scW span{font-size:11.5px;color:#7a6650}
+#skyCard .scW b{display:block;font:700 14px/1.3 'Noto Serif KR',serif;color:#2b2118}
+#skyCard .scGo{display:block;width:100%;margin-top:14px;border:0;border-radius:14px;background:#b8432f;color:#fff6e4;font:700 14.5px/1 'Noto Sans KR',sans-serif;padding:14px;letter-spacing:.04em;box-shadow:0 4px 0 #8a2f20}
+#skyCard .scGo:active{transform:translateY(2px);box-shadow:0 2px 0 #8a2f20}
+#vSky{display:block;margin:0 auto 18px;font:500 12px/1 'Noto Sans KR',sans-serif;color:#efe6d6;background:transparent;border:1px solid rgba(239,230,214,.3);border-radius:16px;padding:8px 14px}
+@media (min-width:900px){#skyTop{top:34px}#skyTop .s1{font-size:30px}}
 </style>
 </head>
 <body>
@@ -938,7 +970,7 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
     <button class="it" data-a="sleep">잠들기<small>소리만 남기고</small></button>
     <div class="fine">본 열차는 아직 존재하지 않습니다</div>
   </div></div>
-  <div id="veil"><div class="vin">
+  <div id="veil"><div id="sky"><canvas id="skycv"></canvas><div id="skyTop"><div class="s1">부산발 런던행</div><div class="s2">BUSAN — LONDON</div><div class="s3">매일 밤 9시, 하늘에 열차가 하나 더 떠요</div></div><div id="skyNow"></div><div id="skyFoot"><span class="h">반짝이는 열차를 누르면 그 별에 타요</span><button id="skyList">목록으로 보기</button><small>본 열차는 아직 존재하지 않습니다</small></div><div id="skyCard"></div></div><div class="vin"><button id="vSky">✦ 하늘 노선도로 보기</button>
     <div class="vL"><img class="vtrain" src="img/zveil.webp" alt=""><div class="v1">부산발 런던행</div><div class="v2">BUSAN — LONDON</div>
     <div class="v5">매일 밤 9시 부산역을 떠나<br>나흘 동안 실제 시간으로 달리는 환상 침대열차</div>
     <div class="v6"><span style="white-space:nowrap">부산 ·</span> <span style="white-space:nowrap">서울 ·</span> <span style="white-space:nowrap">☁ 구름 위 ·</span> <span style="white-space:nowrap">바이칼 ·</span> <span style="white-space:nowrap">🌌 오로라 ·</span> <span style="white-space:nowrap">모스크바 ·</span> <span style="white-space:nowrap">동화의 숲 ·</span> <span style="white-space:nowrap">노이슈반슈타인 ·</span> <span style="white-space:nowrap">알프스 ·</span> <span style="white-space:nowrap">루체른 ·</span> <span style="white-space:nowrap">파리 ·</span> <span style="white-space:nowrap">🐋 해저터널 ·</span> <span style="white-space:nowrap">런던</span></div></div>
@@ -2333,7 +2365,85 @@ function renderVeil(){const now=vnow(),{next,prev}=depTimes(now);let h='';
   $('veil').querySelectorAll('.tr').forEach(b=>b.onclick=e=>{e.stopPropagation();pickTrain(+b.dataset.dep)})}
 function pickTrain(dep){if(!isFinite(dep))return;const v=$('veil');setSound(true);if(!ticketValid()||ticket.dep!==dep){boardTrain(dep);try{waitAsk(dep)}catch(e){}}else{ticket.auto=0;saveTicket()}v.classList.add('off');clearInterval(renderVeil.t);setTimeout(()=>{v.style.display='none'},1500)}
 function openVeil(){try{platClose(true)}catch(e){}const v=$('veil');v.style.display='';renderVeil();v.scrollTop=0;requestAnimationFrame(()=>v.classList.remove('off'));clearInterval(renderVeil.t);renderVeil.t=setInterval(renderVeil,20000)}
-function initVeil(){const v=$('veil');if(location.hash.startsWith('#pc-')){v.classList.add('off');v.style.display='none';return}renderVeil();renderVeil.t=setInterval(renderVeil,20000)}
+
+/* ===== 시작 화면: 별자리 노선도 ===== */
+const SKYV={on:false,stars:[],hits:[],sel:null,dive:null,shoot:null,t0:performance.now(),W:0,H:0,mw:null,trail:{}};
+function skyPts(){const W=SKYV.W,H=SKYV.H,port=W/H<1.05,lats=ST.map(s=>s.lat),la0=Math.min(...lats),la1=Math.max(...lats);
+  return ST.map((s,i)=>{const u=.55*s.km/TOTAL_KM+.45*i/LAST,v=(s.lat-la0)/(la1-la0);
+    if(port)return {x:W*(.2+.6*v),y:H*(.8-.6*u)};
+    return {x:W*(.86-.72*u),y:H*(.74-.42*v)}})}
+function skyAt(km,P){let i=0;while(i<LAST-1&&ST[i+1].km<km)i++;const a=ST[i],b=ST[i+1],f=Math.max(0,Math.min(1,(km-a.km)/(b.km-a.km||1)));
+  return {x:P[i].x+(P[i+1].x-P[i].x)*f,y:P[i].y+(P[i+1].y-P[i].y)*f}}
+function skyResize(){const c=$('skycv'),r=c.getBoundingClientRect(),d=Math.min(2,devicePixelRatio||1);SKYV.W=r.width;SKYV.H=r.height;c.width=r.width*d;c.height=r.height*d;SKYV.d=d;
+  SKYV.stars=[];for(let i=0;i<Math.round(r.width*r.height/2600);i++)SKYV.stars.push({x:Math.random(),y:Math.random(),r:Math.random()*1.3+.3,p:Math.random()*6.28,s:.5+Math.random()*1.8});
+  const m=document.createElement('canvas');m.width=c.width;m.height=c.height;const g=m.getContext('2d');g.scale(d,d);
+  for(let i=0;i<70;i++){const t=i/70,x=r.width*(.05+t*.9),y=r.height*(.15+.7*(1-t))+Math.sin(t*9)*30,rad=60+Math.random()*90,gr=g.createRadialGradient(x,y,0,x,y,rad);gr.addColorStop(0,'rgba(255,236,210,.05)');gr.addColorStop(1,'rgba(255,236,210,0)');g.fillStyle=gr;g.fillRect(x-rad,y-rad,rad*2,rad*2)}
+  for(let i=0;i<500;i++){const t=Math.random(),x=r.width*(.05+t*.9)+(Math.random()-.5)*120,y=r.height*(.15+.7*(1-t))+Math.sin(t*9)*30+(Math.random()-.5)*110;g.fillStyle='rgba(255,245,225,'+(Math.random()*.35)+')';g.fillRect(x,y,1,1)}
+  SKYV.mw=m}
+function skyCol(){const h=kd(vnow()).h+kd(vnow()).mi/60;
+  if(h>=7&&h<17)return ['#1f4a66','#4f8fa6','#e7c9a0',.35];
+  if(h>=17&&h<20)return ['#13223f','#3b4a6e','#e0785c',.8];
+  if(h>=5&&h<7)return ['#16244a','#4b5a86','#f0a37a',.7];
+  return ['#070c1d','#12203f','#2a2f55',1]}
+function spark(g,x,y,r,col,a){g.save();g.globalAlpha=a;g.fillStyle=col;g.beginPath();g.moveTo(x,y-r);g.quadraticCurveTo(x,y,x+r,y);g.quadraticCurveTo(x,y,x,y+r);g.quadraticCurveTo(x,y,x-r,y);g.quadraticCurveTo(x,y,x,y-r);g.fill();g.restore()}
+function skyTrains(now){const {next,prev}=depTimes(now),L=[];for(let d=0;d<12;d++){const dep=prev-d*864e5;if(now-dep>TRIP)break;L.push(dep)}L.push(next);
+  return L.map(dep=>{const S=state(now-dep);return {dep,S,mine:ticketValid()&&!ticket.auto&&ticket.dep===dep}})}
+function skyDraw(){if(!SKYV.on)return;requestAnimationFrame(skyDraw);const c=$('skycv');if(!c.width)return;const g=c.getContext('2d'),W=SKYV.W,H=SKYV.H,t=(performance.now()-SKYV.t0)/1000,now=vnow();
+  g.setTransform(SKYV.d,0,0,SKYV.d,0,0);
+  let zx=0,zy=0,zs=1;if(SKYV.dive){const f=Math.min(1,(performance.now()-SKYV.dive.t)/1100),e=f*f*f;zs=1+e*14;zx=SKYV.dive.x;zy=SKYV.dive.y}
+  const col=skyCol(),bg=g.createLinearGradient(0,0,0,H);bg.addColorStop(0,col[0]);bg.addColorStop(.62,col[1]);bg.addColorStop(1,col[2]);g.fillStyle=bg;g.fillRect(0,0,W,H);
+  if(zs>1){g.translate(zx,zy);g.scale(zs,zs);g.translate(-zx,-zy)}
+  g.globalAlpha=col[3];if(SKYV.mw)g.drawImage(SKYV.mw,0,0,W,H);g.globalAlpha=1;
+  for(const s of SKYV.stars){const a=(.35+.65*Math.abs(Math.sin(t*s.s+s.p)))*col[3];g.fillStyle='rgba(255,248,230,'+a.toFixed(3)+')';g.fillRect(s.x*W,s.y*H,s.r,s.r)}
+  // 달
+  if(col[3]>.6){const mx=W*(W/H<1.05?.15:.9),my=H*(W/H<1.05?.2:.16),mr=Math.min(W,H)*.05+10;const mg=g.createRadialGradient(mx,my,mr*.6,mx,my,mr*3);mg.addColorStop(0,'rgba(255,214,140,.25)');mg.addColorStop(1,'rgba(255,214,140,0)');g.fillStyle=mg;g.fillRect(mx-mr*3,my-mr*3,mr*6,mr*6);g.fillStyle='#f6c983';g.beginPath();g.arc(mx,my,mr,0,7);g.fill();g.fillStyle='rgba(214,150,80,.35)';[[.3,-.2,.22],[-.35,.25,.16],[.1,.4,.12],[-.1,-.45,.1]].forEach(([a,b,r])=>{g.beginPath();g.arc(mx+a*mr,my+b*mr,r*mr,0,7);g.fill()})}
+  // 별똥별
+  if(!SKYV.shoot&&Math.random()<.004)SKYV.shoot={x:W*(.3+Math.random()*.7),y:H*Math.random()*.4,t:t};
+  if(SKYV.shoot){const f=(t-SKYV.shoot.t)/1.1;if(f>1)SKYV.shoot=null;else{const x=SKYV.shoot.x-f*W*.35,y=SKYV.shoot.y+f*H*.18,gr=g.createLinearGradient(x,y,x+90,y-46);gr.addColorStop(0,'rgba(255,255,255,'+(1-f)+')');gr.addColorStop(1,'rgba(255,255,255,0)');g.strokeStyle=gr;g.lineWidth=1.6;g.beginPath();g.moveTo(x,y);g.lineTo(x+90,y-46);g.stroke()}}
+  const P=skyPts();SKYV.hits=[];
+  // 별자리 선
+  g.setLineDash([2,6]);g.strokeStyle='rgba(255,226,170,.5)';g.lineWidth=1.1;g.beginPath();P.forEach((p,i)=>i?g.lineTo(p.x,p.y):g.moveTo(p.x,p.y));g.stroke();g.setLineDash([]);
+  const port=W/H<1.05,cx=W/2;
+  P.forEach((p,i)=>{const s=ST[i],big=i===0||i===LAST,r=big?9:6.5,tw=.75+.25*Math.sin(t*1.7+i);
+    const hg=g.createRadialGradient(p.x,p.y,0,p.x,p.y,r*3.4);hg.addColorStop(0,'rgba(255,236,190,.55)');hg.addColorStop(1,'rgba(255,236,190,0)');g.fillStyle=hg;g.fillRect(p.x-r*4,p.y-r*4,r*8,r*8);
+    spark(g,p.x,p.y,r*tw+2,'#fff4d6',1);
+    let ax,ay;if(port){const left=p.x>cx;ax=left?p.x-r-8:p.x+r+8;ay=p.y-1;g.textAlign=left?'right':'left'}else{const up=i%2===1;ax=p.x;ay=up?p.y-r-22:p.y+r+16;g.textAlign='center'}g.fillStyle='rgba(255,246,228,.95)';g.font='600 '+(big?14:12.5)+"px 'Noto Serif KR',serif";g.fillText(s.k,ax,ay);g.fillStyle='rgba(255,236,200,.55)';g.font="500 8.5px 'Noto Sans KR',sans-serif";g.fillText(s.e.split('').join(' '),ax,ay+12);
+    SKYV.hits.push({x:p.x,y:p.y,r:22,type:'st',i})});
+  // 열차
+  for(const tr of skyTrains(now)){const S=tr.S;if(S.mode==='end')continue;const km=Math.max(0,S.km),p=skyAt(km,P),warm=tr.mine?'#ffd36b':'#ffe9b8';
+    if(S.mode!=='wait'){for(let k=1;k<=14;k++){const kk=km-k*28;if(kk<0)break;const q=skyAt(kk,P),j=Math.sin(t*3+k*1.7+tr.dep%7)*3;spark(g,q.x+j,q.y-j*.6,4.5-k*.25,'#fff1c8',(1-k/15)*.75)}}
+    const R=tr.mine?9:7,pul=S.mode==='wait'?.6+.4*Math.sin(t*2.4):1;const hg=g.createRadialGradient(p.x,p.y,0,p.x,p.y,R*4.5);hg.addColorStop(0,'rgba(255,222,140,'+(.75*pul)+')');hg.addColorStop(1,'rgba(255,222,140,0)');g.fillStyle=hg;g.fillRect(p.x-R*5,p.y-R*5,R*10,R*10);
+    g.fillStyle=warm;g.beginPath();g.arc(p.x,p.y,R*.62,0,7);g.fill();spark(g,p.x,p.y,R*1.7,'#fffbe8',.9*pul);
+    if(tr.mine||SKYV.sel&&SKYV.sel.dep===tr.dep){g.strokeStyle='rgba(255,211,107,.9)';g.lineWidth=1.4;g.setLineDash([3,4]);g.lineDashOffset=-t*8;g.beginPath();g.arc(p.x,p.y,R*2.4,0,7);g.stroke();g.setLineDash([])}
+    const lab=trainNo(tr.dep)+(tr.mine?' · 내 열차':S.mode==='wait'?' · 오늘 밤 9시':S.mode==='stop'?' · 정차 중':''),left=port?p.x<=cx:true;if(SKYV.dive)continue;
+    g.font="600 11.5px 'Noto Sans KR',sans-serif";g.textAlign=left?'right':'left';const tw2=g.measureText(lab).width;let L2=left;if(L2&&p.x-R*2.6-tw2<10)L2=false;if(!L2&&p.x+R*2.6+tw2>W-10)L2=true;g.textAlign=L2?'right':'left';let lx=L2?p.x-R*2.6:p.x+R*2.6,ly=port?p.y-R*1.8:p.y+4;if(port&&S.mode==='wait'){L2=false;lx=Math.max(14,p.x-tw2/2);g.textAlign='left';ly=p.y+R*4.2}
+    g.fillStyle='rgba(12,14,28,.55)';g.beginPath();g.roundRect?g.roundRect(L2?lx-tw2-8:lx-8,ly-13,tw2+16,19,9):g.rect(L2?lx-tw2-8:lx-8,ly-13,tw2+16,19);g.fill();g.fillStyle=tr.mine?'#ffd36b':'#fff3d8';g.fillText(lab,lx,ly);
+    SKYV.hits.push({x:p.x,y:p.y,r:30,type:'tr',dep:tr.dep})}
+  if(SKYV.dive){const f=Math.min(1,(performance.now()-SKYV.dive.t)/1100);g.setTransform(SKYV.d,0,0,SKYV.d,0,0);g.fillStyle='rgba(255,246,222,'+(f*f*.9)+')';g.fillRect(0,0,W,H)}
+  const k=kd(now);$('skyNow').textContent='서울 '+pd(k.h)+':'+pd(k.mi)}
+function skyCard(h){const c=$('skyCard');c.innerHTML=h;c.classList.add('on')}
+function skyTap(e){if(SKYV.dive)return;const r=$('skycv').getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;let best=null,bd=1e9;
+  for(const h of SKYV.hits){const d=Math.hypot(h.x-x,h.y-y);if(d<h.r&&d<bd-(h.type==='tr'?8:0)){bd=d;best=h}}
+  if(!best){$('skyCard').classList.remove('on');SKYV.sel=null;return}blip(1100,.06,.02);
+  if(best.type==='tr'){const dep=best.dep,now=vnow(),S=state(now-dep),inf=trainInfo(dep,now),p=S.mode==='wait'?null:paxAt(S.km),mine=ticketValid()&&!ticket.auto&&ticket.dep===dep;SKYV.sel={dep};
+    skyCard('<div class="scH"><b>'+trainNo(dep)+'</b><span>'+(mine?'내 열차':S.mode==='wait'?'오늘 밤 9시 부산역 출발':pd(kd(dep).m)+'.'+pd(kd(dep).d)+' 출발 · '+(Math.floor((now-dep)/864e5)+1)+'일째')+'</span></div>'+
+      '<div class="scP">'+esc(inf.pl)+'<small>'+esc(inf.sub)+'</small></div>'+
+      (p?'<div class="scW"><img src="img/px_'+p.id+'.webp'+IMGV+'" alt=""><span>맞은편 자리<b>'+esc(p.n)+'</b></span></div>':'')+
+      '<button class="scGo" data-dep="'+dep+'">'+(mine?'내 자리로 돌아가기':S.mode==='wait'?'오늘 밤 열차 예매하기':'이 별에 타기')+'</button>');
+    $('skyCard').querySelector('.scGo').onclick=ev=>{ev.stopPropagation();skyBoard(dep)}}
+  else{const s=ST[best.i],now=vnow();let pick=null,eta=1e15;for(const tr of skyTrains(now)){if(tr.S.mode==='end'||tr.S.km>s.km+.1)continue;const a=elAtKm(s.km)-(now-tr.dep);if(a>=-60e3&&a<eta){eta=a;pick=tr.dep}}SKYV.sel=pick?{dep:pick}:null;
+    const fc=(FACTS.find(f=>s.km>=f[0]&&s.km<f[1])||FACTS[FACTS.length-1]||[0,0,['']])[2];
+    skyCard('<div class="scH"><b>'+esc(s.k)+'</b><span>'+esc(s.e)+'</span></div><div class="scP">'+esc(s.msg||'')+'<small>'+esc(fc[Math.floor(Math.random()*fc.length)]||'')+'</small></div>'+(pick?'<button class="scGo">'+(eta<90e3?'지금 '+esc(s.k)+'에 있는 '+trainNo(pick):fmt(eta)+' 뒤 도착하는 '+trainNo(pick))+'에 타기</button>':''));
+    const b=$('skyCard').querySelector('.scGo');if(b)b.onclick=ev=>{ev.stopPropagation();skyBoard(pick)}}}
+function skyBoard(dep){const P=skyPts(),S=state(vnow()-dep),p=skyAt(Math.max(0,S.km),P);$('skyCard').classList.remove('on');SKYV.dive={x:p.x,y:p.y,t:performance.now()};blip(660,.2,.04);setTimeout(()=>blip(990,.3,.03),250);
+  setTimeout(()=>{pickTrain(dep);setTimeout(()=>{SKYV.dive=null;SKYV.on=false},1600)},1050)}
+function skyStart(){if(SKYV.on)return;SKYV.on=true;$('veil').classList.remove('list');skyResize();requestAnimationFrame(skyDraw)}
+function skyInit(){window.__SKY=SKYV;const c=$('skycv');c.addEventListener('click',skyTap);addEventListener('resize',()=>{if(SKYV.on)skyResize()});
+  $('skyList').onclick=e=>{e.stopPropagation();$('veil').classList.add('list');SKYV.on=false};$('vSky').onclick=e=>{e.stopPropagation();skyStart()};
+  $('skyCard').addEventListener('click',e=>e.stopPropagation());
+  const ob=new MutationObserver(()=>{const v=$('veil');const vis=v.style.display!=='none'&&!v.classList.contains('off');if(vis&&!v.classList.contains('list'))skyStart();if(!vis&&!SKYV.dive)SKYV.on=false});ob.observe($('veil'),{attributes:true,attributeFilter:['class','style']});
+  const v=$('veil');if(v.style.display!=='none'&&!v.classList.contains('off'))skyStart()}
+function initVeil(){try{skyInit()}catch(e){console.error(e)}const v=$('veil');if(location.hash.startsWith('#pc-')){v.classList.add('off');v.style.display='none';return}renderVeil();renderVeil.t=setInterval(renderVeil,20000)}
 // 메뉴
 function openMenu(){const S=cur;$('mCardSub').textContent=ST[curStation()].k+'에서';
   $('mTkSub').textContent=ticket?trainNo(ticket.dep)+'호 · '+ticket.car+'호차 '+ticket.seat+'번':'';

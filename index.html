@@ -664,6 +664,9 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
 .letter b{font-weight:400;color:#8a3b2e}
 #mgSk{margin-bottom:28px;width:min(300px,84vw);aspect-ratio:3/2;background:#f6f0e3;border:8px solid #f6f0e3;box-shadow:0 14px 34px rgba(0,0,0,.5);display:grid;place-items:center;font:12px 'Noto Sans KR',sans-serif;color:#7a6f61;position:relative}
 #mgSk canvas{width:100%;height:100%;display:block}#mgSk::after{content:attr(data-cap);position:absolute;left:0;right:0;bottom:-26px;text-align:center;font:400 18px 'Nanum Pen Script',serif;color:#efe6d6}
+.pxask{display:flex;gap:6px;margin:6px 4px 0}.pxask input{flex:1;min-width:0;padding:10px 14px;border-radius:999px;border:1px solid rgba(239,230,214,.28);background:rgba(255,255,255,.06);color:#efe6d6;font:14px 'Noto Sans KR',sans-serif;outline:none}
+.pxask input::placeholder{color:rgba(239,230,214,.45)}.pxask button{width:40px;border-radius:50%;border:0;background:#efe6d6;color:#221c16;font:600 16px sans-serif}.pxask button:disabled{opacity:.4}
+.pxsrc{font:11px/1.6 'Noto Sans KR',sans-serif;opacity:.5;margin:8px 6px 0;min-height:16px;word-break:keep-all}.pxsay.think{opacity:.55}
 </style>
 </head>
 <body>
@@ -806,7 +809,7 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
     <div class="pcbtns" id="pcRecv" style="display:none"><button class="ghost" id="pcRecvClose">닫기</button><button id="pcRide">나도 이 기차 타기</button></div>
   </div></div>
 
-  <div class="modal" id="mPax"><div class="paxwrap"><div class="pxph" id="pxPh"></div><div class="pxname" id="pxName"></div><div class="pxwho" id="pxWho"></div><div class="pxsay" id="pxSay"></div>
+  <div class="modal" id="mPax"><div class="paxwrap"><div class="pxph" id="pxPh"></div><div class="pxname" id="pxName"></div><div class="pxwho" id="pxWho"></div><div class="pxsay" id="pxSay"></div><div class="pxask"><input id="pxIn" maxlength="120" placeholder="물어보기 (예: 여기는 뭐가 유명해요?)" autocomplete="off"><button id="pxSend" aria-label="보내기">↑</button></div><div class="pxsrc" id="pxSrc"></div>
     <div class="pcbtns"><button class="ghost" id="pxTalk">말 걸기</button><button id="pxGift">선물 받기</button></div><button class="closer" id="pxPlay"></button><button class="closer" id="pxClose">자리로 돌아가기</button></div></div>
   <div class="modal" id="mMenu"><div class="menuwrap"><div class="menucard" id="menuCard"></div><button class="closer" id="menuClose">닫기</button></div></div>
   <div class="modal" id="mPass"><div class="passbook"><div class="ph2"><b>PASSPORT</b><span>여권 · 사증</span></div><div class="pzstamps" id="psSt"></div><div class="pn" id="psN"></div><button class="closer" id="psClose">여권 넣기</button></div></div>
@@ -2288,7 +2291,7 @@ function renderPaxChip(){const el=$('pax');if(!el)return;if(!paxCur){el.innerHTM
   const a=$('pxChipA'),id=paxCur.id;tryImg('pxc_'+id,a,()=>tryImg('px_'+id,a,()=>{}))}
 function openPax(){const p=paxCur;if(!p)return;dayInc('talk');$('pxName').textContent=p.n;$('pxWho').textContent=p.w;paxLine=0;$('pxSay').textContent='“'+p.say[0]+'”';
   const ph=$('pxPh');ph.classList.remove('has');ph.style.backgroundImage='';ph.innerHTML='<b>'+esc(p.n[0])+'</b>';ph.classList.remove('ill');tryImg('px_'+p.id,ph,()=>{},im=>{if(im.naturalWidth/im.naturalHeight<=.9)return;const k=kd(vnow());ph.classList.add('ill');ph.style.backgroundImage='';ph.innerHTML='<i class="art" style="background-image:url('+im.src+')"></i><em class="cap">'+k.m+'.'+k.d+' · '+esc(nearName(cur.km))+'에서</em>'});if(!MET[p.id]){MET[p.id]=Date.now();LSset('bl-met',MET)}
-  const got=!!GIFTS[p.id];$('pxGift').textContent=got?'받은 선물 · '+p.g[0]:'선물 받기';$('pxGift').classList.toggle('done',got);{const pl=PLAY[p.id];$('pxPlay').classList.toggle('on',!!pl);if(pl)$('pxPlay').textContent=pl}show('mPax',true);blip(620,.08,.02)}
+  $('pxSrc').textContent='';$('pxIn').value='';const got=!!GIFTS[p.id];$('pxGift').textContent=got?'받은 선물 · '+p.g[0]:'선물 받기';$('pxGift').classList.toggle('done',got);{const pl=PLAY[p.id];$('pxPlay').classList.toggle('on',!!pl);if(pl)$('pxPlay').textContent=pl}show('mPax',true);blip(620,.08,.02)}
 $('pxTalk').onclick=e=>{e.stopPropagation();const p=paxCur;if(!p)return;paxLine=(paxLine+1)%p.say.length;const el=$('pxSay');el.classList.remove('in');void el.offsetWidth;el.textContent='“'+p.say[paxLine]+'”';el.classList.add('in');blip(880,.05,.015)};
 $('pxGift').onclick=e=>{e.stopPropagation();const p=paxCur;if(!p||GIFTS[p.id])return;GIFTS[p.id]=Date.now();LSset('bl-gifts',GIFTS);logAdd(p.n+'에게 '+p.g[0]+JO(p.g[0],'을','를')+' 받았다');
   $('pxGift').textContent='받은 선물 · '+p.g[0];$('pxGift').classList.add('done');blip(1320,.16,.04);renderPaxChip();show('mPax',false);setTimeout(()=>openGift(p),250)};
@@ -2514,6 +2517,19 @@ function mgSketch(){$('mgSay').textContent='“가만히 있어 봐요… 창밖
     g.putImageData(d,0,0);const box=$('mgSk');box.textContent='';box.appendChild(c);const k=kd(vnow());box.dataset.cap=k.m+'.'+k.d+' · '+nearName(cur.km)+' — 몽마르트르 화가';
     $('mgSay').textContent='“자, 당신이 본 창밖이에요. 사진보다 오래 남을 거예요.”';blip(880,.1,.04);mgDone(nearName(cur.km))};im.src=u})}
 $('mgClose').onclick=()=>{mgClear();show('mPlay',false)};$('mPlay').onclick=e=>{if(e.target===$('mPlay')){mgClear();show('mPlay',false)}};
+
+// ───────── 승객과 대화하기 (RAG: 기차 이야기 자료에서 찾아 승객 말투로 대답) ─────────
+const CHAT_URL=SB_URL+'/functions/v1/pax-chat',CHAT={};let chatBusy=false;
+async function askPax(){const p=paxCur,inp=$('pxIn'),msg=inp.value.trim();if(!p||!msg||chatBusy)return;chatBusy=true;inp.value='';$('pxSend').disabled=true;
+  const H=CHAT[p.id]=CHAT[p.id]||[];$('pxSay').classList.add('think');$('pxSay').textContent='“'+msg+'” …';$('pxSrc').textContent='';
+  try{const r=await fetch(CHAT_URL,{method:'POST',headers:{'Content-Type':'application/json',apikey:SB_KEY},body:JSON.stringify({pax:p.id,km:Math.round(cur.km),place:nearName(cur.km),msg,hist:H.slice(-6)})});
+    const j=await r.json().catch(()=>({}));if(!r.ok||!j.reply)throw new Error(j.error||r.status);
+    H.push({r:'me',c:msg},{r:'pax',c:j.reply});$('pxSay').textContent='“'+j.reply+'”';$('pxSrc').textContent=j.src&&j.src.length?'떠올린 이야기 · '+j.src.join(' · '):'';blip(660,.06,.02);
+    if(H.length===2)logAdd(p.n+'와 이야기를 나눴다')}
+  catch(e){$('pxSay').textContent='“'+p.say[Math.floor(Math.random()*p.say.length)]+'”';$('pxSrc').textContent=String(e.message||'').includes('쉬었다')?String(e.message):'(지금은 대화가 연결되지 않아 늘 하던 말을 했어요)'}
+  finally{$('pxSay').classList.remove('think');chatBusy=false;$('pxSend').disabled=false}}
+$('pxSend').onclick=e=>{e.stopPropagation();askPax()};$('pxIn').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.isComposing){e.preventDefault();askPax()}});
+$('pxIn').addEventListener('click',e=>e.stopPropagation());
 // ───────── 국경 바퀴 교체 (실제: 러시아·벨라루스 선로 1,520mm, 그 밖은 1,435mm) ─────────
 const GAUGE=[{id:'g1',km:1290,stop:1,k:'TUMANGANG',place:'두만강역',from:'1,435',to:'1,520',note:'러시아 선로는 8.5cm 더 넓어요. 객차를 통째로 들어 올려 바퀴 뭉치(대차)를 바꿔 끼워요.'},
   {id:'g2',km:11834,k:'BREST',place:'브레스트 국경',from:'1,520',to:'1,435',note:'다시 유럽 선로로. 실제로도 승객을 태운 채 2시간쯤 걸려요.'}];
@@ -2643,7 +2659,7 @@ setInterval(sillTick,3000);setTimeout(sillTick,800);
   for(let k=0;k<d.length;k+=4){const n=Math.random();const v=n<.5?0:255;d[k]=d[k+1]=d[k+2]=v;d[k+3]=Math.random()*14}
   g.putImageData(im,0,0);g.globalAlpha=.05;g.strokeStyle='#6b5a44';for(let k=0;k<70;k++){g.lineWidth=.4+Math.random()*.5;g.beginPath();const x=Math.random()*180,y=Math.random()*180,a=Math.random()*6.28,l=4+Math.random()*12;g.moveTo(x,y);g.quadraticCurveTo(x+Math.cos(a)*l/2+Math.random()*3,y+Math.sin(a)*l/2,x+Math.cos(a)*l,y+Math.sin(a)*l);g.stroke()}
   document.documentElement.style.setProperty('--paper','url('+c.toDataURL()+')')}catch(e){}})();
-if(/[?&]dev/.test(location.search)||window.__SBMOCK)window.__T={runGauge:i=>runGauge(GAUGE[i]),openChess,openRiddle,openMini:id=>openMini(PAX.find(x=>x.id===id)),elAtKm,openPax,openMenu2,serveFood:()=>serveFood(MENU[3].d[0]),showMoment:()=>showMoment(MOM[5]),get BI(){return BI},B,get ST(){return ST},get SC(){return SC},PHOTO,photoFor,biomeAt,state,get TRIP(){return TRIP},boardTrain,openTicket,openPostcard,openDrawer,viewNow,depTimes,vnow:()=>vnow(),get cur(){return cur},get riders(){return riders},sayPhrase,showCart,CART,openRoom,openLog,show,get ticket(){return ticket}};$('roomSheet').onclick=e=>{if(e.target===$('roomSheet'))show('roomSheet',false)};
+if(/[?&]dev/.test(location.search)||window.__SBMOCK)window.__T={get KB(){return {PAX,MOM,PCARD,GFACT,PLACE,NOTE,MENU,ST:ST_N,ITEMS,STALL,PASS,BI:BI_N}},runGauge:i=>runGauge(GAUGE[i]),openChess,openRiddle,openMini:id=>openMini(PAX.find(x=>x.id===id)),elAtKm,openPax,openMenu2,serveFood:()=>serveFood(MENU[3].d[0]),showMoment:()=>showMoment(MOM[5]),get BI(){return BI},B,get ST(){return ST},get SC(){return SC},PHOTO,photoFor,biomeAt,state,get TRIP(){return TRIP},boardTrain,openTicket,openPostcard,openDrawer,viewNow,depTimes,vnow:()=>vnow(),get cur(){return cur},get riders(){return riders},sayPhrase,showCart,CART,openRoom,openLog,show,get ticket(){return ticket}};$('roomSheet').onclick=e=>{if(e.target===$('roomSheet'))show('roomSheet',false)};
 
 if(!ticketValid()) autoBoard(); else {try{sbPresence()}catch(e){}}
 initVeil();

@@ -733,6 +733,25 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
 #cartBot{display:block;width:62px;margin:-46px auto 4px;filter:drop-shadow(0 4px 6px rgba(0,0,0,.4))}
 #veil .vtrain{display:block;width:100%;border-radius:10px;margin:0 0 22px;box-shadow:0 10px 30px rgba(0,0,0,.45)}
 @media (max-width:899px){#veil .vtrain{max-height:30vh;object-fit:cover}}
+
+/* 사건 수첩 · 씨름 · 창밖 깜짝 출연 */
+.cslist{display:flex;flex-direction:column;gap:7px;margin-top:12px;max-height:46vh;overflow:auto;text-align:left}
+.csi{padding:9px 11px;border-radius:8px;background:rgba(239,230,214,.06);border:1px dashed rgba(239,230,214,.18);font-family:'Noto Sans KR',sans-serif}
+.csi b{display:block;font:500 13px 'Noto Serif KR',serif;color:rgba(239,230,214,.5)}.csi span{display:block;font-size:11.5px;line-height:1.55;opacity:.5;margin-top:3px}
+.csi.on{border-style:solid;border-color:rgba(233,180,95,.45);background:rgba(233,180,95,.08)}.csi.on b{color:#f3d9a4}.csi.on span{opacity:.85}
+.cssolved{margin-top:14px;font:500 14px 'Noto Serif KR',serif;color:#f3d9a4}.csend{font:14px/1.85 'Noto Serif KR',serif;text-align:left;margin-top:12px;opacity:.92}
+.ssr{display:flex;flex-direction:column;align-items:center;gap:10px;margin:8px 0}.ssd{height:150px;transition:transform .3s}.ssd.fall{animation:ssFall .7s ease}.ssd.push{animation:ssPush .5s ease}
+@keyframes ssFall{0%{transform:none}40%{transform:rotate(-38deg) translateX(-14px)}100%{transform:none}}@keyframes ssPush{0%,100%{transform:none}50%{transform:translateX(10px) scale(1.06)}}
+.ssbar{position:relative;width:240px;height:16px;border-radius:9px;background:rgba(239,230,214,.12);overflow:hidden}.ssbar .sz{position:absolute;top:0;bottom:0;background:rgba(233,180,95,.75)}.ssbar .sm{position:absolute;top:-3px;width:4px;height:22px;margin-left:-2px;background:#fff;box-shadow:0 0 8px #fff}
+.sslab{width:240px;display:flex;justify-content:space-between;font:10.5px 'Noto Sans KR',sans-serif;opacity:.55}
+#cameo{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+#cameo img{position:absolute;height:38%;bottom:12%;left:100%;filter:brightness(var(--cb,1)) drop-shadow(0 4px 8px rgba(0,0,0,.35));pointer-events:auto;cursor:pointer;-webkit-tap-highlight-color:transparent}
+#cameo.run img{animation:cmRun 15s linear forwards,cmHop .42s ease-in-out infinite alternate}
+#cameo.fly img{bottom:auto;top:18%;animation:cmFly 15s ease-in-out forwards}
+@keyframes cmRun{0%{left:100%}100%{left:-40%}}@keyframes cmHop{from{margin-bottom:0}to{margin-bottom:2.2%}}
+@keyframes cmFly{0%{left:100%;transform:translateY(0) rotate(-4deg)}25%{transform:translateY(-12%) rotate(3deg)}50%{left:38%;transform:translateY(8%) rotate(-3deg)}75%{transform:translateY(-6%) rotate(4deg)}100%{left:-45%;transform:translateY(0) rotate(-2deg)}}
+#cameo.got img{animation:none!important;transform:scale(1.25)!important;opacity:0;transition:transform .9s,opacity .9s;filter:brightness(1.3) drop-shadow(0 0 18px #fff6c8)}
+.gfs.cms i.on{background-size:contain;background-repeat:no-repeat;background-position:center bottom}
 </style>
 </head>
 <body>
@@ -746,7 +765,7 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
   <div id="route"><div class="line"></div><div class="done" id="rdone"></div><div id="rdots"></div><div class="me" id="rme"></div></div>
   <div id="announce"></div>
   <div id="stage"><div id="cabin">
-    <div id="win"><canvas id="cv"></canvas><canvas id="glasscv"></canvas><canvas id="fogcv"></canvas><div id="glassrefl"></div><div id="tunrefl"></div><div id="glass"></div>
+    <div id="win"><canvas id="cv"></canvas><div id="cameo"></div><canvas id="glasscv"></canvas><canvas id="fogcv"></canvas><div id="glassrefl"></div><div id="tunrefl"></div><div id="glass"></div>
       <button id="speed">미리보기 1×</button><button id="jumpBtn">구간 이동</button>
       <div id="flash"></div>
       <button id="mail"><svg viewBox="0 0 24 24" fill="none" stroke="#3a2a1e" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="1.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></svg><span id="mailtxt">엽서 도착</span></button>
@@ -807,7 +826,8 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
     <button class="it" data-a="lamp">창가 불 끄기<small id="mLampSub">창밖이 더 잘 보여요</small></button>
     <button class="it" data-a="ticket">승차권<small id="mTkSub"></small></button>
     <button class="it" data-a="board">지금 달리는 열차로 옮겨 타기<small id="mBdSub"></small></button>
-    <button class="it" data-a="route">다른 길로 가기<small id="mRtSub"></small></button>
+    <button class="it" data-a="case">사건 수첩<small>사라진 별 연기 · 단서 모으기</small></button>
+    <button class="it" data-a="route" style="display:none">다른 길로 가기<small id="mRtSub"></small></button>
     <button class="it" data-a="sleep">잠들기<small>소리만 남기고</small></button>
     <div class="fine">본 열차는 아직 존재하지 않습니다</div>
   </div></div>
@@ -888,6 +908,7 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
   <div class="modal" id="mChess"><div class="chwrap"><div class="chh">표트르 할아버지의 체스 문제</div><div class="chs" id="chSay"></div><div id="chBoard"></div><div class="chn" id="chN"></div>
     <div class="pcbtns" style="margin-top:12px"><button class="ghost" id="chHint">힌트</button><button id="chNext">다음 문제</button></div><button class="closer" id="chClose">그만 둘래요</button></div></div>
   <div class="modal" id="mPlay"><div class="rdwrap"><div class="chh" id="mgT"></div><div class="chs" id="mgSay"></div><div id="mgA"></div><div class="rdq" id="mgQ" style="display:none"></div><div class="rdo" id="mgO"></div><div class="chn" id="mgN" style="margin-top:12px"></div><button class="closer" id="mgClose">자리로 돌아가기</button></div></div>
+  <div class="modal" id="mCase"><div class="rdwrap" id="csBox"></div></div>
   <div class="modal" id="mRiddle"><div class="rdwrap"><div class="chh">탐정의 수수께끼</div><div class="chs" id="rdSay"></div><div class="rdq" id="rdQ"></div><div class="rdo" id="rdO"></div><div class="chn" id="rdN" style="margin-top:12px"></div><button class="closer" id="rdClose">자리로 돌아가기</button></div></div>
   <div class="modal" id="mWalk"><div class="wkwrap"><div class="pxwho" id="wkT"></div><div class="fdph has" id="wkPh"></div><div class="fdname" id="wkName"></div><div class="fdtext" id="wkTxt"></div><div class="pcbtns" style="margin-top:14px"><button class="ghost" id="wkBack">역으로 돌아가기</button><button id="wkNext">조금 더 걷기</button></div></div></div>
   <div class="modal" id="mBye"><div class="paxwrap"><div class="pxph" id="byPh"></div><div class="pxname" id="byName"></div><div class="pxwho" id="byWho"></div><div class="pxsay" id="bySay"></div><div class="pcbtns"><button id="byWave">손 흔들기</button></div><button class="closer" id="byClose">자리로 돌아가기</button></div></div>
@@ -2136,18 +2157,19 @@ function toggleLamp(){window.LIGHTS_OFF=!window.LIGHTS_OFF;blip(window.LIGHTS_OF
 $('hsLamp').onclick=e=>{e.stopPropagation();toggleLamp()};
 $('hsDrawer').onclick=e=>{e.stopPropagation();openDrawer()};
 function elAtKm(km){let lo=-1,hi=TRIP;for(let k=0;k<44;k++){const m=(lo+hi)/2;if(state(m).km>=km)hi=m;else lo=m}return hi}
+const PAXU=()=>PAX.filter((p,i)=>PAX.findIndex(q=>q.id===p.id)===i);
 function openLog(){if(!ticket)return;dayInc('log');const now=vnow(),rows=[];let last='';
   for(const e of BI){const nm=PLACE[e[2]];if(!nm||nm===last)continue;last=nm;const t=ticket.dep+elAtKm(e[0]+.01);rows.push([t,nm,e[0],e[1]])}
   for(let i=1;i<=LAST;i++){rows.push([ticket.dep+SC[i].arr,ST[i].k+(ST[i].ferry?'항':'역')+' 도착',ST[i].km,ST[i].km+.001])}
   for(const L of (ticket.log||[]))rows.push([L[0],'· '+L[1],-1,-1]);
   rows.sort((a,b)=>a[0]-b[0]);const km=cur.km;let html='',shownNext=false;
   for(const r of rows){const a=kd(r[0]),tt=pd(a.h)+':'+pd(a.mi);if(r[0]<=now){const isNow=km>=r[2]&&km<r[3];html+='<li class="'+(isNow?'now':'')+'"><b>'+tt+'</b>'+esc(r[1])+'</li>'}else if(!shownNext){shownNext=true;html+='<li class="next"><b>'+tt+'</b>'+esc(r[1])+'</li>'}}
-  const skb='<div class="skt">스케치북 · 만난 승객 '+Object.keys(MET).length+' / '+PAX.length+'</div><div class="skb">'+PAX.map(p=>MET[p.id]?'<i style="background-image:url(img/pxc_'+p.id+'.webp'+IMGV+'),url(img/px_'+p.id+'.webp'+IMGV+')"></i>':'<i>?</i>').join('')+'</div>';
+  const skb='<div class="skt">스케치북 · 만난 승객 '+Object.keys(MET).length+' / '+PAXU().length+'</div><div class="skb">'+PAXU().map(p=>MET[p.id]?'<i style="background-image:url(img/pxc_'+p.id+'.webp'+IMGV+'),url(img/px_'+p.id+'.webp'+IMGV+')"></i>':'<i>?</i>').join('')+'</div>';
   const pss='<div class="skt">여권 도장 · '+Object.keys(PASSD).length+' / '+PASS.length+'</div><div class="gfs pss">'+PASS.map(p=>PASSD[p[1]]?'<i class="on" data-pass="1" style="border-color:'+p[5]+';color:'+p[5]+'">'+p[1]+'</i>':'<i>?</i>').join('')+'</div>';
-  const pcs='<div class="skt">엽서함 · '+Object.keys(PCD).length+' / '+PCARD.length+'</div><div class="gfs pcs">'+PCARD.map(p=>PCD[p[1]]?'<i class="on" data-pc="'+p[1]+'" style="background-image:url(img/'+p[1]+'.webp'+IMGV+')"></i>':'<i>?</i>').join('')+'</div>';
+  const pcs='<div class="skt">창밖에서 만난 순간 · '+Object.keys(CAMEOS).length+' / '+CAMEO.length+'</div><div class="gfs cms">'+CAMEO.map(c=>CAMEOS[c.id]?'<i class="on" title="'+esc(c.n)+'" style="background-image:url(img/pf_'+c.p+'.webp'+IMGV+')"></i>':'<i>?</i>').join('')+'</div><div class="skt">사건 수첩 · 단서 '+Object.keys(CLUES).length+' / '+CLUE.length+(CASE.solved?' · 해결 ★':'')+'</div><button class="dvb" id="logCase" style="margin-top:6px">사건 수첩 열기</button>';
   const myS=SHOTS.map((x,i)=>[x,i]).filter(([x])=>ticket&&x.tk===ticket.trainKey&&(x.r|0)===ROLL());const shs='<div class="skt">필름 사진 · '+myS.length+' / '+FILM+'</div><div class="gfs shs">'+(myS.length?myS.map(([x,i])=>'<i class="on'+(x.hero?' hero':'')+'" data-sh="'+i+'" style="background-image:url(img/t/'+x.sk+'.webp'+PV+');background-position:'+(x.sf/10).toFixed(1)+'% 50%"></i>').join(''):'<span style="opacity:.5;font-size:11px">아직 찍은 사진이 없어요</span>')+'</div>'+(Object.keys(PLD).length?'<div class="skt">내린 역 · '+Object.keys(PLD).length+' / '+(ST.length-2)+'</div><div class="gfs tks">'+ST.slice(1,-1).map(x=>PLD[x.k]?'<i class="on">'+esc(x.k.slice(0,2))+'</i>':'<i>?</i>').join('')+'</div>':'')+(myS.length||ROLL()?'<div class="dvrow">'+(myS.length?'<button class="dvb main" data-dev="'+ROLL()+'">'+(myS.length>=FILM?'필름 현상하기':'지금까지 '+myS.length+'장 현상해 보기')+'</button>':'')+Array.from({length:ROLL()},(_,r)=>'<button class="dvb" data-dev="'+r+'">'+(r+1)+'번째 필름</button>').join('')+'</div>':'');
-  const gfs='<div class="skt">선물 서랍 · '+Object.keys(GIFTS).length+' / '+PAX.length+'</div><div class="gfs">'+PAX.map(p=>GIFTS[p.id]?'<i class="on" data-g="'+p.id+'" style="background-image:url(img/gf_'+p.id+'.webp'+IMGV+')" title="'+esc(p.g[0])+'">'+esc(p.g[0][0])+'</i>':'<i>?</i>').join('')+'</div>';
-  $('logStamps').innerHTML=stampsHtml()+shs+pss+skb+gfs+pcs+'<div class="stc"><span>모은 도장 '+Object.keys(STAMPS).length+' / '+MOM.length+'</span><span>받은 선물 '+Object.keys(GIFTS).length+' / '+PAX.length+' · 먹은 음식 '+Object.keys(FOODS).length+'</span></div>';
+  const gfs='<div class="skt">선물 서랍 · '+Object.keys(GIFTS).length+' / '+PAXU().length+'</div><div class="gfs">'+PAXU().map(p=>GIFTS[p.id]?'<i class="on" data-g="'+p.id+'" style="background-image:url(img/gf_'+p.id+'.webp'+IMGV+')" title="'+esc(p.g[0])+'">'+esc(p.g[0][0])+'</i>':'<i>?</i>').join('')+'</div>';
+  $('logStamps').innerHTML=stampsHtml()+shs+pss+skb+gfs+pcs+'<div class="stc"><span>모은 도장 '+Object.keys(STAMPS).length+' / '+MOM.length+'</span><span>받은 선물 '+Object.keys(GIFTS).length+' / '+PAXU().length+' · 먹은 음식 '+Object.keys(FOODS).length+'</span></div>';
   $('logList').innerHTML=html||'<li class="next"><b>21:00</b>부산역 출발</li>';const d=kd(ticket.dep);$('logSub').textContent=trainNo(ticket.dep)+'호 · '+ticket.car+'호차 '+ticket.seat+'번 · '+d.m+'월 '+d.d+'일 출발';show('mLog',true);blip(900,.08,.02);
   setTimeout(()=>{const n=document.querySelector('#logList .now'),ol=$('logList');if(n&&ol){ol.scrollTop+=n.getBoundingClientRect().top-ol.getBoundingClientRect().top-ol.clientHeight/2}},50)}
 $('hsBook').onclick=e=>{e.stopPropagation();openLog()};$('logClose').onclick=()=>show('mLog',false);$('logStamps').addEventListener('click',e=>{{const dv=e.target.closest('[data-dev]');if(dv){show('mLog',false);develop(+dv.dataset.dev);return}}if(e.target.closest('[data-pass]')){show('mLog',false);openPass();return}{const q2=e.target.closest('[data-sh]');if(q2){show('mLog',false);openShot(+q2.dataset.sh);return}}{const q=e.target.closest('[data-pc]');if(q){show('mLog',false);openPCard(q.dataset.pc);return}}const g=e.target.closest('[data-g]');if(!g)return;const p=PAX.find(x=>x.id===g.dataset.g);if(p){show('mLog',false);openGift(p)}});
@@ -2213,7 +2235,7 @@ $('cap').onclick=e=>{e.stopPropagation()};
 $('c3').onclick=e=>{e.stopPropagation();if(cur&&cur.mode==='wait')openVeil()};
 $('menu').onclick=e=>{if(e.target===$('menu'))show('menu',false)};
 document.querySelectorAll('#menu .it').forEach(b=>b.onclick=e=>{e.stopPropagation();show('menu',false);const a=b.dataset.a;
-  if(a==='gaze')gazeAsk();else if(a==='room')openRoom();else if(a==='card'){const v=viewNow()||{};openPostcard(curStation(),{at:vnow(),sk:v.sk,sf:v.sf})}else if(a==='note')openDrawer();else if(a==='ticket')openTicket();
+  if(a==='case')openCase();else if(a==='gaze')gazeAsk();else if(a==='room')openRoom();else if(a==='card'){const v=viewNow()||{};openPostcard(curStation(),{at:vnow(),sk:v.sk,sf:v.sf})}else if(a==='note')openDrawer();else if(a==='ticket')openTicket();
   else if(a==='board'){const {prev}=depTimes(vnow());boardTrain(prev)}else if(a==='route'){setRoute(R_ID==='n'?'s':'n');boardTrain(ticket?ticket.dep:depTimes(vnow()).next)}
   else if(a==='sleep')show('sleep',true)});
 // 창밖 보기: 폰 세로면 가로로 돌리기(가능하면 자동), 가로면 바로 전체
@@ -2313,6 +2335,7 @@ $('pxGift').onclick=e=>{e.stopPropagation();const p=paxCur;if(!p||GIFTS[p.id])re
   $('pxGift').textContent='받은 선물';$('pxGift').classList.add('done');blip(1320,.16,.04);renderPaxChip();show('mPax',false);setTimeout(()=>openGift(p),250)};
 function openGift(p){$('gfName').textContent=p.g[0];$('gfText').textContent=p.g[1];$('gfFact').innerHTML='<b>알고 보니</b>'+esc(GFACT[p.id]||'');const ph=$('gfPh');ph.style.backgroundImage='';ph.innerHTML='<b class="gfb">'+esc(p.g[0])+'</b>';ph.className='pxph ill gf';delete ph.dataset.cap;tryImg('gf_'+p.id,ph,()=>{},im=>{if(im.naturalWidth/im.naturalHeight>1.15){ph.className='fdph has';ph.innerHTML='';ph.style.backgroundImage='url('+im.src+')';ph.dataset.cap=p.n+'에게 받은 선물';return}ph.style.backgroundImage='';ph.innerHTML='<i class="art" style="background-image:url('+im.src+')"></i><em class="cap">'+esc(p.n)+'에게 받음</em>'});show('mGift',true)}
 $('gfClose').onclick=()=>show('mGift',false);$('mGift').onclick=e=>{if(e.target===$('mGift'))show('mGift',false)};
+$('cameo').onclick=catchCameo;document.addEventListener('click',e=>{if(e.target&&e.target.id==='logCase'){e.stopPropagation();show('mLog',false);setTimeout(openCase,200)}});
 $('seatImg').onclick=e=>{e.stopPropagation();if(paxCur)openPax()};
 $('pxClose').onclick=()=>show('mPax',false);$('mPax').onclick=e=>{if(e.target===$('mPax'))show('mPax',false)};
 // 식당칸
@@ -2464,9 +2487,10 @@ $('devClose').onclick=()=>show('mDev',false);$('mDev').onclick=e=>{if(e.target==
 const MQ={"p02": {"t": "갈매기의 부산 사투리 퀴즈", "hi": "“부산 말 쫌 아나? 맞혀 보이소. 끼룩.”", "q": [{"q": "“단디 해라”는 무슨 뜻일까요?", "o": ["빨리 해라", "야무지게 똑바로 해라", "그만 해라"], "a": 1, "ok": "“맞다! 단디 하이소.”"}, {"q": "“머라카노?”는 무슨 뜻일까요?", "o": ["뭐라고 하니?", "어디 가니?", "배고프니?"], "a": 0, "ok": "“하모! 잘 아네.”"}, {"q": "“고마 해라”는 무슨 뜻일까요?", "o": ["고맙다", "그만 해라", "더 해라"], "a": 1, "ok": "“고마 맞혔다, 고마!”"}], "end": "“니 부산 사람 다 됐다! 어묵 한 입 줄게. …진짜 한 입만.”"}, "p03": {"t": "해치의 거짓말 찾기", "hi": "“세 문장 중 하나는 거짓말이야. 뿔이 간질거리는 걸 골라.”", "q": [{"q": "어느 게 거짓말일까?", "o": ["해치는 옳고 그름을 가리는 동물이다", "해치는 2008년 서울의 상징이 됐다", "해치는 원래 바닷속에 산다"], "a": 2, "ok": "“맞아. 바다는 갈매기 담당이야.”"}, {"q": "어느 게 거짓말일까?", "o": ["경복궁 드므는 불귀신을 쫓으려 놓은 물그릇이다", "남산타워는 조선 시대에 지어졌다", "관악산은 불기운이 센 산이라는 말이 있다"], "a": 1, "ok": "“그렇지. 남산타워는 1970년대에 생겼어.”"}, {"q": "어느 게 거짓말일까?", "o": ["해치는 뿔이 하나다", "해치는 거짓말쟁이를 뿔로 받는다", "해치는 매일 밤 열 시간씩 잔다"], "a": 2, "ok": "“…열한 시간이야. (하품)”"}], "end": "“너 꽤 정직하구나. 뿔이 하나도 안 간지러워.”"}, "p04": {"t": "도깨비 옛이야기 퀴즈", "hi": "“우리 도깨비에 대해 얼마나 알아? 틀리면 금화 없어!”", "q": [{"q": "도깨비랑 씨름할 때 어느 쪽 다리를 걸어야 이길까?", "o": ["오른다리", "왼다리", "둘 다"], "a": 1, "ok": "“에이, 그건 비밀이었는데!”"}, {"q": "도깨비가 제일 좋아하는 음식은?", "o": ["메밀묵", "떡볶이", "붕어빵"], "a": 0, "ok": "“메밀묵 있으면 줘! 지금!”"}, {"q": "혹부리 영감 이야기에서 도깨비가 혹을 떼어 간 이유는?", "o": ["혹이 아파 보여서", "노래가 혹에서 나온다고 믿어서", "혹을 팔려고"], "a": 1, "ok": "“노래 잘하는 영감이었지. 히히.”"}], "end": "“금 나와라 뚝딱! …오늘은 금화 대신 박수.”"}, "p05": {"t": "우주비행사의 우주 퀴즈", "hi": "“관제탑, 승객과 교신 시작. 문제 나갑니다.”", "q": [{"q": "지구 궤도를 처음 돈 동물은?", "o": ["원숭이", "라이카(강아지)", "고양이"], "a": 1, "ok": "“멍! (라이카가 꼬리를 흔든다)”"}, {"q": "오로라는 무엇 때문에 생길까?", "o": ["달빛이 반사돼서", "태양에서 온 입자가 대기와 부딪혀서", "눈이 빛나서"], "a": 1, "ok": "“정답. 태양이 보내는 편지 같은 거야.”"}, {"q": "1908년 시베리아 퉁구스카에서 일어난 일은?", "o": ["큰 지진", "숲이 한순간에 쓰러진 폭발", "화산 폭발"], "a": 1, "ok": "“운석일까… 우주선일까. 아직도 수수께끼야.”"}], "end": "“교신 완료. 너 우주비행사 해도 되겠어.”"}, "p07": {"t": "백조 발레리나의 발레 퀴즈", "hi": "“발레 좀 알아? 틀리면 흑조 표정 지을 거야.”", "q": [{"q": "발끝으로 서서 추는 것을 무엇이라 할까요?", "o": ["앙 푸앵트", "데미 플리에", "그랑 주테"], "a": 0, "ok": "“그래, 토슈즈는 그래서 있는 거야.”"}, {"q": "흑조가 쉬지 않고 도는 회전은 몇 번일까요?", "o": ["8번", "16번", "32번"], "a": 2, "ok": "“한 번도 안 넘어지고. 흔들리는 기차에서도!”"}, {"q": "「백조의 호수」를 작곡한 사람은?", "o": ["쇼팽", "차이콥스키", "모차르트"], "a": 1, "ok": "“호두까기 인형도 그분이 만들었지.”"}], "end": "“브라보. 다음 공연, 맨 앞줄 자리 줄게.”"}, "p09": {"t": "진짜 할머니 맞히기", "hi": "“할머니한테 물어볼 말을 골라 줘. 늑대면… 어쩌지?”", "q": [{"q": "“할머니, 귀가 왜 그렇게 커요?” 진짜 할머니라면?", "o": ["네 말을 잘 들으려고", "배고파서", "그냥"], "a": 0, "ok": "“휴, 다행히 아직은 할머니 같아.”"}, {"q": "늑대를 알아보는 방법으로 제일 좋은 건?", "o": ["잠옷 색 보기", "꼬리가 있는지 보기", "목소리 크기 듣기"], "a": 1, "ok": "“(늑대) …저 꼬리 숨겨야겠네요.”"}, {"q": "빨간 모자 이야기를 책으로 모은 사람들은?", "o": ["그림 형제", "안데르센", "이솝"], "a": 0, "ok": "“그림 형제! 이 숲에서 이야기를 모았대.”"}], "end": "“(늑대) 저 진짜 착한 늑대예요… 믿어 주세요.”"}, "p13": {"t": "하얀 토끼의 시간 퀴즈", "hi": "“빨리빨리! 늦었어! 문제 세 개만!”", "q": [{"q": "런던은 서울보다 몇 시간 늦을까요? (겨울)", "o": ["3시간", "9시간", "12시간"], "a": 1, "ok": "“9시간이나! 그러니 늘 늦지!”"}, {"q": "앨리스가 토끼를 따라 들어간 곳은?", "o": ["토끼굴", "옷장", "거울"], "a": 0, "ok": "“거울은 다음 이야기야. 늦었어!”"}, {"q": "바다 밑 영불해협 터널의 길이는 대략?", "o": ["5km", "50km", "500km"], "a": 1, "ok": "“약 50km! 고래 구경하다 늦겠다!”"}], "end": "“늦었다 늦었어! 그래도 재밌었어!”"}, "p14": {"t": "근위병 웃기기 챌린지", "hi": "근위병은 근무 중엔 절대 웃지 않아요. 도전!", "q": [{"q": "어떤 농담을 해 볼까요?", "o": ["모자에 새 둥지 있어요", "바지 지퍼 열렸어요", "(아무 말 없이 같이 서 있기)"], "a": 2, "ok": "…근위병의 입꼬리가 아주 살짝 움직였다!"}, {"q": "한 번 더! 무엇을 해 볼까요?", "o": ["우스꽝스러운 표정 짓기", "모자 위 새에게 말 걸기", "근위병 흉내 내기"], "a": 1, "ok": "(새) 짹! …근위병이 숨을 참는다."}, {"q": "마지막 도전!", "o": ["큰 소리로 노래하기", "\"수고 많으세요\" 인사하기", "간지럼 태우기"], "a": 1, "ok": "…근위병이 아주 작게 고개를 끄덕였다."}], "end": "끝내 웃지는 않았다. 하지만 모자 위 새가 당신을 따라왔다."}};
 let mgP=null,mgI=0,mgOK=0,mgTm=[];
 function mgClear(){mgTm.forEach(clearTimeout);mgTm=[];$('mgA').onclick=null;$('mgA').innerHTML='';$('mgO').innerHTML='';$('mgQ').style.display='none';$('mgN').textContent=''}
+delete MQ.p04;
 function openMini(p){mgP=p;mgClear();$('mgT').textContent=PLAY[p.id];show('mPlay',true);blip(520,.08,.03);
   if(MQ[p.id]){mgI=0;mgOK=0;$('mgT').textContent=MQ[p.id].t;$('mgSay').textContent=MQ[p.id].hi;mqShow();return}
-  ({p06:mgDoll,p08:mgNut,p10:mgSimon,p11:mgSketch})[p.id]()}
+  ({p04:mgSsireum,p06:mgDoll,p08:mgNut,p10:mgSimon,p11:mgSketch})[p.id]()}
 function mgDone(txt){logAdd(mgP.n+'와 '+PLAY[mgP.id]+(txt?' · '+txt:''))}
 function mqShow(){const D=MQ[mgP.id],L=D.q;if(mgI>=L.length){$('mgQ').textContent=mgOK+' / '+L.length+' 맞힘';$('mgO').innerHTML='';$('mgN').textContent='';$('mgSay').textContent=D.end;mgDone(mgOK+'개 맞힘');return}
   const x=L[mgI];$('mgQ').style.display='';$('mgQ').textContent=x.q;$('mgN').textContent=(mgI+1)+' / '+L.length;$('mgO').innerHTML=x.o.map((t,i)=>'<button data-i="'+i+'">'+esc(t)+'</button>').join('')}
@@ -2641,8 +2665,8 @@ function runGauge(g){gaugeOn=g;const el=$('gauge');el.className='';$('gK').textC
     [19800,()=>{show('gauge',false);gaugeOn=null;logAdd(g.place+'에서 바퀴를 갈아 끼웠다 ('+g.from+' → '+g.to+'mm)');toast('바퀴 교체 끝',g.to+'mm 선로를 달려요',3200)}]];
   T.forEach(([t,f])=>setTimeout(f,t))}
 // ───────── 승객과 놀기: 표트르 할아버지 체스 · 탐정 수수께끼 ─────────
-const PLAY={"p01": "셜록의 수수께끼", "p02": "부산 사투리 퀴즈", "p03": "거짓말 찾기", "p04": "도깨비 옛이야기 퀴즈", "p05": "우주 퀴즈", "p06": "마트료시카 열어 보기", "p07": "발레 퀴즈", "p08": "호두 까기", "p09": "진짜 할머니 맞히기", "p10": "합주 따라 하기", "p11": "창밖 그림 그려 받기", "p12": "결투 · 체스 한 판", "p13": "토끼의 시간 퀴즈", "p14": "근위병 웃기기"};
-$('pxPlay').onclick=e=>{e.stopPropagation();const p=paxCur;if(!p)return;show('mPax',false);setTimeout(()=>p.id==='p12'?openChess():p.id==='p01'?openRiddle():openMini(p),200)};
+const PLAY={"p01": "사건 수첩 · 사라진 별 연기", "p02": "부산 사투리 퀴즈", "p03": "거짓말 찾기", "p04": "도깨비 씨름", "p05": "우주 퀴즈", "p06": "마트료시카 열어 보기", "p07": "발레 퀴즈", "p08": "호두 까기", "p09": "진짜 할머니 맞히기", "p10": "합주 따라 하기", "p11": "창밖 그림 그려 받기", "p12": "결투 · 체스 한 판", "p13": "토끼의 시간 퀴즈", "p14": "근위병 웃기기"};
+$('pxPlay').onclick=e=>{e.stopPropagation();const p=paxCur;if(!p)return;show('mPax',false);setTimeout(()=>p.id==='p12'?openChess():p.id==='p01'?openCase():openMini(p),200)};
 const VS='︎',PC={K:'♔',Q:'♕',R:'♖',B:'♗',N:'♘',P:'♙',k:'♚',q:'♛',r:'♜',b:'♝',n:'♞',p:'♟'};
 const CHP=[{"fen": "6k1/5ppp/8/8/8/8/5PPP/R5K1", "mv": ["a1", "a8"], "say": "(길쭉이) 결투다! 백이 한 수 만에 이기는 수가 있지. 왕이 갇힌 걸 보게.", "ok": "(길쭉이) 훌륭해! 뒷줄이 막힌 왕은 이렇게 무너지지."}, {"fen": "r1bqkb1r/pppp1ppp/2n2n2/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR", "mv": ["h5", "f7"], "say": "(뚱뚱이) 여왕과 비숍이 한 칸을 같이 노리고 있어. 크루아상 걸고 한 판!", "ok": "(뚱뚱이) 체크메이트! 크루아상은… 반만 줄게."}, {"fen": "6rk/6pp/8/q5N1/8/8/5PPP/6K1", "mv": ["g5", "f7"], "say": "(꼬마) 이번엔 기사야! 왕이 자기 편에 둘러싸여 숨 못 쉬게 해 봐!", "ok": "(꼬마) 숨 막히는 외통수! 하나는 모두를 위해!"}];
 let CHS=LS('bl-chess',{n:0}),chI=0,chSel=null,chDone=false;
@@ -2682,7 +2706,45 @@ let greetT=0,greetA=false,greetB=false;
 function greetTick(S){if(greetB||!ticket||S.mode==='wait')return;if(!greetT){greetT=performance.now();return}const dt=performance.now()-greetT;
   if(dt>6000&&!greetA){greetA=true;if(paxCur&&!anyOpen()){bubble(paxCur.n,paxCur.say[0]);$('pax').classList.add('dot')}}
   if(dt>16000){greetB=true;if(!anyOpen()){try{if(!localStorage.getItem('bl-camhint')){localStorage.setItem('bl-camhint','1');toast('창밖을 찍어 보세요','오른쪽 위 카메라 · 필름 24장',3600)}}catch(e){}}}}
-function eventsTick(S){if(ticket&&ticket.stay){try{platTick(S)}catch(e){}return}try{paxTick(S);momentTick(S);microTick(S);hopTick(S)}catch(e){}try{passTick(S)}catch(e){}try{lightsTick(S)}catch(e){}try{pcardTick(S)}catch(e){}try{camTick(S);greetTick(S)}catch(e){}try{gaugeTick(S)}catch(e){}try{resvTick(S)}catch(e){}try{platTick(S);byeTick(S)}catch(e){}}
+const CLUE=[{"id": "c1", "km": 13.0, "where": "부산", "t": "다리 위의 쪽지", "s": "부산역 승강장에 떨어진 쪽지 — \"다리에서 만나.\" 글씨가 아주 급하다."}, {"id": "c2", "km": 162.5, "where": "서울", "t": "해치의 증언", "s": "해치가 하품하며 말했다 — \"어젯밤 누가 반짝이는 걸 품에 안고 뛰어갔어. 엄청 서두르더라.\""}, {"id": "c3", "km": 406.25, "where": "구름 위", "t": "구름 위의 모자", "s": "구름 위에서 셜록의 모자를 찾았다. 안에 도깨비 금화 하나. …도깨비의 장난일까?"}, {"id": "c4", "km": 633.75, "where": "바이칼", "t": "별 모양 그을음", "s": "샤먼 바위 앞 눈 위에 작은 별 모양 그을음. 옆에 아주 작은 발자국이 깡충깡충."}, {"id": "c5", "km": 1901.25, "where": "오로라", "t": "하늘의 별 연기", "s": "퉁구스카 쪽 하늘에 별 모양 연기가 잠깐 떴다가 사라졌다. 우주비행사 왈, \"시계 초침처럼 똑딱이며 움직였어.\""}, {"id": "c5b", "km": 99999, "where": "오로라 구간 창밖", "t": "눈밭의 하얀 꼬리", "s": "오로라 아래 눈밭으로 하얀 토끼가 시계를 들고 허둥지둥 달려갔다. (창밖 깜짝 출연을 누르면 얻어요)"}, {"id": "c6", "km": 3071.25, "where": "모스크바", "t": "인형 속 메모", "s": "마트료시카의 제일 작은 인형 속 메모 — \"연기는 시간을 멈출 수 있다더라.\""}, {"id": "c7", "km": 4550.0, "where": "퓌센", "t": "호두 속 쪽지 뒷면", "s": "호두 속 쪽지 뒷면에 누군가 끄적인 글씨 — \"또 늦으면 여왕님께 혼난다.\""}, {"id": "c8", "km": 5200.0, "where": "파리", "t": "하얀 꼬리", "s": "삼총사가 봤다 — 해저터널 쪽으로 하얀 꼬리가 쏙 사라졌다고."}, {"id": "c9", "km": 5476.25, "where": "해저터널", "t": "시계 태엽", "s": "고래가 지나간 자리에 작은 회중시계 태엽 하나가 반짝이며 떠 있었다."}],SUSPECT=[["도깨비", "“히히, 금화는 내 거지만 연기는 아니야!” — 틀렸어요", false], ["잠옷 입은 늑대", "“(늑대) 저 진짜 아니에요…” — 틀렸어요", false], ["부산 갈매기", "“끼룩? 내는 어묵만 훔친다!” — 틀렸어요", false], ["하얀 토끼", "", true]],ENDING="셜록이 파이프를 내려놓았다. “범인은 하얀 토끼. 늘 늦는 그는, 별 연기로 시간을 멈추면 다시는 늦지 않을 거라 믿었지. 서두르다 남긴 깡충 발자국, 시계 초침처럼 움직인 연기, 해저의 태엽까지.” 토끼가 고개를 숙이며 회중시계를 열자, 별 연기가 피어올라 굴뚝으로 돌아갔다. “미안해요… 그래도 이번엔 늦지 않았죠?” 기차가 다시 별을 뿜으며 런던으로 달린다.",CAMEO=[{"id": "k1", "p": "p03", "n": "해치", "a": 65.0, "b": 149.5, "t": "창밖에 해치가!", "s": "서울까지 기차랑 나란히 달린다", "dim": 0.62, "m": "run"}, {"id": "k2", "p": "p04", "n": "도깨비", "a": 198.25, "b": 276.25, "t": "구름 위에 도깨비가!", "s": "구름을 타고 기차와 경주한다", "dim": 0.75, "m": "fly"}, {"id": "k3", "p": "p13", "n": "하얀 토끼", "a": 1511.25, "b": 2096.25, "t": "눈밭 위에 하얀 토끼가!", "s": "회중시계를 들고 허둥지둥 달려간다", "dim": 0.6, "m": "run", "clue": "c5b"}, {"id": "k4", "p": "p08", "n": "호두까기 인형", "a": 4309.5, "b": 4498.0, "t": "창밖에 호두까기 인형이!", "s": "크리스마스 시장으로 행진 중", "dim": 1, "m": "run"}, {"id": "k5", "p": "p10", "n": "브레멘 음악대", "a": 4689.75, "b": 4826.25, "t": "알프스 초원에 브레멘 음악대가!", "s": "초원에서 버스킹 중이다", "dim": 1, "m": "run"}, {"id": "k6", "p": "p12", "n": "삼총사", "a": 5083.0, "b": 5193.5, "t": "파리 지붕 위에 삼총사가!", "s": "지붕을 뛰어 기차를 쫓아온다", "dim": 0.65, "m": "run"}, {"id": "k7", "p": "p07", "n": "백조 발레리나", "a": 3185.0, "b": 4030.0, "t": "눈 숲 위로 백조가!", "s": "달빛 아래서 춤춘다", "dim": 0.6, "m": "fly"}];
+// ───────── 환상열차 이벤트: 셜록 미스터리 · 도깨비 씨름 · 창밖 깜짝 출연 ─────────
+// 1) 사라진 별 연기 — 역마다 단서, 런던 가까이서 범인 지목
+let CLUES=LS('bl-clues',{}),CASE=LS('bl-case',{});
+function clueTick(S){if(!ticket||S.mode==='wait')return;for(const c of CLUE){if(CLUES[c.id])continue;if(S.km>=c.km&&S.km<c.km+30){CLUES[c.id]=Date.now();LSset('bl-clues',CLUES);logAdd('단서: '+c.t);
+  if(!anyOpen()){offer('🔍 단서를 주웠어요 · '+Object.keys(CLUES).length+' / '+CLUE.length,c.t+' — '+c.s,'사건 수첩 보기','나중에',()=>openCase())}else toast('🔍 단서를 주웠어요',c.t,3600);try{knock()}catch(e){}return}}
+  if(paxCur&&paxCur.id==='p01'&&S.km>CLUE[CLUE.length-1].km&&Object.keys(CLUES).length>=5&&!CASE.solved&&!CASE.asked&&!anyOpen()){CASE.asked=Date.now();LSset('bl-case',CASE);bubble('셜록 홈즈','자네, 단서가 꽤 모였군. 범인을 지목해 볼 텐가? (사건 수첩)')}}
+function openCase(){const n=Object.keys(CLUES).length;let h='<div class="chh">사건 수첩 · 사라진 별 연기</div><div class="chs">“출발할 때 굴뚝의 별 연기가 사라졌어. 단서는 늘 창밖에 있지.” — 셜록</div><div class="cslist">';
+  for(const c of CLUE)h+='<div class="csi'+(CLUES[c.id]?' on':'')+'"><b>'+(CLUES[c.id]?esc(c.t):'???')+'</b><span>'+(CLUES[c.id]?esc(c.s):esc(c.where)+' 근처에서 찾을 수 있어요')+'</span></div>';
+  h+='</div>';if(CASE.solved)h+='<div class="cssolved">사건 해결 ★ 범인은 하얀 토끼였다</div>';
+  else if(n>=5)h+='<div class="chs" style="margin-top:12px">범인은 누구일까요?</div><div class="rdo" id="csO">'+SUSPECT.map((x,i)=>'<button data-i="'+i+'">'+esc(x[0])+'</button>').join('')+'</div>';
+  else h+='<div class="chn" style="margin-top:12px">단서 '+n+' / '+CLUE.length+' · 5개를 모으면 범인을 지목할 수 있어요</div>';
+  h+='<button class="closer" id="csClose">수첩 덮기</button>';$('csBox').innerHTML=h;show('mCase',true);blip(520,.08,.03);
+  $('csClose').onclick=()=>show('mCase',false);const o=$('csO');if(o)o.onclick=e=>{const b=e.target.closest('button[data-i]');if(!b)return;const x=SUSPECT[+b.dataset.i];
+    if(x[2]){CASE.solved=Date.now();LSset('bl-case',CASE);logAdd('사라진 별 연기 사건 해결 — 범인은 하얀 토끼');GIFTS['star']=Date.now();LSset('bl-gifts',GIFTS);
+      $('csBox').innerHTML='<div class="chh">사건 해결!</div><div class="csend">'+esc(ENDING)+'</div><div class="cssolved">★ 별 연기 조각을 받았어요</div><button class="closer" id="csClose">수첩 덮기</button>';$('csClose').onclick=()=>show('mCase',false);blip(1500,.2,.04);setTimeout(()=>blip(1880,.3,.04),200)}
+    else{b.disabled=true;b.textContent=x[1];blip(220,.12,.05)}}}
+// 2) 도깨비 씨름 — 왼다리를 걸어라
+function mgSsireum(){let round=0,win=0,run=true,pos=0,dir=1,zone=0,t0=performance.now(),spd=1;$('mgSay').textContent='“씨름 한판! 내 왼다리가 약하다는 소문은 거짓말이야… 아마도. 히히.”';
+  const draw=()=>{zone=.08+Math.random()*.22;$('mgA').innerHTML='<div class="ssr"><img src="img/pf_p04.webp'+IMGV+'" class="ssd" id="ssD"><div class="ssbar"><i class="sz" style="left:'+(zone*100)+'%;width:14%"></i><i class="sm" id="ssM"></i></div><div class="sslab"><span>← 왼다리</span><span>오른다리 →</span></div></div>';
+    $('mgO').innerHTML='<button id="ssGo">걸기!</button>';$('ssGo').onclick=hit;$('mgN').textContent=(round+1)+' / 3판 · '+win+'승'};
+  const tick=()=>{if(!run||!$('ssM')||!$('mPlay').classList.contains('on'))return;const now=performance.now(),dt=(now-t0)/1000;t0=now;pos+=dir*dt*(.55+.25*round)*spd;if(pos>1){pos=1;dir=-1}if(pos<0){pos=0;dir=1}$('ssM').style.left=(pos*100)+'%';requestAnimationFrame(tick)};
+  const hit=()=>{if(!run)return;const ok=pos>=zone-.02&&pos<=zone+.16;round++;if(ok)win++;const d=$('ssD');d.classList.remove('fall','push');void d.offsetWidth;d.classList.add(ok?'fall':'push');blip(ok?980:240,.12,.05);
+    $('mgSay').textContent=ok?['“으악! 왼다리는 반칙이야!”','“또 왼다리?! 누가 알려 줬어?”','“…졌다. 도깨비 체면이 말이 아니네.”'][win-1]||'“으악!”':['“히히, 거긴 오른다리지롱!”','“간지러워! 다시!”','“도깨비 힘 봤지?”'][round-win-1]||'“히히!”';
+    if(round>=3){run=false;$('mgO').innerHTML='';$('mgN').textContent=win+'승 '+(3-win)+'패';setTimeout(()=>{$('mgSay').textContent=win>=2?'“졌다 졌어! 약속대로 — 금 나와라 뚝딱!” 방망이에서 금화가 굴러 나왔다.':'“내가 이겼다! 메밀묵 사 오면 한 판 더 해 줄게. 히히.”';if(win>=2){GIFTS['p04']=GIFTS['p04']||Date.now();LSset('bl-gifts',GIFTS)}mgDone(win+'승')},900);return}
+    setTimeout(()=>{if($('mPlay').classList.contains('on')){draw();requestAnimationFrame(tick)}},900)};
+  draw();requestAnimationFrame(tick)}
+// 3) 창밖 깜짝 출연 — 다음 승객이 먼저 창밖에 나타난다
+let CAMEOS=LS('bl-cameo',{}),cameoOn=null;
+function cameoTick(S){if(!ticket||S.mode!=='run'||cameoOn||anyOpen()||$('app').classList.contains('gaze'))return;ticket.cm=ticket.cm||{};
+  for(const c of CAMEO){if(ticket.cm[c.id])continue;if(S.km>=c.a&&S.km<c.b){ticket.cm[c.id]=1;saveTicket();showCameo(c);return}}}
+function showCameo(c){const el=$('cameo');cameoOn=c;el.className='';el.innerHTML='<img src="img/pf_'+c.p+'.webp'+IMGV+'" alt="">';el.style.setProperty('--cb',c.dim||1);el.classList.add(c.m||'fly');el.dataset.id=c.id;
+  blip(1320,.08,.025);setTimeout(()=>blip(1560,.08,.02),140);clearTimeout(showCameo.t);showCameo.t=setTimeout(()=>{el.className='';cameoOn=null},c.d||16000)}
+function catchCameo(e){e&&e.stopPropagation();const c=cameoOn;if(!c)return;const el=$('cameo');el.classList.add('got');const fresh=!CAMEOS[c.id];CAMEOS[c.id]=Date.now();LSset('bl-cameo',CAMEOS);
+  logAdd('창밖에서 '+c.n+JO(c.n,'을','를')+' 봤다');toast('✦ '+c.t,c.s+' · 창밖에서 만난 순간 '+Object.keys(CAMEOS).length+' / '+CAMEO.length,4200);blip(1500,.18,.04);setTimeout(()=>blip(1880,.25,.03),160);
+  if(c.clue&&!CLUES[c.clue]){CLUES[c.clue]=Date.now();LSset('bl-clues',CLUES);setTimeout(()=>toast('🔍 단서를 주웠어요','하얀 꼬리가 눈밭 위를 달려갔다',3600),2200)}
+  setTimeout(()=>{el.className='';cameoOn=null},1100)}
+
+function eventsTick(S){try{clueTick(S);cameoTick(S)}catch(e){}if(ticket&&ticket.stay){try{platTick(S)}catch(e){}return}try{paxTick(S);momentTick(S);microTick(S);hopTick(S)}catch(e){}try{passTick(S)}catch(e){}try{lightsTick(S)}catch(e){}try{pcardTick(S)}catch(e){}try{camTick(S);greetTick(S)}catch(e){}try{gaugeTick(S)}catch(e){}try{resvTick(S)}catch(e){}try{platTick(S);byeTick(S)}catch(e){}}
 
 // ───────── 작은 사건들: 들어와 있는 동안 1~2분마다 무언가 일어남 ─────────
 const FACTS=[[0, 162.5, ["피란 시절 사람들은 \"헤어지면 영도다리에서 만나자\"고 약속했다.", "영도에는 질투 많은 산신 할매가 살아서, 이사 온 사람이 오래 못 버틴다는 이야기가 있다.", "이 밤기차가 서울에 닿을 무렵, 첫 지하철은 아직 차고에서 잠들어 있다."]], [162.5, 633.75, ["경복궁 마당의 큰 물그릇 \"드므\"는 불귀신이 비친 제 얼굴에 놀라 도망가라고 놓았다고 한다.", "도깨비는 메밀묵을 좋아하고, 씨름할 땐 왼다리가 약하다는 옛이야기가 있다.", "도깨비불은 사람을 홀려 같은 자리를 빙빙 돌게 만든다는 옛말이 있다."]], [633.75, 1332.5, ["바이칼엔 강이 300개 넘게 흘러들지만, 나가는 강은 앙가라 하나뿐이다.", "바이칼물범 \"네르파\"는 바다에서 수천 km 떨어진 호수에 사는 민물 물범이다.", "바이칼은 세계에서 가장 깊은 호수다. 약 1,642m."]], [1332.5, 3071.25, ["1908년 퉁구스카에선 서울 세 배가 넘는 넓이의 숲이 한순간에 쓰러졌다.", "라이카는 1957년 지구 궤도를 돈 첫 번째 동물이다.", "한겨울 시베리아의 밤은 열여섯 시간이 넘는다."]], [3071.25, 4550.0, ["모스크바 지하엔 지도에 없는 비밀 지하철 \"메트로-2\"가 있다는 소문이 있다.", "마트료시카는 1890년대 모스크바 근교 공방에서 처음 만들어졌다.", "차이콥스키는 백조의 호수와 호두까기 인형을 모두 작곡했다."]], [4550.0, 4956.25, ["노이슈반슈타인을 지은 루트비히 2세는 1886년 호수에서 수수께끼처럼 세상을 떠났다.", "하멜른엔 1284년 피리 부는 사나이가 아이 130명을 데려갔다는 기록이 남아 있다.", "하이디는 1880년 스위스 작가 요한나 슈피리가 쓴 소설이다."]], [4956.25, 5200.0, ["루체른 필라투스 산엔 용이 떨어뜨린 \"용의 돌\"이 병을 고쳤다는 전설이 있다.", "카펠 다리는 유럽에서 가장 오래된 지붕 덮인 나무다리로 꼽힌다.", "파리 오페라 극장 지하엔 진짜 물탱크 호수가 있다. 「오페라의 유령」의 무대."]], [5200.0, 5964.75, ["1925년 사기꾼 빅토르 뤼스티그는 에펠탑을 고철로 팔아 치우고, 한 번 더 팔려고 했다.", "런던탑의 까마귀가 모두 떠나면 왕국이 무너진다는 전설 때문에 지금도 까마귀를 키운다.", "베이커가 221B로는 지금도 셜록 앞으로 편지가 온다."]]];

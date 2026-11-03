@@ -955,7 +955,7 @@ const WREADY=['ru1','ngt_forest','ngt_town','st_vlad','ru2','ru3','ru4','st_khab
     for(const arr of [BI_N,BI_S]){let n=0;for(const e of arr){if(e[2]===base){e[2]=V[base][n%V[base].length];n++}}}}}catch(e){}})();
 
 const CITY={busan:1,seoul:1,kr01:1,kr07:1,kr08:1,kr14:1,kr16:1,kr17:1};
-const PV='?p=4';
+const PV='?p=5';
 function loadPhoto(key){if(key==='plat'){loadPhoto('platd');loadPhoto('platn');return}if(PHOTO[key])return;const o=SCN[key]||{};PHOTO[key]={loading:true};
   const mk=(im,low,t0)=>({t0:t0||performance.now(),tile:im,w:im.naturalWidth,h:im.naturalHeight,ready:true,low,spd:o.spd||.2,img:im,pass:!!o.pass,key});
   const th=new Image();th.onload=()=>{const p=PHOTO[key];if(p&&p.loading)PHOTO[key]=mk(th,true)};th.src='img/t/'+key+'.webp'+PV;

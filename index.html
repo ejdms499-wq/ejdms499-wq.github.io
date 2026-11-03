@@ -683,6 +683,7 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
 #app.onplat #cart{z-index:40;bottom:auto;top:14%}#plat.late .plt b{color:#ff8f70}
 .wkwrap{width:min(340px,100%);text-align:center;color:#efe6d6;animation:rise .5s ease}.wkwrap .fdph{margin-top:8px}
 @media (min-width:900px) and (min-aspect-ratio:5/4) and (min-height:560px){.plp{zoom:1.25}}
+#resv{display:none;margin:10px auto 0;font:12px 'Noto Sans KR',sans-serif;padding:7px 14px;border-radius:999px;background:rgba(233,194,125,.18);border:1px solid rgba(233,194,125,.55);width:max-content;max-width:92%;cursor:pointer;pointer-events:auto}#resv.on{display:block}#resv b{font-weight:500;font-variant-numeric:tabular-nums}
 </style>
 </head>
 <body>
@@ -744,7 +745,7 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
   <div id="plat"><div id="plBg"></div><div class="plp"><div class="plk" id="plK"></div><div class="ple" id="plE"></div><div class="plt" id="plT"></div><div class="plb" id="plB"></div></div></div>
   <div id="cart"><div id="cartT"></div><div id="cartD"></div><div class="cb"><button id="cartNo">괜찮아요</button><button id="cartBuy">하나 사기</button></div></div>
   <div id="roomSheet"><div class="sheet"></div></div>
-  <div id="cap"><div id="room"></div><div class="c1" id="c1">부산발 런던행</div><div class="c2" id="c2"></div><div id="hop"></div><div id="getoff">플랫폼에 내리기</div><div class="c3" id="c3"></div></div>
+  <div id="cap"><div id="room"></div><div class="c1" id="c1">부산발 런던행</div><div class="c2" id="c2"></div><div id="hop"></div><div id="getoff">플랫폼에 내리기</div><div id="resv"></div><div class="c3" id="c3"></div></div>
   <button id="menuBtn" aria-label="메뉴"><svg viewBox="0 0 24 24"><path d="M5 8h14M5 12h14M5 16h9"/></svg></button>
   <button id="cam" aria-label="사진 찍기"><svg viewBox="0 0 24 24" fill="none" stroke="#f3ead8" stroke-width="1.6"><rect x="3" y="7" width="18" height="12" rx="2"/><path d="M8.5 7l1.5-2.5h4L15.5 7"/><circle cx="12" cy="13" r="3.4"/></svg><em id="camN"></em></button>
   <button id="sndBtn" aria-label="소리"><svg viewBox="0 0 24 24" id="icoSnd2"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M16 9l5 6M21 9l-5 6"/></svg></button>
@@ -840,6 +841,7 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
   <div class="modal" id="mRiddle"><div class="rdwrap"><div class="chh">탐정의 수수께끼</div><div class="chs" id="rdSay"></div><div class="rdq" id="rdQ"></div><div class="rdo" id="rdO"></div><div class="chn" id="rdN" style="margin-top:12px"></div><button class="closer" id="rdClose">자리로 돌아가기</button></div></div>
   <div class="modal" id="mWalk"><div class="wkwrap"><div class="pxwho" id="wkT"></div><div class="fdph has" id="wkPh"></div><div class="fdname" id="wkName"></div><div class="fdtext" id="wkTxt"></div><div class="pcbtns" style="margin-top:14px"><button class="ghost" id="wkBack">역으로 돌아가기</button><button id="wkNext">조금 더 걷기</button></div></div></div>
   <div class="modal" id="mBye"><div class="paxwrap"><div class="pxph" id="byPh"></div><div class="pxname" id="byName"></div><div class="pxwho" id="byWho"></div><div class="pxsay" id="bySay"></div><div class="pcbtns"><button id="byWave">손 흔들기</button></div><button class="closer" id="byClose">자리로 돌아가기</button></div></div>
+  <div class="modal" id="mWait"><div class="wkwrap"><div class="fdname" id="waT"></div><div class="fdtext" id="waS"></div><div class="pcbtns" style="flex-direction:column;margin-top:18px"><button id="waPre">지금 달리는 열차에 먼저 타 보기</button><button class="ghost" id="waStay">부산역에서 기다릴게요</button></div></div></div>
   <div class="modal" id="mShot"><div class="foodwrap"><div class="fdph has" id="shPh"></div><div class="fdname" id="shName"></div><div class="fdtext" id="shTxt"></div><button class="closer" id="shClose">닫기</button></div></div>
   <div class="modal" id="mGift"><div class="foodwrap"><div class="pxph ill gf" id="gfPh"></div><div class="fdname" id="gfName"></div><div class="fdtext" id="gfText"></div><div class="gffact" id="gfFact"></div><button class="closer" id="gfClose">수첩에 넣기</button></div></div>
   <div class="modal" id="mFood"><div class="foodwrap"><div class="fdph" id="fdPh"></div><div class="fdname" id="fdName"></div><div class="fdtext" id="fdText"></div><div class="fdno" id="fdNo"></div><button class="closer" id="fdClose">잘 먹었습니다</button></div></div>
@@ -2150,7 +2152,7 @@ function renderVeil(){const now=vnow(),{next,prev}=depTimes(now);let h='';
   $('vList').innerHTML=h;const k=kd(now);$('vNow').textContent='서울 '+pd(k.h)+':'+pd(k.mi);
   const mine=ticketValid()&&!ticket.auto?ticket.dep:0,vm=$('vMine');vm.classList.toggle('on',!!mine);if(mine){vm.innerHTML=trRow(mine,now,true).replace('<small>','<small>내 자리로 돌아가기 · ');vm.dataset.dep=mine}
   $('veil').querySelectorAll('.tr').forEach(b=>b.onclick=e=>{e.stopPropagation();pickTrain(+b.dataset.dep)})}
-function pickTrain(dep){if(!isFinite(dep))return;const v=$('veil');setSound(true);if(!ticketValid()||ticket.dep!==dep)boardTrain(dep);else{ticket.auto=0;saveTicket()}v.classList.add('off');clearInterval(renderVeil.t);setTimeout(()=>{v.style.display='none'},1500)}
+function pickTrain(dep){if(!isFinite(dep))return;const v=$('veil');setSound(true);if(!ticketValid()||ticket.dep!==dep){boardTrain(dep);try{waitAsk(dep)}catch(e){}}else{ticket.auto=0;saveTicket()}v.classList.add('off');clearInterval(renderVeil.t);setTimeout(()=>{v.style.display='none'},1500)}
 function openVeil(){try{platClose(true)}catch(e){}const v=$('veil');v.style.display='';renderVeil();v.scrollTop=0;requestAnimationFrame(()=>v.classList.remove('off'));clearInterval(renderVeil.t);renderVeil.t=setInterval(renderVeil,20000)}
 function initVeil(){const v=$('veil');if(location.hash.startsWith('#pc-')){v.classList.add('off');v.style.display='none';return}renderVeil();renderVeil.t=setInterval(renderVeil,20000)}
 // 메뉴
@@ -2619,6 +2621,20 @@ function byeOpen(p){byeP=p;$('byName').textContent=p.n;$('byWho').textContent=ST
   show('mBye',true);blip(520,.1,.03)}
 $('byWave').onclick=()=>{const p=byeP;if(!p)return;$('bySay').textContent='“'+BYE[p.id][1]+'”';$('byWave').style.display='none';try{knock()}catch(e){}logAdd(p.n+'을(를) 배웅했다 — “'+BYE[p.id][0]+'”')};
 $('byClose').onclick=()=>show('mBye',false);$('mBye').onclick=e=>{if(e.target===$('mBye'))show('mBye',false)};
+
+// ───────── 오늘 밤 열차 예약 + 기다리는 동안 달리는 열차에 먼저 타 보기 ─────────
+function waitAsk(dep){const eta=dep-vnow();if(eta<40*60e3)return;
+  $('waT').textContent='출발까지 '+fmt(eta)+' 남았어요';$('waS').textContent='오늘 밤 9시 부산역 열차를 예약해 둘게요. 그동안 지금 대륙을 달리고 있는 열차에 먼저 타 볼 수 있어요. 출발 30분 전에 부산역으로 불러 드려요.';
+  $('waPre').onclick=()=>{const h=bestHop(),r=dep,to=h?h.dep:depTimes(vnow()).prev;show('mWait',false);boardTrain(to,true);ticket.reserve=r;ticket.auto=0;saveTicket();
+    toast(trainNo(to)+'호에 먼저 탔어요','부산역 '+trainNo(r)+'호 예약 · 출발 30분 전에 알려 드려요',3600);logAdd('부산역 9시 열차를 예약하고 먼저 '+trainNo(to)+'호에 탔다')};
+  $('waStay').onclick=()=>show('mWait',false);setTimeout(()=>show('mWait',true),1700)}
+let resvT=0;
+function resvTick(S){const el=$('resv');if(!ticket||!ticket.reserve){el.classList.remove('on');return}const left=ticket.reserve-vnow(),now=performance.now();
+  if(left<5*60e3){const r=ticket.reserve;boardTrain(r,true);ticket.auto=0;saveTicket();el.classList.remove('on');toast('부산역으로 돌아왔어요','곧 '+trainNo(r)+'호가 출발해요',4000);try{knock()}catch(e){};return}
+  if(now-resvT>1000){resvT=now;el.classList.add('on');el.innerHTML='부산역 9시 열차 예약 · <b>'+fmt(left)+'</b> 남음 — 지금 돌아가기'}
+  if(left<30*60e3&&!ticket.resvAsk&&!anyOpen()){ticket.resvAsk=1;saveTicket();toast('곧 부산역 열차가 출발해요','아래 버튼을 누르면 부산역으로 돌아가요 · 5분 전엔 자동으로',5000);try{knock();setTimeout(knock,600)}catch(e){}}}
+$('resv').onclick=e=>{e.stopPropagation();if(!ticket||!ticket.reserve)return;const r=ticket.reserve;boardTrain(r,true);ticket.auto=0;saveTicket();toast('부산역으로 돌아왔어요','출발까지 '+fmt(r-vnow()),3000)};
+$('mWait').onclick=e=>{if(e.target===$('mWait'))show('mWait',false)};
 // ───────── 국경 바퀴 교체 (실제: 러시아·벨라루스 선로 1,520mm, 그 밖은 1,435mm) ─────────
 const GAUGE=[{id:'g1',km:1290,stop:1,k:'TUMANGANG',place:'두만강역',from:'1,435',to:'1,520',note:'러시아 선로는 8.5cm 더 넓어요. 객차를 통째로 들어 올려 바퀴 뭉치(대차)를 바꿔 끼워요.'},
   {id:'g2',km:11834,k:'BREST',place:'브레스트 국경',from:'1,520',to:'1,435',note:'다시 유럽 선로로. 실제로도 승객을 태운 채 2시간쯤 걸려요.'}];
@@ -2679,7 +2695,7 @@ let greetT=0,greetA=false,greetB=false;
 function greetTick(S){if(greetB||!ticket||S.mode==='wait')return;if(!greetT){greetT=performance.now();return}const dt=performance.now()-greetT;
   if(dt>6000&&!greetA){greetA=true;if(paxCur&&!anyOpen()){bubble(paxCur.n,paxCur.say[0]);$('pax').classList.add('dot')}}
   if(dt>16000){greetB=true;if(!anyOpen()){try{if(!localStorage.getItem('bl-camhint')){localStorage.setItem('bl-camhint','1');toast('창밖을 찍어 보세요','오른쪽 위 카메라 · 필름 24장',3600)}}catch(e){}}}}
-function eventsTick(S){if(ticket&&ticket.stay){try{platTick(S)}catch(e){}return}try{paxTick(S);momentTick(S);microTick(S);hopTick(S)}catch(e){}try{passTick(S)}catch(e){}try{lightsTick(S)}catch(e){}try{pcardTick(S)}catch(e){}try{camTick(S);greetTick(S)}catch(e){}try{gaugeTick(S)}catch(e){}try{platTick(S);byeTick(S)}catch(e){}}
+function eventsTick(S){if(ticket&&ticket.stay){try{platTick(S)}catch(e){}return}try{paxTick(S);momentTick(S);microTick(S);hopTick(S)}catch(e){}try{passTick(S)}catch(e){}try{lightsTick(S)}catch(e){}try{pcardTick(S)}catch(e){}try{camTick(S);greetTick(S)}catch(e){}try{gaugeTick(S)}catch(e){}try{resvTick(S)}catch(e){}try{platTick(S);byeTick(S)}catch(e){}}
 
 // ───────── 작은 사건들: 들어와 있는 동안 1~2분마다 무언가 일어남 ─────────
 const FACTS=[

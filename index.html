@@ -708,6 +708,9 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
 #getoff.soon{background:rgba(20,15,10,.5);color:#f3ead8;border:1px solid rgba(233,194,125,.55);box-shadow:none;cursor:default;font-weight:400;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 #veil .tr .can{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:999px;background:#e9c27d;color:#221c16;font:500 10px 'Noto Sans KR',sans-serif;letter-spacing:.02em;vertical-align:2px}
 #mPax .pxmenu #pxGift.done{border:0;font-size:14px;background:none}
+#veil .vtabs{display:flex;gap:6px;margin:0 0 18px}#veil .vtabs button{flex:1;padding:10px 8px;border-radius:999px;border:1px solid rgba(239,230,214,.25);color:rgba(239,230,214,.75);font:13px 'Noto Sans KR',sans-serif;background:transparent}
+#veil .vtabs button.on{background:#efe6d6;color:#221c16;border-color:#efe6d6}
+#veil .tr.spot .pl small b{color:#e9c27d;font-weight:400}#veil .spoth{font:10.5px 'Noto Sans KR',sans-serif;letter-spacing:.2em;opacity:.45;margin:18px 2px 4px}
 </style>
 </head>
 <body>
@@ -791,8 +794,9 @@ body.mopen #cap,body.mopen #sill,body.mopen #riders{opacity:0!important;transiti
     <div class="v5">매일 밤 9시 부산역을 떠나<br>아흐레 동안 실제 시간으로 달리는 침대열차</div>
     <div class="v6"><span style="white-space:nowrap">부산 ·</span> <span style="white-space:nowrap">서울 ·</span> <span style="white-space:nowrap">원산 ·</span> <span style="white-space:nowrap">두만강 ·</span> <span style="white-space:nowrap">하바롭스크 ·</span> <span style="white-space:nowrap">바이칼 ·</span> <span style="white-space:nowrap">모스크바 ·</span> <span style="white-space:nowrap">바르샤바 ·</span> <span style="white-space:nowrap">베를린 ·</span> <span style="white-space:nowrap">파리 ·</span> <span style="white-space:nowrap">런던</span></div></div>
     <div class="vR"><button id="vMine" class="tr mine"></button>
-    <div class="vl"><span>지금 달리고 있는 열차</span><i id="vNow"></i></div>
-    <div id="vList"></div>
+    <div class="vtabs"><button class="on" data-t="list">지금 달리는 열차</button><button data-t="spot">명소 골라 타기</button></div>
+    <div class="vl"><span id="vLbl">지금 달리고 있는 열차</span><i id="vNow"></i></div>
+    <div id="vList"></div><div id="vSpots" style="display:none"></div>
     <div class="v4">고르면 소리와 함께 탑승합니다 · 본 열차는 아직 존재하지 않습니다</div></div>
   </div></div>
   <div id="toast"><div class="t1" id="t1"></div><div class="t2" id="t2"></div></div>
@@ -2283,7 +2287,7 @@ const PAX=[
   say:['호두까기 인형은 우리 마을에서 처음 만들어졌다오.','이 병정 인형은 입으로 진짜 호두를 깨요. 한번 해 봐요.','곧 크리스마스 시장이 열려요. 독일의 겨울은 그때부터지.'],g:['작은 호두까기 병정','빨간 제복에 큰 이빨, 손가락만 한 나무 인형']},
  {a:12610,b:13660,id:'p11',n:'몽마르트르 화가',w:'줄무늬 셔츠에 베레모 · 파리 언덕 위에서 초상화를 그리는 화가',
   say:['가만히 있어 봐요. 창가에 앉은 당신, 지금 그림이 돼요.','몽마르트르 언덕엔 백 년 넘게 화가들이 앉아 그림을 그렸어요.','파리는 걷는 도시예요. 바게트 하나 들고 하루 종일 걸어요.'],g:['당신의 크로키 한 장','창가에 앉은 모습을 몇 분 만에 그려 주었다']},
- {a:13660,b:14121,id:'p12',n:'베이커가의 탐정',w:'사냥모자에 파이프 · 런던 베이커가로 돌아가는 사립 탐정',
+ {a:13660,b:14121,id:'p12',n:'셜록 홈즈',w:'사냥모자에 파이프 · 런던 베이커가 221B로 돌아가는 명탐정',
   say:['부산에서 오셨군요. 아, 놀라지 말아요. 가방 손잡이에 바다 소금기가 하얗게 남았어요.','곧 바다 밑으로 들어갑니다. 50킬로미터 동안 바다 아래를 달리죠.','기초적인 거예요. 창밖만 잘 보면 다 보입니다.'],g:['돋보기 하나','"런던에선 이게 필요할 거요"라며 건넨 작은 돋보기']},
 ];
 const MENU=[
@@ -2659,6 +2663,21 @@ function resvTick(S){const el=$('resv');if(!ticket||!ticket.reserve){el.classLis
   if(left<30*60e3&&!ticket.resvAsk&&!anyOpen()){ticket.resvAsk=1;saveTicket();toast('곧 부산역 열차가 출발해요','아래 버튼을 누르면 부산역으로 돌아가요 · 5분 전엔 자동으로',5000);try{knock();setTimeout(knock,600)}catch(e){}}}
 $('resv').onclick=e=>{e.stopPropagation();if(!ticket||!ticket.reserve)return;const r=ticket.reserve;boardTrain(r,true);ticket.auto=0;saveTicket();toast('부산역으로 돌아왔어요','출발까지 '+fmt(r-vnow()),3000)};
 $('mWait').onclick=e=>{if(e.target===$('mWait'))show('mWait',false)};
+
+// ───────── 명소 골라 타기: 보고 싶은 명소를 고르면 그곳에 가장 먼저 닿는 열차에 태워 줌 ─────────
+const SPOTX={hz01:1,hz02:1,hz05:1,hz12:1,hz13:1,hz22:1,hz23:1,hz25:1,hz26:1,hz27:1,hz29:1};
+function spotList(){const now=vnow(),{prev,next}=depTimes(now),L=[],seen=new Set();
+  const add=(km,name,big)=>{if(seen.has(name))return;seen.add(name);let best=null;
+    for(let d=-1;d<12;d++){const dep=d<0?next:prev-d*864e5,el=now-dep;if(el>TRIP)continue;const eta=elAtKm(km)-el;if(eta>60e3&&(!best||eta<best.eta))best={dep,eta}}
+    if(best)L.push({km,name,big,...best})};
+  for(const e of BI){const k=e[2];if(/^hz/.test(k)&&PNAME[k])add((e[0]+e[1])/2,PNAME[k][0],!!SPOTX[k])}
+  for(const m of MOM)add(m.km,m.t,true);
+  return L.sort((a,b)=>a.km-b.km)}
+function renderSpots(){const L=spotList(),C=[['한국·북한',0,1290],['러시아',1290,11240],['벨라루스·폴란드',11240,12300],['독일·프랑스·영국',12300,99999]];
+  $('vSpots').innerHTML=C.map(([g,a,b])=>{const R=L.filter(x=>x.km>=a&&x.km<b);if(!R.length)return'';return '<div class="spoth">'+g+'</div>'+R.map(x=>'<button class="tr spot" data-dep="'+x.dep+'"><span class="no"><b>'+trainNo(x.dep)+'</b>'+(x.dep>vnow()?'오늘 밤':'달리는 중')+'</span><span class="pl">'+(x.big?'★ ':'')+esc(x.name)+'<small>부산에서 '+Math.round(x.km).toLocaleString()+'km · <b>'+fmt(x.eta)+' 뒤</b> 지나가요</small></span></button>').join('')}).join('');
+  $('vSpots').querySelectorAll('.tr').forEach(b=>b.onclick=e=>{e.stopPropagation();pickTrain(+b.dataset.dep)})}
+document.querySelector('#veil .vtabs').onclick=e=>{const b=e.target.closest('[data-t]');if(!b)return;e.stopPropagation();const sp=b.dataset.t==='spot';
+  document.querySelectorAll('#veil .vtabs button').forEach(x=>x.classList.toggle('on',x===b));$('vList').style.display=sp?'none':'';$('vSpots').style.display=sp?'':'none';$('vLbl').textContent=sp?'고르면 그곳을 가장 먼저 지나는 열차에 태워 드려요':'지금 달리고 있는 열차';if(sp)renderSpots()};
 // ───────── 국경 바퀴 교체 (실제: 러시아·벨라루스 선로 1,520mm, 그 밖은 1,435mm) ─────────
 const GAUGE=[{id:'g1',km:1290,stop:1,k:'TUMANGANG',place:'두만강역',from:'1,435',to:'1,520',note:'러시아 선로는 8.5cm 더 넓어요. 객차를 통째로 들어 올려 바퀴 뭉치(대차)를 바꿔 끼워요.'},
   {id:'g2',km:11834,k:'BREST',place:'브레스트 국경',from:'1,520',to:'1,435',note:'다시 유럽 선로로. 실제로도 승객을 태운 채 2시간쯤 걸려요.'}];

@@ -95,7 +95,7 @@ body.seat #pax{display:block}
 @keyframes breathe{50%{transform:translateY(1.2%) scaleY(.992)}}
 #paxT{position:fixed;z-index:3;display:none;white-space:nowrap;padding:7px 12px;font:700 14px "Apple SD Gothic Neo",sans-serif;cursor:pointer;border-radius:14px;animation:bob2 2.4s ease-in-out infinite}
 @keyframes bob2{50%{transform:translateY(-4px)}}
-#paxT::after{content:"";position:absolute;right:-11px;top:50%;margin-top:-7px;border:7px solid transparent;border-left:10px solid #3a2a1c}
+#paxT::after{content:"";position:absolute;left:50%;bottom:-12px;margin-left:-7px;border:7px solid transparent;border-top:10px solid #3a2a1c}
 body.seat #paxT.on{display:block}
 body.talk #paxT{display:none!important}
 @keyframes bob{50%{transform:rotate(-4deg) translateY(-4px)}}
@@ -276,10 +276,14 @@ body.talk #albB{opacity:0;pointer-events:none}
 #cmB b{display:block;font-size:12px;opacity:.7;margin-bottom:2px}
 #cmB i{display:block;font-style:normal;font-size:11px;color:#b8432f;font-weight:800;margin-top:5px}
 #cmB::after{content:"";position:absolute;left:24px;bottom:-12px;border:7px solid transparent;border-top:10px solid #3a2a1c}
+
+#sMid,#sPole{position:fixed;left:0;right:0;pointer-events:none;display:none;background-repeat:repeat-x}
+body.seat #sMid,body.seat #sPole{display:block}
+#sPole{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='400'%3E%3Crect x='440' y='0' width='18' height='400' fill='%23161a1c'/%3E%3Crect x='400' y='26' width='98' height='9' fill='%23161a1c'/%3E%3Crect x='412' y='54' width='74' height='7' fill='%23161a1c'/%3E%3Cpath d='M0 40 Q 225 95 449 30 Q 675 95 900 40' stroke='%23161a1c' stroke-width='2' fill='none'/%3E%3C/svg%3E");filter:blur(1.4px);opacity:.92}
 </style></head><body>
 <div id="tag"><b>부산</b><span id="tagS">그림 겹 무대 · 시험판</span><i id="tagI"></i></div>
 <div id="dev"><span>출발 후</span><input id="devR" type="range" min="0" max="91.9" step="0.1"><span id="devV"></span></div>
-<div class="vw" id="vwA"></div><div class="vw" id="vwB"></div><div id="cmo"></div><div id="glass"></div><div id="cab"></div><div id="pax"></div><div id="paxT" class="paper"></div><div id="vig"></div><div id="fade"></div>
+<div class="vw" id="vwA"></div><div class="vw" id="vwB"></div><div id="sMid"></div><div id="sPole"></div><div id="cmo"></div><div id="glass"></div><div id="cab"></div><div id="pax"></div><div id="paxT" class="paper"></div><div id="vig"></div><div id="fade"></div>
 <div id="first"><div class="paper" id="fC"></div></div>
 <div id="wait"><div id="wBoard"></div><div id="wBtns"></div></div>
 <div id="depT" class="paper"></div><div id="ann"><div class="in"><div class="bell">♪</div><div id="annT"></div></div></div><div id="stk"></div><div id="cmB" class="paper"></div>
@@ -537,8 +541,7 @@ function soundTick(){if(!AC||!sndOn)return;while(nextClack<AC.currentTime+.5){co
 setInterval(soundTick,200);
 
 /* ================= 배경음악 (bgm/*.mp3 가 있으면 구간별로 재생, 없으면 조용히 건너뜀) ================= */
-const BGM_OF={dawn:'night',yenisei:'snow',nightvil:'snow',steppe:'snow',berlin:'russia',busan:'night',gyeongbu:'night',seoul:'night',cloud:'night',snow:'snow',baikal:'snow',aurora:'snow',taiga:'snow',
-  moscow:'russia',plain:'russia',forest:'forest',castle:'forest',alps:'forest',paris:'paris',sea:'sea',england:'london',london:'london'};
+const BGM_OF={busan:'night',gyeongbu:'night',seoul:'night',cloud:'starlit',dawn:'starlit',snow:'snow',baikal:'lake',yenisei:'lake',aurora:'snow',nightvil:'village',steppe:'snow',taiga:'snow',moscow:'russia',plain:'village',berlin:'village',forest:'forest',castle:'forest',alps:'forest',paris:'paris',sea:'lake',england:'london',london:'london'};
 const BG={el:[new Audio(),new Audio()],cur:0,key:null,ok:{},vol:.55,force:null};
 BG.el.forEach(a=>{a.loop=true;a.preload='none';a.volume=0});
 function bgmWant(){if(BG.force)return BG.force;const w=where(dep,vnow());return w.mode==='run'?BGM_OF[w.seg.id]:'london'}
@@ -682,7 +685,7 @@ function paxLayout(){if(!paxImg)return;const W=innerWidth,H=innerHeight,mob=W/H<
   Object.assign(paxBox.style,{left:(C.x*s+ox-fw/2)+'px',top:top+'px',width:fw+'px',height:(C.h*.64*s)+'px'});
   paxImg.style.height=fh+'px';paxImg.style.top='0px';
   const tw=paxT.offsetWidth||120,figL=C.x*s+ox-fw/2;
-  Object.assign(paxT.style,{left:Math.max(8,Math.min(W-tw-8,figL-tw+fw*.12))+'px',top:(top+fh*.1)+'px'})}
+  const th=paxT.offsetHeight||32;Object.assign(paxT.style,{left:Math.max(8,Math.min(W-tw-8,figL+fw/2-tw/2))+'px',top:Math.max(64,top-th-10)+'px'})}
 addEventListener('resize',paxLayout);
 function paxSet(id){if(id===paxId)return;paxId=id;const c=CAST[id];
   const old=paxImg;if(old){old.classList.add('out');setTimeout(()=>old.remove(),1300)}
@@ -1108,8 +1111,8 @@ const cmo=$('cmo'),cmB=$('cmB');let cmCur=null,cmNext=performance.now()+(Q.has('
 function cmBusy(){return dlg.classList.contains('on')||cg.classList.contains('on')||ck.classList.contains('on')||waitEl.classList.contains('on')||firstEl.classList.contains('on')||alb.classList.contains('on')||card.classList.contains('on')}
 function cmBand(){if(MODE==='seat'){const h=vwLayout.h||innerHeight*.5,y=vwLayout.y||innerHeight*.15;return {foot:y+h*.86,size:h*(innerWidth<innerHeight?.32:.42),top:y+h*.12}}
   const v=new THREE.Vector3(camX,3.55,0).project(cam);const roof=(-v.y*.5+.5)*innerHeight;return {foot:roof+innerHeight*.012,size:innerHeight*.17,top:innerHeight*.12}}
-function cmLaunch(id){const c=CM[id];const im=new Image();im.src='img/cm/'+id+'.webp';im.alt=c.n;
-  im.onload=()=>{cmo.appendChild(im);cmCur={id,im,t0:performance.now(),ar:im.naturalWidth/im.naturalHeight,dur:(c.k==='walk'?17000/(c.sp||1):c.k==='fly'?11000:21000),ph:Math.random()*6}};
+function cmLaunch(id){const c=CM[id];const im=new Image();const WZ=-30,half=vh(dist-WZ)*cam.aspect/2;im.src='img/cm/'+id+'.webp';im.alt=c.n;
+  im.onload=()=>{cmo.appendChild(im);cmCur={id,im,wx0:camX+half+4,tr0:travel,wz:WZ,t0:performance.now(),ar:im.naturalWidth/im.naturalHeight,dur:(c.k==='walk'?17000/(c.sp||1):c.k==='fly'?11000:21000),ph:Math.random()*6}};
   im.onclick=e=>{e.stopPropagation();cmSay(id,im)}}
 function cmSay(id,im){const c=CM[id],seen=LS.get('bl_cameo',{}),isNew=!seen[id];seen[id]=1;LS.set('bl_cameo',seen);
   cmB.innerHTML='<b>'+c.n+'</b>'+c.t+(isNew?'<i>깜짝 손님 발견! '+Object.keys(seen).length+' / '+Object.keys(CM).length+' · 추억 앨범에 기록됐어요</i>':'');
@@ -1118,8 +1121,17 @@ function cmSay(id,im){const c=CM[id],seen=LS.get('bl_cameo',{}),isNew=!seen[id];
   if(cmCur)cmCur.held=performance.now();clearTimeout(cmSay.t);cmSay.t=setTimeout(()=>{cmB.classList.remove('on');if(cmCur&&cmCur.held){cmCur.t0+=performance.now()-cmCur.held;cmCur.held=0}},4200);try{blipUp()}catch(e){}}
 function cmFrame(now){
   if(cmCur){const c=CM[cmCur.id],b=cmBand(),H=b.size*c.s,Wd=H*cmCur.ar;let k=((cmCur.held||now)-cmCur.t0)/cmCur.dur;
-    if(k>=1){cmCur.im.remove();cmCur=null;cmB.classList.remove('on')}
-    else{const x=innerWidth+40-(innerWidth+Wd+80)*k;let y=b.foot-H,rot=0;const t=now/1000;
+    if(MODE!=='seat'&&cmCur.wx0!==undefined){const t=now/1000,held=cmCur.held?1:0;if(!held)cmCur.trU=travel;const tr=(cmCur.trU??travel)-cmCur.tr0;
+      const own=c.k==='walk'?(now-cmCur.t0)/1000*1.1*(c.sp||1):0;const wx=cmCur.wx0-tr*.62-own;
+      const Hw=2.3*c.s;let wy=3.0;if(c.k==='fly')wy=6.2+Math.sin(t*1.6+cmCur.ph)*.6;if(c.k==='drop')wy=5.5+Math.sin(Math.min(1,(now-cmCur.t0)/9000)*Math.PI)*-2.2;
+      if(c.k==='walk')wy+=Math.abs(Math.sin(t*7+cmCur.ph))*.08;
+      const a=new THREE.Vector3(wx,wy,cmCur.wz).project(cam),b=new THREE.Vector3(wx,wy+Hw,cmCur.wz).project(cam);
+      const fy=(-a.y*.5+.5)*innerHeight,ty=(-b.y*.5+.5)*innerHeight,H=fy-ty,W2=H*cmCur.ar,sx=(a.x*.5+.5)*innerWidth;
+      const rot=c.k==='walk'?Math.sin(t*7+cmCur.ph)*2:c.k==='swing'?Math.sin(t*1.8)*9:c.k==='fly'?Math.sin(t*1.6)*6:0;
+      const im=cmCur.im;im.style.height=H+'px';im.style.width=W2+'px';im.style.transform=`translate(${sx-W2/2}px,${ty}px) rotate(${rot}deg)`;
+      if(sx<-W2||now-cmCur.t0>60000){cmCur.im.remove();cmCur=null;cmB.classList.remove('on')}}
+    else if(k>=1){cmCur.im.remove();cmCur=null;cmB.classList.remove('on')}
+    else if(MODE==='seat'){const x=innerWidth+40-(innerWidth+Wd+80)*k;let y=b.foot-H,rot=0;const t=now/1000;
       if(c.k==='walk')y-=Math.abs(Math.sin(t*7+cmCur.ph))*H*.035,rot=Math.sin(t*7+cmCur.ph)*2;
       if(c.k==='fly')y=b.top+Math.sin(t*1.6+cmCur.ph)*H*.18,rot=Math.sin(t*1.6)*6;
       if(c.k==='drop')y=b.top-H*.4+Math.sin(k*Math.PI)*H*.55;
@@ -1150,7 +1162,13 @@ function vwLayout(){const a=innerWidth/innerHeight,h=innerHeight*(a<1?.42:.66),c
 addEventListener('resize',vwLayout);
 function vwNext(){const w=where(dep,vnow());const id=w.mode==='run'?w.seg.id:'busan';const L=VIEWS[id]||VIEWS.busan;
   if(id!==vwSeg){vwSeg=id;vwIdx=0}else vwIdx=(vwIdx+1)%L.length;vwShow(L[vwIdx])}
-function vwTick(dt,t){if(MODE!=='seat')return;if(!vwSeg){vwNext();return}
+function vwTick(dt,t){if(MODE!=='seat')return;
+  {const w=where(dep,vnow()),mk=w.mode==='run'?MIDS[w.seg.id]:null,sm=document.getElementById('sMid'),sp=document.getElementById('sPole');
+   const H=vwLayout.h||innerHeight*.5,Y=vwLayout.y||innerHeight*.15;
+   if(mk){const mh=H*.36;if(sm.dataset.k!==mk[0]){sm.dataset.k=mk[0];sm.style.backgroundImage='url(img/m/'+mk[0]+'.webp)'}sm.style.display='';sm.style.top=(Y+H*.98-mh)+'px';sm.style.height=mh+'px';sm.style.backgroundSize='auto '+mh+'px';
+     vwTick.mx=(vwTick.mx||0)+dt*95;sm.style.backgroundPositionX=(-vwTick.mx)+'px';sm.style.filter='brightness('+(.8*mk[1])+') saturate(.85)'}else sm.style.display='none';
+   sp.style.top=(Y-H*.05)+'px';sp.style.height=(H*1.1)+'px';sp.style.backgroundSize='auto '+(H*1.1)+'px';vwTick.px=(vwTick.px||0)+dt*1250;sp.style.backgroundPositionX=(-vwTick.px)+'px';
+   sp.style.display=(w.mode==='run'&&(w.seg.id==='cloud'||w.seg.id==='dawn'||w.seg.id==='sea'))?'none':''}if(!vwSeg){vwNext();return}
   const winW=innerWidth*(innerWidth<innerHeight?.7:.62),span=Math.max(0,vwLayout.w-winW);
   vwX+=dt*18;                                              // 1초에 18px씩 흘러감
   const x0=(innerWidth-winW)/2,x=x0-Math.min(vwX,span),y=vwLayout.y+Math.sin(t*2.1)*1.5;

@@ -432,6 +432,7 @@ body.talk #nextB,body.amb #nextB,body.intro #nextB{opacity:0!important;pointer-e
 #carP .mn{display:grid;grid-template-columns:34px 1fr;text-align:left;align-items:center;column-gap:8px}#carP .mn span{grid-row:span 2;font-size:26px;text-align:center}#carP .mn b{font-size:14px}#carP .mn small{font-size:11.5px;opacity:.7;font-weight:500}
 body.talk #carP,body.amb #carP{opacity:0!important;pointer-events:none!important}
 @media (max-width:520px){#carP{bottom:calc(150px + env(safe-area-inset-bottom))}}
+#cg .item img.dish{width:min(220px,60vw);aspect-ratio:1;object-fit:cover;border-radius:50%;border:3px solid #3a2a1c;box-shadow:3px 3px 0 #3a2a1c;display:block;margin:0 auto 6px}
 </style></head><body>
 <div id="tag"><b>부산</b><span id="tagS">그림 겹 무대 · 시험판</span><i id="tagI"></i></div>
 <div id="dev"><span>출발 후</span><input id="devR" type="range" min="0" max="91.9" step="0.1"><span id="devV"></span></div>
@@ -2102,6 +2103,10 @@ function focusCar(c){focus=c;tgtX=train.position.x+c.position.x;clampX();const a
 const _tapV4=tap;tap=function(e){const f0=focus;_tapV4(e);if(MODE==='out'&&focus&&focus!==f0)carOpen(focus);else if(MODE==='out'&&focus&&focus===f0)carOpen(focus)};
 const _backV4=back.onclick;back.onclick=()=>{carP.classList.remove('on');_backV4()};
 setInterval(()=>{if(carP.classList.contains('on')&&(MODE!=='out'||!focus||cg.classList.contains('on')))carP.classList.remove('on')},500);
+/* 식당칸 그림(창은 투명) · 역 대표 음식 그림: 있으면 쓰고 없으면 이모지 */
+const IMGOK={};function probe(k){const im=new Image();im.onload=()=>IMGOK[k]=1;im.src='img/'+k+'.webp'}
+probe('v/dine_in');CH.forEach(c=>probe('food/'+c.id));
+function dineBg(){const v=curView();gBg.style.backgroundImage=IMGOK['v/dine_in']?'url(img/v/dine_in.webp),'+v:v;gBg.classList.remove('kb');void gBg.offsetWidth;gBg.classList.add('kb')}
 /* 식당칸 메뉴 → 같이 먹을 승객 고르기 → 식사 장면 */
 function menuOpen(){const i=TRIP?TRIP.ch:0,M=MENU[CH[i].id];
   carP.innerHTML=`<div class="ch"><div><b>식당칸 · ${CH[i].name} 메뉴</b><small>지금 지나는 곳의 음식이에요</small></div></div>`+M.map((d,k)=>`<button class="pbtn2 l mn" data-d="${k}"><span>${d[0]}</span><b>${d[1]}</b><small>${d[2]}</small></button>`).join('')+'<button class="pbtn2 l" data-x="1">닫기</button>';
@@ -2110,11 +2115,11 @@ function menuOpen(){const i=TRIP?TRIP.ch:0,M=MENU[CH[i].id];
 function pickMate(d){const ids=Object.keys(HOME).filter(id=>boarded(id));
   carP.innerHTML=`<div class="ch"><div><b>${d[0]} ${d[1]}</b><small>누구랑 같이 먹을까요?</small></div></div><div class="cp">`+ids.map(id=>`<button class="pbtn2 l" data-p="${id}">${CAST[id].n}</button>`).join('')+'<button class="pbtn2 l" data-p="">혼자 먹기</button></div>';
   carP.querySelectorAll('[data-p]').forEach(x=>x.onclick=e=>{e.stopPropagation();carP.classList.remove('on');eat(d,x.dataset.p)})}
-function eat(d,id){const sh=[{bg:W_,ch:null,ch2:null,who:'',narr:1,say:'(식당칸 창가 자리. 창밖으로 '+CH[TRIP?TRIP.ch:0].name+'의 풍경이 흐른다.)'},
-   {fn:()=>{gBox.classList.remove('on');gIt.innerHTML='<div class="ic">'+d[0]+'</div><b>'+d[1]+'</b><p>'+d[2]+'</p><p style="margin-top:8px;font-size:11px;opacity:.6">눌러서 먹기</p>';gIt.classList.add('on');cg.classList.add('itm')}}];
-  if(id){const L2=EAT[id]||['맛있어요.'];sh.push(L(id,null,1,CAST[id].n,L2[Math.floor(Math.random()*L2.length)],{pose:'in',emo:'♪'}));
+function eat(d,id){const cid=CH[TRIP?TRIP.ch:0].id,isRep=MENU[cid][0][1]===d[1]&&IMGOK['food/'+cid];const sh=[{fn:()=>{dineBg();gShow({who:'',narr:1,say:'(식당칸 창가 자리. 창밖으로 '+CH[TRIP?TRIP.ch:0].name+'의 풍경이 흐른다.)'})}},
+   {fn:()=>{gBox.classList.remove('on');gIt.innerHTML=(isRep?'<img class="dish" src="img/food/'+cid+'.webp" alt="">':'<div class="ic">'+d[0]+'</div>')+'<b>'+d[1]+'</b><p>'+d[2]+'</p><p style="margin-top:8px;font-size:11px;opacity:.6">눌러서 먹기</p>';gIt.classList.add('on');cg.classList.add('itm')}}];
+  if(id){const L2=EAT[id]||['맛있어요.'];sh.push(L(id,null,1,CAST[id].n,L2[Math.floor(Math.random()*L2.length)],{pose:'in',emo:'♪',bg:undefined}));
     const key=id+':'+(TRIP?TRIP.ch:0)+':'+d[1],ate=LS.get('bl_ate',{});if(!ate[key]){ate[key]=1;LS.set('bl_ate',ate);sh.push({fn:()=>{addAff(id,1);gNext()}})}}
-  else sh.push({bg:W_,ch:null,ch2:null,who:'',narr:1,say:'(혼자 먹는 밥도 나쁘지 않다. 덜컹거리는 소리가 반찬이 된다.)'});
+  else sh.push({ch:null,ch2:null,who:'',narr:1,say:'(혼자 먹는 밥도 나쁘지 않다. 덜컹거리는 소리가 반찬이 된다.)'});
   playScene(sh,()=>{})}
 /* ---------- 창가 자리: 아래 버튼을 승객 반대편(왼쪽)으로 ---------- */
 function btnRow(){const L=['ambB','albB','postB','trk','snd'].map(i=>document.getElementById(i)).filter(Boolean);const seat=MODE==='seat',mob=innerWidth<=520;

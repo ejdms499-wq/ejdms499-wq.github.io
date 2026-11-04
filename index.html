@@ -230,10 +230,34 @@ body.talk #albB{opacity:0;pointer-events:none}
 .kc .ic{font-size:30px}
 .kc.lock{opacity:.45}
 .signs{margin:0;padding-left:18px;font:15px/1.7 "Gaegu","Apple SD Gothic Neo",sans-serif}
+
+/* ===== 출발 대기 · 첫 선택 ===== */
+#wait{position:fixed;inset:0;z-index:18;display:none;background:linear-gradient(rgba(6,16,22,.15),rgba(6,16,22,.6)),url(img/v/platform.webp) 30% center/cover;align-items:center;justify-content:center;flex-direction:column;padding:16px;gap:12px}
+#wait.on{display:flex;animation:ckBg .8s}
+#wBoard{width:min(440px,100%);background:#141a1c;color:#f3c76a;border:3px solid #3a2a1c;border-radius:6px;box-shadow:4px 4px 0 #000;padding:14px 16px;font-family:"Apple SD Gothic Neo",sans-serif;text-align:center}
+#wBoard small{display:block;color:#e7dcc2;font-size:12px;letter-spacing:1px;opacity:.8}
+#wBoard b{display:block;font-size:22px;margin:4px 0 2px;color:#fff3d6}
+#wBoard .cd{font:700 44px/1.1 "SF Mono",ui-monospace,Menlo,monospace;letter-spacing:2px;color:#f3c76a;text-shadow:0 0 12px rgba(243,199,106,.45);margin:8px 0 4px}
+#wBoard .st{font-size:13px;color:#e7dcc2}
+#wBtns{display:flex;flex-direction:column;gap:8px;width:min(440px,100%)}
+#first{position:fixed;inset:0;z-index:19;display:none;background:linear-gradient(rgba(6,16,22,.2),rgba(6,16,22,.65)),url(img/v/platform.webp) center/cover;align-items:center;justify-content:center;padding:16px}
+#first.on{display:flex;animation:ckBg .8s}
+#first .paper{width:min(440px,100%);padding:18px;animation:ckIn .5s cubic-bezier(.2,1.4,.4,1)}
+#first h3{margin:0 0 4px;font-size:18px}
+#first .sub{font-size:13px;opacity:.8;margin-bottom:12px;line-height:1.5}
+.fopt{display:block;width:100%;text-align:left;margin-top:8px;padding:12px 14px;border:2px solid #3a2a1c;border-radius:4px;background:#fffaf0;cursor:pointer;font-family:inherit;color:#3a2a1c;box-shadow:2px 2px 0 #3a2a1c}
+.fopt b{display:block;font-size:15px}.fopt span{font-size:12.5px;opacity:.8;line-height:1.45;display:block;margin-top:2px}
+.fopt.rec{background:#3a2a1c;color:#f3e6c4}
+#depT{position:fixed;left:50%;top:30%;transform:translate(-50%,-50%);z-index:36;padding:16px 26px;text-align:center;display:none;font-family:"Apple SD Gothic Neo",sans-serif}
+#depT.on{display:block;animation:lvt 4s forwards}
+#depT b{display:block;font-size:22px}#depT span{font-size:13px;opacity:.8}
 </style></head><body>
 <div id="tag"><b>부산</b><span id="tagS">그림 겹 무대 · 시험판</span><i id="tagI"></i></div>
 <div id="dev"><span>출발 후</span><input id="devR" type="range" min="0" max="91.9" step="0.1"><span id="devV"></span></div>
 <div class="vw" id="vwA"></div><div class="vw" id="vwB"></div><div id="glass"></div><div id="cab"></div><div id="pax"></div><div id="paxT" class="paper"></div><div id="vig"></div><div id="fade"></div>
+<div id="first"><div class="paper" id="fC"></div></div>
+<div id="wait"><div id="wBoard"></div><div id="wBtns"></div></div>
+<div id="depT" class="paper"></div>
 <div id="ck"><div id="ckC" class="paper"></div></div>
 <button id="trk" class="paper">내 트렁크</button><div id="trkP" class="paper"></div>
 <div id="dlg" class="paper"><div id="dlgN"></div><div id="dlgT"></div><div id="dlgC"></div><div id="dlgM">▼</div></div>
@@ -510,7 +534,9 @@ const LS={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}
 const pd2=n=>String(n).padStart(2,'0');
 function trainNo(d){const k=new Date(d+9*HR);return pd2(k.getUTCMonth()+1)+pd2(k.getUTCDate())}
 let TRUNK=LS.get('bl_trunk',null);
-if(TRUNK&&TRUNK.dep!==dep&&!Q.has('h')){const w=where(TRUNK.dep,vnow());if(w.mode==='run')dep=TRUNK.dep;else if(w.mode==='end'){}}
+const RESV=LS.get('bl_resv',0);
+if(!Q.has('h')){const tdep=TRUNK&&!TRUNK.done?TRUNK.dep:0,cand=Math.max(tdep||0,RESV||0);
+  if(cand&&cand!==dep){const w=where(cand,vnow());if(w.mode==='run'||w.mode==='wait')dep=cand}}
 function myTrunk(){return TRUNK&&TRUNK.dep===dep?TRUNK:null}
 
 /* ---- 수하물 접수 ---- */
@@ -529,11 +555,11 @@ function ckSubmit(){const t=$('ckT').value.trim();if(!t){$('ckT').focus();$('ckT
    <div class="trunk open" id="tr"><div class="note">${esc(t)}</div><div class="lid"><div class="hd"></div></div><div class="lk"></div><div class="bx"></div>
    <div class="tag">BSN → LDN<br>제 ${trainNo(dep)}호<br>#${no}</div></div>
    <div id="ckR" style="opacity:0;transition:opacity .6s"><div class="tkt"><b>열차</b><span>부산발 런던행 제 ${trainNo(dep)}호</span><b>짐</b><span>근심 한 개 · 수하물칸 보관</span><b>찾는 곳</b><span>런던역 · 나흘 뒤</span></div>
-   <div class="porter" style="margin-top:12px"><i></i><p>잘 받았어요. 지나는 도시마다 스티커를 붙여 둘게요. 이제 편히 쉬세요.</p></div>
-   <div class="ckRow"><button class="pbtn2" id="ckSeat">내 창가 자리로 →</button><button class="pbtn2 l" id="ckOut">열차 구경하기</button></div></div>`;
+   <div class="porter" style="margin-top:12px"><i></i><p>${where(dep,vnow()).mode==='wait'?'잘 받았어요. 출발하면 지나는 도시마다 스티커를 붙여 둘게요.':'잘 받았어요. 지나는 도시마다 스티커를 붙여 둘게요. 이제 편히 쉬세요.'}</p></div>
+   <div class="ckRow">${where(dep,vnow()).mode==='wait'?'<button class="pbtn2" id="ckSeat">플랫폼에서 출발 기다리기</button>':'<button class="pbtn2" id="ckSeat">내 창가 자리로 →</button><button class="pbtn2 l" id="ckOut">열차 구경하기</button>'}</div></div>`;
   const tr=$('tr');setTimeout(()=>tr.classList.add('in'),400);setTimeout(()=>tr.classList.remove('open'),1250);setTimeout(()=>tr.classList.add('tagged'),1700);
   setTimeout(()=>{$('ckR').style.opacity=1},2200);
-  $('ckSeat').onclick=()=>{ck.classList.remove('on');trkShow();if(MODE!=='seat')goSeat()};$('ckOut').onclick=()=>{ck.classList.remove('on');trkShow()}}
+  $('ckSeat').onclick=()=>{ck.classList.remove('on');trkShow();if(where(dep,vnow()).mode==='wait'){renderWait.b=0;renderWait();return}if(MODE!=='seat')goSeat()};const _co=$('ckOut');if(_co)_co.onclick=()=>{ck.classList.remove('on');trkShow()}}
 function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 
 /* ---- 내 트렁크 · 도시 스티커 ---- */
@@ -541,6 +567,7 @@ const trk=$('trk'),trkP=$('trkP');
 const STC=['#c8553d','#2f7f86','#d39b2a','#5a6fb0','#8a5a9e','#3d8a5a','#b8432f','#2b5f8f'];
 function trunkArrived(){if(!TRUNK||TRUNK.done)return false;const w=where(TRUNK.dep,vnow());return w.mode==='end'||(w.mode==='run'&&w.h>=91.4)}
 function trkShow(){trk.style.display='block';
+  if(TRUNK&&!TRUNK.done&&TRUNK.dep>vnow()&&dep!==TRUNK.dep){trk.classList.add('ev');trk.textContent='내 열차 '+cdown(TRUNK.dep-vnow(),1)+' 뒤 출발';trk.onclick=e=>{e.stopPropagation();backToPlatform()};return}
   if(TRUNK&&!TRUNK.done&&trunkArrived()){trk.textContent='런던 도착 · 트렁크 찾기';trk.classList.add('ev');trk.onclick=e=>{e.stopPropagation();ending()};return}
   trk.classList.remove('ev');
   if(myTrunk()){trk.textContent='내 트렁크';trk.onclick=trkToggle}else{trk.textContent='근심 맡기기';trk.onclick=e=>{e.stopPropagation();ckOpen()}}}
@@ -557,7 +584,7 @@ function trkRender(){const T=myTrunk();if(!T)return;const w=where(dep,vnow());co
 function trkToggle(e){e.stopPropagation();const on=!trkP.classList.contains('on');trkP.classList.toggle('on',on);if(on)trkRender()}
 document.addEventListener('pointerdown',e=>{if(trkP.classList.contains('on')&&!trkP.contains(e.target)&&e.target!==trk)trkP.classList.remove('on')});
 trkShow();
-setTimeout(()=>{if(!myTrunk()&&!(TRUNK&&!TRUNK.done&&trunkArrived())&&LS.get('bl_skip',0)!==dep&&!Q.has('seat'))ckOpen()},1600);
+setTimeout(()=>{try{firstFlow()}catch(e){console.log(e)}},1400);
 
 /* ---- 맞은편 승객 ---- */
 const P='img/px/';
@@ -970,6 +997,42 @@ function albumOpen(t){albTab=t;alb.classList.add('on');alb.querySelectorAll('.al
   if(t==='keep'){const k=LS.get('bl_keep',{}),sg=LS.get('bl_sign',{});
     box.innerHTML='<p class="cnt">기념품 '+Object.keys(k).length+' / '+MAINS.length+'</p><div class="grid kp">'+MAINS.map(id=>k[id]?`<div class="cell kc"><div class="ic">${KEEP[id][0]}</div><em>${KEEP[id][1]}</em><small>${KEEP[id][2]}</small></div>`:`<div class="cell kc lock"><div class="ic">?</div><em>???</em><small>${CAST[id].n}의 꼬리표 이야기</small></div>`).join('')+'</div>'+
       '<p class="cnt" style="margin-top:14px">꼬리표 뒷면의 한마디 '+Object.keys(sg).length+'</p>'+(Object.keys(sg).length?'<ul class="signs">'+Object.values(sg).map(v=>`<li>「${v}」</li>`).join('')+'</ul>':'<p class="cnt" style="opacity:.6">단짝이 되면 꼬리표에 한마디를 적어 줘요</p>')}}
+
+/* ================= 첫 방문 선택 · 출발 대기 ================= */
+const firstEl=$('first'),waitEl=$('wait');
+function nextDeparture(){return lastDeparture(vnow())+24*HR}
+function cdown(ms,short){ms=Math.max(0,ms);const h=Math.floor(ms/HR),m=Math.floor(ms%HR/6e4),s=Math.floor(ms%6e4/1e3);return short?(h?h+'시간 '+m+'분':m+'분'):pd2(h)+':'+pd2(m)+':'+pd2(s)}
+function depLabel(d){const a=new Date(vnow()+9*HR),b=new Date(d+9*HR);return (a.getUTCDate()===b.getUTCDate()?'오늘':'내일')+' 밤 9시'}
+function firstFlow(){if(Q.has('seat'))return;
+  if(TRUNK&&!TRUNK.done&&trunkArrived())return;
+  const w=where(dep,vnow());
+  if(w.mode==='wait'){showWait();if(!myTrunk()&&LS.get('bl_skip',0)!==dep)setTimeout(ckOpen,900);return}
+  if(myTrunk()||LS.get('bl_skip',0)===dep)return;
+  if(w.mode==='run'&&w.h<1.5){ckOpen();return}
+  showFirst()}
+function showFirst(){const nd=nextDeparture(),w=where(dep,vnow());
+  $('fC').innerHTML=`<h3>부산발 런던행</h3><div class="sub">이 열차는 매일 밤 9시 부산역을 떠나 나흘 동안 실제 시간으로 런던까지 달려요.<br>지금 어젯밤 열차는 <b>${w.mode==='run'?w.seg.name:'런던'}</b> 부근을 지나고 있어요.</div>
+   <button class="fopt rec" id="fA"><b>${depLabel(nd)} 열차 예약하기</b><span>부산역에서 근심을 맡기고 처음부터 함께 떠나요 · 출발까지 ${cdown(nd-vnow(),1)}</span></button>
+   <button class="fopt" id="fB"><b>지금 달리는 열차에 올라타기</b><span>${w.mode==='run'?w.day+'일째 '+w.seg.name+' 구간':''}에서 바로 타요</span></button>`;
+  firstEl.classList.add('on');
+  $('fA').onclick=()=>{const nd2=nextDeparture();LS.set('bl_resv',nd2);dep=nd2;curSeg=null;firstEl.classList.remove('on');showWait();setTimeout(ckOpen,500)};
+  $('fB').onclick=()=>{firstEl.classList.remove('on');ckOpen()}}
+let waitT=null;
+function showWait(){waitEl.classList.add('on');document.body.classList.add('talk');renderWait();clearInterval(waitT);waitT=setInterval(renderWait,1000)}
+function hideWait(){waitEl.classList.remove('on');document.body.classList.remove('talk');clearInterval(waitT)}
+function renderWait(){const left=dep-vnow();
+  if(left<=0){hideWait();curSeg=null;clock();trkShow();const d=$('depT');d.innerHTML='<b>부산역을 출발합니다</b><span>부산발 런던행 제 '+trainNo(dep)+'호 · 나흘 뒤 런던 도착</span>';d.classList.remove('on');void d.offsetWidth;d.classList.add('on');try{whistle()}catch(e){}return}
+  const T=myTrunk();
+  $('wBoard').innerHTML=`<small>BUSAN → LONDON · 제 ${trainNo(dep)}호</small><b>${depLabel(dep)} 출발</b><div class="cd">${cdown(left)}</div><div class="st">${T?'트렁크 #'+T.no+' · 수하물칸에 실렸어요':'아직 맡긴 짐이 없어요'}</div>`;
+  if(!renderWait.b||renderWait.t!==!!T){renderWait.t=!!T;renderWait.b=1;
+    $('wBtns').innerHTML=(T?'':'<button class="pbtn2" id="wCk">근심 맡기기</button>')+'<button class="pbtn2 l" id="wLook">그동안 지금 달리는 열차 구경하기</button><button class="pbtn2 l" id="wSnd">♪ 플랫폼 소리 켜기</button>';
+    if(!T)$('wCk').onclick=()=>ckOpen();
+    $('wLook').onclick=()=>{hideWait();dep=lastDeparture(vnow());curSeg=null;clock();trkShow()};
+    $('wSnd').onclick=()=>{$('snd').click();$('wSnd').textContent=sndOn?'♪ 소리 끄기':'♪ 플랫폼 소리 켜기'}}}
+function backToPlatform(){if(!TRUNK)return;dep=TRUNK.dep;curSeg=null;if(MODE==='seat')goOut();showWait();trkShow()}
+function whistle(){if(!AC||!sndOn)return;const t=AC.currentTime;[0,.5].forEach(o=>{const a=AC.createOscillator(),b=AC.createOscillator(),g=AC.createGain();a.type=b.type='sawtooth';a.frequency.value=466;b.frequency.value=554;
+  g.gain.setValueAtTime(0,t+o);g.gain.linearRampToValueAtTime(.06,t+o+.08);g.gain.setValueAtTime(.06,t+o+(o?1.1:.35));g.gain.linearRampToValueAtTime(0,t+o+(o?1.3:.45));
+  const f=AC.createBiquadFilter();f.type='lowpass';f.frequency.value=1800;a.connect(f);b.connect(f);f.connect(g);g.connect(MG);a.start(t+o);b.start(t+o);a.stop(t+o+1.4);b.stop(t+o+1.4)})}
 
 /* ---------- 창가 자리: 창밖 풍경 그림이 계속 지나감 ---------- */
 const V=n=>'img/v/'+n+'.webp';

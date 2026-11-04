@@ -1,0 +1,163 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>부산발 런던행 — 3D 디오라마 시험판</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&family=Noto+Serif+KR:wght@500;700&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;height:100%;overflow:hidden;background:#9fd0dc;font-family:'Noto Sans KR',sans-serif;-webkit-user-select:none;user-select:none}
+#sky{position:fixed;inset:0;background:linear-gradient(180deg,#7fc3d6 0%,#bfe2e6 55%,#efe2c0 100%);transition:background 1.5s}
+body.night #sky{background:linear-gradient(180deg,#0a1230 0%,#1b2b55 55%,#3a3550 100%)}
+#stars{position:fixed;inset:0;opacity:0;transition:opacity 1.5s;background-image:radial-gradient(1.2px 1.2px at 20% 10%,#fff,transparent),radial-gradient(1px 1px at 70% 22%,#fff,transparent),radial-gradient(1.4px 1.4px at 40% 30%,#fff,transparent),radial-gradient(1px 1px at 85% 8%,#fff,transparent),radial-gradient(1px 1px at 10% 35%,#fff,transparent),radial-gradient(1.3px 1.3px at 55% 12%,#fff,transparent),radial-gradient(1px 1px at 30% 18%,#fff,transparent),radial-gradient(1px 1px at 92% 30%,#fff,transparent)}
+body.night #stars{opacity:.9}
+canvas{position:fixed;inset:0;display:block;touch-action:none;cursor:grab}
+canvas.drag{cursor:grabbing}
+#board{position:fixed;left:12px;right:12px;top:calc(12px + env(safe-area-inset-top));height:36px;display:flex;align-items:center;gap:9px;padding:0 12px;background:#17110c;border-radius:9px;box-shadow:inset 0 0 0 1.5px #3a2c20,0 4px 14px rgba(0,0,0,.35);max-width:720px;margin:0 auto;z-index:5}
+#board i{width:8px;height:8px;border-radius:50%;background:#ffb43a;box-shadow:0 0 8px #ff9d1c;flex:none}
+#board span{font:700 13px/36px 'Noto Sans KR',sans-serif;letter-spacing:.06em;color:#ffbf52;text-shadow:0 0 6px rgba(255,170,50,.75);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lbl{position:fixed;left:0;top:0;transform:translate(-50%,-100%);font:600 12px/1 'Noto Serif KR',serif;color:#f6ecd6;background:rgba(30,22,16,.62);border:1px solid rgba(240,220,180,.35);padding:5px 10px;border-radius:20px;white-space:nowrap;pointer-events:none;z-index:4;transition:opacity .3s}
+.lbl.me{background:#b8432f;border-color:#ffd9a0}
+#ui{position:fixed;left:0;right:0;bottom:calc(14px + env(safe-area-inset-bottom));display:flex;justify-content:center;gap:8px;z-index:5}
+#ui button{font:600 13px/1 'Noto Sans KR',sans-serif;color:#2b2118;background:#f6ecd6;border:0;border-radius:18px;padding:10px 14px;box-shadow:0 4px 14px rgba(0,0,0,.3)}
+#ui button.dk{background:rgba(20,16,12,.6);color:#f6ecd6}
+#hint{position:fixed;left:0;right:0;bottom:calc(64px + env(safe-area-inset-bottom));text-align:center;font:400 12px/1.4 'Noto Sans KR',sans-serif;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.7);z-index:5;transition:opacity 1s;pointer-events:none}
+#fps{position:fixed;right:8px;bottom:4px;font:10px monospace;color:rgba(0,0,0,.4);z-index:5}
+</style></head><body>
+<div id="sky"></div><div id="stars"></div>
+<div id="board"><i></i><span>3D 디오라마 시험판 ◆ 바이칼 호숫가 마을 부근 ◆ 크라스노야르스크까지 8시간</span></div>
+<div id="hint">끌어서 둘러보기 · 칸을 누르면 들어가요 · 휠/두 손가락으로 확대</div>
+<div id="ui"><button id="bOut" class="dk" style="display:none">열차 전체</button><button id="bNight">밤으로</button></div>
+<div id="fps"></div>
+<script type="module">
+import * as THREE from './three.module.js';
+const $=id=>document.getElementById(id);
+const geo=await (await fetch('img/geo.json')).json();
+const R=new THREE.WebGLRenderer({antialias:true,alpha:true});R.setPixelRatio(Math.min(devicePixelRatio,matchMedia('(pointer:coarse)').matches?1.5:2));R.setSize(innerWidth,innerHeight);
+R.shadowMap.enabled=true;R.shadowMap.type=THREE.PCFSoftShadowMap;R.outputColorSpace=THREE.SRGBColorSpace;document.body.appendChild(R.domElement);
+const S=new THREE.Scene();S.fog=new THREE.Fog(0xcfe6e6,30,70);
+const cam=new THREE.PerspectiveCamera(32,innerWidth/innerHeight,.1,300);
+const TL=new THREE.TextureLoader();const tex=(u,f)=>{const t=TL.load(u,f);t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=8;return t};
+// 조명
+const hemi=new THREE.HemisphereLight(0xfff6e0,0x6a7a68,1.6);S.add(hemi);
+const sun=new THREE.DirectionalLight(0xfff1d6,2.2);sun.position.set(-8,16,12);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);
+Object.assign(sun.shadow.camera,{left:-22,right:22,top:10,bottom:-8,near:1,far:60});sun.shadow.bias=-.0008;sun.shadow.radius=4;S.add(sun);S.add(sun.target);
+// 크기
+const CW=6,CH=CW*geo.shell.h/geo.shell.w,D=1.75;const LW=CW*geo.loco.w/geo.shell.w,LH=LW*geo.loco.h/geo.loco.w;
+const toon=(c)=>new THREE.MeshToonMaterial({color:c});
+function shapeFrom(pts,W,H){const s=new THREE.Shape();pts.forEach((p,i)=>{const x=p[0]*W,y=p[1]*H;i?s.lineTo(x,y):s.moveTo(x,y)});s.closePath();return s}
+function capMat(t,W,H){t.wrapS=t.wrapT=THREE.ClampToEdgeWrapping;t.repeat.set(1/W,1/H);t.offset.set(0,0);return new THREE.MeshToonMaterial({map:t,alphaTest:.5,transparent:false})}
+function sideColors(g,inside){const p=g.attributes.position,c=new Float32Array(p.count*3);const ext=new THREE.Color(0xf0e2c2),inn=new THREE.Color(0x7a5236);for(let i=0;i<p.count;i++){const x=p.getX(i),y=p.getY(i);const k=inside(x,y)?inn:ext;c[i*3]=k.r;c[i*3+1]=k.g;c[i*3+2]=k.b}g.setAttribute('color',new THREE.BufferAttribute(c,3))}
+const shellTex=tex('img/shell.webp');
+const CARS=[['tail','꿈 보관소'],['post','우체국칸'],['case','탐정 사무소'],['dome','별 전망칸'],['dine','식당칸'],['sleep','내 침대칸']];
+const train=new THREE.Group();S.add(train);const cars=[];let x=0;const gap=-.05;
+const hx0=geo.shell.hole[0]*CW,hy0=geo.shell.hole[1]*CH,hx1=geo.shell.hole[2]*CW,hy1=geo.shell.hole[3]*CH;
+const lights=[];
+for(const [k,n] of CARS){const g=new THREE.Group();const sh=shapeFrom(geo.shell.pts,CW,CH);const hole=new THREE.Path();hole.moveTo(hx0,hy0);hole.lineTo(hx1,hy0);hole.lineTo(hx1,hy1);hole.lineTo(hx0,hy1);hole.closePath();sh.holes.push(hole);
+  const eg=new THREE.ExtrudeGeometry(sh,{depth:D,bevelEnabled:false,curveSegments:4});eg.translate(0,0,-D/2);sideColors(eg,(x,y)=>x>hx0-.02&&x<hx1+.02&&y>hy0-.02&&y<hy1+.02);
+  const m=new THREE.Mesh(eg,[capMat(shellTex.clone(),CW,CH),new THREE.MeshToonMaterial({vertexColors:true})]);m.castShadow=true;m.receiveShadow=true;g.add(m);
+  // 방 그림(안쪽 벽)
+  const rt=tex('img/room_'+k+'.webp');const room=new THREE.Mesh(new THREE.PlaneGeometry(hx1-hx0,hy1-hy0),new THREE.MeshBasicMaterial({map:rt,alphaTest:.5,toneMapped:false}));room.position.set((hx0+hx1)/2,(hy0+hy1)/2,-D/2+.06);room.userData.room=1;g.add(room);
+  // 바닥·천장
+  const fl=new THREE.Mesh(new THREE.PlaneGeometry(hx1-hx0,D),toon(0x2e5a46));fl.rotation.x=-Math.PI/2;fl.position.set((hx0+hx1)/2,hy0+.005,0);fl.receiveShadow=true;g.add(fl);
+  const ce=new THREE.Mesh(new THREE.PlaneGeometry(hx1-hx0,D),toon(0xd9c8a2));ce.rotation.x=Math.PI/2;ce.position.set((hx0+hx1)/2,hy1-.005,0);g.add(ce);
+  const pl=new THREE.PointLight(0xffb560,0,4.5,1.6);pl.position.set((hx0+hx1)/2,hy1-.3,.2);g.add(pl);lights.push(pl);
+  g.position.x=x;g.userData={k,n,w:CW,cx:x+CW/2};train.add(g);cars.push(g);x+=CW+gap}
+// 기관차
+{const g=new THREE.Group();const sh=shapeFrom(geo.loco.pts,LW,LH);const eg=new THREE.ExtrudeGeometry(sh,{depth:D*1.05,bevelEnabled:false,curveSegments:4});eg.translate(0,0,-D*1.05/2);sideColors(eg,()=>false);
+  const lt=tex('img/loco.webp');const m=new THREE.Mesh(eg,[capMat(lt,LW,LH),new THREE.MeshToonMaterial({vertexColors:true})]);m.castShadow=true;m.receiveShadow=true;g.add(m);
+  g.position.x=x;g.userData={k:'loco',n:'기관실',w:LW,cx:x+LW/2};train.add(g);cars.push(g);x+=LW}
+const TRL=x;train.position.x=-TRL/2;
+// 승객 (종이 인형처럼 서 있음)
+const PEOPLE={sleep:[['pf_p01',.54]],dine:[['zrobot',.28,.38],['pf_p02',.62]],dome:[['pf_p05',.6,.47,.6]],post:[['pf_p04',.45]]};
+const walkers=[];
+for(const g of cars){const L=PEOPLE[g.userData.k];if(!L)continue;for(const [f,fx,hh=.46,op=1] of L){const t=tex('img/'+f+'.webp',tt=>{const a=tt.image.width/tt.image.height;const h=CH*hh;pm.geometry.dispose();pm.geometry=new THREE.PlaneGeometry(h*a,h);pm.geometry.translate(0,h/2,0)});
+  const pm=new THREE.Mesh(new THREE.PlaneGeometry(1,1),new THREE.MeshBasicMaterial({map:t,alphaTest:.5,transparent:op<1,opacity:op,toneMapped:false}));pm.position.set(hx0+(hx1-hx0)*fx,hy0+.01,-.15);pm.castShadow=true;pm.customDepthMaterial=new THREE.MeshDepthMaterial({depthPacking:THREE.RGBADepthPacking,map:t,alphaTest:.5});g.add(pm);walkers.push({m:pm,ph:Math.random()*6})}}
+// 선로
+const rails=new THREE.Group();S.add(rails);
+for(const z of [-.55,.55]){const r=new THREE.Mesh(new THREE.BoxGeometry(400,.07,.07),toon(0x5b5550));r.position.set(0,.035,z);r.receiveShadow=true;rails.add(r)}
+const slp=new THREE.InstancedMesh(new THREE.BoxGeometry(.22,.06,1.6),toon(0x4a3a2c),300);for(let i=0;i<300;i++){const o=new THREE.Object3D();o.position.set(-150+i*1,.0,0);o.updateMatrix();slp.setMatrixAt(i,o.matrix)}slp.receiveShadow=true;S.add(slp);
+const bed=new THREE.Mesh(new THREE.BoxGeometry(400,.12,2.6),toon(0x8d8577));bed.position.y=-.07;bed.receiveShadow=true;S.add(bed);
+// 땅
+const gc=document.createElement('canvas');gc.width=512;gc.height=512;const gx=gc.getContext('2d');
+function paintGround(base,dark){gx.fillStyle=base;gx.fillRect(0,0,512,512);for(let i=0;i<900;i++){gx.fillStyle=Math.random()<.5?dark:'rgba(255,255,240,.12)';const x=Math.random()*512,y=Math.random()*512;gx.fillRect(x,y,6+Math.random()*26,2+Math.random()*3)}gt.needsUpdate=true}
+const gt=new THREE.CanvasTexture(gc);gt.colorSpace=THREE.SRGBColorSpace;gt.wrapS=gt.wrapT=THREE.RepeatWrapping;gt.repeat.set(40,8);
+const ground=new THREE.Mesh(new THREE.PlaneGeometry(400,80),new THREE.MeshToonMaterial({map:gt}));ground.rotation.x=-Math.PI/2;ground.position.set(0,-.12,-14);ground.receiveShadow=true;S.add(ground);
+// 배경 파노라마 (둥근 벽)
+const BR=48,BH=24;const bt=tex('img/zt_baikal.webp',t=>{const tw=BH*t.image.width/t.image.height;bt.repeat.set(-(BR*Math.PI*.9)/tw,1)});bt.wrapS=THREE.RepeatWrapping;
+const backMat=new THREE.MeshBasicMaterial({map:bt,side:THREE.BackSide,fog:false,toneMapped:false});
+const back=new THREE.Mesh(new THREE.CylinderGeometry(BR,BR,BH,120,1,true,Math.PI*.55,Math.PI*.9),backMat);back.position.set(0,BH/2-1.3,8);S.add(back);
+// 땅: 선로 옆 풀밭
+paintGround('#9f9a5c','rgba(70,72,36,.5)');S.fog.color.set(0xd9e2cf);
+// 밤 불빛 웅덩이
+const glowC=document.createElement('canvas');glowC.width=glowC.height=128;{const g=glowC.getContext('2d');const r=g.createRadialGradient(64,64,0,64,64,64);r.addColorStop(0,'rgba(255,190,90,.85)');r.addColorStop(1,'rgba(255,190,90,0)');g.fillStyle=r;g.fillRect(0,0,128,128)}
+const glowT=new THREE.CanvasTexture(glowC);const pools=[];
+for(const g of cars){if(g.userData.k==='loco')continue;const m=new THREE.Mesh(new THREE.PlaneGeometry(CW*1.1,3.2),new THREE.MeshBasicMaterial({map:glowT,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,opacity:0}));m.rotation.x=-Math.PI/2;m.position.set(g.userData.cx-TRL/2,.02,2.1);S.add(m);pools.push(m)}
+// 나무·전신주 (먹선 느낌 외곽선)
+const ink=new THREE.MeshBasicMaterial({color:0x1d1712,side:THREE.BackSide});
+function outlined(geo,mat,s=1.06){const g=new THREE.Group();const a=new THREE.Mesh(geo,mat);a.castShadow=true;const b=new THREE.Mesh(geo,ink);b.scale.setScalar(s);g.add(a,b);return g}
+const props=[];
+function pine(){const g=new THREE.Group();const c1=outlined(new THREE.ConeGeometry(1,2.6,7),toon(0x2f6b4f),1.08);c1.position.y=2.2;const c2=outlined(new THREE.ConeGeometry(.75,2,7),toon(0x3d8060),1.08);c2.position.y=3.4;const tr=outlined(new THREE.CylinderGeometry(.14,.18,1.2,6),toon(0x5a3d2a),1.12);tr.position.y=.6;g.add(c1,c2,tr);return g}
+function birch(){const g=new THREE.Group();const tr=outlined(new THREE.CylinderGeometry(.09,.12,4.2,6),toon(0xf2efe6),1.15);tr.position.y=2.1;const cr=outlined(new THREE.IcosahedronGeometry(1.1,0),toon(0xe7a43c),1.06);cr.position.y=4.2;cr.scale.set(1,1.3,1);g.add(tr,cr);return g}
+const SPAN=140;
+for(let i=0;i<34;i++){const p=pine();const z=-5-Math.random()*20;p.position.set(-SPAN/2+Math.random()*SPAN,-.1,z);p.scale.setScalar(.55+Math.random()*.6);S.add(p);props.push(p)}
+const poles=[];for(let i=0;i<12;i++){const g=new THREE.Group();const p=outlined(new THREE.CylinderGeometry(.06,.08,4.6,6),toon(0x5a4030),1.2);p.position.y=2.3;const bar=outlined(new THREE.BoxGeometry(.9,.07,.07),toon(0x5a4030),1.2);bar.position.y=4.3;g.add(p,bar);g.position.set(-SPAN/2+i*(SPAN/12),-.1,-2.6);S.add(g);poles.push(g)}
+
+// 앞쪽 풀숲 (종이 오리기 실루엣) — 가까울수록 빨리 지나감
+const fgMats=[],fgC=[new THREE.Color(1,1,1),new THREE.Color(0x2a3050)];
+function bushTex(seed){const c=document.createElement('canvas');c.width=512;c.height=256;const g=c.getContext('2d');let r=seed;const R=()=>(r=(r*9301+49297)%233280)/233280;
+  const cols=['#2f5a3c','#3f6e45','#567f43','#7a8a3a'];const blobs=[];for(let i=0;i<9;i++)blobs.push([30+R()*452,256-(20+R()*60),30+R()*70]);
+  g.lineWidth=6;g.strokeStyle='#1d1712';g.lineJoin='round';
+  for(const pass of [0,1]){for(const [x,y,rr] of blobs){g.beginPath();for(let a=0;a<=Math.PI*2+.01;a+=Math.PI/9){const k=rr*(1+.18*Math.sin(a*5+x));const px=x+Math.cos(a)*k,py=y+Math.sin(a)*k*.8;a?g.lineTo(px,py):g.moveTo(px,py)}g.closePath();if(pass===0)g.stroke();else{g.fillStyle=cols[(x|0)%4];g.fill()}}}
+  g.fillStyle=cols[0];g.fillRect(0,236,512,20);
+  for(let i=0;i<26;i++){const x=R()*512,y=150+R()*90;g.fillStyle=R()<.5?'#f2e6c6':'#e9a33c';g.beginPath();g.arc(x,y,3+R()*3,0,7);g.fill()}
+  for(let i=0;i<40;i++){const x=R()*512;g.strokeStyle='#1d1712';g.lineWidth=2;g.beginPath();g.moveTo(x,256);g.quadraticCurveTo(x+6,210,x+(R()-.5)*20,180+R()*40);g.stroke()}
+  const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;return t}
+const fgs=[];
+for(let i=0;i<26;i++){const m=new THREE.MeshBasicMaterial({map:bushTex(i*77+3),alphaTest:.4,transparent:true,toneMapped:false,fog:false});fgMats.push(m);const w=2.5+Math.random()*3,h=w*.5;const b=new THREE.Mesh(new THREE.PlaneGeometry(w,h),m);const z=5+Math.random()*7;b.position.set(-SPAN/2+Math.random()*SPAN,h/2-.25,z);S.add(b);fgs.push(b)}
+// 카메라 조작
+let fx=0,tfx=0,yaw=0,tyaw=-.16,pitch=.08,tpitch=.08,dist=17,tdist=17,zoomCar=null;
+const camFor=()=>{const a=innerWidth/innerHeight,isP=a<1,k=isP?1.05:2.7,d=(k*CW)/(2*Math.tan(THREE.MathUtils.degToRad(16))*a);return {d,min:d*.35,max:d*1.8}};
+let cf=camFor();dist=tdist=cf.d;
+const me=cars.find(c=>c.userData.k==='sleep');tfx=fx=me.userData.cx-TRL/2;
+let drag=null,moved=0,pts=new Map(),pinch0=0;
+R.domElement.addEventListener('pointerdown',e=>{pts.set(e.pointerId,[e.clientX,e.clientY]);drag={x:e.clientX,y:e.clientY,fx:tfx,p:tpitch,yw:tyaw};moved=0;R.domElement.classList.add('drag');if(pts.size===2){const a=[...pts.values()];pinch0=Math.hypot(a[0][0]-a[1][0],a[0][1]-a[1][1]);drag.d=tdist}});
+addEventListener('pointermove',e=>{if(!drag)return;pts.set(e.pointerId,[e.clientX,e.clientY]);if(pts.size===2&&pinch0){const a=[...pts.values()];const d=Math.hypot(a[0][0]-a[1][0],a[0][1]-a[1][1]);tdist=Math.max(cf.min,Math.min(cf.max,drag.d*pinch0/d));moved=99;return}
+  const dx=e.clientX-drag.x,dy=e.clientY-drag.y;moved=Math.max(moved,Math.abs(dx)+Math.abs(dy));
+  if(zoomCar){tyaw=Math.max(-.6,Math.min(.6,drag.yw-dx*.004));tpitch=Math.max(.02,Math.min(.6,drag.p+dy*.003));return}
+  tfx=Math.max(-TRL/2+2,Math.min(TRL/2-2,drag.fx-dx*(dist/innerHeight)*1.1));tpitch=Math.max(.04,Math.min(.75,drag.p+dy*.003));tyaw=Math.max(-.5,Math.min(.5,drag.yw-dx*.0006))});
+addEventListener('pointerup',e=>{pts.delete(e.pointerId);if(pts.size<2)pinch0=0;if(!drag)return;R.domElement.classList.remove('drag');if(moved<6)tap(e);drag=null;$('hint').style.opacity=0});
+R.domElement.addEventListener('wheel',e=>{e.preventDefault();tdist=Math.max(cf.min,Math.min(cf.max,tdist*(1+e.deltaY*.0012)))},{passive:false});
+let hov=[0,0];addEventListener('mousemove',e=>{hov=[e.clientX/innerWidth-.5,e.clientY/innerHeight-.5]});
+const ray=new THREE.Raycaster();
+function tap(e){const m=new THREE.Vector2(e.clientX/innerWidth*2-1,-(e.clientY/innerHeight)*2+1);ray.setFromCamera(m,cam);const h=ray.intersectObjects(train.children,true)[0];if(!h)return;let g=h.object;while(g.parent!==train)g=g.parent;enter(g)}
+function enter(g){zoomCar=g;tfx=g.userData.cx-TRL/2;const isP=innerWidth<innerHeight;tdist=cf.d*(g.userData.k==='loco'?.75:(isP?.55:.42));tpitch=.1;tyaw=-.12;$('bOut').style.display='';document.querySelectorAll('.lbl').forEach(l=>l.style.opacity=0)}
+$('bOut').onclick=()=>{zoomCar=null;tdist=cf.d;tpitch=.08;tyaw=-.16;$('bOut').style.display='none';document.querySelectorAll('.lbl').forEach(l=>l.style.opacity=1)};
+// 낮/밤
+let night=false;$('bNight').onclick=()=>{night=!night;document.body.classList.toggle('night',night);$('bNight').textContent=night?'낮으로':'밤으로'};
+// 이름표
+const labels=cars.map(g=>{const d=document.createElement('div');d.className='lbl'+(g.userData.k==='sleep'?' me':'');d.textContent=g.userData.n;document.body.appendChild(d);return d});
+const nightC=[new THREE.Color(1,1,1),new THREE.Color(0x2c3566)],fogC=[new THREE.Color(0xd9e2cf),new THREE.Color(0x141a33)],roomC=[new THREE.Color(1,1,1),new THREE.Color(1.15,.95,.75)];
+const rooms=[];train.traverse(o=>{if(o.userData&&o.userData.room)rooms.push(o)});
+// 루프
+const V=7;let last=performance.now(),acc=0,fc=0,ft=0,slOff=0;const tmp=new THREE.Vector3();
+function frame(now){requestAnimationFrame(frame);const dt=Math.min(.05,(now-last)/1000);last=now;fc++;ft+=dt;if(ft>1){$('fps').textContent=fc+' fps';fc=0;ft=0}
+  const t=now/1000;
+  // 세상이 뒤로 흐름
+  bt.offset.x+=dt*.004;gt.offset.x+=dt*V/(400/40);slOff=(slOff+dt*V)%1;slp.position.x=-slOff;
+  for(const p of props){p.position.x-=V*dt*(p.position.z>0?1:1);if(p.position.x<-SPAN/2)p.position.x+=SPAN}
+  for(const p of fgs){p.position.x-=V*dt;if(p.position.x<-SPAN/2)p.position.x+=SPAN}
+  for(const p of poles){p.position.x-=V*dt;if(p.position.x<-SPAN/2)p.position.x+=SPAN}
+  // 열차 흔들림
+  cars.forEach((g,i)=>{g.position.y=Math.max(0,Math.sin(t*5.2+i*1.3))*.012;g.rotation.z=Math.sin(t*2.1+i)*.0025});
+  walkers.forEach(w=>{w.m.scale.y=1+Math.sin(t*2.2+w.ph)*.012;w.m.rotation.z=Math.sin(t*1.4+w.ph)*.012});
+  // 밤
+  const L=1-Math.pow(.04,dt);hemi.intensity+=((night?.16:1.6)-hemi.intensity)*L;sun.intensity+=((night?.08:2.2)-sun.intensity)*L;lights.forEach(l=>l.intensity+=((night?7:0)-l.intensity)*L);
+  backMat.color.lerp(nightC[night?1:0],L);S.fog.color.lerp(fogC[night?1:0],L);pools.forEach(p=>p.material.opacity+=((night?.9:0)-p.material.opacity)*L);rooms.forEach(m=>m.material.color.lerp(roomC[night?1:0],L));fgMats.forEach(m=>m.color.lerp(fgC[night?1:0],L));
+  // 카메라
+  fx+=(tfx-fx)*.08;yaw+=(tyaw+hov[0]*-.08-yaw)*.06;pitch+=(tpitch+hov[1]*.05-pitch)*.06;dist+=(tdist-dist)*.07;
+  const ty=zoomCar?CH*.55:1.25+Math.sin(t*.3)*.05;const tgt=new THREE.Vector3(fx,ty,0);
+  cam.position.set(fx+Math.sin(yaw)*dist*Math.cos(pitch),ty+Math.sin(pitch)*dist,Math.cos(yaw)*dist*Math.cos(pitch));cam.lookAt(tgt);
+  sun.position.set(fx-8,16,12);sun.target.position.set(fx,0,0);
+  R.render(S,cam);
+  // 이름표 위치
+  cars.forEach((g,i)=>{tmp.set(g.userData.cx-TRL/2,(g.userData.k==='loco'?LH:CH)+.35,D/2);tmp.project(cam);const l=labels[i];if(tmp.z>1||Math.abs(tmp.x)>1.2){l.style.display='none';return}l.style.display='';l.style.left=((tmp.x+1)/2*innerWidth)+'px';l.style.top=((1-tmp.y)/2*innerHeight)+'px'})}
+requestAnimationFrame(frame);
+addEventListener('resize',()=>{cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();R.setSize(innerWidth,innerHeight);cf=camFor();if(!zoomCar)tdist=cf.d});
+window.__p3d={dbg:()=>({night,h:hemi.intensity,bc:backMat.color.getHexString()}),cars,enter,setNight:v=>{night=!v;$('bNight').click()}};
+</script></body></html>

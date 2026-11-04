@@ -14,7 +14,7 @@ canvas{display:block;width:100vw;height:100vh;height:100dvh}
 #tag i{display:block;font-style:normal;font-weight:500;font-size:11px;opacity:.8;margin-top:1px}
 #dev{position:fixed;left:12px;right:12px;bottom:calc(40px + env(safe-area-inset-bottom));display:none;gap:8px;align-items:center;background:#f3e6c4;border:2px solid #3a2a1c;border-radius:4px;padding:6px 10px;font:600 12px 'Apple SD Gothic Neo',sans-serif;color:#3a2a1c}
 #dev input{flex:1}
-#back{position:fixed;right:14px;top:calc(12px + env(safe-area-inset-top));display:none;background:#f3e6c4;color:#3a2a1c;border:2px solid #3a2a1c;box-shadow:2px 2px 0 #3a2a1c;border-radius:3px;padding:6px 11px;font:700 13px "Apple SD Gothic Neo",sans-serif}
+#back{position:fixed;right:14px;z-index:4;top:calc(12px + env(safe-area-inset-top));display:none;background:#f3e6c4;color:#3a2a1c;border:2px solid #3a2a1c;box-shadow:2px 2px 0 #3a2a1c;border-radius:3px;padding:6px 11px;font:700 13px "Apple SD Gothic Neo",sans-serif}
 #vig{position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse 75% 70% at 50% 55%,transparent 55%,rgba(4,14,20,.42) 100%)}
 #snd{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));background:#f3e6c4;color:#3a2a1c;border:2px solid #3a2a1c;box-shadow:2px 2px 0 #3a2a1c;border-radius:3px;padding:6px 11px;font:700 13px 'Apple SD Gothic Neo',sans-serif;z-index:3}
 #snd.on{background:#3a2a1c;color:#f3e6c4}
@@ -24,6 +24,7 @@ canvas{display:block;width:100vw;height:100vh;height:100dvh}
 <div id="vig"></div>
 <button id="snd">♪ 소리 켜기</button>
 <button id="back">← 열차 전체</button>
+<a id="seat" href="window.html" style="position:fixed;right:14px;top:calc(12px + env(safe-area-inset-top));background:#f3e6c4;color:#3a2a1c;border:2px solid #3a2a1c;box-shadow:2px 2px 0 #3a2a1c;border-radius:3px;padding:6px 11px;font:700 13px 'Apple SD Gothic Neo',sans-serif;text-decoration:none">내 창가 자리 →</a>
 <div id="hint">옆으로 끌어서 열차 둘러보기 · 칸을 누르면 가까이</div>
 <script type="module">
 import * as THREE from './three.module.js';
@@ -167,8 +168,8 @@ const ray=new THREE.Raycaster(),v2=new THREE.Vector2(),tagB=document.querySelect
 function tap(e){v2.set(e.clientX/innerWidth*2-1,-(e.clientY/innerHeight)*2+1);ray.setFromCamera(v2,cam);
   const h=ray.intersectObjects(cars)[0];if(!h)return;const c=h.object;focus=c;tgtX=train.position.x+c.position.x;clampX();
   const a=innerWidth/innerHeight;tgtD=Math.max(minD,Math.min(maxD,Math.max(c.userData.h*2.2/(2*TAN),c.userData.w*1.08/(2*TAN*a))));
-  tagB.textContent=c.userData.name;tagS.textContent='';tagI.textContent='';back.style.display='block';hint()}
-back.onclick=()=>{focus=null;tgtD=fitD();back.style.display='none';clock()};
+  tagB.textContent=c.userData.name;tagS.textContent='';tagI.textContent='';back.style.display='block';document.getElementById('seat').style.display='none';hint()}
+back.onclick=()=>{focus=null;tgtD=fitD();back.style.display='none';document.getElementById('seat').style.display='';clock()};
 let hinted=0;function hint(){if(hinted)return;hinted=1;setTimeout(()=>document.getElementById('hint').style.opacity=0,1500)}
 function fitD(){const a=innerWidth/innerHeight;return Math.max(26,12.5/(2*TAN*a))}
 function resize(){R.setSize(innerWidth,innerHeight);cam.aspect=innerWidth/innerHeight;

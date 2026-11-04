@@ -2,7 +2,7 @@
 <html lang="ko"><head><meta charset="utf-8"><base href="/stage/"><script>try{if(!localStorage.getItem("bl_trip")&&!/[?&](h|seat)=?/.test(location.search))document.documentElement.classList.add("notrip")}catch(e){}</script><style>html.notrip body::before{content:"";position:fixed;inset:0;background:#0b1418;z-index:44}</style>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <title>부산발 런던행 — 마음의 짐을 맡기는 밤기차</title>
-<meta name="description" content="마음의 짐을 꼬리표에 맡기고, 열한 개의 역마다 동화 속 승객을 만나 런던까지 함께 가는 따뜻한 밤기차.">
+<meta name="description" content="마음의 짐을 꼬리표에 맡기고, 열세 개의 역마다 동화 속 승객을 만나 런던까지 함께 가는 따뜻한 밤기차.">
 <meta property="og:type" content="website"><meta property="og:site_name" content="부산발 런던행">
 <meta property="og:title" content="부산발 런던행 — 마음의 짐을 맡기는 밤기차">
 <meta property="og:description" content="마음의 짐을 꼬리표에 적어 맡기면 부산역 출발. 동화 속 승객들이 서로의 짐을 들어 주는 런던행 열차.">
@@ -584,6 +584,8 @@ body.amb #pax,body.amb #paxT,body.amb #cmo,body.amb #cmB{opacity:0!important;poi
  #intro.s1 .iOldW{transform:rotate(-4deg) scale(.5);transform-origin:50% 0;margin-bottom:-185px}
  #intro.s0 .iTagW{max-width:none;max-height:0}
  .iTagW{max-height:640px;transition:max-height 1.3s,opacity 1s .3s}}
+#cg .ch{transition:left .9s cubic-bezier(.4,0,.2,1),height .9s cubic-bezier(.4,0,.2,1),bottom .9s,transform 1.1s cubic-bezier(.3,.9,.3,1),opacity .6s,filter .45s!important}
+#cg .item .ic{width:110px;height:110px;margin:0 auto 8px;border-radius:50%;background:radial-gradient(circle at 50% 45%,#fffaf0 0 52%,#efe3c4 53% 64%,#d8c49a 65% 100%);border:2.5px solid #3a2a1c;box-shadow:3px 3px 0 #3a2a1c;display:flex;align-items:center;justify-content:center;font-size:50px}
 </style></head><body>
 <div id="tag"><b>부산</b><span id="tagS">그림 겹 무대 · 시험판</span><i id="tagI"></i></div>
 <div id="dev"><span>출발 후</span><input id="devR" type="range" min="0" max="91.9" step="0.1"><span id="devV"></span></div>
@@ -844,7 +846,7 @@ function clock(){let w=where(dep,vnow());const ended=w.mode==='end';if(ended)w=w
   if(!TRIP||TRIP.ch===undefined)tagI.textContent=(ended?'':(w.next?'다음 '+w.next.name+' · '+dur(w.next.h-w.h)+' 뒤':'곧 런던'))+(typeof CNT==='number'&&CNT>0?(ended?'':' · ')+'오늘 마음의 짐 '+CNT+'개가 떠났어요':'');
   if(curSeg!==w.seg.id){curSeg=w.seg.id}
   if(!ended)try{arrCheck(w)}catch(e){}
-  setPano(w.seg.id,Math.floor((w.h-w.seg.h)*60/3.5));
+  setPano(w.seg.id,(TRIP&&TRIP.tr)?Math.floor((Date.now()-TRIP.tr.t0)/12000):Math.floor((w.h-w.seg.h)*60/3.5));
 }
 setInterval(clock,1000);setTimeout(clock,50);
 if(Q.has('dev')){const d=document.getElementById('dev'),r=document.getElementById('devR'),v=document.getElementById('devV');d.style.display='flex';
@@ -903,7 +905,7 @@ function arrLabel(){return '내일 '+hm((TRIP?dep:vnow())+TRIP_H*HR)}
 const ck=$('ck'),ckC=$('ckC');
 function ckOpen(){ck.classList.add('on');const w=where(dep,vnow());
   ckC.innerHTML=`<h3>수하물 접수</h3><div class="sub">부산발 런던행 제 ${trainNo(dep)}호 · ${w.mode==='run'?w.seg.name+' 부근':'부산역 3번 승강장'}</div>
-  <div class="porter"><i></i><p>어서 오세요! 이 열차는 <b>마음의 짐</b>도 받아요.<br>하나만 적어서 맡겨 주세요. ${TRIP?'런던에 닿으면 돌려드릴게요.':'11개 역을 지나 런던에서 돌려드려요.'}</p></div>
+  <div class="porter"><i></i><p>어서 오세요! 이 열차는 <b>마음의 짐</b>도 받아요.<br>하나만 적어서 맡겨 주세요. ${TRIP?'런던에 닿으면 돌려드릴게요.':'13개 역을 지나 런던에서 돌려드려요.'}</p></div>
   <textarea id="ckT" maxlength="80" placeholder="예: 고백할까 말까 3일째 고민 중"></textarea>
   <div class="ckRow"><button class="pbtn2" id="ckGo">${TRIP?'트렁크에 맡기기':'트렁크에 맡기고 출발하기'}</button></div>
   <div style="text-align:center"><button class="ckSkip" id="ckNo">${TRIP?'닫기':'짐 없이 그냥 탈래요'}</button></div>`;
@@ -1090,10 +1092,10 @@ const CLUES={byeol:'주인 없는 트렁크에서 바닷바람 냄새가 난다.
  mermaid:'바닷물이 스며들자 꼬리표 뒷면에 「나를 찾아 줘」라는 글씨가 떠올랐다.',
  rabbit:'꼬리표의 6시 40분은 어느 멈춘 회중시계가 가리키는 시각과 같다.'};
 const KEEP={byeol:['🐚','소라 껍데기','귀에 대면 용궁의 파도 소리가 난다.'],gilldong:['📜','부적 한 장','「어디서든 네 자리가 있다」라고 적혀 있다.'],
- gyeonu:['🪶','까치 깃털','오작교를 놓은 까치가 떨어뜨린 깃털.'],snowq:['❄️','녹지 않는 눈송이','손바닥 위에서도 녹지 않고 반짝인다.'],
+ gyeonu:['✒️','까치 깃털','오작교를 놓은 까치가 떨어뜨린 깃털.'],snowq:['❄️','녹지 않는 눈송이','손바닥 위에서도 녹지 않고 반짝인다.'],
  odette:['🤍','흰 깃털','낮에도 밤에도 같은 색이다.'],wolf:['🗺️','할머니 댁 지도','늑대가 직접 그린 지름길 지도.'],
  sleeping:['🧵','물레 실패','이제는 찔려도 잠들지 않는다.'],monster:['🔖','책갈피','「실낙원」 마지막 장에 꽂혀 있던 것.'],
- cinder:['💎','유리 단추','드레스에서 떨어졌지만 자정이 지나도 남았다.'],mermaid:['🫧','작은 진주','수첩 마지막 장에 끼워 준 진주.'],
+ cinder:['💎','유리 단추','드레스에서 떨어졌지만 자정이 지나도 남았다.'],mermaid:['⚪','작은 진주','수첩 마지막 장에 끼워 준 진주.'],
  rabbit:['⏱️','회중시계 태엽','「조금 늦어도 괜찮아」라고 새겨져 있다.']};
 const W_='view';
 const EV={
@@ -1390,7 +1392,7 @@ const _playScene=playScene;playScene=function(shots,done){(shots||[]).forEach(x=
 const _gEnd=gEnd;gEnd=function(){moHide();_gEnd()};
 /* 이벤트 캐릭터 크기 맞춤: 머리가 위 띠에 잘리지 않고, 너무 넓지 않게 */
 function chFit(){const W=innerWidth,H=innerHeight,ar=(gCh.naturalWidth/gCh.naturalHeight)||.6,mob=W/H<.75;
-  let h=H*(mob?.70:.80);h=Math.min(h,W*(mob?.92:.56)/ar);h*=htK(gCh,null);gCh.style.height=h+'px';gCh.style.bottom=(mob?H*.08:-H*.01)+'px';gCh.style.left=mob?'50%':'36%'}
+  let h=H*(mob?.70:.80);h=Math.min(h,W*(mob?.92:.56)/ar);h*=htK(gCh,null);gCh.style.height=h+'px';gCh.style.bottom=(mob?H*.08:-H*.01)+'px';gCh.style.left='50%'}
 gCh.addEventListener('load',chFit);addEventListener('resize',chFit);
 /* 다시 보기: 배경을 그 승객 구간 풍경으로 */
 let gBgOv=null;const _curView=curView;curView=function(){return gBgOv?'url('+gBgOv+')':_curView()};
@@ -1442,7 +1444,7 @@ function showWait(){waitEl.style.backgroundImage='';waitEl.classList.add('on');d
 function hideWait(){waitEl.classList.remove('on');document.body.classList.remove('talk');clearInterval(waitT)}
 function renderWait(){if(TRIP&&!TRIP.fin){hideWait();return}
   const arrived=!!TRIP;
-  if(arrived){$('wBoard').innerHTML=`<small>LONDON · 종착역</small><b>런던에 도착했어요</b><div class="st" style="margin-top:6px">열한 개의 역, 수고 많았어요.${LS.get('bl_end',null)?'<br>맡겼던 마음의 짐은 트렁크와 함께 돌려받았어요.':''}</div>`;
+  if(arrived){$('wBoard').innerHTML=`<small>LONDON · 종착역</small><b>런던에 도착했어요</b><div class="st" style="margin-top:6px">열세 개의 역, 수고 많았어요.${LS.get('bl_end',null)?'<br>맡겼던 마음의 짐은 트렁크와 함께 돌려받았어요.':''}</div>`;
     if(renderWait.b!=='a'){renderWait.b='a';
       $('wBtns').innerHTML=(LS.get('bl_end',null)?'<button class="pbtn2" id="wRp">✉ 셜록의 엽서 보기</button>':'')+'<button class="pbtn2'+(LS.get('bl_end',null)?' l':'')+'" id="wAg">새 새 짐 맡기고 다시 타기</button><button class="pbtn2 l" id="wStay">런던 창밖 조금 더 보기</button>';
       const r=$('wRp');if(r)r.onclick=()=>showReply();
@@ -1456,7 +1458,7 @@ function renderWait(){if(TRIP&&!TRIP.fin){hideWait();return}
     $('wSnd').onclick=()=>{$('snd').click();$('wSnd').textContent=sndOn?'♪ 소리 끄기':'♪ 플랫폼 소리 켜기'}}}
 function startTrip(){if(!TRIP){TRIP={dep:vnow(),ch:0,hb:CH[0].h,at:Date.now(),done:{}};LS.set('bl_trip',TRIP);dep=TRIP.dep}
   hideWait();ck.classList.remove('on');curSeg=null;arrLast=null;clock();trkShow();try{postBadge()}catch(e){}
-  const d=$('depT');d.innerHTML='<b>부산발 런던행 · 탑승 완료</b><span>제1역 · 부산 · 런던까지 11개 역</span>';setTimeout(()=>{if(TRIP&&!TRIP.done[0]&&!cmBusy())playChapter(0)},3600);d.classList.remove('on');void d.offsetWidth;d.classList.add('on');try{whistle()}catch(e){}
+  const d=$('depT');d.innerHTML='<b>부산발 런던행 · 탑승 완료</b><span>제1역 · 부산 · 런던까지 13개 역</span>';setTimeout(()=>{if(TRIP&&!TRIP.done[0]&&!cmBusy())playChapter(0)},3600);d.classList.remove('on');void d.offsetWidth;d.classList.add('on');try{whistle()}catch(e){}
   setTimeout(()=>{const h=$('hint');if(h&&MODE!=='seat'){h.style.display='';}},4200)}
 function showArrived(){showWait()}
 function backToPlatform(){}
@@ -1747,7 +1749,7 @@ function makeTicket(){const T=TRUNK&&TRIP&&TRUNK.dep===TRIP.dep?TRUNK:null;card.
   g.font='900 62px '+F;g.textAlign='left';g.fillText('BUSAN',x+56,300);g.textAlign='right';g.fillText('LONDON',x+W-56,300);g.textAlign='center';g.font='700 38px '+F;g.fillText('→',0,290);
   g.fillRect(x+56,326,W-112,6);
   const row=(y,a,b)=>{g.textAlign='left';g.font='700 28px '+F;g.globalAlpha=.7;g.fillText(a,x+60,y);g.globalAlpha=1;g.textAlign='right';g.font='800 40px '+F;g.fillText(b,x+W-60,y)};
-  row(410,'출발','부산 · '+hm(TRIP&&TRIP.dep||Date.now()));row(480,'도착','런던 · 11번째 역');row(550,'수하물',T?'#'+T.no:'빈 트렁크');row(620,'맡긴 짐',T?'🔒 마음의 짐 1개':'없음 · 그냥 탔어요');
+  row(410,'출발','부산 · '+hm(TRIP&&TRIP.dep||Date.now()));row(480,'도착','런던 · 13번째 역');row(550,'수하물',T?'#'+T.no:'빈 트렁크');row(620,'맡긴 짐',T?'🔒 마음의 짐 1개':'없음 · 그냥 탔어요');
   g.setLineDash([14,10]);g.lineWidth=3;g.strokeStyle='#3a2a1c';g.beginPath();g.moveTo(x+56,670);g.lineTo(x+W-56,670);g.stroke();g.setLineDash([]);
   g.textAlign='center';g.font='700 36px "Gaegu",'+F;g.fillText(T?'이 짐은 런던역에서 찾아요':'창가 자리에서 쉬어 갈게요',0,750);
   g.font='600 26px '+F;g.globalAlpha=.75;g.fillText(CNT?'오늘 마음의 짐 '+CNT+'개가 부산역을 떠났어요':'역마다 동화 속 승객이 타요',0,810);g.globalAlpha=1;
@@ -1807,13 +1809,16 @@ const CH=[
  {id:'seoul',name:'서울',en:'SEOUL',h:1.62,ev:['gilldong'],sn:['🍯','약과','한 입 베어 물면 꿀이 배어 나온다.']},
  {id:'ojak',name:'구름 위 오작교',en:'ABOVE THE CLOUDS',h:2.68,ev:['gyeonu'],sn:['⭐','은하수 별사탕','까치가 물어다 준 별 조각.']},
  {id:'siberia',name:'시베리아 설원',en:'SIBERIA',h:4.55,ev:['snowq'],sn:['🥟','피로시키','눈길에서도 식지 않는 고기 빵.']},
- {id:'baikal',name:'바이칼 호수',en:'LAKE BAIKAL',h:5.8,ev:['sherlock'],sn:['🫖','바이칼 허브차','호숫가 풀로 우린 차.']},
+ {id:'baikal',name:'바이칼 호수',en:'LAKE BAIKAL',h:5.8,ev:['sherlock'],sn:['☕','바이칼 허브차','호숫가 풀로 우린 차.']},
  {id:'moscow',name:'모스크바',en:'MOSCOW',h:12.85,ev:['odette'],side:['babayaga'],sn:['🍰','꿀케이크','열 겹으로 쌓은 메도빅.']},
  {id:'forest',name:'독일 숲과 성',en:'BLACK FOREST',h:16.4,h2:17.62,ev:['wolf','sleeping'],side:['hansel'],sn:['🥨','프레첼','숲속 빵집의 소금 프레첼.']},
  {id:'alps',name:'스위스 알프스',en:'SWISS ALPS',h:18.68,ev:['monster'],sn:['🍫','알프스 초콜릿','산장에서 파는 두꺼운 판초콜릿.']},
  {id:'paris',name:'파리',en:'PARIS',h:20.05,ev:['cinder'],sn:['🧁','마카롱','분홍, 하늘, 레몬색.']},
  {id:'sea',name:'해저터널',en:'UNDERSEA TUNNEL',h:21.5,ev:['mermaid'],sn:['🍬','소금 캐러멜','바다 소금을 넣은 캐러멜.']},
- {id:'london',name:'런던',en:'LONDON',h:22.35,ev:['rabbit'],sn:['🫓','스콘','잼과 크림을 듬뿍.']}];
+ {id:'london',name:'런던',en:'LONDON',h:22.35,ev:['rabbit'],sn:['🍞','스콘','잼과 크림을 듬뿍.']}];
+{const fi=CH.findIndex(c=>c.id==='forest');const F=CH[fi];F.ev=['wolf'];F.side=[];delete F.h2;
+  CH.splice(fi+1,0,{id:'candy',name:'과자의 집',en:'GINGERBREAD HOUSE',h:17.0,ev:['hansel'],sn:['🍪','진저브레드 조각','과자 집 처마에서 떼어 온 한 조각.']},
+    {id:'castle',name:'노이슈반슈타인',en:'NEUSCHWANSTEIN',h:17.62,ev:['sleeping'],sn:['🍎','구운 사과','성 부엌에서 막 꺼낸 따뜻한 사과.']})}
 const CH_OF={};CH.forEach((c,i)=>{c.ev.forEach(id=>CH_OF[id]=i);(c.side||[]).forEach(id=>CH_OF[id]=i)});
 const SP={byeol:'px_byeol.webp',gilldong:'px_gilldong.webp',gyeonu:'px_gyeonu.webp',snowq:'px_snowq.webp',sherlock:'pf_p01.webp',babayaga:'px_babayaga.webp',odette:'pf_p07.webp',
  hansel:'px_hansel.webp',wolf:'pf_p09.webp',sleeping:'px_sleeping.webp',monster:'px_monster.webp',cinder:'px_cinder.webp',mermaid:'pf_p15.webp',rabbit:'pf_p13.webp',bunny:'img/cm/rabbit.webp'};
@@ -1969,7 +1974,7 @@ const _moShow=moShow;moShow=function(id){const base=id.replace(/_open$/,'');if(!
 
 /* ---- 진행 상태 ---- */
 const chOfH=h=>{let i=0;CH.forEach((c,k)=>{if(c.h<=h+.01)i=k});return i};
-const HE={busan:1.5,seoul:2.55,ojak:4.4,siberia:5.65,baikal:9.4,moscow:14.15,forest:18.55,alps:19.9,paris:21.35,sea:22.2,london:23.95};const chEndH=i=>HE[CH[i].id]-.02;
+const HE={busan:1.5,seoul:2.55,ojak:4.4,siberia:5.65,baikal:9.4,moscow:14.15,forest:18.55,alps:19.9,paris:21.35,sea:22.2,london:23.95};Object.assign(HE,{forest:16.95,candy:17.5,castle:18.55});const chEndH=i=>HE[CH[i].id]-.02;
 function tripFix(){if(!TRIP)return;if(TRIP.ch===undefined){const h0=TRIP.dev?TRIP.hb:Math.max(0,Math.min(TRIP_H-.1,(Date.now()-TRIP.dep)/HR));const i=chOfH(h0);
     TRIP.ch=i;TRIP.hb=CH[i].h;TRIP.at=Date.now();TRIP.done={};for(let k=0;k<i;k++)TRIP.done[k]=1;const ev=LS.get('bl_ev',{});if(CH[i].ev.every(id=>ev[id]))TRIP.done[i]=1;if(!TRIP.dev)LS.set('bl_trip',TRIP)}
   TRIP.done=TRIP.done||{}}
@@ -2060,7 +2065,7 @@ function fwShots(){const met=LS.get('bl_met',{});const ids=['byeol','gilldong','
   return out}
 ending=function(){const rep=ending.__replay;ending.__replay=0;const T=TRUNK;if(!T)return farewell(()=>{TRIP.fin=1;tripSave();trkShow()});let pick=0;
   const shots=[{t:'title',text:'종착역',sub:'런던'},
-   {bg:'img/v/lostfound.webp',ch:'robot.webp',ch2:null,pose:'in',fx:['glow'],who:'로봇 포터',say:'런던역입니다! 열한 개의 역, 수고 많으셨어요.\n수하물 #'+T.no+', 찾으러 오셨죠?'},
+   {bg:'img/v/lostfound.webp',ch:'robot.webp',ch2:null,pose:'in',fx:['glow'],who:'로봇 포터',say:'런던역입니다! 열세 개의 역, 수고 많으셨어요.\n수하물 #'+T.no+', 찾으러 오셨죠?'},
    {bg:'img/v/lostfound.webp',ch:null,ch2:null,fx:['spk','glow'],who:'',narr:1,say:'트렁크를 연다. 도시 스티커가 빼곡하다.\n안에는 부산에서 넣은 쪽지 한 장.\n\n“'+T.text+'”'},
    ...fwShots(),
    {bg:'img/v/lostfound.webp',ch:'robot.webp',ch2:null,pose:'in',who:'로봇 포터',say:'부산에서부터 같이 실려 온 마음의 짐이에요. 조금 가벼워졌나요?\n가져가셔도 되고, 런던 유실물 보관소에 두고 가셔도 돼요.'},
@@ -2075,7 +2080,7 @@ curView=function(){if(gBgOv)return 'url('+gBgOv+')';try{const w=where(dep,vnow()
    v3 · 배웅 (친한 만큼 깊어짐) · 꼬리표 뒷면 사인 · 같이 내리기(숨은 엔딩)
    =================================================================================== */
 const OFFAT={gyeonu:4,babayaga:6,byeol:9};   // 이 역(장 번호)에 도착하면 내림
-const SIGN={byeol:['🐾','Jua','#2f7f86'],gilldong:['🖌️','Nanum Myeongjo','#1d1a17'],gyeonu:['🪶','Gowun Batang','#5a4ea0'],snowq:['❄️','Gowun Batang','#3c7ea6'],
+const SIGN={byeol:['🐾','Jua','#2f7f86'],gilldong:['🖌️','Nanum Myeongjo','#1d1a17'],gyeonu:['✒️','Gowun Batang','#5a4ea0'],snowq:['❄️','Gowun Batang','#3c7ea6'],
  sherlock:['🔍','Nanum Myeongjo','#5a3d22'],odette:['🤍','Gowun Batang','#a05a80'],wolf:['🐺','Do Hyeon','#b8312f'],sleeping:['🌹','Gowun Batang','#a23b55'],
  monster:['🔖','Jua','#5f6b47'],cinder:['👠','Gowun Batang','#5a6fb0'],mermaid:['🐚','Gaegu','#2f7f9e'],rabbit:['⏱️','Do Hyeon','#c0392b'],babayaga:['🧹','Jua','#2e6b3e']};
 const SIGN_T={babayaga:'길 잃으면 쓸어서 길을 내게 — 바바 야가'};
@@ -2210,14 +2215,14 @@ makeCard=function(T,hid){card.dataset.kind='end';const cv=card.querySelector('ca
 const MENU={busan:[['🍢','어묵탕','부산 부둣가 그 맛. 국물이 먼저 나온다.'],['🥘','돼지국밥','부추를 듬뿍 얹은 뜨끈한 한 그릇.'],['🥟','씨앗호떡','꿀 사이로 해바라기씨가 바삭.']],
  seoul:[['🍲','설렁탕','뽀얀 국물에 파를 송송.'],['🍜','평양냉면','슴슴한데 자꾸 생각나는 맛.'],['🍡','떡꼬치','달콤한 고추장 양념을 발랐다.']],
  ojak:[['🍮','구름 푸딩','숟가락을 대면 몽글몽글 흩어진다.'],['⭐','별빛 수정과','잣 대신 작은 별이 떠 있다.'],['🍙','칠석 밀전병','견우직녀가 만나는 날 먹는 전병.']],
- siberia:[['🥣','보르시','붉은 비트 수프에 사워크림 한 숟갈.'],['🥟','펠메니','작은 만두가 김을 뿜는다.'],['🫖','사모바르 홍차','잼을 한 숟갈 곁들인 러시아식 차.']],
+ siberia:[['🥣','보르시','붉은 비트 수프에 사워크림 한 숟갈.'],['🥟','펠메니','작은 만두가 김을 뿜는다.'],['☕','사모바르 홍차','잼을 한 숟갈 곁들인 러시아식 차.']],
  baikal:[['🐟','오물 훈제구이','바이칼에만 사는 물고기.'],['🥧','잣 파이','시베리아 잣을 듬뿍.'],['🍵','바이칼 허브차','호숫가 풀 냄새가 난다.']],
  moscow:[['🥞','블리니','얇은 팬케이크에 연어알을 얹었다.'],['🍰','메도빅','꿀 케이크 열 겹.'],['🥣','솔랸카','새콤하고 짭짤한 겨울 수프.']],
  forest:[['🌭','소시지와 감자','숲속 오두막 아침 식사.'],['🍰','슈바르츠발트 케이크','체리와 초콜릿, 검은 숲의 케이크.'],['🥨','프레첼','굵은 소금이 반짝인다.']],
- alps:[['🫕','치즈 퐁듀','빵을 콕 찍어 길게 늘인다.'],['🥔','뢰스티','감자를 바삭하게 부쳤다.'],['☕','핫초코','산장에서 마시는 진한 코코아.']],
+ alps:[['🧀','치즈 퐁듀','빵을 콕 찍어 길게 늘인다.'],['🥔','뢰스티','감자를 바삭하게 부쳤다.'],['☕','핫초코','산장에서 마시는 진한 코코아.']],
  paris:[['🥐','크루아상','겹겹이 바스러진다.'],['🧅','양파 수프','치즈 뚜껑을 깨뜨려 먹는다.'],['🍮','크렘 브륄레','설탕 유리를 톡 깨뜨린다.']],
  sea:[['🐚','조개 수프','바다 냄새가 가득한 한 그릇.'],['🍙','김 주먹밥','해녀가 싸 준 듯한 주먹밥.'],['🍨','바다소금 아이스크림','달고 짭짤하다.']],
- london:[['🐟','피시 앤 칩스','식초를 살짝 뿌렸다.'],['🫖','애프터눈 티','3단 접시에 스콘과 샌드위치.'],['🍳','잉글리시 브렉퍼스트','콩, 베이컨, 달걀, 토스트.']]};
+ london:[['🐟','피시 앤 칩스','식초를 살짝 뿌렸다.'],['☕','애프터눈 티','3단 접시에 스콘과 샌드위치.'],['🍳','잉글리시 브렉퍼스트','콩, 베이컨, 달걀, 토스트.']]};
 const EAT={byeol:['허허, 이건 바다에서 못 먹는 맛이오.','천천히 먹으시오. 거북은 늘 천천히 먹소.'],gilldong:['훔친 게 아니라 같이 먹는 밥이라 더 맛있소.','이런 밥상, 처음이오.'],
  gyeonu:['(직녀) 견우, 한 입 먹어 봐요.','(견우) 마주 앉아 밥 먹는 게 일 년에 한 번이라니. 오늘은 실컷 먹겠소.'],snowq:['…따뜻한 걸 먹어도 안 녹네요.','후후 불어서 먹을게요. 천천히요.'],
  sherlock:['식당칸은 관찰하기 좋은 곳이지. 다들 표정이 풀려 있거든.','음식 맛은 추리가 필요 없어서 좋군.'],babayaga:['흐흐, 내 오두막 스튜보다는 못하지만.','젊은이, 더 먹게. 마르면 못써.'],
@@ -2426,7 +2431,7 @@ const PAGES={byeol:'별주부야 울지 마.\n토끼랑 친구 하면 돼.',gill
 /* 놀이 · 페이지 조각 */
 function gGame(kind){gWait=1;gBox.classList.remove('on');cg.classList.add('gaming');const g=document.createElement('div');g.className='gm';cg.appendChild(g);
   const fin=()=>{g.style.transition='opacity .6s';g.style.opacity=0;cg.classList.remove('gaming');setTimeout(()=>{g.remove();gWait=null;gNext()},600)};
-  g.addEventListener('click',e=>e.stopPropagation());(GAMES[kind]||(()=>fin()))(g,fin)}
+  g.addEventListener('click',e=>e.stopPropagation());window.__fin=fin;(GAMES[kind]||(()=>fin()))(g,fin)}
 const SVG={
  boat:'<svg viewBox="0 0 120 80"><path d="M10 52 L110 52 L92 72 L28 72 Z" fill="#f6efdc" stroke="#3a2a1c" stroke-width="2.5"/><path d="M60 6 L60 52 L22 52 Z" fill="#fffaf0" stroke="#3a2a1c" stroke-width="2.5"/><path d="M60 14 L60 52 L92 52 Z" fill="#efe3c4" stroke="#3a2a1c" stroke-width="2.5"/></svg>',
  ticket:'<svg viewBox="0 0 80 48"><path d="M4 6h72v12a6 6 0 0 0 0 12v12H4V30a6 6 0 0 0 0-12z" fill="#f3e6c4" stroke="#3a2a1c" stroke-width="2.5"/><rect x="12" y="6" width="8" height="36" fill="#b8432f"/><path d="M28 18h36M28 26h26" stroke="#3a2a1c" stroke-width="2.5"/></svg>',
@@ -2578,4 +2583,296 @@ async function cgShare(k,how){const b=await cgCanvas(k);const name='busan-london
   setTimeout(()=>{if(skip)return;ty(L,'스무 해 전에 맡기신 짐이, 아직 여기 있습니다.',()=>setTimeout(()=>{if(skip)return;ty(L,'찾으러 오셨군요.',()=>setTimeout(()=>{if(skip)return;ty(L,'그런데… 짐이 하나 더 있으시네요.',()=>setTimeout(go1,700))},1300))},1500))},200);
   const sk=e=>{if(intro.classList.contains('s0')){go1()}};intro.addEventListener('click',sk,{once:true})}}
 {const _ig=introGo;introGo=function(t){$('iOldW').classList.add('done');LS.set('bl_old',{t:'혼자 자는 거 무서워요'});_ig(t)}}
+
+/* v10: 다음 역 갈 때 풍경 미리 받기 */
+{const _dc=departCh;departCh=function(){try{const i=TRIP.ch,a=CH[i].h,b=CH[i+1]?CH[i+1].h:a;SEG.filter(g=>g.h>=a-.01&&g.h<=b+.01).forEach(g=>{(VIEWS[g.id]||[]).forEach(u=>{const im=new Image();im.decoding='async';im.src=u});if(MIDS[g.id]){const im=new Image();im.src='img/m/'+MIDS[g.id][0]+'.webp'}})}catch(e){}_dc()}}
+/* ===================== v11: 13개 역 · 4~13역 새 이야기 · 놀이 10개 ===================== */
+Object.assign(NAME2ID,{'헨젤':'hansel','그레텔':'hansel','눈의 여왕':'snowq','흰 토끼':'rabbit','인어공주':'mermaid','신데렐라':'cinder','바바 야가':'babayaga'});
+
+{OFFAT.byeol=CH.findIndex(c=>c.id==='sea');
+  MENU.candy=[['🍪','진저브레드 지붕 조각','처마 끝은 생강 맛, 굴뚝은 계피 맛.'],['🥛','따뜻한 우유','꿀 한 숟갈을 녹였다.'],['🍎','구운 사과','계피 가루를 솔솔 뿌렸다.']];
+  MENU.castle=[['🥨','바이에른 프레첼','성 아래 빵집에서 갓 구운 것.'],['🍰','사과 슈트루델','얇은 반죽 속에 사과가 가득.'],['☕','백 년 만의 아침 차','공주가 고른 홍차.']];
+  if(!MAINS.includes('hansel'))MAINS.push('hansel')}
+arrLabel=function(){return '13번째 역'};
+const A=say=>({bg:W_,ch:null,ch2:null,sp:0,who:'로봇 포터',say});
+Object.assign(PAGES,{snowq:'여왕님도\n따뜻한 거 좋아하죠?',sherlock:'셜록 아저씨도\n쉬는 날 있어야 돼.',odette:'백조여도 예뻐.\n사람이어도 예뻐.',wolf:'늑대도\n착할 수 있어.',
+  hansel:'헨젤 그레텔\n집 가는 길 ★',sleeping:'공주님 일어나면\n나랑 놀자.',monster:'괴물 말고\n이름 지어 줄게.',cinder:'재투성이여도\n신데렐라가 제일 좋아.',mermaid:'인어공주야,\n하고 싶은 말 여기 써.',rabbit:'다 읽으면\n네가 써.'});
+const MNAME=()=>LS.get('bl_mname','')||'괴물';
+{const _gn11=gNext;gNext=function(){if(cg.classList.contains('on')&&!gType&&!gWait){const s=gShots[gI];if(s){if(s.say&&s.say.includes('{괴물}'))s.say=s.say.replace(/\{괴물\}/g,MNAME());if(s.choice)s.choice=s.choice.map(c=>[c[0].replace(/\{괴물\}/g,MNAME()),c[1].replace(/\{괴물\}/g,MNAME()),c[2]])}}_gn11()}}
+/* ---- 놀이 ---- */
+Object.assign(SVG,{
+ foot:'<svg viewBox="0 0 60 70"><ellipse cx="30" cy="44" rx="16" ry="22" fill="#5a4636" stroke="#3a2a1c" stroke-width="2"/><circle cx="18" cy="14" r="6" fill="#5a4636"/><circle cx="30" cy="9" r="6" fill="#5a4636"/><circle cx="42" cy="14" r="6" fill="#5a4636"/></svg>',
+ ash:'<svg viewBox="0 0 70 50"><path d="M8 40 Q20 18 34 24 Q46 10 62 38 Z" fill="#9a958c" stroke="#3a2a1c" stroke-width="2"/><circle cx="30" cy="30" r="3" fill="#c0503a"/></svg>',
+ leaf:'<svg viewBox="0 0 70 50"><path d="M8 40 Q20 4 62 10 Q52 44 8 40Z" fill="#6d8a3e" stroke="#3a2a1c" stroke-width="2"/><path d="M12 38 Q34 26 58 12" stroke="#3a2a1c" stroke-width="1.6" fill="none"/></svg>',
+ feather:'<svg viewBox="0 0 50 110"><path d="M25 104 L25 30" stroke="#c9b48a" stroke-width="3"/><path d="M25 8 Q48 34 40 70 Q30 86 25 92 Q20 86 10 70 Q2 34 25 8Z" fill="#fffaf2" stroke="#3a2a1c" stroke-width="2"/></svg>',
+ crumb:'<svg viewBox="0 0 30 30"><path d="M5 18 Q8 6 18 7 Q27 10 24 20 Q18 27 9 24Z" fill="#d9a35c" stroke="#3a2a1c" stroke-width="1.8"/></svg>',
+ cup:'<svg viewBox="0 0 120 100"><path d="M20 40 h70 v18 a35 35 0 0 1 -70 0z" fill="#f6efdc" stroke="#3a2a1c" stroke-width="3"/><path d="M90 46 a12 12 0 0 1 0 22" fill="none" stroke="#3a2a1c" stroke-width="3"/><ellipse cx="55" cy="92" rx="46" ry="6" fill="#e9dcbc" stroke="#3a2a1c" stroke-width="2.5"/><path class="stm" d="M42 32 q-8 -10 0 -20 q8 -10 0 -20 M62 32 q-8 -10 0 -20 q8 -10 0 -20" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".8"/></svg>'});
+function findGame(items,title,sub){return (g,fin)=>{let n=0;g.innerHTML='<div class="gh paper">'+title+' <b class="c">0 / '+items.length+'</b><small>'+sub+'</small></div>';
+  const pos=[[14,58],[84,36],[62,80],[30,30],[72,62],[44,70]].sort(()=>Math.random()-.5);
+  items.forEach((o,i)=>{const d=document.createElement('div');d.className='obj';d.innerHTML=SVG[o];d.style.left=pos[i][0]+'%';d.style.top=pos[i][1]+'%';d.style.setProperty('--r',(Math.random()*30-15)+'deg');d.style.opacity=.9;
+    d.onclick=e=>{e.stopPropagation();if(d.classList.contains('got'))return;d.classList.add('got');n++;g.querySelector('.c').textContent=n+' / '+items.length;try{blipUp()}catch(e){}if(n>=items.length)setTimeout(fin,900)};g.appendChild(d)});
+  setTimeout(()=>g.querySelectorAll('.obj:not(.got)').forEach(d=>d.classList.add('hint')),9000)}}
+const gcard=(h)=>'<div class="gc paper">'+h+'</div>';
+Object.assign(GAMES,{
+ clue:findGame(['foot','ash','leaf'],'셜록이 흘린 단서 찾기','발자국 · 파이프 재 · 찻잎'),
+ fog(g,fin){g.innerHTML='<div class="gh paper">김 서린 창에 그림 그리기<small>화면을 문질러 성에를 지워 보세요</small></div><canvas class="fogc" style="position:absolute;inset:9% 0;width:100%;height:82%;cursor:crosshair;touch-action:none"></canvas>';
+   const c=g.querySelector('canvas'),r=c.getBoundingClientRect();c.width=Math.round(r.width/2);c.height=Math.round(r.height/2);const x=c.getContext('2d');
+   x.fillStyle='rgba(232,240,247,.93)';x.fillRect(0,0,c.width,c.height);for(let i=0;i<900;i++){x.fillStyle='rgba(255,255,255,'+(Math.random()*.5)+')';x.beginPath();x.arc(Math.random()*c.width,Math.random()*c.height,Math.random()*3+1,0,7);x.fill()}
+   let down=false,done=false;const rub=e=>{if(!down||done)return;const b=c.getBoundingClientRect(),px=(e.clientX-b.left)/2,py=(e.clientY-b.top)/2;x.globalCompositeOperation='destination-out';const gr=x.createRadialGradient(px,py,4,px,py,34);gr.addColorStop(0,'rgba(0,0,0,1)');gr.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=gr;x.beginPath();x.arc(px,py,34,0,7);x.fill();x.globalCompositeOperation='source-over'};
+   c.addEventListener('pointerdown',e=>{down=true;c.setPointerCapture(e.pointerId);rub(e)});c.addEventListener('pointermove',rub);c.addEventListener('pointerup',()=>down=false);
+   const chk=setInterval(()=>{const d=x.getImageData(0,0,c.width,c.height).data;let t=0,k=0;for(let i=3;i<d.length;i+=64){t++;if(d[i]<60)k++}if(k/t>.38){done=true;clearInterval(chk);c.style.transition='opacity 1.2s';c.style.opacity=0;setTimeout(fin,1300)}},500);
+   setTimeout(()=>{if(!done){done=true;clearInterval(chk);c.style.transition='opacity 1.2s';c.style.opacity=0;setTimeout(fin,1300)}},45000)},
+ feather(g,fin){const seq=[0,1,2].sort(()=>Math.random()-.5);let step=0,busy=true;g.innerHTML='<div class="gh paper">오데트의 춤 따라 하기<small class="m">빛나는 순서를 잘 보세요</small></div>';
+   const F=[28,50,72].map((l,i)=>{const d=document.createElement('div');d.className='obj fth';d.innerHTML=SVG.feather;d.style.left=l+'%';d.style.top='52%';d.style.width='clamp(46px,5vw,70px)';d.style.opacity=.75;g.appendChild(d);d.onclick=e=>{e.stopPropagation();press(i)};return d});
+   const flash=(i,ms)=>{F[i].style.opacity=1;F[i].style.filter='drop-shadow(0 0 16px rgba(255,236,180,1))';F[i].style.transform='translate(-50%,-62%)';setTimeout(()=>{F[i].style.opacity=.75;F[i].style.filter='';F[i].style.transform=''},ms)};
+   const show=()=>{busy=true;step=0;g.querySelector('.m').textContent='빛나는 순서를 잘 보세요';seq.forEach((v,k)=>setTimeout(()=>flash(v,520),700+k*800));setTimeout(()=>{busy=false;g.querySelector('.m').textContent='이제 같은 순서로 눌러 보세요'},700+seq.length*800)};
+   const press=i=>{if(busy)return;flash(i,300);if(i===seq[step]){step++;try{blipUp()}catch(e){}if(step>=seq.length){busy=true;g.querySelector('.m').textContent='완벽해요!';setTimeout(fin,1100)}}else{g.querySelector('.m').textContent='괜찮아요, 한 번 더 볼게요';setTimeout(show,900);busy=true}};
+   setTimeout(show,400)},
+ sniff(g,fin){let r=0;const H=[['오른쪽','왼쪽'],['왼쪽','오른쪽'],['오른쪽','왼쪽']].map(()=>Math.random()<.5?'L':'R');
+   const draw=m=>{g.innerHTML=gcard('<h4>늑대 코로 길 찾기 · '+(r+1)+' / 3</h4><p>킁킁… '+(H[r]==='L'?'왼쪽':'오른쪽')+'에서 희미하게 파이 냄새가 난다.'+(m?'<br><b>'+m+'</b>':'')+'</p><div class="row"><button class="pbtn2 l" data-d="L">← 왼쪽 길</button><button class="pbtn2 l" data-d="R">오른쪽 길 →</button></div>');
+     g.querySelectorAll('[data-d]').forEach(b=>b.onclick=e=>{e.stopPropagation();if(b.dataset.d===H[r]){r++;try{blipUp()}catch(e){}if(r>=3){g.innerHTML=gcard('<h4>찾았다!</h4><p>바구니 속 파이가 무사하다.</p>');setTimeout(fin,1200)}else draw('맞아, 이쪽이야!')}else draw('…버섯 냄새다. 다른 길이야.')})};draw()},
+ crumbs(g,fin){const P=[[16,70],[28,58],[40,64],[53,52],[66,58],[80,46]];let n=0;g.innerHTML='<div class="gh paper">빵 부스러기로 길 표시하기<small>반짝이는 곳을 차례로 눌러 주세요</small></div><svg class="pth" viewBox="0 0 100 100" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none"><polyline fill="none" stroke="#ffe7a8" stroke-width=".5" stroke-dasharray="1.4 1.2" points=""/></svg>';
+   const pl=g.querySelector('polyline');const next=()=>{if(n>=P.length){setTimeout(fin,1000);return}const d=document.createElement('div');d.className='obj hint';d.innerHTML=SVG.crumb;d.style.left=P[n][0]+'%';d.style.top=P[n][1]+'%';d.style.width='clamp(34px,3.4vw,48px)';g.appendChild(d);
+     d.onclick=e=>{e.stopPropagation();d.classList.remove('hint');d.onclick=null;pl.setAttribute('points',P.slice(0,n+1).map(p=>p.join(',')).join(' '));n++;try{blipUp()}catch(e){}next()}};next()},
+ list(g,fin){const O=['첫눈 오는 날','바다 위 해돋이','친구랑 밤새 수다','별똥별','기차 도시락','비 오는 날 낮잠'];const sel=new Set();
+   g.innerHTML=gcard('<h4>공주가 못 본 것들 · <b class="c">0</b> / 3</h4><p>런던까지 같이 보고 싶은 것 세 가지를 골라 주세요.</p><div class="chips" style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:12px">'+O.map((o,i)=>'<button class="pbtn2 l" data-i="'+i+'" style="flex:0 0 auto;padding:7px 12px">'+o+'</button>').join('')+'</div><button class="pbtn2 go" disabled style="width:100%">이걸로 할래요</button>');
+   g.querySelectorAll('[data-i]').forEach(b=>b.onclick=e=>{e.stopPropagation();const i=+b.dataset.i;if(sel.has(i)){sel.delete(i);b.style.background=''}else if(sel.size<3){sel.add(i);b.style.background='#3a2a1c';b.style.color='#f3e6c4'}if(!sel.has(i))b.style.color='';g.querySelector('.c').textContent=sel.size;g.querySelector('.go').disabled=sel.size<3});
+   g.querySelector('.go').onclick=e=>{e.stopPropagation();LS.set('bl_pwish',[...sel].map(i=>O[i]));fin()}},
+ name(g,fin){g.innerHTML=gcard('<h4>이름표 쓰기</h4><p>그에게 이름을 지어 주세요. 세 글자 안쪽이면 부르기 좋아요.</p><input maxlength="6" placeholder="예: 봄"><div class="row" style="margin-bottom:8px">'+['봄','아담','별','친구'].map(n=>'<button class="pbtn2 l sg">'+n+'</button>').join('')+'</div><button class="pbtn2 go" style="width:100%">이 이름으로 부르기</button>');
+   const inp=g.querySelector('input');g.querySelectorAll('.sg').forEach(b=>b.onclick=e=>{e.stopPropagation();inp.value=b.textContent});
+   const go=()=>{const v=(inp.value.trim()||'봄').replace(/[<>{}]/g,'');LS.set('bl_mname',v);fin()};g.querySelector('.go').onclick=e=>{e.stopPropagation();go()};inp.onkeydown=e=>{if(e.key==='Enter')go()};setTimeout(()=>{try{inp.focus()}catch(e){}},300)},
+ clock(g,fin){let a=Math.random()*200+60,miss=0,stop=false;g.innerHTML=gcard('<h4>열두 시 종 멈추기</h4><p class="m">바늘이 맨 위(12)에 닿기 직전에 눌러요.</p><svg viewBox="0 0 120 120" style="width:150px;display:block;margin:0 auto 10px"><circle cx="60" cy="60" r="54" fill="#fffaf0" stroke="#3a2a1c" stroke-width="4"/>'+Array.from({length:12},(_,i)=>{const t=i*30*Math.PI/180;return '<line x1="'+(60+46*Math.sin(t))+'" y1="'+(60-46*Math.cos(t))+'" x2="'+(60+40*Math.sin(t))+'" y2="'+(60-40*Math.cos(t))+'" stroke="#3a2a1c" stroke-width="'+(i?2:4)+'"/>'}).join('')+'<path d="M48 6 L60 0 L72 6" fill="#b8432f" opacity=".35"/><line class="hd" x1="60" y1="60" x2="60" y2="16" stroke="#b8432f" stroke-width="4" stroke-linecap="round"/><circle cx="60" cy="60" r="5" fill="#3a2a1c"/></svg><button class="pbtn2 go" style="width:100%">멈춰!</button>');
+   const hd=g.querySelector('.hd');let last=performance.now();const tick=t=>{if(stop||!g.isConnected)return;a=(a+(t-last)*.12)%360;last=t;hd.setAttribute('transform','rotate('+a+' 60 60)');requestAnimationFrame(tick)};requestAnimationFrame(tick);
+   g.querySelector('.go').onclick=e=>{e.stopPropagation();const d=Math.min(a,360-a),tol=miss>=2?70:34;if(d<=tol){stop=true;g.querySelector('.m').textContent='댕… (종소리가 멈췄다)';setTimeout(fin,1200)}else{miss++;g.querySelector('.m').textContent=miss>=2?'거의 다 왔어요. 이번엔 조금 넉넉하게!':'조금만 더 기다렸다가!'}}},
+ note(g,fin){g.innerHTML=gcard('<h4>인어공주의 수첩</h4><p>누구에게든, 하지 못한 말 한 줄을 써 주세요.</p><input maxlength="40" placeholder="예: 그때 고마웠다고 말하고 싶어"><button class="pbtn2 go" style="width:100%">수첩에 쓰기</button>');
+   const inp=g.querySelector('input'),go=()=>{const v=inp.value.trim();if(v)LS.set('bl_mnote',v);fin()};g.querySelector('.go').onclick=e=>{e.stopPropagation();go()};inp.onkeydown=e=>{if(e.key==='Enter')go()};setTimeout(()=>{try{inp.focus()}catch(e){}},300)},
+ wait(g,fin){const T=20;g.innerHTML=gcard('<h4>차가 식을 때까지</h4><p class="m">아무것도 안 해도 돼요.</p><div style="position:relative;width:150px;margin:0 auto 6px">'+SVG.cup+'<svg viewBox="0 0 40 40" style="position:absolute;right:-18px;top:-6px;width:40px"><circle cx="20" cy="20" r="16" fill="none" stroke="rgba(58,42,28,.2)" stroke-width="4"/><circle class="rg" cx="20" cy="20" r="16" fill="none" stroke="#3a2a1c" stroke-width="4" stroke-dasharray="100.5" stroke-dashoffset="100.5" transform="rotate(-90 20 20)"/></svg></div>');
+   const rg=g.querySelector('.rg'),m=g.querySelector('.m'),t0=performance.now();g.addEventListener('click',()=>{m.textContent='쉿… 그냥 있어도 돼요.'});
+   const iv=setInterval(()=>{const k=Math.min(1,(performance.now()-t0)/(T*1000));rg.setAttribute('stroke-dashoffset',100.5*(1-k));if(k>=1){clearInterval(iv);m.textContent='…차가 딱 좋게 식었어요.';setTimeout(fin,1200)}},200)}});
+/* ---- 4~13역 ---- */
+Object.assign(EV2,{
+ snowq:[T(4,'시베리아 설원','눈의 여왕의 짐'),A('시베리아 설원입니다. 이 너머 북쪽 끝 어딘가에, 눈의 여왕의 얼음 궁전이 있다는 이야기가 전해집니다.'),
+  O('snowq','눈보라 속 작은 간이역. 얼음 왕관을 쓴 사람이 오르자, 열차 창마다 하얀 성에가 번진다.'),
+  L('snowq',null,1,'눈의 여왕','…앉아도 될까요. 제 자리 근처는 금방 추워져서, 다들 자리를 옮기더군요.',{pose:'in'}),
+  L('snowq',null,1,'눈의 여왕','손대는 것마다 얼어요. 꽃도, 찻잔도, 내밀어 준 손도.'),
+  L('snowq',null,1,'눈의 여왕','그래서 궁전에서 혼자 살았어요. 얼음은 아무도 다치게 하지 않으니까요. …그렇게 믿었어요.',{pose:'face'}),
+  N('snowq',null,'(그녀가 앉은 쪽 창에 성에가 꽃처럼 피어난다. 창밖이 하나도 보이지 않는다.)'),
+  L('snowq',null,1,'눈의 여왕','미안해요. 창밖을 보고 싶었을 텐데.'),
+  N('snowq',null,'(손가락으로 성에를 문질러 본다. 차갑지만, 생각보다 잘 지워진다.)'),
+  L('snowq',null,1,'눈의 여왕','…지워져요? 제 얼음이?'),
+  {game:'fog'},
+  L('snowq',null,1,'눈의 여왕','창에 그림이 생겼네요. 제 얼음이 누군가의 도화지가 된 건 처음이에요.'),
+  N('snowq','byeol','(식당칸에서 별주부가 김이 오르는 찻잔을 들고 온다.)'),
+  L('snowq','byeol',2,'별주부','여왕 양반, 차 한 잔 하시오. 거북은 원래 찬 데 익숙하오. 얼어도 괜찮소.'),
+  L('snowq','byeol',1,'눈의 여왕','(두 손으로 찻잔을 감싼다) …안 얼어요. 이번엔.'),
+  L('snowq','byeol',2,'별주부','허허, 따뜻한 쪽이 이겼구려.'),
+  L('snowq',null,1,'눈의 여왕','{이름님}, 추운 날엔 누가 떠올라요?',{pose:'face'}),
+  L('snowq',null,1,'눈의 여왕','저는 아무도 떠오르지 않아서, 그게 제일 추웠어요.'),
+  {choice:[['아직은 아무도 안 떠올라요','(여왕이 고개를 끄덕인다) 그럼 우리, 같은 겨울이네요. 같은 겨울이면 덜 추워요.','honest'],['오늘부턴 여왕님이 떠오를 거예요','(성에가 녹아 물방울이 된다) …그런 말을 들으면, 얼음도 녹는군요.','kind'],['따뜻한 차요. 사람보다 차가 먼저예요','(여왕이 처음으로 소리 내어 웃는다) 맞아요. 차가 먼저예요.','smile']],cg:'snowq'},
+  N('snowq',null,'(녹은 성에 사이로, 종이 한 장이 창틀에 얼어붙어 있다.)'),
+  L('snowq',null,1,'눈의 여왕','궁전 거울 뒤에 붙어 있던 쪽지예요. 이것만은 얼지 않았어요. 이상하죠.'),
+  {page:'snowq'},
+  L('snowq',null,1,'눈의 여왕','이 글씨, 별주부 씨 조각이랑 같은 글씨예요. …누군가 우리를 전부 알고 있었나 봐요.',{pose:'face'}),
+  {item:'snowq'}],
+ sherlock:[T(5,'바이칼 호수','셜록 홈즈의 짐'),A('바이칼 호수입니다. 세상에서 가장 깊은 호수라고 합니다. 깊은 곳일수록, 오래된 것이 가라앉아 있지요.'),
+  O('sherlock','얼어붙은 호숫가 승강장. 체크무늬 망토의 신사가 파이프를 문 채, 노을을 등지고 서 있다.'),
+  L('sherlock',null,1,'셜록 홈즈','실례하네. 설명은 필요 없네. 자네는 부산에서 탔고, 차를 두 잔 마셨고, 거북과 친구가 되었지.',{pose:'in'}),
+  L('sherlock',null,1,'셜록 홈즈','어떻게 알았냐고? 소매에 바닷모래가 묻었고, 탁자에 찻잔 자국이 두 개일세. 기본이지.'),
+  L('sherlock',null,1,'셜록 홈즈','…그런데 요즘은 그게 다일세. 풀 사건이 없네.',{pose:'face'}),
+  L('sherlock',null,1,'셜록 홈즈','사건이 없으면 나는 아무것도 아닌 사람 같아. 이 회중시계도 마지막 사건이 끝난 날 멈췄지.'),
+  N('sherlock',null,'(그가 멈춘 시계를 탁자에 올려놓는다. 바늘이 한곳을 가리킨 채 움직이지 않는다.)'),
+  L('sherlock',null,1,'셜록 홈즈','그러니 부탁 하나 하지. 이 칸에 단서 세 개를 흘려 두었네. 찾아보게. 오랜만에 조수가 필요하거든.'),
+  {game:'clue'},
+  L('sherlock',null,1,'셜록 홈즈','훌륭하네! 발자국, 파이프 재, 찻잎. 결론은… 이 칸엔 차를 좋아하는 사람이 너무 많다는 거지.'),
+  N('sherlock','snowq','(옆 칸에서 눈의 여왕이 빈 찻잔을 들고 고개를 내민다.)'),
+  L('sherlock','snowq',2,'눈의 여왕','범인은 저예요. 별주부 씨가 따라 준 차, 세 잔째거든요.'),
+  L('sherlock','snowq',1,'셜록 홈즈','자백이 빠르군. 이번 사건은 내가 진 걸로 하지.'),
+  L('sherlock',null,1,'셜록 홈즈','그나저나 이 호수와 나는 아무 연결 고리가 없네. 포터 말로는 그게 단서라더군. 마음에 드는 말이야.'),
+  L('sherlock',null,1,'셜록 홈즈','{이름}, 이제 자네 차례일세. 자네 짐을 맞혀 보지.',{pose:'face'}),
+  L('sherlock',null,1,'셜록 홈즈','꼬리표에 적힌 걸 읽는 건 반칙이니, 눈을 보고 추리하겠네.',{ifJim:true}),
+  L('sherlock',null,1,'셜록 홈즈','자네는 할 일이 없으면 불안해지는 사람이야. 나처럼. 맞나?'),
+  {choice:[['딱 맞혔어요','(셜록의 눈이 반짝인다) 역시. 같은 종류의 사람이군. 그렇다면 오늘은 둘 다 쉬어 보세.','honest'],['반은 맞고 반은 틀렸어요','반이라. 내 탐정 인생 최고의 성적이군. 나머지 반은 런던까지 가며 맞혀 보겠네.','smile'],['셜록 씨도 쉬어도 돼요','…쉬어도 된다. (회중시계를 집어 든다) 이상하군. 그 말을 듣자마자 시계가 다시 가네.','kind']],cg:'sherlock'},
+  N('sherlock',null,'(째깍. 멈췄던 시계가 다시 간다. 시계 뚜껑 안쪽에 접힌 종이가 끼워져 있다.)'),
+  L('sherlock',null,1,'셜록 홈즈','이건 내가 넣은 게 아니네. …흥미롭군. 아이 글씨야. 크레파스고.'),
+  {page:'sherlock'},
+  L('sherlock',null,1,'셜록 홈즈','이제 조각이 다섯. 같은 손, 같은 크레파스. 이건 사건일세. 런던까지 풀 만한, 진짜 사건.',{pose:'face'}),
+  {item:'sherlock'}],
+ odette:[T(6,'모스크바','백조 오데트의 짐'),A('모스크바입니다. 백오십 년쯤 전, 이 도시의 극장에서 백조가 된 공주의 발레가 처음 무대에 올랐습니다.'),
+  O('odette','노을 진 모스크바 승강장. 하얀 백조 한 마리가 내려앉더니, 발끝으로 선 발레리나가 된다.'),
+  L('odette',null,1,'백조 오데트','안녕하세요! 해가 진 동안에만 사람으로 있을 수 있어요. 그래서 늘 서둘러요.',{pose:'in'}),
+  L('odette',null,1,'백조 오데트','낮에는 백조예요. 마법에 걸려서요.'),
+  L('odette',null,1,'백조 오데트','사람들은 밤의 저만 알아요. 낮의 제 모습을 보면 다들 떠날까 봐… 그게 제 짐이에요.',{pose:'face'}),
+  N('odette','babayaga','(통로로 절구를 탄 할머니가 쿵쿵 지나간다.)'),
+  L('odette','babayaga',2,'바바 야가','흥, 낮이든 밤이든 깃털 빠지는 건 똑같구나. 통로 쓸기 귀찮으니 날개는 접고 다니거라.'),
+  L('odette','babayaga',1,'백조 오데트','(웃음을 참는다) 네, 할머니.'),
+  N('odette',null,'(바바 야가가 빗자루로 깃털을 쓸어 담으며 다음 칸으로 사라진다.)'),
+  L('odette',null,1,'백조 오데트','저기, 춤 하나 가르쳐 드릴까요? 깃털이 빛나는 순서대로만 따라 하면 돼요.'),
+  {game:'feather'},
+  L('odette',null,1,'백조 오데트','완벽해요! 처음인데 발끝이 예뻐요.'),
+  N('odette','sherlock','(뒤 칸에서 셜록이 박수를 치며 들어온다.)'),
+  L('odette','sherlock',2,'셜록 홈즈','추리하자면, 자네는 백조일 때도 똑같이 우아하네. 깃털 각도가 증거일세.'),
+  L('odette','sherlock',1,'백조 오데트','…백조인 저를 본 적 있어요?'),
+  L('odette','sherlock',2,'셜록 홈즈','모스크바 하늘을 두 바퀴 돌더군. 나는 눈이 좋거든.'),
+  L('odette',null,1,'백조 오데트','{이름님}도 사람들 앞에서 숨기는 모습이 있어요?',{pose:'face'}),
+  {choice:[['있어요. 아무도 몰랐으면 해요','(오데트가 손을 잡는다) 그럼 우리 둘만 아는 비밀로 해요. 비밀이 혼자면 외롭지만, 둘이면 약속이 돼요.','honest'],['숨겨도 결국 들키더라고요','(오데트가 웃는다) 맞아요. 그리고 들켜도, 생각보다 아무 일도 안 일어나요.','tough'],['오데트 씨는 둘 다 예뻐요','…둘 다요? (깃털 하나가 반짝인다) 그 말, 아침까지 기억할게요.','kind']],cg:'odette'},
+  N('odette',null,'(오데트가 춤을 마치자, 발치에 깃털 대신 종이 한 장이 떨어진다.)'),
+  L('odette',null,1,'백조 오데트','이건 제 발레 신발 안에 있던 거예요. 늘 넣고 췄어요. 무섭지 않게.'),
+  {page:'odette'},
+  L('odette',null,1,'백조 오데트','이 글씨… 이제 알 것 같아요. 우리 모두를 응원해 준 아이가 있었던 거예요.'),
+  N(null,null,'(뒤 칸에서 셜록의 목소리가 들린다. 「조수의 정체를 알았네. 자네는 발레 선생이야!」 …아니다.)'),
+  {item:'odette'}],
+ wolf:[T(7,'검은 숲','늑대와 빨간 모자의 짐'),A('독일 검은 숲입니다. 이백 년 전, 두 형제가 이 근방 마을을 돌며 옛이야기를 받아 적었다고 합니다. 빨간 모자 이야기도 그중 하나였지요.'),
+  O('wolf','안개 낀 숲속 승강장. 빨간 망토의 아이가 커다란 회색 늑대의 앞발을 꼭 잡고 열차에 오른다.'),
+  L('wolf',null,1,'빨간 모자','안녕! 이쪽은 늑대 아저씨야. 무섭게 생겼지만 길 안내를 엄청 잘해!',{pose:'in'}),
+  L('wolf',null,1,'늑대','…크흠. 익숙하오. 다들 내가 잡아먹을 줄 알지.'),
+  L('wolf',null,1,'늑대','이야기 속에서 나는 늘 할머니를 삼키는 쪽이었소. 사실은 할머니 댁 가는 길을 지켜 주는 쪽인데. 아무도 안 믿어 주지.',{pose:'face'}),
+  L('wolf',null,1,'빨간 모자','난 믿어! 아저씨 꼬리 흔들 때 완전 강아지 같거든.'),
+  L('wolf',null,1,'늑대','…흔든 적 없소.'),
+  N('wolf',null,'(꼬리가 흔들리고 있다.)'),
+  L('wolf',null,1,'빨간 모자','아, 맞다! 할머니 드릴 파이를 숲에 떨어뜨렸어. 아저씨 코로 찾아 줘!'),
+  {game:'sniff'},
+  L('wolf',null,1,'늑대','찾았소. 파이는 무사하오. …내가 한 입도 안 먹었다는 것도 꼭 적어 두시오.'),
+  N('wolf','babayaga','(창밖 숲에서 절구를 탄 바바 야가가 나란히 날아온다.)'),
+  L('wolf','babayaga',2,'바바 야가','늑대야, 또 오해받고 다니냐? 나도 숲에서 애들 잡아먹는다는 소리를 백 년째 듣는다.'),
+  L('wolf','babayaga',1,'늑대','할머니도요?'),
+  L('wolf','babayaga',2,'바바 야가','그래. 사실은 길 잃은 애들 밥 먹여서 돌려보냈는데. 소문은 늘 무서운 쪽으로 자라는 법이지.'),
+  L('wolf',null,1,'늑대','{이름}, 자네도 남한테 오해받은 적 있소?',{pose:'face'}),
+  {choice:[['있어요. 아직 억울해요','억울한 건 억울하다고 해도 되오. (늑대가 앞발을 슬쩍 내민다) 나랑 같은 편이오.','honest'],['오해는 시간이 풀더라고요','시간이라… 이백 년 걸렸지만, 오늘 풀린 것 같소.','wait'],['아저씨 착한 거, 제가 알아요','(꼬리가 눈에 띄게 흔들린다) …크흠. 그 말이면 됐소.','kind']],cg:'wolf'},
+  N('wolf',null,'(빨간 모자가 바구니 바닥에서 접힌 종이를 꺼낸다.)'),
+  L('wolf',null,1,'빨간 모자','이거 할머니가 준 거야. 「늑대 아저씨 만나면 보여 줘」라고 했어.'),
+  {page:'wolf'},
+  L('wolf',null,1,'늑대','…늑대도 착할 수 있다. (한참 들여다본다) 이걸 써 준 사람을 만나면, 평생 길 안내를 해 주겠소.',{pose:'face'}),
+  N(null,null,'(뒤 칸에서 셜록의 목소리가 들린다. 「조수는 숲 해설사일세!」 …또 아니다.)'),
+  {item:'wolf'}],
+ hansel:[T(8,'과자의 집','헨젤과 그레텔의 짐'),A('다음 정차는 지도에 없는 역, 과자의 집입니다. 내리실 때 지붕을 떼어 드시면 안 됩니다.'),
+  O('hansel','과자로 지은 작은 역사. 금발 남매가 손을 꼭 잡고 열차로 뛰어오른다. 오빠 주머니에서 빵 부스러기가 떨어진다.'),
+  L('hansel',null,1,'그레텔','오빠, 여기 빈자리야! …아, 안녕하세요. 저희 앉아도 돼요?',{pose:'in'}),
+  L('hansel',null,1,'헨젤','빵 부스러기로 길을 표시해 놨어요. 집에 돌아가는 길을 잊을까 봐요.'),
+  L('hansel',null,1,'헨젤','예전에 숲에 남겨진 적이 있거든요. 그때 뿌려 둔 부스러기를 새들이 다 먹어 버려서… 길을 잃었어요.',{pose:'face'}),
+  L('hansel',null,1,'그레텔','그래서 오빠는 지금도 주머니에 빵을 넣고 다녀요. 밥 먹을 때도요.'),
+  L('hansel',null,1,'헨젤','…또 남겨지면 어떡해요. 그게 제 짐이에요. 동생 몫까지요.'),
+  L('hansel',null,1,'그레텔','오빠, 이번엔 같이 길 표시하자. 기차 창에다가!'),
+  {game:'crumbs'},
+  L('hansel',null,1,'그레텔','봐, 오빠! 창에 길이 생겼어. 새들은 유리는 못 먹어!'),
+  N('hansel','wolf','(식당칸 쪽에서 늑대가 코를 킁킁거리며 다가온다.)'),
+  L('hansel','wolf',2,'늑대','생강 과자 냄새가 나는군. 그 냄새면 어디서든 찾아 줄 수 있소. 길을 잃어도 걱정 마시오.'),
+  L('hansel','wolf',1,'그레텔','오, 오빠… 늑대야… 근데 착한 늑대야?'),
+  L('hansel','wolf',2,'늑대','…그렇다고 적힌 종이도 있소.'),
+  L('hansel',null,1,'헨젤','{이름님}은 돌아가고 싶은 곳이 있어요?',{pose:'face'}),
+  {choice:[['있어요. 아직 길을 찾는 중이에요','(헨젤이 빵 부스러기 한 줌을 쥐여 준다) 그럼 이거 가져가요. 길은 표시하면서 가면 돼요.','wait'],['돌아가기보다 가 보고 싶은 데가 있어요','(그레텔이 손뼉을 친다) 멋지다! 그럼 우리랑 같이 가요. 런던까지.','tough'],['둘이 같이 있는 곳이 집 같아요','(헨젤이 동생 손을 꽉 잡는다) …맞아요. 그레텔 있는 데가 집이에요.','kind']],cg:'hansel'},
+  N('hansel',null,'(그레텔이 과자 지붕 조각을 반으로 쪼갠다. 안에서 접힌 종이가 나온다.)'),
+  L('hansel',null,1,'그레텔','과자 안에 편지가 있어! 지도 같은데?'),
+  {page:'hansel'},
+  L('hansel',null,1,'헨젤','집 가는 길에 별표… 누가 우리 길을 대신 그려 줬나 봐요. 이제 부스러기 안 뿌려도 되겠다.'),
+  N(null,null,'(뒤 칸에서 셜록의 목소리가 들린다. 「조수는 제과점 주인이야!」 …아쉽지만 아니다.)'),
+  {item:'hansel'}],
+ sleeping:[T(9,'노이슈반슈타인','잠자는 숲속의 공주의 짐'),A('노이슈반슈타인 성입니다. 동화 속 성을 짓고 싶었던 왕이 세운 성이라, 지금도 많은 동화 속 성의 모델이 되고 있습니다.'),
+  O('sleeping','하얀 성의 탑에서 장미 넝쿨을 헤치고, 하품하는 공주가 내려온다.'),
+  L('sleeping',null,1,'공주','하암… 안녕하세요. 백 년 만에 일어났더니 기차라는 게 생겼네요.',{pose:'in'}),
+  L('sleeping',null,1,'공주','물레 바늘에 찔려서 잠들었어요. 깨어 보니 백 년이 지나 있더라고요.'),
+  L('sleeping',null,1,'공주','친구들도, 좋아하던 노래도, 다 지나가 버렸어요. 나만 빼고 세상이 앞으로 가 버린 게… 제 짐이에요.',{pose:'face'}),
+  L('sleeping',null,1,'공주','그래서 이번엔 하나도 안 놓치려고요. 런던까지 보고 싶은 것 세 가지, 같이 골라 줄래요?'),
+  {game:'list'},
+  L('sleeping',null,1,'공주','좋아요. 이 세 가지는 꼭 보고 잘래요. …아니, 보고 나서도 안 잘래요.'),
+  N('sleeping','hansel','(헨젤과 그레텔이 과자 조각을 들고 쪼르르 달려온다.)'),
+  L('sleeping','hansel',2,'그레텔','공주님! 백 년 동안 못 먹은 과자, 이거 다 드세요!'),
+  L('sleeping','hansel',1,'공주','(한 입 베어 문다) …백 년 기다린 보람이 있네요.'),
+  L('sleeping','hansel',2,'헨젤','근데 백 년 자면 꿈도 백 년 꿔요? 무슨 꿈 꿨어요?'),
+  L('sleeping','hansel',1,'공주','음… 누가 계속 책을 읽어 주는 꿈. 목소리가 아주 작은 아이였어요.'),
+  L('sleeping',null,1,'공주','{이름님}은 요즘 놓치고 지나간 게 있어요?',{pose:'face'}),
+  {choice:[['너무 많아서 셀 수도 없어요','(공주가 웃는다) 저는 백 년치예요. 우리 같이 천천히 따라잡아요.','honest'],['놓친 건 놓친 대로 괜찮아요','(공주가 창밖을 본다) …그 말 들으니까, 백 년이 조금 가벼워져요.','tough'],['지금 이 창밖은 안 놓칠 거예요','(공주가 창에 이마를 댄다) 그럼 같이 봐요. 눈 덮인 산이에요. 처음 봐요.','smile']],cg:'sleeping'},
+  N('sleeping',null,'(공주가 베개 속에서 무언가를 꺼낸다. 백 년 동안 베고 잔 종이다.)'),
+  L('sleeping',null,1,'공주','꿈속의 그 아이가 놓고 간 거예요. 깨 보니 정말 있더라고요.'),
+  {page:'sleeping'},
+  L('sleeping',null,1,'공주','「나랑 놀자」래요. 백 년이나 기다리게 했네요. 미안해서 어떡하지.',{pose:'face'}),
+  N(null,null,'(뒤 칸에서 셜록의 목소리가 들린다. 「조수는 수면 연구가일세!」 …점점 멀어진다.)'),
+  {item:'sleeping'}],
+ monster:[T(10,'스위스 알프스','이름 없는 괴물의 짐'),A('알프스입니다. 이백 년 전, 이 산 아래 호숫가에서 열여덟 살 작가가 이름 없는 괴물의 이야기를 처음 떠올렸다고 합니다.'),
+  O('monster','눈 덮인 산골 간이역. 문틀보다 키가 큰 사람이 고개를 숙이고, 조심조심 열차에 오른다.'),
+  L('monster',null,1,'괴물','…놀라지 마세요. 키가 커서 그렇지, 아무것도 안 해요.',{pose:'in'}),
+  L('monster',null,1,'괴물','저를 만든 사람은 이름을 붙여 주지 않았어요. 그래서 다들 그냥 「괴물」이라고 불러요.'),
+  L('monster',null,1,'괴물','사람들은 가끔 저를 만든 사람 이름으로 불러요. 그건 제 이름이 아닌데.',{pose:'face'}),
+  L('monster',null,1,'괴물','이름이 없으면, 누가 불러도 저를 부르는 건지 모르겠어요. 그게 제 짐이에요.'),
+  N('monster',null,'(그가 주머니에서 빈 이름표와 몽당연필을 꺼내 탁자에 올려놓는다.)'),
+  L('monster',null,1,'괴물','…혹시, 이름 하나 지어 줄 수 있어요? 아무거나 괜찮아요. 정말로.'),
+  {game:'name'},
+  L('monster',null,1,'괴물','「{괴물}」. …「{괴물}」. 몇 번 불러 봐도 돼요? 입에 붙을 때까지.'),
+  N('monster','sleeping','(공주가 하품을 하며 통로를 지나가다 멈춰 선다.)'),
+  L('monster','sleeping',2,'공주','어머, 이름 생겼어요? {괴물} 씨, 안녕하세요!'),
+  L('monster','sleeping',1,'괴물','(얼굴이 빨개진다) …안녕하세요. 이름으로 인사받은 건 처음이에요.'),
+  L('monster','sleeping',2,'공주','저도 다들 「공주」라고만 불러요. 우리 서로 이름으로 불러요.'),
+  L('monster',null,1,'괴물','{이름님}을 제대로 불러 준 사람은 누구예요?',{pose:'face'}),
+  {choice:[['아직 잘 모르겠어요','그럼 오늘은 제가 부를게요. {이름}. …잘 불렀어요?','honest'],['저를 불러 주는 사람이 있어서 버텼어요','(괴물이 고개를 끄덕인다) 좋은 사람이에요. 이름을 부르는 건, 여기 있다고 말해 주는 거니까요.','tough'],['오늘은 {괴물} 씨가요','(괴물이 이름표를 가슴에 단다) …그럼 우리, 서로를 처음 부른 사람이네요.','kind']],cg:'monster'},
+  N('monster',null,'(괴물이 품에서 낡은 책을 꺼낸다. 마지막 장에 접힌 종이가 끼워져 있다.)'),
+  L('monster',null,1,'괴물','오두막 창문 너머로 몰래 읽던 책에 끼워져 있던 거예요. 누가 저한테 써 준 것 같았어요.'),
+  {page:'monster'},
+  L('monster',null,1,'괴물','「이름 지어 줄게」. …정말 지어 줬네요. 이 글씨 주인이랑 {이름님}, 같은 사람 같아요.',{pose:'face'}),
+  N(null,null,'(뒤 칸에서 셜록이 중얼거린다. 「…조수는, 이름을 지어 주는 사람이군.」 이번엔 조금 가까워졌다.)'),
+  {item:'monster'}],
+ cinder:[T(11,'파리','신데렐라의 짐'),A('파리입니다. 유리 구두 이야기를 처음 책으로 묶은 작가가 이 도시 사람이었지요. 곧 자정입니다.'),
+  O('cinder','자정 직전의 파리. 에펠탑에 불이 들어오는 순간, 낡은 원피스의 소녀가 작은 트렁크를 안고 열차로 뛰어든다.'),
+  L('cinder',null,1,'신데렐라','하아, 하아… 다행이다, 탔어요! 열두 시 종이 치기 전에 타야 했거든요.',{pose:'in'}),
+  L('cinder',null,1,'신데렐라','열두 시가 지나면 마법이 풀려요. 드레스는 재투성이 옷으로, 마차는 호박으로.'),
+  L('cinder',null,1,'신데렐라','사람들은 무도회의 저를 좋아했어요. 재투성이인 저를 보면 실망할까 봐 무서워요. 그게 제 짐이에요.',{pose:'face'}),
+  L('cinder',null,1,'신데렐라','그래서 매번 도망쳐요. 오늘도 구두 한 짝을 계단에 두고 왔어요.'),
+  N('cinder',null,'(창밖으로 시계탑이 보인다. 큰바늘이 열두 시를 향해 다가간다.)'),
+  L('cinder',null,1,'신데렐라','도와줄래요? 종이 울리기 직전에 시계를 멈추면, 조금 더 있을 수 있대요.'),
+  {game:'clock'},
+  L('cinder',null,1,'신데렐라','멈췄어요! …근데 이상해요. 더 있을 수 있게 됐는데, 이제는 도망치고 싶지 않아요.'),
+  N('cinder','monster','(옆자리에서 키 큰 그림자가 조심스럽게 고개를 숙인다.)'),
+  L('cinder','monster',2,'괴물','안녕하세요. 저는 {괴물}이에요. 오늘 생긴 이름이에요.'),
+  L('cinder','monster',1,'신데렐라','(눈이 동그래진다) 오늘이요? 축하해요! 그럼 오늘이 생일이네요!'),
+  L('cinder','monster',2,'괴물','…겉모습으로 사람을 알아보는 건 실수가 많아요. 이 기차에서 배웠어요.'),
+  L('cinder',null,1,'신데렐라','{이름님}은요? 마법이 풀려도 괜찮은 모습이 있어요?',{pose:'face'}),
+  {choice:[['솔직히 아직 자신 없어요','(신데렐라가 남은 구두 한 짝을 벗어 놓는다) 그럼 우리 둘 다 맨발로 있어요. 같이 있으면 안 부끄러워요.','honest'],['재투성이여도 저는 저예요','(신데렐라가 웃음을 터뜨린다) 맞아요. 재 좀 묻었다고 다른 사람이 되진 않죠.','tough'],['지금 그 모습이 제일 예뻐요','…고마워요. 그럼 오늘 밤은, 이 모습 그대로 춤출래요.','kind']],cg:'cinder'},
+  N('cinder',null,'(신데렐라가 남은 유리 구두를 뒤집자, 안에서 접힌 종이가 나온다.)'),
+  L('cinder',null,1,'신데렐라','구두 안에 늘 있던 쪽지예요. 춤출 때마다 발바닥으로 느꼈어요.'),
+  {page:'cinder'},
+  L('cinder',null,1,'신데렐라','이 말을 처음 해 준 사람이 있었네요. 그것도 아주 오래전에.',{pose:'face'}),
+  N(null,null,'(뒤 칸에서 셜록이 혼잣말을 한다. 「같은 글씨가 열한 장. 범인은 이 기차 안에 있군.」)'),
+  {item:'cinder'}],
+ mermaid:[T(12,'해저터널','인어공주의 짐'),A('해저터널입니다. 창밖은 바다 밑입니다. 덴마크의 한 작가가 쓴 인어 이야기 속 바다도, 이렇게 깊고 파랬을 겁니다.'),
+  O('mermaid','창밖이 온통 바다다. 해파리 불빛 사이로, 은빛 머리카락의 인어가 수첩을 안고 창가에 앉아 있다.'),
+  N('mermaid',null,'(인어공주가 고개를 숙여 인사한다. 그리고 수첩에 무언가를 써서 보여 준다.)',{pose:'in'}),
+  L('mermaid',null,1,'인어공주','「안녕하세요. 목소리가 없어서 이렇게 써요. 천천히 읽어 주세요.」'),
+  L('mermaid',null,1,'인어공주','「다리를 얻으려고 목소리를 바다 마녀에게 줬어요. 그때는 그게 맞는 줄 알았어요.」'),
+  L('mermaid',null,1,'인어공주','「그 뒤로 하고 싶은 말을 한 번도 못 했어요. 고맙다는 말도, 좋아한다는 말도.」',{pose:'face'}),
+  L('mermaid',null,1,'인어공주','「그게 제 짐이에요. 하지 못한 말들이요.」'),
+  N('mermaid',null,'(그녀가 수첩의 빈 페이지를 펼쳐 내 쪽으로 민다.)'),
+  L('mermaid',null,1,'인어공주','「대신 한 줄만 써 줄래요? 누구에게든, 하지 못한 말을요.」'),
+  {game:'note'},
+  N('mermaid',null,'(인어공주가 내 글씨를 한참 들여다본다. 그리고 수첩을 넘겨, 오래된 페이지 하나를 내 글씨 옆에 나란히 댄다.)'),
+  L('mermaid',null,1,'인어공주','「…이 글씨. 똑같아요. 기울어지는 방향도, 받침 쓰는 버릇도.」',{pose:'face'}),
+  N('mermaid','cinder','(신데렐라가 유리 구두를 든 채 다가와, 두 페이지를 번갈아 본다.)'),
+  L('mermaid','cinder',2,'신데렐라','어? 이거 제 구두 속 쪽지랑 같은 글씨예요!'),
+  L('mermaid',null,1,'인어공주','「너였구나.」'),
+  N('mermaid',null,'(잠깐, 기차 소리만 들린다.)'),
+  L('mermaid',null,1,'인어공주','「우리한테 낙서로 말을 걸어 준 아이. 그게 {이름님}이었구나.」'),
+  {choice:[['…기억은 안 나요. 그래도 왠지 알 것 같아요','「괜찮아요. 우리가 기억하고 있었어요. 그러려고 기다렸어요.」','honest'],['그때 저도 무서웠을 거예요','「알아요. 무서운 아이가, 다른 사람을 달래 주고 있었어요. 그래서 더 고마워요.」','kind'],['이번엔 제가 말로 할게요. 고마워요','「…목소리로 들으니까 더 좋네요.」','tough']],cg:'mermaid'},
+  {page:'mermaid'},
+  L('mermaid',null,1,'인어공주','「이 조각은 원래 제 수첩 맨 뒤에 있던 거예요. 이제 주인한테 돌려줄게요.」'),
+  N(null,null,'(뒤 칸에서 셜록이 조용히 파이프를 내려놓는다. 「…그랬군. 사건 해결일세.」)'),
+  {item:'mermaid'}],
+ rabbit:[T(13,'런던','흰 토끼의 짐'),A('곧 종착역, 런던입니다. 토끼 굴에 빠진 소녀의 이야기도, 이 나라 강가의 뱃놀이에서 처음 시작되었다고 합니다.'),
+  O('rabbit','하얀 절벽 위로 해가 뜬다. 체크무늬 재킷의 흰 토끼가 커다란 회중시계를 들고 열차를 향해 달려온다.'),
+  L('rabbit',null,1,'흰 토끼','큰일이에요, 큰일! 늦었어요! …어, 아직 안 늦었네요? 이상하다.',{pose:'in'}),
+  L('rabbit',null,1,'흰 토끼','저는 평생 늦을까 봐 뛰었어요. 여왕님한테도, 차 모임에도, 이야기 속 모든 장면에도요.'),
+  L('rabbit',null,1,'흰 토끼','늦으면 다들 실망할 줄 알았거든요. 그래서 한 번도 멈춰서 차를 마셔 본 적이 없어요. 그게 제 짐이에요.',{pose:'face'}),
+  N('rabbit',null,'(포터가 찻잔 두 개를 탁자에 내려놓는다. 김이 천천히 올라간다.)'),
+  L('porter',null,1,'로봇 포터','런던까지 남은 시간은 넉넉합니다. 서두르실 일이 하나도 없습니다.'),
+  L('rabbit',null,1,'흰 토끼','…아무것도 안 해도 돼요? 진짜로요? 그럼 같이, 딱 이 차가 식을 때까지만요.'),
+  {game:'wait'},
+  L('rabbit',null,1,'흰 토끼','…아무 일도 안 일어났어요. 늦지도 않았고, 아무도 실망하지 않았어요.'),
+  L('rabbit',null,1,'흰 토끼','시계를 내려놓으니까 오히려 시간이 맞더라고요. 이상하죠?'),
+  N('rabbit','sherlock','(셜록이 맞은편에 앉으며 파이프를 내려놓는다.)'),
+  L('rabbit','sherlock',2,'셜록 홈즈','{이름}, 마지막 추리를 하지. 자네는 이 기차의 손님이 아니야.'),
+  L('rabbit','sherlock',2,'셜록 홈즈','자네는 이 책을 읽어 주던 아이였네. 우리 이야기 귀퉁이마다 낙서를 해 주던. 이번엔 틀리지 않았지?'),
+  L('rabbit',null,1,'흰 토끼','{이름님}, 이제 좀 늦어도 괜찮아요?',{pose:'face'}),
+  {choice:[['네. 조금 늦어도 괜찮아요','(흰 토끼가 회중시계를 닫는다) 그럼 저도요. 우리 둘 다 오늘부터 지각생이에요.','tough'],['아직은 무서워요. 그래도 해 볼게요','(흰 토끼가 시계 태엽 하나를 건넨다) 무서울 때마다 이걸 쥐어요. 「조금 늦어도 괜찮아」라고 새겨 뒀어요.','honest'],['토끼 씨가 먼저 쉬어요','(흰 토끼가 웃으며 찻잔을 든다) 손님한테 양보받은 건 처음이에요. 그럼 한 잔만 더요.','kind']],cg:'rabbit'},
+  N('rabbit',null,'(흰 토끼의 시계 뚜껑에서, 마지막 종이 조각이 떨어진다.)'),
+  {page:'rabbit'},
+  L('porter',null,1,'로봇 포터','마지막 조각이군요. 열세 조각이 다 모였습니다.'),
+  L('porter',null,1,'로봇 포터','런던역에서 맡기신 짐을 찾으실 때, 함께 돌려드리겠습니다. 스무 해 동안 잘 보관해 두었습니다.'),
+  {item:'rabbit'}]});
+['snowq','sherlock','odette','wolf','hansel','sleeping','monster','cinder','mermaid','rabbit'].forEach(id=>{EV[id]=EV2[id];EV2[id].forEach(x=>{if(x.choice&&!x.rw)x.rw=CAST[id].n})});
 </script></body></html>

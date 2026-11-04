@@ -3,6 +3,7 @@
 export const TRIP_H=92;
 export const SEG=[
  {id:'busan',  h:0,  name:'부산',            tz:9, sky:'밤',        who:'별주부',              art:true},
+ {id:'gyeongbu',h:0.6,name:'경부선 밤길',     tz:9, sky:'밤',        who:'별주부'},
  {id:'seoul',  h:1.5,name:'서울',            tz:9, sky:'밤',        who:'홍길동'},
  {id:'cloud',  h:3,  name:'구름 위 오작교',   tz:9, sky:'한밤→새벽', who:'견우와 직녀'},
  {id:'snow',   h:10, name:'시베리아 설원',    tz:8, sky:'아침→낮',   who:'눈의 여왕'},

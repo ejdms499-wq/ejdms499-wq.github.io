@@ -312,6 +312,21 @@ const mid=plane(midT,1,1,M.tint,M.fx);mid.renderOrder=3;scene.add(mid);
 /* ---------- 선로 둑 ---------- */
 const E=SCENE.emb, embT=tex(E.img,true), embH=E.h*E.scale, embTile=E.w*E.scale, EMBW=embTile*12;
 const emb=plane(embT,EMBW,embH,null,E.fx);emb.renderOrder=5;scene.add(emb);
+/* ---------- 부산 밖 구간: 그 구간 풍경 그림을 열차 뒤에 펼침 ---------- */
+const PANO={on:false,id:null,tex:null,ar:3};
+const pano=plane(null,1,1,[.86,.88,.96],{sat:.9,bri:.9});pano.renderOrder=2;pano.visible=false;scene.add(pano);
+function bedTex(){const c=document.createElement('canvas');c.width=1024;c.height=160;const g=c.getContext('2d');
+  const gr=g.createLinearGradient(0,0,0,160);gr.addColorStop(0,'#2b2a28');gr.addColorStop(.25,'#1d2224');gr.addColorStop(1,'#0f1517');g.fillStyle=gr;g.fillRect(0,0,1024,160);
+  for(let i=0;i<1600;i++){const x=Math.random()*1024,y=10+Math.random()*28,r=1+Math.random()*2.4;g.fillStyle=['#4a4640','#3a3733','#5a554d'][i%3];g.beginPath();g.ellipse(x,y,r,r*.7,0,0,7);g.fill()}
+  for(let x=0;x<1024;x+=32){g.fillStyle='#3a271b';g.fillRect(x+4,14,18,9)}
+  g.fillStyle='#40403f';g.fillRect(0,4,1024,7);g.fillStyle='#c9b08a';g.fillRect(0,4,1024,2);
+  g.fillStyle='#14191b';g.fillRect(0,38,1024,3);
+  const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;t.wrapS=THREE.RepeatWrapping;return t}
+const bed=plane(bedTex(),1,1);bed.renderOrder=5;bed.visible=false;scene.add(bed);
+function setPano(id){if(PANO.id===id)return;PANO.id=id;const busan=id==='busan';PANO.on=!busan;
+  far.visible=nearWater.visible=mid.visible=emb.visible=busan;pano.visible=bed.visible=!busan;
+  if(!busan){const src=((typeof VIEWS!=='undefined'&&VIEWS[id])||[])[0];if(!src)return;
+    TL.load(src,t=>{t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=8;if(PANO.id!==id)return;PANO.tex&&PANO.tex.dispose();PANO.tex=t;PANO.ar=t.image.width/t.image.height;pano.material.uniforms.map.value=t})}}
 const embTop=(E.rail)*E.scale, SEA=-(E.sea-E.rail)*E.scale;
 emb.position.set(0,embTop-embH/2,0.4);
 
@@ -419,11 +434,12 @@ function dur(h){const m=Math.round(h*60);return m>=60?Math.floor(m/60)+'시간 '
 let curSeg=null;
 function clock(){const w=where(dep,vnow());if(w.mode!=='run')return;
   if(focus)return;
-  tagB.textContent=w.seg.name+(w.seg.art||MODE==='seat'?'':' · 그림 준비 중');
+  tagB.textContent=w.seg.name;
   document.body.classList.toggle('day',!/밤|자정|새벽/.test(w.seg.sky));
   tagS.textContent=w.day+'일째 · 현지 '+pd(w.localH)+':'+pd(w.localM)+' · '+w.seg.sky;
   tagI.textContent=w.next?'다음 '+w.next.name+' · '+dur(w.next.h-w.h)+' 뒤':'곧 런던';
   if(curSeg!==w.seg.id){curSeg=w.seg.id}
+  setPano(w.seg.id);
 }
 setInterval(clock,1000);setTimeout(clock,50);
 if(Q.has('dev')){const d=document.getElementById('dev'),r=document.getElementById('devR'),v=document.getElementById('devV');d.style.display='flex';
@@ -570,7 +586,7 @@ const CAST={
   c:[['기차는 제시간에 도착해요','그렇죠? 휴… 시계를 잠깐 내려놓을게요.'],['조금 늦어도 괜찮아요','괜찮다고요? …그 말, 회중시계에 새겨 두고 싶네요.']],
   idle:['도버 절벽이 보이면 거의 다 온 거예요!']},
 };
-const SEAT={busan:'byeol',seoul:'gilldong',cloud:'gyeonu',snow:'snowq',baikal:'sherlock',aurora:'sherlock',taiga:'babayaga',moscow:'odette',
+const SEAT={busan:'byeol',gyeongbu:'byeol',seoul:'gilldong',cloud:'gyeonu',snow:'snowq',baikal:'sherlock',aurora:'sherlock',taiga:'babayaga',moscow:'odette',
   plain:'hansel',forest:'wolf',castle:'sleeping',alps:'monster',paris:'cinder',sea:'mermaid',england:'rabbit',london:'sherlock'};
 const paxBox=$('pax'),paxT=$('paxT');let paxId=null,paxImg=null,paxAR=.6;
 function paxLayout(){if(!paxImg)return;const W=innerWidth,H=innerHeight,mob=W/H<=.75;
@@ -923,7 +939,7 @@ function albumOpen(t){albTab=t;alb.classList.add('on');alb.querySelectorAll('.al
 
 /* ---------- 창가 자리: 창밖 풍경 그림이 계속 지나감 ---------- */
 const V=n=>'img/v/'+n+'.webp';
-const VIEWS={busan:[V('busan_1'),V('busan_2')],seoul:[V('seoul_1'),V('seoul_2')],cloud:[V('cloud_1'),V('cloud_2')],
+const VIEWS={busan:[V('busan_1'),V('busan_2')],gyeongbu:[V('busan_2'),V('busan_1')],seoul:[V('seoul_1'),V('seoul_2')],cloud:[V('cloud_1'),V('cloud_2')],
   snow:[V('snow_1'),V('snow_2')],baikal:[V('baikal_1'),V('baikal_2')],aurora:[V('aurora_1'),V('aurora_2')],
   taiga:[V('taiga_1'),V('taiga_2')],moscow:[V('moscow_1'),V('moscow_2')],plain:[V('plain_1'),V('plain_2')],
   forest:[V('forest_1'),V('forest_2')],castle:[V('castle_1'),'../img/zh_castle.webp'],alps:[V('alps_1'),V('alps_2'),'../img/zh_alps.webp'],
@@ -958,6 +974,10 @@ function frame(now){
   mid.material.uniforms.rep.value=3;mid.material.uniforms.off.value=(((camX-MIDW/2+travel)/midTile)%1+1)%1;
   emb.position.set(camX,embTop-embH/2+MD.embY,MD.embZ);emb.material.uniforms.rep.value=EMBW/embTile;emb.material.uniforms.off.value=(((camX-EMBW/2+travel)/embTile)%1+1)%1;
   // 가까운 바다: 둑 아래만
+  if(PANO.on){const Z=-90,d=dist-Z,H=vh(d)*1.03,Wd=H*PANO.ar,vis=vh(d)*cam.aspect;
+    pano.scale.set(Wd,H,1);const span=Math.max(0,(Wd-vis)/2);pano.position.set(camX+Math.sin(t*.012)*span*.92,eye-(HZ-.5)*vh(d),Z);
+    const BH=1.25;bed.scale.set(vh(dist)*cam.aspect*2.2,BH,1);bed.position.set(camX,0.25-BH/2,0.4);
+    bed.material.uniforms.rep.value=bed.scale.x/6;bed.material.uniforms.off.value=((travel/6)%1+1)%1;}
   pv.set(camX,SEA+0.25+MD.embY,MD.embZ).project(cam);nearWater.material.uniforms.cut.value=pv.y*.5+.5;
   for(const c of cars)c.position.y=c.userData.h/2-0.03+Math.sin(t*9+c.userData.ph)*0.012;
   for(const [b,sp,ph] of glows){const f=1+Math.sin(t*1.7+ph)*.05+Math.sin(t*7.3+ph*2)*.025;b.material.opacity=.22*f;sp.material.opacity=.4*f}

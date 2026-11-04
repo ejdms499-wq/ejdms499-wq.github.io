@@ -21,9 +21,9 @@ import * as THREE from './three.module.js';
 /* ================= 구간 설정 (구간마다 이것만 바꾸면 됨) ================= */
 const SCENE={
   name:'부산',
-  far:{img:'far.webp',w:1904,h:640,hz:412,moonU:.82,moonAt:.74,fold:110},
-  mid:{img:'mid.webp',w:1904,h:356,z:-70,hgt:23,topBelowHz:.025,tint:[.74,.77,.9]},
-  emb:{img:'emb.webp',w:2176,h:332,rail:62,sea:296,scale:.0095},
+  far:{img:'far.webp',w:1904,h:640,hz:414,moonU:.805,moonAt:.74,fold:110},
+  mid:{img:'mid.webp',w:1904,h:438,z:-70,hgt:26,topBelowHz:.0,tint:[.9,.9,.96]},
+  emb:{img:'emb.webp',w:2176,h:310,rail:57,sea:288,scale:.0095},
   ppl:[['pf_p02.webp','dine',.62,1.32]]
 };
 /* ======================================================================= */
@@ -89,7 +89,7 @@ const train=new THREE.Group();scene.add(train);
 const cars=[];let x=0;
 for(const [k,name] of ORDER){
   const w=(k==='loco'?2856:1640)*PX,h=(k==='loco'?680:550)*PX;
-  const p=plane(tex('car_'+k+'.webp'),w,h,[.84,.86,.97]);p.renderOrder=6;
+  const p=plane(tex('car_'+k+'.webp'),w,h,[.88,.9,.97]);p.renderOrder=6;
   p.position.set(x+w/2,h/2-0.03,0);p.userData={k,name,w,h,ph:Math.random()*6};train.add(p);cars.push(p);x+=w-0.22;
 }
 const TRAINW=x;train.position.x=-TRAINW/2;

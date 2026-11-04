@@ -72,7 +72,7 @@ body.seat .vw{display:block}
 #trkP h4{margin:0 0 4px;font-size:15px}
 #trkP .w{font-size:13px;background:#fffaf0;border:2px dashed #3a2a1c;padding:8px;margin:8px 0;border-radius:3px}
 .stk{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px}
-.stk span{aspect-ratio:1;border-radius:50%;border:2px dashed #b7a687;display:flex;align-items:center;justify-content:center;text-align:center;font:700 10px/1.15 "Apple SD Gothic Neo",sans-serif;color:#b7a687;padding:3px}
+.stk span{aspect-ratio:1;word-break:break-all;border-radius:50%;border:2px dashed #b7a687;display:flex;align-items:center;justify-content:center;text-align:center;font:700 10px/1.15 "Apple SD Gothic Neo",sans-serif;color:#b7a687;padding:3px}
 .stk span.got{border:2px solid #3a2a1c;color:#fffaf0;transform:rotate(var(--r));box-shadow:inset 0 0 0 3px rgba(255,255,255,.35)}
 .stk span.now{animation:stp 1.6s infinite}
 @keyframes stp{50%{transform:rotate(var(--r)) scale(1.06)}}
@@ -746,7 +746,7 @@ function makeCard(T){const cv=card.querySelector('canvas'),g=cv.getContext('2d')
   SEG.forEach((s,i)=>{const x=150+(k%4)*187,y=598+Math.floor(k/4)*138;k++;const got=i>=bi;
     g.save();g.translate(x,y);g.rotate(((i*37)%17-8)*Math.PI/180);g.beginPath();g.arc(0,0,60,0,7);
     g.fillStyle=got?STC[i%STC.length]:'#e6d8b5';g.fill();g.lineWidth=5;g.strokeStyle=got?'#3a2a1c':'#c4b38f';g.stroke();
-    g.fillStyle=got?'#fffaf0':'#b7a687';g.font='800 20px '+F;const nm=s.name.replace(' 도착','').split(' ');nm.forEach((w,j)=>g.fillText(w,0,7+(j-(nm.length-1)/2)*23));g.restore()});
+    g.fillStyle=got?'#fffaf0':'#b7a687';g.font='800 20px '+F;let nm=s.name.replace(' 도착','').split(' ');nm=nm.flatMap(w=>w.length>4?[w.slice(0,Math.ceil(w.length/2)),w.slice(Math.ceil(w.length/2))]:[w]);nm.forEach((w,j)=>g.fillText(w,0,7+(j-(nm.length-1)/2)*23));g.restore()});
   g.fillStyle='#3a2a1c';g.font='800 34px '+F;
   g.fillText(T.pick===1?'근심은 런던 유실물 보관소에 두고 왔어요':'근심은 조금 가벼워져서 다시 가져왔어요',430,1340-220);
   const met=Object.keys(LS.get('bl_met',{})).length,kp=Object.keys(LS.get('bl_keep',{})).length,cl=Object.keys(clues()).length;

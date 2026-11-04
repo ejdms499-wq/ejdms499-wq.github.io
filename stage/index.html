@@ -436,6 +436,29 @@ body.talk #carP,body.amb #carP{opacity:0!important;pointer-events:none!important
 @media (max-width:520px){#hint{display:none!important}}
 body.seat #nextB{bottom:auto;top:calc(76px + env(safe-area-inset-top))}
 @media (max-width:520px){body.seat #nextB{top:calc(96px + env(safe-area-inset-top))}}
+/* ===== v5: 가방 하나로 · 처음 안내 ===== */
+body.bag5 #ambB,body.bag5 #albB,body.bag5 #postB,body.bag5 #trk:not(.ev){visibility:hidden!important;pointer-events:none!important}
+#bagB{position:fixed;left:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:5;padding:7px 13px;font:800 14px "Apple SD Gothic Neo",sans-serif;cursor:pointer}
+#bagB i{font-style:normal;display:none;margin-left:5px;background:#b8432f;color:#fff6e4;border-radius:9px;padding:0 6px;font-size:11px}
+#bagB.new i{display:inline-block}#bagB.new{animation:bob 1.6s infinite}
+#bagP{position:fixed;left:14px;bottom:calc(58px + env(safe-area-inset-bottom));z-index:24;padding:6px 8px;display:none;min-width:200px;max-width:calc(100vw - 28px)}
+#bagP.on{display:block;animation:ckIn .3s}
+#bagP button{display:flex;width:100%;align-items:center;gap:9px;background:none;border:0;border-bottom:1.5px dashed rgba(58,42,28,.3);padding:11px 6px;font:700 14.5px "Apple SD Gothic Neo",sans-serif;color:#3a2a1c;text-align:left;cursor:pointer}
+#bagP button:last-child{border-bottom:0}#bagP button:active{background:rgba(58,42,28,.08)}
+#bagP button span{width:22px;text-align:center}#bagP button small{margin-left:auto;font-size:11px;opacity:.55;font-weight:600;padding-left:10px}
+#bagP button i{font-style:normal;margin-left:auto;background:#b8432f;color:#fff6e4;border-radius:9px;padding:0 7px;font-size:11px}
+body.talk #bagB,body.amb #bagB,body.intro #bagB,body.talk #bagP,body.amb #bagP{opacity:0!important;pointer-events:none!important}
+#tkB{bottom:calc(116px + env(safe-area-inset-bottom));white-space:nowrap}
+@media (max-width:520px){#nextB{bottom:calc(62px + env(safe-area-inset-bottom))}#carP{bottom:calc(62px + env(safe-area-inset-bottom))}#tkB{bottom:calc(116px + env(safe-area-inset-bottom));white-space:nowrap}}
+#coach{position:fixed;inset:0;z-index:40;display:none}
+#coach.on{display:block}
+#coach .hole{position:fixed;border-radius:14px;box-shadow:0 0 0 9999px rgba(8,12,16,.62);transition:all .45s cubic-bezier(.3,1.2,.4,1);pointer-events:none;outline:3px dashed rgba(243,230,196,.9);outline-offset:4px;animation:chole 1.6s ease-in-out infinite}
+@keyframes chole{50%{outline-offset:9px}}
+#coach .bub{position:fixed;left:50%;width:min(330px,calc(100vw - 32px));transform:translateX(-50%);padding:14px 16px 12px;transition:top .45s,bottom .45s}
+#coach .bub small{display:block;font-size:11px;letter-spacing:.12em;color:#b8432f;font-weight:800;margin-bottom:4px}
+#coach .bub p{margin:0 0 10px;font-size:14.5px;line-height:1.6;color:#3a2a1c}
+#coach .bub div{display:flex;justify-content:space-between;align-items:center}
+#coach .bub .sk{background:none;border:0;font:600 12px "Apple SD Gothic Neo",sans-serif;opacity:.6;cursor:pointer;color:#3a2a1c}
 </style></head><body>
 <div id="tag"><b>부산</b><span id="tagS">그림 겹 무대 · 시험판</span><i id="tagI"></i></div>
 <div id="dev"><span>출발 후</span><input id="devR" type="range" min="0" max="91.9" step="0.1"><span id="devV"></span></div>
@@ -2131,7 +2154,7 @@ function btnRow(){const L=['ambB','albB','postB','trk','snd'].map(i=>document.ge
     if(getComputedStyle(el).display==='none')continue;el.style.right='auto';
     if(mob){el.style.left='14px';el.style.bottom='calc('+y+'px + env(safe-area-inset-bottom))';y+=el.offsetHeight+8}
     else{el.style.left=x+'px';el.style.bottom='calc(14px + env(safe-area-inset-bottom))';x+=el.offsetWidth+8}}}
-addEventListener('resize',btnRow);setInterval(btnRow,700);
+addEventListener('resize',()=>btnRow());setInterval(()=>btnRow(),700);
 /* ---------- 매 프레임 ---------- */
 const SPEED=7;let travel=0,last=performance.now();const T0=last;const pv=new THREE.Vector3();
 function frame(now){
@@ -2161,4 +2184,65 @@ function frame(now){
   vwTick(dt,t);if(MODE!=='seat')R.render(scene,cam);requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);
+/* ===================== v5: 가방 하나로 · 처음 안내 · 휴대폰 확대 ===================== */
+document.body.classList.add('bag5');
+{const _fit=MODES.out.fit;MODES.out.fit=function(){const a=innerWidth/innerHeight;return a<.8?Math.max(26,10.5/(2*TAN*a)):_fit()};
+ if(innerWidth/innerHeight<.8){const d=cars.find(c=>c.userData.k==='dine');camX=tgtX=train.position.x+d.position.x}if(!focus&&MODE==='out'){dist=tgtD=fitD()}}
+const bagB=document.createElement('button');bagB.id='bagB';bagB.className='paper';bagB.innerHTML='🧳 가방<i></i>';document.body.appendChild(bagB);
+const bagP=document.createElement('div');bagP.id='bagP';bagP.className='paper';document.body.appendChild(bagP);
+function bagItems(){const it=[];const pn=postB.querySelector('i').textContent;
+  if(TRIP)it.push(['✉','우체국',pn?'<i>'+pn+'</i>':'<small>편지 · 쪽지</small>',()=>postB.click()]);
+  it.push(['📷','추억 앨범','<small>장면 · 승객 · 엔딩</small>',()=>albB.click()]);
+  if(TRIP&&trk.style.display!=='none'&&!trk.classList.contains('ev'))it.push(['🧳',trk.textContent,'',()=>trk.click()]);
+  if(TRIP&&TRIP.tk)it.push(['🎫','내 승차권','<small>저장 · 공유</small>',()=>{try{makeTicket()}catch(e){}}]);
+  it.push(['🎞','틀어 두기','<small>창밖만 보기</small>',()=>$('ambB').click()]);
+  it.push(['❔','처음 안내 다시 보기','',()=>coachStart(1)]);return it}
+function bagOpen(){const it=bagItems();try{$('tkB').classList.remove('on')}catch(e){}bagP.innerHTML='';for(const [ic,t,r,fn] of it){const b=document.createElement('button');b.innerHTML='<span>'+ic+'</span>'+t+r;
+    b.onclick=e=>{e.stopPropagation();bagP.classList.remove('on');fn()};bagP.appendChild(b)}
+  const r=bagB.getBoundingClientRect();bagP.style.left=Math.max(8,Math.min(r.left,innerWidth-bagP.offsetWidth-8))+'px';
+  bagP.style.bottom=(innerHeight-r.top+8)+'px';bagP.classList.add('on');
+  const rr=bagP.getBoundingClientRect();if(rr.top<8){bagP.style.bottom='auto';bagP.style.top=(r.bottom+8)+'px'}else bagP.style.top='auto';
+  bagP.style.left=Math.max(8,Math.min(r.left,innerWidth-bagP.offsetWidth-8))+'px'}
+bagB.onclick=e=>{e.stopPropagation();bagP.classList.contains('on')?bagP.classList.remove('on'):bagOpen()};
+document.addEventListener('pointerdown',e=>{if(bagP.classList.contains('on')&&!bagP.contains(e.target)&&e.target!==bagB&&!bagB.contains(e.target))bagP.classList.remove('on')},true);
+function bagBadge(){const n=postB.classList.contains('new');bagB.classList.toggle('new',n);bagB.querySelector('i').textContent=n?(postB.querySelector('i').textContent||'!'):''}
+setInterval(bagBadge,1000);
+btnRow=function(){const seat=MODE==='seat',mob=innerWidth<=520;const L=[bagB,trk.classList.contains('ev')&&trk.style.display!=='none'?trk:null,$('snd')].filter(Boolean);
+  for(const el of [$('ambB'),albB,postB,trk,$('snd'),bagB]){el.style.left=el.style.right=el.style.bottom=''}
+  if(!seat)return;let x=14,y=14;for(const el of L){el.style.right='auto';
+    if(mob){el.style.left='14px';el.style.bottom='calc('+y+'px + env(safe-area-inset-bottom))';y+=el.offsetHeight+8}
+    else{el.style.left=x+'px';el.style.bottom='calc(14px + env(safe-area-inset-bottom))';x+=el.offsetWidth+8}}};
+btnRow();
+/* ---------- 처음 한 번 나오는 안내 ---------- */
+const coach=document.createElement('div');coach.id='coach';coach.innerHTML='<div class="hole"></div><div class="bub paper"><small></small><p></p><div><button class="sk">건너뛰기</button><button class="pbtn2 nx">다음</button></div></div>';document.body.appendChild(coach);
+const cHole=coach.querySelector('.hole'),cBub=coach.querySelector('.bub');
+function carRect(){let best=null,bd=1e9;const v=new THREE.Vector3();
+  for(const c of cars){const w=c.userData.w,h=c.userData.h||2.6;c.getWorldPosition(v);const a=v.clone().add(new THREE.Vector3(-w/2,-h/2,0)).project(cam),b=v.clone().add(new THREE.Vector3(w/2,h/2,0)).project(cam);
+    const L=(a.x+1)/2*innerWidth,R=(b.x+1)/2*innerWidth,T=(1-b.y)/2*innerHeight,B=(1-a.y)/2*innerHeight;const cx=(L+R)/2,d=Math.abs(cx-innerWidth/2);
+    if(d<bd&&R>0&&L<innerWidth){bd=d;best={x:Math.max(6,L),y:T,w:Math.min(innerWidth-6,R)-Math.max(6,L),h:B-T}}}return best}
+const elRect=el=>{if(!el)return null;const r=el.getBoundingClientRect();return r.width?{x:r.left,y:r.top,w:r.width,h:r.height}:null};
+const COACH=[
+  {t:'열차 둘러보기',p:'기차 칸을 누르면 가까이 가요.<br>칸 안에 있는 <b>승객을 누르면</b> 내 자리로 불러 이야기할 수 있어요.',r:carRect,pad:6},
+  {t:'내 창가 자리',p:'창가 자리에 앉으면 창밖 풍경이 보이고, 불러온 승객이 <b>옆자리</b>에 앉아요.<br>말을 걸고, 역 매점 <b>간식을 선물</b>해 보세요.',r:()=>elRect(seatB),pad:6},
+  {t:'가방',p:'승객이 보낸 <b>편지</b>, 모은 <b>추억 앨범</b>, <b>승차권</b>은 모두 가방 안에 있어요.',r:()=>elRect(bagB),pad:6},
+  {t:'다음 역으로',p:'준비되면 눌러서 다음 역으로 가요. 서두를 필요는 없어요.<br>친해진 승객은 내리는 역에서 <b>특별한 배웅</b>을 해 줘요.',r:()=>elRect($('nextB').classList.contains('on')?$('nextB'):null),pad:6}
+];
+let cI=0,cOn=false,cReplay=0;
+function coachShow(){const s=COACH[cI];let r=s.r();if(!r&&cI<COACH.length-1){cI++;coachShow();return}
+  cBub.querySelector('small').textContent=(cI+1)+' / '+COACH.length+' · '+s.t;cBub.querySelector('p').innerHTML=s.p;
+  cBub.querySelector('.nx').textContent=cI===COACH.length-1?'알겠어요':'다음';
+  if(r){const p=s.pad;Object.assign(cHole.style,{left:r.x-p+'px',top:r.y-p+'px',width:r.w+2*p+'px',height:r.h+2*p+'px',opacity:1});
+    const cy=r.y+r.h/2;if(cy>innerHeight*.5){cBub.style.top='auto';cBub.style.bottom=(innerHeight-r.y+p+18)+'px'}else{cBub.style.bottom='auto';cBub.style.top=(r.y+r.h+p+18)+'px'}}
+  else{Object.assign(cHole.style,{left:'50%',top:'50%',width:'0px',height:'0px'});cBub.style.bottom='auto';cBub.style.top='38%'}}
+function coachEnd(){coach.classList.remove('on');cOn=false;LS.set('bl_tut',1);if(TRIP&&TRIP.tk&&!cReplay)setTimeout(()=>{try{tkShow()}catch(e){}},500)}
+function coachStart(rep){if(cOn)return;if(MODE!=='out'){try{goOut()}catch(e){}setTimeout(()=>coachStart(rep),900);return}
+  cReplay=rep?1:0;cOn=true;cI=0;try{$('tkB').classList.remove('on')}catch(e){}coach.classList.add('on');coachShow()}
+coach.querySelector('.nx').onclick=e=>{e.stopPropagation();cI++;cI>=COACH.length?coachEnd():coachShow()};
+coach.querySelector('.sk').onclick=e=>{e.stopPropagation();coachEnd()};
+coach.addEventListener('pointerdown',e=>e.stopPropagation());
+addEventListener('resize',()=>{if(cOn)coachShow()});
+{let doneAt=0;setInterval(()=>{if(cOn||LS.get('bl_tut',0)||!TRIP||!TRIP.done||!TRIP.done[0])return;if(!doneAt){doneAt=Date.now();return}
+  const B=document.body.classList;if(Date.now()-doneAt<6500||MODE!=='out'||busy||cg.classList.contains('on')||B.contains('talk')||B.contains('amb')||B.contains('intro'))return;
+  if($('lvt').classList.contains('on')||$('carP').classList.contains('on')||document.querySelector('#card.on,#alb.on,#ck.on,#trkP.on,#post.on'))return;
+  if(TRIP.tr)return;coachStart(0)},800)}
 </script></body></html>

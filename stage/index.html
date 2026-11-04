@@ -1040,7 +1040,7 @@ function gNext(){if(gType){clearInterval(gType);gType=null;gTx.textContent=gFull
   if(s.t==='title'){gBox.classList.remove('on');gTt.innerHTML='<small>'+(s.text||'')+'</small>'+s.sub;gTt.classList.add('on');gWait=1;
      gBg.style.backgroundImage=curView();gCh.style.opacity=0;setTimeout(()=>{gTt.classList.remove('on');gWait=null;gNext()},1700);return}
   if(s.choice){gMk.style.display='none';gCs.innerHTML='';gWait=1;s.choice.forEach(([q,r],k)=>{const b=document.createElement('button');b.className='pbtn2 l';b.textContent=q;
-     b.onclick=e=>{e.stopPropagation();gCs.innerHTML='';gWait=null;if(s.onPick)s.onPick(k);if(s.cg&&typeof moShow==='function'){moShow(s.cg);const cp=CGM[s.cg]&&CGM[s.cg].cap;if(cp&&!(gShots[gI]&&gShots[gI].keepMo))gShots.splice(gI,0,{say:cp,who:'',narr:1,keepMo:1})}gShow({say:r,who:s.me?'나':gWho.textContent})};gCs.appendChild(b)});return}
+     b.onclick=e=>{e.stopPropagation();gCs.innerHTML='';gWait=null;if(s.onPick)s.onPick(k);if(s.cg&&typeof moShow==='function'){moShow(s.cg);const cp=CGM[s.cg]&&CGM[s.cg].cap;if(cp&&!(gShots[gI]&&gShots[gI].keepMo))gShots.splice(gI,0,{say:cp,who:'',narr:1,keepMo:1})}{const nar=/^\((?![^)]{0,5}\))/.test(r);gShow({say:r,who:nar?'':(s.rw||(s.me?'나':gWho.textContent)),narr:nar})}};gCs.appendChild(b)});return}
   if(s.clue){cg.classList.remove('itm');const c=clues();c[s.clue]=1;LS.set('bl_clue',c);gBox.classList.add('on');gWho.textContent='셜록의 단서 수첩';
      G('.fx.spk').classList.add('on');gType2('🔎 '+CLUES[s.clue]+'\n(단서 '+Object.keys(c).length+'/'+MAINS.length+')');return}
   if(s.item){const k=LS.get('bl_keep',{});k[s.item]=1;LS.set('bl_keep',k);const it=KEEP[s.item];gBox.classList.remove('on');
@@ -1252,6 +1252,7 @@ function albumOpen(t){albTab=t;alb.classList.add('on');alb.querySelectorAll('.al
       if(EV[id]){tot++;const ok=ev[id];if(ok)n++;h+=`<div class="cell" ${ok?`data-r="ev:${id}"`:''}>${thumb(viewOf(id),c.img,!ok)}<em>꼬리표 이야기</em><small>${ok?c.n:'???'}</small></div>`}
       if(L3[id]){tot++;const ok=ev3[id];if(ok)n++;h+=`<div class="cell" ${ok?`data-r="l3:${id}"`:''}>${thumb(viewOf(id),c.img,!ok)}<em>단짝 이야기</em><small>${ok?c.n:'???'}</small></div>`}}
     tot++;if(end)n++;h+=`<div class="cell" ${end?'data-r="end"':''}>${thumb('img/v/london_1.webp','robot.webp',!end)}<em>종착역 런던</em><small>${end?'엔딩':'???'}</small></div>`;
+    {const E=LS.get('bl_endings',{});[['yonggung','img/v/sea_3.webp','px_byeol.webp','용궁 엔딩'],['eunha','img/v/aurora_1.webp','px_gyeonu.webp','은하수 역장 엔딩']].forEach(([k,bgi,chi,nm])=>{tot++;if(E[k])n++;h+=`<div class="cell">${thumb(bgi,chi,!E[k])}<em>숨은 엔딩</em><small>${E[k]?nm:'단짝과 함께 내리면…'}</small></div>`})}
     h+='</div>';box.innerHTML=`<p class="cnt">모은 장면 ${n} / ${tot}</p>`+h;
     box.querySelectorAll('[data-r]').forEach(el=>el.onclick=()=>{const r=el.dataset.r;alb.classList.remove('on');
       if(r.startsWith('ev:')){const id=r.slice(3);replay(EV[id],viewOf(id))}
@@ -1767,10 +1768,11 @@ const EV2={
   L('rabbit',null,1,'흰 토끼','늦었다, 늦었어! 아, 앞자리 실례할게요. 숨 좀 고르고요.',{pose:'in',emo:'💦',shake:1}),
   L('rabbit',null,1,'흰 토끼','저는 늘 늦을까 봐 걱정이에요. 시계를 하루에 백 번은 봐요. 그게 제 짐이에요.',{pose:'face'}),
   L('rabbit','sherlock',2,'셜록 홈즈','이 열차는 정시에 도착한다네. 그건 내가 보증하지. …내 시계도 다시 가거든.'),
-  L('rabbit','gyeonu',2,'견우','기다려 주는 사람이 있으면, 조금 늦어도 괜찮소.'),
+  L('rabbit','gilldong',2,'홍길동','기다려 주는 사람이 있으면 조금 늦어도 괜찮소. 나도 이 열차에서 배웠소.'),
   {choice:[['시계를 잠깐 내려놔 볼까요?','(흰 토끼가 회중시계를 탁자에 내려놓는다) …어, 이상하다. 시간이 더 천천히 가요.'],['조금 늦어도 괜찮아요','괜찮다고요? …그 말, 회중시계 뚜껑에 새겨 두고 싶네요.']],cg:'rabbit'},
   L('rabbit',null,1,'흰 토끼','저기 봐요! 도버 절벽이에요. 이제 곧 런던역이에요.',{emo:'✨'}),{item:'rabbit'}]};
 Object.assign(EV,EV2);
+for(const id in EV2)EV2[id].forEach(x=>{if(x.choice&&!x.rw)x.rw=CAST[id].n});
 ['sherlock'].forEach(k=>{if(!MAINS.includes(k))MAINS.push(k)});
 /* ---- 장면 엔진 확장: 두 사람 장면 · 말하는 쪽 강조 · 감정 기호 · 오프닝 CG ---- */
 CGM.sherlock=CGM.sherlock||{p:'up',fp:'50% 40%'};CGM.babayaga={p:'up'};CGM.hansel={p:'up'};
@@ -1890,7 +1892,7 @@ const FW={byeol:'자네 짐, 용궁까지는 몰라도 런던까지는 우리가
  snowq:'천천히 녹여요. 당신 짐도, 당신 마음도.',sherlock:'조수, 사건이 없어도 찾아오게. 짐이 있으면 더더욱.',odette:'짐을 든 당신도, 내려놓은 당신도 다 당신이에요.',
  wolf:'(늑대) 길을 잃으면 휘파람을 부시오. 짐 들어 줄 사람이 달려갈 테니.',sleeping:'늦게 내려놔도 괜찮아요. 저는 백 년 걸렸는걸요.',monster:'짐이 무거우면 저한테 반 주세요. 저는 힘이 세요.',
  cinder:'자정이 지나도 남는 게 진짜예요. 짐을 내려놔도 당신은 남아요.',mermaid:'「다 들렸어요. 당신 짐 이야기도.」',rabbit:'조금 늦게 내려놔도 괜찮아요! 기차는 정시에 오니까요.'};
-function fwShots(){const met=LS.get('bl_met',{});const ids=['byeol','gilldong','gyeonu','snowq','sherlock','odette','wolf','sleeping','monster','cinder','mermaid','rabbit'].filter(id=>met[id]);
+function fwShots(){const met=LS.get('bl_met',{});const ids=['byeol','gilldong','gyeonu','snowq','sherlock','odette','wolf','sleeping','monster','cinder','mermaid','rabbit'].filter(id=>met[id]&&!(TRIP&&TRIP.left&&TRIP.left[id]));
   const out=[{bg:'img/v/london_2.webp',ch:null,ch2:null,who:'',narr:1,say:'열차에서 내리기 전, 함께 탄 승객들이 하나둘 당신 앞에 선다.'}];
   for(let k=0;k<ids.length;k+=2){const a=ids[k],b=ids[k+1];out.push(L(a,b||null,1,CAST[a].n,FW[a],{bg:'img/v/london_2.webp'}));if(b)out.push(L(a,b,2,CAST[b].n,FW[b],{bg:'img/v/london_2.webp'}))}
   return out}
@@ -1907,6 +1909,139 @@ function farewell(done){playScene([{t:'title',text:'종착역',sub:'런던'},...
 const _ambOnV2=ambOn;ambOn=function(){AMB_H=hEff();_ambOnV2()};const _ambOffV2=ambOff;ambOff=function(){_ambOffV2();AMB_H=null};
 /* 장면 배경 = 지금 열차가 지나는 곳의 창밖 그림 (바깥 보기에서도 정확하게) */
 curView=function(){if(gBgOv)return 'url('+gBgOv+')';try{const w=where(dep,vnow());if(w.mode==='run'){const L=VIEWS[w.seg.id]||VIEWS.busan;const vi=Math.floor((w.h-w.seg.h)*60/3.5);return 'url('+L[vi%L.length]+')'}}catch(e){}return 'url('+VIEWS.busan[0]+')'};
+/* ===================================================================================
+   v3 · 배웅 (친한 만큼 깊어짐) · 꼬리표 뒷면 사인 · 같이 내리기(숨은 엔딩)
+   =================================================================================== */
+const OFFAT={gyeonu:4,babayaga:6,byeol:9};   // 이 역(장 번호)에 도착하면 내림
+const SIGN={byeol:['🐾','Jua','#2f7f86'],gilldong:['🖌️','Nanum Myeongjo','#1d1a17'],gyeonu:['🪶','Gowun Batang','#5a4ea0'],snowq:['❄️','Gowun Batang','#3c7ea6'],
+ sherlock:['🔍','Nanum Myeongjo','#5a3d22'],odette:['🤍','Gowun Batang','#a05a80'],wolf:['🐺','Do Hyeon','#b8312f'],sleeping:['🌹','Gowun Batang','#a23b55'],
+ monster:['🔖','Jua','#5f6b47'],cinder:['👠','Gowun Batang','#5a6fb0'],mermaid:['🐚','Gaegu','#2f7f9e'],rabbit:['⏱️','Do Hyeon','#c0392b'],babayaga:['🧹','Jua','#2e6b3e']};
+const SIGN_T={babayaga:'길 잃으면 쓸어서 길을 내게 — 바바 야가'};
+function addSign(id){const sg=LS.get('bl_sign',{});if(sg[id])return false;sg[id]=(L3[id]&&L3[id][1])||SIGN_T[id]||(CAST[id].n);LS.set('bl_sign',sg);return true}
+function iga(n){const c=n.charCodeAt(n.length-1);return (c>=0xAC00&&c<=0xD7A3&&(c-0xAC00)%28)?'이':'가'}
+function signShot(id){return {fn:()=>{const fresh=addSign(id);gBox.classList.add('on');gWho.textContent='꼬리표 뒷면';const s=LS.get('bl_sign',{})[id];
+  G('.fx.spk').classList.add('on');gType2(SIGN[id][0]+' '+CAST[id].n+iga(CAST[id].n)+' 당신의 꼬리표 뒷면에 사인을 남긴다.\n\n「'+s+'」'+(fresh?'\n\n(꼬리표 사인 '+Object.keys(LS.get('bl_sign',{})).length+'개)':''))}}}
+TRIP&&(TRIP.left=TRIP.left||{});
+const _boardedV3=boarded;boarded=function(id){return _boardedV3(id)&&!(TRIP&&TRIP.left&&TRIP.left[id])};
+function leavers(i){const met=LS.get('bl_met',{});return Object.keys(OFFAT).filter(id=>OFFAT[id]===i&&met[id]&&CH_OF[id]<i&&!(TRIP.left&&TRIP.left[id]))}
+const BYE={
+ gyeonu:{t:'바이칼 호수',hid:'eunha',
+  s0:[N('gyeonu',null,'(바이칼 호숫가에서 견우와 직녀가 내린다. 창 너머로 둘이 고개 숙여 인사한다.)'),L('gyeonu',null,1,'직녀','고마웠어요. 일 년 뒤에 또 만나요.',{emo:'♪'})],
+  s:[N('gyeonu',null,'열차가 바이칼 호숫가에 선다. 견우와 직녀가 짐을 챙긴다.'),
+   L('gyeonu',null,1,'직녀','여기서 내려요. 호수 건너편이 은하수 끝이래요. 거기서 견우는 땅으로, 저는 하늘로 가요.',{pose:'in'}),
+   N('gyeonu',null,'(승강장으로 따라 내린다. 차가운 호수 바람이 분다.)'),
+   L('gyeonu','gilldong',2,'홍길동','망은 끝까지 봐 주지 못했구려. 미안하오.'),
+   L('gyeonu','gilldong',1,'견우','아니오. 덕분에 처음으로 새벽이 무섭지 않았소.',{emo:'…'}),
+   L('gyeonu','byeol',2,'별주부','헤어지는 날도 같이 산 날이오. 잊지 마시오.'),
+   {choice:[['일 년 뒤에 이 역에서 기다릴게요','(직녀) 약속이에요. 까치들한테도 말해 둘게요.'],['오늘도 같이 산 날이에요','(견우) …그래, 오늘도 같이 산 날이오. 고맙소.']]}],
+  end:N('gyeonu',null,'(기적이 울린다. 창밖에서 두 사람이 손을 흔든다. 까치 한 마리가 열차를 한참 따라 날아온다.)',{fx:['spk']})},
+ babayaga:{t:'독일 숲',
+  s0:[N('babayaga',null,'(검은 숲 역에서 바바 야가가 절구를 끌고 내린다. 창 너머로 빗자루를 한 번 흔든다.)'),L('babayaga',null,1,'바바 야가','흐흐, 잘 가게, 젊은이.')],
+  s:[N('babayaga',null,'열차가 검은 숲 역에 선다. 바바 야가가 절구를 챙긴다.'),
+   L('babayaga',null,1,'바바 야가','흐흐, 내 오두막이 이 숲까지 걸어와 있구먼. 닭다리로 말이야. 여기서 내리네.',{pose:'in',emo:'💢'}),
+   L('babayaga','odette',2,'오데트','할머니, 다음에 오두막 앞에서 춤출게요.'),
+   L('babayaga','odette',1,'바바 야가','흐흐, 약속했네. 젊은이, 길 잃으면 그 빗자루로 쓸어서 길을 내게.'),
+   {choice:[['오두막에 놀러 갈게요','흐흐, 차는 쓰지만 몸엔 좋다네. 문은 열어 두지.'],['절구 고쳐서 다행이에요','고친 게 아니라… 자네랑 떠드느라 고장 난 걸 잊었지. 흐흐.']]}],
+  end:N('babayaga',null,'(기적이 울린다. 숲 사이로 닭다리 달린 오두막이 쿵쿵 걸어가는 게 보인다.)')},
+ byeol:{t:'해저터널',hid:'yonggung',
+  s0:[N('byeol',null,'(바다 밑 정거장에서 별주부가 내린다. 창 너머로 지느러미 같은 앞발을 흔든다.)'),L('byeol',null,1,'별주부','허허, 자네 덕에 빈손이 아니오. 잘 가시오.',{emo:'♪'})],
+  s:[N('byeol',null,'열차가 바다 밑 정거장에 선다. 창밖에 산호가 흔들린다. 별주부가 트렁크를 챙긴다.'),
+   L('byeol',null,1,'별주부','여기서 내리오. 이 바다 아래가 용궁이오.',{pose:'in'}),
+   L('byeol',null,1,'별주부','빈손이 아니오. 육지 이야기 한 보따리, 그리고 친구가 생겼다는 이야기.',{emo:'✨'}),
+   L('byeol','gilldong',2,'홍길동','거북 양반, 그 옆자리는 비워 두겠소. 다음에도 앉으시오.'),
+   L('byeol','monster',2,'괴물','…제 이름을 처음으로 고민해 준 분이에요. 잊지 않을게요.',{emo:'💧'}),
+   {choice:[['용왕님께 자랑하세요','허허, 간 대신 자랑거리라. 용왕님도 웃으시겠소.'],['다음엔 놀러 갈게요','그럼 내 등에 태워 주겠소. 토끼보다는 안전하게.']]}],
+  end:N('byeol',null,'(기적이 울린다. 창밖에서 별주부가 바다 아래로 천천히 헤엄쳐 내려간다. 작은 물방울 하나가 창에 붙어 반짝인다.)',{fx:['spk']})}};
+function byeShots(id){const B=BYE[id],l=lv(AFF[id]||0);B.s.forEach(x=>{if(x.choice&&!x.rw)x.rw=CAST[id].n});
+  if(l<2)return [{t:'title',text:'배웅',sub:CAST[id].n},...B.s0,B.end];
+  const out=[{t:'title',text:'배웅 · '+B.t,sub:CAST[id].n},...B.s];
+  if(l>=3){out.push({cgb:id,say:'(친구가 당신의 손을 꼭 잡는다.)'});out.push(signShot(id));
+    if(B.hid)out.push({choice:[['손 흔들며 배웅하기','(다시 열차에 오른다. 창 너머로 오래 손을 흔든다.)'],['나도 같이 내릴래요 · 숨은 엔딩','…정말이오? 그럼 같이 갑시다.']],onPick:k=>{if(k===1)hidPick=B.hid},rw:CAST[id].n})}
+  out.push(B.end);return out}
+let hidPick=null;
+/* 배웅 CG: img/cg/<id>_bye.(webp|mp4) · 없으면 합성 */
+for(const id in BYE)cgProbe(id+'_bye');
+const _gNextV3=gNext;gNext=function(){if(!cg.classList.contains('on'))return;if(gType||gWait){_gNextV3();return}const s=gShots[gI];
+  if(s&&s.cgb){gI++;setTimeout(()=>{moShow(s.cgb+'_bye');gShow({say:s.say,who:'',narr:1})},10);return}
+  if(hidPick&&s&&s.narr&&gI===gShots.length-1){/* 숨은 엔딩 선택 시 마지막 기적 장면은 건너뜀 */gI=gShots.length}
+  _gNextV3()};
+const _moShowV3=moShow;moShow=function(id){const b2=id.replace(/_bye$/,'');if(b2!==id){if(!CGM[id])CGM[id]=CGM[b2]||{p:'up'};const save=CAST[id];if(!save)CAST[id]=CAST[b2];_moShowV3(id);if(!save)delete CAST[id];return}_moShowV3(id)};
+function doFarewell(id,done){hidPick=null;playScene(byeShots(id),()=>{TRIP.left=TRIP.left||{};TRIP.left[id]=1;if(COMP&&COMP.id===id)COMP=null;if(TRIP.seat===id)TRIP.seat=null;tripSave();
+  MQ[id+':off']={at:vnow()+40e3};mqSave();
+  if(hidPick){const h=hidPick;hidPick=null;setTimeout(()=>hiddenEnding(h,id),700);return}done&&done()})}
+function stopAt(i){const L=leavers(i);const go=k=>{if(k>=L.length){if(!TRIP.done[i]&&!AMB&&!cmBusy())playChapter(i);return}doFarewell(L[k],()=>setTimeout(()=>go(k+1),900))};go(0)}
+/* 도착하면: 내릴 사람 배웅 → 새 승객 이야기 */
+const _arriveChV3=arriveCh;arriveCh=function(i){if(!TRIP.tr)return;const L0=leavers(i);
+  if(!L0.length){_arriveChV3(i);return}
+  TRIP.tr=null;TRIP.ch=i;TRIP.hb=CH[i].h;TRIP.at=Date.now();COMP=null;TRIP.seat=null;tripSave();tgtD=fitD();
+  announce('도착 안내','제'+(i+1)+'역 · '+CH[i].name,CAST[L0[0]].n+iga(CAST[L0[0]].n)+' 이 역에서 내려요');
+  setTimeout(()=>{if(TRIP&&TRIP.ch===i)stopAt(i)},4200)};
+const _playChapterV3=playChapter;playChapter=function(i){const L=leavers(i);if(L.length){stopAt(i);return}_playChapterV3(i)};
+/* 다음 역 버튼: 배웅이 남아 있으면 */
+const _uiTickV3=uiTick;uiTick=function(){_uiTickV3();if(!TRIP||TRIP.tr||TRIP.fin)return;const L=leavers(TRIP.ch);
+  if(L.length&&nextB.classList.contains('on')){nextB.innerHTML='🚉 '+CAST[L[0]].n+' 배웅하기';nextB.dataset.a='story';nextB.classList.add('go')}};
+/* 작별 편지 */
+Object.assign(MAIL.gyeonu,{off:'(직녀) 은하수 끝에서 써요. 여긴 별이 너무 많아서, 편지지를 펴면 별빛이 글씨 위에 내려앉아요.\n(견우) 땅으로 내려와 소를 몰면서도 자꾸 하늘을 보게 되오. 이번엔 쓸쓸해서가 아니라, 자네 생각이 나서.\n(직녀) 일 년 뒤 칠석, 바이칼 역이에요. 잊지 마요.'});
+Object.assign(MAIL.babayaga,{off:'흐흐, 젊은이 보게.\n오두막에 돌아왔네. 닭다리가 자네 얘기를 들려 달라고 보채서 혼났지.\n차를 끓여 두었네. 쓰지만 몸엔 좋아. 언제든 오게. 빗자루로 쓸면 길이 날 걸세.'});
+Object.assign(MAIL.byeol,{off:'육지 친구에게.\n\n용궁에 돌아왔소. 용왕님께 간 대신 이야기 보따리를 바쳤더니, 글쎄 한참을 웃으셨소.\n「별주부, 너도 친구가 생겼구나」 하시면서.\n이 편지는 물에 젖지 않게 진주 껍데기에 새겼소. 바다 냄새가 나거든 내 생각을 해 주시오.'});
+const _mailTickV3=mailTick;mailTick=function(){_mailTickV3()};
+const _postOpenV3=postOpen;postOpen=function(t){_postOpenV3(t);if(t!=='mail')return;post.querySelectorAll('.env').forEach(b=>{if(b.dataset.k.endsWith(':off'))b.querySelector('small').textContent='작별 편지'})};
+const _letterOpenV3=letterOpen;letterOpen=function(k){if(!k.endsWith(':off')){_letterOpenV3(k);return}const id=k.split(':')[0],m=MAIL[id],th=TH[id]||{},v=MQ[k];v.read=1;mqSave();postBadge();
+  const el=$('letter');el.innerHTML=`<div class="lp" style="--ff:'${th.ff||'Gowun Batang'}';--bg:${th.bg||'#fbf3e2'};--ink:${th.ink||'#2b1e12'};--ac:${th.acc||'#8a5a2b'};background:${th.pat?th.pat+',':''}${th.bg||'#fbf3e2'}">
+    <span class="stp">${m.st}</span><div class="tx">${esc(m.off)}</div><div class="sg">— ${esc(m.sign)}</div><button class="pbtn2 l" id="ltX">편지 접기</button></div>`;
+  el.classList.remove('on');void el.offsetWidth;el.classList.add('on');$('ltX').onclick=e=>{e.stopPropagation();el.classList.remove('on');postOpen('mail')}};
+/* 엔딩: 먼저 내린 친구는 편지로 */
+const _fwShotsV3=fwShots;fwShots=function(){const left=TRIP&&TRIP.left||{};const out=_fwShotsV3();
+  const names=Object.keys(left).map(id=>CAST[id].n);if(names.length)out.push({bg:'img/v/london_2.webp',ch:null,ch2:null,who:'',narr:1,say:'먼저 내린 '+names.join(', ')+'의 편지도 트렁크 위에 놓여 있다.\n「런던까지 무사히 갔지요? 짐은 조금 가벼워졌나요?」'});return out};
+/* 숨은 엔딩 */
+const HID={
+ yonggung:{name:'용궁 엔딩',bg:'img/v/sea_1.webp',shots:T=>[{t:'title',text:'숨은 엔딩',sub:'용궁'},
+   N('byeol',null,'별주부의 등에 올라 바다 아래로 내려간다. 숨이 막히지 않는다. 물방울이 하나하나 빛난다.',{bg:'img/v/sea_2.webp',fx:['spk']}),
+   N(null,null,'산호 기둥 사이로 용궁의 지붕이 보인다. 문지기 물고기들이 놀라 지느러미를 턴다.',{bg:'img/v/sea_3.webp'}),
+   L('byeol',null,1,'별주부','용왕님! 간은 못 구했소. 대신… 육지 친구를 데려왔소.',{bg:'img/v/sea_3.webp',emo:'💦'}),
+   N(null,null,'(용왕이 한참 당신을 바라보다가, 궁이 울릴 만큼 크게 웃는다.)',{bg:'img/v/sea_3.webp',shake:1}),
+   L('byeol',null,1,'별주부','…웃으셨소! 용궁에서 처음 듣는 웃음소리요.',{bg:'img/v/sea_3.webp',emo:'✨'}),
+   ...(T?[N(null,null,'트렁크를 용궁 보물 창고에 넣는다. 바다가 대신 맡아 주겠단다.\n\n“'+T.text+'”',{bg:'img/v/sea_3.webp'}),L('byeol',null,1,'별주부','이제 자네 짐은 바다가 들어 줄 거요. 바다는 아주 힘이 세오.',{bg:'img/v/sea_3.webp'})]:[]),
+   N(null,null,'— 용궁 엔딩 —',{bg:'img/v/sea_2.webp',fx:['glow','spk']})]},
+ eunha:{name:'은하수 역장 엔딩',bg:'img/v/aurora_1.webp',shots:T=>[{t:'title',text:'숨은 엔딩',sub:'은하수 역'},
+   N('gyeonu',null,'견우와 직녀를 따라 얼어붙은 호수 위를 걷는다. 호수에 은하수가 그대로 비친다.',{bg:'img/v/baikal_1.webp'}),
+   N(null,null,'까치들이 날아와, 호수에서 하늘까지 다리를 놓는다.',{bg:'img/v/aurora_1.webp',fx:['spk']}),
+   L('gyeonu',null,1,'직녀','정말 같이 와 줬네요.',{bg:'img/v/aurora_1.webp',emo:'✨'}),
+   L('gyeonu',null,1,'견우','다리 끝에 작은 역이 하나 있소. 일 년에 한 번 열리는데, 아무도 지키지 않는 역이오.',{bg:'img/v/aurora_2.webp'}),
+   N(null,null,'은하수 역. 당신은 그 역의 역장이 되기로 한다.',{bg:'img/v/aurora_2.webp',fx:['glow']}),
+   L('gyeonu',null,1,'직녀','당신이 같이 기다려 주면, 일 년이 하루 같을 거예요.',{bg:'img/v/aurora_2.webp'}),
+   ...(T?[N(null,null,'트렁크는 역장실 선반에 올려 둔다. 별빛 아래서는 짐도 가볍다.\n\n“'+T.text+'”',{bg:'img/v/aurora_2.webp'})]:[]),
+   N(null,null,'— 은하수 역장 엔딩 —',{bg:'img/v/aurora_1.webp',fx:['glow','spk']})]}};
+function hiddenEnding(h,id){const H=HID[h],T=TRUNK&&!TRUNK.done?TRUNK:null;playScene(H.shots(T),()=>{const E=LS.get('bl_endings',{});E[h]=1;LS.set('bl_endings',E);
+  if(T){T.done=1;T.pick=2;T.hid=h;LS.set('bl_trunk',T);LS.set('bl_end',{text:T.text,no:T.no,pick:2,dep:T.dep,hid:h})}
+  TRIP.fin=1;TRIP.hid=h;tripSave();trkShow();makeCard(T||{dep:TRIP.dep,no:'----',text:''},h)})}
+/* 기념 카드 = 꼬리표 뒷면 (모인 사인) */
+makeCard=function(T,hid){card.dataset.kind='end';const cv=card.querySelector('canvas'),g=cv.getContext('2d'),F='"Apple SD Gothic Neo","Noto Sans KR",sans-serif';
+  const bg=g.createRadialGradient(540,500,60,540,760,950);bg.addColorStop(0,'#2b4a52');bg.addColorStop(1,'#0b1418');g.fillStyle=bg;g.fillRect(0,0,1080,1440);
+  for(let i=0;i<90;i++){g.fillStyle='rgba(255,246,216,'+(Math.random()*.5+.2)+')';g.beginPath();g.arc(Math.random()*1080,Math.random()*300,Math.random()*2+.5,0,7);g.fill()}
+  g.strokeStyle='#c9b08a';g.lineWidth=4;g.beginPath();g.moveTo(540,0);g.lineTo(540,170);g.stroke();
+  g.save();g.translate(540,170);g.rotate(.025);const W=860,H=1210,x=-W/2;
+  g.fillStyle='rgba(0,0,0,.4)';g.beginPath();g.moveTo(x+160,18);g.lineTo(x+W-140,18);g.lineTo(x+W+18,130);g.lineTo(x+W+18,H+18);g.lineTo(x+18,H+18);g.lineTo(x+18,130);g.closePath();g.fill();
+  g.fillStyle='#e2c79a';g.beginPath();g.moveTo(x+150,0);g.lineTo(x+W-150,0);g.lineTo(x+W,112);g.lineTo(x+W,H);g.lineTo(x,H);g.lineTo(x,112);g.closePath();g.fill();
+  g.strokeStyle='rgba(90,61,34,.07)';g.lineWidth=2;for(let y=8;y<H;y+=9){g.beginPath();g.moveTo(x,y);g.lineTo(x+W,y);g.stroke()}
+  g.fillStyle='#0b1418';g.beginPath();g.arc(0,70,30,0,7);g.fill();g.lineWidth=12;g.strokeStyle='#b8a27a';g.stroke();
+  g.fillStyle='#3a2a1c';g.textAlign='center';g.font='700 28px '+F;g.fillText('부산발 런던행 · 나의 꼬리표 뒷면',0,170);
+  g.font='900 64px '+F;g.fillText(hid?HID[hid].name:'동화 친구들의 사인',0,250);
+  const sg=LS.get('bl_sign',{}),ids=Object.keys(sg);const ALL=['byeol','gilldong','gyeonu','snowq','sherlock','babayaga','odette','wolf','sleeping','monster','cinder','mermaid','rabbit'];
+  const order=ALL.filter(id=>sg[id]).concat(ALL.filter(id=>!sg[id])).slice(0,12);
+  order.forEach((id,k)=>{const col=k%2,row=Math.floor(k/2),cx=x+40+col*(W-80)/2+((W-80)/4),cy=320+row*120;const s=SIGN[id]||['✦','Gaegu','#3a2a1c'];
+    g.save();g.translate(cx,cy);g.rotate(((k*53)%11-5)*Math.PI/180);
+    if(sg[id]){g.fillStyle=s[2];g.font='54px '+F;g.textAlign='center';g.fillText(s[0],-150,20);
+      const [a,b]=sg[id].split(' — ');g.textAlign='left';g.font='700 30px "'+s[1]+'",'+F;g.fillText(a.length>14?a.slice(0,14)+'…':a,-110,4);
+      g.font='600 22px "'+s[1]+'",'+F;g.globalAlpha=.8;g.fillText('— '+(b||CAST[id].n),-110,38);g.globalAlpha=1}
+    else{g.strokeStyle='rgba(58,42,28,.28)';g.setLineDash([8,7]);g.lineWidth=3;g.beginPath();g.arc(-150,6,30,0,7);g.stroke();g.setLineDash([]);
+      g.fillStyle='rgba(58,42,28,.3)';g.font='700 30px '+F;g.textAlign='center';g.fillText('?',-150,17);g.textAlign='left';g.font='600 24px "Gaegu",'+F;g.fillText('단짝이 되면 사인해 줘요',-110,14)}
+    g.restore()});
+  g.setLineDash([14,10]);g.lineWidth=3;g.strokeStyle='#3a2a1c';g.beginPath();g.moveTo(x+56,H-220);g.lineTo(x+W-56,H-220);g.stroke();g.setLineDash([]);
+  g.fillStyle='#3a2a1c';g.textAlign='center';g.font='800 32px '+F;
+  g.fillText(hid==='yonggung'?'마음의 짐은 바다가 맡아 주기로 했어요':hid==='eunha'?'은하수 역장실 선반에 짐을 올려 두었어요':T&&T.pick===1?'마음의 짐은 런던 유실물 보관소에 두고 왔어요':'마음의 짐은 조금 가벼워져서 다시 가져왔어요',0,H-160);
+  const met=Object.keys(LS.get('bl_met',{})).length;g.font='600 26px '+F;g.fillText('함께 탄 승객 '+met+'명 · 꼬리표 사인 '+ids.length+'개 · 받은 편지 '+mailList().length+'통',0,H-110);
+  g.font='600 22px '+F;g.globalAlpha=.6;g.fillText('ejdms499-wq.github.io',0,H-60);g.globalAlpha=1;g.restore();card.classList.add('on')};
 /* ---------- 창가 자리: 아래 버튼을 승객 반대편(왼쪽)으로 ---------- */
 function btnRow(){const L=['ambB','albB','postB','trk','snd'].map(i=>document.getElementById(i)).filter(Boolean);const seat=MODE==='seat',mob=innerWidth<=520;
   let x=14,y=14;for(const el of L){if(!seat){el.style.left=el.style.right=el.style.bottom='';continue}

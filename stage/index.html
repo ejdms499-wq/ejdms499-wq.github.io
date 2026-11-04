@@ -24,7 +24,7 @@ body.day #cab{background-image:url(img/zcab_w_d.webp)}
 @media (max-aspect-ratio:3/4){body.day #cab{background-image:url(img/zcab_m_d.webp)}}
 #glass{position:fixed;inset:0;pointer-events:none;display:none;background:linear-gradient(115deg,transparent 30%,rgba(255,220,170,.06) 45%,transparent 55%)}
 body.seat #cab,body.seat #glass{display:block}
-.vw{position:fixed;inset:0;pointer-events:none;display:none;background-repeat:no-repeat;opacity:0;transition:opacity 2.4s;filter:saturate(.9) brightness(.92)}
+.vw{position:fixed;inset:0;pointer-events:none;display:none;background-repeat:no-repeat;opacity:0;transition:opacity 2.4s}
 body.seat .vw{display:block}
 .vw.on{opacity:1}
 #fade{position:fixed;inset:0;pointer-events:none;background:#08151c;opacity:0;transition:opacity .35s;z-index:5}
@@ -80,11 +80,10 @@ body.seat .vw{display:block}
 /* 맞은편 승객 */
 #pax{position:fixed;overflow:hidden;pointer-events:none;display:none;z-index:1}
 body.seat #pax{display:block}
-body:not(.day) #pax img{filter:brightness(.88) saturate(.9)}
 #pax img{position:absolute;left:0;width:100%;pointer-events:auto;cursor:pointer;transform-origin:50% 100%;animation:breathe 4.2s ease-in-out infinite;transition:opacity 1.2s}
 #pax img.out{opacity:0}
 @keyframes breathe{50%{transform:translateY(1.2%) scaleY(.992)}}
-#paxT{position:fixed;z-index:3;display:none;white-space:nowrap;padding:4px 9px 4px 14px;font:700 12px "Apple SD Gothic Neo",sans-serif;cursor:pointer;transform:rotate(-4deg);animation:bob 2.4s ease-in-out infinite}
+#paxT{position:fixed;z-index:3;display:none;padding:4px 9px 4px 14px;font:700 12px "Apple SD Gothic Neo",sans-serif;cursor:pointer;transform:rotate(-4deg);animation:bob 2.4s ease-in-out infinite}
 body.seat #paxT.on{display:block}
 @keyframes bob{50%{transform:rotate(-4deg) translateY(-4px)}}
 #paxT::before{content:"";position:absolute;left:4px;top:50%;width:4px;height:4px;margin-top:-3px;border:2px solid #3a2a1c;border-radius:50%}
@@ -98,6 +97,74 @@ body.seat #paxT.on{display:block}
 #dlgC button{text-align:left}
 #dlgM{position:absolute;right:12px;bottom:6px;font-size:11px;opacity:.6;animation:bob 1.2s infinite}
 body.talk #snd,body.talk #trk,body.talk #seat{opacity:.0;pointer-events:none}
+
+/* ===== 애니메이션 장면 (60년대 TV 만화식 리미티드 애니메이션) ===== */
+#cg{position:fixed;inset:0;z-index:30;display:none;overflow:hidden;background:#08151c}
+#cg.on{display:block}
+#cg .bg{position:absolute;inset:-8%;background-size:cover;background-position:50% 50%;will-change:transform}
+#cg .bg.kb{animation:kb 14s ease-out forwards}
+@keyframes kb{from{transform:scale(1.18) translate(3%,2%)}to{transform:scale(1) translate(0,0)}}
+#cg .bg.dim{filter:brightness(.55) saturate(.8) blur(2px)}
+#cg .ch{position:absolute;left:50%;bottom:-6%;height:min(96%,128vw);transform:translateX(-50%);transform-origin:50% 8%;transition:transform 1.1s cubic-bezier(.3,.9,.3,1),opacity .6s}
+#cg .ch.in{animation:chIn .7s cubic-bezier(.2,1.3,.4,1)}
+@keyframes chIn{from{transform:translateX(-50%) translateY(18%);opacity:0}}
+#cg .ch.face{transform:translateX(-50%) translateY(20%) scale(1.75)}
+@media (max-aspect-ratio:3/4){#cg .ch{bottom:22%}#cg .ch.face{transform:translateX(-50%) translateY(14%) scale(1.45)}#cg .ch.side{transform:translateX(-30%)}}
+#cg .ch.side{transform:translateX(-12%)}
+#cg .ch.sad{filter:saturate(.6) brightness(.85)}
+#cg.shake .stage{animation:shk .45s}
+@keyframes shk{20%{transform:translate(-8px,4px)}40%{transform:translate(7px,-5px)}60%{transform:translate(-5px,-3px)}80%{transform:translate(4px,5px)}}
+#cg .stage{position:absolute;inset:0}
+#cg .fx{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .4s}
+#cg .fx.on{opacity:1}
+#cg .lines{background:repeating-conic-gradient(from 0deg at 50% 38%,rgba(255,250,235,.0) 0deg 2.2deg,rgba(255,250,235,.55) 2.4deg 2.9deg,rgba(255,250,235,0) 3.1deg 7deg);
+  -webkit-mask:radial-gradient(circle at 50% 38%,transparent 26%,#000 60%);mask:radial-gradient(circle at 50% 38%,transparent 26%,#000 60%)}
+
+@keyframes spin{to{filter:hue-rotate(0deg);transform:rotate(3deg)}}
+#cg .spk{background-image:radial-gradient(circle,#fff6d8 0 2px,transparent 3px),radial-gradient(circle,#fff6d8 0 1.5px,transparent 2.5px);background-size:90px 110px,57px 73px;background-position:0 0,30px 20px}
+#cg .spk.on{animation:spk 3s linear infinite}
+@keyframes spk{to{background-position:0 -220px,30px -126px}}
+#cg .snow{background-image:radial-gradient(circle,#fff 0 2px,transparent 3px),radial-gradient(circle,#fff 0 1.4px,transparent 2.4px);background-size:70px 70px,43px 51px}
+#cg .snow.on{animation:spk 6s linear infinite}
+#cg .glow{background:radial-gradient(circle at 50% 40%,rgba(255,214,150,.45),transparent 55%)}
+#cg .bar{position:absolute;left:0;right:0;height:9%;background:#050a0d;z-index:5;transition:transform .7s}
+#cg .bar.t{top:0;transform:translateY(-100%)}#cg .bar.b{bottom:0;transform:translateY(100%)}
+#cg.lb .bar{transform:none}
+#cg .iris{position:absolute;inset:0;z-index:8;background:#050a0d;pointer-events:none;
+  -webkit-mask:radial-gradient(circle at 50% 45%,transparent var(--r),#000 calc(var(--r) + 1px));mask:radial-gradient(circle at 50% 45%,transparent var(--r),#000 calc(var(--r) + 1px));--r:0%}
+#cg .ttl{position:absolute;left:50%;top:42%;transform:translate(-50%,-50%) rotate(-2deg);z-index:9;padding:12px 20px;text-align:center;font:800 20px/1.3 "Apple SD Gothic Neo",sans-serif;opacity:0;transition:opacity .5s;white-space:nowrap}
+#cg .ttl small{display:block;font-size:12px;font-weight:600;opacity:.75;letter-spacing:2px}
+#cg .ttl.on{opacity:1}
+#cg .box{position:absolute;left:50%;bottom:calc(11% + env(safe-area-inset-bottom));transform:translateX(-50%);width:min(640px,calc(100vw - 24px));z-index:6;padding:14px 16px 12px;cursor:pointer;display:none}
+#cg .box.on{display:block;animation:ckIn .3s}
+#cg .who{position:absolute;top:-14px;left:14px;padding:3px 10px;font:800 13px "Apple SD Gothic Neo",sans-serif;background:#3a2a1c;color:#f3e6c4;border-radius:3px;transform:rotate(-2deg)}
+#cg .who:empty{display:none}
+#cg .tx{font-size:15.5px;line-height:1.65;min-height:50px;white-space:pre-wrap}
+#cg .tx.narr{font-style:italic;opacity:.9}
+#cg .chs{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+#cg .chs button{text-align:left}
+#cg .mk{position:absolute;right:12px;bottom:6px;font-size:11px;opacity:.6;animation:bob 1.2s infinite}
+#cg .item{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%) scale(0);z-index:7;width:min(300px,80vw);padding:16px;text-align:center;transition:transform .6s cubic-bezier(.2,1.5,.4,1)}
+#cg .item.on{transform:translate(-50%,-50%) scale(1) rotate(-2deg)}
+#cg .item b{display:block;font-size:17px;margin:6px 0 4px}
+#cg .item .ic{font-size:40px;line-height:1}
+#cg .item p{margin:0;font-size:13px;line-height:1.5}
+#cg .skip{position:absolute;right:12px;top:calc(12px + env(safe-area-inset-top));z-index:9;background:rgba(5,10,13,.5);color:#f3e6c4;border:1px solid rgba(243,230,196,.5);border-radius:3px;font:600 12px "Apple SD Gothic Neo",sans-serif;padding:5px 9px;cursor:pointer}
+#cg .grain{position:absolute;inset:0;z-index:4;pointer-events:none;opacity:.12;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");animation:grn .5s steps(3) infinite}
+@keyframes grn{33%{background-position:40px 70px}66%{background-position:-60px 20px}}
+/* 꼬리표 카드 */
+#card{position:fixed;inset:0;z-index:40;background:rgba(6,16,22,.8);display:none;align-items:center;justify-content:center;flex-direction:column;gap:12px;padding:16px}
+#card.on{display:flex}
+#card canvas{max-width:min(420px,92vw);max-height:72vh;border:2px solid #3a2a1c;box-shadow:4px 4px 0 #000;transform:rotate(-1deg)}
+#card .row{display:flex;gap:8px}
+.stk span.clue{border-style:solid;border-color:#3a2a1c;color:#3a2a1c;background:#fffaf0}
+.clues{margin-top:10px;font-size:12px;line-height:1.5}
+.clues li{margin:2px 0}
+.clues .no{opacity:.4}
+#paxT.ev{background:#b8432f;color:#fff6e4}
+
+#trk.ev{background:#b8432f;color:#fff6e4;animation:bob 1.4s infinite}
 </style></head><body>
 <div id="tag"><b>부산</b><span id="tagS">그림 겹 무대 · 시험판</span><i id="tagI"></i></div>
 <div id="dev"><span>출발 후</span><input id="devR" type="range" min="0" max="91.9" step="0.1"><span id="devV"></span></div>
@@ -355,10 +422,10 @@ function ckOpen(){ck.classList.add('on');const w=where(dep,vnow());
   <textarea id="ckT" maxlength="80" placeholder="예: 다음 달 면접이 자꾸 걱정돼요"></textarea>
   <div class="ckRow"><button class="pbtn2" id="ckGo">트렁크에 맡기기</button></div>
   <div style="text-align:center"><button class="ckSkip" id="ckNo">오늘은 그냥 탈래요</button></div>`;
-  $('ckGo').onclick=ckSubmit;$('ckNo').onclick=()=>{ck.classList.remove('on');LS.set('bl_skip',dep)}}
+  $('ckGo').onclick=ckSubmit;setTimeout(()=>{try{$('ckT').focus()}catch(e){}},300);$('ckNo').onclick=()=>{ck.classList.remove('on');LS.set('bl_skip',dep)}}
 function ckSubmit(){const t=$('ckT').value.trim();if(!t){$('ckT').focus();$('ckT').placeholder='한 줄이면 충분해요';return}
   const w=where(dep,vnow());const no=String(1000+Math.floor(Math.random()*9000));
-  TRUNK={dep,text:t,no,boardH:w.mode==='run'?w.h:0,at:Date.now()};LS.set('bl_trunk',TRUNK);
+  TRUNK={dep,text:t,no,boardH:w.mode==='run'?w.h:0,at:Date.now()};LS.set('bl_trunk',TRUNK);sbAdd(dep);
   ckC.innerHTML=`<h3>트렁크에 넣는 중…</h3><div class="sub">수하물 번호 #${no}</div>
    <div class="trunk open" id="tr"><div class="note">${esc(t)}</div><div class="lid"><div class="hd"></div></div><div class="lk"></div><div class="bx"></div>
    <div class="tag">BSN → LDN<br>제 ${trainNo(dep)}호<br>#${no}</div></div>
@@ -367,25 +434,31 @@ function ckSubmit(){const t=$('ckT').value.trim();if(!t){$('ckT').focus();$('ckT
    <div class="ckRow"><button class="pbtn2" id="ckSeat">내 창가 자리로 →</button><button class="pbtn2 l" id="ckOut">열차 구경하기</button></div></div>`;
   const tr=$('tr');setTimeout(()=>tr.classList.add('in'),400);setTimeout(()=>tr.classList.remove('open'),1250);setTimeout(()=>tr.classList.add('tagged'),1700);
   setTimeout(()=>{$('ckR').style.opacity=1},2200);
-  $('ckSeat').onclick=()=>{ck.classList.remove('on');trkShow();goSeat()};$('ckOut').onclick=()=>{ck.classList.remove('on');trkShow()}}
+  $('ckSeat').onclick=()=>{ck.classList.remove('on');trkShow();if(MODE!=='seat')goSeat()};$('ckOut').onclick=()=>{ck.classList.remove('on');trkShow()}}
 function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 
 /* ---- 내 트렁크 · 도시 스티커 ---- */
 const trk=$('trk'),trkP=$('trkP');
 const STC=['#c8553d','#2f7f86','#d39b2a','#5a6fb0','#8a5a9e','#3d8a5a','#b8432f','#2b5f8f'];
-function trkShow(){trk.style.display=myTrunk()?'block':'none'}
+function trunkArrived(){if(!TRUNK||TRUNK.done)return false;const w=where(TRUNK.dep,vnow());return w.mode==='end'||(w.mode==='run'&&w.h>=91.4)}
+function trkShow(){trk.style.display='block';
+  if(TRUNK&&!TRUNK.done&&trunkArrived()){trk.textContent='런던 도착 · 트렁크 찾기';trk.classList.add('ev');trk.onclick=e=>{e.stopPropagation();ending()};return}
+  trk.classList.remove('ev');
+  if(myTrunk()){trk.textContent='내 트렁크';trk.onclick=trkToggle}else{trk.textContent='근심 맡기기';trk.onclick=e=>{e.stopPropagation();ckOpen()}}}
+setInterval(trkShow,5000);
 function trkRender(){const T=myTrunk();if(!T)return;const w=where(dep,vnow());const h=w.mode==='end'?999:w.h;
   const bi=SEG.reduce((a,s,i)=>s.h<=T.boardH?i:a,0);
   let st='';SEG.forEach((s,i)=>{const got=i>=bi&&s.h<=h,now=w.mode==='run'&&w.i===i,pre=i<bi;
     st+=`<span class="${got?'got':''}${now?' now':''}${pre?' pre':''}" style="--r:${((i*37)%17)-8}deg;${got?'background:'+STC[i%STC.length]:''}">${s.name.replace(' 도착','')}</span>`});
   const left=w.mode==='run'?Math.max(0,TRIP_H-w.h):0;
   trkP.innerHTML=`<h4>내 트렁크 #${T.no}</h4><div style="font-size:12px;opacity:.75">${left>0?'런던까지 '+dur(left)+' · 수하물칸 보관 중':'런던 도착! 트렁크를 찾을 수 있어요'}</div>
-   <div class="w" id="trkW">🔒 안에 든 것: 근심 한 개 <u style="cursor:pointer;margin-left:6px">살짝 보기</u></div><div class="stk">${st}</div>`;
+   <div class="w" id="trkW">🔒 안에 든 것: 근심 한 개 <u style="cursor:pointer;margin-left:6px">살짝 보기</u></div>
+   <div style="font-size:12px;font-weight:700">지나온 도시 스티커${CNT!=null?' · 이 열차 수하물칸에 근심 '+CNT+'개':''}</div><div class="stk">${st}</div>${clueList()}${keepList()}`;
   $('trkW').onclick=()=>{$('trkW').textContent='“'+T.text+'”'}}
-trk.onclick=e=>{e.stopPropagation();const on=!trkP.classList.contains('on');trkP.classList.toggle('on',on);if(on)trkRender()};
+function trkToggle(e){e.stopPropagation();const on=!trkP.classList.contains('on');trkP.classList.toggle('on',on);if(on)trkRender()}
 document.addEventListener('pointerdown',e=>{if(trkP.classList.contains('on')&&!trkP.contains(e.target)&&e.target!==trk)trkP.classList.remove('on')});
 trkShow();
-setTimeout(()=>{if(!myTrunk()&&LS.get('bl_skip',0)!==dep&&!Q.has('seat'))ckOpen()},1600);
+setTimeout(()=>{if(!myTrunk()&&!(TRUNK&&!TRUNK.done&&trunkArrived())&&LS.get('bl_skip',0)!==dep&&!Q.has('seat'))ckOpen()},1600);
 
 /* ---- 맞은편 승객 ---- */
 const P='img/px/';
@@ -452,11 +525,11 @@ const SEAT={busan:'byeol',seoul:'gilldong',cloud:'gyeonu',snow:'snowq',baikal:'s
 const paxBox=$('pax'),paxT=$('paxT');let paxId=null,paxImg=null,paxAR=.6;
 function paxLayout(){if(!paxImg)return;const W=innerWidth,H=innerHeight,mob=W/H<=.75;
   const IW=mob?816:1344,IH=mob?1456:896,s=Math.max(W/IW,H/IH),ox=(W-IW*s)/2,oy=(H-IH*s)/2;
-  const C=mob?{x:640,seat:1200,h:470}:{x:1205,seat:800,h:500};
+  const C=mob?{x:612,seat:1190,h:560}:{x:1190,seat:770,h:610};
   const fh=C.h*s,fw=fh*paxAR,top=(C.seat-C.h*.64)*s+oy;
   Object.assign(paxBox.style,{left:(C.x*s+ox-fw/2)+'px',top:top+'px',width:fw+'px',height:(C.h*.64*s)+'px'});
   paxImg.style.height=fh+'px';paxImg.style.top='0px';
-  Object.assign(paxT.style,{left:Math.max(8,Math.min(W-paxT.offsetWidth-10,C.x*s+ox-fw*.35))+'px',top:(top-26)+'px'})}
+  Object.assign(paxT.style,{left:Math.min(W-110,C.x*s+ox-fw*.2)+'px',top:(top-26)+'px'})}
 addEventListener('resize',paxLayout);
 function paxSet(id){if(id===paxId)return;paxId=id;const c=CAST[id];
   const old=paxImg;if(old){old.classList.add('out');setTimeout(()=>old.remove(),1300)}
@@ -464,7 +537,7 @@ function paxSet(id){if(id===paxId)return;paxId=id;const c=CAST[id];
   const im=new Image();im.className='out';im.src=P+c.img;im.alt=c.n;
   im.onload=()=>{paxAR=im.naturalWidth/im.naturalHeight;paxImg=im;paxLayout();requestAnimationFrame(()=>im.classList.remove('out'))};
   im.onclick=e=>{e.stopPropagation();talk()};paxBox.appendChild(im);
-  paxT.innerHTML=c.n+' · 말 걸기';paxT.className='paper on'}
+  paxTag()}
 paxT.onclick=e=>{e.stopPropagation();talk()};
 function paxTick(){if(MODE!=='seat')return;const w=where(dep,vnow());paxSet(w.mode==='run'?SEAT[w.seg.id]:'sherlock')}
 setInterval(paxTick,1500);
@@ -480,16 +553,213 @@ function say(t,done){dlgC.innerHTML='';dlgM.style.display='none';let i=0;clearIn
   typing=setInterval(()=>{i+=1;dlgT.textContent=t.slice(0,i);if(i>=t.length){clearInterval(typing);typing=null;dlgM.style.display=done?'block':'none';if(!done&&afterQ)afterQ()}},28)}
 function talk(){if(!paxId)return;const id=paxId,c=CAST[id];document.body.classList.add('talk');dlg.classList.add('on');paxT.classList.remove('on');nameTag(id);
   const met=LS.get('bl_met',{});
+  if(met[id]&&EV[id]&&!LS.get('bl_ev',{})[id]){close();playEvent(id);return}
   if(!met[id]){Q2=c.a.slice();afterQ=null;next=()=>{if(typing){clearInterval(typing);typing=null;dlgT.textContent=cur;if(Q2.length===0)choose();else dlgM.style.display='block';return}
       if(Q2.length){cur=Q2.shift();say(cur,Q2.length>0);if(!Q2.length)afterQ=choose}else close()};next()}
-  else{cur=c.idle[Math.floor(Math.random()*c.idle.length)];afterQ=null;next=()=>{if(typing){clearInterval(typing);typing=null;dlgT.textContent=cur;dlgM.style.display='block';return}close()};say(cur,true)}
+  else{cur=id==='sherlock'?sherIdle():c.idle[Math.floor(Math.random()*c.idle.length)];afterQ=null;next=()=>{if(typing){clearInterval(typing);typing=null;dlgT.textContent=cur;dlgM.style.display='block';return}close()};say(cur,true)}
   function choose(){afterQ=null;dlgM.style.display='none';dlgC.innerHTML='';c.c.forEach(([q,r])=>{const b=document.createElement('button');b.className='pbtn2 l';b.textContent=q;
-    b.onclick=e=>{e.stopPropagation();met[id]=1;LS.set('bl_met',met);addAff(id,2);nameTag(id);dlgC.innerHTML='';cur=r;
+    b.onclick=e=>{e.stopPropagation();met[id]=1;LS.set('bl_met',met);addAff(id,2);nameTag(id);if(EV[id])setTimeout(()=>{if(!dlg.classList.contains('on'))paxTag()},50);dlgC.innerHTML='';cur=r;
       next=()=>{if(typing){clearInterval(typing);typing=null;dlgT.textContent=cur;dlgM.style.display='block';return}close()};say(r,true)};dlgC.appendChild(b)})}
   addAff(id,0)}
 let next=()=>{},cur='';
-function close(){dlg.classList.remove('on');document.body.classList.remove('talk');if(MODE==='seat'&&paxId)paxT.classList.add('on')}
+function close(){dlg.classList.remove('on');document.body.classList.remove('talk');if(MODE==='seat'&&paxId)paxTag()}
 dlg.onclick=e=>{e.stopPropagation();if(dlgC.children.length&&!typing)return;next()};
+
+/* ================= 애니메이션 장면 · 셜록의 단서 · 런던 엔딩 ================= */
+const CLUES={byeol:'주인 없는 트렁크에서 바닷바람 냄새가 난다. 섬나라의 바람이다.',
+ gilldong:'밤마다 누군가 수하물칸에 몰래 드나든다. 발소리는 구두 굽 소리.',
+ gyeonu:'꼬리표 끈에 갈색 트위드 실 한 올이 걸려 있다.',
+ snowq:'모든 짐이 얼어도 그 트렁크만은 얼지 않았다. 안쪽이 따뜻하다.',
+ odette:'자정마다 수하물칸에서 바이올린으로 「백조의 호수」가 흘러나온다.',
+ wolf:'트렁크에서 파이프 담배와 홍차 냄새가 난다.',
+ sleeping:'트렁크에 기대 잠들자, 사건을 기다리며 창밖만 보는 남자의 꿈을 꾸었다.',
+ monster:'그 트렁크는 무겁지만 텅 비었다. 마음의 짐이다.',
+ cinder:'재를 털자 트렁크 바닥에 「221」이라는 숫자가 드러났다.',
+ mermaid:'바닷물이 스며들자 꼬리표 뒷면에 「나를 찾아 줘」라는 글씨가 떠올랐다.',
+ rabbit:'꼬리표의 6시 40분은 어느 멈춘 회중시계가 가리키는 시각과 같다.'};
+const KEEP={byeol:['🐚','소라 껍데기','귀에 대면 용궁의 파도 소리가 난다.'],gilldong:['📜','부적 한 장','「어디서든 네 자리가 있다」라고 적혀 있다.'],
+ gyeonu:['🪶','까치 깃털','오작교를 놓은 까치가 떨어뜨린 깃털.'],snowq:['❄️','녹지 않는 눈송이','손바닥 위에서도 녹지 않고 반짝인다.'],
+ odette:['🤍','흰 깃털','낮에도 밤에도 같은 색이다.'],wolf:['🗺️','할머니 댁 지도','늑대가 직접 그린 지름길 지도.'],
+ sleeping:['🧵','물레 실패','이제는 찔려도 잠들지 않는다.'],monster:['🔖','책갈피','「실낙원」 마지막 장에 꽂혀 있던 것.'],
+ cinder:['💎','유리 단추','드레스에서 떨어졌지만 자정이 지나도 남았다.'],mermaid:['🫧','작은 진주','수첩 마지막 장에 끼워 준 진주.'],
+ rabbit:['⏱️','회중시계 태엽','「조금 늦어도 괜찮아」라고 새겨져 있다.']};
+const W_='view';
+const EV={
+ byeol:[{t:'title',text:'꼬리표 이야기',sub:'별주부'},
+  {bg:W_,ch:'px_byeol.webp',pose:'in',who:'별주부',say:'저기… 아까 내 근심을 들어 줘서 고마웠소.'},
+  {bg:W_,ch:'px_byeol.webp',pose:'face',fx:['glow'],who:'별주부',say:'사실 용왕님께 돌아가기가 무섭소. 또 빈손이니.'},
+  {choice:[['빈손 말고 이야기를 들고 가요','이야기… 육지에서 본 것들 말이오? 허허, 그거라면 한 보따리지.'],['용왕님도 별주부를 기다릴 거예요','기다린다… 그 생각은 못 했구려. 나를 말이오, 간이 아니라.']]},
+  {bg:W_,ch:'px_byeol.webp',pose:'side',fx:['spk'],who:'별주부',say:'참, 수하물칸에 주인 없는 트렁크 말이오. 거기서 바닷바람 냄새가 나더이다.\n동해 바람은 아니오. 더 짜고 차가운, 섬나라 바람이었소.'},
+  {clue:'byeol'},{item:'byeol'}],
+ gilldong:[{t:'title',text:'꼬리표 이야기',sub:'홍길동'},
+  {bg:W_,ch:'px_gilldong.webp',pose:'in',fx:['lines'],shake:1,who:'홍길동',say:'쉿! 방금 수하물칸에서 누가 나왔소.'},
+  {bg:W_,ch:'px_gilldong.webp',pose:'face',who:'홍길동',say:'나만큼 발이 빠른 자는 처음 보오. 구두 굽 소리만 또각또각 남기고 사라졌지.'},
+  {choice:[['같이 망 봐 줄게요','허허, 의적한테 망을 봐 주겠다니. 오늘부터 우린 한패요.'],['혹시 당신 아니에요?','이 사람이! …뭐, 내가 드나든 건 맞소. 하지만 오늘은 아니었소.']]},
+  {bg:W_,ch:'px_gilldong.webp',pose:'side',who:'홍길동',say:'아무튼, 자리를 내준 사람한테는 은혜를 갚는 게 내 법이오. 이걸 받으시오.'},
+  {clue:'gilldong'},{item:'gilldong'}],
+ gyeonu:[{t:'title',text:'꼬리표 이야기',sub:'견우와 직녀'},
+  {bg:W_,ch:'px_gyeonu.webp',pose:'in',fx:['spk'],who:'직녀',say:'새벽이 오고 있어요. 저기, 하늘 끝이 밝아지죠.'},
+  {bg:W_,ch:'px_gyeonu.webp',pose:'face',fx:['spk','glow'],who:'견우',say:'…직녀야, 울지 마. 일 년은 금방이야. 베 한 필 짜고 나면 오는걸.'},
+  {choice:[['두 분 사진 찍어 드릴까요?','(직녀) 정말요? …찰칵. 일 년 동안 이걸 볼게요.'],['일 년 뒤에도 이 열차에 타요','(견우) 그거 좋은 약속이오. 그때도 이 자리에 앉아 있어 주시오.']]},
+  {bg:W_,ch:'px_gyeonu.webp',pose:'side',who:'직녀',say:'아, 그러고 보니 베를 짜는 사람 눈엔 실이 먼저 보여요.\n그 주인 없는 트렁크 꼬리표에, 갈색 트위드 실 한 올이 걸려 있었어요.'},
+  {clue:'gyeonu'},{item:'gyeonu'}],
+ snowq:[{t:'title',text:'꼬리표 이야기',sub:'눈의 여왕'},
+  {bg:W_,ch:'px_snowq.webp',pose:'in',fx:['snow'],who:'눈의 여왕',say:'아까 그 미지근한 차, 하나 더 있을까요?'},
+  {bg:W_,ch:'px_snowq.webp',pose:'face',fx:['snow','glow'],who:'눈의 여왕',say:'…손이 녹지 않았어요. 따뜻한 것도 천천히 만지면 괜찮은 거였나 봐요.'},
+  {choice:[['천천히면 다 괜찮아요','천천히… 그 말을 얼음 궁전 문에 새겨 둘게요.'],['다음엔 조금 더 따뜻하게 드릴게요','조금 더… 네. 조금씩이요. 약속해요.']]},
+  {bg:W_,ch:'px_snowq.webp',pose:'side',fx:['snow'],who:'눈의 여왕',say:'이상한 걸 봤어요. 제가 지나가면 수하물칸 짐이 전부 얼어요.\n그런데 주인 없는 트렁크 하나만은 얼지 않았어요. 안쪽이… 따뜻했어요.'},
+  {clue:'snowq'},{item:'snowq'}],
+ odette:[{t:'title',text:'꼬리표 이야기',sub:'백조 오데트'},
+  {bg:W_,ch:'pf_p07.webp',pose:'in',fx:['spk'],who:'오데트',say:'자정이 되면 늘 음악이 들려요. 수하물칸 쪽에서요.'},
+  {bg:W_,ch:'pf_p07.webp',pose:'face',fx:['spk','glow'],who:'오데트',say:'바이올린이에요. 그것도 「백조의 호수」. 누가 저를 위해 켜 주는 것 같아서… 춤을 추게 돼요.'},
+  {choice:[['한 번 춰 주세요','(오데트가 통로에서 한 바퀴 돈다. 깃털 하나가 떨어진다)'],['같이 들으러 가요','쉿, 저기예요. …멈췄네요. 우리가 오는 걸 눈치챘나 봐요.']]},
+  {clue:'odette'},{item:'odette'}],
+ wolf:[{t:'title',text:'꼬리표 이야기',sub:'늑대와 빨간 모자'},
+  {bg:W_,ch:'pf_p09.webp',pose:'in',who:'빨간 모자',say:'늑대 아저씨가 할 말이 있대요! 부끄러워서 못 하는 거래요.'},
+  {bg:W_,ch:'pf_p09.webp',pose:'face',fx:['glow'],who:'늑대',say:'…크흠. 날 믿어 준 사람한테 내 코를 빌려주겠소. 늑대 코는 거짓말을 안 하거든.'},
+  {choice:[['무슨 냄새가 나요?','파이프 담배. 그리고 홍차. 우유를 나중에 붓는 고집쟁이의 홍차요.'],['빨간 모자 바구니 냄새요?','그건 사과파이 냄새고! …진짜 할 말은 트렁크 냄새요. 파이프 담배와 홍차.']]},
+  {clue:'wolf'},{item:'wolf'}],
+ sleeping:[{t:'title',text:'꼬리표 이야기',sub:'잠자는 숲속의 공주'},
+  {bg:W_,ch:'px_sleeping.webp',pose:'in',who:'공주',say:'하암… 방금 수하물칸에서 잠깐 졸았는데요, 이상한 꿈을 꿨어요.'},
+  {bg:W_,ch:'px_sleeping.webp',pose:'face',fx:['spk'],who:'공주',say:'키 큰 남자가 창밖만 보고 있었어요. 아무도 문을 두드리지 않는 방에서, 사건이 오기를 기다리면서요.'},
+  {choice:[['그 사람 쓸쓸했겠어요','네… 저도 백 년 동안 아무도 안 와서 알아요. 기다리는 건 무서운 거예요.'],['그 꿈, 누구 꿈일까요?','제가 기대 잔 건 그 주인 없는 트렁크였어요. 그러니까… 트렁크 주인의 꿈이겠죠?']]},
+  {clue:'sleeping'},{item:'sleeping'}],
+ monster:[{t:'title',text:'꼬리표 이야기',sub:'프랑켄슈타인의 괴물'},
+  {bg:W_,ch:'px_monster.webp',pose:'in',who:'괴물',say:'이름, 생각해 봤어요. 아직 못 정했지만… 생각하는 동안 기분이 좋았어요.'},
+  {bg:W_,ch:'px_monster.webp',pose:'face',fx:['glow'],who:'괴물',say:'아무도 저한테 무언가를 고르게 해 준 적이 없었거든요.'},
+  {choice:[['천천히 정해도 돼요','네. 런던까지 아직 시간이 있으니까요.'],['정하면 제일 먼저 알려 줘요','약속해요. 첫 번째로 부르는 사람이 되어 주세요.']]},
+  {bg:W_,ch:'px_monster.webp',pose:'side',who:'괴물',say:'짐 옮기는 걸 도와드리다 알았어요. 그 주인 없는 트렁크는 무거운데, 흔들어 보면 텅 비었어요.\n제 트렁크랑 똑같아요. 마음의 짐이라서 그래요.'},
+  {clue:'monster'},{item:'monster'}],
+ cinder:[{t:'title',text:'꼬리표 이야기',sub:'신데렐라'},
+  {bg:W_,ch:'px_cinder.webp',pose:'in',fx:['spk'],who:'신데렐라',say:'에펠탑이 반짝이기 시작했어요. 곧 열두 시예요!'},
+  {bg:W_,ch:'px_cinder.webp',pose:'face',fx:['lines','spk'],shake:1,who:'',say:'── 댕, 댕, 댕… 열두 번의 종소리.',narr:1},
+  {bg:W_,ch:'px_cinder.webp',pose:'in',who:'신데렐라',say:'…어? 드레스가 그대로예요. 아니, 원래 재투성이 옷이었는데 이상하게 안 부끄러워요.'},
+  {choice:[['원래 모습이 제일 예뻐요','…고마워요. 오늘 밤은 이대로 춤출래요.'],['유리구두는요?','한 짝은 여기 있어요! 남는 건 남는 거였어요.']]},
+  {bg:W_,ch:'px_cinder.webp',pose:'side',who:'신데렐라',say:'아, 재는 제가 잘 알아요. 그 주인 없는 트렁크를 재로 문질렀더니 숫자가 떠올랐어요. 「221」.'},
+  {clue:'cinder'},{item:'cinder'}],
+ mermaid:[{t:'title',text:'꼬리표 이야기',sub:'인어공주'},
+  {bg:W_,ch:'pf_p15.webp',pose:'in',fx:['spk'],who:'인어공주',say:'(수첩을 넘겨 보여 준다)\n「바다 밑이에요. 고향이 지나가요.」'},
+  {bg:W_,ch:'pf_p15.webp',pose:'face',fx:['spk','glow'],who:'인어공주',say:'「목소리는 없지만, 오늘은 하고 싶은 말을 다 썼어요. 당신 덕분이에요.」'},
+  {choice:[['저도 한 줄 써도 돼요?','(인어공주가 수첩을 내민다. 당신이 쓴 한 줄 밑에 하트를 그려 준다)'],['노래는 마음으로 들려요','(인어공주가 눈을 감고 입술만 움직여 노래한다. 정말로 들리는 것 같다)']]},
+  {bg:W_,ch:'pf_p15.webp',pose:'side',who:'인어공주',say:'「수하물칸에 바닷물이 조금 샜어요. 그 주인 없는 트렁크 꼬리표 뒤에 글씨가 떠올랐어요.」\n「나를 찾아 줘」'},
+  {clue:'mermaid'},{item:'mermaid'}],
+ rabbit:[{t:'title',text:'꼬리표 이야기',sub:'흰 토끼'},
+  {bg:W_,ch:'pf_p13.webp',pose:'in',fx:['lines'],shake:1,who:'흰 토끼',say:'큰일이에요! 아니, 큰일은 아닌데… 제 시계가 처음으로 늦지 않았어요!'},
+  {bg:W_,ch:'pf_p13.webp',pose:'face',who:'흰 토끼',say:'시계를 내려놓으니까 오히려 시간이 맞더라고요. 이상하죠?'},
+  {choice:[['쉬어야 맞는 시계도 있어요','쉬어야 맞는 시계… 회중시계 뚜껑에 새겨 둘게요.'],['이제 늦어도 괜찮죠?','괜찮아요. 근데 기차는 정확히 런던에 닿을 거예요. 아침 7시.']]},
+  {bg:W_,ch:'pf_p13.webp',pose:'side',who:'흰 토끼',say:'시계를 잘 아는 제가 보기엔요, 그 꼬리표의 「6시 40분」은 시각이 아니에요.\n어떤 회중시계가 멈춘 순간이에요. 바늘이 딱 거기서 멈춰 있었을 거예요.'},
+  {clue:'rabbit'},{item:'rabbit'}],
+};
+const MAINS=Object.keys(EV);
+function clues(){return LS.get('bl_clue',{})}
+function clueList(){const c=clues(),n=Object.keys(c).length;if(!n)return '';
+  return `<div class="clues"><b>셜록의 단서 수첩 ${n}/${MAINS.length}</b><ul style="padding-left:16px;margin:4px 0">`+MAINS.map(id=>c[id]?`<li>${CLUES[id]} <span style="opacity:.6">— ${CAST[id].n}</span></li>`:'').join('')+'</ul></div>'}
+function keepList(){const k=LS.get('bl_keep',{}),ids=Object.keys(k);if(!ids.length)return '';
+  return `<div class="clues"><b>받은 기념품</b> `+ids.map(id=>KEEP[id][0]+' '+KEEP[id][1]).join(' · ')+'</div>'}
+function sherIdle(){const n=Object.keys(clues()).length;
+  if(n===0)return '단서는 승객들이 쥐고 있네. 친해져 보게. 사람은 친한 이에게만 이상한 걸 말해 주거든.';
+  if(n<4)return '단서 '+n+'개. 바닷바람, 실, 발소리… 아직 그림이 안 그려지는군.';
+  if(n<8)return '단서 '+n+'개. …자네, 그 트렁크 주인이 누군지 벌써 짐작하는 눈치로군.';
+  return '단서 '+n+'개. 이쯤이면 범인은… 크흠. 런던에 도착하면 이야기하지.'}
+function paxTag(){if(!paxId)return;const c=CAST[paxId],ev=EV[paxId]&&LS.get('bl_met',{})[paxId]&&!LS.get('bl_ev',{})[paxId];
+  paxT.innerHTML=c.n+(ev?' · 꼬리표 이야기 ✦':' · 말 걸기');paxT.className='paper on'+(ev?' ev':'')}
+
+/* ---- 장면 엔진 ---- */
+const cg=document.createElement('div');cg.id='cg';
+cg.innerHTML='<div class="stage"><div class="bg"></div><img class="ch" alt=""><div class="fx glow"></div><div class="fx lines"></div><div class="fx spk"></div><div class="fx snow"></div></div><div class="bar t"></div><div class="bar b"></div><div class="paper item"></div><div class="paper ttl"></div><div class="paper box"><div class="who"></div><div class="tx"></div><div class="chs"></div><div class="mk">▼</div></div><div class="iris"></div><button class="skip">건너뛰기</button>';
+document.body.appendChild(cg);
+const G=k=>cg.querySelector(k),gBg=G('.bg'),gCh=G('.ch'),gBox=G('.box'),gWho=G('.who'),gTx=G('.tx'),gCs=G('.chs'),gMk=G('.mk'),gIt=G('.item'),gTt=G('.ttl'),gIr=G('.iris');
+let gShots=[],gI=0,gDone=null,gType=null,gFull='',gWait=null,gSkip=null;
+function iris(to,ms,cb){const from=parseFloat(gIr.style.getPropertyValue('--r'))||0,t0=performance.now();
+  (function f(n){const k=Math.min(1,(n-t0)/ms),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;gIr.style.setProperty('--r',(from+(to-from)*e)+'%');if(k<1)requestAnimationFrame(f);else cb&&cb()})(t0)}
+function curView(){const e=vwEl[vwCur];const m=e&&e.style.backgroundImage;return m&&m!=='none'?m:'url(img/far.webp)'}
+function gType2(t,narr){gTx.classList.toggle('narr',!!narr);gFull=t;let i=0;clearInterval(gType);gTx.textContent='';gMk.style.display='none';
+  gType=setInterval(()=>{i++;gTx.textContent=t.slice(0,i);if(i>=t.length){clearInterval(gType);gType=null;gMk.style.display='block'}},30)}
+function gShow(s){gIt.classList.remove('on');gTt.classList.remove('on');gCs.innerHTML='';
+  if(s.bg){gBg.style.backgroundImage=s.bg==='view'?curView():'url('+s.bg+')';gBg.classList.remove('kb');void gBg.offsetWidth;gBg.classList.add('kb')}
+  if(s.ch!==undefined){if(s.ch){const src=(s.ch.startsWith('../')||s.ch.startsWith('img/'))?s.ch:P+s.ch;if(!gCh.src.endsWith(src.replace(/^\.\.\//,''))){gCh.src=src;gCh.classList.remove('in');void gCh.offsetWidth;gCh.classList.add('in')}gCh.style.opacity=1}else gCh.style.opacity=0}
+  gCh.classList.toggle('face',s.pose==='face');gCh.classList.toggle('side',s.pose==='side');
+  for(const f of ['glow','lines','spk','snow'])G('.fx.'+f).classList.toggle('on',!!(s.fx&&s.fx.includes(f)));
+  if(s.shake){cg.classList.remove('shake');void cg.offsetWidth;cg.classList.add('shake')}
+  if(s.say!==undefined){gBox.classList.add('on');gWho.textContent=s.who||'';gType2(s.say,s.narr)}}
+function gNext(){if(gType){clearInterval(gType);gType=null;gTx.textContent=gFull;gMk.style.display='block';return}
+  if(gWait)return;
+  if(gI>=gShots.length){gEnd();return}
+  const s=gShots[gI++];
+  if(s.t==='title'){gBox.classList.remove('on');gTt.innerHTML='<small>'+(s.text||'')+'</small>'+s.sub;gTt.classList.add('on');gWait=1;
+     gBg.style.backgroundImage=curView();gCh.style.opacity=0;setTimeout(()=>{gTt.classList.remove('on');gWait=null;gNext()},1700);return}
+  if(s.choice){gMk.style.display='none';gCs.innerHTML='';gWait=1;s.choice.forEach(([q,r],k)=>{const b=document.createElement('button');b.className='pbtn2 l';b.textContent=q;
+     b.onclick=e=>{e.stopPropagation();gCs.innerHTML='';gWait=null;if(s.onPick)s.onPick(k);gShow({say:r,who:gWho.textContent})};gCs.appendChild(b)});return}
+  if(s.clue){const c=clues();c[s.clue]=1;LS.set('bl_clue',c);gBox.classList.add('on');gWho.textContent='셜록의 단서 수첩';
+     G('.fx.spk').classList.add('on');gType2('🔎 '+CLUES[s.clue]+'\n(단서 '+Object.keys(c).length+'/'+MAINS.length+')');return}
+  if(s.item){const k=LS.get('bl_keep',{});k[s.item]=1;LS.set('bl_keep',k);const it=KEEP[s.item];gBox.classList.remove('on');
+     gIt.innerHTML='<div class="ic">'+it[0]+'</div><b>'+it[1]+'</b><p>'+it[2]+'</p><p style="margin-top:8px;font-size:11px;opacity:.6">트렁크에 넣어 두었어요 · 눌러서 닫기</p>';gIt.classList.add('on');return}
+  if(s.fn){s.fn();return}
+  gShow(s)}
+function gEnd(){gWait=1;iris(0,650,()=>{cg.classList.remove('on','lb');gWait=null;gBox.classList.remove('on');document.body.classList.remove('talk');const d=gDone;gDone=null;d&&d()})}
+cg.addEventListener('click',e=>{if(e.target.closest('.skip')){gI=gShots.length;gEnd();return}gNext()});
+function playScene(shots,done){gShots=shots;gI=0;gDone=done;gWait=null;cg.classList.add('on','lb');gBox.classList.remove('on');gIt.classList.remove('on');gCh.style.opacity=0;
+  gIr.style.setProperty('--r','0%');document.body.classList.add('talk');iris(160,900);setTimeout(gNext,250)}
+function playEvent(id){playScene(EV[id],()=>{const e=LS.get('bl_ev',{});e[id]=1;LS.set('bl_ev',e);addAff(id,3);paxTag()})}
+
+/* ---- 다른 승객 수 (Supabase · 표가 없으면 조용히 건너뜀) ---- */
+const SB='https://vuxqlfockqxvocjlntgv.supabase.co/rest/v1/trunks',SK='sb_publishable_IUPtobU60cCTWGpLAW6AxQ_kBtD7L38';
+let CNT=null;
+function sbAdd(d){try{fetch(SB,{method:'POST',headers:{apikey:SK,'Content-Type':'application/json',Prefer:'return=minimal'},body:JSON.stringify({dep:d})}).then(()=>sbCount(d)).catch(()=>{})}catch(e){}}
+function sbCount(d){try{fetch(SB+'?select=id&dep=eq.'+d,{method:'HEAD',headers:{apikey:SK,Prefer:'count=exact'}}).then(r=>{if(!r.ok)return;const m=(r.headers.get('content-range')||'').split('/')[1];if(m&&m!=='*')CNT=+m}).catch(()=>{})}catch(e){}}
+sbCount(dep);
+
+/* ---- 런던 엔딩 ---- */
+function ending(){const T=TRUNK;if(!T)return;const met=LS.get('bl_met',{}),nC=Object.keys(clues()).length;let pick=0;
+  const shots=[{t:'title',text:'종착역',sub:'런던'},
+   {bg:'img/v/london_1.webp',ch:'robot.webp',pose:'in',fx:['glow'],who:'로봇 포터',say:'런던역입니다! 나흘 동안 수고 많으셨어요.\n수하물 #'+T.no+', 찾으러 오셨죠?'},
+   {bg:'img/v/london_1.webp',ch:null,fx:['spk','glow'],who:'',narr:1,say:'트렁크를 연다. 도시 스티커가 빼곡하다.\n안에는 부산에서 넣은 쪽지 한 장.\n\n“'+T.text+'”'},
+   {bg:'img/v/london_1.webp',ch:'robot.webp',pose:'in',who:'로봇 포터',say:'나흘 동안 실려 온 당신의 근심이에요. 조금 가벼워졌나요?\n가져가셔도 되고, 런던 유실물 보관소에 두고 가셔도 돼요.'},
+   {choice:[['찾아가기','가져갈게요. 이제는 들고 갈 수 있을 것 같아요.'],['런던 유실물 보관소에 두기','여기 두고 갈게요. 누가 찾으러 오지 않아도 괜찮은 근심이에요.']],onPick:k=>{pick=k}}];
+  if(nC>=6)shots.push(
+   {bg:'img/v/london_1.webp',ch:'pf_p01.webp',pose:'in',who:'셜록 홈즈',say:'잠깐, 조수. 주인 없는 트렁크 말일세. 단서가 '+nC+'개나 모였지.'},
+   {bg:'img/v/london_1.webp',ch:'pf_p01.webp',pose:'face',fx:['glow'],who:'셜록 홈즈',say:'섬나라 바람, 트위드, 파이프와 홍차, 221, 그리고 6시 40분에 멈춘 시계.\n…그래. 그 트렁크는 내 걸세.'},
+   {bg:'img/v/london_1.webp',ch:'pf_p01.webp',pose:'side',who:'셜록 홈즈',say:'마지막 사건이 끝난 다음 날 아침 6시 40분, 내 시계가 멈췄네.\n사건이 없으면 아무도 날 찾지 않을까 봐… 그게 내 근심이었지.'},
+   {choice:[['사건 없어도 찾아갈게요','…그럼 차는 내가 끓이지. 우유는 나중에 붓는 걸로.'],['이번 사건, 같이 풀었잖아요','그렇군. 이번엔 내가 의뢰인이었어. 고맙네, 조수.']]});
+  else shots.push({bg:'img/v/london_1.webp',ch:'pf_p01.webp',pose:'in',who:'셜록 홈즈',say:'주인 없는 트렁크는 아직 수수께끼로 남았군. 다음 열차에서 단서를 더 모아 보게.'});
+  playScene(shots,()=>{T.done=1;T.pick=pick;LS.set('bl_trunk',T);trkShow();makeCard(T)})}
+
+/* ---- 「나의 꼬리표」 카드 ---- */
+const card=document.createElement('div');card.id='card';card.innerHTML='<canvas width="1080" height="1440"></canvas><div class="row"><button class="pbtn2 l" id="cdSave">이미지 저장</button><button class="pbtn2" id="cdShare">공유하기</button><button class="pbtn2 l" id="cdX">닫기</button></div>';
+document.body.appendChild(card);
+function makeCard(T){const cv=card.querySelector('canvas'),g=cv.getContext('2d'),F='"Apple SD Gothic Neo","Noto Sans KR",sans-serif';
+  g.fillStyle='#0d2230';g.fillRect(0,0,1080,1440);
+  // 꼬리표 모양
+  g.save();g.translate(540,720);g.rotate(-.03);g.translate(-430,-640);
+  g.fillStyle='#000';g.beginPath();g.moveTo(130,14);g.lineTo(874,14);g.lineTo(874,1294);g.lineTo(14,1294);g.lineTo(14,130);g.closePath();g.fill();
+  g.fillStyle='#f3e6c4';g.beginPath();g.moveTo(120,0);g.lineTo(860,0);g.lineTo(860,1280);g.lineTo(0,1280);g.lineTo(0,120);g.closePath();g.fill();
+  g.lineWidth=6;g.strokeStyle='#3a2a1c';g.stroke();
+  g.beginPath();g.arc(120,120,26,0,7);g.stroke();
+  g.fillStyle='#3a2a1c';g.textAlign='center';
+  g.font='700 30px '+F;g.fillText('부산발 런던행 · 근심 수하물',430,200);
+  g.font='900 92px '+F;g.fillText('나의 꼬리표',430,310);
+  g.font='800 54px '+F;g.fillText('BSN  →  LDN',430,410);
+  g.font='600 28px '+F;g.fillText('제 '+trainNo(T.dep)+'호 · 수하물 #'+T.no,430,462);
+  g.setLineDash([16,12]);g.beginPath();g.moveTo(60,510);g.lineTo(800,510);g.stroke();g.setLineDash([]);
+  // 스티커
+  const bi=SEG.reduce((a,s,i)=>s.h<=T.boardH?i:a,0);let k=0;
+  SEG.forEach((s,i)=>{const x=150+(k%4)*187,y=598+Math.floor(k/4)*138;k++;const got=i>=bi;
+    g.save();g.translate(x,y);g.rotate(((i*37)%17-8)*Math.PI/180);g.beginPath();g.arc(0,0,60,0,7);
+    g.fillStyle=got?STC[i%STC.length]:'#e6d8b5';g.fill();g.lineWidth=5;g.strokeStyle=got?'#3a2a1c':'#c4b38f';g.stroke();
+    g.fillStyle=got?'#fffaf0':'#b7a687';g.font='800 20px '+F;const nm=s.name.replace(' 도착','').split(' ');nm.forEach((w,j)=>g.fillText(w,0,7+(j-(nm.length-1)/2)*23));g.restore()});
+  g.fillStyle='#3a2a1c';g.font='800 34px '+F;
+  g.fillText(T.pick===1?'근심은 런던 유실물 보관소에 두고 왔어요':'근심은 조금 가벼워져서 다시 가져왔어요',430,1340-220);
+  const met=Object.keys(LS.get('bl_met',{})).length,kp=Object.keys(LS.get('bl_keep',{})).length,cl=Object.keys(clues()).length;
+  g.font='600 28px '+F;g.fillText('함께 탄 승객 '+met+'명 · 기념품 '+kp+'개 · 셜록의 단서 '+cl+'/'+MAINS.length,430,1340-160);
+  g.font='600 24px '+F;g.globalAlpha=.7;g.fillText('ejdms499-wq.github.io',430,1340-100);g.globalAlpha=1;
+  g.restore();
+  card.classList.add('on')}
+card.querySelector('#cdX').onclick=()=>card.classList.remove('on');
+card.querySelector('#cdSave').onclick=()=>{const a=document.createElement('a');a.download='나의꼬리표.png';a.href=card.querySelector('canvas').toDataURL('image/png');a.click()};
+card.querySelector('#cdShare').onclick=()=>{card.querySelector('canvas').toBlob(b=>{const f=new File([b],'나의꼬리표.png',{type:'image/png'});
+  if(navigator.canShare&&navigator.canShare({files:[f]}))navigator.share({files:[f],title:'부산발 런던행',text:'나흘 동안 근심을 부산에서 런던까지 실어 보냈어요.'}).catch(()=>{});
+  else{const a=document.createElement('a');a.download='나의꼬리표.png';a.href=URL.createObjectURL(b);a.click()}})};
+if(Q.has('card')&&TRUNK)setTimeout(()=>makeCard(TRUNK),800);
 
 /* ---------- 창가 자리: 창밖 풍경 그림이 계속 지나감 ---------- */
 const V=n=>'img/v/'+n+'.webp';

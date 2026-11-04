@@ -138,6 +138,16 @@ for(const [k,name] of ORDER){
   p.position.set(x+w/2,h/2-0.03,0);p.userData={k,name,w,h,ph:Math.random()*6};train.add(p);cars.push(p);x+=w-0.22;
 }
 const TRAINW=x;train.position.x=-TRAINW/2;
+/* ---------- 칸 사이 연결 주름막 ---------- */
+function bellowsTex(){const c=document.createElement('canvas');c.width=64;c.height=256;const g=c.getContext('2d');
+  g.fillStyle='#2a2d36';g.fillRect(0,0,64,256);
+  for(let i=4;i<64;i+=10){g.fillStyle='#3f4552';g.fillRect(i,6,4,244);g.fillStyle='#1b1d24';g.fillRect(i+4,6,2,244)}
+  g.fillStyle='#16171c';g.fillRect(0,0,64,8);g.fillRect(0,248,64,8);
+  const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;return t}
+const BT=bellowsTex();
+for(let i=0;i<cars.length-1;i++){const a=cars[i],b=cars[i+1];const xm=(a.position.x+a.userData.w/2+b.position.x-b.userData.w/2)/2;
+  const m=new THREE.Mesh(new THREE.PlaneGeometry(1.4,2.62),new THREE.MeshBasicMaterial({map:BT,depthTest:false,depthWrite:false,transparent:true}));
+  m.position.set(xm,0.62+2.62/2,-0.01);m.renderOrder=5.9;train.add(m)}
 
 /* ---------- 불빛: 칸 안에서 새어 나오는 빛 ---------- */
 function glowTex(){const c=document.createElement('canvas');c.width=c.height=128;const g=c.getContext('2d');

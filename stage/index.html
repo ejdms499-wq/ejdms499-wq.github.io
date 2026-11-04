@@ -449,7 +449,9 @@ body.bag5 #ambB,body.bag5 #albB,body.bag5 #postB,body.bag5 #trk:not(.ev){visibil
 #bagP button i{font-style:normal;margin-left:auto;background:#b8432f;color:#fff6e4;border-radius:9px;padding:0 7px;font-size:11px}
 body.talk #bagB,body.amb #bagB,body.intro #bagB,body.talk #bagP,body.amb #bagP{opacity:0!important;pointer-events:none!important}
 #tkB{bottom:calc(116px + env(safe-area-inset-bottom));white-space:nowrap}
-@media (max-width:520px){#nextB{bottom:calc(62px + env(safe-area-inset-bottom))}#carP{bottom:calc(62px + env(safe-area-inset-bottom))}#tkB{bottom:calc(116px + env(safe-area-inset-bottom));white-space:nowrap}}
+#back{left:102px;z-index:5}
+@media (max-width:520px){#nextB{bottom:calc(62px + env(safe-area-inset-bottom))}#carP{bottom:calc(62px + env(safe-area-inset-bottom))}#tkB{bottom:calc(116px + env(safe-area-inset-bottom));white-space:nowrap}
+#back{left:102px;z-index:5}}
 #coach{position:fixed;inset:0;z-index:40;display:none}
 #coach.on{display:block}
 #coach .hole{position:fixed;border-radius:14px;box-shadow:0 0 0 9999px rgba(8,12,16,.62);transition:all .45s cubic-bezier(.3,1.2,.4,1);pointer-events:none;outline:3px dashed rgba(243,230,196,.9);outline-offset:4px;animation:chole 1.6s ease-in-out infinite}
@@ -459,6 +461,18 @@ body.talk #bagB,body.amb #bagB,body.intro #bagB,body.talk #bagP,body.amb #bagP{o
 #coach .bub p{margin:0 0 10px;font-size:14.5px;line-height:1.6;color:#3a2a1c}
 #coach .bub div{display:flex;justify-content:space-between;align-items:center}
 #coach .bub .sk{background:none;border:0;font:600 12px "Apple SD Gothic Neo",sans-serif;opacity:.6;cursor:pointer;color:#3a2a1c}
+#cg .mo.real .mi{inset:-4%}
+#cg .mo.real .mp{display:none}
+@keyframes moPan{from{background-position:var(--p0,50% 50%)}to{background-position:var(--p1,50% 50%)}}
+#cg .mo.real.on .mi{animation:moKB2 14s cubic-bezier(.22,.6,.3,1) forwards}
+@keyframes moKB2{from{transform:scale(1.1) translate(1%,1%)}to{transform:scale(1)}}
+@media (max-aspect-ratio:4/5){#cg .mo.real .mi{background-size:auto 60%}#cg .mo.real::before{content:'';position:absolute;inset:-40px;background:var(--bgi) 50% 50%/cover;filter:blur(22px) brightness(.42) saturate(1.2)}}
+@media (max-aspect-ratio:4/5){#cg .mo.real.on .mi{animation:moKB2 14s cubic-bezier(.22,.6,.3,1) forwards,moPan 15s ease-in-out forwards}}
+#cgv{position:fixed;inset:0;z-index:60;background:rgba(5,9,12,.94);display:none;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:16px}
+#cgv.on{display:flex;animation:ckIn .35s}
+#cgv img{max-width:100%;max-height:78vh;border:3px solid #f3e6c4;box-shadow:0 10px 40px rgba(0,0,0,.6);border-radius:4px}
+#cgv p{margin:0;color:#f3e6c4;font:700 14px "Apple SD Gothic Neo",sans-serif}
+.th.lock.cgl{filter:blur(7px) brightness(.42) grayscale(.6)!important}
 </style></head><body>
 <div id="tag"><b>부산</b><span id="tagS">그림 겹 무대 · 시험판</span><i id="tagI"></i></div>
 <div id="dev"><span>출발 후</span><input id="devR" type="range" min="0" max="91.9" step="0.1"><span id="devV"></span></div>
@@ -1285,10 +1299,10 @@ function albumOpen(t){albTab=t;alb.classList.add('on');alb.querySelectorAll('.al
   const box=alb.querySelector('.albB'),ev=LS.get('bl_ev',{}),ev3=LS.get('bl_ev3',{}),met=LS.get('bl_met',{}),end=LS.get('bl_end',null);
   if(t==='scene'){let h='<div class="grid">',n=0,tot=0;
     for(const id of MAINS.concat(['sherlock'])){const c=CAST[id];
-      if(EV[id]){tot++;const ok=ev[id];if(ok)n++;h+=`<div class="cell" ${ok?`data-r="ev:${id}"`:''}>${thumb(viewOf(id),c.img,!ok)}<em>꼬리표 이야기</em><small>${ok?c.n:'???'}</small></div>`}
+      if(EV[id]){tot++;const ok=ev[id];if(ok)n++;h+=`<div class="cell" ${ok?`data-r="ev:${id}"`:''}>${ok&&CGREAL[id+'_open']!==undefined?thumb('img/cg/t/'+id+'_open.webp',null,0):thumb(viewOf(id),c.img,!ok)}<em>꼬리표 이야기</em><small>${ok?c.n:'???'}</small></div>`}
       if(L3[id]){tot++;const ok=ev3[id];if(ok)n++;h+=`<div class="cell" ${ok?`data-r="l3:${id}"`:''}>${thumb(viewOf(id),c.img,!ok)}<em>단짝 이야기</em><small>${ok?c.n:'???'}</small></div>`}}
     tot++;if(end)n++;h+=`<div class="cell" ${end?'data-r="end"':''}>${thumb('img/v/london_1.webp','robot.webp',!end)}<em>종착역 런던</em><small>${end?'엔딩':'???'}</small></div>`;
-    {const E=LS.get('bl_endings',{});[['yonggung','img/v/sea_3.webp','px_byeol.webp','용궁 엔딩'],['eunha','img/v/aurora_1.webp','px_gyeonu.webp','은하수 역장 엔딩']].forEach(([k,bgi,chi,nm])=>{tot++;if(E[k])n++;h+=`<div class="cell">${thumb(bgi,chi,!E[k])}<em>숨은 엔딩</em><small>${E[k]?nm:(k==='yonggung'?'별주부와 단짝이 되어 해저터널에서 배웅할 때…':'견우·직녀와 단짝이 되어 바이칼 호수에서 배웅할 때…')}</small></div>`})}
+    {const E=LS.get('bl_endings',{});[['yonggung','img/v/sea_3.webp','px_byeol.webp','용궁 엔딩'],['eunha','img/v/aurora_1.webp','px_gyeonu.webp','은하수 역장 엔딩']].forEach(([k,bgi,chi,nm])=>{tot++;if(E[k])n++;h+=`<div class="cell">${E[k]?thumb('img/cg/t/'+k+'.webp',null,0):thumb(bgi,chi,!E[k])}<em>숨은 엔딩</em><small>${E[k]?nm:(k==='yonggung'?'별주부와 단짝이 되어 해저터널에서 배웅할 때…':'견우·직녀와 단짝이 되어 바이칼 호수에서 배웅할 때…')}</small></div>`})}
     h+='</div>';box.innerHTML=`<p class="cnt">모은 장면 ${n} / ${tot}</p>`+h;
     box.querySelectorAll('[data-r]').forEach(el=>el.onclick=()=>{const r=el.dataset.r;alb.classList.remove('on');
       if(r.startsWith('ev:')){const id=r.slice(3);replay(EV[id],viewOf(id))}
@@ -1840,7 +1854,7 @@ const _gNextV2=gNext;gNext=function(){if(!cg.classList.contains('on'))return;if(
 const _moShow=moShow;moShow=function(id){const base=id.replace(/_open$/,'');if(!CGM[id]&&CGM[base])CGM[id]=CGM[base];
   if(!CAST[id]&&CAST[base]){const k=CGK[id];if(!k||k.k==='cmp'){/* 합성: 기본 캐릭터 그림 사용 */CGK[id]=k||{k:'cmp'}}}
   const save=CAST[id];if(!save&&CAST[base])CAST[id]=CAST[base];_moShow(id);if(!save)delete CAST[id]};
-for(const id in EV2)EV2[id].forEach(x=>{if(x.cgo)cgProbe(x.cgo+'_open')});
+
 
 /* ---- 진행 상태 ---- */
 const chOfH=h=>{let i=0;CH.forEach((c,k)=>{if(c.h<=h+.01)i=k});return i};
@@ -1997,7 +2011,7 @@ function byeShots(id){const B=BYE[id],l=lv(AFF[id]||0);B.s.forEach(x=>{if(x.choi
   out.push(B.end);return out}
 let hidPick=null;
 /* 배웅 CG: img/cg/<id>_bye.(webp|mp4) · 없으면 합성 */
-for(const id in BYE)cgProbe(id+'_bye');
+
 const _gNextV3=gNext;gNext=function(){if(!cg.classList.contains('on'))return;if(gType||gWait){_gNextV3();return}const s=gShots[gI];
   if(s&&s.cgb){gI++;setTimeout(()=>{moShow(s.cgb+'_bye');gShow({say:s.say,who:'',narr:1})},10);return}
   if(hidPick&&s&&s.narr&&gI===gShots.length-1){/* 숨은 엔딩 선택 시 마지막 기적 장면은 건너뜀 */gI=gShots.length}
@@ -2036,19 +2050,19 @@ const HID={
    N('byeol',null,'별주부의 등에 올라 바다 아래로 내려간다. 숨이 막히지 않는다. 물방울이 하나하나 빛난다.',{bg:'img/v/sea_2.webp',fx:['spk']}),
    N(null,null,'산호 기둥 사이로 용궁의 지붕이 보인다. 문지기 물고기들이 놀라 지느러미를 턴다.',{bg:'img/v/sea_3.webp'}),
    L('byeol',null,1,'별주부','용왕님! 간은 못 구했소. 대신… 육지 친구를 데려왔소.',{bg:'img/v/sea_3.webp',emo:'💦'}),
-   N(null,null,'(용왕이 한참 당신을 바라보다가, 궁이 울릴 만큼 크게 웃는다.)',{bg:'img/v/sea_3.webp',shake:1}),
+   N(null,null,'(용왕이 한참 당신을 바라보다가, 궁이 울릴 만큼 크게 웃는다.)',{bg:'img/cg/yonggung.webp',shake:1}),
    L('byeol',null,1,'별주부','…웃으셨소! 용궁에서 처음 듣는 웃음소리요.',{bg:'img/v/sea_3.webp',emo:'✨'}),
    ...(T?[N(null,null,'트렁크를 용궁 보물 창고에 넣는다. 바다가 대신 맡아 주겠단다.\n\n“'+T.text+'”',{bg:'img/v/sea_3.webp'}),L('byeol',null,1,'별주부','이제 자네 짐은 바다가 들어 줄 거요. 바다는 아주 힘이 세오.',{bg:'img/v/sea_3.webp'})]:[]),
-   N(null,null,'— 용궁 엔딩 —',{bg:'img/v/sea_2.webp',fx:['glow','spk']})]},
+   N(null,null,'— 용궁 엔딩 —',{bg:'img/cg/yonggung.webp',fx:['glow','spk']})]},
  eunha:{name:'은하수 역장 엔딩',bg:'img/v/aurora_1.webp',shots:T=>[{t:'title',text:'숨은 엔딩',sub:'은하수 역'},
    N('gyeonu',null,'견우와 직녀를 따라 얼어붙은 호수 위를 걷는다. 호수에 은하수가 그대로 비친다.',{bg:'img/v/baikal_1.webp'}),
-   N(null,null,'까치들이 날아와, 호수에서 하늘까지 다리를 놓는다.',{bg:'img/v/aurora_1.webp',fx:['spk']}),
+   N(null,null,'까치들이 날아와, 호수에서 하늘까지 다리를 놓는다.',{bg:'img/cg/eunha.webp',fx:['spk']}),
    L('gyeonu',null,1,'직녀','정말 같이 와 줬네요.',{bg:'img/v/aurora_1.webp',emo:'✨'}),
    L('gyeonu',null,1,'견우','다리 끝에 작은 역이 하나 있소. 일 년에 한 번 열리는데, 아무도 지키지 않는 역이오.',{bg:'img/v/aurora_2.webp'}),
-   N(null,null,'은하수 역. 당신은 그 역의 역장이 되기로 한다.',{bg:'img/v/aurora_2.webp',fx:['glow']}),
+   N(null,null,'은하수 역. 당신은 그 역의 역장이 되기로 한다.',{bg:'img/cg/eunha.webp',fx:['glow']}),
    L('gyeonu',null,1,'직녀','당신이 같이 기다려 주면, 일 년이 하루 같을 거예요.',{bg:'img/v/aurora_2.webp'}),
    ...(T?[N(null,null,'트렁크는 역장실 선반에 올려 둔다. 별빛 아래서는 짐도 가볍다.\n\n“'+T.text+'”',{bg:'img/v/aurora_2.webp'})]:[]),
-   N(null,null,'— 은하수 역장 엔딩 —',{bg:'img/v/aurora_1.webp',fx:['glow','spk']})]}};
+   N(null,null,'— 은하수 역장 엔딩 —',{bg:'img/cg/eunha.webp',fx:['glow','spk']})]}};
 function hiddenEnding(h,id){const H=HID[h],T=TRUNK&&!TRUNK.done?TRUNK:null;playScene(H.shots(T),()=>{const E=LS.get('bl_endings',{});E[h]=1;LS.set('bl_endings',E);
   if(T){T.done=1;T.pick=2;T.hid=h;LS.set('bl_trunk',T);LS.set('bl_end',{text:T.text,no:T.no,pick:2,dep:T.dep,hid:h})}
   TRIP.fin=1;TRIP.hid=h;tripSave();trkShow();makeCard(T||{dep:TRIP.dep,no:'----',text:''},h)})}
@@ -2245,4 +2259,34 @@ addEventListener('resize',()=>{if(cOn)coachShow()});
   const B=document.body.classList;if(Date.now()-doneAt<6500||MODE!=='out'||busy||cg.classList.contains('on')||B.contains('talk')||B.contains('amb')||B.contains('intro'))return;
   if($('lvt').classList.contains('on')||$('carP').classList.contains('on')||document.querySelector('#card.on,#alb.on,#ck.on,#trkP.on,#post.on'))return;
   if(TRIP.tr)return;coachStart(0)},800)}
+/* ===================== v6: 진짜 CG 그림 (img/cg/<id>.webp) ===================== */
+const CGREAL={byeol_open:45,byeol:45,gilldong_open:46,gilldong:47,gyeonu_open:27,gyeonu:74,snowq_open:56,snowq:62,sherlock_open:33,sherlock:63,
+  odette_open:68,odette:50,wolf_open:50,wolf:55,sleeping_open:78,sleeping:68,monster_open:68,monster:62,cinder_open:52,cinder:62,
+  mermaid_open:55,mermaid:45,rabbit_open:33,rabbit:68,gyeonu_bye:35,babayaga_bye:50,byeol_bye:50,yonggung:60,eunha:40};
+const CGNAME={byeol:'별주부',gilldong:'홍길동',gyeonu:'견우와 직녀',snowq:'눈의 여왕',sherlock:'셜록 홈즈',odette:'오데트',wolf:'늑대와 빨간 모자',sleeping:'잠자는 숲속의 공주',
+  monster:'괴물',cinder:'신데렐라',mermaid:'인어공주',rabbit:'흰 토끼',babayaga:'바바 야가'};
+const cgLabel=id=>id==='yonggung'?'숨은 엔딩 · 용궁':id==='eunha'?'숨은 엔딩 · 은하수 역':(CGNAME[id.replace(/_(open|bye)$/,'')]||'')+(id.endsWith('_open')?' · 탑승':id.endsWith('_bye')?' · 배웅':' · 선택');
+for(const id in CGREAL){const base=id.replace(/_(open|bye)$/,'');CGM[id]=Object.assign({},CGM[base]||{},{fp:CGREAL[id]+'% 50%'})}
+{const _probe=cgProbe;cgProbe=function(id){if(CGREAL[id]===undefined){_probe(id);return}if(CGK[id]&&(CGK[id].k==='img'||CGK[id].ld))return;
+  CGK[id]={k:'cmp',ld:1};const im=new Image();im.onload=()=>{CGK[id]={k:'img',src:im.src};if(moOnId===id&&mo.classList.contains('cmp'))moShow(id)};
+  im.onerror=()=>{CGK[id]={k:'cmp'}};im.src='img/cg/'+id+'.webp'}}
+{const _ms=moShow;moShow=function(id){_ms(id);const k=CGK[id];if(k&&k.k==='img'){mo.classList.add('real');const f=CGREAL[id]!==undefined?CGREAL[id]:50;mo.style.setProperty('--p0',Math.max(0,f-9)+'% 32%');mo.style.setProperty('--p1',Math.min(100,f+9)+'% 32%');mo.style.setProperty('--bgi','url('+k.src+')');moI.style.backgroundPosition=f+'% 32%'}}}
+{const _ps=playScene;playScene=function(shots,done){(shots||[]).forEach(x=>{if(x.cgo)cgProbe(x.cgo+'_open');if(x.cgb)cgProbe(x.cgb+'_bye');if(x.cg)cgProbe(x.cg);
+    if(x.bg&&/img\/cg\//.test(x.bg)){const im=new Image();im.src=x.bg}});_ps(shots,done)}}
+/* 남은 그림은 천천히 하나씩 미리 받기 (첫 화면을 느리게 하지 않게) */
+{const q=Object.keys(CGREAL).filter(k=>!/^(yonggung|eunha)$/.test(k));let qi=0;
+  const next=()=>{if(qi>=q.length)return;const id=q[qi++];if(CGK[id]&&CGK[id].k==='img'){next();return}cgProbe(id);
+    const t=setInterval(()=>{if(!CGK[id]||!CGK[id].ld){clearInterval(t);setTimeout(next,600)}},300)};
+  setTimeout(next,15000)}
+{const _he=hiddenEnding;hiddenEnding=function(h,id){const sd=LS.get('bl_cg',{});sd[h]=1;LS.set('bl_cg',sd);_he(h,id)}}
+/* 추억 앨범 · 모은 그림 */
+const cgv=document.createElement('div');cgv.id='cgv';cgv.innerHTML='<img alt=""><p></p><button class="pbtn2">닫기</button>';document.body.appendChild(cgv);
+cgv.onclick=e=>{e.stopPropagation();cgv.classList.remove('on')};
+const CGORD=['byeol_open','byeol','gilldong_open','gilldong','gyeonu_open','gyeonu','snowq_open','snowq','sherlock_open','sherlock','odette_open','odette','wolf_open','wolf',
+  'sleeping_open','sleeping','monster_open','monster','cinder_open','cinder','mermaid_open','mermaid','rabbit_open','rabbit','gyeonu_bye','babayaga_bye','byeol_bye','yonggung','eunha'];
+{const _ao=albumOpen;albumOpen=function(t){_ao(t);if(t!=='scene')return;const box=alb.querySelector('.albB'),sd=LS.get('bl_cg',{});const n=CGORD.filter(k=>sd[k]).length;
+  let h=`<p class="cnt" style="margin-top:18px">모은 그림 ${n} / ${CGORD.length}</p><div class="grid cgg">`;
+  for(const k of CGORD){const ok=sd[k];h+=`<div class="cell" ${ok?`data-cg="${k}"`:''}><div class="th${ok?'':' lock cgl'}" style="background-image:url(img/cg/t/${k}.webp)">${ok?'':'<span>?</span>'}</div><small>${ok?cgLabel(k):'???'}</small></div>`}
+  box.insertAdjacentHTML('beforeend',h+'</div>');
+  box.querySelectorAll('[data-cg]').forEach(el=>el.onclick=e=>{e.stopPropagation();const k=el.dataset.cg;cgv.querySelector('img').src='img/cg/'+k+'.webp';cgv.querySelector('p').textContent=cgLabel(k);cgv.classList.add('on')})}}
 </script></body></html>

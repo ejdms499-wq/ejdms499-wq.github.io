@@ -129,7 +129,7 @@ const train=new THREE.Group();scene.add(train);
 const cars=[];let x=0;
 for(const [k,name] of ORDER){
   const w=(k==='loco'?2856:1640)*PX,h=(k==='loco'?680:550)*PX;
-  const p=new THREE.Mesh(new THREE.PlaneGeometry(w,h),carMat(tex('car_'+k+'.webp'),k==='loco'?[2163/2856,1-556/680,2577/2856,1-278/680]:[193/1640,1-418/550,1449/1640,1-47/550]));p.renderOrder=6;
+  const p=plane(tex('car_'+k+'.webp'),w,h);p.renderOrder=6;
   p.position.set(x+w/2,h/2-0.03,0);p.userData={k,name,w,h,ph:Math.random()*6};train.add(p);cars.push(p);x+=w-0.22;
 }
 const TRAINW=x;train.position.x=-TRAINW/2;
@@ -195,6 +195,7 @@ function goSeat(){if(busy)return;busy=true;
 function goOut(){if(busy)return;busy=true;fadeEl.classList.add('on');
   setTimeout(()=>{setMode('out');dist=minD;focus=null;tgtD=fitD();seatB.textContent='내 창가 자리 →';clock();fadeEl.classList.remove('on');busy=false},380)}
 seatB.onclick=e=>{e.stopPropagation();MODE==='out'?goSeat():goOut()};
+if(new URLSearchParams(location.search).has('seat'))setTimeout(()=>{setMode('seat');camX=tgtX=train.position.x+cars.find(c=>c.userData.k==='sleep').position.x;dist=tgtD=fitD();seatB.textContent='← 열차 전체 보기'},0);
 let hinted=0;function hint(){if(hinted)return;hinted=1;setTimeout(()=>document.getElementById('hint').style.opacity=0,1500)}
 function fitD(){return MD.fit()}
 function resize(){R.setSize(innerWidth,innerHeight);cam.aspect=innerWidth/innerHeight;

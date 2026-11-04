@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko"><head><meta charset="utf-8"><base href="/stage/">
+<html lang="ko"><head><meta charset="utf-8"><base href="/stage/"><script>try{if(!localStorage.getItem("bl_trip")&&!/[?&](h|seat)=?/.test(location.search))document.documentElement.classList.add("notrip")}catch(e){}</script><style>html.notrip body::before{content:"";position:fixed;inset:0;background:#0b1418;z-index:44}</style>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <title>부산발 런던행 — 마음의 짐을 맡기는 밤기차</title>
 <meta name="description" content="마음의 짐을 트렁크에 맡기는 순간 부산역을 떠나, 하루 동안 실제 시간으로 런던까지 달리는 꿈의 밤기차. 창가에 앉아 보세요.">
@@ -310,10 +310,10 @@ body.amb #ambX{display:block}body.amb.wake #ambX{opacity:1}
 #cg .mo.cmp .mi{filter:blur(4px) brightness(.62) saturate(1.15)}
 #cg .mv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--fp,50% 50%);display:none}
 #cg .mo.vid .mv{display:block}#cg .mo.vid .mi{display:none}
-#cg .mch{position:absolute;left:50%;bottom:-8%;height:min(108%,175vw);transform:translateX(-50%);display:none;filter:drop-shadow(0 0 28px var(--ac,#ffd9a0))}
+#cg .mch{position:absolute;left:50%;bottom:9%;height:min(76%,150vw);transform-origin:50% 100%;transform:translateX(-50%);display:none;filter:drop-shadow(0 0 28px var(--ac,#ffd9a0))}
 #cg .mo.cmp .mch{display:block}
 #cg .mo.on.cmp .mch{animation:moCh 14s cubic-bezier(.22,.6,.3,1) forwards}
-@keyframes moCh{from{transform:translateX(-46%) scale(1.22) rotate(-1.5deg)}to{transform:translateX(-50%) scale(1.02) rotate(0)}}
+@keyframes moCh{from{transform:translateX(-50%) scale(.96);opacity:.0}12%{opacity:1}to{transform:translateX(-50%) scale(1.04);opacity:1}}
 #cg .ml{position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,238,205,.32) 48%,transparent 62%);background-size:300% 100%;mix-blend-mode:screen;animation:moSw 7s ease-in-out infinite}
 @keyframes moSw{0%{background-position:120% 0}60%,100%{background-position:-60% 0}}
 #cg .mp{position:absolute;inset:-40% 0 0 0;opacity:.95;
@@ -703,7 +703,7 @@ function bgmTick(){if(!sndOn){BG.el.forEach(a=>{if(!a.paused)bgmFade(a,0,600,()=
 setInterval(bgmTick,2000);
 const sb=document.getElementById('snd');sb.onclick=e=>{e.stopPropagation();if(!AC)initSound();sndOn=!sndOn;AC.resume();
   MG.gain.cancelScheduledValues(AC.currentTime);MG.gain.linearRampToValueAtTime(sndOn?.55:0,AC.currentTime+.8);if(sndOn)nextClack=Math.max(nextClack,AC.currentTime+.1);
-  sb.textContent=sndOn?'♪ 소리 끄기':'♪ 소리 켜기';setTimeout(bgmTick,50);sb.classList.toggle('on',sndOn)};
+  sb.textContent=sndOn?'♪ 소리 끄기':'♪ 소리 켜기';if(sndAuto)LS.set('bl_mute',sndOn?0:1);setTimeout(bgmTick,50);sb.classList.toggle('on',sndOn)};
 
 
 /* ================= 마음의 짐 수하물 · 맞은편 승객 ================= */
@@ -765,7 +765,7 @@ function trkRender(){const T=myTrunk();if(!T)return;const w=where(dep,vnow());co
 function trkToggle(e){e.stopPropagation();const on=!trkP.classList.contains('on');trkP.classList.toggle('on',on);if(on)trkRender()}
 document.addEventListener('pointerdown',e=>{if(trkP.classList.contains('on')&&!trkP.contains(e.target)&&e.target!==trk)trkP.classList.remove('on')});
 trkShow();
-setTimeout(()=>{try{firstFlow()}catch(e){console.log(e)}},1400);
+setTimeout(()=>{try{firstFlow()}catch(e){console.log(e)}},TRIP?1400:50);
 
 /* ---- 맞은편 승객 ---- */
 const P='img/px/';
@@ -1344,17 +1344,18 @@ function cmFrame(now){
     if(k>=1){cmEnd();requestAnimationFrame(cmFrame);return}
     // 걷다가 가운데서 잠깐 서서 창밖 보기(서 있는 손님)
     const kk=c.k==='walk'?k:(k<.4?k/.4*.5:k<.6?.5:.5+(k-.6)/.4*.5);const moving=c.k==='walk'||k<.4||k>.6;
-    const bob=moving?Math.abs(Math.sin(t*7+cmCur.ph)):0,rot=moving?Math.sin(t*7+cmCur.ph)*2.5:0;
+    const bob=moving?Math.abs(Math.sin(t*5.5+cmCur.ph))*.25:0,rot=moving?Math.sin(t*5.5+cmCur.ph)*1.1:0;
     const op=Math.min(1,k/.06,(1-k)/.06);im.style.opacity=op;
     if(!cmCur.inside){ // 불새: 하늘
       cmo.style.zIndex='';let x,y,H;
       if(MODE==='seat'){const h=vwLayout.h||innerHeight*.5,y0=vwLayout.y||innerHeight*.15;H=h*.38;x=innerWidth+40-(innerWidth+H*cmCur.ar+80)*k;y=y0+h*.08+Math.sin(t*1.6+cmCur.ph)*H*.18}
       else{H=innerHeight*.16;x=innerWidth+40-(innerWidth+H*cmCur.ar+80)*k;y=innerHeight*.12+Math.sin(t*1.6+cmCur.ph)*H*.3}
       im.style.height=H+'px';im.style.width=H*cmCur.ar+'px';im.style.transform=`translate(${x}px,${y}px) rotate(${Math.sin(t*1.6)*6}deg)`}
-    else if(MODE==='seat'){ // 내 자리 앞 통로
-      cmo.style.zIndex='3';const H=innerHeight*(innerWidth<innerHeight?.58:.78)*c.s,W=H*cmCur.ar;
-      const x=innerWidth+W*.2-(innerWidth+W*1.4)*kk,y=innerHeight*1.03-H-bob*H*.025;
-      im.style.height=H+'px';im.style.width=W+'px';im.style.transform=`translate(${x}px,${y}px) rotate(${rot}deg)`}
+    else if(MODE==='seat'){ // 칸 문 쪽에서 빼꼼: 화면 왼쪽 끝에서 들어와 잠깐 멈췄다가 나감 (발은 화면 아래로 잘림)
+      cmo.style.zIndex='3';const mob=innerWidth<innerHeight,H=innerHeight*(mob?.62:.86)*c.s,W=H*cmCur.ar;
+      const e=k<.18?k/.18:k>.82?(1-k)/.18:1,ee=e*e*(3-2*e);const x=-W+ee*W*(mob?.62:.7),y=innerHeight-H*.86;
+      const br=1+Math.sin(t*1.8+cmCur.ph)*.006;im.style.opacity=1;
+      im.style.height=H+'px';im.style.width=W+'px';im.style.transformOrigin='50% 100%';im.style.transform=`translate(${x}px,${y}px) scale(${br}) rotate(${(1-ee)*-3}deg)`;if(!cmCur.said&&k>.24){cmCur.said=1;cmSay(cmCur.id,im)}}
     else{ // 칸 안: 바닥(0.93)에 발, 칸 오른쪽 끝 → 왼쪽 끝
       cmo.style.zIndex='';const cc=cmCur.car,w=cc.userData.w,cx=train.position.x+cc.position.x;
       const lx=cx+w*.40-w*.80*kk,Hw=1.3*c.s;
@@ -1574,6 +1575,9 @@ function makeTicket(){const T=TRUNK&&TRUNK.dep===dep?TRUNK:null;card.dataset.kin
 const tkB=document.createElement('button');tkB.id='tkB';tkB.className='paper';tkB.innerHTML='🎫 승차권이 나왔어요 <small>저장 · 공유</small>';document.body.appendChild(tkB);
 tkB.onclick=e=>{e.stopPropagation();tkB.classList.remove('on');makeTicket()};
 function tkShow(){tkB.classList.add('on');clearTimeout(tkShow.t);tkShow.t=setTimeout(()=>tkB.classList.remove('on'),14000)}
+/* 소리: 브라우저 규칙상 첫 터치/입력 때 자동으로 켬 */
+let sndAuto=false;const sndFirst=()=>{if(sndAuto)return;sndAuto=true;try{if(!sndOn&&!LS.get('bl_mute',0))$('snd').click()}catch(e){}};
+addEventListener('pointerdown',sndFirst,{capture:true,once:true});addEventListener('keydown',sndFirst,{capture:true,once:true});
 /* ================= 인트로: 꼬리표 한 장으로 시작 → 도장 → 펀칭 → 구멍 속으로 열차가 보인다 ================= */
 const intro=document.createElement('div');intro.id='intro';
 intro.innerHTML=`<div class="iTop"><small>BUSAN STATION · 마음의 짐 창구</small><p id="iLine"></p></div>
@@ -1607,7 +1611,7 @@ function introGo(t){$('iGo').disabled=true;$('iNo2').style.visibility='hidden';$
   setTimeout(()=>{const r=$('iHole').getBoundingClientRect(),hx=r.left+r.width/2,hy=r.top+r.height/2,tr=$('iTag').getBoundingClientRect();
     $('iTag').style.transformOrigin=(hx-tr.left)+'px '+(hy-tr.top)+'px';$('iTag').classList.add('zoom');
     curSeg=null;arrLast=null;clock();
-    const t0=performance.now(),D=1500,max=Math.hypot(innerWidth,innerHeight);
+    document.documentElement.classList.remove('notrip');const t0=performance.now(),D=1500,max=Math.hypot(innerWidth,innerHeight);
     (function f(n){const k=Math.min(1,(n-t0)/D),e=k*k*(3-2*k),R=e*max;
       intro.style.webkitMaskImage=intro.style.maskImage=`radial-gradient(circle at ${hx}px ${hy}px, transparent ${R}px, #000 ${R+2}px)`;
       if(k<1)requestAnimationFrame(f);else{intro.className='';intro.style.maskImage=intro.style.webkitMaskImage='';$('iTag').classList.remove('zoom');$('iStamp').classList.remove('on');$('iHole').classList.remove('lit');$('iGo').disabled=false;$('iNo2').style.visibility='';$('iT').value='';

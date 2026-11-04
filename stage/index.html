@@ -11,13 +11,18 @@ canvas{display:block;width:100vw;height:100vh;height:100dvh}
 #tag::before{content:"";position:absolute;left:-7px;top:50%;width:8px;height:8px;margin-top:-4px;border:2px solid #3a2a1c;border-radius:50%;background:#0d2230}
 #hint{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);color:#f6e9c8;
  font:500 12px "Apple SD Gothic Neo","Noto Sans KR",sans-serif;opacity:.85;text-shadow:0 1px 2px #000a;white-space:nowrap;transition:opacity 1s}
+#tag i{display:block;font-style:normal;font-weight:500;font-size:11px;opacity:.8;margin-top:1px}
+#dev{position:fixed;left:12px;right:12px;bottom:calc(40px + env(safe-area-inset-bottom));display:none;gap:8px;align-items:center;background:#f3e6c4;border:2px solid #3a2a1c;border-radius:4px;padding:6px 10px;font:600 12px 'Apple SD Gothic Neo',sans-serif;color:#3a2a1c}
+#dev input{flex:1}
 #back{position:fixed;right:14px;top:calc(12px + env(safe-area-inset-top));display:none;background:#f3e6c4;color:#3a2a1c;border:2px solid #3a2a1c;box-shadow:2px 2px 0 #3a2a1c;border-radius:3px;padding:6px 11px;font:700 13px "Apple SD Gothic Neo",sans-serif}
 </style></head><body>
-<div id="tag"><b>부산</b>그림 겹 무대 · 시험판</div>
+<div id="tag"><b>부산</b><span id="tagS">그림 겹 무대 · 시험판</span><i id="tagI"></i></div>
+<div id="dev"><span>출발 후</span><input id="devR" type="range" min="0" max="91.9" step="0.1"><span id="devV"></span></div>
 <button id="back">← 열차 전체</button>
 <div id="hint">옆으로 끌어서 열차 둘러보기 · 칸을 누르면 가까이</div>
 <script type="module">
 import * as THREE from './three.module.js';
+import {SEG,TRIP_H,lastDeparture,where} from './timetable.js';
 /* ================= 구간 설정 (구간마다 이것만 바꾸면 됨) ================= */
 const SCENE={
   name:'부산',
@@ -121,8 +126,8 @@ const ray=new THREE.Raycaster(),v2=new THREE.Vector2(),tagB=document.querySelect
 function tap(e){v2.set(e.clientX/innerWidth*2-1,-(e.clientY/innerHeight)*2+1);ray.setFromCamera(v2,cam);
   const h=ray.intersectObjects(cars)[0];if(!h)return;const c=h.object;focus=c;tgtX=train.position.x+c.position.x;clampX();
   const a=innerWidth/innerHeight;tgtD=Math.max(minD,Math.min(maxD,Math.max(c.userData.h*2.2/(2*TAN),c.userData.w*1.08/(2*TAN*a))));
-  tagB.textContent=c.userData.name;back.style.display='block';hint()}
-back.onclick=()=>{focus=null;tgtD=fitD();tagB.textContent=SCENE.name;back.style.display='none'};
+  tagB.textContent=c.userData.name;tagS.textContent='';tagI.textContent='';back.style.display='block';hint()}
+back.onclick=()=>{focus=null;tgtD=fitD();back.style.display='none';clock()};
 let hinted=0;function hint(){if(hinted)return;hinted=1;setTimeout(()=>document.getElementById('hint').style.opacity=0,1500)}
 function fitD(){const a=innerWidth/innerHeight;return Math.max(26,12.5/(2*TAN*a))}
 function resize(){R.setSize(innerWidth,innerHeight);cam.aspect=innerWidth/innerHeight;
@@ -132,6 +137,26 @@ function resize(){R.setSize(innerWidth,innerHeight);cam.aspect=innerWidth/innerH
    let mAt=Math.max(F.moonAt,1-(0.995-F.moonU)*Wx);mAt=Math.min(mAt,(F.moonU-0.005)*Wx);
    for(const q of [far,nearWater]){q.material.uniforms.asp.value=a;q.material.uniforms.Him.value=Him;q.material.uniforms.mAt.value=mAt}}if(!focus)tgtD=fitD()}
 addEventListener('resize',resize);resize();dist=tgtD;
+
+/* ---------- 시간표 ---------- */
+const HR=36e5,Q=new URLSearchParams(location.search);
+let OFF=0;const vnow=()=>Date.now()+OFF;let dep=lastDeparture();
+if(Q.has('h'))OFF=dep+parseFloat(Q.get('h'))*HR-Date.now();
+const pd=n=>String(n).padStart(2,'0');
+const tagS=document.getElementById('tagS'),tagI=document.getElementById('tagI');
+function dur(h){const m=Math.round(h*60);return m>=60?Math.floor(m/60)+'시간 '+(m%60?m%60+'분':''):m+'분'}
+let curSeg=null;
+function clock(){const w=where(dep,vnow());if(w.mode!=='run')return;
+  if(focus)return;
+  tagB.textContent=w.seg.name+(w.seg.art?'':' · 그림 준비 중');
+  tagS.textContent=w.day+'일째 · 현지 '+pd(w.localH)+':'+pd(w.localM)+' · '+w.seg.sky;
+  tagI.textContent=w.next?'다음 '+w.next.name+' · '+dur(w.next.h-w.h)+' 뒤':'곧 런던';
+  if(curSeg!==w.seg.id){curSeg=w.seg.id}
+}
+setInterval(clock,1000);setTimeout(clock,50);
+if(Q.has('dev')){const d=document.getElementById('dev'),r=document.getElementById('devR'),v=document.getElementById('devV');d.style.display='flex';
+  const sync=()=>{const h=(vnow()-dep)/HR;r.value=h;v.textContent=h.toFixed(1)+'시간'};sync();
+  r.oninput=()=>{OFF=dep+parseFloat(r.value)*HR-Date.now();v.textContent=(+r.value).toFixed(1)+'시간';clock()}}
 
 /* ---------- 매 프레임 ---------- */
 const SPEED=7;let travel=0,last=performance.now();const T0=last;const pv=new THREE.Vector3();

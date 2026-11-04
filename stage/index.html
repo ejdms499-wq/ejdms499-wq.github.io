@@ -267,11 +267,12 @@ const sb=document.getElementById('snd');sb.onclick=e=>{e.stopPropagation();if(!A
   sb.textContent=sndOn?'♪ 소리 끄기':'♪ 소리 켜기';sb.classList.toggle('on',sndOn)};
 
 /* ---------- 창가 자리: 창밖 풍경 그림이 계속 지나감 ---------- */
-const VIEWS={busan:['img/far.webp','../img/zh_busan.webp'],seoul:['../img/zh_seoul.webp'],cloud:['../img/zt_cloud.webp'],
-  snow:['../img/zt_snowforest.webp','../img/zt_taiga.webp'],baikal:['../img/zh_baikal_am.webp'],aurora:['../img/zt_aurora.webp'],
-  taiga:['../img/zt_taiga.webp','../img/zt_snowforest.webp'],moscow:['../img/zh_moscow.webp','../img/zt_moscow.webp'],plain:['../img/zh_volga.webp','../img/zt_volga.webp'],
-  forest:['../img/zt_fairy.webp'],castle:['../img/zh_castle.webp','../img/zt_castle.webp'],alps:['../img/zh_alps.webp','../img/zh_lake.webp','../img/zt_alps.webp'],
-  paris:['../img/zh_paris.webp','../img/zt_paris.webp'],sea:['../img/zt_sea.webp'],england:['../img/zt_england.webp'],london:['../img/zh_london.webp']};
+const V=n=>'img/v/'+n+'.webp';
+const VIEWS={busan:[V('busan_1'),V('busan_2')],seoul:[V('seoul_1'),V('seoul_2')],cloud:[V('cloud_1'),V('cloud_2')],
+  snow:[V('snow_1'),'../img/zt_snowforest.webp'],baikal:[V('baikal_1'),V('baikal_2')],aurora:[V('aurora_1'),V('aurora_2')],
+  taiga:[V('taiga_1'),V('taiga_2')],moscow:[V('moscow_1'),V('moscow_2')],plain:[V('plain_1'),V('plain_2')],
+  forest:[V('forest_1'),'../img/zt_fairy.webp'],castle:[V('castle_1'),'../img/zh_castle.webp'],alps:[V('alps_1'),V('alps_2'),'../img/zh_alps.webp'],
+  paris:[V('paris_1'),V('paris_2')],sea:[V('sea_1'),'../img/zt_sea.webp'],england:[V('england_1'),V('england_2')],london:['../img/zh_london.webp']};
 const vwEl=[document.getElementById('vwA'),document.getElementById('vwB')];
 let vwCur=0,vwImg=null,vwX=0,vwIdx=0,vwSeg=null,vwSize={w:1,h:1};
 function vwShow(src){const im=new Image();im.onload=()=>{const nx=1-vwCur,e=vwEl[nx];e.style.backgroundImage='url('+src+')';

@@ -267,13 +267,22 @@ body.talk #albB{opacity:0;pointer-events:none}
 @keyframes stkIn{0%{transform:scale(3) rotate(-35deg);opacity:0}14%{transform:scale(.92) rotate(-8deg);opacity:1}20%{transform:scale(1) rotate(-8deg)}70%{transform:scale(1) rotate(-8deg);opacity:1}100%{transform:translate(var(--tx),var(--ty)) scale(.18) rotate(-8deg);opacity:.2}}
 #trk.bump{animation:bump .5s}
 @keyframes bump{40%{transform:scale(1.18)}}
+
+/* ===== 깜짝 손님 ===== */
+#cmo{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+#cmo img{position:absolute;left:0;top:0;pointer-events:auto;cursor:pointer;transform-origin:50% 100%;filter:drop-shadow(0 2px 0 rgba(0,0,0,.25));will-change:transform}
+#cmB{position:fixed;z-index:33;max-width:min(300px,80vw);padding:10px 12px 9px;font:600 14.5px/1.55 "Apple SD Gothic Neo",sans-serif;display:none;pointer-events:none}
+#cmB.on{display:block;animation:ckIn .3s}
+#cmB b{display:block;font-size:12px;opacity:.7;margin-bottom:2px}
+#cmB i{display:block;font-style:normal;font-size:11px;color:#b8432f;font-weight:800;margin-top:5px}
+#cmB::after{content:"";position:absolute;left:24px;bottom:-12px;border:7px solid transparent;border-top:10px solid #3a2a1c}
 </style></head><body>
 <div id="tag"><b>부산</b><span id="tagS">그림 겹 무대 · 시험판</span><i id="tagI"></i></div>
 <div id="dev"><span>출발 후</span><input id="devR" type="range" min="0" max="91.9" step="0.1"><span id="devV"></span></div>
-<div class="vw" id="vwA"></div><div class="vw" id="vwB"></div><div id="glass"></div><div id="cab"></div><div id="pax"></div><div id="paxT" class="paper"></div><div id="vig"></div><div id="fade"></div>
+<div class="vw" id="vwA"></div><div class="vw" id="vwB"></div><div id="cmo"></div><div id="glass"></div><div id="cab"></div><div id="pax"></div><div id="paxT" class="paper"></div><div id="vig"></div><div id="fade"></div>
 <div id="first"><div class="paper" id="fC"></div></div>
 <div id="wait"><div id="wBoard"></div><div id="wBtns"></div></div>
-<div id="depT" class="paper"></div><div id="ann"><div class="in"><div class="bell">♪</div><div id="annT"></div></div></div><div id="stk"></div>
+<div id="depT" class="paper"></div><div id="ann"><div class="in"><div class="bell">♪</div><div id="annT"></div></div></div><div id="stk"></div><div id="cmB" class="paper"></div>
 <div id="ck"><div id="ckC" class="paper"></div></div>
 <button id="trk" class="paper">내 트렁크</button><div id="trkP" class="paper"></div>
 <div id="dlg" class="paper"><div id="dlgN"></div><div id="dlgT"></div><div id="dlgC"></div><div id="dlgM">▼</div></div>
@@ -971,6 +980,7 @@ const L3={
  rabbit:['늦어도 괜찮다는 그 말, 제 시계보다 정확했어요.','조금 늦어도 괜찮아 — 흰 토끼'],
 };
 const SEG_OF={};Object.entries(SEAT).forEach(([sg,id])=>{if(!SEG_OF[id])SEG_OF[id]=sg});
+function viewOf2(seg){return (VIEWS[seg]||VIEWS.busan)[0]}
 function viewOf(id){const L=VIEWS[SEG_OF[id]]||VIEWS.busan;return L[0]}
 function l3Shots(id){const c=CAST[id],[line,sign]=L3[id];
   return [{t:'title',text:'단짝 이야기',sub:c.n},{bg:W_,ch:c.img,pose:'in',fx:['glow','spk'],who:c.n,say:line},
@@ -1009,8 +1019,11 @@ function albumOpen(t){albTab=t;alb.classList.add('on');alb.querySelectorAll('.al
       else if(r==='end'){const E=LS.get('bl_end',{});const T0=TRUNK;TRUNK={...E,boardH:0};const save=TRUNK;ending.__replay=1;
         _ending();TRUNK=T0;const iv=setInterval(()=>{if(!cg.classList.contains('on')){clearInterval(iv);if(T0)LS.set('bl_trunk',T0);else localStorage.removeItem('bl_trunk')}},500)}})}
   if(t==='pax'){const ids=['byeol','gilldong','gyeonu','snowq','sherlock','babayaga','odette','hansel','wolf','sleeping','monster','cinder','mermaid','rabbit'];
+    const cs=LS.get('bl_cameo',{}),cids=Object.keys(CM);
+    const cmh='<p class="cnt" style="margin-top:16px">깜짝 손님 '+Object.keys(cs).length+' / '+cids.length+'</p><div class="grid pax">'+cids.map(id=>{const c=CM[id],ok=cs[id];const sg=SEG.find(s=>s.id===c.segs[0]);
+      return `<div class="cell">${thumb(viewOf2(c.segs[0]),'img/cm/'+id+'.webp',!ok)}<em>${ok?c.n:'???'}</em><small>${ok?c.t.slice(0,26)+'…':sg.name+' 창밖을 잘 보세요'}</small></div>`}).join('')+'</div>';
     box.innerHTML='<div class="grid pax">'+ids.map(id=>{const c=CAST[id],ok=met[id],p=AFF[id]||0,l=lv(p);
-      return `<div class="cell">${thumb(viewOf(id),c.img,!ok)}<em>${ok?c.n:'???'}</em><small>${ok?pns(l)+' '+LVN[l]:SEG.find(s=>s.id===SEG_OF[id]).name+'에서 만나요'}</small></div>`}).join('')+'</div>'}
+      return `<div class="cell">${thumb(viewOf(id),c.img,!ok)}<em>${ok?c.n:'???'}</em><small>${ok?pns(l)+' '+LVN[l]:SEG.find(s=>s.id===SEG_OF[id]).name+'에서 만나요'}</small></div>`}).join('')+'</div>'+cmh}
   if(t==='keep'){const k=LS.get('bl_keep',{}),sg=LS.get('bl_sign',{});
     box.innerHTML='<p class="cnt">기념품 '+Object.keys(k).length+' / '+MAINS.length+'</p><div class="grid kp">'+MAINS.map(id=>k[id]?`<div class="cell kc"><div class="ic">${KEEP[id][0]}</div><em>${KEEP[id][1]}</em><small>${KEEP[id][2]}</small></div>`:`<div class="cell kc lock"><div class="ic">?</div><em>???</em><small>${CAST[id].n}의 꼬리표 이야기</small></div>`).join('')+'</div>'+
       '<p class="cnt" style="margin-top:14px">꼬리표 뒷면의 한마디 '+Object.keys(sg).length+'</p>'+(Object.keys(sg).length?'<ul class="signs">'+Object.values(sg).map(v=>`<li>「${v}」</li>`).join('')+'</ul>':'<p class="cnt" style="opacity:.6">단짝이 되면 꼬리표에 한마디를 적어 줘요</p>')}}
@@ -1073,6 +1086,51 @@ function dingdong(){if(!AC||!sndOn)return;const t=AC.currentTime;[[659,0],[523,.
 function thunk(){if(!AC||!sndOn)return;const t=AC.currentTime,o=AC.createOscillator(),g=AC.createGain();o.frequency.setValueAtTime(160,t);o.frequency.exponentialRampToValueAtTime(55,t+.15);
   g.gain.setValueAtTime(.5,t);g.gain.exponentialRampToValueAtTime(.001,t+.22);o.connect(g);g.connect(MG);o.start(t);o.stop(t+.25)}
 if(Q.has('arr'))setTimeout(()=>{const w=where(dep,vnow());if(w.mode==='run')arrive(w)},2500);
+
+/* ================= 깜짝 손님: 창밖으로 가끔 지나감 ================= */
+const CM={
+ rabbit:{n:'토끼 (별주부전)',segs:['busan','gyeongbu'],k:'walk',s:.95,t:'간은 집에 두고 왔다니까! 별주부한테는 비밀이야.'},
+ heungbu:{n:'흥부',segs:['gyeongbu','seoul'],k:'walk',s:1,t:'박씨를 심었더니 근심 대신 박이 열렸지 뭐예요. 하나 드릴까요?'},
+ chunhyang:{n:'춘향',segs:['seoul'],k:'swing',s:1.05,t:'기다리는 것도 여행이에요. 런던까지 잘 다녀오세요!'},
+ sunmoon:{n:'해님달님 남매',segs:['cloud'],k:'drop',s:1.1,t:'무서웠지만 끝까지 올라왔어요! 위에서 보면 걱정도 다 작아 보여요.'},
+ firebird:{n:'불새',segs:['snow','aurora','taiga'],k:'fly',s:1.15,t:'(불새가 반짝이는 깃털 하나를 떨어뜨리고 날아간다)'},
+ rapunzel:{n:'라푼젤',segs:['castle','forest'],k:'stand',s:1.05,t:'저도 언젠가 저 열차 탈 거예요! 머리는 좀 묶고요.'},
+ tell:{n:'빌헬름 텔',segs:['alps'],k:'stand',s:1,t:'빗나가도 괜찮아요. 사과는 먹으면 되니까!'},
+ phantom:{n:'오페라의 유령',segs:['paris'],k:'stand',s:1.05,t:'자정의 음악은 내가 켜고 있지… 얼굴은 보여 주지 않겠소.'},
+ quasimodo:{n:'콰지모도',segs:['paris'],k:'stand',s:1,t:'종소리는 누구 얼굴도 안 봐요. 오늘 밤 열두 번, 크게 울려 드릴게요.'},
+ alice:{n:'앨리스',segs:['england','london'],k:'walk',s:.95,sp:1.6,t:'기다려, 흰 토끼야! …어, 기차가 더 빠르잖아?'},
+ scrooge:{n:'스크루지',segs:['london','england'],k:'walk',s:1,t:'흥! 근심도 내 재산이오. …그래도 맡기고 나니 가볍긴 하구먼.'},
+ jekyll:{n:'지킬과 하이드',segs:['london'],k:'walk',s:1,t:'근심이 두 개면 트렁크도 두 개요? 우리는 반씩 나눠 들었소.'},
+};
+const cmo=$('cmo'),cmB=$('cmB');let cmCur=null,cmNext=performance.now()+(Q.has('cameo')?2500:30000);
+function cmBusy(){return dlg.classList.contains('on')||cg.classList.contains('on')||ck.classList.contains('on')||waitEl.classList.contains('on')||firstEl.classList.contains('on')||alb.classList.contains('on')||card.classList.contains('on')}
+function cmBand(){if(MODE==='seat'){const h=vwLayout.h||innerHeight*.5,y=vwLayout.y||innerHeight*.15;return {foot:y+h*.86,size:h*(innerWidth<innerHeight?.32:.42),top:y+h*.12}}
+  const v=new THREE.Vector3(camX,3.55,0).project(cam);const roof=(-v.y*.5+.5)*innerHeight;return {foot:roof+innerHeight*.012,size:innerHeight*.17,top:innerHeight*.12}}
+function cmLaunch(id){const c=CM[id];const im=new Image();im.src='img/cm/'+id+'.webp';im.alt=c.n;
+  im.onload=()=>{cmo.appendChild(im);cmCur={id,im,t0:performance.now(),ar:im.naturalWidth/im.naturalHeight,dur:(c.k==='walk'?17000/(c.sp||1):c.k==='fly'?11000:21000),ph:Math.random()*6}};
+  im.onclick=e=>{e.stopPropagation();cmSay(id,im)}}
+function cmSay(id,im){const c=CM[id],seen=LS.get('bl_cameo',{}),isNew=!seen[id];seen[id]=1;LS.set('bl_cameo',seen);
+  cmB.innerHTML='<b>'+c.n+'</b>'+c.t+(isNew?'<i>깜짝 손님 발견! '+Object.keys(seen).length+' / '+Object.keys(CM).length+' · 추억 앨범에 기록됐어요</i>':'');
+  const r=im.getBoundingClientRect();cmB.classList.add('on');const bw=cmB.offsetWidth,bh=cmB.offsetHeight;
+  cmB.style.left=Math.max(8,Math.min(innerWidth-bw-8,r.left+r.width*.3-24))+'px';cmB.style.top=Math.max(8,r.top-bh-14)+'px';
+  if(cmCur)cmCur.held=performance.now();clearTimeout(cmSay.t);cmSay.t=setTimeout(()=>{cmB.classList.remove('on');if(cmCur&&cmCur.held){cmCur.t0+=performance.now()-cmCur.held;cmCur.held=0}},4200);try{blipUp()}catch(e){}}
+function cmFrame(now){
+  if(cmCur){const c=CM[cmCur.id],b=cmBand(),H=b.size*c.s,Wd=H*cmCur.ar;let k=((cmCur.held||now)-cmCur.t0)/cmCur.dur;
+    if(k>=1){cmCur.im.remove();cmCur=null;cmB.classList.remove('on')}
+    else{const x=innerWidth+40-(innerWidth+Wd+80)*k;let y=b.foot-H,rot=0;const t=now/1000;
+      if(c.k==='walk')y-=Math.abs(Math.sin(t*7+cmCur.ph))*H*.035,rot=Math.sin(t*7+cmCur.ph)*2;
+      if(c.k==='fly')y=b.top+Math.sin(t*1.6+cmCur.ph)*H*.18,rot=Math.sin(t*1.6)*6;
+      if(c.k==='drop')y=b.top-H*.4+Math.sin(k*Math.PI)*H*.55;
+      if(c.k==='swing')rot=Math.sin(t*1.8)*9,y-=Math.abs(Math.sin(t*1.8))*H*.06;
+      const im=cmCur.im;im.style.height=H+'px';im.style.width=Wd+'px';im.style.transform=`translate(${x}px,${y}px) rotate(${rot}deg)`;
+      im.style.opacity=MODE==='seat'||c.k!=='walk'||1?1:1}}
+  else if(now>cmNext&&!document.hidden&&!cmBusy()){const w=where(dep,vnow());if(w.mode==='run'){
+      const ids=Object.keys(CM).filter(id=>CM[id].segs.includes(w.seg.id));
+      if(ids.length){const seen=LS.get('bl_cameo',{}),un=ids.filter(i=>!seen[i]);const pick=(un.length?un:ids)[Math.floor(Math.random()*(un.length?un:ids).length)];cmLaunch(pick)}}
+    cmNext=now+(Q.has('cameo')?25000:120000+Math.random()*120000)}
+  requestAnimationFrame(cmFrame)}
+requestAnimationFrame(cmFrame);
+addEventListener('pointerdown',e=>{if(cmB.classList.contains('on')&&!e.target.closest('#cmo'))cmB.classList.remove('on')});
 
 /* ---------- 창가 자리: 창밖 풍경 그림이 계속 지나감 ---------- */
 const V=n=>'img/v/'+n+'.webp';

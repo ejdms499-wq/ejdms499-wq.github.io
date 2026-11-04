@@ -338,7 +338,7 @@ function bedTex(){const c=document.createElement('canvas');c.width=1024;c.height
   g.fillStyle='#14191b';g.fillRect(0,38,1024,3);
   const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;t.wrapS=THREE.RepeatWrapping;return t}
 const bed=plane(bedTex(),1,1);bed.renderOrder=5;bed.visible=false;scene.add(bed);
-const MIDS={seoul:['seoul',.8],gyeongbu:['kcity',.85],cloud:['cloud',.9],snow:['snow',1],aurora:['snow',.75],taiga:['snow',1],baikal:['baikal',1],moscow:['rus',.9],plain:['rus',.75],forest:['deforest',.9],castle:['deforest',.95],alps:['alps',1],paris:['paris',.85],sea:['reef',.9],england:['eng',1],london:['paris',.8]};
+const MIDS={seoul:['kcity',.8],gyeongbu:['kcity',.85],cloud:null,snow:['snow',1],aurora:['snow',.75],taiga:['snow',1],baikal:['baikal',1],moscow:['rus',.9],plain:['rus',.75],forest:['deforest',.9],castle:['deforest',.95],alps:['deforest',1],paris:['paris',.85],sea:['reef',.9],england:['eng',1],london:['paris',.8]};
 const pmid=plane(null,1,1,[1,1,1],{haze:.12,sat:.9,bri:.95});pmid.renderOrder=3;pmid.visible=false;scene.add(pmid);let pmAR=4,pmK=null;
 function setPano(id){if(PANO.id===id)return;PANO.id=id;const busan=id==='busan';PANO.on=!busan;
   far.visible=nearWater.visible=mid.visible=emb.visible=busan;pano.visible=bed.visible=!busan;

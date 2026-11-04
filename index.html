@@ -793,9 +793,9 @@ sbCount(dep);
 /* ---- 런던 엔딩 ---- */
 function ending(){const T=TRUNK;if(!T)return;const met=LS.get('bl_met',{}),nC=Object.keys(clues()).length;let pick=0;
   const shots=[{t:'title',text:'종착역',sub:'런던'},
-   {bg:'img/v/london_1.webp',ch:'robot.webp',pose:'in',fx:['glow'],who:'로봇 포터',say:'런던역입니다! 나흘 동안 수고 많으셨어요.\n수하물 #'+T.no+', 찾으러 오셨죠?'},
-   {bg:'img/v/london_1.webp',ch:null,fx:['spk','glow'],who:'',narr:1,say:'트렁크를 연다. 도시 스티커가 빼곡하다.\n안에는 부산에서 넣은 쪽지 한 장.\n\n“'+T.text+'”'},
-   {bg:'img/v/london_1.webp',ch:'robot.webp',pose:'in',who:'로봇 포터',say:'나흘 동안 실려 온 당신의 근심이에요. 조금 가벼워졌나요?\n가져가셔도 되고, 런던 유실물 보관소에 두고 가셔도 돼요.'},
+   {bg:'img/v/lostfound.webp',ch:'robot.webp',pose:'in',fx:['glow'],who:'로봇 포터',say:'런던역입니다! 나흘 동안 수고 많으셨어요.\n수하물 #'+T.no+', 찾으러 오셨죠?'},
+   {bg:'img/v/lostfound.webp',ch:null,fx:['spk','glow'],who:'',narr:1,say:'트렁크를 연다. 도시 스티커가 빼곡하다.\n안에는 부산에서 넣은 쪽지 한 장.\n\n“'+T.text+'”'},
+   {bg:'img/v/lostfound.webp',ch:'robot.webp',pose:'in',who:'로봇 포터',say:'나흘 동안 실려 온 당신의 근심이에요. 조금 가벼워졌나요?\n가져가셔도 되고, 런던 유실물 보관소에 두고 가셔도 돼요.'},
    {choice:[['찾아가기','가져갈게요. 이제는 들고 갈 수 있을 것 같아요.'],['런던 유실물 보관소에 두기','여기 두고 갈게요. 누가 찾으러 오지 않아도 괜찮은 근심이에요.']],onPick:k=>{pick=k}}];
   if(nC>=6)shots.push(
    {bg:'img/v/london_1.webp',ch:'pf_p01.webp',pose:'in',who:'셜록 홈즈',say:'잠깐, 조수. 주인 없는 트렁크 말일세. 단서가 '+nC+'개나 모였지.'},
@@ -957,8 +957,8 @@ const V=n=>'img/v/'+n+'.webp';
 const VIEWS={busan:[V('busan_1'),V('busan_2')],gyeongbu:[V('gyeongbu_1'),V('gyeongbu_2'),V('gyeongbu_3'),V('gyeongbu_4')],seoul:[V('seoul_1'),V('seoul_2')],cloud:[V('cloud_1'),V('cloud_2')],
   snow:[V('snow_1'),V('snow_2')],baikal:[V('baikal_1'),V('baikal_2')],aurora:[V('aurora_1'),V('aurora_2')],
   taiga:[V('taiga_1'),V('taiga_2')],moscow:[V('moscow_1'),V('moscow_2')],plain:[V('plain_1'),V('plain_2')],
-  forest:[V('forest_1'),V('forest_2')],castle:[V('castle_1'),'../img/zh_castle.webp'],alps:[V('alps_1'),V('alps_2'),'../img/zh_alps.webp'],
-  paris:[V('paris_1'),V('paris_2')],sea:[V('sea_1'),'../img/zt_sea.webp'],england:[V('england_1'),V('england_2')],london:[V('london_1')]};
+  forest:[V('forest_1'),V('forest_2')],castle:[V('castle_1'),V('castle_2')],alps:[V('alps_1'),V('alps_2'),V('alps_3')],
+  paris:[V('paris_1'),V('paris_2')],sea:[V('sea_1'),V('sea_2'),V('sea_3')],england:[V('england_1'),V('england_2')],london:[V('london_1'),V('london_2')]};
 const vwEl=[document.getElementById('vwA'),document.getElementById('vwB')];
 let vwCur=0,vwImg=null,vwX=0,vwIdx=0,vwSeg=null,vwSize={w:1,h:1};
 function vwShow(src){const im=new Image();im.onload=()=>{const nx=1-vwCur,e=vwEl[nx];e.style.backgroundImage='url('+src+')';

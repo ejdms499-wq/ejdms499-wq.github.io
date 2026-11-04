@@ -44,7 +44,8 @@ body.seat .vw{display:block}
 .paper{background:#f3e6c4;color:#3a2a1c;border:2px solid #3a2a1c;box-shadow:3px 3px 0 #3a2a1c;border-radius:4px;font-family:"Apple SD Gothic Neo","Noto Sans KR",sans-serif}
 .pbtn2{background:#3a2a1c;color:#f3e6c4;border:2px solid #3a2a1c;border-radius:3px;padding:10px 14px;font:700 14px "Apple SD Gothic Neo",sans-serif;cursor:pointer}
 .pbtn2.l{background:#f3e6c4;color:#3a2a1c;box-shadow:2px 2px 0 #3a2a1c}
-#ck{position:fixed;inset:0;z-index:20;display:none;align-items:center;justify-content:center;background:rgba(6,16,22,.55);padding:16px}
+#ck{position:fixed;inset:0;z-index:20;display:none;align-items:center;justify-content:center;background:linear-gradient(rgba(6,16,22,.25),rgba(6,16,22,.55)),url(img/v/platform.webp) center/cover;padding:16px}
+#ck.on{animation:ckBg .8s}@keyframes ckBg{from{opacity:0}}
 #ck.on{display:flex}
 #ckC{width:min(420px,100%);padding:18px 18px 16px;position:relative;transform:rotate(-.6deg);animation:ckIn .5s cubic-bezier(.2,1.4,.4,1)}
 @keyframes ckIn{from{transform:translateY(40px) rotate(-3deg);opacity:0}}
@@ -337,8 +338,12 @@ function bedTex(){const c=document.createElement('canvas');c.width=1024;c.height
   g.fillStyle='#14191b';g.fillRect(0,38,1024,3);
   const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;t.wrapS=THREE.RepeatWrapping;return t}
 const bed=plane(bedTex(),1,1);bed.renderOrder=5;bed.visible=false;scene.add(bed);
+const MIDS={seoul:['seoul',.8],gyeongbu:null,cloud:['cloud',.9],snow:['snow',1],aurora:['snow',.75],taiga:['snow',1],baikal:['baikal',1],moscow:['rus',.9],plain:['rus',.75],alps:['alps',1],castle:['alps',.95],paris:['seoul',.75],london:['seoul',.8]};
+const pmid=plane(null,1,1,[1,1,1],{haze:.12,sat:.9,bri:.95});pmid.renderOrder=3;pmid.visible=false;scene.add(pmid);let pmAR=4,pmK=null;
 function setPano(id){if(PANO.id===id)return;PANO.id=id;const busan=id==='busan';PANO.on=!busan;
   far.visible=nearWater.visible=mid.visible=emb.visible=busan;pano.visible=bed.visible=!busan;
+  const mk=!busan&&MIDS[id];pmid.visible=false;pmK=mk||null;
+  if(mk)TL.load('img/m/'+mk[0]+'.webp',t=>{t.colorSpace=THREE.SRGBColorSpace;t.wrapS=THREE.RepeatWrapping;t.anisotropy=8;if(pmK!==mk)return;pmid.material.uniforms.map.value=t;pmAR=t.image.width/t.image.height;pmid.material.uniforms.bri.value=.95*mk[1];pmid.visible=MODE!=='seat'});
   if(!busan){const src=((typeof VIEWS!=='undefined'&&VIEWS[id])||[])[0];if(!src)return;
     TL.load(src,t=>{t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=8;if(PANO.id!==id)return;PANO.tex&&PANO.tex.dispose();PANO.tex=t;PANO.ar=t.image.width/t.image.height;pano.material.uniforms.map.value=t})}}
 const embTop=(E.rail)*E.scale, SEA=-(E.sea-E.rail)*E.scale;
@@ -992,7 +997,9 @@ function frame(now){
   if(PANO.on){const Z=-90,d=dist-Z,H=vh(d)*1.03,Wd=H*PANO.ar,vis=vh(d)*cam.aspect;
     pano.scale.set(Wd,H,1);const span=Math.max(0,(Wd-vis)/2);pano.position.set(camX+Math.sin(t*.012)*span*.92,eye-(HZ-.5)*vh(d),Z);
     const BH=1.25;bed.scale.set(vh(dist)*cam.aspect*2.2,BH,1);bed.position.set(camX,0.25-BH/2,0.4);
-    bed.material.uniforms.rep.value=bed.scale.x/6;bed.material.uniforms.off.value=((travel/6)%1+1)%1;}
+    bed.material.uniforms.rep.value=bed.scale.x/6;bed.material.uniforms.off.value=((travel/6)%1+1)%1;
+    if(pmK){const MZ=-48,Hm=vh(fitD()-MZ)*.30,tile=Hm*pmAR,WW=tile*4;pmid.scale.set(WW,Hm,1);pmid.position.set(camX,-0.6+Hm/2,MZ);
+      pmid.material.uniforms.rep.value=4;pmid.material.uniforms.off.value=(((camX-WW/2+travel*.55)/tile)%1+1)%1;pmid.visible=MODE!=='seat'}}
   pv.set(camX,SEA+0.25+MD.embY,MD.embZ).project(cam);nearWater.material.uniforms.cut.value=pv.y*.5+.5;
   for(const c of cars)c.position.y=c.userData.h/2-0.03+Math.sin(t*9+c.userData.ph)*0.012;
   for(const [b,sp,ph] of glows){const f=1+Math.sin(t*1.7+ph)*.05+Math.sin(t*7.3+ph*2)*.025;b.material.opacity=.22*f;sp.material.opacity=.4*f}

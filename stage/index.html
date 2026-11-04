@@ -251,13 +251,29 @@ body.talk #albB{opacity:0;pointer-events:none}
 #depT{position:fixed;left:50%;top:30%;transform:translate(-50%,-50%);z-index:36;padding:16px 26px;text-align:center;display:none;font-family:"Apple SD Gothic Neo",sans-serif}
 #depT.on{display:block;animation:lvt 4s forwards}
 #depT b{display:block;font-size:22px}#depT span{font-size:13px;opacity:.8}
+
+/* ===== 역 도착 안내 ===== */
+#ann{position:fixed;left:50%;top:0;z-index:34;transform:translate(-50%,-110%);width:min(460px,calc(100vw - 24px));transition:transform .7s cubic-bezier(.2,1.3,.4,1);pointer-events:none}
+#ann.on{transform:translate(-50%,calc(14px + env(safe-area-inset-top)))}
+#ann .in{background:#141a1c;border:3px solid #3a2a1c;border-radius:6px;box-shadow:4px 4px 0 rgba(0,0,0,.6);padding:12px 16px 12px 64px;color:#f3c76a;font-family:"Apple SD Gothic Neo",sans-serif;position:relative;min-height:46px}
+#ann .bell{position:absolute;left:14px;top:50%;margin-top:-18px;width:36px;height:36px;border-radius:50%;background:#f3c76a;color:#141a1c;font:800 18px/36px sans-serif;text-align:center;animation:ring 1s ease-in-out 2}
+@keyframes ring{25%{transform:rotate(-18deg)}75%{transform:rotate(18deg)}}
+#ann small{display:block;font-size:11px;letter-spacing:2px;color:#e7dcc2;opacity:.8}
+#ann b{display:block;font-size:19px;color:#fff3d6;margin:1px 0}
+#ann span{font-size:12.5px;color:#e7dcc2}
+#stk{position:fixed;left:50%;top:44%;z-index:35;width:150px;height:150px;margin:-75px 0 0 -75px;border-radius:50%;border:5px solid #3a2a1c;display:none;align-items:center;justify-content:center;text-align:center;color:#fffaf0;font:800 19px/1.2 "Apple SD Gothic Neo",sans-serif;box-shadow:inset 0 0 0 7px rgba(255,255,255,.35),5px 6px 0 rgba(0,0,0,.45);pointer-events:none;padding:10px;box-sizing:border-box}
+#stk.on{display:flex;animation:stkIn 2.6s cubic-bezier(.2,1.2,.4,1) forwards}
+#stk small{display:block;font-size:11px;font-weight:700;letter-spacing:1px;opacity:.85}
+@keyframes stkIn{0%{transform:scale(3) rotate(-35deg);opacity:0}14%{transform:scale(.92) rotate(-8deg);opacity:1}20%{transform:scale(1) rotate(-8deg)}70%{transform:scale(1) rotate(-8deg);opacity:1}100%{transform:translate(var(--tx),var(--ty)) scale(.18) rotate(-8deg);opacity:.2}}
+#trk.bump{animation:bump .5s}
+@keyframes bump{40%{transform:scale(1.18)}}
 </style></head><body>
 <div id="tag"><b>부산</b><span id="tagS">그림 겹 무대 · 시험판</span><i id="tagI"></i></div>
 <div id="dev"><span>출발 후</span><input id="devR" type="range" min="0" max="91.9" step="0.1"><span id="devV"></span></div>
 <div class="vw" id="vwA"></div><div class="vw" id="vwB"></div><div id="glass"></div><div id="cab"></div><div id="pax"></div><div id="paxT" class="paper"></div><div id="vig"></div><div id="fade"></div>
 <div id="first"><div class="paper" id="fC"></div></div>
 <div id="wait"><div id="wBoard"></div><div id="wBtns"></div></div>
-<div id="depT" class="paper"></div>
+<div id="depT" class="paper"></div><div id="ann"><div class="in"><div class="bell">♪</div><div id="annT"></div></div></div><div id="stk"></div>
 <div id="ck"><div id="ckC" class="paper"></div></div>
 <button id="trk" class="paper">내 트렁크</button><div id="trkP" class="paper"></div>
 <div id="dlg" class="paper"><div id="dlgN"></div><div id="dlgT"></div><div id="dlgC"></div><div id="dlgM">▼</div></div>
@@ -482,6 +498,7 @@ function clock(){const w=where(dep,vnow());if(w.mode!=='run')return;
   tagS.textContent=w.day+'일째 · 현지 '+pd(w.localH)+':'+pd(w.localM)+' · '+w.seg.sky;
   tagI.textContent=w.next?'다음 '+w.next.name+' · '+dur(w.next.h-w.h)+' 뒤':'곧 런던';
   if(curSeg!==w.seg.id){curSeg=w.seg.id}
+  try{arrCheck(w)}catch(e){}
   setPano(w.seg.id);
 }
 setInterval(clock,1000);setTimeout(clock,50);
@@ -1033,6 +1050,29 @@ function backToPlatform(){if(!TRUNK)return;dep=TRUNK.dep;curSeg=null;if(MODE==='
 function whistle(){if(!AC||!sndOn)return;const t=AC.currentTime;[0,.5].forEach(o=>{const a=AC.createOscillator(),b=AC.createOscillator(),g=AC.createGain();a.type=b.type='sawtooth';a.frequency.value=466;b.frequency.value=554;
   g.gain.setValueAtTime(0,t+o);g.gain.linearRampToValueAtTime(.06,t+o+.08);g.gain.setValueAtTime(.06,t+o+(o?1.1:.35));g.gain.linearRampToValueAtTime(0,t+o+(o?1.3:.45));
   const f=AC.createBiquadFilter();f.type='lowpass';f.frequency.value=1800;a.connect(f);b.connect(f);f.connect(g);g.connect(MG);a.start(t+o);b.start(t+o);a.stop(t+o+1.4);b.stop(t+o+1.4)})}
+
+/* ================= 역 도착 안내 · 스티커 ================= */
+const EN={busan:'Busan',gyeongbu:'Gyeongbu Line',seoul:'Seoul',cloud:'Above the Clouds',snow:'Siberian Plain',baikal:'Lake Baikal',aurora:'Aurora Forest',taiga:'Taiga',moscow:'Moscow',plain:'Eastern Plain',forest:'Black Forest',castle:'Neuschwanstein',alps:'Swiss Alps',paris:'Paris',sea:'Undersea Tunnel',england:'English Countryside',london:'London'};
+const PRE={};let arrLast=null;
+function arrCheck(w){const key=dep+':'+w.seg.id;
+  if(arrLast===null){arrLast=key;return}
+  if(key!==arrLast){const sameDep=arrLast.split(':')[0]===String(dep);arrLast=key;if(sameDep)arrive(w)}
+  else if(w.next){const left=(w.next.h-w.h)*60;const pk=dep+':'+w.next.id;if(left<3&&left>0&&!PRE[pk]){PRE[pk]=1;announce('잠시 후','곧 '+w.next.name+'에 도착합니다',EN[w.next.id]?'Next stop · '+EN[w.next.id]:'',false)}}}
+function announce(top,main,sub,chime){const a=$('ann');$('annT').innerHTML='<small>'+top+'</small><b>'+main+'</b><span>'+sub+'</span>';a.classList.add('on');if(chime!==false)dingdong();clearTimeout(announce.t);announce.t=setTimeout(()=>a.classList.remove('on'),5200)}
+function arrive(w){const i=SEG.findIndex(s=>s.id===w.seg.id);
+  announce('도착 안내',w.seg.name+(w.seg.id==='london'?'':' 구간에 들어왔어요'),(EN[w.seg.id]||'')+' · 현지 '+pd(w.localH)+':'+pd(w.localM));
+  const T=myTrunk();if(!T)return;
+  setTimeout(()=>{const st=$('stk'),r=trk.getBoundingClientRect();st.style.background=STC[i%STC.length];
+    st.innerHTML='<div><small>BSN → LDN</small>'+w.seg.name.replace(' 도착','')+'</div>';
+    st.style.setProperty('--tx',(r.left+r.width/2-innerWidth/2)+'px');st.style.setProperty('--ty',(r.top+r.height/2-innerHeight*.44)+'px');
+    st.classList.remove('on');void st.offsetWidth;st.classList.add('on');thunk();
+    setTimeout(()=>{trk.classList.remove('bump');void trk.offsetWidth;trk.classList.add('bump');if(trkP.classList.contains('on'))trkRender()},2500);
+    setTimeout(()=>st.classList.remove('on'),2700)},1400)}
+function dingdong(){if(!AC||!sndOn)return;const t=AC.currentTime;[[659,0],[523,.42]].forEach(([f,o])=>{const a=AC.createOscillator(),g=AC.createGain();a.type='sine';a.frequency.value=f;
+  g.gain.setValueAtTime(0,t+o);g.gain.linearRampToValueAtTime(.22,t+o+.02);g.gain.exponentialRampToValueAtTime(.001,t+o+1.3);a.connect(g);g.connect(MG);a.start(t+o);a.stop(t+o+1.35)})}
+function thunk(){if(!AC||!sndOn)return;const t=AC.currentTime,o=AC.createOscillator(),g=AC.createGain();o.frequency.setValueAtTime(160,t);o.frequency.exponentialRampToValueAtTime(55,t+.15);
+  g.gain.setValueAtTime(.5,t);g.gain.exponentialRampToValueAtTime(.001,t+.22);o.connect(g);g.connect(MG);o.start(t);o.stop(t+.25)}
+if(Q.has('arr'))setTimeout(()=>{const w=where(dep,vnow());if(w.mode==='run')arrive(w)},2500);
 
 /* ---------- 창가 자리: 창밖 풍경 그림이 계속 지나감 ---------- */
 const V=n=>'img/v/'+n+'.webp';

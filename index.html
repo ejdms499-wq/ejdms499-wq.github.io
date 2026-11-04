@@ -2,10 +2,10 @@
 <html lang="ko"><head><meta charset="utf-8"><base href="/stage/">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <title>부산발 런던행 — 근심을 맡기는 밤기차</title>
-<meta name="description" content="매일 밤 9시 부산역을 떠나 나흘 동안 실제 시간으로 런던까지 달리는 밤기차. 근심을 트렁크에 맡기고 창가에 앉아 보세요.">
+<meta name="description" content="매일 밤 9시 부산역을 떠나 하루 동안 실제 시간으로 런던까지 달리는 꿈의 밤기차. 근심을 트렁크에 맡기고 창가에 앉아 보세요.">
 <meta property="og:type" content="website"><meta property="og:site_name" content="부산발 런던행">
 <meta property="og:title" content="부산발 런던행 — 근심을 맡기는 밤기차">
-<meta property="og:description" content="매일 밤 9시 부산역 출발. 근심을 트렁크에 맡기고, 나흘 동안 실제 시간으로 달리는 열차 창가에 앉아 보세요.">
+<meta property="og:description" content="매일 밤 9시 부산역 출발. 근심을 트렁크에 맡기고, 다음 날 밤 런던에 닿는 열차 창가에 앉아 보세요.">
 <meta property="og:url" content="https://ejdms499-wq.github.io/"><meta property="og:image" content="https://ejdms499-wq.github.io/og.jpg?v=2">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="ko_KR">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://ejdms499-wq.github.io/og.jpg?v=2">
@@ -119,10 +119,10 @@ body.talk #snd,body.talk #trk,body.talk #seat{opacity:.0;pointer-events:none}
 #cg .bg.kb{animation:kb 14s ease-out forwards}
 @keyframes kb{from{transform:scale(1.18) translate(3%,2%)}to{transform:scale(1) translate(0,0)}}
 #cg .bg.dim{filter:brightness(.55) saturate(.8) blur(2px)}
-#cg .ch{position:absolute;left:50%;bottom:18%;height:min(80%,120vw);transform:translateX(-50%);transform-origin:50% 8%;transition:transform 1.1s cubic-bezier(.3,.9,.3,1),opacity .6s}
+#cg .ch{position:absolute;left:50%;bottom:18%;height:min(72%,120vw);transform:translateX(-50%);transform-origin:50% 8%;transition:transform 1.1s cubic-bezier(.3,.9,.3,1),opacity .6s}
 #cg .ch.in{animation:chIn .7s cubic-bezier(.2,1.3,.4,1)}
 @keyframes chIn{from{transform:translateX(-50%) translateY(18%);opacity:0}}
-#cg .ch.face{transform:translateX(-50%) translateY(-2%) scale(1.6)}
+#cg .ch.face{transform:translateX(-50%) translateY(7%) scale(1.45)}
 @media (max-aspect-ratio:3/4){#cg .ch{bottom:26%;height:min(62%,118vw)}#cg .ch.face{transform:translateX(-50%) translateY(-4%) scale(1.35)}#cg .ch.side{transform:translateX(-30%)}}
 #cg .ch.side{transform:translateX(-12%)}
 #cg .ch.sad{filter:saturate(.6) brightness(.85)}
@@ -280,6 +280,25 @@ body.talk #albB{opacity:0;pointer-events:none}
 #sMid,#sPole{position:fixed;left:0;right:0;pointer-events:none;display:none;background-repeat:repeat-x}
 body.seat #sMid,body.seat #sPole{display:block}
 #sPole{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='400'%3E%3Crect x='440' y='0' width='18' height='400' fill='%23161a1c'/%3E%3Crect x='400' y='26' width='98' height='9' fill='%23161a1c'/%3E%3Crect x='412' y='54' width='74' height='7' fill='%23161a1c'/%3E%3Cpath d='M0 40 Q 225 95 449 30 Q 675 95 900 40' stroke='%23161a1c' stroke-width='2' fill='none'/%3E%3C/svg%3E");filter:blur(1.4px);opacity:.92}
+
+/* ===== 틀어 두기 · 답장 열차 ===== */
+#ambB{position:fixed;left:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:4;padding:6px 11px;font:700 13px "Apple SD Gothic Neo",sans-serif;cursor:pointer}
+@media (max-width:420px){#ambB{bottom:calc(56px + env(safe-area-inset-bottom))}}
+body.amb #snd,body.amb #trk,body.amb #albB,body.amb #seat,body.amb #back,body.amb #hint,body.amb #paxT,body.amb #ambB{opacity:0!important;pointer-events:none!important;transition:opacity 1.2s}
+body.amb #tag{opacity:.35;transition:opacity 1.2s}
+#ambX{position:fixed;right:14px;top:calc(12px + env(safe-area-inset-top));z-index:6;display:none;background:rgba(5,10,13,.45);color:#f3e6c4;border:1px solid rgba(243,230,196,.45);border-radius:3px;font:600 12px "Apple SD Gothic Neo",sans-serif;padding:6px 10px;cursor:pointer;opacity:.0;transition:opacity .6s}
+body.amb #ambX{display:block}body.amb.wake #ambX{opacity:1}
+#reply{position:fixed;inset:0;z-index:42;display:none;align-items:center;justify-content:center;background:rgba(6,16,22,.82);padding:16px}
+#reply.on{display:flex}
+#reply .paper{width:min(440px,100%);padding:20px 20px 16px;animation:ckIn .6s cubic-bezier(.2,1.4,.4,1);position:relative}
+#reply h3{margin:0 0 2px;font-size:13px;letter-spacing:2px;color:#8a5a2b}
+#reply h2{margin:0 0 12px;font-size:22px}
+#reply .lt{font:16px/1.75 "Gaegu","Apple SD Gothic Neo",sans-serif;background:#fffaf0;border:2px solid #3a2a1c;padding:12px 14px;border-radius:3px;white-space:pre-wrap}
+#reply .env{margin:14px auto 4px;width:220px;height:120px;position:relative;background:#e9d8b4;border:3px solid #3a2a1c;border-radius:4px}
+#reply .env::before{content:"";position:absolute;inset:0;background:linear-gradient(to bottom right,transparent 49%,#3a2a1c 49.5%,#3a2a1c 50.5%,transparent 51%),linear-gradient(to bottom left,transparent 49%,#3a2a1c 49.5%,#3a2a1c 50.5%,transparent 51%);background-size:100% 60%;background-repeat:no-repeat}
+#reply .env b{position:absolute;left:50%;top:44%;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;background:#b8432f;color:#f3e6c4;font:800 13px/44px serif;text-align:center;box-shadow:inset 0 0 0 3px rgba(255,255,255,.25)}
+#reply .env span{position:absolute;left:0;right:0;bottom:8px;text-align:center;font:700 12px "Apple SD Gothic Neo",sans-serif}
+#reply .soon{text-align:center;font:800 12px "Apple SD Gothic Neo",sans-serif;letter-spacing:3px;color:#b8432f;margin-top:6px}
 </style></head><body>
 <div id="tag"><b>부산</b><span id="tagS">그림 겹 무대 · 시험판</span><i id="tagI"></i></div>
 <div id="dev"><span>출발 후</span><input id="devR" type="range" min="0" max="91.9" step="0.1"><span id="devV"></span></div>
@@ -290,6 +309,7 @@ body.seat #sMid,body.seat #sPole{display:block}
 <div id="ck"><div id="ckC" class="paper"></div></div>
 <button id="trk" class="paper">내 트렁크</button><div id="trkP" class="paper"></div>
 <div id="dlg" class="paper"><div id="dlgN"></div><div id="dlgT"></div><div id="dlgC"></div><div id="dlgM">▼</div></div>
+<button id="ambB" class="paper">🎞 틀어 두기</button><button id="ambX">감상 끝내기 ✕</button><div id="reply"><div class="paper" id="rpC"></div></div>
 <button id="snd">♪ 소리 켜기</button>
 <button id="back">← 열차 전체</button>
 <button id="seat" class="pbtn">내 창가 자리 →</button>
@@ -317,13 +337,13 @@ function tex(u,rep){const t=TL.load('img/'+u);t.colorSpace=THREE.SRGBColorSpace;
 const VS=`varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`;
 function mat(t,tint,fx){fx=Object.assign({haze:0,sat:1,bri:1,blur:0,hc:[.06,.17,.21]},fx||{});
   return new THREE.ShaderMaterial({transparent:true,depthWrite:false,depthTest:false,
-  uniforms:{map:{value:t},tint:{value:new THREE.Color(...(tint||[1,1,1]))},off:{value:0},rep:{value:1},
+  uniforms:{map:{value:t},tint:{value:new THREE.Color(...(tint||[1,1,1]))},off:{value:0},rep:{value:1},op:{value:1},
     haze:{value:fx.haze},sat:{value:fx.sat},bri:{value:fx.bri},blur:{value:fx.blur},hc:{value:new THREE.Vector3(...fx.hc)}},vertexShader:VS,
-  fragmentShader:`uniform sampler2D map;uniform vec3 tint,hc;uniform float off,rep,haze,sat,bri,blur;varying vec2 vUv;
+  fragmentShader:`uniform sampler2D map;uniform vec3 tint,hc;uniform float off,rep,haze,sat,bri,blur,op;varying vec2 vUv;
   void main(){vec2 uv=vec2(vUv.x*rep+off,vUv.y);vec4 c=texture2D(map,uv);
     if(blur>0.){vec2 d=vec2(blur/rep,blur)*.0012;c=c*.36+(texture2D(map,uv+vec2(d.x,0.))+texture2D(map,uv-vec2(d.x,0.))+texture2D(map,uv+vec2(0.,d.y*3.))+texture2D(map,uv-vec2(0.,d.y*3.)))*.16;}
     vec3 col=c.rgb*tint;float l=dot(col,vec3(.299,.587,.114));col=mix(vec3(l),col,sat)*bri;col=mix(col,hc,haze);
-    gl_FragColor=vec4(col,c.a);
+    gl_FragColor=vec4(col,c.a*op);
   #include <colorspace_fragment>
   }`})}
 function carMat(t,r){return new THREE.ShaderMaterial({transparent:true,depthWrite:false,depthTest:false,
@@ -383,6 +403,7 @@ const emb=plane(embT,EMBW,embH,null,E.fx);emb.renderOrder=5;scene.add(emb);
 /* ---------- 부산 밖 구간: 그 구간 풍경 그림을 열차 뒤에 펼침 ---------- */
 const PANO={on:false,id:null,tex:null,ar:3};
 const pano=plane(null,1,1,[.86,.88,.96],{sat:.9,bri:.9});pano.renderOrder=2;pano.visible=false;scene.add(pano);
+const pano2=plane(null,1,1,[.86,.88,.96],{sat:.9,bri:.9});pano2.renderOrder=2.1;pano2.visible=false;scene.add(pano2);pano.userData.ar=pano2.userData.ar=3;let PCUR=pano,PFADE=null;
 function bedTex(){const c=document.createElement('canvas');c.width=1024;c.height=160;const g=c.getContext('2d');
   const gr=g.createLinearGradient(0,0,0,160);gr.addColorStop(0,'#2b2a28');gr.addColorStop(.25,'#1d2224');gr.addColorStop(1,'#0f1517');g.fillStyle=gr;g.fillRect(0,0,1024,160);
   for(let i=0;i<1600;i++){const x=Math.random()*1024,y=10+Math.random()*28,r=1+Math.random()*2.4;g.fillStyle=['#4a4640','#3a3733','#5a554d'][i%3];g.beginPath();g.ellipse(x,y,r,r*.7,0,0,7);g.fill()}
@@ -393,12 +414,16 @@ function bedTex(){const c=document.createElement('canvas');c.width=1024;c.height
 const bed=plane(bedTex(),1,1);bed.renderOrder=5;bed.visible=false;scene.add(bed);
 const MIDS={seoul:['kcity',.8],gyeongbu:['kcity',.85],snow:['snow',1],nightvil:['rus',.7],steppe:['snow',.9],taiga:['snow',1],moscow:['rus',.9],plain:['rus',.75],berlin:['paris',.7],forest:['deforest',.9],castle:['deforest',.95],alps:['deforest',1],paris:['paris',.85],sea:['reef',.9],england:['eng',1],london:['paris',.8]};
 const pmid=plane(null,1,1,[1,1,1],{haze:.12,sat:.9,bri:.95});pmid.renderOrder=3;pmid.visible=false;scene.add(pmid);let pmAR=4,pmK=null;
-function setPano(id){if(PANO.id===id)return;PANO.id=id;const busan=id==='busan';PANO.on=!busan;
-  far.visible=nearWater.visible=mid.visible=emb.visible=busan;pano.visible=bed.visible=!busan;
-  const mk=!busan&&MIDS[id];pmid.visible=false;pmK=mk||null;
-  if(mk)TL.load('img/m/'+mk[0]+'.webp',t=>{t.colorSpace=THREE.SRGBColorSpace;t.wrapS=THREE.RepeatWrapping;t.anisotropy=8;if(pmK!==mk)return;pmid.material.uniforms.map.value=t;pmAR=t.image.width/t.image.height;pmid.material.uniforms.bri.value=.95*mk[1];pmid.visible=MODE!=='seat'});
-  if(!busan){const src=((typeof VIEWS!=='undefined'&&VIEWS[id])||[])[0];if(!src)return;
-    TL.load(src,t=>{t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=8;if(PANO.id!==id)return;PANO.tex&&PANO.tex.dispose();PANO.tex=t;PANO.ar=t.image.width/t.image.height;pano.material.uniforms.map.value=t})}}
+function setPano(id,vi){vi=vi||0;const key=id+':'+vi;if(PANO.key===key)return;const segChange=PANO.id!==id;PANO.key=key;PANO.id=id;const busan=id==='busan';PANO.on=!busan;
+  far.visible=nearWater.visible=mid.visible=emb.visible=busan;bed.visible=!busan;if(busan){pano.visible=pano2.visible=false}
+  const mk=!busan&&MIDS[id];if(segChange){pmid.visible=false;pmK=mk||null;}
+  if(mk&&segChange)TL.load('img/m/'+mk[0]+'.webp',t=>{t.colorSpace=THREE.SRGBColorSpace;t.wrapS=THREE.RepeatWrapping;t.anisotropy=8;if(pmK!==mk)return;pmid.material.uniforms.map.value=t;pmAR=t.image.width/t.image.height;pmid.material.uniforms.bri.value=.95*mk[1];pmid.visible=MODE!=='seat'});
+  if(!busan){const L=((typeof VIEWS!=='undefined'&&VIEWS[id])||[]);const src=L[vi%Math.max(1,L.length)];if(!src)return;
+    TL.load(src,t=>{t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=8;if(PANO.key!==key)return;
+      const nx=PCUR===pano?pano2:pano,old=PCUR;const om=nx.material.uniforms.map.value;if(om&&om!==t)om.dispose();
+      nx.material.uniforms.map.value=t;nx.userData.ar=t.image.width/t.image.height;nx.renderOrder=2.1;old.renderOrder=2;
+      if(!old.visible||segChange&&!old.material.uniforms.map.value){nx.material.uniforms.op.value=1;nx.visible=true;old.visible=false;PCUR=nx;return}
+      nx.material.uniforms.op.value=0;nx.visible=true;PFADE={nx,old,t0:performance.now(),ms:segChange?1600:3500};PCUR=nx})}}
 const embTop=(E.rail)*E.scale, SEA=-(E.sea-E.rail)*E.scale;
 emb.position.set(0,embTop-embH/2,0.4);
 
@@ -508,11 +533,11 @@ function clock(){const w=where(dep,vnow());if(w.mode!=='run')return;
   if(focus)return;
   tagB.textContent=w.seg.name;
   document.body.classList.toggle('day',!/밤|자정|새벽/.test(w.seg.sky));
-  tagS.textContent=w.day+'일째 · 현지 '+pd(w.localH)+':'+pd(w.localM)+' · '+w.seg.sky;
+  {const k=new Date(vnow()+9*HR);tagS.textContent='서울 '+pd(k.getUTCHours())+':'+pd(k.getUTCMinutes())+' · 출발 '+Math.floor(w.h)+'시간째 · '+w.seg.sky;}
   tagI.textContent=(w.next?'다음 '+w.next.name+' · '+dur(w.next.h-w.h)+' 뒤':'곧 런던')+(typeof CNT==='number'&&CNT>0?' · 근심 '+CNT+'개 탑승':'');
   if(curSeg!==w.seg.id){curSeg=w.seg.id}
   try{arrCheck(w)}catch(e){}
-  setPano(w.seg.id);
+  setPano(w.seg.id,Math.floor((w.h-w.seg.h)*60/3.5));
 }
 setInterval(clock,1000);setTimeout(clock,50);
 if(Q.has('dev')){const d=document.getElementById('dev'),r=document.getElementById('devR'),v=document.getElementById('devV');d.style.display='flex';
@@ -571,8 +596,8 @@ function myTrunk(){return TRUNK&&TRUNK.dep===dep?TRUNK:null}
 /* ---- 수하물 접수 ---- */
 const ck=$('ck'),ckC=$('ckC');
 function ckOpen(){ck.classList.add('on');const w=where(dep,vnow());
-  ckC.innerHTML=`<h3>수하물 접수</h3><div class="sub">부산발 런던행 제 ${trainNo(dep)}호 · ${w.mode==='run'?w.day+'일째 '+w.seg.name+' 부근':'오늘 밤 9시 출발'}</div>
-  <div class="porter"><i></i><p>어서 오세요! 이 열차는 <b>근심</b>을 짐으로 받아요.<br>하나만 적어서 맡겨 주세요. 나흘 뒤 런던에서 돌려드릴게요.</p></div>
+  ckC.innerHTML=`<h3>수하물 접수</h3><div class="sub">부산발 런던행 제 ${trainNo(dep)}호 · ${w.mode==='run'?w.seg.name+' 부근':'오늘 밤 9시 출발'}</div>
+  <div class="porter"><i></i><p>어서 오세요! 이 열차는 <b>근심</b>을 짐으로 받아요.<br>하나만 적어서 맡겨 주세요. 내일 밤 런던에서 돌려드릴게요.</p></div>
   <textarea id="ckT" maxlength="80" placeholder="예: 다음 달 면접이 자꾸 걱정돼요"></textarea>
   <div class="ckRow"><button class="pbtn2" id="ckGo">트렁크에 맡기기</button></div>
   <div style="text-align:center"><button class="ckSkip" id="ckNo">오늘은 그냥 탈래요</button></div>`;
@@ -583,7 +608,7 @@ function ckSubmit(){const t=$('ckT').value.trim();if(!t){$('ckT').focus();$('ckT
   ckC.innerHTML=`<h3>트렁크에 넣는 중…</h3><div class="sub">수하물 번호 #${no}</div>
    <div class="trunk open" id="tr"><div class="note">${esc(t)}</div><div class="lid"><div class="hd"></div></div><div class="lk"></div><div class="bx"></div>
    <div class="tag">BSN → LDN<br>제 ${trainNo(dep)}호<br>#${no}</div></div>
-   <div id="ckR" style="opacity:0;transition:opacity .6s"><div class="tkt"><b>열차</b><span>부산발 런던행 제 ${trainNo(dep)}호</span><b>짐</b><span>근심 한 개 · 수하물칸 보관</span><b>찾는 곳</b><span>런던역 · 나흘 뒤</span></div><div id="ckCnt" style="font-size:12px;font-weight:700;color:#8a5a2b;margin-top:6px"></div>
+   <div id="ckR" style="opacity:0;transition:opacity .6s"><div class="tkt"><b>열차</b><span>부산발 런던행 제 ${trainNo(dep)}호</span><b>짐</b><span>근심 한 개 · 수하물칸 보관</span><b>찾는 곳</b><span>런던역 · 내일 밤 9시</span></div><div id="ckCnt" style="font-size:12px;font-weight:700;color:#8a5a2b;margin-top:6px"></div>
    <div class="porter" style="margin-top:12px"><i></i><p>${where(dep,vnow()).mode==='wait'?'잘 받았어요. 출발하면 지나는 도시마다 스티커를 붙여 둘게요.':'잘 받았어요. 지나는 도시마다 스티커를 붙여 둘게요. 이제 편히 쉬세요.'}</p></div>
    <div class="ckRow">${where(dep,vnow()).mode==='wait'?'<button class="pbtn2" id="ckSeat">플랫폼에서 출발 기다리기</button>':'<button class="pbtn2" id="ckSeat">내 창가 자리로 →</button><button class="pbtn2 l" id="ckOut">열차 구경하기</button>'}</div></div>`;
   const tr=$('tr');setTimeout(()=>tr.classList.add('in'),400);setTimeout(()=>tr.classList.remove('open'),1250);setTimeout(()=>tr.classList.add('tagged'),1700);
@@ -594,8 +619,9 @@ function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;
 /* ---- 내 트렁크 · 도시 스티커 ---- */
 const trk=$('trk'),trkP=$('trkP');
 const STC=['#c8553d','#2f7f86','#d39b2a','#5a6fb0','#8a5a9e','#3d8a5a','#b8432f','#2b5f8f'];
-function trunkArrived(){if(!TRUNK||TRUNK.done)return false;const w=where(TRUNK.dep,vnow());return w.mode==='end'||(w.mode==='run'&&w.h>=91.4)}
+function trunkArrived(){if(!TRUNK||TRUNK.done)return false;const w=where(TRUNK.dep,vnow());return w.mode==='end'||(w.mode==='run'&&w.h>=TRIP_H-.4)}
 function trkShow(){trk.style.display='block';
+  if(LS.get('bl_end',null)&&!(TRUNK&&!TRUNK.done)){trk.classList.add('ev');trk.textContent='✉ 답장 열차';trk.onclick=e=>{e.stopPropagation();showReply()};return}
   if(TRUNK&&!TRUNK.done&&TRUNK.dep>vnow()&&dep!==TRUNK.dep){trk.classList.add('ev');trk.textContent='내 열차 '+cdown(TRUNK.dep-vnow(),1)+' 뒤 출발';trk.onclick=e=>{e.stopPropagation();backToPlatform()};return}
   if(TRUNK&&!TRUNK.done&&trunkArrived()){trk.textContent='런던 도착 · 트렁크 찾기';trk.classList.add('ev');trk.onclick=e=>{e.stopPropagation();ending()};return}
   trk.classList.remove('ev');
@@ -870,9 +896,9 @@ sbCount(dep);
 /* ---- 런던 엔딩 ---- */
 function ending(){const T=TRUNK;if(!T)return;const met=LS.get('bl_met',{}),nC=Object.keys(clues()).length;let pick=0;
   const shots=[{t:'title',text:'종착역',sub:'런던'},
-   {bg:'img/v/lostfound.webp',ch:'robot.webp',pose:'in',fx:['glow'],who:'로봇 포터',say:'런던역입니다! 나흘 동안 수고 많으셨어요.\n수하물 #'+T.no+', 찾으러 오셨죠?'},
+   {bg:'img/v/lostfound.webp',ch:'robot.webp',pose:'in',fx:['glow'],who:'로봇 포터',say:'런던역입니다! 하룻밤 하룻낮, 수고 많으셨어요.\n수하물 #'+T.no+', 찾으러 오셨죠?'},
    {bg:'img/v/lostfound.webp',ch:null,fx:['spk','glow'],who:'',narr:1,say:'트렁크를 연다. 도시 스티커가 빼곡하다.\n안에는 부산에서 넣은 쪽지 한 장.\n\n“'+T.text+'”'},
-   {bg:'img/v/lostfound.webp',ch:'robot.webp',pose:'in',who:'로봇 포터',say:'나흘 동안 실려 온 당신의 근심이에요. 조금 가벼워졌나요?\n가져가셔도 되고, 런던 유실물 보관소에 두고 가셔도 돼요.'},
+   {bg:'img/v/lostfound.webp',ch:'robot.webp',pose:'in',who:'로봇 포터',say:'부산에서부터 실려 온 당신의 근심이에요. 조금 가벼워졌나요?\n가져가셔도 되고, 런던 유실물 보관소에 두고 가셔도 돼요.'},
    {choice:[['찾아가기','가져갈게요. 이제는 들고 갈 수 있을 것 같아요.'],['런던 유실물 보관소에 두기','여기 두고 갈게요. 누가 찾으러 오지 않아도 괜찮은 근심이에요.']],onPick:k=>{pick=k}}];
   if(nC>=6)shots.push(
    {bg:'img/v/london_1.webp',ch:'pf_p01.webp',pose:'in',who:'셜록 홈즈',say:'잠깐, 조수. 주인 없는 트렁크 말일세. 단서가 '+nC+'개나 모였지.'},
@@ -912,10 +938,10 @@ function makeCard(T){const cv=card.querySelector('canvas'),g=cv.getContext('2d')
   g.font='600 24px '+F;g.globalAlpha=.7;g.fillText('ejdms499-wq.github.io',430,1340-100);g.globalAlpha=1;
   g.restore();
   card.classList.add('on')}
-card.querySelector('#cdX').onclick=()=>card.classList.remove('on');
+card.querySelector('#cdX').onclick=()=>{card.classList.remove('on');if(LS.get('bl_end',null)&&!LS.get('bl_replyseen',0)){LS.set('bl_replyseen',1);setTimeout(showReply,500)}};
 card.querySelector('#cdSave').onclick=()=>{const a=document.createElement('a');a.download='나의꼬리표.png';a.href=card.querySelector('canvas').toDataURL('image/png');a.click()};
 card.querySelector('#cdShare').onclick=()=>{card.querySelector('canvas').toBlob(b=>{const f=new File([b],'나의꼬리표.png',{type:'image/png'});
-  if(navigator.canShare&&navigator.canShare({files:[f]}))navigator.share({files:[f],title:'부산발 런던행',text:'나흘 동안 근심을 부산에서 런던까지 실어 보냈어요.'}).catch(()=>{});
+  if(navigator.canShare&&navigator.canShare({files:[f]}))navigator.share({files:[f],title:'부산발 런던행',text:'근심을 트렁크에 맡겨 부산에서 런던까지 실어 보냈어요.'}).catch(()=>{});
   else{const a=document.createElement('a');a.download='나의꼬리표.png';a.href=URL.createObjectURL(b);a.click()}})};
 if(Q.has('card')&&TRUNK)setTimeout(()=>makeCard(TRUNK),800);
 
@@ -1038,17 +1064,17 @@ const firstEl=$('first'),waitEl=$('wait');
 function nextDeparture(){return lastDeparture(vnow())+24*HR}
 function cdown(ms,short){ms=Math.max(0,ms);const h=Math.floor(ms/HR),m=Math.floor(ms%HR/6e4),s=Math.floor(ms%6e4/1e3);return short?(h?h+'시간 '+m+'분':m+'분'):pd2(h)+':'+pd2(m)+':'+pd2(s)}
 function depLabel(d){const a=new Date(vnow()+9*HR),b=new Date(d+9*HR);return (a.getUTCDate()===b.getUTCDate()?'오늘':'내일')+' 밤 9시'}
-function firstFlow(){if(Q.has('seat'))return;
+function firstFlow(){if(Q.has('seat'))return;if(LS.get('bl_end',null)&&!(TRUNK&&!TRUNK.done))return;
   if(TRUNK&&!TRUNK.done&&trunkArrived())return;
   const w=where(dep,vnow());
   if(w.mode==='wait'){showWait();if(!myTrunk()&&LS.get('bl_skip',0)!==dep)setTimeout(ckOpen,900);return}
   if(myTrunk()||LS.get('bl_skip',0)===dep)return;
-  if(w.mode==='run'&&w.h<1.5){ckOpen();return}
+  if(w.mode==='run'&&w.h<.7){ckOpen();return}
   showFirst()}
 function showFirst(){const nd=nextDeparture(),w=where(dep,vnow());
-  $('fC').innerHTML=`<h3>부산발 런던행</h3><div class="sub">이 열차는 매일 밤 9시 부산역을 떠나 나흘 동안 실제 시간으로 런던까지 달려요.<br>지금 어젯밤 열차는 <b>${w.mode==='run'?w.seg.name:'런던'}</b> 부근을 지나고 있어요.</div>
+  $('fC').innerHTML=`<h3>부산발 런던행</h3><div class="sub">이 열차는 매일 밤 9시 부산역을 떠나 다음 날 밤 9시 런던에 닿아요. 도시마다 가장 아름다운 시각에 지나가요.<br>지금 어젯밤 열차는 <b>${w.mode==='run'?w.seg.name:'런던'}</b> 부근을 지나고 있어요.</div>
    <button class="fopt rec" id="fA"><b>${depLabel(nd)} 열차 예약하기</b><span>부산역에서 근심을 맡기고 처음부터 함께 떠나요 · 출발까지 ${cdown(nd-vnow(),1)}${CNTS[nd]?' · 벌써 근심 '+CNTS[nd]+'개가 기다려요':''}</span></button>
-   <button class="fopt" id="fB"><b>지금 달리는 열차에 올라타기</b><span>${w.mode==='run'?w.day+'일째 '+w.seg.name+' 구간':''}에서 바로 타요${CNT?' · 근심 '+CNT+'개가 함께 달리는 중':''}</span></button>`;
+   <button class="fopt" id="fB"><b>지금 달리는 열차에 올라타기</b><span>${w.mode==='run'?w.seg.name+' 구간':''}에서 바로 타요${CNT?' · 근심 '+CNT+'개가 함께 달리는 중':''}</span></button>`;
   firstEl.classList.add('on');
   $('fA').onclick=()=>{const nd2=nextDeparture();LS.set('bl_resv',nd2);dep=nd2;curSeg=null;firstEl.classList.remove('on');showWait();setTimeout(ckOpen,500)};
   $('fB').onclick=()=>{firstEl.classList.remove('on');ckOpen()}}
@@ -1056,7 +1082,7 @@ let waitT=null;
 function showWait(){waitEl.classList.add('on');document.body.classList.add('talk');renderWait();clearInterval(waitT);waitT=setInterval(renderWait,1000)}
 function hideWait(){waitEl.classList.remove('on');document.body.classList.remove('talk');clearInterval(waitT)}
 function renderWait(){const left=dep-vnow();
-  if(left<=0){hideWait();curSeg=null;clock();trkShow();const d=$('depT');d.innerHTML='<b>부산역을 출발합니다</b><span>부산발 런던행 제 '+trainNo(dep)+'호 · 나흘 뒤 런던 도착</span>';d.classList.remove('on');void d.offsetWidth;d.classList.add('on');try{whistle()}catch(e){}return}
+  if(left<=0){hideWait();curSeg=null;clock();trkShow();const d=$('depT');d.innerHTML='<b>부산역을 출발합니다</b><span>부산발 런던행 제 '+trainNo(dep)+'호 · 내일 밤 9시 런던 도착</span>';d.classList.remove('on');void d.offsetWidth;d.classList.add('on');try{whistle()}catch(e){}return}
   const T=myTrunk();
   $('wBoard').innerHTML=`<small>BUSAN → LONDON · 제 ${trainNo(dep)}호</small><b>${depLabel(dep)} 출발</b><div class="cd">${cdown(left)}</div><div class="st">${T?'트렁크 #'+T.no+' · 수하물칸에 실렸어요':'아직 맡긴 짐이 없어요'}${CNTS[dep]?'<br>이 열차 수하물칸 · 근심 '+CNTS[dep]+'개':''}</div>`;
   if(!renderWait.b||renderWait.t!==!!T){renderWait.t=!!T;renderWait.b=1;
@@ -1078,7 +1104,7 @@ function arrCheck(w){const key=dep+':'+w.seg.id;
   else if(w.next){const left=(w.next.h-w.h)*60;const pk=dep+':'+w.next.id;if(left<3&&left>0&&!PRE[pk]){PRE[pk]=1;announce('잠시 후','곧 '+w.next.name+'에 도착합니다',EN[w.next.id]?'Next stop · '+EN[w.next.id]:'',false)}}}
 function announce(top,main,sub,chime){const a=$('ann');$('annT').innerHTML='<small>'+top+'</small><b>'+main+'</b><span>'+sub+'</span>';a.classList.add('on');if(chime!==false)dingdong();clearTimeout(announce.t);announce.t=setTimeout(()=>a.classList.remove('on'),5200)}
 function arrive(w){const i=SEG.findIndex(s=>s.id===w.seg.id);
-  announce('도착 안내',w.seg.name+(w.seg.id==='london'?'':' 구간에 들어왔어요'),(EN[w.seg.id]||'')+' · 현지 '+pd(w.localH)+':'+pd(w.localM));
+  announce('도착 안내',w.seg.name+(w.seg.id==='london'?'':' 구간에 들어왔어요'),(EN[w.seg.id]||'')+' · '+w.seg.sky);
   const T=myTrunk();if(!T)return;
   setTimeout(()=>{const st=$('stk'),r=trk.getBoundingClientRect();st.style.background=STC[i%STC.length];
     st.innerHTML='<div><small>BSN → LDN</small>'+w.seg.name.replace(' 도착','')+'</div>';
@@ -1146,6 +1172,37 @@ function cmFrame(now){
 requestAnimationFrame(cmFrame);
 addEventListener('pointerdown',e=>{if(cmB.classList.contains('on')&&!e.target.closest('#cmo'))cmB.classList.remove('on')});
 
+/* ================= 틀어 두기(감상 모드) ================= */
+let AMB=false,ambT=null,ambSeatAt=0,ambWake=null;
+function ambOn(){if(AMB)return;AMB=true;document.body.classList.add('amb');if(!sndOn)$('snd').click();focus=null;tgtD=fitD();ambSeatAt=performance.now()+150000;ambStep();ambT=setInterval(ambStep,28000)}
+function ambOff(){AMB=false;document.body.classList.remove('amb','wake');clearInterval(ambT)}
+function ambStep(){if(!AMB||cmBusy())return;const now=performance.now();
+  if(now>ambSeatAt){ambSeatAt=now+(MODE==='seat'?140000:110000);MODE==='seat'?goOut():goSeat();return}
+  if(MODE!=='out')return;const r=Math.random();
+  if(r<.45){const c=cars[Math.floor(Math.random()*cars.length)];tgtX=train.position.x+c.position.x;clampX();tgtD=fitD()*(.45+Math.random()*.25)}
+  else{tgtX=train.position.x+(Math.random()-.5)*TRAINW*.8;clampX();tgtD=fitD()*(.9+Math.random()*.5)}}
+$('ambB').onclick=e=>{e.stopPropagation();ambOn()};
+$('ambX').onclick=e=>{e.stopPropagation();ambOff()};
+addEventListener('pointermove',()=>{if(!AMB)return;document.body.classList.add('wake');clearTimeout(ambWake);ambWake=setTimeout(()=>document.body.classList.remove('wake'),2500)});
+addEventListener('keydown',e=>{if(e.key==='Escape')ambOff()});
+/* ================= 엔딩 이후: 답장 열차 떡밥 ================= */
+function showReply(){const E=LS.get('bl_end',{})||{};
+  $('rpC').innerHTML=`<h3>FROM · 221B BAKER ST.</h3><h2>셜록의 엽서</h2>
+  <div class="lt">조수에게.
+
+런던 유실물 보관소에 맡겨진 근심들은 버려지지 않는다네.
+밤마다 누군가 그 근심을 읽고, 답장을 쓰지.
+낯선 사람이 쓴, 단 한 줄짜리 답장 말일세.
+
+그 답장들을 싣고 부산으로 갈 열차가 준비 중이라더군.
+자네 앞으로 온 것도 한 통 있네. 아직 봉인되어 있지만.
+
+— S.H.</div>
+  <div class="env"><b>✉</b><span>To. 수하물 #${E.no||'????'}</span></div>
+  <div class="soon">런던발 부산행 · 답장 열차 · 출발 준비 중</div>
+  <div class="ckRow" style="margin-top:12px"><button class="pbtn2" id="rpX">창밖 계속 보기</button></div>`;
+  $('reply').classList.add('on');$('rpX').onclick=()=>$('reply').classList.remove('on')}
+
 /* ---------- 창가 자리: 창밖 풍경 그림이 계속 지나감 ---------- */
 const V=n=>'img/v/'+n+'.webp';
 const VIEWS={dawn:[V('cloud_2')],yenisei:[V('baikal_2')],nightvil:[V('plain_2')],steppe:[V('taiga_1')],berlin:[V('plain_1')],busan:[V('busan_1'),V('busan_2')],gyeongbu:[V('gyeongbu_1'),V('gyeongbu_2'),V('gyeongbu_3'),V('gyeongbu_4')],seoul:[V('seoul_1'),V('seoul_2')],cloud:[V('cloud_1')],
@@ -1189,8 +1246,9 @@ function frame(now){
   mid.material.uniforms.rep.value=3;mid.material.uniforms.off.value=(((camX-MIDW/2+travel)/midTile)%1+1)%1;
   emb.position.set(camX,embTop-embH/2+MD.embY,MD.embZ);emb.material.uniforms.rep.value=EMBW/embTile;emb.material.uniforms.off.value=(((camX-EMBW/2+travel)/embTile)%1+1)%1;
   // 가까운 바다: 둑 아래만
-  if(PANO.on){const Z=-90,d=dist-Z,H=vh(d)*1.03,Wd=H*PANO.ar,vis=vh(d)*cam.aspect;
-    pano.scale.set(Wd,H,1);const span=Math.max(0,(Wd-vis)/2);pano.position.set(camX+Math.sin(t*.012)*span*.92,eye-(HZ-.5)*vh(d),Z);
+  if(PFADE){const k=Math.min(1,(now-PFADE.t0)/PFADE.ms);PFADE.nx.material.uniforms.op.value=k;if(k>=1){PFADE.old.visible=false;PFADE=null}}
+  if(PANO.on){const Z=-90,d=dist-Z,H=vh(d)*1.03,vis=vh(d)*cam.aspect;
+    for(const pp of [pano,pano2]){const Wd=H*pp.userData.ar,span=Math.max(0,(Wd-vis)/2);pp.scale.set(Wd,H,1);pp.position.set(camX+Math.sin(t*.012)*span*.92,eye-(HZ-.5)*vh(d),Z)}
     const BH=1.25;bed.scale.set(vh(dist)*cam.aspect*2.2,BH,1);bed.position.set(camX,0.25-BH/2,0.4);
     bed.material.uniforms.rep.value=bed.scale.x/6;bed.material.uniforms.off.value=((travel/6)%1+1)%1;
     if(pmK){const MZ=-48,Hm=vh(fitD()-MZ)*.30,tile=Hm*pmAR,WW=tile*4;pmid.scale.set(WW,Hm,1);pmid.position.set(camX,-0.6+Hm/2,MZ);

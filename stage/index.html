@@ -2,10 +2,10 @@
 <html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <title>부산발 런던행 — 근심을 맡기는 밤기차</title>
-<meta name="description" content="매일 밤 9시 부산역을 떠나 하루 동안 실제 시간으로 런던까지 달리는 꿈의 밤기차. 근심을 트렁크에 맡기고 창가에 앉아 보세요.">
+<meta name="description" content="근심을 트렁크에 맡기는 순간 부산역을 떠나, 하루 동안 실제 시간으로 런던까지 달리는 꿈의 밤기차. 창가에 앉아 보세요.">
 <meta property="og:type" content="website"><meta property="og:site_name" content="부산발 런던행">
 <meta property="og:title" content="부산발 런던행 — 근심을 맡기는 밤기차">
-<meta property="og:description" content="매일 밤 9시 부산역 출발. 근심을 트렁크에 맡기고, 다음 날 밤 런던에 닿는 열차 창가에 앉아 보세요.">
+<meta property="og:description" content="근심을 맡기면 바로 부산역 출발. 24시간 뒤 런던에 닿는 열차 창가에 앉아 보세요.">
 <meta property="og:url" content="https://ejdms499-wq.github.io/"><meta property="og:image" content="https://ejdms499-wq.github.io/og.jpg?v=2">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="ko_KR">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://ejdms499-wq.github.io/og.jpg?v=2">
@@ -566,20 +566,24 @@ addEventListener('resize',resize);resize();dist=tgtD;
 
 /* ---------- 시간표 ---------- */
 const HR=36e5,Q=new URLSearchParams(location.search);
-let OFF=0;const vnow=()=>Date.now()+OFF;let dep=lastDeparture();
-if(Q.has('h'))OFF=dep+parseFloat(Q.get('h'))*HR-Date.now();
+let OFF=0;const vnow=()=>Date.now()+OFF;
+/* 내 열차: 근심을 맡기는(또는 그냥 타는) 순간 출발. 출발 전엔 부산역 승강장 */
+let TRIP=(()=>{try{const v=localStorage.getItem('bl_trip');if(v)return JSON.parse(v);const t=JSON.parse(localStorage.getItem('bl_trunk')||'null');if(t&&!t.done&&t.dep<=Date.now()){localStorage.setItem('bl_trip',JSON.stringify({dep:t.dep}));return {dep:t.dep}}}catch(e){}return null})();
+const NOTRIP=()=>Date.now()+3650*24*HR;
+let dep=TRIP?TRIP.dep:NOTRIP();
+if(Q.has('h')){dep=Date.now()-parseFloat(Q.get('h'))*HR;TRIP={dep,dev:1}}
 const pd=n=>String(n).padStart(2,'0');
 const tagS=document.getElementById('tagS'),tagI=document.getElementById('tagI');
-function dur(h){const m=Math.round(h*60);return m>=60?Math.floor(m/60)+'시간 '+(m%60?m%60+'분':''):m+'분'}
+function dur(h){const m=Math.round(h*60);return m>=60?Math.floor(m/60)+'시간'+(m%60?' '+m%60+'분':''):m+'분'}
 let curSeg=null;
-function clock(){const w=where(dep,vnow());if(w.mode!=='run')return;
+function clock(){let w=where(dep,vnow());const ended=w.mode==='end';if(ended)w=where(dep,dep+(TRIP_H-.01)*HR);if(w.mode!=='run')return;
   if(focus)return;
   tagB.textContent=w.seg.name;
   document.body.classList.toggle('day',!/밤|자정|새벽/.test(w.seg.sky));
-  {const k=new Date(vnow()+9*HR);tagS.textContent='서울 '+pd(k.getUTCHours())+':'+pd(k.getUTCMinutes())+' · 출발 '+Math.floor(w.h)+'시간째 · '+w.seg.sky;}
-  tagI.textContent=(w.next?'다음 '+w.next.name+' · '+dur(w.next.h-w.h)+' 뒤':'곧 런던')+(typeof CNT==='number'&&CNT>0?' · 근심 '+CNT+'개 탑승':'');
+  tagS.textContent=ended?'런던 도착 · 하룻밤 하룻낮의 여행 끝':'출발 '+Math.floor(w.h)+'시간째 · 런던까지 '+dur(TRIP_H-w.h)+' · '+w.seg.sky;
+  tagI.textContent=(ended?'':(w.next?'다음 '+w.next.name+' · '+dur(w.next.h-w.h)+' 뒤':'곧 런던'))+(typeof CNT==='number'&&CNT>0?(ended?'':' · ')+'오늘 근심 '+CNT+'개가 떠났어요':'');
   if(curSeg!==w.seg.id){curSeg=w.seg.id}
-  try{arrCheck(w)}catch(e){}
+  if(!ended)try{arrCheck(w)}catch(e){}
   setPano(w.seg.id,Math.floor((w.h-w.seg.h)*60/3.5));
 }
 setInterval(clock,1000);setTimeout(clock,50);
@@ -612,7 +616,7 @@ setInterval(soundTick,200);
 const BGM_OF={busan:'night',gyeongbu:'night',seoul:'night',cloud:'starlit',dawn:'starlit',snow:'snow',baikal:'lake',yenisei:'lake',aurora:'snow',nightvil:'village',steppe:'snow',taiga:'snow',moscow:'russia',plain:'village',berlin:'village',forest:'forest',castle:'forest',alps:'forest',paris:'paris',sea:'lake',england:'london',london:'london'};
 const BG={el:[new Audio(),new Audio()],cur:0,key:null,ok:{},vol:.55,force:null};
 BG.el.forEach(a=>{a.loop=true;a.preload='none';a.volume=0});
-function bgmWant(){if(BG.force)return BG.force;const w=where(dep,vnow());return w.mode==='run'?BGM_OF[w.seg.id]:'london'}
+function bgmWant(){if(BG.force)return BG.force;const w=where(dep,vnow());return w.mode==='run'?BGM_OF[w.seg.id]:w.mode==='wait'?'night':'london'}
 function bgmFade(a,to,ms,done){const from=a.volume,t0=performance.now();(function f(n){const k=Math.min(1,(n-t0)/ms);a.volume=Math.max(0,Math.min(1,from+(to-from)*k));if(k<1)requestAnimationFrame(f);else done&&done()})(t0)}
 function bgmTick(){if(!sndOn){BG.el.forEach(a=>{if(!a.paused)bgmFade(a,0,600,()=>a.pause())});BG.key=null;return}
   const k=bgmWant();if(!k||k===BG.key||BG.ok[k]===false)return;BG.key=k;
@@ -631,32 +635,32 @@ const LS={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}
 const pd2=n=>String(n).padStart(2,'0');
 function trainNo(d){const k=new Date(d+9*HR);return pd2(k.getUTCMonth()+1)+pd2(k.getUTCDate())}
 let TRUNK=LS.get('bl_trunk',null);
-const RESV=LS.get('bl_resv',0);
-if(!Q.has('h')){const tdep=TRUNK&&!TRUNK.done?TRUNK.dep:0,cand=Math.max(tdep||0,RESV||0);
-  if(cand&&cand!==dep){const w=where(cand,vnow());if(w.mode==='run'||w.mode==='wait')dep=cand}}
-function myTrunk(){return TRUNK&&TRUNK.dep===dep?TRUNK:null}
+function myTrunk(){return TRUNK&&TRIP&&TRUNK.dep===dep?TRUNK:null}
+function hm(t){const k=new Date(t+9*HR),h=k.getUTCHours();return (h<12?'오전 ':'오후 ')+((h%12)||12)+':'+pd2(k.getUTCMinutes())}
+function arrLabel(){return '내일 '+hm((TRIP?dep:vnow())+TRIP_H*HR)}
 
 /* ---- 수하물 접수 ---- */
 const ck=$('ck'),ckC=$('ckC');
 function ckOpen(){ck.classList.add('on');const w=where(dep,vnow());
-  ckC.innerHTML=`<h3>수하물 접수</h3><div class="sub">부산발 런던행 제 ${trainNo(dep)}호 · ${w.mode==='run'?w.seg.name+' 부근':'오늘 밤 9시 출발'}</div>
-  <div class="porter"><i></i><p>어서 오세요! 이 열차는 <b>근심</b>을 짐으로 받아요.<br>하나만 적어서 맡겨 주세요. 내일 밤 런던에서 돌려드릴게요.</p></div>
+  ckC.innerHTML=`<h3>수하물 접수</h3><div class="sub">부산발 런던행 제 ${trainNo(dep)}호 · ${w.mode==='run'?w.seg.name+' 부근':'부산역 3번 승강장'}</div>
+  <div class="porter"><i></i><p>어서 오세요! 이 열차는 <b>근심</b>을 짐으로 받아요.<br>하나만 적어서 맡겨 주세요. ${TRIP?'런던에 닿으면 돌려드릴게요.':'맡기는 순간 열차가 출발하고, 24시간 뒤 런던에서 돌려드려요.'}</p></div>
   <textarea id="ckT" maxlength="80" placeholder="예: 다음 달 면접이 자꾸 걱정돼요"></textarea>
-  <div class="ckRow"><button class="pbtn2" id="ckGo">트렁크에 맡기기</button></div>
-  <div style="text-align:center"><button class="ckSkip" id="ckNo">오늘은 그냥 탈래요</button></div>`;
-  $('ckGo').onclick=ckSubmit;setTimeout(()=>{try{$('ckT').focus()}catch(e){}},300);$('ckNo').onclick=()=>{ck.classList.remove('on');LS.set('bl_skip',dep)}}
+  <div class="ckRow"><button class="pbtn2" id="ckGo">${TRIP?'트렁크에 맡기기':'트렁크에 맡기고 출발하기'}</button></div>
+  <div style="text-align:center"><button class="ckSkip" id="ckNo">${TRIP?'닫기':'근심 없이 그냥 탈래요'}</button></div>`;
+  $('ckGo').onclick=ckSubmit;setTimeout(()=>{try{$('ckT').focus()}catch(e){}},300);$('ckNo').onclick=()=>{ck.classList.remove('on');if(!TRIP)startTrip()}}
 function ckSubmit(){const t=$('ckT').value.trim();if(!t){$('ckT').focus();$('ckT').placeholder='한 줄이면 충분해요';return}
+  const fresh=!TRIP;if(fresh){TRIP={dep:vnow()};LS.set('bl_trip',TRIP);dep=TRIP.dep}
   const w=where(dep,vnow());const no=String(1000+Math.floor(Math.random()*9000));
-  TRUNK={dep,text:t,no,boardH:w.mode==='run'?w.h:0,at:Date.now()};LS.set('bl_trunk',TRUNK);sbAdd(dep);setTimeout(()=>{const e=$('ckCnt');if(e&&CNTS[dep])e.textContent='이 열차 수하물칸에 근심 '+CNTS[dep]+'개가 함께 실렸어요'},1600);
+  TRUNK={dep,text:t,no,boardH:w.mode==='run'?w.h:0,at:Date.now()};LS.set('bl_trunk',TRUNK);sbAdd(dep);setTimeout(()=>{const e=$('ckCnt');if(e&&CNT)e.textContent='오늘 '+CNT+'번째로 맡겨진 근심이에요'},1600);
   ckC.innerHTML=`<h3>트렁크에 넣는 중…</h3><div class="sub">수하물 번호 #${no}</div>
    <div class="trunk open" id="tr"><div class="note">${esc(t)}</div><div class="lid"><div class="hd"></div></div><div class="lk"></div><div class="bx"></div>
    <div class="tag">BSN → LDN<br>제 ${trainNo(dep)}호<br>#${no}</div></div>
-   <div id="ckR" style="opacity:0;transition:opacity .6s"><div class="tkt"><b>열차</b><span>부산발 런던행 제 ${trainNo(dep)}호</span><b>짐</b><span>근심 한 개 · 수하물칸 보관</span><b>찾는 곳</b><span>런던역 · 내일 밤 9시</span></div><div id="ckCnt" style="font-size:12px;font-weight:700;color:#8a5a2b;margin-top:6px"></div>
-   <div class="porter" style="margin-top:12px"><i></i><p>${where(dep,vnow()).mode==='wait'?'잘 받았어요. 출발하면 지나는 도시마다 스티커를 붙여 둘게요.':'잘 받았어요. 지나는 도시마다 스티커를 붙여 둘게요. 이제 편히 쉬세요.'}</p></div>
-   <div class="ckRow">${where(dep,vnow()).mode==='wait'?'<button class="pbtn2" id="ckSeat">플랫폼에서 출발 기다리기</button>':'<button class="pbtn2" id="ckSeat">내 창가 자리로 →</button><button class="pbtn2 l" id="ckOut">열차 구경하기</button>'}</div></div>`;
+   <div id="ckR" style="opacity:0;transition:opacity .6s"><div class="tkt"><b>열차</b><span>부산발 런던행 제 ${trainNo(dep)}호</span><b>짐</b><span>근심 한 개 · 수하물칸 보관</span><b>찾는 곳</b><span>런던역 · ${arrLabel()}</span></div><div id="ckCnt" style="font-size:12px;font-weight:700;color:#8a5a2b;margin-top:6px"></div>
+   <div class="porter" style="margin-top:12px"><i></i><p>${fresh?'잘 받았어요. 지나는 도시마다 스티커를 붙여 둘게요.<br>자, 출발합니다!':'잘 받았어요. 지나는 도시마다 스티커를 붙여 둘게요. 이제 편히 쉬세요.'}</p></div>
+   <div class="ckRow">${fresh?'<button class="pbtn2" id="ckSeat">부산역 출발 →</button>':'<button class="pbtn2" id="ckSeat">내 창가 자리로 →</button><button class="pbtn2 l" id="ckOut">열차 구경하기</button>'}</div></div>`;
   const tr=$('tr');setTimeout(()=>tr.classList.add('in'),400);setTimeout(()=>tr.classList.remove('open'),1250);setTimeout(()=>tr.classList.add('tagged'),1700);
   setTimeout(()=>{$('ckR').style.opacity=1},2200);
-  $('ckSeat').onclick=()=>{ck.classList.remove('on');trkShow();if(where(dep,vnow()).mode==='wait'){renderWait.b=0;renderWait();return}if(MODE!=='seat')goSeat()};const _co=$('ckOut');if(_co)_co.onclick=()=>{ck.classList.remove('on');trkShow()}}
+  $('ckSeat').onclick=()=>{ck.classList.remove('on');if(fresh){startTrip();return}trkShow();if(MODE!=='seat')goSeat()};const _co=$('ckOut');if(_co)_co.onclick=()=>{ck.classList.remove('on');trkShow()}}
 function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 
 /* ---- 내 트렁크 · 도시 스티커 ---- */
@@ -664,8 +668,9 @@ const trk=$('trk'),trkP=$('trkP');
 const STC=['#c8553d','#2f7f86','#d39b2a','#5a6fb0','#8a5a9e','#3d8a5a','#b8432f','#2b5f8f'];
 function trunkArrived(){if(!TRUNK||TRUNK.done)return false;const w=where(TRUNK.dep,vnow());return w.mode==='end'||(w.mode==='run'&&w.h>=TRIP_H-.4)}
 function trkShow(){trk.style.display='block';
-  if(LS.get('bl_end',null)&&!(TRUNK&&!TRUNK.done)){trk.classList.add('ev');trk.textContent='✉ 답장 열차';trk.onclick=e=>{e.stopPropagation();showReply()};return}
-  if(TRUNK&&!TRUNK.done&&TRUNK.dep>vnow()&&dep!==TRUNK.dep){trk.classList.add('ev');trk.textContent='내 열차 '+cdown(TRUNK.dep-vnow(),1)+' 뒤 출발';trk.onclick=e=>{e.stopPropagation();backToPlatform()};return}
+  if(!TRIP){trk.style.display='none';return}
+  if(where(dep,vnow()).mode==='end'&&!(TRUNK&&!TRUNK.done)){trk.classList.add('ev');trk.textContent='다시 타기';trk.onclick=e=>{e.stopPropagation();showArrived()};return}
+  if(LS.get('bl_end',null)&&!(TRUNK&&!TRUNK.done)&&0){trk.classList.add('ev');trk.textContent='✉ 답장 열차';trk.onclick=e=>{e.stopPropagation();showReply()};return}
   if(TRUNK&&!TRUNK.done&&trunkArrived()){trk.textContent='런던 도착 · 트렁크 찾기';trk.classList.add('ev');trk.onclick=e=>{e.stopPropagation();ending()};return}
   trk.classList.remove('ev');
   if(myTrunk()){trk.textContent='내 트렁크';trk.onclick=trkToggle}else{trk.textContent='근심 맡기기';trk.onclick=e=>{e.stopPropagation();ckOpen()}}}
@@ -677,7 +682,7 @@ function trkRender(){const T=myTrunk();if(!T)return;const w=where(dep,vnow());co
   const left=w.mode==='run'?Math.max(0,TRIP_H-w.h):0;
   trkP.innerHTML=`<h4>내 트렁크 #${T.no}</h4><div style="font-size:12px;opacity:.75">${left>0?'런던까지 '+dur(left)+' · 수하물칸 보관 중':'런던 도착! 트렁크를 찾을 수 있어요'}</div>
    <div class="w" id="trkW">🔒 안에 든 것: 근심 한 개 <u style="cursor:pointer;margin-left:6px">살짝 보기</u></div>
-   <div style="font-size:12px;font-weight:700">지나온 도시 스티커${CNT!=null?' · 이 열차 수하물칸에 근심 '+CNT+'개':''}</div><div class="stk">${st}</div>${clueList()}${keepList()}`;
+   <div style="font-size:12px;font-weight:700">지나온 도시 스티커${CNT?' · 오늘 근심 '+CNT+'개가 떠났어요':''}</div><div class="stk">${st}</div>${clueList()}${keepList()}`;
   $('trkW').onclick=()=>{$('trkW').textContent='“'+T.text+'”'}}
 function trkToggle(e){e.stopPropagation();const on=!trkP.classList.contains('on');trkP.classList.toggle('on',on);if(on)trkRender()}
 document.addEventListener('pointerdown',e=>{if(trkP.classList.contains('on')&&!trkP.contains(e.target)&&e.target!==trk)trkP.classList.remove('on')});
@@ -764,7 +769,10 @@ function paxSet(id){if(id===paxId)return;paxId=id;const c=CAST[id];
   im.onclick=e=>{e.stopPropagation();talk()};paxBox.appendChild(im);
   paxTag()}
 paxT.onclick=e=>{e.stopPropagation();talk()};
-function paxTick(){if(MODE!=='seat')return;const w=where(dep,vnow());paxSet(w.mode==='run'?SEAT[w.seg.id]:'sherlock')}
+/* 놓친 승객 대기열: 지나온 구간의 승객 중 아직 인사 못 한 사람이 먼저 맞은편에 앉는다 (순서대로) */
+const PQ=[['byeol','busan'],['gilldong','seoul'],['gyeonu','cloud'],['snowq','snow'],['sherlock','baikal'],['babayaga','taiga'],['odette','moscow'],['hansel','plain'],['wolf','forest'],['sleeping','castle'],['monster','alps'],['cinder','paris'],['mermaid','sea'],['rabbit','england']];
+function seatWho(w){const met=LS.get('bl_met',{});for(const [id,sg] of PQ){const s=SEG.find(x=>x.id===sg);if(s&&s.h<=w.h&&!met[id]&&CAST[id])return id}return SEAT[w.seg.id]}
+function paxTick(){if(MODE!=='seat')return;let w=where(dep,vnow());if(w.mode==='end')w=where(dep,dep+(TRIP_H-.01)*HR);paxSet(w.mode==='run'?seatWho(w):'sherlock')}
 setInterval(paxTick,1500);
 
 /* ---- 대화 ---- */
@@ -932,8 +940,9 @@ const SB='https://vuxqlfockqxvocjlntgv.supabase.co/rest/v1/trunks',SK='sb_publis
 let CNT=null;
 function sbAdd(d){try{fetch(SB,{method:'POST',headers:{apikey:SK,'Content-Type':'application/json',Prefer:'return=minimal'},body:JSON.stringify({dep:d})}).then(()=>sbCount(d)).catch(()=>{})}catch(e){}}
 const CNTS={};
-function sbCount(d,cb){try{fetch(SB+'?select=id&dep=eq.'+d,{method:'HEAD',headers:{apikey:SK,Prefer:'count=exact'}}).then(r=>{if(!r.ok)return;const m=(r.headers.get('content-range')||'').split('/')[1];if(m&&m!=='*'){CNTS[d]=+m;if(d===dep)CNT=+m;cb&&cb(+m)}}).catch(()=>{})}catch(e){}}
-setInterval(()=>{sbCount(dep);try{sbCount(nextDeparture())}catch(e){}},60000);setTimeout(()=>{try{sbCount(nextDeparture())}catch(e){}},500);
+function dayISO(){const k=new Date(Date.now()+9*HR);return new Date(Date.UTC(k.getUTCFullYear(),k.getUTCMonth(),k.getUTCDate())-9*HR).toISOString()}
+function sbCount(d,cb){d=dep;try{fetch(SB+'?select=id&created_at=gte.'+encodeURIComponent(dayISO()),{method:'HEAD',headers:{apikey:SK,Prefer:'count=exact'}}).then(r=>{if(!r.ok)return;const m=(r.headers.get('content-range')||'').split('/')[1];if(m&&m!=='*'){CNTS[d]=+m;CNT=+m;cb&&cb(+m)}}).catch(()=>{})}catch(e){}}
+setInterval(()=>sbCount(dep),60000);
 sbCount(dep);
 
 /* ---- 런던 엔딩 ---- */
@@ -1038,6 +1047,11 @@ const _paxTag=paxTag;
 paxTag=function(){if(!paxId)return;const id=paxId,met=LS.get('bl_met',{}),ev=LS.get('bl_ev',{}),ev3=LS.get('bl_ev3',{});
   if(met[id]&&(ev[id]||!EV[id])&&L3[id]&&lv(AFF[id]||0)>=3&&!ev3[id]){paxT.innerHTML=CAST[id].n+' · 단짝 이야기 ✦';paxT.className='paper on ev';}else _paxTag();
   requestAnimationFrame(paxLayout)};
+/* 늦게 자리를 찾아온 승객: 첫마디 앞에 한 줄 */
+const _talkL=talk;talk=function(){const id=paxId,c=id&&CAST[id];const w=where(dep,vnow());
+  if(c&&!LS.get('bl_met',{})[id]&&w.mode==='run'&&SEAT[w.seg.id]!==id){const q=PQ.find(x=>x[0]===id),sg=q&&SEG.find(x=>x.id===q[1]);
+    if(sg){const o=c.a;c.a=['('+sg.name+'에서 탄 승객이 이제야 맞은편 자리를 찾아왔어요.\n인사할 차례가 올 때까지 쭉 기다렸대요.)'].concat(o);_talkL();c.a=o;return}}
+  _talkL()};
 /* 단짝 이야기 */
 const L3={
  byeol:['용궁에 돌아가면 자네 얘기를 하겠소. 육지에도 좋은 친구가 있다고.','실패해도 괜찮소 — 별주부'],
@@ -1129,36 +1143,34 @@ function albumOpen(t){albTab=t;alb.classList.add('on');alb.querySelectorAll('.al
 
 /* ================= 첫 방문 선택 · 출발 대기 ================= */
 const firstEl=$('first'),waitEl=$('wait');
-function nextDeparture(){return lastDeparture(vnow())+24*HR}
 function cdown(ms,short){ms=Math.max(0,ms);const h=Math.floor(ms/HR),m=Math.floor(ms%HR/6e4),s=Math.floor(ms%6e4/1e3);return short?(h?h+'시간 '+m+'분':m+'분'):pd2(h)+':'+pd2(m)+':'+pd2(s)}
-function depLabel(d){const a=new Date(vnow()+9*HR),b=new Date(d+9*HR);return (a.getUTCDate()===b.getUTCDate()?'오늘':'내일')+' 밤 9시'}
-function firstFlow(){if(Q.has('seat'))return;if(LS.get('bl_end',null)&&!(TRUNK&&!TRUNK.done))return;
-  if(TRUNK&&!TRUNK.done&&trunkArrived())return;
-  const w=where(dep,vnow());
-  if(w.mode==='wait'){showWait();if(!myTrunk()&&LS.get('bl_skip',0)!==dep)setTimeout(ckOpen,900);return}
-  if(myTrunk()||LS.get('bl_skip',0)===dep)return;
-  if(w.mode==='run'&&w.h<.7){ckOpen();return}
-  showFirst()}
-function showFirst(){const nd=nextDeparture(),w=where(dep,vnow());
-  $('fC').innerHTML=`<h3>부산발 런던행</h3><div class="sub">이 열차는 매일 밤 9시 부산역을 떠나 다음 날 밤 9시 런던에 닿아요. 도시마다 가장 아름다운 시각에 지나가요.<br>지금 어젯밤 열차는 <b>${w.mode==='run'?w.seg.name:'런던'}</b> 부근을 지나고 있어요.</div>
-   <button class="fopt rec" id="fA"><b>${depLabel(nd)} 열차 예약하기</b><span>부산역에서 근심을 맡기고 처음부터 함께 떠나요 · 출발까지 ${cdown(nd-vnow(),1)}${CNTS[nd]?' · 벌써 근심 '+CNTS[nd]+'개가 기다려요':''}</span></button>
-   <button class="fopt" id="fB"><b>지금 달리는 열차에 올라타기</b><span>${w.mode==='run'?w.seg.name+' 구간':''}에서 바로 타요${CNT?' · 근심 '+CNT+'개가 함께 달리는 중':''}</span></button>`;
-  firstEl.classList.add('on');
-  $('fA').onclick=()=>{const nd2=nextDeparture();LS.set('bl_resv',nd2);dep=nd2;curSeg=null;firstEl.classList.remove('on');showWait();setTimeout(ckOpen,500)};
-  $('fB').onclick=()=>{firstEl.classList.remove('on');ckOpen()}}
+/* 흐름: (승강장) 근심 맡기기 → 즉시 출발 → 24시간 실제 시간 운행 → 런던 도착·트렁크 찾기 → (다시 타기) */
+function firstFlow(){if(Q.has('seat')&&TRIP)return;
+  if(!TRIP){showWait();setTimeout(()=>{if(!TRIP&&!ck.classList.contains('on'))ckOpen()},1100);return}
+  if(where(dep,vnow()).mode==='end'&&!(TRUNK&&!TRUNK.done))showArrived()}
 let waitT=null;
-function showWait(){waitEl.classList.add('on');document.body.classList.add('talk');renderWait();clearInterval(waitT);waitT=setInterval(renderWait,1000)}
+function showWait(){waitEl.style.backgroundImage='';waitEl.classList.add('on');document.body.classList.add('talk');renderWait.b=0;renderWait();clearInterval(waitT);waitT=setInterval(renderWait,5000)}
 function hideWait(){waitEl.classList.remove('on');document.body.classList.remove('talk');clearInterval(waitT)}
-function renderWait(){const left=dep-vnow();
-  if(left<=0){hideWait();curSeg=null;clock();trkShow();const d=$('depT');d.innerHTML='<b>부산역을 출발합니다</b><span>부산발 런던행 제 '+trainNo(dep)+'호 · 내일 밤 9시 런던 도착</span>';d.classList.remove('on');void d.offsetWidth;d.classList.add('on');try{whistle()}catch(e){}return}
-  const T=myTrunk();
-  $('wBoard').innerHTML=`<small>BUSAN → LONDON · 제 ${trainNo(dep)}호</small><b>${depLabel(dep)} 출발</b><div class="cd">${cdown(left)}</div><div class="st">${T?'트렁크 #'+T.no+' · 수하물칸에 실렸어요':'아직 맡긴 짐이 없어요'}${CNTS[dep]?'<br>이 열차 수하물칸 · 근심 '+CNTS[dep]+'개':''}</div>`;
-  if(!renderWait.b||renderWait.t!==!!T){renderWait.t=!!T;renderWait.b=1;
-    $('wBtns').innerHTML=(T?'':'<button class="pbtn2" id="wCk">근심 맡기기</button>')+'<button class="pbtn2 l" id="wLook">그동안 지금 달리는 열차 구경하기</button><button class="pbtn2 l" id="wSnd">♪ 플랫폼 소리 켜기</button>';
-    if(!T)$('wCk').onclick=()=>ckOpen();
-    $('wLook').onclick=()=>{hideWait();dep=lastDeparture(vnow());curSeg=null;clock();trkShow()};
+function renderWait(){if(TRIP&&where(dep,vnow()).mode!=='end'){hideWait();return}
+  const arrived=!!TRIP;
+  if(arrived){$('wBoard').innerHTML=`<small>LONDON · 종착역</small><b>런던에 도착했어요</b><div class="st" style="margin-top:6px">하룻밤 하룻낮, 수고 많았어요.${LS.get('bl_end',null)?'<br>맡겼던 근심은 트렁크와 함께 돌려받았어요.':''}</div>`;
+    if(renderWait.b!=='a'){renderWait.b='a';
+      $('wBtns').innerHTML=(LS.get('bl_end',null)?'<button class="pbtn2" id="wRp">✉ 셜록의 엽서 보기</button>':'')+'<button class="pbtn2'+(LS.get('bl_end',null)?' l':'')+'" id="wAg">새 근심 맡기고 다시 타기</button><button class="pbtn2 l" id="wStay">런던 창밖 조금 더 보기</button>';
+      const r=$('wRp');if(r)r.onclick=()=>showReply();
+      $('wAg').onclick=()=>{TRIP=null;localStorage.removeItem('bl_trip');if(TRUNK&&TRUNK.done){TRUNK=null;localStorage.removeItem('bl_trunk')}dep=NOTRIP();curSeg=null;if(MODE==='seat')goOut();renderWait.b=0;renderWait();trkShow();setTimeout(ckOpen,500)};
+      $('wStay').onclick=()=>{hideWait();trkShow()}}
+    return}
+  $('wBoard').innerHTML=`<small>BUSAN → LONDON · 부산역 3번 승강장</small><b>탑승을 기다리고 있어요</b><div class="cd" style="font-size:28px">● 탑승 중</div><div class="st">근심을 맡기면 바로 출발해요 · 하루 뒤 런던 도착${CNT?'<br>오늘 근심 '+CNT+'개가 이 승강장을 떠났어요':''}</div>`;
+  if(renderWait.b!=='p'){renderWait.b='p';
+    $('wBtns').innerHTML='<button class="pbtn2" id="wCk">근심 맡기고 출발하기</button><button class="pbtn2 l" id="wGo">근심 없이 그냥 출발</button><button class="pbtn2 l" id="wSnd">♪ 플랫폼 소리 켜기</button>';
+    $('wCk').onclick=()=>ckOpen();$('wGo').onclick=()=>startTrip();
     $('wSnd').onclick=()=>{$('snd').click();$('wSnd').textContent=sndOn?'♪ 소리 끄기':'♪ 플랫폼 소리 켜기'}}}
-function backToPlatform(){if(!TRUNK)return;dep=TRUNK.dep;curSeg=null;if(MODE==='seat')goOut();showWait();trkShow()}
+function startTrip(){if(!TRIP){TRIP={dep:vnow()};LS.set('bl_trip',TRIP);dep=TRIP.dep}
+  hideWait();ck.classList.remove('on');curSeg=null;arrLast=null;clock();trkShow();
+  const d=$('depT');d.innerHTML='<b>부산역을 출발합니다</b><span>부산발 런던행 · '+arrLabel()+' 런던 도착</span>';d.classList.remove('on');void d.offsetWidth;d.classList.add('on');try{whistle()}catch(e){}
+  setTimeout(()=>{const h=$('hint');if(h&&MODE!=='seat'){h.style.display='';}},4200)}
+function showArrived(){showWait()}
+function backToPlatform(){}
 function whistle(){if(!AC||!sndOn)return;const t=AC.currentTime;[0,.5].forEach(o=>{const a=AC.createOscillator(),b=AC.createOscillator(),g=AC.createGain();a.type=b.type='sawtooth';a.frequency.value=466;b.frequency.value=554;
   g.gain.setValueAtTime(0,t+o);g.gain.linearRampToValueAtTime(.06,t+o+.08);g.gain.setValueAtTime(.06,t+o+(o?1.1:.35));g.gain.linearRampToValueAtTime(0,t+o+(o?1.3:.45));
   const f=AC.createBiquadFilter();f.type='lowpass';f.frequency.value=1800;a.connect(f);b.connect(f);f.connect(g);g.connect(MG);a.start(t+o);b.start(t+o);a.stop(t+o+1.4);b.stop(t+o+1.4)})}

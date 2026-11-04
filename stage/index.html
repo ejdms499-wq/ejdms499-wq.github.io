@@ -1,77 +1,87 @@
 <!DOCTYPE html>
 <html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-<title>부산발 런던행 — 그림 겹 무대 시험판</title>
+<title>부산발 런던행 — 그림 겹 무대 · 부산</title>
 <style>
-html,body{margin:0;height:100%;background:#f6e9c8;overflow:hidden;touch-action:none;-webkit-user-select:none;user-select:none}
+html,body{margin:0;height:100%;background:#0d2230;overflow:hidden;touch-action:none;-webkit-user-select:none;user-select:none}
 canvas{display:block;width:100vw;height:100vh;height:100dvh}
-#tag{position:fixed;left:14px;top:calc(12px + env(safe-area-inset-top));padding:7px 12px 7px 10px;background:#f3e6c4;color:#3a2a1c;
+#tag{position:fixed;left:14px;top:calc(12px + env(safe-area-inset-top));padding:7px 12px 7px 14px;background:#f3e6c4;color:#3a2a1c;
  font:600 12px/1.35 "Apple SD Gothic Neo","Noto Sans KR",sans-serif;border:2px solid #3a2a1c;border-radius:3px;box-shadow:3px 3px 0 #3a2a1c;transform:rotate(-1.5deg)}
 #tag b{display:block;font-size:15px;letter-spacing:-.02em}
-#tag::before{content:"";position:absolute;left:-7px;top:50%;width:8px;height:8px;margin-top:-4px;border:2px solid #3a2a1c;border-radius:50%;background:#f6e9c8}
+#tag::before{content:"";position:absolute;left:-7px;top:50%;width:8px;height:8px;margin-top:-4px;border:2px solid #3a2a1c;border-radius:50%;background:#0d2230}
 #hint{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);color:#f6e9c8;
- font:500 12px "Apple SD Gothic Neo","Noto Sans KR",sans-serif;opacity:.85;text-shadow:0 1px 2px #0008;white-space:nowrap;transition:opacity 1s}
-#back{position:fixed;right:14px;top:calc(12px + env(safe-area-inset-top));display:none;background:#3a2a1c;color:#f3e6c4;border:0;border-radius:3px;padding:8px 12px;font:600 13px "Apple SD Gothic Neo",sans-serif}
+ font:500 12px "Apple SD Gothic Neo","Noto Sans KR",sans-serif;opacity:.85;text-shadow:0 1px 2px #000a;white-space:nowrap;transition:opacity 1s}
+#back{position:fixed;right:14px;top:calc(12px + env(safe-area-inset-top));display:none;background:#f3e6c4;color:#3a2a1c;border:2px solid #3a2a1c;box-shadow:2px 2px 0 #3a2a1c;border-radius:3px;padding:6px 11px;font:700 13px "Apple SD Gothic Neo",sans-serif}
 </style></head><body>
-<div id="tag"><b>바이칼 호수</b>그림 겹 무대 · 시험판</div>
+<div id="tag"><b>부산</b>그림 겹 무대 · 시험판</div>
 <button id="back">← 열차 전체</button>
 <div id="hint">옆으로 끌어서 열차 둘러보기 · 칸을 누르면 가까이</div>
 <script type="module">
 import * as THREE from './three.module.js';
+/* ================= 구간 설정 (구간마다 이것만 바꾸면 됨) ================= */
+const SCENE={
+  name:'부산',
+  far:{img:'far.webp',w:1904,h:640,hz:412,moonU:.82,moonAt:.74,fold:110},
+  mid:{img:'mid.webp',w:1904,h:356,z:-70,hgt:23,topBelowHz:.025,tint:[.74,.77,.9]},
+  emb:{img:'emb.webp',w:2176,h:332,rail:62,sea:296,scale:.0095},
+  ppl:[['pf_p02.webp','dine',.62,1.32]]
+};
+/* ======================================================================= */
 const R=new THREE.WebGLRenderer({antialias:true});
 R.setPixelRatio(Math.min(devicePixelRatio,2));R.outputColorSpace=THREE.SRGBColorSpace;
 document.body.prepend(R.domElement);
-const scene=new THREE.Scene();scene.background=new THREE.Color('#f6e9c8');
+const scene=new THREE.Scene();
 const cam=new THREE.PerspectiveCamera(30,1,0.5,6000);
+const TAN=Math.tan(THREE.MathUtils.degToRad(15)), HZ=0.64; // 수평선: 화면 위에서 36%
 const TL=new THREE.TextureLoader();
-function tex(u,rep){const t=TL.load('img/'+u);t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=8;if(rep){t.wrapS=THREE.RepeatWrapping}return t}
-const T0=performance.now();
-function mat(t,tint,extra){
-  const m=new THREE.ShaderMaterial({transparent:true,depthWrite:false,
-    uniforms:{map:{value:t},tint:{value:new THREE.Color(...(tint||[1,1,1]))},off:{value:0},rep:{value:1},flip:{value:0},time:{value:0},wave:{value:extra?1:0}},
-    vertexShader:`varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`,
-    fragmentShader:`uniform sampler2D map;uniform vec3 tint;uniform float off,rep,flip,time,wave;varying vec2 vUv;
-    void main(){vec2 uv=vUv;uv.x=uv.x*rep+off;if(flip>.5)uv.x=1.-uv.x;
-      if(wave>.5){float k=smoothstep(.0,.25,1.-uv.y);uv.x+=sin(time*1.3+uv.y*90.)*.0011*k;uv.y+=sin(time*.9+uv.x*40.)*.0009*k;}
-      vec4 c=texture2D(map,uv);c.rgb*=tint;gl_FragColor=c;
+function tex(u,rep){const t=TL.load('img/'+u);t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=8;if(rep)t.wrapS=THREE.RepeatWrapping;return t}
+const VS=`varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`;
+function mat(t,tint){return new THREE.ShaderMaterial({transparent:true,depthWrite:false,depthTest:false,
+  uniforms:{map:{value:t},tint:{value:new THREE.Color(...(tint||[1,1,1]))},off:{value:0},rep:{value:1}},vertexShader:VS,
+  fragmentShader:`uniform sampler2D map;uniform vec3 tint;uniform float off,rep;varying vec2 vUv;
+  void main(){vec4 c=texture2D(map,vec2(vUv.x*rep+off,vUv.y));c.rgb*=tint;gl_FragColor=c;
+  #include <colorspace_fragment>
+  }`})}
+function plane(t,w,h,tint){return new THREE.Mesh(new THREE.PlaneGeometry(w,h),mat(t,tint))}
+
+/* ---------- 맨 뒤 그림: 화면에 고정된 무한히 먼 풍경 (하늘·달·먼 불빛·바다) ---------- */
+const F=SCENE.far;
+function backdrop(cutBelow){
+  const m=new THREE.ShaderMaterial({depthWrite:false,depthTest:false,transparent:true,
+    uniforms:{map:{value:farT},asp:{value:1},t:{value:0},cut:{value:-1},only:{value:cutBelow?1:0},Him:{value:.6},mAt:{value:.74}},
+    vertexShader:`varying vec2 s;void main(){s=position.xy*.5+.5;gl_Position=vec4(position.xy,0.,1.);}`,
+    fragmentShader:`uniform sampler2D map;uniform float asp,t,cut,only,Him,mAt;varying vec2 s;
+    const float IW=${F.w}.,IH=${F.h}.,HZR=${F.hz}.;
+    void main(){
+      if(only>.5&&s.y>cut)discard;
+      float yb=${HZ}-(IH-HZR)/IH*Him;                                      // 그림 아래 끝
+      float v=(s.y-yb)/Him;
+      float Wx=Him*(IW/IH)/asp;
+      float u=${F.moonU}+(s.x-mAt)/Wx;
+      float water=step(v,(IH-HZR)/IH);
+      if(v<0.){float k=${F.fold}./IH;float tt=-v;v=k-abs(mod(tt,2.*k)-k);}
+      v=min(v,.999);
+      float w=water*(1.-smoothstep(0.,.4,v));
+      u+=sin(t*1.1+v*260.)*.0009*water+sin(t*.7+s.y*120.)*.0006*water;
+      vec4 c=texture2D(map,vec2(clamp(u,.001,.999),v));
+      gl_FragColor=vec4(c.rgb,1.);
       #include <colorspace_fragment>
     }`});
-  return m;
+  const q=new THREE.Mesh(new THREE.PlaneGeometry(2,2),m);q.frustumCulled=false;return q;
 }
-function plane(t,w,h,tint,wave){const m=new THREE.Mesh(new THREE.PlaneGeometry(w,h),mat(t,tint,wave));return m}
+const farT=tex(F.img);farT.wrapS=farT.wrapT=THREE.ClampToEdgeWrapping;
+const far=backdrop(false);far.renderOrder=0;scene.add(far);
+const nearWater=backdrop(true);nearWater.renderOrder=4;scene.add(nearWater);
 
-/* ---------- 거리값 ---------- */
-const EYE=2.2;            // 눈높이 (선로 = 0)
-const SEA=-1.1;           // 호수 수면
-const SPEED=6.5;          // 열차 속도 (단위/초)
-let dist=26;              // 카메라 거리
-/* ---------- 하늘·물 (무한히 먼 그림, 카메라를 따라감) ---------- */
-const DSKY=3000;
-const vh=k=>2*k*Math.tan(THREE.MathUtils.degToRad(15));
-const skyH=vh(DSKY)*0.44, skyW=skyH*3046/556;
-const sky=plane(tex('sky_baikal.webp'),skyW*3,skyH*720/556);sky.material.uniforms.rep.value=3;sky.material.uniforms.off.value=-1;scene.add(sky);
-const watH=vh(DSKY)*0.62, watW=skyW;
-const water=plane(tex('water_baikal.webp'),watW*3,watH,null,true);water.material.uniforms.rep.value=3;water.material.uniforms.off.value=-1;scene.add(water);
-sky.renderOrder=0;water.renderOrder=1;
-/* ---------- 먼 바위섬 (아주 천천히 지나감) ---------- */
-const ZROCK=-420, rockS=46/433;
-const rockT=tex('rock_baikal.webp');
-const rocks=[0,1].map(i=>{const p=plane(rockT,1390*rockS,901*rockS,[1,1,1]);p.material.uniforms.flip.value=i;p.renderOrder=2;scene.add(p);return p});
-const ROCKGAP=620;
-/* ---------- 가운데 마을 (중간 속도) ---------- */
-const ZMID=-70, midH=15, midW=midH*1186/626, PAT=midW*2+34;
-const midT=tex('mid_baikal.webp');
-const mids=[];
-for(let i=0;i<6;i++){const p=plane(midT,midW,midH,[1,.87,.8]);p.material.uniforms.flip.value=i%2;p.renderOrder=3;scene.add(p);mids.push(p)}
-/* ---------- 둑과 선로 ---------- */
-const emT=tex('embank.webp',true);
-const EMW=400, emH=3;
-const emb=plane(emT,EMW,emH);emb.material.uniforms.rep.value=EMW/24;emb.renderOrder=5;
-emb.position.set(0,0.23-emH/2,0.4);scene.add(emb);
-// 둑 아래 채움
-// 가까운 물결 (빠르게 지나감)
-const rpT=tex('ripple.webp',true);const ZRP=6,RPW=160,rpH=10;
-const rip=plane(rpT,RPW,rpH);rip.material.uniforms.rep.value=RPW/40;rip.renderOrder=4;scene.add(rip);
+/* ---------- 가운데 겹 (이음새 없는 반복 그림) ---------- */
+const M=SCENE.mid, midT=tex(M.img,true), midTile=M.hgt*M.w/M.h, MIDW=midTile*3;
+const mid=plane(midT,MIDW,M.hgt,M.tint);mid.renderOrder=3;scene.add(mid);
+/* ---------- 선로 둑 ---------- */
+const E=SCENE.emb, embT=tex(E.img,true), embH=E.h*E.scale, embTile=E.w*E.scale, EMBW=embTile*12;
+const emb=plane(embT,EMBW,embH);emb.renderOrder=5;scene.add(emb);
+const embTop=(E.rail)*E.scale, SEA=-(E.sea-E.rail)*E.scale;
+emb.position.set(0,embTop-embH/2,0.4);
+
 /* ---------- 열차 (손그림 단면) ---------- */
 const PX=3.4/550;
 const ORDER=[['tail','꿈 보관소'],['case','탐정 사무소'],['post','우체국칸'],['dome','별 전망칸'],['dine','식당칸'],['sleep','침대칸'],['loco','기관실']];
@@ -79,81 +89,66 @@ const train=new THREE.Group();scene.add(train);
 const cars=[];let x=0;
 for(const [k,name] of ORDER){
   const w=(k==='loco'?2856:1640)*PX,h=(k==='loco'?680:550)*PX;
-  const p=plane(tex('car_'+k+'.webp'),w,h,[1,.95,.9]);p.renderOrder=6;
-  p.position.set(x+w/2,h/2-0.04,0);p.userData={k,name,w,h,ph:Math.random()*6};train.add(p);cars.push(p);x+=w-0.22;
+  const p=plane(tex('car_'+k+'.webp'),w,h,[.84,.86,.97]);p.renderOrder=6;
+  p.position.set(x+w/2,h/2-0.03,0);p.userData={k,name,w,h,ph:Math.random()*6};train.add(p);cars.push(p);x+=w-0.22;
 }
 const TRAINW=x;train.position.x=-TRAINW/2;
-/* 승객 (아톰풍 손그림) */
-function person(file,car,fx,hgt){
-  const c=cars.find(c=>c.userData.k===car);const t=tex(file);const img={w:0,h:0};
-  const p=plane(t,1,1);p.renderOrder=7;p.visible=false;
-  t.onUpdate=null;const im=new Image();im.onload=()=>{const a=im.width/im.height;p.scale.set(hgt*a,hgt,1);p.visible=true};im.src='img/'+file;
+function person([file,car,fx,hgt]){
+  const c=cars.find(c=>c.userData.k===car);const p=plane(tex(file),1,1);p.renderOrder=7;p.visible=false;
+  const im=new Image();im.onload=()=>{p.scale.set(hgt*im.width/im.height,hgt,1);p.visible=true};im.src='img/'+file;
   p.position.set(c.position.x-c.userData.w/2+c.userData.w*fx,0.93+hgt/2,0.05);p.userData.base=p.position.y;p.userData.ph=Math.random()*6;
   train.add(p);return p;
 }
-const ppl=[person('pf_p01.webp','case',.36,1.7),person('pf_p02.webp','dine',.64,1.32)];
-/* ---------- 앞쪽 풀 그림자 (빠르게 지나감) ---------- */
+const ppl=SCENE.ppl.map(person);
 
-
-/* ---------- 카메라 조작 ---------- */
-let camX=(()=>{const d=cars.find(c=>c.userData.k==='dine');return train.position.x+d.position.x+3})(), tgtX=0, tgtD=dist, minD=9, maxD=75, focus=null;
+/* ---------- 카메라 ---------- */
+const vh=k=>2*k*TAN;
+let dist=26,camX=(()=>{const d=cars.find(c=>c.userData.k==='dine');return train.position.x+d.position.x+2})(),tgtX=camX,tgtD=dist,minD=9,maxD=80,focus=null;
+const eyeAt=d=>1.7+0.145*d;
 const clampX=()=>{tgtX=Math.max(-TRAINW/2+3,Math.min(TRAINW/2-3,tgtX))};
-const ptrs=new Map();let lastPinch=0,moved=0,downX=0,downY=0;
-const el=R.domElement;
+const ptrs=new Map();let lastPinch=0,moved=0,downX=0,downY=0;const el=R.domElement;
 el.addEventListener('pointerdown',e=>{el.setPointerCapture(e.pointerId);ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});moved=0;downX=e.clientX;downY=e.clientY;
   if(ptrs.size===2){const [a,b]=[...ptrs.values()];lastPinch=Math.hypot(a.x-b.x,a.y-b.y)}});
 el.addEventListener('pointermove',e=>{const p=ptrs.get(e.pointerId);if(!p)return;
   if(ptrs.size===2){p.x=e.clientX;p.y=e.clientY;const [a,b]=[...ptrs.values()];const d=Math.hypot(a.x-b.x,a.y-b.y);
     if(lastPinch){tgtD=Math.max(minD,Math.min(maxD,tgtD*lastPinch/d));focus=null}lastPinch=d;moved=99;return}
   const dx=e.clientX-p.x;p.x=e.clientX;p.y=e.clientY;moved+=Math.abs(dx);
-  const wpp=vh(dist)/innerHeight;tgtX-=dx*wpp;clampX();if(moved>6)focus=null;hint()});
-const up=e=>{ptrs.delete(e.pointerId);if(ptrs.size<2)lastPinch=0;
-  if(moved<6&&Math.hypot(e.clientX-downX,e.clientY-downY)<8)tap(e)};
-el.addEventListener('pointerup',up);el.addEventListener('pointercancel',e=>{ptrs.delete(e.pointerId)});
+  tgtX-=dx*vh(dist)/innerHeight;clampX();if(moved>6)focus=null;hint()});
+el.addEventListener('pointerup',e=>{ptrs.delete(e.pointerId);if(ptrs.size<2)lastPinch=0;if(moved<6&&Math.hypot(e.clientX-downX,e.clientY-downY)<8)tap(e)});
+el.addEventListener('pointercancel',e=>ptrs.delete(e.pointerId));
 el.addEventListener('wheel',e=>{e.preventDefault();tgtD=Math.max(minD,Math.min(maxD,tgtD*(1+e.deltaY*0.001)));focus=null},{passive:false});
-const ray=new THREE.Raycaster(),v2=new THREE.Vector2();
+const ray=new THREE.Raycaster(),v2=new THREE.Vector2(),tagB=document.querySelector('#tag b'),back=document.getElementById('back');
 function tap(e){v2.set(e.clientX/innerWidth*2-1,-(e.clientY/innerHeight)*2+1);ray.setFromCamera(v2,cam);
-  const h=ray.intersectObjects(cars)[0];if(!h)return;const c=h.object;focus=c;
-  tgtX=train.position.x+c.position.x;clampX();
-  const a=innerWidth/innerHeight;const need=Math.max(c.userData.h*1.9/(2*Math.tan(THREE.MathUtils.degToRad(15))),c.userData.w*1.08/(2*Math.tan(THREE.MathUtils.degToRad(15))*a));
-  tgtD=Math.max(minD,Math.min(maxD,need));document.querySelector('#tag b').textContent=c.userData.name;back.style.display='block';hint()}
-const back=document.getElementById('back');back.onclick=()=>{focus=null;tgtD=fitD();document.querySelector('#tag b').textContent='바이칼 호수';back.style.display='none'};
+  const h=ray.intersectObjects(cars)[0];if(!h)return;const c=h.object;focus=c;tgtX=train.position.x+c.position.x;clampX();
+  const a=innerWidth/innerHeight;tgtD=Math.max(minD,Math.min(maxD,Math.max(c.userData.h*2.2/(2*TAN),c.userData.w*1.08/(2*TAN*a))));
+  tagB.textContent=c.userData.name;back.style.display='block';hint()}
+back.onclick=()=>{focus=null;tgtD=fitD();tagB.textContent=SCENE.name;back.style.display='none'};
 let hinted=0;function hint(){if(hinted)return;hinted=1;setTimeout(()=>document.getElementById('hint').style.opacity=0,1500)}
-function fitD(){const a=innerWidth/innerHeight;return Math.max(26,12.5/(2*Math.tan(THREE.MathUtils.degToRad(15))*a))}
-
-/* ---------- 크기 ---------- */
-function resize(){R.setSize(innerWidth,innerHeight);cam.aspect=innerWidth/innerHeight;cam.setViewOffset(innerWidth,innerHeight,0,innerHeight*0.14,innerWidth,innerHeight);cam.updateProjectionMatrix();if(!focus){tgtD=fitD()}}
-addEventListener('resize',resize);resize();dist=tgtD;tgtX=camX;
+function fitD(){const a=innerWidth/innerHeight;return Math.max(26,12.5/(2*TAN*a))}
+function resize(){R.setSize(innerWidth,innerHeight);cam.aspect=innerWidth/innerHeight;
+  cam.setViewOffset(innerWidth,innerHeight,0,innerHeight*(HZ-.5),innerWidth,innerHeight);cam.updateProjectionMatrix();
+  {const a=cam.aspect,IW=F.w,IH=F.h;let Him=(1-HZ)*1.15*IH/F.hz;let Wx=Him*(IW/IH)/a;
+   if(Wx<1.04){Him*=1.04/Wx;Wx=1.04}
+   let mAt=Math.max(F.moonAt,1-(0.995-F.moonU)*Wx);mAt=Math.min(mAt,(F.moonU-0.005)*Wx);
+   for(const q of [far,nearWater]){q.material.uniforms.asp.value=a;q.material.uniforms.Him.value=Him;q.material.uniforms.mAt.value=mAt}}if(!focus)tgtD=fitD()}
+addEventListener('resize',resize);resize();dist=tgtD;
 
 /* ---------- 매 프레임 ---------- */
-let EYE_=5,travel=0,last=performance.now();
+const SPEED=7;let travel=0,last=performance.now();const T0=last;const pv=new THREE.Vector3();
 function frame(now){
-  const dt=Math.min(.05,(now-last)/1000);last=now;const t=(now-T0)/1000;
-  travel+=SPEED*dt;
+  const dt=Math.min(.05,(now-last)/1000);last=now;const t=(now-T0)/1000;travel+=SPEED*dt;
   const L=1-Math.pow(.02,dt);camX+=(tgtX-camX)*L;dist+=(tgtD-dist)*L;
-  const camY=1.7+0.145*dist;EYE_=camY;
-  cam.position.set(camX,camY,dist);cam.lookAt(camX,camY,0);
-  const hz=camY; // 수평선 = 눈높이
-  // 하늘/물: 카메라와 함께
-  const sunShift=-0.325*skyW+0.28*cam.aspect*vh(DSKY);
-  sky.position.set(camX+sunShift,hz+sky.geometry.parameters.height/2-(720-556)/720*sky.geometry.parameters.height,-DSKY);
-  water.position.set(camX+sunShift,hz-watH/2+watH*6/(468)*0,-DSKY+1);
-  sky.material.uniforms.time.value=water.material.uniforms.time.value=t;
-  // 바위섬
-  const rw=rocks[0].geometry.parameters.width;
-  for(let i=0;i<2;i++){const r=rocks[i];
-    let px=((-travel+i*ROCKGAP)%(ROCKGAP*2)+ROCKGAP*2)%(ROCKGAP*2)-ROCKGAP+camX*0.0;
-    r.position.set(px+camX*0,SEA+(901-(556-123))*rockS*-1+901*rockS/2,ZROCK)}
-  // 마을 (패턴: A, 뒤집은 A, 빈 물)
-  for(let i=0;i<mids.length;i++){const k=Math.floor(i/2),side=i%2;
-    const span=PAT*3;const o=-travel+k*PAT-camX;const base=camX+((o%span)+span*1.5)%span-span/2;
-    mids[i].position.set(base+(side?midW/2:-midW/2),SEA-0.8+midH/2,ZMID)}
-  // 둑, 앞풀: 텍스처를 흘림
-  emb.position.x=camX;emb.material.uniforms.off.value=(travel/24)%1;
-  {const yb=-1.0,yr=EYE_+(yb-EYE_)*(dist-ZRP)/(dist-0.4);rip.position.set(camX,yr-rpH/2,ZRP);rip.material.uniforms.off.value=(travel/40)%1;}
-  // 열차 흔들림
-  for(const c of cars){c.position.y=c.userData.h/2-0.04+Math.sin(t*9+c.userData.ph)*0.012}
-  for(const p of ppl){p.position.y=p.userData.base+Math.abs(Math.sin(t*2.2+p.userData.ph))*0.03}
+  const eye=eyeAt(dist);cam.position.set(camX,eye,dist);cam.lookAt(camX,eye,0);cam.updateMatrixWorld();
+  far.material.uniforms.t.value=nearWater.material.uniforms.t.value=t;
+  // 가운데 겹: 위쪽 끝을 기본 화면의 수평선 바로 아래에
+  const dm=fitD()-M.z, top=eyeAt(fitD())-M.topBelowHz*vh(dm);
+  mid.position.set(camX,top-M.hgt/2,M.z);
+  mid.material.uniforms.rep.value=MIDW/midTile;mid.material.uniforms.off.value=(((camX-MIDW/2+travel*1)/midTile)%1+1)%1;
+  emb.position.x=camX;emb.material.uniforms.rep.value=EMBW/embTile;emb.material.uniforms.off.value=(((camX-EMBW/2+travel)/embTile)%1+1)%1;
+  // 가까운 바다: 둑 아래만
+  pv.set(camX,SEA+0.25,0.4).project(cam);nearWater.material.uniforms.cut.value=pv.y*.5+.5;
+  for(const c of cars)c.position.y=c.userData.h/2-0.03+Math.sin(t*9+c.userData.ph)*0.012;
+  for(const p of ppl)p.position.y=p.userData.base+Math.abs(Math.sin(t*2.2+p.userData.ph))*0.03;
   R.render(scene,cam);requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);

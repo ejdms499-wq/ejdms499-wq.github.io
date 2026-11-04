@@ -536,7 +536,7 @@ body.talk #bagB,body.amb #bagB,body.intro #bagB,body.talk #bagP,body.amb #bagP{o
  #nextB{font-size:17px!important;padding:12px 24px!important}
  #bagB,#snd{font-size:14px;padding:8px 14px}
 }
-#cg.gaming .ch{opacity:.28!important}
+#cg.gaming .ch{opacity:0!important;transition:opacity .4s}
 /* ===== v9 ===== */
 /* CG: 움직이지 않고 전체가 보이게 (가로 화면) */
 @media (min-aspect-ratio:4/5){
@@ -627,6 +627,12 @@ body.poprise>canvas{transition:transform 1.7s cubic-bezier(.2,.95,.25,1);transfo
 #lastP h3{margin:12px 0 4px;font:700 30px "Gowun Batang",serif;color:#3a2a1c}
 #lastP .hw{font:700 24px "Gaegu",sans-serif;color:#c2402f;transform:rotate(-2deg);margin:6px 0 18px}
 #lastP input{width:100%;box-sizing:border-box;border:0;border-bottom:2px dashed #3a2a1c;background:transparent;font:400 28px "Nanum Pen Script","Gaegu",sans-serif;color:#1f2b5a;padding:6px 4px;outline:none;text-align:center;margin-bottom:18px}
+
+/* v13 */
+body.talk #tkB,body.amb #tkB,#cg.on~#tkB{opacity:0!important;pointer-events:none!important}
+body.amb #tag{opacity:0!important}body.amb.wake #tag{opacity:.55!important}
+body.amb #mailT,body.amb #lvt{opacity:0!important;pointer-events:none!important}
+@media (min-aspect-ratio:1/1){#cg .chs{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:8px}}
 </style></head><body>
 <div id="tag"><b>부산</b><span id="tagS"></span><i id="tagI"></i></div>
 <div id="dev"><span>출발 후</span><input id="devR" type="range" min="0" max="91.9" step="0.1"><span id="devV"></span></div>
@@ -1002,7 +1008,7 @@ const CAST={
  gilldong:{n:'홍길동',img:'px_gilldong.webp',sub:'의적',
   a:['쉿, 표 없이 탄 건 아니오. …아마도.','아버지를 아버지라 부르지 못한 지 오래요.\n이번 마음의 짐은 그거요. 어디에도 내 자리가 없다는 것.'],
   c:[['여기 맞은편은 당신 자리예요','…허허, 자리를 내준 사람은 처음이오. 그럼 앉겠소.'],['저도 가끔 그래요','그렇소? 그럼 오늘 밤은 둘이 같은 처지구려.']],
-  idle:['동에 번쩍 서에 번쩍. 기차보다 빠를걸?','서울 불빛은 언제 봐도 좋소.']},
+  idle:['동에 번쩍 서에 번쩍. 기차보다 내가 빠르오.','서울 불빛은 언제 봐도 좋소.']},
  gyeonu:{n:'견우와 직녀',img:'px_gyeonu.webp',sub:'은하수',
   a:['(직녀) 쉿, 견우가 졸고 있어요. 일 년 만에 만났거든요.','(직녀) 날이 밝으면 또 헤어져야 해요.\n그래서 이 밤이 끝나는 게 제 마음의 짐이에요.'],
   c:[['까치들이 또 다리를 놓아 줄 거예요','…그렇죠. 까치들은 한 번도 약속을 어긴 적이 없어요.'],['같이 새벽을 기다려 줄게요','고마워요. 혼자 기다리는 새벽은 너무 길거든요.']],
@@ -1382,14 +1388,14 @@ const _aa=addAff;addAff=function(id,n){const before=lv(AFF[id]||0);_aa(id,n);if(
 /* 단짝 이야기 */
 const L3={
  byeol:['용궁에 돌아가면 자네 얘기를 하겠소. 육지에도 좋은 친구가 있다고.','실패해도 괜찮소 — 별주부'],
- gilldong:['어디서든 네 자리가 있다. 이건 이 홍길동이 보증하오.','동에 번쩍, 네 편에 번쩍 — 길동'],
+ gilldong:['어디서든 자네 자리가 있소. 이건 이 홍길동이 보증하오.','동에 번쩍, 자네 편에 번쩍 — 길동'],
  gyeonu:['(직녀) 내년 칠석에도 이 열차에서 만나요. 약속이에요.\n(견우) 자리는 우리가 맡아 두겠소.','일 년은 금방이에요 — 견우·직녀'],
  snowq:['당신 앞에서는 조금 녹아도 괜찮을 것 같아요.','천천히, 따뜻하게 — 눈의 여왕'],
  sherlock:['사건이 없어도 찾아와 주게. 차는 늘 준비해 두지. 우유는 나중에 붓고.','친애하는 조수에게 — S.H.'],
  odette:['낮이든 밤이든, 당신 앞의 저는 진짜예요.','둘 다 나예요 — 오데트'],
- wolf:['(늑대) 길을 잃으면 휘파람을 부시오. 어디서든 달려가겠소.\n(빨간 모자) 나도 같이!','한 명이면 충분해 — 늑대'],
+ wolf:['(늑대) 길을 잃으면 휘파람을 부시오. 어디서든 달려가겠소.\n(빨간 모자) 나도 같이!','한 명이면 충분하오 — 늑대'],
  sleeping:['이제는 잠드는 게 무섭지 않아요. 깨어나면 당신 같은 사람이 있을 테니까요.','천천히 가도 돼요 — 공주'],
- monster:['이름을 정했어요. 제일 먼저 당신이 불러 주세요.\n…「아담」이에요.','처음 불러 준 사람에게 — 아담'],
+ monster:['이름을 정했어요. 제일 먼저 당신이 불러 주세요.\n…「{괴물}」이에요.','처음 불러 준 사람에게 — {괴물}'],
  cinder:['자정이 지나도 남는 것, 그게 진짜 저예요. 당신도 그래요.','남는 건 남아요 — 신데렐라'],
  mermaid:['「목소리가 없어도, 당신은 제 말을 다 들어 줬어요.」','「다 들렸어요」 — 인어공주'],
  rabbit:['늦어도 괜찮다는 그 말, 제 시계보다 정확했어요.','조금 늦어도 괜찮아 — 흰 토끼'],
@@ -1874,7 +1880,7 @@ const EV2={
   L('byeol',null,1,'별주부','토끼 간을 구해 오라는 어명을 받았는데… 또 놓쳤소. 이번이 세 번째요.'),
   L('byeol',null,1,'별주부','이 트렁크엔 그게 들었소. 또 빈손으로 돌아가면 어쩌나 하는 마음.',{pose:'face',emo:'💧'}),
   N('byeol','bunny','(창밖 승강장에서 흰 토끼 한 마리가 손을 흔들며 혀를 쏙 내민다.)'),
-  L('byeol','bunny',2,'토끼','거북 아저씨! 간은 집에 두고 왔다니까! 다음엔 그냥 놀러 와요!',{emo:'♪'}),
+  L('byeol','bunny',2,'토끼','거북 아저씨! 간은 집에 두고 왔다니까요! 다음엔 그냥 놀러 와요!',{emo:'♪'}),
   L('byeol','bunny',1,'별주부','…저 녀석. 저렇게 웃으니 미워할 수가 없구려.',{emo:'…'}),
   L('byeol',null,1,'별주부','자네라면 어떻게 하겠소? 용궁에 또 빈손으로 가야 하는 거북이라면.'),
   {choice:[['실패해도 괜찮아요','…괜찮다니. 용궁에선 아무도 그 말을 안 해 주던데. 고맙소, 정말.'],['다음엔 친구로 만나 보면요?','친구라… 간 대신 친구를 데려가면, 용왕님도 웃으실지 모르겠소.']],cg:'byeol'},
@@ -1915,7 +1921,7 @@ const EV2={
   L('sherlock','snowq',2,'눈의 여왕','어떻게 알았어요?'),
   L('sherlock','snowq',1,'셜록 홈즈','추리라네. …솔직히 말하면, 이제 쓸 데가 없는 재주지.'),
   L('sherlock',null,1,'셜록 홈즈','마지막 사건이 끝난 다음 날 아침, 6시 40분에 내 시계가 멈췄네. 그 뒤로 아무도 베이커가의 문을 두드리지 않아.',{pose:'face'}),
-  L('sherlock',null,1,'셜록 홈즈','사건이 없으면 아무도 날 찾지 않을 것 같아. 그게 내 짐일세.',{emo:'…'}),
+  L('sherlock',null,1,'셜록 홈즈','사건이 없으면 아무도 날 찾지 않을 것 같네. 그게 내 짐일세.',{emo:'…'}),
   L('sherlock','snowq',2,'눈의 여왕','…얼음 궁전에도 아무도 안 와요. 그래서 알아요, 그 조용함.'),
   L('sherlock','gilldong',2,'홍길동','의적도 훔칠 게 없으면 그냥 백수요. 그래도 나는 이 열차에서 할 일이 생겼소. 앉아 있는 일.',{emo:'♪'}),
   {choice:[['사건 없어도 찾아갈게요','…그럼 차는 내가 끓이지. 우유는 나중에 붓는 걸로.'],['오늘은 그냥 같이 호수 봐요','호수를 본다라… 아무 이유 없이. 그런 건 처음일세.']],cg:'sherlock'},
@@ -1924,16 +1930,16 @@ const EV2={
  odette:[T(6,'모스크바','오데트의 짐'),O('odette','양파 지붕들이 금빛으로 물든 저녁. 해가 지자, 승강장의 백조 한 마리가 사람이 된다.'),
   L('odette',null,1,'오데트','해가 지면 저는 사람이 돼요. 그래서 저녁 열차를 좋아해요.',{pose:'in',fx:['spk']}),
   L('odette',null,1,'오데트','낮의 백조와 밤의 저, 어느 쪽이 진짜일까요. 둘 다 가짜 같아서… 그게 제 짐이에요.',{pose:'face'}),
-  L('odette','babayaga',2,'바바 야가','흐흐, 진짜 가짜를 따지는 아가씨로군. 자리 좀 빌리세. 절구가 고장 났거든.',{emo:'💢'}),
+  L('odette','babayaga',2,'바바 야가','허, 진짜 가짜를 따지는 아가씨로군. 자리 좀 빌리세. 절구가 고장 났거든.',{emo:'💢'}),
   L('odette','babayaga',2,'바바 야가','나 좀 보게. 아이들은 날 무서운 마녀라 하고, 길 잃은 아이한텐 길 알려 주는 할멈이라 하지. 둘 다 나야. 하나만 고를 필요 없어.'),
   L('odette','snowq',2,'눈의 여왕','저도… 차가운 저도, 차를 마시는 저도 있어요. 오늘 알았어요.'),
   {choice:[['둘 다 당신이에요','둘 다… 그럼 오늘 밤은 둘 다로 춤출래요.'],['한 번 춰 주세요','(오데트가 좁은 통로에서 한 바퀴 돈다. 깃털 하나가 천천히 떨어진다.)']],cg:'odette'},
-  L('odette','babayaga',2,'바바 야가','흐흐, 볼만하구먼. 내 오두막 앞에서도 한번 춰 주게.',{emo:'♪'}),
+  L('odette','babayaga',2,'바바 야가','볼만하구먼. 내 오두막 앞에서도 한번 춰 주게.',{emo:'♪'}),
   L('odette',null,1,'오데트','낮이 와도 무섭지 않을 것 같아요. 날개도 저니까요.',{emo:'✨',fx:['spk','glow']}),{item:'odette'},{item:'babayaga'}],
  wolf:[T(7,'독일 숲','늑대의 짐'),O('wolf','안개 낀 검은 숲. 빨간 망토를 두른 소녀가 커다란 회색 늑대의 앞발을 잡고 열차에 오른다.'),
-  L('wolf',null,1,'빨간 모자','안녕! 이쪽은 늑대 아저씨야. 무섭게 생겼지만 길 안내를 엄청 잘해!',{pose:'in',emo:'♪'}),
+  L('wolf',null,1,'빨간 모자','안녕하세요! 이쪽은 늑대 아저씨예요. 무섭게 생겼지만 길 안내를 엄청 잘해요!',{pose:'in',emo:'♪'}),
   L('wolf','hansel',2,'그레텔','오, 오빠… 늑대야…',{emo:'💦',shake:1}),
-  L('wolf',null,1,'늑대','…괜찮다. 익숙하다. 다들 내가 잡아먹을 줄 알지.',{pose:'face',emo:'…'}),
+  L('wolf',null,1,'늑대','…괜찮소. 익숙하오. 다들 내가 잡아먹을 줄 알지.',{pose:'face',emo:'…'}),
   L('wolf',null,1,'늑대','사실 난 할머니 댁 가는 길을 지켜 주는 쪽이오. 아무도 안 믿어 주지만. 그게 내 짐이오.'),
   L('wolf','hansel',2,'헨젤','…저희, 숲에서 길을 잃어 봤어요. 빵 부스러기는 새가 다 먹어 버렸고요.'),
   L('wolf','hansel',1,'늑대','(코를 킁킁) …너희 주머니에서 생강 과자 냄새가 나는군. 그 냄새면 어디서든 찾아 줄 수 있소.',{emo:'!'}),
@@ -1989,7 +1995,7 @@ function srcOf(x){return (x.startsWith('../')||x.startsWith('img/'))?x:P+x}
 function duoFit(){const W=innerWidth,H=innerHeight,mob=W/H<.75,duo=cg.classList.contains('duo');
   if(!duo){chFit();gCh.style.setProperty('--fl',1);return}
   for(const [im,x] of [[gCh,mob?28:30],[gCh2,mob?74:70]]){const ar=(im.naturalWidth/im.naturalHeight)||.6;let h=H*(mob?.56:.74);h=Math.min(h,W*(mob?.48:.36)/ar);h*=htK(im,im===gCh?gCh2:gCh);
-    im.style.height=h+'px';im.style.bottom=(mob?H*.12:-H*.01)+'px';im.style.left=x+'%'}
+    im.style.height=h+'px';im.style.bottom=(mob?H*.12:Math.min(H*.075,Math.max(-H*.01,H*.6-h)))+'px';im.style.left=x+'%'}
   gCh.style.setProperty('--fl',-1)}
 gCh2.addEventListener('load',duoFit);addEventListener('resize',duoFit);gCh.addEventListener('load',()=>setTimeout(duoFit,0));
 function emoAt(im,e){gEmo.textContent=e;gEmo.className='emo';if(!e||!im)return;const r=im.getBoundingClientRect();if(!r.width)return;
@@ -2125,7 +2131,7 @@ const SIGN={byeol:['🐾','Jua','#2f7f86'],gilldong:['🖌️','Nanum Myeongjo',
  sherlock:['🔍','Nanum Myeongjo','#5a3d22'],odette:['🤍','Gowun Batang','#a05a80'],wolf:['🐺','Do Hyeon','#b8312f'],sleeping:['🌹','Gowun Batang','#a23b55'],
  monster:['🔖','Jua','#5f6b47'],cinder:['👠','Gowun Batang','#5a6fb0'],mermaid:['🐚','Gaegu','#2f7f9e'],rabbit:['⏱️','Do Hyeon','#c0392b'],babayaga:['🧹','Jua','#2e6b3e']};
 const SIGN_T={babayaga:'길 잃으면 쓸어서 길을 내게 — 바바 야가'};
-function addSign(id){const sg=LS.get('bl_sign',{});if(sg[id])return false;sg[id]=(L3[id]&&L3[id][1])||SIGN_T[id]||(CAST[id].n);LS.set('bl_sign',sg);return true}
+function addSign(id){const sg=LS.get('bl_sign',{});if(sg[id])return false;sg[id]=String((L3[id]&&L3[id][1])||SIGN_T[id]||(CAST[id].n)).replace(/\{괴물\}/g,(LS.get('bl_mname','')||'괴물'));LS.set('bl_sign',sg);return true}
 function iga(n){const c=n.charCodeAt(n.length-1);return (c>=0xAC00&&c<=0xD7A3&&(c-0xAC00)%28)?'이':'가'}
 function signShot(id){return {fn:()=>{const fresh=addSign(id);gBox.classList.add('on');gWho.textContent='꼬리표 뒷면';const s=LS.get('bl_sign',{})[id];
   G('.fx.spk').classList.add('on');gType2(SIGN[id][0]+' '+CAST[id].n+iga(CAST[id].n)+' 당신의 꼬리표 뒷면에 사인을 남긴다.\n\n「'+s+'」'+(fresh?'\n\n(꼬리표 사인 '+Object.keys(LS.get('bl_sign',{})).length+'개)':''))}}}
@@ -2141,10 +2147,10 @@ const BYE={
    L('gyeonu','gilldong',2,'홍길동','망은 끝까지 봐 주지 못했구려. 미안하오.'),
    L('gyeonu','gilldong',1,'견우','아니오. 덕분에 처음으로 새벽이 무섭지 않았소.',{emo:'…'}),
    L('gyeonu','byeol',2,'별주부','헤어지는 날도 같이 산 날이오. 잊지 마시오.'),
-   {choice:[['일 년 뒤에 이 역에서 기다릴게요','(직녀) 약속이에요. 까치들한테도 말해 둘게요.'],['오늘도 같이 산 날이에요','(견우) …그래, 오늘도 같이 산 날이오. 고맙소.']]}],
+   {choice:[['일 년 뒤에 이 역에서 기다릴게요','약속이에요. 까치들한테도 말해 둘게요.'],['오늘도 같이 산 날이에요','오늘도 같이 산 날. 우리도 그렇게 기억할게요.']]}],
   end:N('gyeonu',null,'(기적이 울린다. 창밖에서 두 사람이 손을 흔든다. 까치 한 마리가 열차를 한참 따라 날아온다.)',{fx:['spk']})},
  babayaga:{t:'독일 숲',
-  s0:[N('babayaga',null,'(검은 숲 역에서 바바 야가가 절구를 끌고 내린다. 창 너머로 빗자루를 한 번 흔든다.)'),L('babayaga',null,1,'바바 야가','흐흐, 잘 가게, 젊은이.')],
+  s0:[N('babayaga',null,'(검은 숲 역에서 바바 야가가 절구를 끌고 내린다. 창 너머로 빗자루를 한 번 흔든다.)'),L('babayaga',null,1,'바바 야가','잘 가게, 젊은이.')],
   s:[N('babayaga',null,'열차가 검은 숲 역에 선다. 바바 야가가 절구를 챙긴다.'),
    L('babayaga',null,1,'바바 야가','흐흐, 내 오두막이 이 숲까지 걸어와 있구먼. 닭다리로 말이야. 여기서 내리네.',{pose:'in',emo:'💢'}),
    L('babayaga','odette',2,'오데트','할머니, 다음에 오두막 앞에서 춤출게요.'),
@@ -2163,7 +2169,7 @@ const BYE={
 function byeShots(id){const B=BYE[id],l=lv(AFF[id]||0);B.s.forEach(x=>{if(x.choice&&!x.rw)x.rw=CAST[id].n});
   if(l<2)return [{t:'title',text:'배웅',sub:CAST[id].n},...B.s0,B.end];
   const out=[{t:'title',text:'배웅 · '+B.t,sub:CAST[id].n},...B.s];
-  if(l>=3){out.push({cgb:id,say:'(친구가 당신의 손을 꼭 잡는다.)'});out.push(signShot(id));
+  if(l>=3){out.push({cgb:id,say:'(손을 꼭 잡는다. 생각보다 따뜻하다.)'});out.push(signShot(id));
     if(B.hid)out.push({choice:[['손 흔들며 배웅하기','(다시 열차에 오른다. 창 너머로 오래 손을 흔든다.)'],['나도 같이 내릴래요 · 숨은 엔딩','…정말이오? 그럼 같이 갑시다.']],onPick:k=>{if(k===1)hidPick=B.hid},rw:CAST[id].n})}
   out.push(B.end);return out}
 let hidPick=null;
@@ -2507,7 +2513,7 @@ const GAMES={
 /* ---------- 새로 쓴 1~3역 ---------- */
 Object.assign(EV2,{
  byeol:[T(1,'부산','별주부의 짐'),O('byeol','밤 부두. 등딱지만 한 트렁크를 끌고, 거북 한 마리가 열차에 오른다.'),
-  L('porter',null,1,'로봇 포터','{이름님}, 맞은편 자리에 손님 한 분 모시겠습니다. 짐이… 조금 많으신 분이에요.',{pose:'in'}),
+  L('porter',null,1,'로봇 포터','{이름님}, 맞은편 자리에 손님 한 분 모시겠습니다. 짐이… 조금 많으신 분입니다.',{pose:'in'}),
   L('byeol',null,1,'별주부','어이쿠, 앞자리 실례하오. 용궁에서 올라온 별주부라 하오.',{pose:'in'}),
   L('byeol',null,1,'별주부','이게 다 내 짐이오. 정확히는, 세 번 실패한 무게요.'),
   L('byeol',null,1,'별주부','용왕님 병에 토끼 간이 약이라기에 뭍으로 올라왔지. 첫 번째는 토끼한테 속았고,'),
@@ -2720,7 +2726,7 @@ Object.assign(EV2,{
   L('sherlock',null,1,'셜록 홈즈','실례하네. 설명은 필요 없네. 자네는 부산에서 탔고, 차를 두 잔 마셨고, 거북과 친구가 되었지.',{pose:'in'}),
   L('sherlock',null,1,'셜록 홈즈','어떻게 알았냐고? 소매에 바닷모래가 묻었고, 탁자에 찻잔 자국이 두 개일세. 기본이지.'),
   L('sherlock',null,1,'셜록 홈즈','…그런데 요즘은 그게 다일세. 풀 사건이 없네.',{pose:'face'}),
-  L('sherlock',null,1,'셜록 홈즈','사건이 없으면 나는 아무것도 아닌 사람 같아. 이 회중시계도 마지막 사건이 끝난 날 멈췄지.'),
+  L('sherlock',null,1,'셜록 홈즈','사건이 없으면 나는 아무것도 아닌 사람 같네. 이 회중시계도 마지막 사건이 끝난 날 멈췄지.'),
   N('sherlock',null,'(그가 멈춘 시계를 탁자에 올려놓는다. 바늘이 한곳을 가리킨 채 움직이지 않는다.)'),
   L('sherlock',null,1,'셜록 홈즈','그러니 부탁 하나 하지. 이 칸에 단서 세 개를 흘려 두었네. 찾아보게. 오랜만에 조수가 필요하거든.'),
   {game:'clue'},
@@ -2731,40 +2737,40 @@ Object.assign(EV2,{
   L('sherlock',null,1,'셜록 홈즈','그나저나 이 호수와 나는 아무 연결 고리가 없네. 포터 말로는 그게 단서라더군. 마음에 드는 말이야.'),
   L('sherlock',null,1,'셜록 홈즈','{이름}, 이제 자네 차례일세. 자네 짐을 맞혀 보지.',{pose:'face'}),
   L('sherlock',null,1,'셜록 홈즈','꼬리표에 적힌 걸 읽는 건 반칙이니, 눈을 보고 추리하겠네.',{ifJim:true}),
-  L('sherlock',null,1,'셜록 홈즈','자네는 할 일이 없으면 불안해지는 사람이야. 나처럼. 맞나?'),
+  L('sherlock',null,1,'셜록 홈즈','자네는 할 일이 없으면 불안해지는 사람일세. 나처럼. 맞나?'),
   {choice:[['딱 맞혔어요','(셜록의 눈이 반짝인다) 역시. 같은 종류의 사람이군. 그렇다면 오늘은 둘 다 쉬어 보세.','honest'],['반은 맞고 반은 틀렸어요','반이라. 내 탐정 인생 최고의 성적이군. 나머지 반은 런던까지 가며 맞혀 보겠네.','smile'],['셜록 씨도 쉬어도 돼요','…쉬어도 된다. (회중시계를 집어 든다) 이상하군. 그 말을 듣자마자 시계가 다시 가네.','kind']],cg:'sherlock'},
   N('sherlock',null,'(째깍. 멈췄던 시계가 다시 간다. 시계 뚜껑 안쪽에 접힌 종이가 끼워져 있다.)'),
-  L('sherlock',null,1,'셜록 홈즈','이건 내가 넣은 게 아니네. …흥미롭군. 아이 글씨야. 크레파스고.'),
+  L('sherlock',null,1,'셜록 홈즈','이건 내가 넣은 게 아니네. …흥미롭군. 아이 글씨일세. 크레파스로 썼어.'),
   {page:'sherlock'},
   L('sherlock',null,1,'셜록 홈즈','이제 조각이 다섯. 같은 손, 같은 크레파스. 이건 사건일세. 런던까지 풀 만한, 진짜 사건.',{pose:'face'}),
   {item:'sherlock'}],
  odette:[T(6,'모스크바','백조 오데트의 짐'),A('모스크바입니다. 백오십 년쯤 전, 이 도시의 극장에서 백조가 된 공주의 발레가 처음 무대에 올랐습니다.'),
   O('odette','노을 진 모스크바 승강장. 하얀 백조 한 마리가 내려앉더니, 발끝으로 선 발레리나가 된다.'),
-  L('odette',null,1,'백조 오데트','안녕하세요! 해가 진 동안에만 사람으로 있을 수 있어요. 그래서 늘 서둘러요.',{pose:'in'}),
-  L('odette',null,1,'백조 오데트','낮에는 백조예요. 마법에 걸려서요.'),
-  L('odette',null,1,'백조 오데트','사람들은 밤의 저만 알아요. 낮의 제 모습을 보면 다들 떠날까 봐… 그게 제 짐이에요.',{pose:'face'}),
+  L('odette',null,1,'오데트','안녕하세요! 해가 진 동안에만 사람으로 있을 수 있어요. 그래서 늘 서둘러요.',{pose:'in'}),
+  L('odette',null,1,'오데트','낮에는 백조예요. 마법에 걸려서요.'),
+  L('odette',null,1,'오데트','사람들은 밤의 저만 알아요. 낮의 제 모습을 보면 다들 떠날까 봐… 그게 제 짐이에요.',{pose:'face'}),
   N('odette','babayaga','(통로로 절구를 탄 할머니가 쿵쿵 지나간다.)'),
   L('odette','babayaga',2,'바바 야가','흥, 낮이든 밤이든 깃털 빠지는 건 똑같구나. 통로 쓸기 귀찮으니 날개는 접고 다니거라.'),
-  L('odette','babayaga',1,'백조 오데트','(웃음을 참는다) 네, 할머니.'),
+  L('odette','babayaga',1,'오데트','(웃음을 참는다) 네, 할머니.'),
   N('odette',null,'(바바 야가가 빗자루로 깃털을 쓸어 담으며 다음 칸으로 사라진다.)'),
-  L('odette',null,1,'백조 오데트','저기, 춤 하나 가르쳐 드릴까요? 깃털이 빛나는 순서대로만 따라 하면 돼요.'),
+  L('odette',null,1,'오데트','저기, 춤 하나 가르쳐 드릴까요? 깃털이 빛나는 순서대로만 따라 하면 돼요.'),
   {game:'feather'},
-  L('odette',null,1,'백조 오데트','완벽해요! 처음인데 발끝이 예뻐요.'),
+  L('odette',null,1,'오데트','완벽해요! 처음인데 발끝이 예뻐요.'),
   N('odette','sherlock','(뒤 칸에서 셜록이 박수를 치며 들어온다.)'),
   L('odette','sherlock',2,'셜록 홈즈','추리하자면, 자네는 백조일 때도 똑같이 우아하네. 깃털 각도가 증거일세.'),
-  L('odette','sherlock',1,'백조 오데트','…백조인 저를 본 적 있어요?'),
+  L('odette','sherlock',1,'오데트','…백조인 저를 본 적 있어요?'),
   L('odette','sherlock',2,'셜록 홈즈','모스크바 하늘을 두 바퀴 돌더군. 나는 눈이 좋거든.'),
-  L('odette',null,1,'백조 오데트','{이름님}도 사람들 앞에서 숨기는 모습이 있어요?',{pose:'face'}),
+  L('odette',null,1,'오데트','{이름님}도 사람들 앞에서 숨기는 모습이 있어요?',{pose:'face'}),
   {choice:[['있어요. 아무도 몰랐으면 해요','(오데트가 손을 잡는다) 그럼 우리 둘만 아는 비밀로 해요. 비밀이 혼자면 외롭지만, 둘이면 약속이 돼요.','honest'],['숨겨도 결국 들키더라고요','(오데트가 웃는다) 맞아요. 그리고 들켜도, 생각보다 아무 일도 안 일어나요.','tough'],['오데트 씨는 둘 다 예뻐요','…둘 다요? (깃털 하나가 반짝인다) 그 말, 아침까지 기억할게요.','kind']],cg:'odette'},
   N('odette',null,'(오데트가 춤을 마치자, 발치에 깃털 대신 종이 한 장이 떨어진다.)'),
-  L('odette',null,1,'백조 오데트','이건 제 발레 신발 안에 있던 거예요. 늘 넣고 췄어요. 무섭지 않게.'),
+  L('odette',null,1,'오데트','이건 제 발레 신발 안에 있던 거예요. 늘 넣고 췄어요. 무섭지 않게.'),
   {page:'odette'},
-  L('odette',null,1,'백조 오데트','이 글씨… 이제 알 것 같아요. 우리 모두를 응원해 준 아이가 있었던 거예요.'),
+  L('odette',null,1,'오데트','이 글씨… 이제 알 것 같아요. 우리 모두를 응원해 준 아이가 있었던 거예요.'),
   N(null,null,'(뒤 칸에서 셜록의 목소리가 들린다. 「조수의 정체를 알았네. 자네는 발레 선생이야!」 …아니다.)'),
   {item:'odette'}],
  wolf:[T(7,'검은 숲','늑대와 빨간 모자의 짐'),A('독일 검은 숲입니다. 이백 년 전, 두 형제가 이 근방 마을을 돌며 옛이야기를 받아 적었다고 합니다. 빨간 모자 이야기도 그중 하나였지요.'),
   O('wolf','안개 낀 숲속 승강장. 빨간 망토의 아이가 커다란 회색 늑대의 앞발을 꼭 잡고 열차에 오른다.'),
-  L('wolf',null,1,'빨간 모자','안녕! 이쪽은 늑대 아저씨야. 무섭게 생겼지만 길 안내를 엄청 잘해!',{pose:'in'}),
+  L('wolf',null,1,'빨간 모자','안녕하세요! 이쪽은 늑대 아저씨예요. 무섭게 생겼지만 길 안내를 엄청 잘해요!',{pose:'in'}),
   L('wolf',null,1,'늑대','…크흠. 익숙하오. 다들 내가 잡아먹을 줄 알지.'),
   L('wolf',null,1,'늑대','이야기 속에서 나는 늘 할머니를 삼키는 쪽이었소. 사실은 할머니 댁 가는 길을 지켜 주는 쪽인데. 아무도 안 믿어 주지.',{pose:'face'}),
   L('wolf',null,1,'빨간 모자','난 믿어! 아저씨 꼬리 흔들 때 완전 강아지 같거든.'),
@@ -2906,7 +2912,7 @@ Object.assign(EV2,{
   L('rabbit',null,1,'흰 토끼','…아무 일도 안 일어났어요. 늦지도 않았고, 아무도 실망하지 않았어요.'),
   L('rabbit',null,1,'흰 토끼','시계를 내려놓으니까 오히려 시간이 맞더라고요. 이상하죠?'),
   N('rabbit','sherlock','(셜록이 맞은편에 앉으며 파이프를 내려놓는다.)'),
-  L('rabbit','sherlock',2,'셜록 홈즈','{이름}, 마지막 추리를 하지. 자네는 이 기차의 손님이 아니야.'),
+  L('rabbit','sherlock',2,'셜록 홈즈','{이름}, 마지막 추리를 하지. 자네는 이 기차의 손님이 아닐세.'),
   L('rabbit','sherlock',2,'셜록 홈즈','자네는 이 책을 읽어 주던 아이였네. 우리 이야기 귀퉁이마다 낙서를 해 주던. 이번엔 틀리지 않았지?'),
   L('rabbit',null,1,'흰 토끼','{이름님}, 이제 좀 늦어도 괜찮아요?',{pose:'face'}),
   {choice:[['네. 조금 늦어도 괜찮아요','(흰 토끼가 회중시계를 닫는다) 그럼 저도요. 우리 둘 다 오늘부터 지각생이에요.','tough'],['아직은 무서워요. 그래도 해 볼게요','(흰 토끼가 시계 태엽 하나를 건넨다) 무서울 때마다 이걸 쥐어요. 「조금 늦어도 괜찮아」라고 새겨 뒀어요.','honest'],['토끼 씨가 먼저 쉬어요','(흰 토끼가 웃으며 찻잔을 든다) 손님한테 양보받은 건 처음이에요. 그럼 한 잔만 더요.','kind']],cg:'rabbit'},

@@ -9,17 +9,20 @@ canvas{display:block;width:100vw;height:100vh;height:100dvh}
  font:600 12px/1.35 "Apple SD Gothic Neo","Noto Sans KR",sans-serif;border:2px solid #3a2a1c;border-radius:3px;box-shadow:3px 3px 0 #3a2a1c;transform:rotate(-1.5deg)}
 #tag b{display:block;font-size:15px;letter-spacing:-.02em}
 #tag::before{content:"";position:absolute;left:-7px;top:50%;width:8px;height:8px;margin-top:-4px;border:2px solid #3a2a1c;border-radius:50%;background:#0d2230}
-#hint{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);color:#f6e9c8;
+#hint{position:fixed;left:50%;bottom:calc(52px + env(safe-area-inset-bottom));transform:translateX(-50%);color:#f6e9c8;
  font:500 12px "Apple SD Gothic Neo","Noto Sans KR",sans-serif;opacity:.85;text-shadow:0 1px 2px #000a;white-space:nowrap;transition:opacity 1s}
 #tag i{display:block;font-style:normal;font-weight:500;font-size:11px;opacity:.8;margin-top:1px}
 #dev{position:fixed;left:12px;right:12px;bottom:calc(40px + env(safe-area-inset-bottom));display:none;gap:8px;align-items:center;background:#f3e6c4;border:2px solid #3a2a1c;border-radius:4px;padding:6px 10px;font:600 12px 'Apple SD Gothic Neo',sans-serif;color:#3a2a1c}
 #dev input{flex:1}
 #back{position:fixed;right:14px;top:calc(12px + env(safe-area-inset-top));display:none;background:#f3e6c4;color:#3a2a1c;border:2px solid #3a2a1c;box-shadow:2px 2px 0 #3a2a1c;border-radius:3px;padding:6px 11px;font:700 13px "Apple SD Gothic Neo",sans-serif}
 #vig{position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse 75% 70% at 50% 55%,transparent 55%,rgba(4,14,20,.42) 100%)}
+#snd{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));background:#f3e6c4;color:#3a2a1c;border:2px solid #3a2a1c;box-shadow:2px 2px 0 #3a2a1c;border-radius:3px;padding:6px 11px;font:700 13px 'Apple SD Gothic Neo',sans-serif;z-index:3}
+#snd.on{background:#3a2a1c;color:#f3e6c4}
 </style></head><body>
 <div id="tag"><b>부산</b><span id="tagS">그림 겹 무대 · 시험판</span><i id="tagI"></i></div>
 <div id="dev"><span>출발 후</span><input id="devR" type="range" min="0" max="91.9" step="0.1"><span id="devV"></span></div>
 <div id="vig"></div>
+<button id="snd">♪ 소리 켜기</button>
 <button id="back">← 열차 전체</button>
 <div id="hint">옆으로 끌어서 열차 둘러보기 · 칸을 누르면 가까이</div>
 <script type="module">
@@ -54,6 +57,17 @@ function mat(t,tint,fx){fx=Object.assign({haze:0,sat:1,bri:1,blur:0,hc:[.06,.17,
     gl_FragColor=vec4(col,c.a);
   #include <colorspace_fragment>
   }`})}
+function carMat(t,r){return new THREE.ShaderMaterial({transparent:true,depthWrite:false,depthTest:false,
+  uniforms:{map:{value:t},r:{value:new THREE.Vector4(...r)},glow:{value:1}},vertexShader:VS,
+  fragmentShader:`uniform sampler2D map;uniform vec4 r;uniform float glow;varying vec2 vUv;
+  void main(){vec4 c=texture2D(map,vUv);vec3 col=c.rgb;float l=dot(col,vec3(.299,.587,.114));
+    float inR=step(r.x,vUv.x)*step(vUv.x,r.z)*step(r.y,vUv.y)*step(vUv.y,r.w);
+    vec3 night=mix(vec3(l),col,.62)*vec3(.52,.6,.78);            // 달빛 받은 바깥 몸체
+    vec3 warm=mix(vec3(l),col,.9)*vec3(1.08,.96,.8)*glow;       // 불 켜진 실내
+    col=mix(night,warm,inR);
+    gl_FragColor=vec4(col,c.a);
+  #include <colorspace_fragment>
+  }`})}
 function plane(t,w,h,tint,fx){return new THREE.Mesh(new THREE.PlaneGeometry(w,h),mat(t,tint,fx))}
 
 /* ---------- 맨 뒤 그림: 화면에 고정된 무한히 먼 풍경 (하늘·달·먼 불빛·바다) ---------- */
@@ -76,7 +90,12 @@ function backdrop(cutBelow){
       float w=water*(1.-smoothstep(0.,.4,v));
       u+=sin(t*1.1+v*260.)*.0009*water+sin(t*.7+s.y*120.)*.0006*water;
       vec4 c=texture2D(map,vec2(clamp(u,.001,.999),v));
-      vec3 col=c.rgb;float l=dot(col,vec3(.299,.587,.114));col=mix(vec3(l),col,.82);col=mix(col,vec3(.07,.18,.22),only>.5?.22:.14);
+      vec3 col=c.rgb;float l=dot(col,vec3(.299,.587,.114));
+      vec2 cell=floor(vec2(u*900.,v*300.));float hsh=fract(sin(dot(cell,vec2(12.9898,78.233)))*43758.5453);
+      vec2 md=vec2((u-${F.moonU})*IW,(v-${(1-171/640).toFixed(3)})*IH)/IH;float dm=length(md);
+      if(water<.5&&l>.62&&dm>.16){col*=.78+.22*sin(t*(1.2+hsh*2.5)+hsh*40.);}
+      col+=vec3(1.,.82,.6)*(.16*exp(-dm*9.)+.05*exp(-dm*3.))*(1.-water)*(.92+.08*sin(t*.6));
+      l=dot(col,vec3(.299,.587,.114));col=mix(vec3(l),col,.82);col=mix(col,vec3(.07,.18,.22),only>.5?.22:.14);
       gl_FragColor=vec4(col,1.);
       #include <colorspace_fragment>
     }`});
@@ -102,10 +121,24 @@ const train=new THREE.Group();scene.add(train);
 const cars=[];let x=0;
 for(const [k,name] of ORDER){
   const w=(k==='loco'?2856:1640)*PX,h=(k==='loco'?680:550)*PX;
-  const p=plane(tex('car_'+k+'.webp'),w,h,[.9,.92,.98],{sat:.82,bri:.96});p.renderOrder=6;
+  const p=new THREE.Mesh(new THREE.PlaneGeometry(w,h),carMat(tex('car_'+k+'.webp'),k==='loco'?[2163/2856,1-556/680,2577/2856,1-278/680]:[193/1640,1-418/550,1449/1640,1-47/550]));p.renderOrder=6;
   p.position.set(x+w/2,h/2-0.03,0);p.userData={k,name,w,h,ph:Math.random()*6};train.add(p);cars.push(p);x+=w-0.22;
 }
 const TRAINW=x;train.position.x=-TRAINW/2;
+
+/* ---------- 불빛: 칸 안에서 새어 나오는 빛 ---------- */
+function glowTex(){const c=document.createElement('canvas');c.width=c.height=128;const g=c.getContext('2d');
+  const r=g.createRadialGradient(64,64,0,64,64,64);r.addColorStop(0,'rgba(255,214,150,1)');r.addColorStop(.45,'rgba(255,190,120,.35)');r.addColorStop(1,'rgba(255,170,100,0)');
+  g.fillStyle=r;g.fillRect(0,0,128,128);const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;return t}
+const GT=glowTex();
+function glowSpr(w,h,a){const m=new THREE.MeshBasicMaterial({map:GT,transparent:true,opacity:a,blending:THREE.AdditiveBlending,depthWrite:false,depthTest:false});
+  const q=new THREE.Mesh(new THREE.PlaneGeometry(w,h),m);return q}
+const glows=[];
+for(const c of cars){if(c.userData.k==='loco')continue;const W=c.userData.w;
+  const b=glowSpr(W*0.95,c.userData.h*1.1,.22);b.position.set(c.position.x,c.userData.h*.47,0.02);b.renderOrder=6.5;train.add(b);
+  const sp=glowSpr(W*1.15,1.6,.4);sp.position.set(c.position.x,0.05,0.5);sp.renderOrder=5.5;train.add(sp);
+  glows.push([b,sp,Math.random()*9]);}
+
 function person([file,car,fx,hgt]){
   const c=cars.find(c=>c.userData.k===car);const p=plane(tex(file),1,1);p.renderOrder=7;p.visible=false;
   const im=new Image();im.onload=()=>{p.scale.set(hgt*im.width/im.height,hgt,1);p.visible=true};im.src='img/'+file;
@@ -166,12 +199,36 @@ if(Q.has('dev')){const d=document.getElementById('dev'),r=document.getElementByI
   const sync=()=>{const h=(vnow()-dep)/HR;r.value=h;v.textContent=h.toFixed(1)+'시간'};sync();
   r.oninput=()=>{OFF=dep+parseFloat(r.value)*HR-Date.now();v.textContent=(+r.value).toFixed(1)+'시간';clock()}}
 
+
+/* ---------- 소리: 덜컹덜컹 + 파도 (직접 합성) ---------- */
+let AC=null,MG=null,sndOn=false,nextClack=0;
+function noiseBuf(ac,sec){const b=ac.createBuffer(1,ac.sampleRate*sec,ac.sampleRate),d=b.getChannelData(0);let last=0;
+  for(let i=0;i<d.length;i++){const w=Math.random()*2-1;last=(last+0.02*w)/1.02;d[i]=last*3.5}return b}
+function initSound(){AC=new (window.AudioContext||window.webkitAudioContext)();MG=AC.createGain();MG.gain.value=0;MG.connect(AC.destination);
+  // 파도
+  const n=AC.createBufferSource();n.buffer=noiseBuf(AC,6);n.loop=true;const lp=AC.createBiquadFilter();lp.type='lowpass';lp.frequency.value=650;
+  const wg=AC.createGain();wg.gain.value=.22;const lfo=AC.createOscillator();lfo.frequency.value=.09;const lg=AC.createGain();lg.gain.value=.14;lfo.connect(lg);lg.connect(wg.gain);
+  n.connect(lp);lp.connect(wg);wg.connect(MG);n.start();lfo.start();
+  // 객실 웅웅
+  const h=AC.createBufferSource();h.buffer=noiseBuf(AC,4);h.loop=true;const hp=AC.createBiquadFilter();hp.type='lowpass';hp.frequency.value=140;const hg=AC.createGain();hg.gain.value=.35;
+  h.connect(hp);hp.connect(hg);hg.connect(MG);h.start();
+  nextClack=AC.currentTime+.2}
+function clack(at,v){const b=AC.createBufferSource();b.buffer=noiseBuf(AC,.08);const bp=AC.createBiquadFilter();bp.type='bandpass';bp.frequency.value=1500;bp.Q.value=1.4;
+  const g=AC.createGain();g.gain.setValueAtTime(v*.5,at);g.gain.exponentialRampToValueAtTime(.001,at+.07);b.connect(bp);bp.connect(g);g.connect(MG);b.start(at);
+  const o=AC.createOscillator();o.frequency.setValueAtTime(90,at);o.frequency.exponentialRampToValueAtTime(45,at+.12);const og=AC.createGain();og.gain.setValueAtTime(v*.55,at);og.gain.exponentialRampToValueAtTime(.001,at+.14);
+  o.connect(og);og.connect(MG);o.start(at);o.stop(at+.16)}
+function soundTick(){if(!AC||!sndOn)return;while(nextClack<AC.currentTime+.5){const c=nextClack;clack(c,.9);clack(c+.13,.7);clack(c+1.05,.85);clack(c+1.18,.65);nextClack+=2.1}}
+setInterval(soundTick,200);
+const sb=document.getElementById('snd');sb.onclick=e=>{e.stopPropagation();if(!AC)initSound();sndOn=!sndOn;AC.resume();
+  MG.gain.cancelScheduledValues(AC.currentTime);MG.gain.linearRampToValueAtTime(sndOn?.55:0,AC.currentTime+.8);if(sndOn)nextClack=Math.max(nextClack,AC.currentTime+.1);
+  sb.textContent=sndOn?'♪ 소리 끄기':'♪ 소리 켜기';sb.classList.toggle('on',sndOn)};
+
 /* ---------- 매 프레임 ---------- */
 const SPEED=7;let travel=0,last=performance.now();const T0=last;const pv=new THREE.Vector3();
 function frame(now){
   const dt=Math.min(.05,(now-last)/1000);last=now;const t=(now-T0)/1000;travel+=SPEED*dt;
   const L=1-Math.pow(.02,dt);camX+=(tgtX-camX)*L;dist+=(tgtD-dist)*L;
-  const eye=eyeAt(dist);cam.position.set(camX,eye,dist);cam.lookAt(camX,eye,0);cam.updateMatrixWorld();
+  const eye=eyeAt(dist)+Math.sin(t*.21)*.06;const cx=camX+Math.sin(t*.13)*.25;cam.position.set(cx,eye,dist);cam.lookAt(cx,eye,0);cam.updateMatrixWorld();
   far.material.uniforms.t.value=nearWater.material.uniforms.t.value=t;
   // 가운데 겹: 위쪽 끝을 기본 화면의 수평선 바로 아래에
   const dm=fitD()-M.z, top=eyeAt(fitD())-M.topBelowHz*vh(dm);
@@ -181,6 +238,7 @@ function frame(now){
   // 가까운 바다: 둑 아래만
   pv.set(camX,SEA+0.25,0.4).project(cam);nearWater.material.uniforms.cut.value=pv.y*.5+.5;
   for(const c of cars)c.position.y=c.userData.h/2-0.03+Math.sin(t*9+c.userData.ph)*0.012;
+  for(const [b,sp,ph] of glows){const f=1+Math.sin(t*1.7+ph)*.05+Math.sin(t*7.3+ph*2)*.025;b.material.opacity=.22*f;sp.material.opacity=.4*f}
   for(const p of ppl)p.position.y=p.userData.base+Math.abs(Math.sin(t*2.2+p.userData.ph))*0.03;
   R.render(scene,cam);requestAnimationFrame(frame);
 }

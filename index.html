@@ -417,7 +417,7 @@ body.intro #tag,body.intro #snd,body.intro #seat,body.intro #ambB,body.intro #al
 <button id="seat" class="pbtn">내 창가 자리 →</button>
 <div id="hint">옆으로 끌어서 둘러보기 · 칸을 누르면 가까이</div>
 <script type="module">
-import * as THREE from './three.module.js';
+import * as THREE from './three.min.js';
 import {SEG,TRIP_H,lastDeparture,where} from './timetable.js';
 /* ================= 구간 설정 (구간마다 이것만 바꾸면 됨) ================= */
 const SCENE={
@@ -428,8 +428,9 @@ const SCENE={
   ppl:[['pf_p02.webp','dine',.62,1.32]]
 };
 /* ======================================================================= */
-const R=new THREE.WebGLRenderer({antialias:true});
-R.setPixelRatio(Math.min(devicePixelRatio,2));R.outputColorSpace=THREE.SRGBColorSpace;
+const LOWP=/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent)||innerWidth<700;
+const R=new THREE.WebGLRenderer({antialias:!LOWP,powerPreference:'high-performance'});
+R.setPixelRatio(Math.min(devicePixelRatio,LOWP?1.5:2));R.outputColorSpace=THREE.SRGBColorSpace;
 document.body.prepend(R.domElement);
 const scene=new THREE.Scene();
 const cam=new THREE.PerspectiveCamera(30,1,0.5,6000);

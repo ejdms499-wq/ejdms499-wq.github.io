@@ -158,8 +158,9 @@ body.talk #snd,body.talk #trk,body.talk #seat{opacity:.0;pointer-events:none}
 #cg .chs{display:flex;flex-direction:column;gap:6px;margin-top:8px}
 #cg .chs button{text-align:left}
 #cg .mk{position:absolute;right:12px;bottom:6px;font-size:11px;opacity:.6;animation:bob 1.2s infinite}
-#cg .item{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%) scale(0);z-index:7;width:min(300px,80vw);padding:16px;text-align:center;transition:transform .6s cubic-bezier(.2,1.5,.4,1)}
+#cg .item{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(0);z-index:7;width:min(300px,80vw);padding:16px;text-align:center;transition:transform .6s cubic-bezier(.2,1.5,.4,1)}
 #cg .item.on{transform:translate(-50%,-50%) scale(1) rotate(-2deg)}
+#cg.itm .stage{filter:brightness(.35) blur(3px);transition:filter .5s}#cg .stage{transition:filter .5s}
 #cg .item b{display:block;font-size:17px;margin:6px 0 4px}
 #cg .item .ic{font-size:40px;line-height:1}
 #cg .item p{margin:0;font-size:13px;line-height:1.5}
@@ -334,7 +335,7 @@ body.amb #ambX{display:block}body.amb.wake #ambX{opacity:1}
 @media (max-width:420px){#postB{right:auto;left:112px;bottom:calc(56px + env(safe-area-inset-bottom))}}
 body.talk #postB,body.amb #postB{opacity:0;pointer-events:none}
 #mailT{position:fixed;left:50%;top:calc(76px + env(safe-area-inset-top));transform:translate(-50%,-160%);z-index:24;display:flex;gap:10px;align-items:center;padding:10px 16px;cursor:pointer;transition:transform .6s cubic-bezier(.2,1.3,.4,1);max-width:calc(100vw - 24px);font-family:"Apple SD Gothic Neo",sans-serif}
-#mailT.on{transform:translate(-50%,0) rotate(-1deg)}
+#mailT{visibility:hidden;opacity:0}#mailT.on{transform:translate(-50%,0) rotate(-1deg);visibility:visible;opacity:1}
 #mailT b{font-size:22px}#mailT span{font-weight:800;font-size:14px}#mailT small{display:block;font-size:11px;opacity:.65;margin-left:auto;white-space:nowrap}
 #post{position:fixed;inset:0;z-index:25;background:rgba(6,16,22,.6);display:none;align-items:center;justify-content:center;padding:14px}
 #post.on{display:flex}
@@ -363,6 +364,36 @@ body.talk #postB,body.amb #postB{opacity:0;pointer-events:none}
 .nt p{margin:0;word-break:break-all}.nt span{position:absolute;left:12px;bottom:5px;font:11px "Apple SD Gothic Neo",sans-serif;opacity:.55}
 .nt button{position:absolute;right:6px;bottom:3px;background:none;border:0;font:11px "Apple SD Gothic Neo",sans-serif;opacity:.45;cursor:pointer;color:#3a2a1c}
 .sos{margin:8px 0;padding:10px 12px;background:#fff2e6;border:2px solid #b8432f;border-radius:3px;font-size:13.5px;line-height:1.55;color:#3a1d12}.sos a{font-weight:800;color:#b8432f}
+
+/* ===== 인트로: 꼬리표 ===== */
+#intro{position:fixed;inset:0;z-index:45;display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:18px;
+ background:radial-gradient(ellipse at 50% 30%,rgba(243,199,106,.16),transparent 55%),radial-gradient(ellipse at 50% 120%,rgba(47,127,134,.25),transparent 60%),#0b1418;font-family:"Apple SD Gothic Neo",sans-serif}
+#intro.on{display:flex}
+.iTop{text-align:center;color:#e7dcc2}.iTop small{letter-spacing:3px;font-size:11px;opacity:.6}.iTop p{margin:6px 0 0;min-height:24px;font:700 17px/1.4 "Gowun Batang","Apple SD Gothic Neo",serif;color:#f3e6c4}
+.iTagW{position:relative;padding-top:56px}
+.iStr{position:absolute;left:50%;top:0;width:2px;height:74px;background:linear-gradient(#0000,#c9b08a 30%);transform-origin:50% 0;animation:iSw 4.5s ease-in-out infinite}
+.iTag{position:relative;width:min(380px,84vw);padding:44px 22px 18px;background:repeating-linear-gradient(0deg,rgba(90,61,34,.05) 0 1px,transparent 1px 4px),#d8b98a;color:#3a2a1c;
+ clip-path:polygon(18% 0,82% 0,100% 11%,100% 100%,0 100%,0 11%);box-shadow:0 18px 40px rgba(0,0,0,.45);transform-origin:50% -40px;animation:iSw 4.5s ease-in-out infinite;filter:drop-shadow(0 10px 18px rgba(0,0,0,.4))}
+@keyframes iSw{0%,100%{transform:rotate(-2.2deg)}50%{transform:rotate(2.2deg)}}
+.iTag.shk{animation:shk .4s}
+.iTag.zoom{animation:none;transition:transform 1.5s cubic-bezier(.6,0,.2,1);transform:scale(9)}
+.iHole{position:absolute;left:50%;top:14px;width:20px;height:20px;margin-left:-10px;border-radius:50%;background:#0b1418;box-shadow:0 0 0 5px #b8a27a,0 0 0 7px #8a7350;transition:box-shadow .4s,background .4s}
+.iHole.lit{background:#ffe6a8;box-shadow:0 0 0 5px #b8a27a,0 0 0 7px #8a7350,0 0 30px 12px rgba(255,214,140,.85)}
+.iHd{display:flex;justify-content:space-between;align-items:center;font:800 20px "Do Hyeon","Apple SD Gothic Neo",sans-serif;letter-spacing:1px;border-bottom:2px solid #3a2a1c;padding-bottom:6px}
+.iHd span{font-size:12px;opacity:.7}
+.iSub{font-size:11px;letter-spacing:2px;margin:6px 0 12px;opacity:.75;text-align:center}
+.iTag label{display:block;font-size:11px;font-weight:800;letter-spacing:1px;opacity:.75}
+.iTag textarea{width:100%;height:76px;resize:none;border:0;border-bottom:1.5px dashed #3a2a1c;background:repeating-linear-gradient(180deg,transparent 0 25px,rgba(58,42,28,.28) 25px 26px);font:20px/26px "Gaegu","Apple SD Gothic Neo",sans-serif;color:#2b1e12;outline:none;padding:0;margin:4px 0 10px;box-sizing:border-box}
+.iTag textarea::placeholder{color:rgba(58,42,28,.45)}
+.iRow{display:flex;justify-content:space-between;font-size:12px}.iRow b em{font-style:normal}
+.iStamp{position:absolute;right:16px;bottom:34px;width:96px;height:96px;border:3px solid #b8312f;border-radius:50%;color:#b8312f;display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(-14deg) scale(2.4);opacity:0;font-family:"Do Hyeon",sans-serif;mix-blend-mode:multiply;pointer-events:none}
+.iStamp b{font-size:24px;line-height:1}.iStamp span{font-size:14px}.iStamp small{font-size:10px;letter-spacing:1px}
+.iStamp.on{animation:iSt .35s cubic-bezier(.3,1.6,.5,1) forwards}
+@keyframes iSt{to{transform:rotate(-14deg) scale(1);opacity:.9}}
+.iBtns{display:flex;flex-direction:column;align-items:center;gap:6px;width:min(380px,84vw)}
+.iBtns .pbtn2{width:100%}.iBtns .ckSkip{color:#e7dcc2;opacity:.6}
+#iSos .sos{margin-top:4px}
+body.intro #tag,body.intro #snd,body.intro #seat,body.intro #ambB,body.intro #albB,body.intro #postB,body.intro #trk{opacity:0;pointer-events:none}
 </style></head><body>
 <div id="tag"><b>부산</b><span id="tagS">그림 겹 무대 · 시험판</span><i id="tagI"></i></div>
 <div id="dev"><span>출발 후</span><input id="devR" type="range" min="0" max="91.9" step="0.1"><span id="devV"></span></div>
@@ -576,6 +607,7 @@ el.addEventListener('pointercancel',e=>ptrs.delete(e.pointerId));
 el.addEventListener('wheel',e=>{e.preventDefault();if(MODE!=='out')return;tgtD=Math.max(minD,Math.min(maxD,tgtD*(1+e.deltaY*0.001)));focus=null},{passive:false});
 const ray=new THREE.Raycaster(),v2=new THREE.Vector2(),tagB=document.querySelector('#tag b'),back=document.getElementById('back');
 function tap(e){if(MODE!=='out')return;v2.set(e.clientX/innerWidth*2-1,-(e.clientY/innerHeight)*2+1);ray.setFromCamera(v2,cam);
+  {const vis=PIT_M.filter(m=>m.visible);const hp=ray.intersectObjects(vis)[0];if(hp){invite(hp.object.userData.id);return}}
   const h=ray.intersectObjects(cars)[0];if(!h)return;const c=h.object;focus=c;tgtX=train.position.x+c.position.x;clampX();
   const a=innerWidth/innerHeight;tgtD=Math.max(minD,Math.min(maxD,Math.max(c.userData.h*2.2/(2*TAN),c.userData.w*1.08/(2*TAN*a))));
   tagB.textContent=c.userData.name;tagS.textContent='';tagI.textContent='';back.style.display='block';seatB.textContent='이 칸 창가에 앉기 →';hint()}
@@ -808,7 +840,26 @@ function paxSet(id){if(id===paxId)return;paxId=id;const c=CAST[id];
 paxT.onclick=e=>{e.stopPropagation();talk()};
 /* 놓친 승객 대기열: 지나온 구간의 승객 중 아직 인사 못 한 사람이 먼저 맞은편에 앉는다 (순서대로) */
 const PQ=[['byeol','busan'],['gilldong','seoul'],['gyeonu','cloud'],['snowq','snow'],['sherlock','baikal'],['babayaga','taiga'],['odette','moscow'],['hansel','plain'],['wolf','forest'],['sleeping','castle'],['monster','alps'],['cinder','paris'],['mermaid','sea'],['rabbit','england']];
-function seatWho(w){const met=LS.get('bl_met',{});for(const [id,sg] of PQ){const s=SEG.find(x=>x.id===sg);if(s&&s.h<=w.h&&!met[id]&&CAST[id])return id}return SEAT[w.seg.id]}
+function boarded(id,w){const q=PQ.find(x=>x[0]===id);if(!q)return false;const sg=SEG.find(x=>x.id===q[1]);return !!sg&&(w.mode==='end'||sg.h<=w.h)}
+function seatWho(w){const met=LS.get('bl_met',{}),ev=LS.get('bl_ev',{});
+  if(COMP&&performance.now()-COMP.t<30*6e4&&boarded(COMP.id,w))return COMP.id;
+  for(const [id,sg] of PQ){if(CAST[id]&&boarded(id,w)&&(!met[id]||(EV[id]&&!ev[id])))return id}return SEAT[w.seg.id]}
+/* 승객은 내리지 않고 열차에 남는다: 탄 승객은 자기 칸에 보이고, 누르면 내 창가 자리로 초대 */
+let COMP=null;
+const HOME={sherlock:['case',.62],gilldong:['case',.3],byeol:['dine',.24],hansel:['dine',.44],babayaga:['dine',.82],gyeonu:['dome',.28],snowq:['dome',.55],odette:['dome',.8],
+  wolf:['tail',.3],sleeping:['tail',.66],monster:['post',.26],mermaid:['post',.55],rabbit:['post',.82],cinder:['sleep',.7]};
+const PIT={},PIT_M=[];
+function pitTick(){let w=where(dep,vnow());if(w.mode==='wait'){for(const id in PIT)PIT[id].visible=false;return}if(w.mode==='end')w=where(dep,dep+(TRIP_H-.01)*HR);
+  for(const id in HOME){const on=TRIP&&boarded(id,w);let m=PIT[id];
+    if(on&&!m){const [ck,fx]=HOME[id],c=cars.find(x=>x.userData.k===ck);if(!c||!CAST[id])continue;const src=(CAST[id].img.startsWith('img/')?CAST[id].img.slice(4):'px/'+CAST[id].img);
+      m=plane(tex(src),1,1);m.renderOrder=7;m.visible=false;m.userData={id,ph:Math.random()*6};const im=new Image();
+      im.onload=()=>{const H=1.3;m.scale.set(H*im.width/im.height,H,1);m.position.set(c.position.x-c.userData.w/2+c.userData.w*fx,0.93+H/2,0.05);m.userData.base=m.position.y;m.userData.ok=1;m.visible=true};
+      im.src='img/'+src;train.add(m);PIT[id]=m;PIT_M.push(m)}
+    if(m&&m.userData.ok)m.visible=!!on}}
+setInterval(pitTick,2000);setTimeout(pitTick,600);
+function invite(id){COMP={id,t:performance.now()};const c=CAST[id];paxId=null;
+  try{mailToast&&0}catch(e){}
+  goSeat();setTimeout(()=>{try{const a=$('depT');a.innerHTML='<b>'+c.n+'</b><span>내 창가 자리로 초대했어요</span>';a.classList.remove('on');void a.offsetWidth;a.classList.add('on')}catch(e){}},1300)}
 function paxTick(){if(MODE!=='seat')return;let w=where(dep,vnow());if(w.mode==='end')w=where(dep,dep+(TRIP_H-.01)*HR);paxSet(w.mode==='run'?seatWho(w):'sherlock')}
 setInterval(paxTick,1500);
 
@@ -945,7 +996,7 @@ function iris(to,ms,cb){const from=parseFloat(gIr.style.getPropertyValue('--r'))
 function curView(){const e=vwEl[vwCur];const m=e&&e.style.backgroundImage;return m&&m!=='none'?m:'url(img/far.webp)'}
 function gType2(t,narr){gTx.classList.toggle('narr',!!narr);gFull=t;let i=0;clearInterval(gType);gTx.textContent='';gMk.style.display='none';
   gType=setInterval(()=>{i++;gTx.textContent=t.slice(0,i);if(i>=t.length){clearInterval(gType);gType=null;gMk.style.display='block'}},30)}
-function gShow(s){gIt.classList.remove('on');gTt.classList.remove('on');gCs.innerHTML='';
+function gShow(s){gIt.classList.remove('on');cg.classList.remove('itm');gTt.classList.remove('on');gCs.innerHTML='';
   if(s.bg){gBg.style.backgroundImage=s.bg==='view'?curView():'url('+s.bg+')';gBg.classList.remove('kb');void gBg.offsetWidth;gBg.classList.add('kb')}
   if(s.ch!==undefined){if(s.ch){const src=(s.ch.startsWith('../')||s.ch.startsWith('img/'))?s.ch:P+s.ch;if(!gCh.src.endsWith(src.replace(/^\.\.\//,''))){gCh.src=src;gCh.classList.remove('in');void gCh.offsetWidth;gCh.classList.add('in')}gCh.style.opacity=1}else gCh.style.opacity=0}
   gCh.classList.toggle('face',s.pose==='face');gCh.classList.toggle('side',s.pose==='side');
@@ -960,10 +1011,10 @@ function gNext(){if(gType){clearInterval(gType);gType=null;gTx.textContent=gFull
      gBg.style.backgroundImage=curView();gCh.style.opacity=0;setTimeout(()=>{gTt.classList.remove('on');gWait=null;gNext()},1700);return}
   if(s.choice){gMk.style.display='none';gCs.innerHTML='';gWait=1;s.choice.forEach(([q,r],k)=>{const b=document.createElement('button');b.className='pbtn2 l';b.textContent=q;
      b.onclick=e=>{e.stopPropagation();gCs.innerHTML='';gWait=null;if(s.onPick)s.onPick(k);if(s.cg&&typeof moShow==='function'){moShow(s.cg);const cp=CGM[s.cg]&&CGM[s.cg].cap;if(cp&&!(gShots[gI]&&gShots[gI].keepMo))gShots.splice(gI,0,{say:cp,who:'',narr:1,keepMo:1})}gShow({say:r,who:gWho.textContent})};gCs.appendChild(b)});return}
-  if(s.clue){const c=clues();c[s.clue]=1;LS.set('bl_clue',c);gBox.classList.add('on');gWho.textContent='셜록의 단서 수첩';
+  if(s.clue){cg.classList.remove('itm');const c=clues();c[s.clue]=1;LS.set('bl_clue',c);gBox.classList.add('on');gWho.textContent='셜록의 단서 수첩';
      G('.fx.spk').classList.add('on');gType2('🔎 '+CLUES[s.clue]+'\n(단서 '+Object.keys(c).length+'/'+MAINS.length+')');return}
   if(s.item){const k=LS.get('bl_keep',{});k[s.item]=1;LS.set('bl_keep',k);const it=KEEP[s.item];gBox.classList.remove('on');
-     gIt.innerHTML='<div class="ic">'+it[0]+'</div><b>'+it[1]+'</b><p>'+it[2]+'</p><p style="margin-top:8px;font-size:11px;opacity:.6">트렁크에 넣어 두었어요 · 눌러서 닫기</p>';gIt.classList.add('on');return}
+     gIt.innerHTML='<div class="ic">'+it[0]+'</div><b>'+it[1]+'</b><p>'+it[2]+'</p><p style="margin-top:8px;font-size:11px;opacity:.6">트렁크에 넣어 두었어요 · 눌러서 닫기</p>';gIt.classList.add('on');cg.classList.add('itm');return}
   if(s.fn){s.fn();return}
   gShow(s)}
 function gEnd(){gWait=1;iris(0,650,()=>{cg.classList.remove('on','lb');gWait=null;gBox.classList.remove('on');document.body.classList.remove('talk');const d=gDone;gDone=null;BG.force=null;setTimeout(bgmTick,0);d&&d()})}
@@ -1141,6 +1192,10 @@ for(const id in EV){const c=EV[id].find(x=>x.choice);if(c)c.cg=id}
 const _gNext=gNext;gNext=function(){if(moOnId&&!gType&&!gWait){const s=gShots[gI];if(!(s&&s.keepMo))moHide()}_gNext()};
 const _playScene=playScene;playScene=function(shots,done){(shots||[]).forEach(x=>x.cg&&cgProbe(x.cg));moHide();_playScene(shots,done)};
 const _gEnd=gEnd;gEnd=function(){moHide();_gEnd()};
+/* 이벤트 캐릭터 크기 맞춤: 머리가 위 띠에 잘리지 않고, 너무 넓지 않게 */
+function chFit(){const W=innerWidth,H=innerHeight,ar=(gCh.naturalWidth/gCh.naturalHeight)||.6,mob=W/H<.75;
+  let h=H*(mob?.70:.80);h=Math.min(h,W*(mob?.92:.56)/ar);gCh.style.height=h+'px';gCh.style.bottom=(mob?H*.08:-H*.01)+'px';gCh.style.left=mob?'50%':'36%'}
+gCh.addEventListener('load',chFit);addEventListener('resize',chFit);
 /* 다시 보기: 배경을 그 승객 구간 풍경으로 */
 let gBgOv=null;const _curView=curView;curView=function(){return gBgOv?'url('+gBgOv+')':_curView()};
 function replay(shots,bg){gBgOv=bg;playScene(shots.map(s=>s.choice?{...s,onPick:null}:s),()=>{gBgOv=null;albumOpen(albTab)})}
@@ -1183,7 +1238,7 @@ const firstEl=$('first'),waitEl=$('wait');
 function cdown(ms,short){ms=Math.max(0,ms);const h=Math.floor(ms/HR),m=Math.floor(ms%HR/6e4),s=Math.floor(ms%6e4/1e3);return short?(h?h+'시간 '+m+'분':m+'분'):pd2(h)+':'+pd2(m)+':'+pd2(s)}
 /* 흐름: (승강장) 근심 맡기기 → 즉시 출발 → 24시간 실제 시간 운행 → 런던 도착·트렁크 찾기 → (다시 타기) */
 function firstFlow(){if(Q.has('seat')&&TRIP)return;
-  if(!TRIP){showWait();setTimeout(()=>{if(!TRIP&&!ck.classList.contains('on'))ckOpen()},1100);return}
+  if(!TRIP){showIntro();return}
   if(where(dep,vnow()).mode==='end'&&!(TRUNK&&!TRUNK.done))showArrived()}
 let waitT=null;
 function showWait(){waitEl.style.backgroundImage='';waitEl.classList.add('on');document.body.classList.add('talk');renderWait.b=0;renderWait();clearInterval(waitT);waitT=setInterval(renderWait,5000)}
@@ -1194,7 +1249,7 @@ function renderWait(){if(TRIP&&where(dep,vnow()).mode!=='end'){hideWait();return
     if(renderWait.b!=='a'){renderWait.b='a';
       $('wBtns').innerHTML=(LS.get('bl_end',null)?'<button class="pbtn2" id="wRp">✉ 셜록의 엽서 보기</button>':'')+'<button class="pbtn2'+(LS.get('bl_end',null)?' l':'')+'" id="wAg">새 근심 맡기고 다시 타기</button><button class="pbtn2 l" id="wStay">런던 창밖 조금 더 보기</button>';
       const r=$('wRp');if(r)r.onclick=()=>showReply();
-      $('wAg').onclick=()=>{TRIP=null;localStorage.removeItem('bl_trip');if(TRUNK&&TRUNK.done){TRUNK=null;localStorage.removeItem('bl_trunk')}dep=NOTRIP();curSeg=null;if(MODE==='seat')goOut();renderWait.b=0;renderWait();trkShow();setTimeout(ckOpen,500)};
+      $('wAg').onclick=()=>{TRIP=null;localStorage.removeItem('bl_trip');if(TRUNK&&TRUNK.done){TRUNK=null;localStorage.removeItem('bl_trunk')}dep=NOTRIP();curSeg=null;if(MODE==='seat')goOut();hideWait();trkShow();showIntro()};
       $('wStay').onclick=()=>{hideWait();trkShow()}}
     return}
   $('wBoard').innerHTML=`<small>BUSAN → LONDON · 부산역 3번 승강장</small><b>탑승을 기다리고 있어요</b><div class="cd" style="font-size:28px">● 탑승 중</div><div class="st">근심을 맡기면 바로 출발해요 · 하루 뒤 런던 도착${CNT?'<br>오늘 근심 '+CNT+'개가 이 승강장을 떠났어요':''}</div>`;
@@ -1240,9 +1295,9 @@ const CM={
  rabbit:{n:'토끼 (별주부전)',segs:['busan','gyeongbu'],k:'walk',s:.95,t:'간은 집에 두고 왔다니까! 별주부한테는 비밀이야.'},
  heungbu:{n:'흥부',segs:['gyeongbu','seoul'],k:'walk',s:1,t:'박씨를 심었더니 근심 대신 박이 열렸지 뭐예요. 하나 드릴까요?'},
  chunhyang:{n:'춘향',segs:['seoul'],k:'swing',s:1.05,t:'기다리는 것도 여행이에요. 런던까지 잘 다녀오세요!'},
- sunmoon:{n:'해님달님 남매',segs:['cloud','dawn'],k:'drop',s:1.1,t:'무서웠지만 끝까지 올라왔어요! 위에서 보면 걱정도 다 작아 보여요.'},
+ sunmoon:{n:'해님달님 남매',segs:['cloud','dawn'],k:'drop',s:1.1,t:'동아줄 타고 내려와서 얼른 탔어요! 구름 위에서 보면 걱정도 다 작아 보여요.'},
  firebird:{n:'불새',segs:['snow','aurora','nightvil','steppe','taiga'],k:'fly',s:1.15,t:'(불새가 반짝이는 깃털 하나를 떨어뜨리고 날아간다)'},
- rapunzel:{n:'라푼젤',segs:['castle','forest'],k:'stand',s:1.05,t:'저도 언젠가 저 열차 탈 거예요! 머리는 좀 묶고요.'},
+ rapunzel:{n:'라푼젤',segs:['castle','forest'],k:'stand',s:1.05,t:'탑에서 내려와서 처음 타 보는 기차예요! 머리는 좀 묶었어요.'},
  tell:{n:'빌헬름 텔',segs:['alps'],k:'stand',s:1,t:'빗나가도 괜찮아요. 사과는 먹으면 되니까!'},
  phantom:{n:'오페라의 유령',segs:['paris'],k:'stand',s:1.05,t:'자정의 음악은 내가 켜고 있지… 얼굴은 보여 주지 않겠소.'},
  quasimodo:{n:'콰지모도',segs:['paris'],k:'stand',s:1,t:'종소리는 누구 얼굴도 안 봐요. 오늘 밤 열두 번, 크게 울려 드릴게요.'},
@@ -1252,35 +1307,46 @@ const CM={
 };
 const cmo=$('cmo'),cmB=$('cmB');let cmCur=null,cmNext=performance.now()+(Q.has('cameo')?2500:30000);
 function cmBusy(){return dlg.classList.contains('on')||cg.classList.contains('on')||ck.classList.contains('on')||waitEl.classList.contains('on')||firstEl.classList.contains('on')||alb.classList.contains('on')||card.classList.contains('on')||post.classList.contains('on')}
-function cmBand(){if(MODE==='seat'){const h=vwLayout.h||innerHeight*.5,y=vwLayout.y||innerHeight*.15;return {foot:y+h*.86,size:h*(innerWidth<innerHeight?.32:.42),top:y+h*.12}}
-  const v=new THREE.Vector3(camX,3.55,0).project(cam);const roof=(-v.y*.5+.5)*innerHeight;return {foot:roof+innerHeight*.012,size:innerHeight*.17,top:innerHeight*.12}}
-function cmLaunch(id){const c=CM[id];const im=new Image();const WZ=-30,half=vh(dist-WZ)*cam.aspect/2;im.src='img/cm/'+id+'.webp';im.alt=c.n;
-  im.onload=()=>{cmo.appendChild(im);cmCur={id,im,wx0:camX+half+4,tr0:travel,wz:WZ,t0:performance.now(),ar:im.naturalWidth/im.naturalHeight,dur:(c.k==='walk'?17000/(c.sp||1):c.k==='fly'?11000:21000),ph:Math.random()*6}};
+/* 깜짝 손님: 새(불새)만 창밖 하늘을 날고, 나머지는 '열차 안 승객'으로 통로를 지나간다
+   - 바깥 보기: 가까운 칸 안을 걸어서 지나감(바닥에 발을 딛고, 칸과 같이 움직임)
+   - 창가 자리: 내 자리 앞 통로를 크게 지나감(창에 비친 유령처럼 보이지 않게, 창보다 앞에) */
+const CM_CARS=['dine','dome','sleep','post','case','tail'];
+function cmLaunch(id){const c=CM[id];const im=new Image();im.src='img/cm/'+id+'.webp';im.alt=c.n;
+  im.onload=()=>{cmo.appendChild(im);const inside=c.k!=='fly';
+    let car=null;if(inside){let best=1e9;for(const k of CM_CARS){const cc=cars.find(x=>x.userData.k===k);const d=Math.abs(train.position.x+cc.position.x-camX);if(d<best){best=d;car=cc}}}
+    cmCur={id,im,inside,car,t0:performance.now(),ar:im.naturalWidth/im.naturalHeight,dur:inside?(c.k==='walk'?15000/(c.sp||1):19000):11000,ph:Math.random()*6,mode:MODE}};
   im.onclick=e=>{e.stopPropagation();cmSay(id,im)}}
 function cmSay(id,im){const c=CM[id],seen=LS.get('bl_cameo',{}),isNew=!seen[id];seen[id]=1;LS.set('bl_cameo',seen);
   cmB.innerHTML='<b>'+c.n+'</b>'+c.t+(isNew?'<i>깜짝 손님 발견! '+Object.keys(seen).length+' / '+Object.keys(CM).length+' · 추억 앨범에 기록됐어요</i>':'');
   const r=im.getBoundingClientRect();cmB.classList.add('on');const bw=cmB.offsetWidth,bh=cmB.offsetHeight;
   cmB.style.left=Math.max(8,Math.min(innerWidth-bw-8,r.left+r.width*.3-24))+'px';cmB.style.top=Math.max(8,r.top-bh-14)+'px';
-  if(cmCur)cmCur.held=performance.now();clearTimeout(cmSay.t);cmSay.t=setTimeout(()=>{cmB.classList.remove('on');if(cmCur&&cmCur.held){cmCur.t0+=performance.now()-cmCur.held;cmCur.held=0}},4200);try{blipUp()}catch(e){}}
+  if(cmCur&&!cmCur.held)cmCur.held=performance.now();clearTimeout(cmSay.t);cmSay.t=setTimeout(()=>{cmB.classList.remove('on');if(cmCur&&cmCur.held){cmCur.t0+=performance.now()-cmCur.held;cmCur.held=0}},4200);try{blipUp()}catch(e){}}
+function cmEnd(){if(cmCur){cmCur.im.remove();cmCur=null}cmB.classList.remove('on')}
+const cmV=new THREE.Vector3();
 function cmFrame(now){
-  if(cmCur){const c=CM[cmCur.id],b=cmBand(),H=b.size*c.s,Wd=H*cmCur.ar;let k=((cmCur.held||now)-cmCur.t0)/cmCur.dur;
-    if(MODE!=='seat'&&cmCur.wx0!==undefined){const t=now/1000,held=cmCur.held?1:0;if(!held)cmCur.trU=travel;const tr=(cmCur.trU??travel)-cmCur.tr0;
-      const own=c.k==='walk'?(now-cmCur.t0)/1000*1.1*(c.sp||1):0;const wx=cmCur.wx0-tr*.62-own;
-      const Hw=2.3*c.s;let wy=3.0;if(c.k==='fly')wy=6.2+Math.sin(t*1.6+cmCur.ph)*.6;if(c.k==='drop')wy=5.5+Math.sin(Math.min(1,(now-cmCur.t0)/9000)*Math.PI)*-2.2;
-      if(c.k==='walk')wy+=Math.abs(Math.sin(t*7+cmCur.ph))*.08;
-      const a=new THREE.Vector3(wx,wy,cmCur.wz).project(cam),b=new THREE.Vector3(wx,wy+Hw,cmCur.wz).project(cam);
-      const fy=(-a.y*.5+.5)*innerHeight,ty=(-b.y*.5+.5)*innerHeight,H=fy-ty,W2=H*cmCur.ar,sx=(a.x*.5+.5)*innerWidth;
-      const rot=c.k==='walk'?Math.sin(t*7+cmCur.ph)*2:c.k==='swing'?Math.sin(t*1.8)*9:c.k==='fly'?Math.sin(t*1.6)*6:0;
-      const im=cmCur.im;im.style.height=H+'px';im.style.width=W2+'px';im.style.transform=`translate(${sx-W2/2}px,${ty}px) rotate(${rot}deg)`;
-      if(sx<-W2||now-cmCur.t0>60000){cmCur.im.remove();cmCur=null;cmB.classList.remove('on')}}
-    else if(k>=1){cmCur.im.remove();cmCur=null;cmB.classList.remove('on')}
-    else if(MODE==='seat'){const x=innerWidth+40-(innerWidth+Wd+80)*k;let y=b.foot-H,rot=0;const t=now/1000;
-      if(c.k==='walk')y-=Math.abs(Math.sin(t*7+cmCur.ph))*H*.035,rot=Math.sin(t*7+cmCur.ph)*2;
-      if(c.k==='fly')y=b.top+Math.sin(t*1.6+cmCur.ph)*H*.18,rot=Math.sin(t*1.6)*6;
-      if(c.k==='drop')y=b.top-H*.4+Math.sin(k*Math.PI)*H*.55;
-      if(c.k==='swing')rot=Math.sin(t*1.8)*9,y-=Math.abs(Math.sin(t*1.8))*H*.06;
-      const im=cmCur.im;im.style.height=H+'px';im.style.width=Wd+'px';im.style.transform=`translate(${x}px,${y}px) rotate(${rot}deg)`;
-      im.style.opacity=MODE==='seat'||c.k!=='walk'||1?1:1}}
+  if(cmCur){const c=CM[cmCur.id],im=cmCur.im,t=now/1000;
+    if(cmCur.mode!==MODE){cmEnd();requestAnimationFrame(cmFrame);return}
+    let k=((cmCur.held||now)-cmCur.t0)/cmCur.dur;
+    if(k>=1){cmEnd();requestAnimationFrame(cmFrame);return}
+    // 걷다가 가운데서 잠깐 서서 창밖 보기(서 있는 손님)
+    const kk=c.k==='walk'?k:(k<.4?k/.4*.5:k<.6?.5:.5+(k-.6)/.4*.5);const moving=c.k==='walk'||k<.4||k>.6;
+    const bob=moving?Math.abs(Math.sin(t*7+cmCur.ph)):0,rot=moving?Math.sin(t*7+cmCur.ph)*2.5:0;
+    const op=Math.min(1,k/.06,(1-k)/.06);im.style.opacity=op;
+    if(!cmCur.inside){ // 불새: 하늘
+      cmo.style.zIndex='';let x,y,H;
+      if(MODE==='seat'){const h=vwLayout.h||innerHeight*.5,y0=vwLayout.y||innerHeight*.15;H=h*.38;x=innerWidth+40-(innerWidth+H*cmCur.ar+80)*k;y=y0+h*.08+Math.sin(t*1.6+cmCur.ph)*H*.18}
+      else{H=innerHeight*.16;x=innerWidth+40-(innerWidth+H*cmCur.ar+80)*k;y=innerHeight*.12+Math.sin(t*1.6+cmCur.ph)*H*.3}
+      im.style.height=H+'px';im.style.width=H*cmCur.ar+'px';im.style.transform=`translate(${x}px,${y}px) rotate(${Math.sin(t*1.6)*6}deg)`}
+    else if(MODE==='seat'){ // 내 자리 앞 통로
+      cmo.style.zIndex='3';const H=innerHeight*(innerWidth<innerHeight?.58:.78)*c.s,W=H*cmCur.ar;
+      const x=innerWidth+W*.2-(innerWidth+W*1.4)*kk,y=innerHeight*1.03-H-bob*H*.025;
+      im.style.height=H+'px';im.style.width=W+'px';im.style.transform=`translate(${x}px,${y}px) rotate(${rot}deg)`}
+    else{ // 칸 안: 바닥(0.93)에 발, 칸 오른쪽 끝 → 왼쪽 끝
+      cmo.style.zIndex='';const cc=cmCur.car,w=cc.userData.w,cx=train.position.x+cc.position.x;
+      const lx=cx+w*.40-w*.80*kk,Hw=1.3*c.s;
+      cmV.set(lx,0.93,0.06).project(cam);const fy=(-cmV.y*.5+.5)*innerHeight,sx=(cmV.x*.5+.5)*innerWidth;
+      cmV.set(lx,0.93+Hw,0.06).project(cam);const ty=(-cmV.y*.5+.5)*innerHeight,H=fy-ty,W=H*cmCur.ar;
+      im.style.height=H+'px';im.style.width=W+'px';im.style.transform=`translate(${sx-W/2}px,${ty-bob*H*.03}px) rotate(${rot}deg)`}}
   else if(now>cmNext&&!document.hidden&&!cmBusy()){const w=where(dep,vnow());if(w.mode==='run'){
       const ids=Object.keys(CM).filter(id=>CM[id].segs.includes(w.seg.id));
       if(ids.length){const seen=LS.get('bl_cameo',{}),un=ids.filter(i=>!seen[i]);const pick=(un.length?un:ids)[Math.floor(Math.random()*(un.length?un:ids).length)];cmLaunch(pick)}}
@@ -1468,6 +1534,42 @@ function noteRender(box){const hid=LS.get('bl_nhide',{}),mine=LS.get('bl_nmine',
      .catch(()=>{msg.innerHTML='<p class="cnt">지금은 서랍이 잠겨 있어요. 조금 뒤에 다시 넣어 주세요.</p>';$('nGo').disabled=false})}}
 function noteAgo(t){const m=Math.max(1,Math.round((Date.now()-new Date(t).getTime())/6e4));return m<60?m+'분 전':m<1440?Math.floor(m/60)+'시간 전':Math.floor(m/1440)+'일 전'}
 postBadge();
+/* ================= 인트로: 꼬리표 한 장으로 시작 → 도장 → 펀칭 → 구멍 속으로 열차가 보인다 ================= */
+const intro=document.createElement('div');intro.id='intro';
+intro.innerHTML=`<div class="iTop"><small>BUSAN STATION · 근심 수하물 창구</small><p id="iLine"></p></div>
+ <div class="iTagW"><div class="iStr"></div><div class="iTag" id="iTag"><i class="iHole" id="iHole"></i>
+  <div class="iHd"><b>BUSAN</b><span>━━ ✈ ━━</span><b>LONDON</b></div><div class="iSub">수하물 꼬리표 · 근심 1개</div>
+  <label>맡기는 짐</label><textarea id="iT" maxlength="80" placeholder="근심 한 줄을 적어 주세요"></textarea>
+  <div class="iRow"><span>찾는 곳</span><b>런던역 · <em id="iArr"></em></b></div>
+  <div class="iStamp" id="iStamp"><b>접수</b><span id="iNo"></span><small>BSN→LDN</small></div></div></div>
+ <div class="iBtns"><button class="pbtn2" id="iGo">꼬리표 달기</button><button class="ckSkip" id="iNo2">짐 없이 탈게요</button><div id="iSos"></div></div>`;
+document.body.appendChild(intro);
+function typeLine(el,t,cb){let i=0;el.textContent='';const iv=setInterval(()=>{el.textContent=t.slice(0,++i);if(i>=t.length){clearInterval(iv);cb&&cb()}},55)}
+function showIntro(){intro.className='on';document.body.classList.add('talk','intro');$('iArr').textContent=arrLabel();
+  typeLine($('iLine'),'이 열차는 근심을 짐으로 받습니다.');setTimeout(()=>{try{$('iT').focus({preventScroll:true})}catch(e){}},1600)}
+let iSosShown=false;
+$('iGo').onclick=e=>{e.stopPropagation();const t=$('iT').value.trim();if(!t){$('iT').focus();$('iT').placeholder='한 줄이면 충분해요';$('iTag').classList.remove('shk');void $('iTag').offsetWidth;$('iTag').classList.add('shk');return}
+  if(SOS.test(t)&&!iSosShown){iSosShown=true;$('iSos').innerHTML=sosCard();$('iGo').textContent='그래도 맡기고 출발하기';return}
+  introGo(t)};
+$('iNo2').onclick=e=>{e.stopPropagation();introGo(null)};
+function introGo(t){$('iGo').disabled=true;$('iNo2').style.visibility='hidden';$('iSos').innerHTML='';
+  TRIP={dep:vnow()};LS.set('bl_trip',TRIP);dep=TRIP.dep;
+  const no=String(1000+Math.floor(Math.random()*9000));
+  if(t){TRUNK={dep,text:t,no,boardH:0,at:Date.now()};LS.set('bl_trunk',TRUNK);sbAdd(dep)}
+  $('iNo').textContent=t?'#'+no:'빈 트렁크';
+  // 1) 도장 쾅
+  setTimeout(()=>{$('iStamp').classList.add('on');try{if(AC&&sndOn)thunk()}catch(e){}},150);
+  // 2) 펀칭: 구멍이 빛난다
+  setTimeout(()=>{$('iHole').classList.add('lit');try{if(AC&&sndOn)blipUp()}catch(e){}},1100);
+  // 3) 구멍 속으로: 꼬리표가 커지고, 구멍 자리부터 동그랗게 열차가 보인다
+  setTimeout(()=>{const r=$('iHole').getBoundingClientRect(),hx=r.left+r.width/2,hy=r.top+r.height/2,tr=$('iTag').getBoundingClientRect();
+    $('iTag').style.transformOrigin=(hx-tr.left)+'px '+(hy-tr.top)+'px';$('iTag').classList.add('zoom');
+    curSeg=null;arrLast=null;clock();
+    const t0=performance.now(),D=1500,max=Math.hypot(innerWidth,innerHeight);
+    (function f(n){const k=Math.min(1,(n-t0)/D),e=k*k*(3-2*k),R=e*max;
+      intro.style.webkitMaskImage=intro.style.maskImage=`radial-gradient(circle at ${hx}px ${hy}px, transparent ${R}px, #000 ${R+2}px)`;
+      if(k<1)requestAnimationFrame(f);else{intro.className='';intro.style.maskImage=intro.style.webkitMaskImage='';$('iTag').classList.remove('zoom');$('iStamp').classList.remove('on');$('iHole').classList.remove('lit');$('iGo').disabled=false;$('iNo2').style.visibility='';$('iT').value='';
+        document.body.classList.remove('talk','intro');startTrip()}})(t0)},1900)}
 /* ---------- 창가 자리: 아래 버튼을 승객 반대편(왼쪽)으로 ---------- */
 function btnRow(){const L=['ambB','albB','postB','trk','snd'].map(i=>document.getElementById(i)).filter(Boolean);const seat=MODE==='seat',mob=innerWidth<=520;
   let x=14,y=14;for(const el of L){if(!seat){el.style.left=el.style.right=el.style.bottom='';continue}
@@ -1500,6 +1602,7 @@ function frame(now){
   for(const c of cars)c.position.y=c.userData.h/2-0.03+Math.sin(t*9+c.userData.ph)*0.012;
   for(const [b,sp,ph] of glows){const f=1+Math.sin(t*1.7+ph)*.05+Math.sin(t*7.3+ph*2)*.025;b.material.opacity=.22*f;sp.material.opacity=.4*f}
   for(const p of ppl)p.position.y=p.userData.base+Math.abs(Math.sin(t*2.2+p.userData.ph))*0.03;
+  for(const m of PIT_M)if(m.userData.ok)m.position.y=m.userData.base+Math.sin(t*1.6+m.userData.ph)*0.012;
   vwTick(dt,t);if(MODE!=='seat')R.render(scene,cam);requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);

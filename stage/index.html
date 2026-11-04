@@ -20,15 +20,20 @@ canvas{display:block;width:100vw;height:100vh;height:100dvh}
 #snd.on{background:#3a2a1c;color:#f3e6c4}
 #cab{position:fixed;inset:0;pointer-events:none;background:url(img/zcab_w_n.webp) center/cover no-repeat;display:none}
 @media (max-aspect-ratio:3/4){#cab{background-image:url(img/zcab_m_n.webp)}}
+body.day #cab{background-image:url(img/zcab_w_d.webp)}
+@media (max-aspect-ratio:3/4){body.day #cab{background-image:url(img/zcab_m_d.webp)}}
 #glass{position:fixed;inset:0;pointer-events:none;display:none;background:linear-gradient(115deg,transparent 30%,rgba(255,220,170,.06) 45%,transparent 55%)}
 body.seat #cab,body.seat #glass{display:block}
+.vw{position:fixed;inset:0;pointer-events:none;display:none;background-repeat:no-repeat;opacity:0;transition:opacity 2.4s;filter:saturate(.9) brightness(.92)}
+body.seat .vw{display:block}
+.vw.on{opacity:1}
 #fade{position:fixed;inset:0;pointer-events:none;background:#08151c;opacity:0;transition:opacity .35s;z-index:5}
 #fade.on{opacity:1}
 .pbtn{position:fixed;right:14px;top:calc(12px + env(safe-area-inset-top));background:#f3e6c4;color:#3a2a1c;border:2px solid #3a2a1c;box-shadow:2px 2px 0 #3a2a1c;border-radius:3px;padding:6px 11px;font:700 13px 'Apple SD Gothic Neo',sans-serif;z-index:4}
 </style></head><body>
 <div id="tag"><b>부산</b><span id="tagS">그림 겹 무대 · 시험판</span><i id="tagI"></i></div>
 <div id="dev"><span>출발 후</span><input id="devR" type="range" min="0" max="91.9" step="0.1"><span id="devV"></span></div>
-<div id="glass"></div><div id="cab"></div><div id="vig"></div><div id="fade"></div>
+<div class="vw" id="vwA"></div><div class="vw" id="vwB"></div><div id="glass"></div><div id="cab"></div><div id="vig"></div><div id="fade"></div>
 <button id="snd">♪ 소리 켜기</button>
 <button id="back">← 열차 전체</button>
 <button id="seat" class="pbtn">내 창가 자리 →</button>
@@ -187,7 +192,7 @@ function tap(e){if(MODE!=='out')return;v2.set(e.clientX/innerWidth*2-1,-(e.clien
 back.onclick=()=>{focus=null;tgtD=fitD();back.style.display='none';seatB.textContent='내 창가 자리 →';clock()};
 const seatB=document.getElementById('seat'),fadeEl=document.getElementById('fade');
 let busy=false;
-function setMode(m){MODE=m;MD=MODES[m];HZ=MD.HZ;document.body.classList.toggle('seat',m==='seat');train.visible=MD.train;resize()}
+function setMode(m){MODE=m;MD=MODES[m];if(m==='seat'){vwSeg=null;document.getElementById('hint').style.display='none'}HZ=MD.HZ;document.body.classList.toggle('seat',m==='seat');train.visible=MD.train;resize()}
 function goSeat(){if(busy)return;busy=true;
   const c=focus||cars.find(c=>c.userData.k==='sleep');focus=c;tgtX=train.position.x+c.position.x;tgtD=minD;
   setTimeout(()=>{fadeEl.classList.add('on');setTimeout(()=>{setMode('seat');back.style.display='none';focus=null;document.getElementById('hint').style.opacity=0;
@@ -216,7 +221,8 @@ function dur(h){const m=Math.round(h*60);return m>=60?Math.floor(m/60)+'시간 '
 let curSeg=null;
 function clock(){const w=where(dep,vnow());if(w.mode!=='run')return;
   if(focus)return;
-  tagB.textContent=w.seg.name+(w.seg.art?'':' · 그림 준비 중');
+  tagB.textContent=w.seg.name+(w.seg.art||MODE==='seat'?'':' · 그림 준비 중');
+  document.body.classList.toggle('day',!/밤|자정|새벽/.test(w.seg.sky));
   tagS.textContent=w.day+'일째 · 현지 '+pd(w.localH)+':'+pd(w.localM)+' · '+w.seg.sky;
   tagI.textContent=w.next?'다음 '+w.next.name+' · '+dur(w.next.h-w.h)+' 뒤':'곧 런던';
   if(curSeg!==w.seg.id){curSeg=w.seg.id}
@@ -250,6 +256,29 @@ const sb=document.getElementById('snd');sb.onclick=e=>{e.stopPropagation();if(!A
   MG.gain.cancelScheduledValues(AC.currentTime);MG.gain.linearRampToValueAtTime(sndOn?.55:0,AC.currentTime+.8);if(sndOn)nextClack=Math.max(nextClack,AC.currentTime+.1);
   sb.textContent=sndOn?'♪ 소리 끄기':'♪ 소리 켜기';sb.classList.toggle('on',sndOn)};
 
+/* ---------- 창가 자리: 창밖 풍경 그림이 계속 지나감 ---------- */
+const VIEWS={busan:['img/far.webp','../img/zh_busan.webp'],seoul:['../img/zh_seoul.webp'],cloud:['../img/zt_cloud.webp'],
+  snow:['../img/zt_snowforest.webp','../img/zt_taiga.webp'],baikal:['../img/zh_baikal_am.webp'],aurora:['../img/zt_aurora.webp'],
+  taiga:['../img/zt_taiga.webp','../img/zt_snowforest.webp'],moscow:['../img/zh_moscow.webp','../img/zt_moscow.webp'],plain:['../img/zh_volga.webp','../img/zt_volga.webp'],
+  forest:['../img/zt_fairy.webp'],castle:['../img/zh_castle.webp','../img/zt_castle.webp'],alps:['../img/zh_alps.webp','../img/zh_lake.webp','../img/zt_alps.webp'],
+  paris:['../img/zh_paris.webp','../img/zt_paris.webp'],sea:['../img/zt_sea.webp'],england:['../img/zt_england.webp'],london:['../img/zh_london.webp']};
+const vwEl=[document.getElementById('vwA'),document.getElementById('vwB')];
+let vwCur=0,vwImg=null,vwX=0,vwIdx=0,vwSeg=null,vwSize={w:1,h:1};
+function vwShow(src){const im=new Image();im.onload=()=>{const nx=1-vwCur,e=vwEl[nx];e.style.backgroundImage='url('+src+')';
+    vwSize={w:im.width,h:im.height};vwX=0;e.classList.add('on');vwEl[vwCur].classList.remove('on');vwCur=nx;vwLayout()};im.src=src}
+function vwLayout(){const a=innerWidth/innerHeight,h=innerHeight*(a<1?.42:.66),cy=innerHeight*(a<1?.36:.42);
+  const w=h*vwSize.w/vwSize.h;for(const e of vwEl)e.style.backgroundSize=w+'px '+h+'px';vwLayout.h=h;vwLayout.w=w;vwLayout.y=cy-h/2}
+addEventListener('resize',vwLayout);
+function vwNext(){const w=where(dep,vnow());const id=w.mode==='run'?w.seg.id:'busan';const L=VIEWS[id]||VIEWS.busan;
+  if(id!==vwSeg){vwSeg=id;vwIdx=0}else vwIdx=(vwIdx+1)%L.length;vwShow(L[vwIdx])}
+function vwTick(dt,t){if(MODE!=='seat')return;if(!vwSeg){vwNext();return}
+  const winW=innerWidth*(innerWidth<innerHeight?.7:.62),span=Math.max(0,vwLayout.w-winW);
+  vwX+=dt*18;                                              // 1초에 18px씩 흘러감
+  const x0=(innerWidth-winW)/2,x=x0-Math.min(vwX,span),y=vwLayout.y+Math.sin(t*2.1)*1.5;
+  vwEl[vwCur].style.backgroundPosition=x+'px '+y+'px';
+  if(vwX>span+40)vwNext();
+  const w=where(dep,vnow());if(w.mode==='run'&&w.seg.id!==vwSeg)vwNext()}
+
 /* ---------- 매 프레임 ---------- */
 const SPEED=7;let travel=0,last=performance.now();const T0=last;const pv=new THREE.Vector3();
 function frame(now){
@@ -267,7 +296,7 @@ function frame(now){
   for(const c of cars)c.position.y=c.userData.h/2-0.03+Math.sin(t*9+c.userData.ph)*0.012;
   for(const [b,sp,ph] of glows){const f=1+Math.sin(t*1.7+ph)*.05+Math.sin(t*7.3+ph*2)*.025;b.material.opacity=.22*f;sp.material.opacity=.4*f}
   for(const p of ppl)p.position.y=p.userData.base+Math.abs(Math.sin(t*2.2+p.userData.ph))*0.03;
-  R.render(scene,cam);requestAnimationFrame(frame);
+  vwTick(dt,t);if(MODE!=='seat')R.render(scene,cam);requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);
 </script></body></html>

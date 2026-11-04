@@ -183,6 +183,11 @@ body.talk #snd,body.talk #trk,body.talk #seat{opacity:.0;pointer-events:none}
 .themed.stitch{outline:2px dashed rgba(46,42,36,.55);outline-offset:-8px}
 .themed.seal::after{content:"印";position:absolute;right:12px;top:-12px;width:28px;height:28px;border-radius:4px;background:#b8312f;color:#f3ead4;font:800 15px/28px "Nanum Myeongjo",serif;text-align:center;transform:rotate(8deg)}
 #dlgN small{font-size:12px}
+.pns{display:inline-flex;gap:3px;vertical-align:-2px;margin-right:3px}
+.pn{display:inline-block;width:13px;height:13px;border-radius:50%;border:1.5px dashed currentColor;opacity:.55;box-sizing:border-box}
+.pn.on{opacity:1;border:2px solid #7a1f14;background:radial-gradient(circle,#f3e6c4 0 1.6px,transparent 2.2px),#c0392b;transform:rotate(-12deg);box-shadow:0 0 0 1px rgba(255,255,255,.35) inset}
+#lvt .pns{gap:6px}#lvt .pn{width:22px;height:22px}#lvt .pn.on{animation:stampIn .5s .35s both}
+@keyframes stampIn{from{transform:scale(2.4) rotate(-30deg);opacity:0}}
 .lvbar{position:absolute;left:16px;right:16px;bottom:-1px;height:4px;background:rgba(0,0,0,.08);border-radius:2px;overflow:hidden}
 .lvbar i{display:block;height:100%;background:currentColor;opacity:.55;transition:width .8s}
 #lvt{position:fixed;left:50%;top:22%;z-index:35;transform:translate(-50%,-50%) scale(0);padding:14px 22px;text-align:center;pointer-events:none;opacity:0}
@@ -865,13 +870,14 @@ function applyTheme(el,id){const t=TH[id];
   const n=el.querySelector('#dlgN,.who');if(n){n.style.background=t.acc;n.style.color=t.bg;n.style.fontFamily=`"${t.ff}",sans-serif`}}
 /* 친밀도 단계 */
 const LVN=['낯선 승객','말동무','길동무','단짝'],LVT=[0,2,5,9];
+function pns(l){return '<span class="pns">'+[0,1,2].map(i=>'<i class="pn'+(i<l?' on':'')+'"></i>').join('')+'</span>'}
 const toastEl=document.createElement('div');toastEl.id='lvt';toastEl.className='paper';document.body.appendChild(toastEl);
-function lvToast(id,l){toastEl.innerHTML=`<small>친밀도 UP</small><b>${CAST[id].n}</b><span>${'♥'.repeat(l)}${'♡'.repeat(3-l)} ${LVN[l]}</span>${l===1?'<i>다음에 말 걸면 「꼬리표 이야기」가 열려요</i>':l===3?'<i>「단짝 이야기」가 열렸어요</i>':''}`;
+function lvToast(id,l){toastEl.innerHTML=`<small>동행 도장 쾅!</small><b>${CAST[id].n}</b><span>${pns(l)} ${LVN[l]}</span>${l===1?'<i>다음에 말 걸면 「꼬리표 이야기」가 열려요</i>':l===3?'<i>「단짝 이야기」가 열렸어요</i>':''}`;
   toastEl.classList.remove('on');void toastEl.offsetWidth;toastEl.classList.add('on');try{blipUp()}catch(e){}}
 const _addAff=addAff;
 addAff=function(id,n){const b=lv(AFF[id]||0);_addAff(id,n);const a=lv(AFF[id]||0);if(a>b&&n>0)setTimeout(()=>lvToast(id,a),dlg.classList.contains('on')?900:200);paxTag()};
 nameTag=function(id){const p=AFF[id]||0,l=lv(p),nx=LVT[l+1];
-  dlgN.innerHTML=CAST[id].n+`<small>${'♥'.repeat(l)}${'♡'.repeat(3-l)} ${LVN[l]}</small>`;applyTheme(dlg,id);
+  dlgN.innerHTML=CAST[id].n+`<small>${pns(l)} ${LVN[l]}</small>`;applyTheme(dlg,id);
   let bar=dlg.querySelector('.lvbar');if(!bar){bar=document.createElement('div');bar.className='lvbar';dlg.appendChild(bar)}
   bar.innerHTML=nx?`<i style="width:${Math.round((p-LVT[l])/(nx-LVT[l])*100)}%"></i>`:'<i style="width:100%"></i>'};
 function blipUp(){if(!AC||!sndOn)return;const o=AC.createOscillator(),g=AC.createGain();o.type='triangle';o.frequency.setValueAtTime(660,AC.currentTime);o.frequency.setValueAtTime(880,AC.currentTime+.09);
@@ -884,7 +890,7 @@ talk=function(){const id=paxId;const met=LS.get('bl_met',{}),ev=LS.get('bl_ev',{
 let sitM={};setInterval(()=>{if(MODE==='seat'&&paxId&&!document.hidden&&LS.get('bl_met',{})[paxId]){sitM[paxId]=(sitM[paxId]||0)+1;if(sitM[paxId]%4===0)addAff(paxId,1)}},60000);
 const _paxTag=paxTag;
 paxTag=function(){if(!paxId)return;const id=paxId,met=LS.get('bl_met',{}),ev=LS.get('bl_ev',{}),ev3=LS.get('bl_ev3',{});
-  if(met[id]&&(ev[id]||!EV[id])&&L3[id]&&lv(AFF[id]||0)>=3&&!ev3[id]){paxT.innerHTML=CAST[id].n+' · 단짝 이야기 ♥';paxT.className='paper on ev';}else _paxTag();
+  if(met[id]&&(ev[id]||!EV[id])&&L3[id]&&lv(AFF[id]||0)>=3&&!ev3[id]){paxT.innerHTML=CAST[id].n+' · 단짝 이야기 ✦';paxT.className='paper on ev';}else _paxTag();
   requestAnimationFrame(paxLayout)};
 /* 단짝 이야기 */
 const L3={
@@ -941,7 +947,7 @@ function albumOpen(t){albTab=t;alb.classList.add('on');alb.querySelectorAll('.al
         _ending();TRUNK=T0;const iv=setInterval(()=>{if(!cg.classList.contains('on')){clearInterval(iv);if(T0)LS.set('bl_trunk',T0);else localStorage.removeItem('bl_trunk')}},500)}})}
   if(t==='pax'){const ids=['byeol','gilldong','gyeonu','snowq','sherlock','babayaga','odette','hansel','wolf','sleeping','monster','cinder','mermaid','rabbit'];
     box.innerHTML='<div class="grid pax">'+ids.map(id=>{const c=CAST[id],ok=met[id],p=AFF[id]||0,l=lv(p);
-      return `<div class="cell">${thumb(viewOf(id),c.img,!ok)}<em>${ok?c.n:'???'}</em><small>${ok?'♥'.repeat(l)+'♡'.repeat(3-l)+' '+LVN[l]:SEG.find(s=>s.id===SEG_OF[id]).name+'에서 만나요'}</small></div>`}).join('')+'</div>'}
+      return `<div class="cell">${thumb(viewOf(id),c.img,!ok)}<em>${ok?c.n:'???'}</em><small>${ok?pns(l)+' '+LVN[l]:SEG.find(s=>s.id===SEG_OF[id]).name+'에서 만나요'}</small></div>`}).join('')+'</div>'}
   if(t==='keep'){const k=LS.get('bl_keep',{}),sg=LS.get('bl_sign',{});
     box.innerHTML='<p class="cnt">기념품 '+Object.keys(k).length+' / '+MAINS.length+'</p><div class="grid kp">'+MAINS.map(id=>k[id]?`<div class="cell kc"><div class="ic">${KEEP[id][0]}</div><em>${KEEP[id][1]}</em><small>${KEEP[id][2]}</small></div>`:`<div class="cell kc lock"><div class="ic">?</div><em>???</em><small>${CAST[id].n}의 꼬리표 이야기</small></div>`).join('')+'</div>'+
       '<p class="cnt" style="margin-top:14px">꼬리표 뒷면의 한마디 '+Object.keys(sg).length+'</p>'+(Object.keys(sg).length?'<ul class="signs">'+Object.values(sg).map(v=>`<li>「${v}」</li>`).join('')+'</ul>':'<p class="cnt" style="opacity:.6">단짝이 되면 꼬리표에 한마디를 적어 줘요</p>')}}

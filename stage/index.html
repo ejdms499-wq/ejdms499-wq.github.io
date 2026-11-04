@@ -15,9 +15,11 @@ canvas{display:block;width:100vw;height:100vh;height:100dvh}
 #dev{position:fixed;left:12px;right:12px;bottom:calc(40px + env(safe-area-inset-bottom));display:none;gap:8px;align-items:center;background:#f3e6c4;border:2px solid #3a2a1c;border-radius:4px;padding:6px 10px;font:600 12px 'Apple SD Gothic Neo',sans-serif;color:#3a2a1c}
 #dev input{flex:1}
 #back{position:fixed;right:14px;top:calc(12px + env(safe-area-inset-top));display:none;background:#f3e6c4;color:#3a2a1c;border:2px solid #3a2a1c;box-shadow:2px 2px 0 #3a2a1c;border-radius:3px;padding:6px 11px;font:700 13px "Apple SD Gothic Neo",sans-serif}
+#vig{position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse 75% 70% at 50% 55%,transparent 55%,rgba(4,14,20,.42) 100%)}
 </style></head><body>
 <div id="tag"><b>부산</b><span id="tagS">그림 겹 무대 · 시험판</span><i id="tagI"></i></div>
 <div id="dev"><span>출발 후</span><input id="devR" type="range" min="0" max="91.9" step="0.1"><span id="devV"></span></div>
+<div id="vig"></div>
 <button id="back">← 열차 전체</button>
 <div id="hint">옆으로 끌어서 열차 둘러보기 · 칸을 누르면 가까이</div>
 <script type="module">
@@ -27,8 +29,8 @@ import {SEG,TRIP_H,lastDeparture,where} from './timetable.js';
 const SCENE={
   name:'부산',
   far:{img:'far.webp',w:1904,h:640,hz:414,moonU:.805,moonAt:.74,fold:110},
-  mid:{img:'mid.webp',w:1904,h:438,z:-70,hgt:26,topBelowHz:.0,tint:[.9,.9,.96]},
-  emb:{img:'emb.webp',w:2176,h:310,rail:57,sea:288,scale:.0095},
+  mid:{img:'mid.webp',w:1904,h:438,z:-70,hgt:26,topBelowHz:.0,tint:[.9,.9,.96],fx:{haze:.38,sat:.7,bri:.82,blur:1}},
+  emb:{img:'emb.webp',w:2176,h:310,rail:57,sea:288,scale:.0095,fx:{haze:.12,sat:.6,bri:.62}},
   ppl:[['pf_p02.webp','dine',.62,1.32]]
 };
 /* ======================================================================= */
@@ -41,13 +43,18 @@ const TAN=Math.tan(THREE.MathUtils.degToRad(15)), HZ=0.64; // 수평선: 화면 
 const TL=new THREE.TextureLoader();
 function tex(u,rep){const t=TL.load('img/'+u);t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=8;if(rep)t.wrapS=THREE.RepeatWrapping;return t}
 const VS=`varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`;
-function mat(t,tint){return new THREE.ShaderMaterial({transparent:true,depthWrite:false,depthTest:false,
-  uniforms:{map:{value:t},tint:{value:new THREE.Color(...(tint||[1,1,1]))},off:{value:0},rep:{value:1}},vertexShader:VS,
-  fragmentShader:`uniform sampler2D map;uniform vec3 tint;uniform float off,rep;varying vec2 vUv;
-  void main(){vec4 c=texture2D(map,vec2(vUv.x*rep+off,vUv.y));c.rgb*=tint;gl_FragColor=c;
+function mat(t,tint,fx){fx=Object.assign({haze:0,sat:1,bri:1,blur:0,hc:[.06,.17,.21]},fx||{});
+  return new THREE.ShaderMaterial({transparent:true,depthWrite:false,depthTest:false,
+  uniforms:{map:{value:t},tint:{value:new THREE.Color(...(tint||[1,1,1]))},off:{value:0},rep:{value:1},
+    haze:{value:fx.haze},sat:{value:fx.sat},bri:{value:fx.bri},blur:{value:fx.blur},hc:{value:new THREE.Vector3(...fx.hc)}},vertexShader:VS,
+  fragmentShader:`uniform sampler2D map;uniform vec3 tint,hc;uniform float off,rep,haze,sat,bri,blur;varying vec2 vUv;
+  void main(){vec2 uv=vec2(vUv.x*rep+off,vUv.y);vec4 c=texture2D(map,uv);
+    if(blur>0.){vec2 d=vec2(blur/rep,blur)*.0012;c=c*.36+(texture2D(map,uv+vec2(d.x,0.))+texture2D(map,uv-vec2(d.x,0.))+texture2D(map,uv+vec2(0.,d.y*3.))+texture2D(map,uv-vec2(0.,d.y*3.)))*.16;}
+    vec3 col=c.rgb*tint;float l=dot(col,vec3(.299,.587,.114));col=mix(vec3(l),col,sat)*bri;col=mix(col,hc,haze);
+    gl_FragColor=vec4(col,c.a);
   #include <colorspace_fragment>
   }`})}
-function plane(t,w,h,tint){return new THREE.Mesh(new THREE.PlaneGeometry(w,h),mat(t,tint))}
+function plane(t,w,h,tint,fx){return new THREE.Mesh(new THREE.PlaneGeometry(w,h),mat(t,tint,fx))}
 
 /* ---------- 맨 뒤 그림: 화면에 고정된 무한히 먼 풍경 (하늘·달·먼 불빛·바다) ---------- */
 const F=SCENE.far;
@@ -69,7 +76,8 @@ function backdrop(cutBelow){
       float w=water*(1.-smoothstep(0.,.4,v));
       u+=sin(t*1.1+v*260.)*.0009*water+sin(t*.7+s.y*120.)*.0006*water;
       vec4 c=texture2D(map,vec2(clamp(u,.001,.999),v));
-      gl_FragColor=vec4(c.rgb,1.);
+      vec3 col=c.rgb;float l=dot(col,vec3(.299,.587,.114));col=mix(vec3(l),col,.82);col=mix(col,vec3(.07,.18,.22),only>.5?.22:.14);
+      gl_FragColor=vec4(col,1.);
       #include <colorspace_fragment>
     }`});
   const q=new THREE.Mesh(new THREE.PlaneGeometry(2,2),m);q.frustumCulled=false;return q;
@@ -80,10 +88,10 @@ const nearWater=backdrop(true);nearWater.renderOrder=4;scene.add(nearWater);
 
 /* ---------- 가운데 겹 (이음새 없는 반복 그림) ---------- */
 const M=SCENE.mid, midT=tex(M.img,true), midTile=M.hgt*M.w/M.h, MIDW=midTile*3;
-const mid=plane(midT,MIDW,M.hgt,M.tint);mid.renderOrder=3;scene.add(mid);
+const mid=plane(midT,MIDW,M.hgt,M.tint,M.fx);mid.renderOrder=3;scene.add(mid);
 /* ---------- 선로 둑 ---------- */
 const E=SCENE.emb, embT=tex(E.img,true), embH=E.h*E.scale, embTile=E.w*E.scale, EMBW=embTile*12;
-const emb=plane(embT,EMBW,embH);emb.renderOrder=5;scene.add(emb);
+const emb=plane(embT,EMBW,embH,null,E.fx);emb.renderOrder=5;scene.add(emb);
 const embTop=(E.rail)*E.scale, SEA=-(E.sea-E.rail)*E.scale;
 emb.position.set(0,embTop-embH/2,0.4);
 
@@ -94,7 +102,7 @@ const train=new THREE.Group();scene.add(train);
 const cars=[];let x=0;
 for(const [k,name] of ORDER){
   const w=(k==='loco'?2856:1640)*PX,h=(k==='loco'?680:550)*PX;
-  const p=plane(tex('car_'+k+'.webp'),w,h,[.88,.9,.97]);p.renderOrder=6;
+  const p=plane(tex('car_'+k+'.webp'),w,h,[.9,.92,.98],{sat:.82,bri:.96});p.renderOrder=6;
   p.position.set(x+w/2,h/2-0.03,0);p.userData={k,name,w,h,ph:Math.random()*6};train.add(p);cars.push(p);x+=w-0.22;
 }
 const TRAINW=x;train.position.x=-TRAINW/2;

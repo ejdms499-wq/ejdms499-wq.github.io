@@ -485,9 +485,23 @@ function clack(at,v){const b=AC.createBufferSource();b.buffer=noiseBuf(AC,.08);c
   o.connect(og);og.connect(MG);o.start(at);o.stop(at+.16)}
 function soundTick(){if(!AC||!sndOn)return;while(nextClack<AC.currentTime+.5){const c=nextClack;clack(c,.9);clack(c+.13,.7);clack(c+1.05,.85);clack(c+1.18,.65);nextClack+=2.1}}
 setInterval(soundTick,200);
+
+/* ================= 배경음악 (bgm/*.mp3 가 있으면 구간별로 재생, 없으면 조용히 건너뜀) ================= */
+const BGM_OF={busan:'night',gyeongbu:'night',seoul:'night',cloud:'night',snow:'snow',baikal:'snow',aurora:'snow',taiga:'snow',
+  moscow:'russia',plain:'russia',forest:'forest',castle:'forest',alps:'forest',paris:'paris',sea:'sea',england:'london',london:'london'};
+const BG={el:[new Audio(),new Audio()],cur:0,key:null,ok:{},vol:.55,force:null};
+BG.el.forEach(a=>{a.loop=true;a.preload='none';a.volume=0});
+function bgmWant(){if(BG.force)return BG.force;const w=where(dep,vnow());return w.mode==='run'?BGM_OF[w.seg.id]:'london'}
+function bgmFade(a,to,ms,done){const from=a.volume,t0=performance.now();(function f(n){const k=Math.min(1,(n-t0)/ms);a.volume=Math.max(0,Math.min(1,from+(to-from)*k));if(k<1)requestAnimationFrame(f);else done&&done()})(t0)}
+function bgmTick(){if(!sndOn){BG.el.forEach(a=>{if(!a.paused)bgmFade(a,0,600,()=>a.pause())});BG.key=null;return}
+  const k=bgmWant();if(!k||k===BG.key||BG.ok[k]===false)return;BG.key=k;
+  const old=BG.el[BG.cur],nx=BG.el[1-BG.cur];nx.src='bgm/'+k+'.mp3';nx.volume=0;
+  nx.play().then(()=>{BG.ok[k]=true;BG.cur=1-BG.cur;bgmFade(nx,BG.vol,2200);bgmFade(old,0,2200,()=>old.pause());if(MG)MG.gain.linearRampToValueAtTime(.32,AC.currentTime+2)})
+   .catch(()=>{BG.ok[k]=false;BG.key=null})}
+setInterval(bgmTick,2000);
 const sb=document.getElementById('snd');sb.onclick=e=>{e.stopPropagation();if(!AC)initSound();sndOn=!sndOn;AC.resume();
   MG.gain.cancelScheduledValues(AC.currentTime);MG.gain.linearRampToValueAtTime(sndOn?.55:0,AC.currentTime+.8);if(sndOn)nextClack=Math.max(nextClack,AC.currentTime+.1);
-  sb.textContent=sndOn?'♪ 소리 끄기':'♪ 소리 켜기';sb.classList.toggle('on',sndOn)};
+  sb.textContent=sndOn?'♪ 소리 끄기':'♪ 소리 켜기';setTimeout(bgmTick,50);sb.classList.toggle('on',sndOn)};
 
 
 /* ================= 근심 수하물 · 맞은편 승객 ================= */
@@ -782,9 +796,9 @@ function gNext(){if(gType){clearInterval(gType);gType=null;gTx.textContent=gFull
      gIt.innerHTML='<div class="ic">'+it[0]+'</div><b>'+it[1]+'</b><p>'+it[2]+'</p><p style="margin-top:8px;font-size:11px;opacity:.6">트렁크에 넣어 두었어요 · 눌러서 닫기</p>';gIt.classList.add('on');return}
   if(s.fn){s.fn();return}
   gShow(s)}
-function gEnd(){gWait=1;iris(0,650,()=>{cg.classList.remove('on','lb');gWait=null;gBox.classList.remove('on');document.body.classList.remove('talk');const d=gDone;gDone=null;d&&d()})}
+function gEnd(){gWait=1;iris(0,650,()=>{cg.classList.remove('on','lb');gWait=null;gBox.classList.remove('on');document.body.classList.remove('talk');const d=gDone;gDone=null;BG.force=null;setTimeout(bgmTick,0);d&&d()})}
 cg.addEventListener('click',e=>{if(e.target.closest('.skip')){gI=gShots.length;gEnd();return}gNext()});
-function playScene(shots,done){gShots=shots;gI=0;gDone=done;gWait=null;cg.classList.add('on','lb');gBox.classList.remove('on');gIt.classList.remove('on');gCh.style.opacity=0;
+function playScene(shots,done){BG.force=shots===undefined?null:(shots[0]&&shots[0].text==='종착역'?'ending':'event');setTimeout(bgmTick,0);gShots=shots;gI=0;gDone=done;gWait=null;cg.classList.add('on','lb');gBox.classList.remove('on');gIt.classList.remove('on');gCh.style.opacity=0;
   gIr.style.setProperty('--r','0%');document.body.classList.add('talk');iris(160,900);setTimeout(gNext,250)}
 function playEvent(id){playScene(EV[id],()=>{const e=LS.get('bl_ev',{});e[id]=1;LS.set('bl_ev',e);addAff(id,3);paxTag()})}
 

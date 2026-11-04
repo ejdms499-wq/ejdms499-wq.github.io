@@ -633,6 +633,118 @@ body.talk #tkB,body.amb #tkB,#cg.on~#tkB{opacity:0!important;pointer-events:none
 body.amb #tag{opacity:0!important}body.amb.wake #tag{opacity:.55!important}
 body.amb #mailT,body.amb #lvt{opacity:0!important;pointer-events:none!important}
 @media (min-aspect-ratio:1/1){#cg .chs{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:8px}}
+
+/* ===== v14 ===== */
+/* 도착 안내: 낙서 종이 */
+#ann .in{background:#fbf5e6!important;color:#2b2620!important;border:7px solid transparent!important;border-image:var(--dz) 16 / 7px stretch!important;border-radius:0!important;background-clip:padding-box!important;box-shadow:0 4px 12px rgba(0,0,0,.3)!important;padding:12px 18px 12px 66px!important;transform:rotate(-.8deg)}
+#ann .bell{background:#c2402f!important;color:#fffaf0!important;font-family:"Gaegu",sans-serif!important}
+#ann small{color:#c2402f!important;opacity:1!important;font:400 15px "Nanum Pen Script","Gaegu",sans-serif!important;letter-spacing:1px!important}
+#ann b{color:#1f2b5a!important;font:400 26px/1.15 "Nanum Pen Script","Gaegu",sans-serif!important;display:block}
+#ann span{color:#5a4a3a!important;font:400 17px "Nanum Pen Script","Gaegu",sans-serif!important}
+/* 작은 글씨 키우기 */
+#hint{font-size:14.5px!important;bottom:calc(16px + env(safe-area-inset-bottom))!important;opacity:.92;text-shadow:0 1px 3px rgba(0,0,0,.8)}
+@media (min-width:900px) and (min-height:620px){#intro .iPair{zoom:1.3}}
+/* 카드형 미니게임: 인물은 보이게, 카드는 왼쪽으로 */
+#cg.gaming:has(.gm .gc) .ch.in{opacity:1!important}
+@media (min-aspect-ratio:1/1){#cg .gm .gc{left:27%}}
+/* 공용 */
+#v14T{width:auto!important;position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top));transform:translate(-50%,-140%) rotate(-.6deg);z-index:46;max-width:min(520px,calc(100vw - 24px));padding:10px 18px;transition:transform .55s cubic-bezier(.2,1.3,.4,1);text-align:center;font-family:"Nanum Pen Script","Gaegu",sans-serif;color:#1f2b5a}
+#v14T{visibility:hidden}#v14T.on{visibility:visible;transform:translate(-50%,0) rotate(-.6deg)}
+#v14T b{display:block;font-weight:400;font-size:21px;line-height:1.2}
+#v14T small{display:block;font-size:16.5px;opacity:.8;margin-top:2px}
+.v14S{position:fixed;inset:0;z-index:40;display:none;align-items:center;justify-content:center;background:rgba(8,14,18,.55);padding:12px}
+.v14S.on{display:flex}
+.v14S .sC{animation:ckIn .35s;max-height:90vh;display:flex;flex-direction:column;overflow:hidden;padding:0}
+.v14A{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.v14A .lost{animation:glow5 2.4s ease-in-out infinite}
+/* 방송 */
+#bcP .sC.bc{flex-direction:row;align-items:center;gap:14px;padding:16px 18px;width:min(520px,94vw)}
+#bcP .bc img{width:74px;height:auto;flex:none;filter:drop-shadow(2px 3px 0 rgba(0,0,0,.18))}
+#bcP .bc small{display:block;font:400 15px "Nanum Pen Script","Gaegu",sans-serif;color:#c2402f}
+#bcP .bc b{display:block;font:400 25px "Nanum Pen Script","Gaegu",sans-serif;color:#1f2b5a}
+#bcP .bc p{margin:4px 0 0;font:15.5px/1.55 "Gowun Batang",serif;color:#2b2620}
+#bcP .bc .albX{align-self:flex-end;flex:none}
+/* 분실물 */
+#lostP .lostc{width:min(380px,90vw);padding:20px;text-align:center;align-items:center;gap:6px}
+#lostP .big{font-size:56px}
+#lostP b{font:400 26px "Nanum Pen Script",sans-serif;color:#1f2b5a}
+#lostP .nt{background:#fffaf0;border:1.5px dashed #b9a27a;padding:12px 14px;font:400 21px/1.35 "Nanum Pen Script",sans-serif;color:#2b2620;transform:rotate(-1.2deg);width:100%;box-sizing:border-box}
+#lostP .nt i{display:block;text-align:right;font-style:normal;margin-top:4px;color:#c2402f}
+#lostP small{opacity:.65;font-size:13px}
+/* 추리 보드 */
+#boardP .board{width:min(880px,96vw);height:min(640px,90vh)}
+#boardP .cork{position:relative;flex:1;overflow:auto;padding:22px 20px 26px;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:22px 18px;align-content:start;
+ background:radial-gradient(circle at 20% 30%,rgba(0,0,0,.06) 0 2px,transparent 3px) 0 0/13px 11px,radial-gradient(circle at 70% 60%,rgba(255,255,255,.08) 0 1.5px,transparent 2.5px) 0 0/9px 12px,#b98a57;box-shadow:inset 0 0 40px rgba(60,30,10,.45)}
+#boardP .str{position:absolute;left:0;top:0;pointer-events:none;z-index:2}
+#boardP .bc{position:relative;background:#f7efdc;min-height:96px;padding:16px 10px 10px;transform:rotate(var(--r));box-shadow:2px 4px 6px rgba(40,20,5,.35);text-align:center;z-index:1}
+#boardP .bc:not(.g){background:rgba(247,239,220,.35);border:2px dashed rgba(58,42,28,.4);box-shadow:none}
+#boardP .bc small{display:block;font:11px "Apple SD Gothic Neo",sans-serif;opacity:.6;margin-bottom:4px}
+#boardP .bc .hw{font:400 19px/1.25 "Gaegu",sans-serif;color:#2f55a4}
+#boardP .bc .q{font:400 36px "Gaegu",sans-serif;color:rgba(58,42,28,.45)}
+#boardP .pin{position:absolute;left:50%;top:-6px;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ff8a7a,#b8312f 60%,#6d1a14);box-shadow:1px 2px 2px rgba(0,0,0,.4);z-index:3}
+#boardP .bc:not(.g) .pin{opacity:.35}
+#boardP .memo{grid-column:span 2;background:#fffef6;background-image:repeating-linear-gradient(180deg,transparent 0 21px,rgba(47,85,164,.18) 21px 22px);border-top:4px solid #c2402f;padding:12px 16px;transform:rotate(1.2deg);box-shadow:2px 4px 6px rgba(40,20,5,.35);z-index:1}
+#boardP .memo small{font:12px "Courier New",monospace;opacity:.7}
+#boardP .memo p{margin:6px 0 0;font:15.5px/22px "Courier New","Nanum Myeongjo",monospace;color:#2b2620}
+#boardP .sus{background:#2b2620;color:#f6e9c8;padding:12px;text-align:center;transform:rotate(-2deg);box-shadow:2px 4px 6px rgba(40,20,5,.4);z-index:1}
+#boardP .sus small{display:block;font-size:11px;opacity:.7;letter-spacing:1px}
+#boardP .sus b{font:400 30px "Nanum Pen Script",sans-serif;color:#f3c76a}
+/* 엽서 쓰기 */
+#post .pcS{display:flex;flex-direction:column;gap:6px;padding:4px 16px 16px}
+#post .pcS>small{font:400 17px "Nanum Pen Script","Gaegu",sans-serif;color:#c2402f;margin-top:6px}
+#post .pcTo{display:flex;flex-wrap:wrap;gap:6px}
+#post .chip{border:1.5px solid #3a2a1c;background:#fffaf0;border-radius:999px;padding:6px 12px;font:600 13.5px "Apple SD Gothic Neo",sans-serif;cursor:pointer;color:#2b2620}
+#post .chip i{font-style:normal;font-size:11px;opacity:.55}
+#post .chip.on{background:#1f2b5a;color:#fffaf0;border-color:#1f2b5a}
+#post .pcPic{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 8px}
+#post .pic{flex:none;width:118px;aspect-ratio:3/2;border:3px solid #fffaf0;outline:1.5px solid #3a2a1c;background-size:cover;background-position:50%;position:relative;cursor:pointer;box-shadow:2px 3px 0 rgba(0,0,0,.15)}
+#post .pic span{position:absolute;left:0;right:0;bottom:0;background:rgba(255,250,240,.88);font:600 11.5px "Apple SD Gothic Neo",sans-serif;padding:2px;color:#2b2620}
+#post .pic.on{outline:3px solid #c2402f;transform:rotate(-2deg)}
+#post .pcS textarea{height:66px;resize:none;border:0;border-bottom:1.5px dashed #3a2a1c;background:repeating-linear-gradient(180deg,transparent 0 25px,rgba(58,42,28,.25) 25px 26px);font:22px/26px "Nanum Pen Script","Gaegu",sans-serif;color:#1f2b5a;outline:none;padding:0}
+#post .pcS .go{margin-top:8px}
+#post .pcSent{display:flex;flex-direction:column;align-items:center;gap:8px;padding:20px 16px 22px;text-align:center}
+#post .pcSent .card{width:220px;aspect-ratio:3/2;background-size:cover;background-position:50%;border:6px solid #fffaf0;box-shadow:3px 5px 0 rgba(0,0,0,.18);position:relative;animation:pcFly 1.1s cubic-bezier(.3,1.4,.5,1)}
+#post .pcSent .stamp{position:absolute;right:-12px;top:-12px;width:46px;height:46px;border-radius:50%;border:3px solid #c2402f;background:#fffaf0;font:22px/40px sans-serif;font-style:normal;text-align:center;transform:rotate(14deg);animation:iSt .35s .7s both cubic-bezier(.3,1.6,.5,1)}
+@keyframes pcFly{from{transform:translateY(40px) rotate(-8deg);opacity:0}to{transform:none;opacity:1}}
+#post .pcSent b{font:400 26px "Nanum Pen Script",sans-serif;color:#1f2b5a}
+#post .pcSent small{opacity:.7}
+#letter .pcQ{height:120px;background-size:cover;background-position:50%;border:5px solid #fffaf0;box-shadow:2px 3px 0 rgba(0,0,0,.15);position:relative;margin:4px 0 14px;transform:rotate(-1deg)}
+#letter .pcQ span{position:absolute;left:0;top:0;background:rgba(255,250,240,.9);font:600 11px sans-serif;padding:2px 6px}
+#letter .pcQ q{position:absolute;left:8px;right:8px;bottom:8px;background:rgba(255,250,240,.92);font:400 19px/1.25 "Nanum Pen Script",sans-serif;color:#1f2b5a;padding:4px 8px;quotes:"“" "”"}
+/* 수다 */
+#chatP .chat{width:min(440px,94vw);height:min(470px,80vh)}
+#chatP .cl{flex:1;overflow:auto;padding:14px 16px;display:flex;flex-direction:column;gap:10px;background:repeating-linear-gradient(180deg,transparent 0 27px,rgba(58,42,28,.08) 27px 28px)}
+#chatP .bb{max-width:78%;animation:ckIn .3s}
+#chatP .bb.r{align-self:flex-end;text-align:right}
+#chatP .bb small{font:700 12px "Apple SD Gothic Neo",sans-serif}
+#chatP .bb p{margin:3px 0 0;background:#fffaf0;border:1.5px solid #3a2a1c;border-radius:14px 14px 14px 3px;padding:8px 12px;font:15px/1.5 "Gowun Batang",serif;color:#2b2620;text-align:left;box-shadow:2px 2px 0 rgba(0,0,0,.08)}
+#chatP .bb.r p{border-radius:14px 14px 3px 14px;background:#f3ead4}
+#chatP .ft{display:block;text-align:center;padding:8px;opacity:.55;font-size:12px}
+/* 창가 선반 */
+#shelf{position:fixed;left:53%;width:25%;height:46px;z-index:3;display:none;align-items:flex-end;justify-content:flex-start;gap:4px;pointer-events:auto}
+body.seat #shelf{display:flex}
+body.seat #v14T{top:calc(84px + env(safe-area-inset-top))}
+body.carOn #nextB{opacity:0!important;pointer-events:none!important}
+@media (max-aspect-ratio:1/1){body.seat #shelf{display:none}}
+body.talk #shelf,body.amb #shelf{opacity:.0;pointer-events:none}
+#shelf button{background:none;border:0;padding:0 2px;font-size:30px;line-height:1;cursor:pointer;filter:drop-shadow(0 3px 2px rgba(0,0,0,.55));transition:transform .2s}
+#shelf button:hover{transform:translateY(-4px) rotate(-6deg)}
+#shelf img{height:40px;width:auto;display:block}
+/* 소원 별 */
+#wstar{position:fixed;z-index:4;width:90px;height:60px;border:0;background:none;padding:0;cursor:pointer;display:none}
+#wstar.on{display:block;animation:wsF 3.2s linear forwards}
+#wstar i{position:absolute;right:0;top:0;width:12px;height:12px;border-radius:50%;background:#fff;box-shadow:0 0 12px 5px rgba(255,240,190,.95),0 0 30px 10px rgba(255,220,140,.5)}
+#wstar i::after{content:"";position:absolute;right:6px;top:4px;width:110px;height:3px;transform-origin:100% 50%;transform:rotate(-22deg);background:linear-gradient(90deg,transparent,rgba(255,245,210,.9));border-radius:3px}
+@keyframes wsF{0%{transform:translate(0,0);opacity:0}8%{opacity:1}85%{opacity:1}100%{transform:translate(-260px,105px);opacity:0}}
+#wishP .wish{width:min(400px,90vw);padding:18px;text-align:center;gap:6px}
+#wishP .wish small{font:400 16px "Nanum Pen Script",sans-serif;color:#c2402f}
+#wishP .wish b{font:400 28px "Nanum Pen Script",sans-serif;color:#1f2b5a}
+#wishP input{border:0;border-bottom:1.5px dashed #3a2a1c;background:transparent;font:22px "Nanum Pen Script","Gaegu",sans-serif;color:#1f2b5a;padding:6px 2px;outline:none;text-align:center;margin:6px 0 10px}
+#wishP .row{display:flex;gap:8px}#wishP .row button{flex:1}
+#wbP .wbook{width:min(440px,94vw)}
+#wbP .wl{overflow:auto;padding:10px 16px 16px;display:flex;flex-direction:column;gap:8px}
+#wbP .wi{display:flex;align-items:center;gap:10px;border-bottom:1.5px dashed rgba(58,42,28,.3);padding:6px 0}
+#wbP .wi span{font-size:20px}#wbP .wi p{flex:1;margin:0;font:400 21px "Nanum Pen Script",sans-serif;color:#1f2b5a}#wbP .wi small{opacity:.55;font-size:12px}
 </style></head><body>
 <div id="tag"><b>부산</b><span id="tagS"></span><i id="tagI"></i></div>
 <div id="dev"><span>출발 후</span><input id="devR" type="range" min="0" max="91.9" step="0.1"><span id="devV"></span></div>
@@ -2892,13 +3004,13 @@ Object.assign(EV2,{
   L('mermaid',null,1,'인어공주','「…이 글씨. 똑같아요. 기울어지는 방향도, 받침 쓰는 버릇도.」',{pose:'face'}),
   N('mermaid','cinder','(신데렐라가 유리 구두를 든 채 다가와, 두 페이지를 번갈아 본다.)'),
   L('mermaid','cinder',2,'신데렐라','어? 이거 제 구두 속 쪽지랑 같은 글씨예요!'),
-  L('mermaid',null,1,'인어공주','「너였구나.」'),
-  N('mermaid',null,'(잠깐, 기차 소리만 들린다.)'),
-  L('mermaid',null,1,'인어공주','「우리한테 낙서로 말을 걸어 준 아이. 그게 {이름님}이었구나.」'),
-  {choice:[['…기억은 안 나요. 그래도 왠지 알 것 같아요','「괜찮아요. 우리가 기억하고 있었어요. 그러려고 기다렸어요.」','honest'],['그때 저도 무서웠을 거예요','「알아요. 무서운 아이가, 다른 사람을 달래 주고 있었어요. 그래서 더 고마워요.」','kind'],['이번엔 제가 말로 할게요. 고마워요','「…목소리로 들으니까 더 좋네요.」','tough']],cg:'mermaid'},
+  L('mermaid',null,1,'인어공주','「…{이름님}, 혹시 어릴 때 동화책에 낙서한 적 있어요?」',{pose:'face'}),
+  N('mermaid',null,'(대답하기도 전에, 그녀가 웃으며 고개를 젓는다.)'),
+  L('mermaid',null,1,'인어공주','「아니에요. 이건 제가 맞힐 일이 아닌 것 같아요. 끝까지 기다릴게요.」'),
+  {choice:[['…저도 잘 모르겠어요. 그런데 이상하게 낯익어요','「낯익다는 건, 한 번은 만났다는 뜻이에요.」','honest'],['그 글씨 주인, 좋은 사람이었을 것 같아요','「네. 무서울 때 남을 먼저 달래 주는 사람이요.」','kind'],['이번엔 제가 말로 할게요. 고마워요','「…목소리로 들으니까 더 좋네요.」','tough']],cg:'mermaid'},
   {page:'mermaid'},
   L('mermaid',null,1,'인어공주','「이 조각은 원래 제 수첩 맨 뒤에 있던 거예요. 이제 주인한테 돌려줄게요.」'),
-  N(null,null,'(뒤 칸에서 셜록이 조용히 파이프를 내려놓는다. 「…그랬군. 사건 해결일세.」)'),
+  N(null,null,'(뒤 칸에서 셜록이 수첩을 덮는다. 「…답은 나왔네. 런던에서 말하지.」)'),
   {item:'mermaid'}],
  rabbit:[T(13,'런던','흰 토끼의 짐'),A('곧 종착역, 런던입니다. 토끼 굴에 빠진 소녀의 이야기도, 이 나라 강가의 뱃놀이에서 처음 시작되었다고 합니다.'),
   O('rabbit','하얀 절벽 위로 해가 뜬다. 체크무늬 재킷의 흰 토끼가 커다란 회중시계를 들고 열차를 향해 달려온다.'),
@@ -2914,6 +3026,7 @@ Object.assign(EV2,{
   N('rabbit','sherlock','(셜록이 맞은편에 앉으며 파이프를 내려놓는다.)'),
   L('rabbit','sherlock',2,'셜록 홈즈','{이름}, 마지막 추리를 하지. 자네는 이 기차의 손님이 아닐세.'),
   L('rabbit','sherlock',2,'셜록 홈즈','자네는 이 책을 읽어 주던 아이였네. 우리 이야기 귀퉁이마다 낙서를 해 주던. 이번엔 틀리지 않았지?'),
+  L('rabbit','sherlock',2,'셜록 홈즈','증거는 열세 조각. 같은 손, 같은 크레파스, 그리고 인어공주 수첩에 남긴 자네 글씨. …사건 해결일세. 이십 년 걸렸군.'),
   L('rabbit',null,1,'흰 토끼','{이름님}, 이제 좀 늦어도 괜찮아요?',{pose:'face'}),
   {choice:[['네. 조금 늦어도 괜찮아요','(흰 토끼가 회중시계를 닫는다) 그럼 저도요. 우리 둘 다 오늘부터 지각생이에요.','tough'],['아직은 무서워요. 그래도 해 볼게요','(흰 토끼가 시계 태엽 하나를 건넨다) 무서울 때마다 이걸 쥐어요. 「조금 늦어도 괜찮아」라고 새겨 뒀어요.','honest'],['토끼 씨가 먼저 쉬어요','(흰 토끼가 웃으며 찻잔을 든다) 손님한테 양보받은 건 처음이에요. 그럼 한 잔만 더요.','kind']],cg:'rabbit'},
   N('rabbit',null,'(흰 토끼의 시계 뚜껑에서, 마지막 종이 조각이 떨어진다.)'),
@@ -3038,4 +3151,264 @@ makeCard=function(T,hid){card.dataset.kind='end';const cv=card.querySelector('ca
   g.font='600 26px '+F;g.globalAlpha=.75;g.fillText('“'+tr[2]+'” — '+tr[1],cx,Y+1130);g.globalAlpha=1;
   const met=Object.keys(LS.get('bl_met',{})).length,pgs=Object.keys(LS.get('bl_pages',{})).length;g.font='600 22px '+F;g.globalAlpha=.55;g.fillText('함께 탄 승객 '+met+'명 · 페이지 조각 '+pgs+' / 13 · ejdms499-wq.github.io',cx,Y+H-50);g.globalAlpha=1;
   card.classList.add('on')};
+
+/* ===================== v14: 기차 안 재미 · 표정 · 숨은 엔딩 새로 · UI 정리 ===================== */
+const DAY=()=>{const d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()};
+const dHash=s=>{let h=7;for(const c of String(s))h=(h*31+c.charCodeAt(0))>>>0;return h};
+const onTrain=id=>{try{const met=LS.get('bl_met',{});return !!(TRIP&&met[id]&&CH_OF[id]!==undefined&&CH_OF[id]<=TRIP.ch&&!(TRIP.left&&TRIP.left[id]))}catch(e){return false}};
+const busyNow=()=>!TRIP||TRIP.fin||cg.classList.contains('on')||$('dlg').classList.contains('on')||AMB||document.body.classList.contains('intro');
+const nm=id=>id==='gyeonu'?'견우와 직녀':id==='wolf'?'늑대와 빨간 모자':id==='hansel'?'헨젤과 그레텔':(CAST[id]?CAST[id].n:'');
+KEEP.gilldong[2]='「어디서든 자네 자리가 있소」라고 적혀 있다.';
+
+/* ---- 공용 작은 알림 ---- */
+const v14T=document.createElement('div');v14T.id='v14T';v14T.className='paper';document.body.appendChild(v14T);
+function tip(html,ms,onclick){v14T.innerHTML=html;v14T.onclick=e=>{e.stopPropagation();v14T.classList.remove('on');onclick&&onclick()};v14T.style.cursor=onclick?'pointer':'default';
+  v14T.classList.remove('on');void v14T.offsetWidth;v14T.classList.add('on');clearTimeout(tip.t);tip.t=setTimeout(()=>v14T.classList.remove('on'),ms||6000)}
+
+/* ---- 공용 종이 창 ---- */
+function sheet(id,cls){let el=$(id);if(!el){el=document.createElement('div');el.id=id;el.className='v14S';el.innerHTML='<div class="paper sC '+(cls||'')+'"></div>';document.body.appendChild(el);
+  el.addEventListener('click',e=>{if(e.target===el)el.classList.remove('on')})}return el}
+const xBtn='<button class="albX">닫기</button>';
+
+/* ================= ① 로봇 포터의 오늘 방송 ================= */
+const BC=[
+ ['오늘의 차','식당칸 오늘의 차는 「느리게 우린 보리차」입니다. 서두르지 않으셔도 식지 않습니다.'],
+ ['분실물 안내','홍길동 승객이 빌려 간 물건은 오늘 안에 돌아옵니다. 대개는요.'],
+ ['날씨 안내','창밖은 맑음, 마음은 조금 흐림일 수 있습니다. 우산은 우체국칸에 있습니다.'],
+ ['열차 소식','별 전망칸 유리를 닦았습니다. 오늘은 별이 한 개 더 보입니다.'],
+ ['안내 말씀','오늘도 탑승해 주셔서 고맙습니다. 짐은 선반에, 걱정은 꼬리표에 적어 두시면 됩니다.'],
+ ['안내 말씀','이 열차에는 늦은 승객이 없습니다. 천천히 온 승객이 있을 뿐입니다.'],
+ ['오늘의 우편','엽서는 우체국칸에서 하루 세 장까지 보낼 수 있습니다. 답장은 조금 늦게 옵니다. 그래서 반갑습니다.'],
+ ['기관실 소식','로봇 기관사가 오늘 기적을 세 번 연습했습니다. 들으셨다면 손을 흔들어 주십시오.'],
+ ['꿈 보관소 안내','어젯밤 꾼 꿈은 꼬리 칸에 맡기실 수 있습니다. 나쁜 꿈은 무료로 보관합니다.'],
+ ['오늘의 날씨','바깥은 차갑고, 객실은 따뜻합니다. 몇몇 승객 자리 근처만 조금 시원합니다.'],
+ ['안내 말씀','오늘은 아무것도 하지 않으셔도 됩니다. 창밖이 대신 움직이겠습니다.'],
+ ['소원 안내','창가 자리에서 별똥별이 보이면 눌러 보십시오. 소원은 무게가 없어 짐칸에 실을 필요가 없습니다.'],
+ ['로봇 포터의 한마디','저는 잠들지 않습니다. 그래서 승객분들이 편히 잠드는 걸 지켜보는 일을 좋아합니다.'],
+ ['선반 안내','받으신 기념품은 창가 선반에 올려 두었습니다. 가끔 주인이 와서 들여다봅니다.'],
+ ['안내 말씀','엿듣기는 원래 예의가 아니지만, 이 열차에서는 괜찮습니다. 다들 들으라고 크게 말하거든요.']];
+function bcToday(){return BC[dHash(DAY())%BC.length]}
+function bcShow(){const [t,b]=bcToday();const el=sheet('bcP','bc');el.querySelector('.sC').innerHTML=
+  `<img src="img/px/robot.webp" alt=""><div><small>오늘의 방송 · 로봇 포터</small><b>${t}</b><p>${b}</p></div><button class="albX">알겠어요</button>`;
+  el.querySelector('.albX').onclick=e=>{e.stopPropagation();el.classList.remove('on')};el.classList.add('on');try{dingdong()}catch(e){}}
+let bcTry=0;function bcBoot(){if(LS.get('bl_bc','')===DAY())return;if(busyNow()){if(++bcTry<40)setTimeout(bcBoot,5000);return}LS.set('bl_bc',DAY());bcShow();setTimeout(lostBoot,9000)}
+setTimeout(bcBoot,7000);
+
+/* ================= ② 길동의 오늘 분실물 ================= */
+const LOST=[['🧦','양말 한 짝','발이 시려 잠깐 빌렸소. 빨아서 돌려드리오.'],['✏️','연필','편지 쓰려고 빌렸소. 끝이 뭉툭해진 건 내 마음이 무거워서요.'],
+ ['🧣','목도리','시베리아 바람이 매서워서. 따뜻하게 잘 썼소.'],['🥄','숟가락','식당칸 수프가 너무 맛있어 보여서…. 한 입만 먹었소.'],
+ ['🔑','열쇠고리','반짝여서 그만. 손이 먼저 빌리고 마음이 나중에 돌려주오.'],['🎀','머리끈','부채에 묶어 봤는데 안 어울리오. 돌려드리오.'],
+ ['🔘','단추 하나','자네 옷에서 떨어진 걸 주웠소. 이번엔 진짜 주운 거요.'],['📎','책갈피','자네가 읽던 쪽은 표시해 두었소. 걱정 마시오.'],
+ ['🧤','장갑 한 짝','한 짝만 빌렸소. 의적도 양심은 있소.'],['🖍️','크레파스','이걸 보니 낙서하던 아이가 생각나서. …누군지는 비밀이오.'],
+ ['☂️','우산','지붕 위에서 비를 만났소. 덕분에 갓이 무사하오.'],['🍬','사탕 하나','…이건 먹었소. 미안하오. 대신 내 것을 하나 넣어 두었소.'],
+ ['✉️','우표 한 장','엽서 보내려는데 우표가 없더이다. 자네 것을 빌렸소.'],['🕶️','안경','세상이 어떻게 보이나 궁금해서. 자네 눈엔 세상이 다정하구려.']];
+const LOSTCAR=['dine','dome','post','case','tail','loco'];
+function lostNow(){const d=DAY(),L=LS.get('bl_lost',{});if(L.d!==d){const h=dHash(d+'L');return {d,i:h%LOST.length,car:LOSTCAR[(h>>5)%LOSTCAR.length],f:0,told:0}}return L}
+function lostBoot(){if(!onTrain('gilldong')&&!(LS.get('bl_met',{}).gilldong))return;const L=lostNow();if(L.told||L.f)return;if(busyNow()){setTimeout(lostBoot,8000);return}
+  L.told=1;LS.set('bl_lost',L);const it=LOST[L.i];tip(`<b>${it[0]} 앗, 내 ${it[1]}${iga(it[1])} 없어졌다</b><small>길동이 어느 칸에 숨겨 둔 것 같아요. 칸을 하나씩 열어 보세요.</small>`,9000)}
+
+/* ================= ③ 칸 패널에 새 기능 붙이기 ================= */
+{const _co=carOpen;carOpen=function(c){_co(c);const k=c.userData.k;let add='';
+  if(k==='case')add+='<button class="pbtn2" data-v="board">🗂 추리 보드 보기</button>';
+  if(k==='post')add+='<button class="pbtn2" data-v="send">✍ 엽서 쓰기</button>';
+  if(k==='dome')add+='<button class="pbtn2" data-v="wish">🌠 소원 수첩</button>';
+  if(k==='loco')add+='<button class="pbtn2" data-v="bc">📢 오늘 방송 다시 듣기</button>';
+  const L=lostNow();if(L.told&&!L.f&&L.car===k)add+='<button class="pbtn2 lost" data-v="lost">✨ 바닥에서 뭔가 반짝여요</button>';
+  if(!add)return;const box=document.createElement('div');box.className='v14A';box.innerHTML=add;const ref=carP.querySelector('.cnt,.cp');ref?carP.insertBefore(box,ref):carP.appendChild(box);
+  box.querySelectorAll('[data-v]').forEach(b=>b.onclick=e=>{e.stopPropagation();const v=b.dataset.v;
+    if(v==='board')boardOpen();if(v==='send')postOpen('send');if(v==='wish')wishBook();if(v==='bc')bcShow();
+    if(v==='lost'){const L=lostNow(),it=LOST[L.i];L.f=1;LS.set('bl_lost',L);b.remove();try{addAff('gilldong',1)}catch(e){}try{blipUp()}catch(e){}
+      const el=sheet('lostP','lostc');el.querySelector('.sC').innerHTML=`<div class="big">${it[0]}</div><b>${it[1]} 찾았다!</b><div class="nt">${it[2]}<i>— 길동</i></div><small>내일은 또 뭘 빌려 갈까요.</small><button class="pbtn2">돌려받기</button>`;
+      el.querySelector('button').onclick=()=>el.classList.remove('on');el.classList.add('on')}})}}
+
+/* ================= ④ 가방 메뉴 ================= */
+{const _bi=bagItems;bagItems=function(){const it=_bi();const add=[];
+  if(LS.get('bl_met',{}).sherlock||Object.keys(LS.get('bl_pages',{})).length)add.push(['🗂','추리 보드','<small>페이지 조각 · 셜록 메모</small>',boardOpen]);
+  if(TRIP)add.push(['✍','엽서 쓰기','<small>오늘 '+pcLeft()+'장 남음</small>',()=>postOpen('send')]);
+  if(LS.get('bl_wish',[]).length)add.push(['🌠','소원 수첩','<small>'+LS.get('bl_wish',[]).length+'개</small>',wishBook]);
+  it.splice(Math.min(2,it.length),0,...add);return it}}
+
+/* ================= ⑤ 셜록의 추리 보드 ================= */
+const SHER_NOTE=n=>{const done=LS.get('bl_end',null);
+  if(n>=13)return done?'사건 해결. 글씨의 주인: '+(LS.get('bl_name','')||'자네')+'. 이십 년 걸렸군.':'조각이 다 모였네. 답은 런던에서 말하지.';
+  if(n>=8)return '이 아이는 승객 모두를 알고 있었네. 무서울 때 남을 먼저 달래는 아이였어. …자네 글씨를 한 번 보고 싶군.';
+  if(n>=4)return '우연이 네 번이면 사건일세. 글씨 주인은 어린아이야. 받침을 크게 쓰는 버릇이 있군.';
+  if(n>=1)return '같은 크레파스, 같은 손. 아직은 우연일 수도 있네.';return '아직 단서가 없군. 첫 조각은 부산 근처 어딘가에 있을 걸세.'};
+function boardOpen(){const el=sheet('boardP','board'),pg=LS.get('bl_pages',{});const n=PG_ORD.filter(([k])=>pg[k]&&PAGES[k]).length;
+  const cards=PG_ORD.map(([k,st],i)=>{const got=pg[k]&&PAGES[k];const r=((dHash(k)%9)-4)*1.4;
+    return got?`<div class="bc g" data-i="${i}" style="--r:${r}deg"><i class="pin"></i><small>${i+1} · ${st}</small><div class="hw">${esc(PAGES[k]).replace(/\n/g,'<br>')}</div></div>`
+      :`<div class="bc" data-i="${i}" style="--r:${r}deg"><i class="pin"></i><small>${i+1} · ${st}</small><div class="q">?</div></div>`}).join('');
+  const sus=n>=13&&LS.get('bl_end',null)?esc(LS.get('bl_name','')||'나'):'???';
+  el.querySelector('.sC').innerHTML=`<div class="albH"><b>🗂 추리 보드 · 베이커가 출장소</b>${xBtn}</div><div class="cork"><svg class="str"></svg>${cards}
+    <div class="memo"><small>S.H.의 메모 · 조각 ${n} / 13</small><p>${SHER_NOTE(n)}</p></div><div class="sus"><small>용의자 · 글씨의 주인</small><b>${sus}</b></div></div>`;
+  el.querySelector('.albX').onclick=()=>el.classList.remove('on');el.classList.add('on');
+  requestAnimationFrame(()=>{const ck=el.querySelector('.cork'),sv=el.querySelector('.str'),R=ck.getBoundingClientRect();sv.setAttribute('width',R.width);sv.setAttribute('height',ck.scrollHeight);
+    const pts=[...ck.querySelectorAll('.bc.g .pin')].map(p=>{const r=p.getBoundingClientRect();return [r.left-R.left+r.width/2,r.top-R.top+r.height/2+ck.scrollTop]});
+    sv.innerHTML=pts.length>1?'<polyline points="'+pts.map(p=>p.join(',')).join(' ')+'" fill="none" stroke="#b8312f" stroke-width="2" stroke-linejoin="round" opacity=".55"/>':''})}
+
+/* ================= ⑥ 엽서 보내기 + 답장 ================= */
+const PCV={busan:'busan_1',seoul:'seoul_1',ojak:'cloud_1',siberia:'snow_1',baikal:'baikal_1',moscow:'moscow_1',forest:'forest_1',candy:'forest_2',castle:'castle_1',alps:'alps_1',paris:'paris_1',sea:'sea_2',london:'london_1'};
+const pcImg={};Object.keys(PCV).forEach(k=>{pcImg[k]='img/v/'+PCV[k]+'.webp';const im=new Image();im.onload=()=>{pcImg[k]='img/post/'+k+'.webp'};setTimeout(()=>im.src='img/post/'+k+'.webp',20000)});
+const PCR={
+ byeol:['{역} 엽서 잘 받았소. 용궁 서고에 꽂아 두었더니 물고기들이 줄을 서서 구경하오. 자네 글씨는 바다에서도 번지지 않는구려.','고맙다는 말은 내가 할 말이오. 빈손으로 돌아갈 뻔한 거북한테 이야기 보따리를 준 게 누구였소? {역} 엽서는 등딱지 안쪽에 붙여 두겠소.','보고 싶다니, 허허. 거북은 느려도 꼭 가오. 언젠가 {역} 바다에서 고개를 내밀어 보겠소.','무거운 날이구려. 그럴 땐 등딱지를 생각하시오. 무거워 보여도 그 안에 숨을 수 있는 거요. 오늘은 좀 숨어도 괜찮소.'],
+ gilldong:['{역} 엽서라. 지붕 위에서 읽었소. 바람이 자꾸 빌려 가려 해서 꼭 쥐고 읽었지. 이건 안 돌려줄 거요.','고맙다니, 의적한테 그런 말 하는 사람은 자네뿐이오. 오늘 밤엔 아무것도 안 빌리고 자겠소. 아마도.','나도 자네가 보고 싶었소. 동에 번쩍 서에 번쩍 하다 보면, 언젠가 자네 창밖에도 번쩍하겠지.','힘든 날엔 지붕에 올라가 보시오. 위에서 보면 사람 사는 불빛이 다 작아 보이오. 걱정도 같이 작아지고.'],
+ gyeonu:['(직녀) {역} 엽서, 까치가 물어다 줬어요. 베틀 옆에 세워 두고 짜다 말고 자꾸 봐요.\n(견우) 소들도 같이 봤소.','(직녀) 고맙다는 말, 별빛보다 오래 남아요.\n(견우) 나도 고맙소. 새벽이 덜 무서웠던 건 자네 덕이오.','(직녀) 보고 싶은 마음은 일 년을 하루로 만들어요. 우리가 제일 잘 알아요.\n(견우) 기다리면 오오. 꼭.','(직녀) 실이 엉킬 땐 한 올씩 풀어요. 마음도 그래요. 천천히 해요.\n(견우) 서두르면 소도 안 움직이오.'],
+ snowq:['{역} 엽서가 궁전에 닿았어요. 신기하죠, 제 손에 들어와도 얼지 않았어요.','고맙다는 말을 들으면 창에 성에꽃이 피어요. 오늘은 창이 꽃밭이 됐어요.','보고 싶다는 말, 처음 들어 봐요. 얼음 궁전이 조금 따뜻해졌어요. 정말로요.','추운 날이죠. 저도 알아요. 그럴 땐 따뜻한 걸 천천히 만져요. 한 번에 말고, 조금씩.'],
+ sherlock:['{역} 엽서라. 우표가 비뚤게 붙었군. 서둘러 보냈다는 증거일세. 무엇이 그리 급했는지는 묻지 않겠네.','감사 인사는 받아 두지. 대신 다음엔 단서를 하나 넣어 보내게. 심심하면 시계가 또 멈출 것 같네.','추리하자면, 자네는 창밖을 보며 이걸 썼을 걸세. 나도 그렇네. 베이커가 창가에서.','무거운 날일수록 관찰을 하게. 찻잔의 김, 창밖 불빛. 작은 걸 보면 큰 걱정이 잠깐 비켜서지. 경험에서 나온 추리일세.'],
+ babayaga:['{역} 엽서라. 닭다리가 신이 나서 오두막째 춤을 췄네. 덕분에 찻잔 두 개가 깨졌지. 괜찮아.','고맙긴. 차나 한잔 더 마시러 오게. 쓰지만 몸엔 좋아.','보고 싶으면 숲에서 빗자루를 흔들게. 오두막이 알아서 걸어갈 걸세.','힘들 땐 배부터 채우게. 마녀도 배고프면 무서워지는 법이야.'],
+ odette:['{역} 엽서를 받고 호숫가에서 한 바퀴 돌았어요. 낮이었는데도요. 백조 춤이었지만 괜찮았어요.','고마워요. 그 말을 들으면 날개도, 손도 다 제 것 같아요.','저도 보고 싶어요. 해 질 녘마다 창밖을 봐요. 당신 열차가 지나갈까 봐요.','힘든 날엔 발끝으로 서 봐요. 조금 높아진 만큼, 조금 가벼워져요. 진짜예요.'],
+ hansel:['(그레텔) {역} 엽서 받았어요! 오빠가 지도에 별표 쳤어요.\n(헨젤) 이제 길 안 잃어요.','(헨젤) 고마운 건 우리예요.\n(그레텔) 생강 과자 하나 넣었는데, 우체부 아저씨가 먹었을지도 몰라요.','(그레텔) 보고 싶어요!\n(헨젤) 길 표시해 뒀으니까 언제든 와요. 이번엔 조약돌로요.','(헨젤) 무서울 땐 손잡으면 돼요. 우리도 숲에서 그렇게 했어요.\n(그레텔) 손 두 개면 무서운 게 반이에요.'],
+ wolf:['(빨간 모자) {역} 엽서 왔어요! 아저씨가 냄새 맡더니 꼬리 흔들었어요.\n(늑대) …안 흔들었소.','(늑대) 크흠. 고맙다는 말은 오해 없이 잘 들었소.\n(빨간 모자) 아저씨 또 흔든다!','(늑대) 보고 싶으면 휘파람을 부시오. 어디서든 냄새로 찾아가겠소.','(늑대) 오해받는 날이 있소. 나는 백 년째요. 그래도 한 명이 믿어 주면 버틸 만하오. 나는 자네를 믿소.'],
+ sleeping:['{역} 엽서 받고 잠이 확 깼어요! 머리맡에 세워 뒀어요. 깨자마자 보이게요.','고마워요. 백 년 동안 못 들은 말을 오늘 다 들은 것 같아요.','저도 보고 싶어요. 꿈에서 보면 안 될까요? 꿈은 제가 자신 있어요.','피곤하면 자도 돼요. 세상은 생각보다 기다려 줘요. 제가 백 년 자 봐서 알아요.'],
+ monster:['{역} 엽서를 책 사이에 끼웠어요. 「실낙원」 맨 앞장이요. 제일 좋은 자리예요.','고맙다는 말을 소리 내서 읽어 봤어요. 제 목소리가 조금 덜 무섭게 들렸어요.','보고 싶다는 말… 저한테 처음 온 말이에요. 몇 번이고 다시 읽을게요.','겉모습이 무거운 날이 있어요. 그래도 안은 생각보다 가벼워요. 우리 트렁크처럼요.'],
+ cinder:['{역} 엽서! 열두 시가 지나도 안 사라졌어요. 진짜는 남는 거 맞죠?','고마워요. 재 묻은 손으로 답장 써요. 그래도 괜찮죠? 후후.','저도 보고 싶어요. 다음엔 구두 두 짝 다 신고 갈게요.','힘든 날엔 그냥 재투성이로 있어요. 그 모습도 좋아해 줄 사람이 있어요. 저처럼요.'],
+ mermaid:['「{역} 엽서가 젖지 않게 소라 껍데기에 넣어 뒀어요. 바다 밑에서도 읽을 수 있게요.」','「고맙다는 말, 목소리 없이도 다 들려요. 저도 고마워요.」','「보고 싶어요. 이건 쓰면서도 소리 내 보고 싶은 말이에요.」','「하지 못한 말이 쌓이면 무거워요. 저한테 써요. 다 읽을게요.」'],
+ rabbit:['{역} 엽서 받았어요! 시계 안 보고 읽었어요. 세 번이나요!','고마워요! 늦게 답장해서 미안해요. …아, 이제 늦어도 괜찮댔죠?','저도 보고 싶어요. 차 모임에 의자 하나 비워 둘게요. 늦어도 돼요.','바쁘고 힘든 날엔 시계를 엎어 둬요. 시간은 그래도 맞게 가요. 제가 해 봤어요.']};
+function pcMood(t){if(/힘들|무서|걱정|슬프|슬퍼|지쳐|지친|우울|외로|불안|아파|울고|눈물/.test(t))return 3;if(/보고\s*싶|그리워|그립|생각\s*나|만나고/.test(t))return 2;if(/고마|고맙|감사|덕분/.test(t))return 1;return 0}
+function pcLog(){const L=LS.get('bl_pc',[]);return Array.isArray(L)?L:[]}
+function pcLeft(){const d=DAY();return Math.max(0,3-pcLog().filter(x=>x.d===d).length)}
+{const tabs=post.querySelector('.albT');const b=document.createElement('button');b.dataset.t='send';b.textContent='엽서 쓰기';tabs.appendChild(b);b.onclick=()=>postOpen('send')}
+{const _po=postOpen;postOpen=function(t){_po(t);
+  if(t==='mail'){post.querySelectorAll('.env').forEach(b=>{if(b.dataset.k.includes(':pc'))b.querySelector('small').textContent='엽서 답장'});return}
+  if(t!=='send')return;const box=post.querySelector('.pB');const met=LS.get('bl_met',{});const ids=Object.keys(PCR).filter(id=>met[id]);
+  const vis=CH.map((c,i)=>[c.id,c.name,i]).filter(([id,n,i])=>PCV[id]&&TRIP&&i<=TRIP.ch);const left=pcLeft();
+  if(!ids.length){box.innerHTML='<p class="cnt">아직 엽서를 보낼 승객이 없어요.<br>승객을 만나면, 내린 뒤에도 엽서를 보낼 수 있어요.</p>';return}
+  let to=null,st=vis.length?vis[vis.length-1][0]:'busan';
+  box.innerHTML=`<p class="cnt">오늘 보낼 수 있는 엽서 <b>${left}</b> / 3 · 답장은 조금 뒤 우체국으로 와요</p>
+   <div class="pcS"><small>① 받는 사람</small><div class="pcTo">${ids.map(id=>`<button class="chip" data-id="${id}">${nm(id)}${onTrain(id)?'':' <i>내림</i>'}</button>`).join('')}</div>
+   <small>② 엽서 그림</small><div class="pcPic">${vis.map(([id,n])=>`<button class="pic" data-s="${id}" style="background-image:url(${pcImg[id]})"><span>${n}</span></button>`).join('')}</div>
+   <small>③ 한 줄</small><textarea maxlength="60" placeholder="예: 덕분에 오늘 하루가 조금 가벼웠어요"></textarea>
+   <button class="pbtn2 go" ${left?'':'disabled'}>${left?'우체통에 넣기':'오늘은 다 보냈어요. 내일 또 써요'}</button></div>`;
+  const go=box.querySelector('.go'),ta=box.querySelector('textarea');
+  const sync=()=>{box.querySelectorAll('.chip').forEach(b=>b.classList.toggle('on',b.dataset.id===to));box.querySelectorAll('.pic').forEach(b=>b.classList.toggle('on',b.dataset.s===st))};
+  box.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{to=b.dataset.id;sync()});box.querySelectorAll('.pic').forEach(b=>b.onclick=()=>{st=b.dataset.s;sync()});sync();
+  go.onclick=()=>{if(!pcLeft())return;if(!to){tip('<b>받는 사람을 골라 주세요</b>',2500);return}const t=ta.value.trim().replace(/[<>]/g,'');if(!t){ta.focus();return}
+    if(typeof BAD!=='undefined'&&BAD.test(t)){tip('<b>그 말은 엽서에 못 실어요</b><small>다른 말로 써 볼까요?</small>',3500);return}
+    const L=pcLog();const n=L.length;L.push({d:DAY(),to,st,t,at:Date.now()});LS.set('bl_pc',L.slice(-60));
+    MQ[to+':pc'+n]={at:vnow()+(Q.has('mail')?8e3:5*6e4),pc:{st,t,m:pcMood(t)}};mqSave();
+    box.innerHTML=`<div class="pcSent"><div class="card" style="background-image:url(${pcImg[st]})"><i class="stamp">${(MAIL[to]&&MAIL[to].st)||'✉'}</i></div><b>${nm(to)}에게 보냈어요</b><small>답장은 5분쯤 뒤에 와요. 창을 닫아도 괜찮아요.</small><button class="pbtn2 l">한 장 더 쓰기</button></div>`;
+    try{blipUp()}catch(e){}box.querySelector('button').onclick=()=>postOpen('send')}}}
+{const _lo=letterOpen;letterOpen=function(k){if(!k.includes(':pc')){_lo(k);return}const id=k.split(':')[0],v=MQ[k],m=MAIL[id]||{},th=TH[id]||{},p=v.pc||{};v.read=1;mqSave();postBadge();
+  const stn=(CH.find(c=>c.id===p.st)||{}).name||'';const body=(PCR[id]||PCR.byeol)[p.m||0].replace(/\{역\}/g,stn);
+  const el=$('letter');el.innerHTML=`<div class="lp" style="--ff:'${th.ff||'Gowun Batang'}';--bg:${th.bg||'#fbf3e2'};--ink:${th.ink||'#2b1e12'};--ac:${th.acc||'#8a5a2b'};background:${th.pat?th.pat+',':''}${th.bg||'#fbf3e2'}">
+    <span class="stp">${m.st||'✉'}</span><div class="pcQ" style="background-image:url(${pcImg[p.st]||''})"><span>내가 보낸 엽서 · ${esc(stn)}</span><q>${esc(p.t||'')}</q></div>
+    <div class="tx">${esc(body)}</div><div class="sg">— ${esc(m.sign||nm(id))}</div><button class="pbtn2 l" id="ltX">편지 접기</button></div>`;
+  el.classList.remove('on');void el.offsetWidth;el.classList.add('on');$('ltX').onclick=e=>{e.stopPropagation();el.classList.remove('on');postOpen('mail')}}}
+
+/* ================= ⑦ 옆 칸 수다 엿듣기 ================= */
+const CHAT=[
+ ['bg1','byeol','gilldong','dine',[['byeol','길동 양반, 그 부채 또 내 것 아니오?'],['gilldong','이건 진짜 내 거요. 어제 것은 돌려드렸잖소.'],['byeol','어제 것은 내 갓끈이었소.'],['gilldong','…허허. 오늘 밤 안에 돌려드리리다.']]],
+ ['gg1','gilldong','gyeonu','dome',[['gilldong','두 분, 새벽까지 몇 시간 남았소?'],['gyeonu','(직녀) 세지 않기로 했어요. 세면 빨리 가거든요.'],['gilldong','그럼 나도 안 세겠소. 대신 망은 보겠소.'],['gyeonu','(견우) …고맙소. 졸면 깨워 주시오.']]],
+ ['bs1','byeol','snowq','dine',[['snowq','별주부 씨, 등딱지는 안 추워요?'],['byeol','거북은 원래 찬 바다 출신이오. 여왕 양반 옆이 오히려 고향 같소.'],['snowq','…고향 같다는 말, 처음 들어요.'],['byeol','허허, 그럼 오늘부터 자주 들으시오.']]],
+ ['ss1','snowq','sherlock','dine',[['sherlock','여왕, 찻잔에 우유를 먼저 부었군.'],['snowq','…그러면 안 되나요?'],['sherlock','안 되네. 하지만 오늘은 눈감아 주지. 김이 나는 걸 보니 안 얼었군.'],['snowq','네. 세 잔째예요.']]],
+ ['so1','sherlock','odette','dome',[['odette','셜록 씨, 제가 백조인지 사람인지 맞혀 볼래요?'],['sherlock','지금은 사람일세. 깃털이 한 개 소매에 붙어 있으니, 한 시간 전엔 백조였고.'],['odette','…무서워요. 다 맞혀요.'],['sherlock','틀린 적도 있네. 딱 한 번. 이 열차에서.']]],
+ ['bo1','babayaga','odette','dine',[['babayaga','아가씨, 날개 접고 다니라니까. 통로가 깃털 천지야.'],['odette','죄송해요, 할머니. 기분이 좋으면 자꾸 펴져요.'],['babayaga','흥. …그럼 오늘은 그냥 펴고 다니게.'],['odette','네! (깃털이 우수수 떨어진다)']]],
+ ['wh1','wolf','hansel','dine',[['hansel','(그레텔) 늑대 아저씨, 진짜 안 잡아먹어요?'],['wolf','(늑대) …몇 번을 말하오. 나는 길 안내하는 쪽이오.'],['hansel','(헨젤) 그럼 우리 집 가는 길도 알아요?'],['wolf','(늑대) 생강 과자 냄새를 따라가면 되오. 너희 주머니에서 계속 나니까.']]],
+ ['hs1','hansel','sleeping','sleep',[['hansel','(그레텔) 공주님, 백 년 자면 배 안 고파요?'],['sleeping','엄청 고파요. 그래서 지금 과자를 세 개째 먹고 있어요.'],['hansel','(헨젤) 그거 우리 과자인데…'],['sleeping','어머. 그럼 내일은 제가 빵을 살게요. 백 년 치 이자 붙여서요.']]],
+ ['ms1','monster','sleeping','tail',[['monster','공주님, 백 년 동안 꾼 꿈 중에 제일 좋았던 건 뭐예요?'],['sleeping','누가 책을 읽어 주는 꿈이요. 아주 작은 목소리였어요.'],['monster','…저도 그런 꿈을 꾸고 싶어요.'],['sleeping','그럼 오늘 밤엔 제가 읽어 줄게요. 목소리는 좀 졸리겠지만요.']]],
+ ['cm1','cinder','monster','dine',[['cinder','키가 크니까 선반에 짐 올리는 거 좀 도와줄래요?'],['monster','…제가요? 다들 제가 다가가면 피하던데요.'],['cinder','저는 재투성이일 때도 사람들이 피했어요. 우리 둘 다 이제 그만 피하기로 해요.'],['monster','…네. 무거운 건 다 저 주세요.']]],
+ ['cw1','cinder','wolf','dome',[['cinder','늑대 아저씨, 자정까지 몇 분 남았는지 냄새로 알 수 있어요?'],['wolf','(늑대) 그건 못 하오. 시계를 보시오.'],['wolf','(빨간 모자) 근데 아저씨, 열두 시 되면 호박 냄새 난대요!'],['cinder','…들켰네요.']]],
+ ['sm1','sherlock','monster','case',[['sherlock','자네 손가락에 잉크가 묻었군. 무언가를 쓰고 있었어.'],['monster','이름 후보요. 아직 정하진 못했어요.'],['sherlock','추리하자면, 자네는 이미 마음에 둔 이름이 있네. 그걸 불러 줄 사람을 기다리는 거지.'],['monster','…그것까지 추리하면 반칙이에요.']]],
+ ['bc1','byeol','cinder','dine',[['cinder','별주부 씨는 어디로 돌아가요?'],['byeol','바다 아래 용궁이오. 빈손이라 걱정이었는데, 이젠 이야기가 한 보따리요.'],['cinder','저도 무도회에서 돌아갈 땐 늘 빈손이었어요. 구두 한 짝도 없이요.'],['byeol','허허, 그럼 우리 둘 다 빈손 동지구려. 오늘은 이야기로 배를 채웁시다.']]],
+ ['od1','odette','sleeping','dome',[['sleeping','오데트 씨는 낮에 뭐 해요?'],['odette','호수에서 떠다녀요. 아무 생각 없이요.'],['sleeping','부러워요. 저는 생각 없이 백 년을 잤는데, 그건 좀 아깝더라고요.'],['odette','그럼 오늘 밤은 같이 깨어 있어요. 아깝지 않게요.']]],
+ ['gm1','gilldong','monster','tail',[['gilldong','이름이 없다니, 나보다 딱하구려. 나는 이름은 있는데 부를 사람이 없었소.'],['monster','…어느 쪽이 더 슬퍼요?'],['gilldong','글쎄. 오늘은 둘 다 덜 슬픈 것 같소. 서로 불러 주면 되니까.'],['monster','그럼… 길동 씨.'],['gilldong','허, 이거 생각보다 좋구려.']]]];
+const CHAT_CAR={dine:'식당칸',dome:'별 전망칸',sleep:'침대칸',tail:'꿈 보관소',case:'탐정 사무소',post:'우체국칸'};
+let chatAct=0,chatNext=Q.has('chat')?15:240,chatPend=null;
+function chatPick(){const heard=LS.get('bl_chat',{});const ok=CHAT.filter(c=>onTrain(c[1])&&onTrain(c[2]));const fresh=ok.filter(c=>!heard[c[0]]);const L=fresh.length?fresh:ok;return L.length?L[Math.floor(Math.random()*L.length)]:null}
+setInterval(()=>{if(document.hidden||busyNow())return;chatAct+=5;if(chatAct<chatNext||chatPend)return;const c=chatPick();chatNext=chatAct+(c?1800:300);if(!c)return;chatPend=c;
+  tip(`<b>👂 ${CHAT_CAR[c[3]]||'옆 칸'}에서 수다 소리가 들려요</b><small>${nm(c[1])} · ${nm(c[2])} — 눌러서 엿듣기</small>`,20000,()=>chatOpen(c));setTimeout(()=>{chatPend=null},20500)},5000);
+function chatOpen(c){chatPend=null;const heard=LS.get('bl_chat',{});heard[c[0]]=1;LS.set('bl_chat',heard);const el=sheet('chatP','chat');
+  el.querySelector('.sC').innerHTML=`<div class="albH"><b>👂 ${CHAT_CAR[c[3]]||'옆 칸'} · 엿듣는 중</b>${xBtn}</div><div class="cl"></div><small class="ft">들킨 것 같지는 않아요.</small>`;
+  el.querySelector('.albX').onclick=()=>el.classList.remove('on');el.classList.add('on');const cl=el.querySelector('.cl'),A=c[1];let i=0;
+  const step=()=>{if(!el.classList.contains('on')||i>=c[4].length){if(i>=c[4].length){try{addAff(c[1],1);addAff(c[2],1)}catch(e){}}return}
+    const [id,t]=c[4][i++];const m=t.match(/^\((.+?)\) ?(.*)$/);const who=m?m[1]:(CAST[id]?CAST[id].n:'');const tx=m?m[2]:t;const th=TH[id]||{};
+    const b=document.createElement('div');b.className='bb '+(id===A?'l':'r');b.innerHTML=`<small style="color:${th.acc||'#8a5a2b'}">${esc(who)}</small><p>${esc(tx)}</p>`;cl.appendChild(b);cl.scrollTop=cl.scrollHeight;try{blipUp()}catch(e){}setTimeout(step,1700)};
+  setTimeout(step,500)}
+
+/* ================= ⑧ 창가 선반 + 소원 별 ================= */
+const SHELF_SAY={byeol:'허허, 내가 준 걸 선반에 올려 두었구려.',gilldong:'그거 내가 준 거 아니오? 잘 보이는 데 두었구려.',gyeonu:'(직녀) 우리가 드린 거 저기 있네요!',snowq:'제가 드린 거… 녹지 않고 잘 있네요.',
+ sherlock:'선반 맨 앞에 두었군. 추리하자면, 꽤 마음에 든 모양일세.',babayaga:'흐흐, 내 빗자루가 선반에 앉아 있구먼.',odette:'제 선물이 창가에 있네요. 해 질 녘에 반짝일 거예요.',hansel:'(그레텔) 오빠, 우리 과자 저기 있어! (헨젤) 먹으면 안 돼.',
+ wolf:'(빨간 모자) 아저씨, 우리 선물 저기 있어요! (늑대) …크흠. 보이오.',sleeping:'제가 드린 거, 창가에 있으니까 더 예뻐요.',monster:'제 선물이 선반에 있어요. …자리를 받은 기분이에요.',cinder:'어머, 제 선물 저기 있네요! 열두 시 지나도 그대로예요.',mermaid:'「제 선물, 창가에 있네요. 햇빛 받으면 반짝여요.」',rabbit:'제 선물이 선반에 있어요! 늦지 않게 잘 도착했네요.'};
+setInterval(()=>document.body.classList.toggle('carOn',carP.classList.contains('on')),300);
+setInterval(()=>{if(cg.classList.contains('on'))['bcP','chatP','lostP','wishP'].forEach(i=>{const e=$(i);if(e)e.classList.remove('on')})},400);
+const shelf=document.createElement('div');shelf.id='shelf';document.body.appendChild(shelf);const itImg={};
+function shelfDraw(){const k=LS.get('bl_keep',{});const ids=Object.keys(k).filter(id=>KEEP[id]).slice(-7);const sig=ids.join(',');
+  if(shelf.dataset.sig!==sig){shelf.dataset.sig=sig;shelf.innerHTML=ids.map(id=>`<button data-id="${id}" title="${KEEP[id][1]}">${itImg[id]?`<img src="${itImg[id]}" alt="">`:KEEP[id][0]}</button>`).join('');
+    shelf.querySelectorAll('button').forEach(b=>b.onclick=e=>{e.stopPropagation();const it=KEEP[b.dataset.id];tip(`<b>${it[0]} ${it[1]}</b><small>${it[2]} · ${nm(b.dataset.id)}에게 받음</small>`,4500)})}
+  const H=vwLayout.h||innerHeight*.66,Y=vwLayout.y||innerHeight*.09;shelf.style.top=(Y+H*1.005-30)+'px'}
+setInterval(()=>{if(MODE!=='seat'||innerWidth<innerHeight)return;shelfDraw();
+  if(paxId&&LS.get('bl_keep',{})[paxId]&&SHELF_SAY[paxId]&&!busyNow()){const s=LS.get('bl_shs',{});if(s[paxId]!==DAY()){s[paxId]=DAY();LS.set('bl_shs',s);
+    const t=SHELF_SAY[paxId];setTimeout(()=>tip(`<b>${nm(paxId)}</b><small>${esc(t)}</small>`,5500),2500)}}},1500);
+['byeol','gilldong','gyeonu','snowq','sherlock','babayaga','odette','hansel','wolf','sleeping','monster','cinder','mermaid','rabbit'].forEach(id=>{const im=new Image();im.onload=()=>{itImg[id]='img/items/'+id+'.webp';shelf.dataset.sig=''};setTimeout(()=>im.src='img/items/'+id+'.webp',25000)});
+// 소원 별
+const wstar=document.createElement('button');wstar.id='wstar';wstar.innerHTML='<i></i>';document.body.appendChild(wstar);
+let starAt=Date.now()+(Q.has('star')?8e3:40e3);
+setInterval(()=>{if(MODE!=='seat'||busyNow()||document.hidden||wstar.classList.contains('on'))return;if(Date.now()<starAt)return;starAt=Date.now()+(Q.has('star')?20e3:(150+Math.random()*150)*1e3);
+  const H=vwLayout.h||innerHeight*.66,Y=vwLayout.y||innerHeight*.09;wstar.style.top=(Y+H*(.08+Math.random()*.18))+'px';wstar.style.left=(innerWidth*(.5+Math.random()*.22))+'px';
+  wstar.classList.remove('on');void wstar.offsetWidth;wstar.classList.add('on');setTimeout(()=>wstar.classList.remove('on'),3200)},1000);
+wstar.onclick=e=>{e.stopPropagation();wstar.classList.remove('on');wishOpen()};
+function wishOpen(){const el=sheet('wishP','wish');el.querySelector('.sC').innerHTML=`<small>🌠 별똥별이 떨어지는 동안</small><b>소원 한 줄</b><input maxlength="24" placeholder="예: 내일도 이만큼만 무겁기를"><div class="row"><button class="pbtn2 l">그냥 보내기</button><button class="pbtn2">빌기</button></div>`;
+  el.classList.add('on');const inp=el.querySelector('input');setTimeout(()=>{try{inp.focus()}catch(e){}},200);
+  const go=()=>{const t=inp.value.trim().replace(/[<>]/g,'');el.classList.remove('on');if(!t)return;const w=LS.get('bl_wish',[]);w.push({t,at:Date.now(),s:1});LS.set('bl_wish',w);try{blipUp()}catch(e){}
+    tip(paxId?`<b>✨ 소원을 빌었어요</b><small>맞은편 ${nm(paxId)}도 몰래 눈을 감았다 떠요.</small>`:'<b>✨ 소원을 빌었어요</b><small>소원 수첩에 적어 두었어요.</small>',4500)};
+  el.querySelectorAll('button').forEach((b,i)=>b.onclick=e=>{e.stopPropagation();if(i===0)inp.value='';go()});inp.onkeydown=e=>{if(e.key==='Enter')go()}}
+function wishBook(){const w=LS.get('bl_wish',[]).slice().reverse();const el=sheet('wbP','wbook');
+  el.querySelector('.sC').innerHTML=`<div class="albH"><b>🌠 소원 수첩</b>${xBtn}</div><div class="wl">${w.length?w.map(x=>{const d=new Date(x.at);return `<div class="wi"><span>${x.s?'🌠':'⛵'}</span><p>${esc(x.t)}</p><small>${d.getMonth()+1}월 ${d.getDate()}일</small></div>`}).join(''):'<p class="cnt">아직 빈 소원이 없어요.<br>창가 자리에서 별똥별을 기다려 보세요.</p>'}</div>`;
+  el.querySelector('.albX').onclick=()=>el.classList.remove('on');el.classList.add('on')}
+
+/* ================= ⑨ 표정 그림 (있으면 자동으로 씀) ================= */
+const EXOK={};{const files=[...new Set(Object.values(SP).filter(f=>!f.includes('/')))];setTimeout(()=>files.forEach(f=>['smile','sad'].forEach(x=>{const v=f.replace('.webp','_'+x+'.webp'),im=new Image();im.onload=()=>EXOK[v]=1;im.src=P+v})),12000)}
+{const _gs=gShow;gShow=function(s){if(s&&typeof s.ch==='string'&&!s.ch.includes('/')){const x=s.ex||(['💧','…','💦'].includes(s.emo)||s.pose==='face'?'sad':['♪','✨','💕','❤'].includes(s.emo)?'smile':null);
+    if(x){const v=s.ch.replace('.webp','_'+x+'.webp');if(EXOK[v])s=Object.assign({},s,{ch:v})}}_gs(s)}}
+
+/* ================= ⑩ 런던: 부산 토끼 다시 등장 ================= */
+{const _en=ending;ending=function(){const _ps=playScene;if(LS.get('bl_met',{}).byeol){playScene=function(shots,cb){playScene=_ps;const BG='img/v/london_1.webp',R=SP.bunny;
+    const gag=[{bg:BG,ch:R,who:'',narr:1,say:'(승강장에 내리자, 짐 수레 위에서 낯익은 흰 토끼 한 마리가 깡충 뛰어내린다.)'},
+     {bg:BG,ch:R,who:'토끼',say:'부산에서 본 손님이죠? 거북 아저씨는요? 간 보여 주려고 여기까지 따라왔는데!',emo:'♪'},
+     {bg:BG,ch:R,who:'',narr:1,say:'(별주부는 해저터널에서 용궁으로 돌아갔다고 하자, 토끼 귀가 축 늘어진다. 그러다 주머니에서 진주 조개 하나를 꺼낸다.)'},
+     {bg:BG,ch:R,who:'토끼',say:'이거, 해저터널 지날 때 창문에 붙어 있었어요. 거북 아저씨 글씨예요.'},
+     {bg:BG,ch:null,who:'',narr:1,say:'「토끼에게. 간은 됐소. 다음엔 그냥 놀러 오시오. — 별주부」'},
+     {bg:BG,ch:R,who:'토끼',say:'…흥. 그 말 하려고 런던까지 편지를 보내요? 용궁 가는 길이나 물어봐야겠다.',emo:'💢'}];
+    const i=shots.findIndex(x=>x.t==='title');shots.splice(i+1,0,...gag);return _ps(shots,cb)}}
+  try{_en()}finally{playScene=_ps}}}
+
+/* ================= ⑪ 숨은 엔딩: 새 줄거리 ================= */
+HID.yonggung.name='용궁 엔딩 · 종이배 서고지기';
+HID.yonggung.shots=T=>{const w=(LS.get('bl_wish',[])[0]||{}).t;return [{t:'title',text:'숨은 엔딩',sub:'용궁'},
+ N('byeol',null,'별주부의 등에 올라 바다 아래로 내려간다. 숨이 막히지 않는다. 물방울이 하나하나 빛난다.',{bg:'img/v/sea_2.webp',fx:['spk']}),
+ N(null,null,'산호 기둥 사이로 용궁 지붕이 보인다. 그 옆에, 종이배가 산처럼 쌓인 커다란 서고가 있다.',{bg:'img/v/sea_3.webp'}),
+ L('byeol',null,1,'별주부','부산 부두에서 띄운 종이배는 전부 여기로 오오. 서고지기가 하나하나 말려서 꽂아 두지.',{bg:'img/v/sea_3.webp'}),
+ L('byeol',null,1,'별주부','그런데 서고지기 자리가 스무 해째 비어 있소. 아무도 답장을 안 써 줘서, 배들이 젖은 채로 쌓여만 가오.',{bg:'img/v/sea_3.webp',emo:'💧'}),
+ N(null,null,'(맨 아래 칸에서, 크레파스로 쓴 작은 종이배 하나가 굴러 나온다.)',{bg:'img/v/sea_3.webp'}),
+ N(null,null,'「거북아, 나 혼자 자는 거 무서워. 너도 무서우면 같이 자자.」\n— 삐뚤빼뚤한 일곱 살 글씨.',{bg:'img/v/sea_3.webp',fx:['glow']}),
+ L('byeol',null,1,'별주부','…이 배는 내가 처음 뭍에 올라가던 날 받은 거요. 그날 밤 나도 무서웠소. 그래서 이 배를 베고 잤지.',{bg:'img/v/sea_3.webp'}),
+ N(null,null,'(용왕이 다가와 한참 당신을 바라보다가, 궁이 울릴 만큼 크게 웃는다.)',{bg:'img/cg/yonggung.webp',shake:1}),
+ L('byeol',null,1,'별주부','용왕님 말씀이오. 「답장을 써 줄 사람이 드디어 왔구나.」',{bg:'img/v/sea_3.webp',emo:'✨'}),
+ N(null,null,'당신은 용궁 서고지기가 되기로 한다. 젖은 종이배를 말리고, 한 척씩 답장을 쓴다.',{bg:'img/cg/yonggung.webp'}),
+ ...(w?[N(null,null,'그 사이로 오늘 부산에서 띄운 내 종이배도 떠내려온다.\n「'+w+'」\n첫 답장은 나한테 쓰기로 한다.',{bg:'img/v/sea_3.webp'})]:[]),
+ ...(T?[N(null,null,'트렁크는 서고 맨 아래 칸에 둔다. 바다가 대신 들어 준단다.\n\n“'+T.text+'”',{bg:'img/v/sea_3.webp'}),L('byeol',null,1,'별주부','이제 자네 짐은 바다가 들어 줄 거요. 바다는 아주 힘이 세오.',{bg:'img/v/sea_3.webp'})]:[]),
+ N(null,null,'— 용궁 엔딩 · 종이배 서고지기 —',{bg:'img/cg/yonggung.webp',fx:['glow','spk']})]};
+HID.eunha.name='은하수 역장 엔딩';
+HID.eunha.shots=T=>[{t:'title',text:'숨은 엔딩',sub:'은하수 역'},
+ N('gyeonu',null,'견우와 직녀를 따라 얼어붙은 호수 위를 걷는다. 호수에 은하수가 그대로 비친다.',{bg:'img/v/baikal_1.webp'}),
+ N(null,null,'까치들이 날아와, 호수에서 하늘까지 다리를 놓는다.',{bg:'img/cg/eunha.webp',fx:['spk']}),
+ L('gyeonu',null,1,'직녀','정말 같이 와 줬네요.',{bg:'img/v/aurora_1.webp',emo:'✨'}),
+ L('gyeonu',null,1,'견우','다리 끝에 작은 역이 하나 있소. 일 년에 한 번 열리는데, 아무도 지키지 않는 역이오.',{bg:'img/v/aurora_2.webp'}),
+ N(null,null,'(역장실 책상 위에 낡은 방명록이 펼쳐져 있다. 첫 장에 크레파스 글씨가 있다.)',{bg:'img/v/aurora_2.webp'}),
+ N(null,null,'「까치야, 매일매일 다리 놔 줘. 그럼 견우랑 직녀가 매일 만나잖아.」\n— 일곱 살 글씨.',{bg:'img/v/aurora_2.webp',fx:['glow']}),
+ L('gyeonu',null,1,'직녀','이 방명록의 첫 손님이에요. 이 글씨 덕분에, 우린 일 년을 기다릴 수 있었어요.',{bg:'img/v/aurora_2.webp',emo:'💧'}),
+ L('gyeonu',null,1,'견우','매일은 못 해도, 기다리는 사람이 있으면 일 년이 하루 같다는 걸 배웠소.',{bg:'img/v/aurora_2.webp'}),
+ N(null,null,'당신은 은하수 역의 역장이 되기로 한다. 일 년에 한 번 열리는 역을, 나머지 364일 동안 지키는 사람.',{bg:'img/cg/eunha.webp',fx:['glow']}),
+ ...(T?[N(null,null,'트렁크는 역장실 선반에 올려 둔다. 별빛 아래서는 짐도 가볍다.\n\n“'+T.text+'”',{bg:'img/v/aurora_2.webp'})]:[]),
+ L('gyeonu',null,1,'직녀','당신이 같이 기다려 주면, 일 년이 하루 같을 거예요.',{bg:'img/v/aurora_2.webp',emo:'♪'}),
+ N(null,null,'— 은하수 역장 엔딩 —',{bg:'img/cg/eunha.webp',fx:['glow','spk']})];
+hiddenEnding=function(h,id){const H=HID[h],T=TRUNK&&!TRUNK.done?TRUNK:null;playScene(H.shots(T),()=>{const E=LS.get('bl_endings',{});E[h]=1;LS.set('bl_endings',E);
+  if(T){T.done=1;T.pick=2;T.hid=h;LS.set('bl_trunk',T);LS.set('bl_end',{text:T.text,no:T.no,pick:2,dep:T.dep,hid:h})}
+  TRIP.fin=1;TRIP.hid=h;tripSave();trkShow();lastLine(()=>makeCard(T||{dep:TRIP.dep,no:'----',text:''},h))})};
+
+/* ================= ⑫ 대화창 하나로 통일 (편지지는 그대로) ================= */
+window.__t={ann:()=>announce('도착 안내','제5역 · 바이칼 호수','LAKE BAIKAL · 새벽'),hid:h=>hiddenEnding(h,'byeol'),end:()=>ending(),board:()=>boardOpen(),chat:()=>chatOpen(CHAT[0]),bc:()=>bcShow()};
+applyTheme=function(el,id){const t=TH[id];el.style.cssText='';el.classList.remove('themed','stitch','seal');const n=el.querySelector('#dlgN,.who');if(!n)return;n.style.cssText='';
+  if(t){n.style.background=t.acc;n.style.color='#fffaf0'}};
+
 </script></body></html>

@@ -387,7 +387,7 @@ function bedTex(){const c=document.createElement('canvas');c.width=1024;c.height
   g.fillStyle='#14191b';g.fillRect(0,38,1024,3);
   const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;t.wrapS=THREE.RepeatWrapping;return t}
 const bed=plane(bedTex(),1,1);bed.renderOrder=5;bed.visible=false;scene.add(bed);
-const MIDS={seoul:['kcity',.8],gyeongbu:['kcity',.85],cloud:null,snow:['snow',1],aurora:['snow',.75],taiga:['snow',1],baikal:['baikal',1],moscow:['rus',.9],plain:['rus',.75],forest:['deforest',.9],castle:['deforest',.95],alps:['deforest',1],paris:['paris',.85],sea:['reef',.9],england:['eng',1],london:['paris',.8]};
+const MIDS={seoul:['kcity',.8],gyeongbu:['kcity',.85],snow:['snow',1],nightvil:['rus',.7],steppe:['snow',.9],taiga:['snow',1],moscow:['rus',.9],plain:['rus',.75],berlin:['paris',.7],forest:['deforest',.9],castle:['deforest',.95],alps:['deforest',1],paris:['paris',.85],sea:['reef',.9],england:['eng',1],london:['paris',.8]};
 const pmid=plane(null,1,1,[1,1,1],{haze:.12,sat:.9,bri:.95});pmid.renderOrder=3;pmid.visible=false;scene.add(pmid);let pmAR=4,pmK=null;
 function setPano(id){if(PANO.id===id)return;PANO.id=id;const busan=id==='busan';PANO.on=!busan;
   far.visible=nearWater.visible=mid.visible=emb.visible=busan;pano.visible=bed.visible=!busan;
@@ -505,7 +505,7 @@ function clock(){const w=where(dep,vnow());if(w.mode!=='run')return;
   tagB.textContent=w.seg.name;
   document.body.classList.toggle('day',!/밤|자정|새벽/.test(w.seg.sky));
   tagS.textContent=w.day+'일째 · 현지 '+pd(w.localH)+':'+pd(w.localM)+' · '+w.seg.sky;
-  tagI.textContent=w.next?'다음 '+w.next.name+' · '+dur(w.next.h-w.h)+' 뒤':'곧 런던';
+  tagI.textContent=(w.next?'다음 '+w.next.name+' · '+dur(w.next.h-w.h)+' 뒤':'곧 런던')+(typeof CNT==='number'&&CNT>0?' · 근심 '+CNT+'개 탑승':'');
   if(curSeg!==w.seg.id){curSeg=w.seg.id}
   try{arrCheck(w)}catch(e){}
   setPano(w.seg.id);
@@ -537,7 +537,7 @@ function soundTick(){if(!AC||!sndOn)return;while(nextClack<AC.currentTime+.5){co
 setInterval(soundTick,200);
 
 /* ================= 배경음악 (bgm/*.mp3 가 있으면 구간별로 재생, 없으면 조용히 건너뜀) ================= */
-const BGM_OF={busan:'night',gyeongbu:'night',seoul:'night',cloud:'night',snow:'snow',baikal:'snow',aurora:'snow',taiga:'snow',
+const BGM_OF={dawn:'night',yenisei:'snow',nightvil:'snow',steppe:'snow',berlin:'russia',busan:'night',gyeongbu:'night',seoul:'night',cloud:'night',snow:'snow',baikal:'snow',aurora:'snow',taiga:'snow',
   moscow:'russia',plain:'russia',forest:'forest',castle:'forest',alps:'forest',paris:'paris',sea:'sea',england:'london',london:'london'};
 const BG={el:[new Audio(),new Audio()],cur:0,key:null,ok:{},vol:.55,force:null};
 BG.el.forEach(a=>{a.loop=true;a.preload='none';a.volume=0});
@@ -576,11 +576,11 @@ function ckOpen(){ck.classList.add('on');const w=where(dep,vnow());
   $('ckGo').onclick=ckSubmit;setTimeout(()=>{try{$('ckT').focus()}catch(e){}},300);$('ckNo').onclick=()=>{ck.classList.remove('on');LS.set('bl_skip',dep)}}
 function ckSubmit(){const t=$('ckT').value.trim();if(!t){$('ckT').focus();$('ckT').placeholder='한 줄이면 충분해요';return}
   const w=where(dep,vnow());const no=String(1000+Math.floor(Math.random()*9000));
-  TRUNK={dep,text:t,no,boardH:w.mode==='run'?w.h:0,at:Date.now()};LS.set('bl_trunk',TRUNK);sbAdd(dep);
+  TRUNK={dep,text:t,no,boardH:w.mode==='run'?w.h:0,at:Date.now()};LS.set('bl_trunk',TRUNK);sbAdd(dep);setTimeout(()=>{const e=$('ckCnt');if(e&&CNTS[dep])e.textContent='이 열차 수하물칸에 근심 '+CNTS[dep]+'개가 함께 실렸어요'},1600);
   ckC.innerHTML=`<h3>트렁크에 넣는 중…</h3><div class="sub">수하물 번호 #${no}</div>
    <div class="trunk open" id="tr"><div class="note">${esc(t)}</div><div class="lid"><div class="hd"></div></div><div class="lk"></div><div class="bx"></div>
    <div class="tag">BSN → LDN<br>제 ${trainNo(dep)}호<br>#${no}</div></div>
-   <div id="ckR" style="opacity:0;transition:opacity .6s"><div class="tkt"><b>열차</b><span>부산발 런던행 제 ${trainNo(dep)}호</span><b>짐</b><span>근심 한 개 · 수하물칸 보관</span><b>찾는 곳</b><span>런던역 · 나흘 뒤</span></div>
+   <div id="ckR" style="opacity:0;transition:opacity .6s"><div class="tkt"><b>열차</b><span>부산발 런던행 제 ${trainNo(dep)}호</span><b>짐</b><span>근심 한 개 · 수하물칸 보관</span><b>찾는 곳</b><span>런던역 · 나흘 뒤</span></div><div id="ckCnt" style="font-size:12px;font-weight:700;color:#8a5a2b;margin-top:6px"></div>
    <div class="porter" style="margin-top:12px"><i></i><p>${where(dep,vnow()).mode==='wait'?'잘 받았어요. 출발하면 지나는 도시마다 스티커를 붙여 둘게요.':'잘 받았어요. 지나는 도시마다 스티커를 붙여 둘게요. 이제 편히 쉬세요.'}</p></div>
    <div class="ckRow">${where(dep,vnow()).mode==='wait'?'<button class="pbtn2" id="ckSeat">플랫폼에서 출발 기다리기</button>':'<button class="pbtn2" id="ckSeat">내 창가 자리로 →</button><button class="pbtn2 l" id="ckOut">열차 구경하기</button>'}</div></div>`;
   const tr=$('tr');setTimeout(()=>tr.classList.add('in'),400);setTimeout(()=>tr.classList.remove('open'),1250);setTimeout(()=>tr.classList.add('tagged'),1700);
@@ -672,7 +672,7 @@ const CAST={
   c:[['기차는 제시간에 도착해요','그렇죠? 휴… 시계를 잠깐 내려놓을게요.'],['조금 늦어도 괜찮아요','괜찮다고요? …그 말, 회중시계에 새겨 두고 싶네요.']],
   idle:['도버 절벽이 보이면 거의 다 온 거예요!']},
 };
-const SEAT={busan:'byeol',gyeongbu:'byeol',seoul:'gilldong',cloud:'gyeonu',snow:'snowq',baikal:'sherlock',aurora:'sherlock',taiga:'babayaga',moscow:'odette',
+const SEAT={dawn:'gyeonu',yenisei:'sherlock',nightvil:'sherlock',steppe:'sherlock',berlin:'hansel',busan:'byeol',gyeongbu:'byeol',seoul:'gilldong',cloud:'gyeonu',snow:'snowq',baikal:'sherlock',aurora:'sherlock',taiga:'babayaga',moscow:'odette',
   plain:'hansel',forest:'wolf',castle:'sleeping',alps:'monster',paris:'cinder',sea:'mermaid',england:'rabbit',london:'sherlock'};
 const paxBox=$('pax'),paxT=$('paxT');let paxId=null,paxImg=null,paxAR=.6;
 function paxLayout(){if(!paxImg)return;const W=innerWidth,H=innerHeight,mob=W/H<=.75;
@@ -859,7 +859,9 @@ function playEvent(id){playScene(EV[id],()=>{const e=LS.get('bl_ev',{});e[id]=1;
 const SB='https://vuxqlfockqxvocjlntgv.supabase.co/rest/v1/trunks',SK='sb_publishable_IUPtobU60cCTWGpLAW6AxQ_kBtD7L38';
 let CNT=null;
 function sbAdd(d){try{fetch(SB,{method:'POST',headers:{apikey:SK,'Content-Type':'application/json',Prefer:'return=minimal'},body:JSON.stringify({dep:d})}).then(()=>sbCount(d)).catch(()=>{})}catch(e){}}
-function sbCount(d){try{fetch(SB+'?select=id&dep=eq.'+d,{method:'HEAD',headers:{apikey:SK,Prefer:'count=exact'}}).then(r=>{if(!r.ok)return;const m=(r.headers.get('content-range')||'').split('/')[1];if(m&&m!=='*')CNT=+m}).catch(()=>{})}catch(e){}}
+const CNTS={};
+function sbCount(d,cb){try{fetch(SB+'?select=id&dep=eq.'+d,{method:'HEAD',headers:{apikey:SK,Prefer:'count=exact'}}).then(r=>{if(!r.ok)return;const m=(r.headers.get('content-range')||'').split('/')[1];if(m&&m!=='*'){CNTS[d]=+m;if(d===dep)CNT=+m;cb&&cb(+m)}}).catch(()=>{})}catch(e){}}
+setInterval(()=>{sbCount(dep);try{sbCount(nextDeparture())}catch(e){}},60000);setTimeout(()=>{try{sbCount(nextDeparture())}catch(e){}},500);
 sbCount(dep);
 
 /* ---- 런던 엔딩 ---- */
@@ -1042,8 +1044,8 @@ function firstFlow(){if(Q.has('seat'))return;
   showFirst()}
 function showFirst(){const nd=nextDeparture(),w=where(dep,vnow());
   $('fC').innerHTML=`<h3>부산발 런던행</h3><div class="sub">이 열차는 매일 밤 9시 부산역을 떠나 나흘 동안 실제 시간으로 런던까지 달려요.<br>지금 어젯밤 열차는 <b>${w.mode==='run'?w.seg.name:'런던'}</b> 부근을 지나고 있어요.</div>
-   <button class="fopt rec" id="fA"><b>${depLabel(nd)} 열차 예약하기</b><span>부산역에서 근심을 맡기고 처음부터 함께 떠나요 · 출발까지 ${cdown(nd-vnow(),1)}</span></button>
-   <button class="fopt" id="fB"><b>지금 달리는 열차에 올라타기</b><span>${w.mode==='run'?w.day+'일째 '+w.seg.name+' 구간':''}에서 바로 타요</span></button>`;
+   <button class="fopt rec" id="fA"><b>${depLabel(nd)} 열차 예약하기</b><span>부산역에서 근심을 맡기고 처음부터 함께 떠나요 · 출발까지 ${cdown(nd-vnow(),1)}${CNTS[nd]?' · 벌써 근심 '+CNTS[nd]+'개가 기다려요':''}</span></button>
+   <button class="fopt" id="fB"><b>지금 달리는 열차에 올라타기</b><span>${w.mode==='run'?w.day+'일째 '+w.seg.name+' 구간':''}에서 바로 타요${CNT?' · 근심 '+CNT+'개가 함께 달리는 중':''}</span></button>`;
   firstEl.classList.add('on');
   $('fA').onclick=()=>{const nd2=nextDeparture();LS.set('bl_resv',nd2);dep=nd2;curSeg=null;firstEl.classList.remove('on');showWait();setTimeout(ckOpen,500)};
   $('fB').onclick=()=>{firstEl.classList.remove('on');ckOpen()}}
@@ -1053,7 +1055,7 @@ function hideWait(){waitEl.classList.remove('on');document.body.classList.remove
 function renderWait(){const left=dep-vnow();
   if(left<=0){hideWait();curSeg=null;clock();trkShow();const d=$('depT');d.innerHTML='<b>부산역을 출발합니다</b><span>부산발 런던행 제 '+trainNo(dep)+'호 · 나흘 뒤 런던 도착</span>';d.classList.remove('on');void d.offsetWidth;d.classList.add('on');try{whistle()}catch(e){}return}
   const T=myTrunk();
-  $('wBoard').innerHTML=`<small>BUSAN → LONDON · 제 ${trainNo(dep)}호</small><b>${depLabel(dep)} 출발</b><div class="cd">${cdown(left)}</div><div class="st">${T?'트렁크 #'+T.no+' · 수하물칸에 실렸어요':'아직 맡긴 짐이 없어요'}</div>`;
+  $('wBoard').innerHTML=`<small>BUSAN → LONDON · 제 ${trainNo(dep)}호</small><b>${depLabel(dep)} 출발</b><div class="cd">${cdown(left)}</div><div class="st">${T?'트렁크 #'+T.no+' · 수하물칸에 실렸어요':'아직 맡긴 짐이 없어요'}${CNTS[dep]?'<br>이 열차 수하물칸 · 근심 '+CNTS[dep]+'개':''}</div>`;
   if(!renderWait.b||renderWait.t!==!!T){renderWait.t=!!T;renderWait.b=1;
     $('wBtns').innerHTML=(T?'':'<button class="pbtn2" id="wCk">근심 맡기기</button>')+'<button class="pbtn2 l" id="wLook">그동안 지금 달리는 열차 구경하기</button><button class="pbtn2 l" id="wSnd">♪ 플랫폼 소리 켜기</button>';
     if(!T)$('wCk').onclick=()=>ckOpen();
@@ -1065,7 +1067,7 @@ function whistle(){if(!AC||!sndOn)return;const t=AC.currentTime;[0,.5].forEach(o
   const f=AC.createBiquadFilter();f.type='lowpass';f.frequency.value=1800;a.connect(f);b.connect(f);f.connect(g);g.connect(MG);a.start(t+o);b.start(t+o);a.stop(t+o+1.4);b.stop(t+o+1.4)})}
 
 /* ================= 역 도착 안내 · 스티커 ================= */
-const EN={busan:'Busan',gyeongbu:'Gyeongbu Line',seoul:'Seoul',cloud:'Above the Clouds',snow:'Siberian Plain',baikal:'Lake Baikal',aurora:'Aurora Forest',taiga:'Taiga',moscow:'Moscow',plain:'Eastern Plain',forest:'Black Forest',castle:'Neuschwanstein',alps:'Swiss Alps',paris:'Paris',sea:'Undersea Tunnel',england:'English Countryside',london:'London'};
+const EN={dawn:'Sea of Clouds',yenisei:'Yenisei River',nightvil:'Siberian Village',steppe:'Endless Steppe',berlin:'Warsaw · Berlin',busan:'Busan',gyeongbu:'Gyeongbu Line',seoul:'Seoul',cloud:'Above the Clouds',snow:'Siberian Plain',baikal:'Lake Baikal',aurora:'Aurora Forest',taiga:'Taiga',moscow:'Moscow',plain:'Eastern Plain',forest:'Black Forest',castle:'Neuschwanstein',alps:'Swiss Alps',paris:'Paris',sea:'Undersea Tunnel',england:'English Countryside',london:'London'};
 const PRE={};let arrLast=null;
 function arrCheck(w){const key=dep+':'+w.seg.id;
   if(arrLast===null){arrLast=key;return}
@@ -1092,8 +1094,8 @@ const CM={
  rabbit:{n:'토끼 (별주부전)',segs:['busan','gyeongbu'],k:'walk',s:.95,t:'간은 집에 두고 왔다니까! 별주부한테는 비밀이야.'},
  heungbu:{n:'흥부',segs:['gyeongbu','seoul'],k:'walk',s:1,t:'박씨를 심었더니 근심 대신 박이 열렸지 뭐예요. 하나 드릴까요?'},
  chunhyang:{n:'춘향',segs:['seoul'],k:'swing',s:1.05,t:'기다리는 것도 여행이에요. 런던까지 잘 다녀오세요!'},
- sunmoon:{n:'해님달님 남매',segs:['cloud'],k:'drop',s:1.1,t:'무서웠지만 끝까지 올라왔어요! 위에서 보면 걱정도 다 작아 보여요.'},
- firebird:{n:'불새',segs:['snow','aurora','taiga'],k:'fly',s:1.15,t:'(불새가 반짝이는 깃털 하나를 떨어뜨리고 날아간다)'},
+ sunmoon:{n:'해님달님 남매',segs:['cloud','dawn'],k:'drop',s:1.1,t:'무서웠지만 끝까지 올라왔어요! 위에서 보면 걱정도 다 작아 보여요.'},
+ firebird:{n:'불새',segs:['snow','aurora','nightvil','steppe','taiga'],k:'fly',s:1.15,t:'(불새가 반짝이는 깃털 하나를 떨어뜨리고 날아간다)'},
  rapunzel:{n:'라푼젤',segs:['castle','forest'],k:'stand',s:1.05,t:'저도 언젠가 저 열차 탈 거예요! 머리는 좀 묶고요.'},
  tell:{n:'빌헬름 텔',segs:['alps'],k:'stand',s:1,t:'빗나가도 괜찮아요. 사과는 먹으면 되니까!'},
  phantom:{n:'오페라의 유령',segs:['paris'],k:'stand',s:1.05,t:'자정의 음악은 내가 켜고 있지… 얼굴은 보여 주지 않겠소.'},
@@ -1134,7 +1136,7 @@ addEventListener('pointerdown',e=>{if(cmB.classList.contains('on')&&!e.target.cl
 
 /* ---------- 창가 자리: 창밖 풍경 그림이 계속 지나감 ---------- */
 const V=n=>'img/v/'+n+'.webp';
-const VIEWS={busan:[V('busan_1'),V('busan_2')],gyeongbu:[V('gyeongbu_1'),V('gyeongbu_2'),V('gyeongbu_3'),V('gyeongbu_4')],seoul:[V('seoul_1'),V('seoul_2')],cloud:[V('cloud_1'),V('cloud_2')],
+const VIEWS={dawn:[V('cloud_2')],yenisei:[V('baikal_2')],nightvil:[V('plain_2')],steppe:[V('taiga_1')],berlin:[V('plain_1')],busan:[V('busan_1'),V('busan_2')],gyeongbu:[V('gyeongbu_1'),V('gyeongbu_2'),V('gyeongbu_3'),V('gyeongbu_4')],seoul:[V('seoul_1'),V('seoul_2')],cloud:[V('cloud_1')],
   snow:[V('snow_1'),V('snow_2')],baikal:[V('baikal_1'),V('baikal_2')],aurora:[V('aurora_1'),V('aurora_2')],
   taiga:[V('taiga_1'),V('taiga_2')],moscow:[V('moscow_1'),V('moscow_2')],plain:[V('plain_1'),V('plain_2')],
   forest:[V('forest_1'),V('forest_2')],castle:[V('castle_1'),V('castle_2')],alps:[V('alps_1'),V('alps_2'),V('alps_3')],
@@ -1174,7 +1176,7 @@ function frame(now){
     const BH=1.25;bed.scale.set(vh(dist)*cam.aspect*2.2,BH,1);bed.position.set(camX,0.25-BH/2,0.4);
     bed.material.uniforms.rep.value=bed.scale.x/6;bed.material.uniforms.off.value=((travel/6)%1+1)%1;
     if(pmK){const MZ=-48,Hm=vh(fitD()-MZ)*.30,tile=Hm*pmAR,WW=tile*4;pmid.scale.set(WW,Hm,1);pmid.position.set(camX,-0.6+Hm/2,MZ);
-      pmid.material.uniforms.rep.value=4;pmid.material.uniforms.off.value=(((camX-WW/2+travel*.55)/tile)%1+1)%1;pmid.visible=MODE!=='seat'}}
+      pmid.material.uniforms.rep.value=4;pmid.material.uniforms.haze.value=.22+Math.max(0,(22-dist)/22)*.3;pmid.material.opacity=1;pmid.visible=MODE!=='seat'&&dist>14;pmid.material.uniforms.off.value=(((camX-WW/2+travel*.55)/tile)%1+1)%1}}
   pv.set(camX,SEA+0.25+MD.embY,MD.embZ).project(cam);nearWater.material.uniforms.cut.value=pv.y*.5+.5;
   for(const c of cars)c.position.y=c.userData.h/2-0.03+Math.sin(t*9+c.userData.ph)*0.012;
   for(const [b,sp,ph] of glows){const f=1+Math.sin(t*1.7+ph)*.05+Math.sin(t*7.3+ph*2)*.025;b.material.opacity=.22*f;sp.material.opacity=.4*f}

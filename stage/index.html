@@ -83,16 +83,20 @@ body.seat #pax{display:block}
 #pax img{position:absolute;left:0;width:100%;pointer-events:auto;cursor:pointer;transform-origin:50% 100%;animation:breathe 4.2s ease-in-out infinite;transition:opacity 1.2s}
 #pax img.out{opacity:0}
 @keyframes breathe{50%{transform:translateY(1.2%) scaleY(.992)}}
-#paxT{position:fixed;z-index:3;display:none;padding:4px 9px 4px 14px;font:700 12px "Apple SD Gothic Neo",sans-serif;cursor:pointer;transform:rotate(-4deg);animation:bob 2.4s ease-in-out infinite}
+#paxT{position:fixed;z-index:3;display:none;white-space:nowrap;padding:7px 12px;font:700 14px "Apple SD Gothic Neo",sans-serif;cursor:pointer;border-radius:14px;animation:bob2 2.4s ease-in-out infinite}
+@keyframes bob2{50%{transform:translateY(-4px)}}
+#paxT::after{content:"";position:absolute;right:-11px;top:50%;margin-top:-7px;border:7px solid transparent;border-left:10px solid #3a2a1c}
 body.seat #paxT.on{display:block}
+body.talk #paxT{display:none!important}
 @keyframes bob{50%{transform:rotate(-4deg) translateY(-4px)}}
-#paxT::before{content:"";position:absolute;left:4px;top:50%;width:4px;height:4px;margin-top:-3px;border:2px solid #3a2a1c;border-radius:50%}
+
 /* 대화 */
 #dlg{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);width:min(620px,calc(100vw - 20px));z-index:16;padding:14px 16px 12px;display:none;cursor:pointer}
 #dlg.on{display:block;animation:ckIn .35s}
-#dlgN{position:absolute;top:-14px;left:14px;padding:3px 10px;font:800 13px "Apple SD Gothic Neo",sans-serif;background:#3a2a1c;color:#f3e6c4;border-radius:3px;transform:rotate(-2deg)}
+#dlgN{position:absolute;top:-16px;left:14px;padding:4px 12px;font:800 15px "Apple SD Gothic Neo",sans-serif;background:#3a2a1c;color:#f3e6c4;border-radius:3px;transform:rotate(-2deg)}
 #dlgN small{font-weight:600;opacity:.8;margin-left:6px;letter-spacing:1px}
-#dlgT{font-size:15px;line-height:1.6;min-height:48px;white-space:pre-wrap}
+#dlgT{font-size:17.5px;line-height:1.65;min-height:58px;white-space:pre-wrap;font-family:var(--ff,inherit)}
+#dlgC button,#cg .chs button{font-size:15.5px;font-family:var(--ff,inherit)}
 #dlgC{display:flex;flex-direction:column;gap:6px;margin-top:8px}
 #dlgC button{text-align:left}
 #dlgM{position:absolute;right:12px;bottom:6px;font-size:11px;opacity:.6;animation:bob 1.2s infinite}
@@ -105,11 +109,11 @@ body.talk #snd,body.talk #trk,body.talk #seat{opacity:.0;pointer-events:none}
 #cg .bg.kb{animation:kb 14s ease-out forwards}
 @keyframes kb{from{transform:scale(1.18) translate(3%,2%)}to{transform:scale(1) translate(0,0)}}
 #cg .bg.dim{filter:brightness(.55) saturate(.8) blur(2px)}
-#cg .ch{position:absolute;left:50%;bottom:-6%;height:min(96%,128vw);transform:translateX(-50%);transform-origin:50% 8%;transition:transform 1.1s cubic-bezier(.3,.9,.3,1),opacity .6s}
+#cg .ch{position:absolute;left:50%;bottom:18%;height:min(80%,120vw);transform:translateX(-50%);transform-origin:50% 8%;transition:transform 1.1s cubic-bezier(.3,.9,.3,1),opacity .6s}
 #cg .ch.in{animation:chIn .7s cubic-bezier(.2,1.3,.4,1)}
 @keyframes chIn{from{transform:translateX(-50%) translateY(18%);opacity:0}}
-#cg .ch.face{transform:translateX(-50%) translateY(20%) scale(1.75)}
-@media (max-aspect-ratio:3/4){#cg .ch{bottom:22%}#cg .ch.face{transform:translateX(-50%) translateY(14%) scale(1.45)}#cg .ch.side{transform:translateX(-30%)}}
+#cg .ch.face{transform:translateX(-50%) translateY(-2%) scale(1.6)}
+@media (max-aspect-ratio:3/4){#cg .ch{bottom:26%;height:min(62%,118vw)}#cg .ch.face{transform:translateX(-50%) translateY(-4%) scale(1.35)}#cg .ch.side{transform:translateX(-30%)}}
 #cg .ch.side{transform:translateX(-12%)}
 #cg .ch.sad{filter:saturate(.6) brightness(.85)}
 #cg.shake .stage{animation:shk .45s}
@@ -135,11 +139,11 @@ body.talk #snd,body.talk #trk,body.talk #seat{opacity:.0;pointer-events:none}
 #cg .ttl{position:absolute;left:50%;top:42%;transform:translate(-50%,-50%) rotate(-2deg);z-index:9;padding:12px 20px;text-align:center;font:800 20px/1.3 "Apple SD Gothic Neo",sans-serif;opacity:0;transition:opacity .5s;white-space:nowrap}
 #cg .ttl small{display:block;font-size:12px;font-weight:600;opacity:.75;letter-spacing:2px}
 #cg .ttl.on{opacity:1}
-#cg .box{position:absolute;left:50%;bottom:calc(11% + env(safe-area-inset-bottom));transform:translateX(-50%);width:min(640px,calc(100vw - 24px));z-index:6;padding:14px 16px 12px;cursor:pointer;display:none}
+#cg .box{position:absolute;left:50%;bottom:calc(10% + 6px + env(safe-area-inset-bottom));transform:translateX(-50%);width:min(640px,calc(100vw - 24px));z-index:6;padding:14px 16px 12px;cursor:pointer;display:none}
 #cg .box.on{display:block;animation:ckIn .3s}
-#cg .who{position:absolute;top:-14px;left:14px;padding:3px 10px;font:800 13px "Apple SD Gothic Neo",sans-serif;background:#3a2a1c;color:#f3e6c4;border-radius:3px;transform:rotate(-2deg)}
+#cg .who{position:absolute;top:-16px;left:14px;padding:4px 12px;font:800 15px "Apple SD Gothic Neo",sans-serif;background:#3a2a1c;color:#f3e6c4;border-radius:3px;transform:rotate(-2deg)}
 #cg .who:empty{display:none}
-#cg .tx{font-size:15.5px;line-height:1.65;min-height:50px;white-space:pre-wrap}
+#cg .tx{font-size:17.5px;line-height:1.7;min-height:58px;white-space:pre-wrap;font-family:var(--ff,inherit)}
 #cg .tx.narr{font-style:italic;opacity:.9}
 #cg .chs{display:flex;flex-direction:column;gap:6px;margin-top:8px}
 #cg .chs button{text-align:left}
@@ -165,6 +169,52 @@ body.talk #snd,body.talk #trk,body.talk #seat{opacity:.0;pointer-events:none}
 #paxT.ev{background:#b8432f;color:#fff6e4}
 
 #trk.ev{background:#b8432f;color:#fff6e4;animation:bob 1.4s infinite}
+/* ===== 테마 대사창 · 친밀도 · 앨범 ===== */
+.themed{border-width:3px!important}
+.themed.stitch{outline:2px dashed rgba(46,42,36,.55);outline-offset:-8px}
+.themed.seal::after{content:"印";position:absolute;right:12px;top:-12px;width:28px;height:28px;border-radius:4px;background:#b8312f;color:#f3ead4;font:800 15px/28px "Nanum Myeongjo",serif;text-align:center;transform:rotate(8deg)}
+#dlgN small{font-size:12px}
+.lvbar{position:absolute;left:16px;right:16px;bottom:-1px;height:4px;background:rgba(0,0,0,.08);border-radius:2px;overflow:hidden}
+.lvbar i{display:block;height:100%;background:currentColor;opacity:.55;transition:width .8s}
+#lvt{position:fixed;left:50%;top:22%;z-index:35;transform:translate(-50%,-50%) scale(0);padding:14px 22px;text-align:center;pointer-events:none;opacity:0}
+#lvt.on{animation:lvt 3.2s cubic-bezier(.2,1.4,.4,1) forwards}
+@keyframes lvt{0%{transform:translate(-50%,-50%) scale(.2) rotate(-8deg);opacity:0}12%{transform:translate(-50%,-50%) scale(1.08) rotate(-2deg);opacity:1}20%,82%{transform:translate(-50%,-50%) scale(1) rotate(-2deg);opacity:1}100%{transform:translate(-50%,-60%) scale(.96) rotate(-2deg);opacity:0}}
+#lvt small{display:block;font-size:11px;letter-spacing:3px;font-weight:800;color:#b8432f}
+#lvt b{display:block;font-size:18px;margin:2px 0}
+#lvt span{display:block;font-size:15px;font-weight:700;color:#b8432f}
+#lvt i{display:block;font-style:normal;font-size:12px;margin-top:6px;opacity:.75}
+#cg .vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
+#albB{position:fixed;right:232px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:4;padding:6px 11px;font:700 13px "Apple SD Gothic Neo",sans-serif;cursor:pointer}
+@media (max-width:420px){#albB{right:auto;left:14px}#trk{right:118px}}
+body.talk #albB{opacity:0;pointer-events:none}
+#alb{position:fixed;inset:0;z-index:25;background:rgba(6,16,22,.6);display:none;align-items:center;justify-content:center;padding:14px}
+#alb.on{display:flex}
+.albC{width:min(720px,100%);max-height:88vh;display:flex;flex-direction:column;padding:0;overflow:hidden;animation:ckIn .35s}
+.albH{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 8px}
+.albH b{font-size:18px}
+.albX{background:#3a2a1c;color:#f3e6c4;border:0;border-radius:3px;padding:6px 10px;font:700 12px sans-serif;cursor:pointer}
+.albT{display:flex;gap:6px;padding:0 16px 10px;border-bottom:2px dashed #3a2a1c}
+.albT button{flex:1;background:none;border:2px solid #3a2a1c;border-radius:3px;padding:7px 4px;font:700 13px "Apple SD Gothic Neo",sans-serif;color:#3a2a1c;cursor:pointer}
+.albT button.on{background:#3a2a1c;color:#f3e6c4}
+.albB{overflow:auto;padding:12px 16px 18px}
+.cnt{margin:0 0 10px;font-size:12px;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.grid.pax,.grid.kp{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}
+.cell{font-size:12px;cursor:default}
+.cell[data-r]{cursor:pointer}
+.cell[data-r]:hover .th{transform:translateY(-2px) rotate(-1deg)}
+.cell em{display:block;font-style:normal;font-weight:800;margin-top:5px;font-size:12.5px}
+.cell small{display:block;opacity:.7;line-height:1.35}
+.th{position:relative;aspect-ratio:16/10;border:2px solid #3a2a1c;border-radius:3px;background-size:cover;background-position:50%;overflow:hidden;transition:transform .2s;box-shadow:2px 2px 0 #3a2a1c}
+.pax .th{aspect-ratio:3/4}
+.th img{position:absolute;left:50%;bottom:-6%;height:112%;transform:translateX(-50%)}
+.th.lock{filter:grayscale(1) brightness(.5)}
+.th.lock img{filter:brightness(0);opacity:.55}
+.th span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#f3e6c4;font:800 28px sans-serif}
+.kc{border:2px solid #3a2a1c;border-radius:4px;background:#fffaf0;padding:10px;text-align:center}
+.kc .ic{font-size:30px}
+.kc.lock{opacity:.45}
+.signs{margin:0;padding-left:18px;font:15px/1.7 "Gaegu","Apple SD Gothic Neo",sans-serif}
 </style></head><body>
 <div id="tag"><b>부산</b><span id="tagS">그림 겹 무대 · 시험판</span><i id="tagI"></i></div>
 <div id="dev"><span>출발 후</span><input id="devR" type="range" min="0" max="91.9" step="0.1"><span id="devV"></span></div>
@@ -525,11 +575,12 @@ const SEAT={busan:'byeol',seoul:'gilldong',cloud:'gyeonu',snow:'snowq',baikal:'s
 const paxBox=$('pax'),paxT=$('paxT');let paxId=null,paxImg=null,paxAR=.6;
 function paxLayout(){if(!paxImg)return;const W=innerWidth,H=innerHeight,mob=W/H<=.75;
   const IW=mob?816:1344,IH=mob?1456:896,s=Math.max(W/IW,H/IH),ox=(W-IW*s)/2,oy=(H-IH*s)/2;
-  const C=mob?{x:612,seat:1190,h:560}:{x:1190,seat:770,h:610};
+  const C=mob?{x:640,seat:1200,h:470}:{x:1205,seat:800,h:500};
   const fh=C.h*s,fw=fh*paxAR,top=(C.seat-C.h*.64)*s+oy;
   Object.assign(paxBox.style,{left:(C.x*s+ox-fw/2)+'px',top:top+'px',width:fw+'px',height:(C.h*.64*s)+'px'});
   paxImg.style.height=fh+'px';paxImg.style.top='0px';
-  Object.assign(paxT.style,{left:Math.min(W-110,C.x*s+ox-fw*.2)+'px',top:(top-26)+'px'})}
+  const tw=paxT.offsetWidth||120,figL=C.x*s+ox-fw/2;
+  Object.assign(paxT.style,{left:Math.max(8,Math.min(W-tw-8,figL-tw+fw*.12))+'px',top:(top+fh*.1)+'px'})}
 addEventListener('resize',paxLayout);
 function paxSet(id){if(id===paxId)return;paxId=id;const c=CAST[id];
   const old=paxImg;if(old){old.classList.add('out');setTimeout(()=>old.remove(),1300)}
@@ -760,6 +811,115 @@ card.querySelector('#cdShare').onclick=()=>{card.querySelector('canvas').toBlob(
   if(navigator.canShare&&navigator.canShare({files:[f]}))navigator.share({files:[f],title:'부산발 런던행',text:'나흘 동안 근심을 부산에서 런던까지 실어 보냈어요.'}).catch(()=>{});
   else{const a=document.createElement('a');a.download='나의꼬리표.png';a.href=URL.createObjectURL(b);a.click()}})};
 if(Q.has('card')&&TRUNK)setTimeout(()=>makeCard(TRUNK),800);
+
+/* ================= 캐릭터별 대사창 · 친밀도 단계 · 단짝 이야기 · 추억 앨범 ================= */
+(function(){const l=document.createElement('link');l.rel='stylesheet';
+  l.href='https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Batang:wght@400;700&family=Gaegu:wght@400;700&family=Nanum+Myeongjo:wght@400;800&family=Do+Hyeon&display=swap';document.head.appendChild(l)})();
+const TH={
+ byeol:{bg:'#dff1ec',ink:'#123c3a',acc:'#2f7f86',ff:'Jua',pat:'radial-gradient(circle at 10px -4px,transparent 9px,#2f7f86 10px 12px,transparent 13px) 0 100%/20px 12px repeat-x'},
+ gilldong:{bg:'#f3ead4',ink:'#1d1a17',acc:'#1d1a17',ff:'Nanum Myeongjo',pat:'linear-gradient(90deg,#b8312f 0 0)',seal:1},
+ gyeonu:{bg:'#1f2b5a',ink:'#f5ecd4',acc:'#e9b949',ff:'Gowun Batang',pat:'radial-gradient(circle,#fff6d8 0 1px,transparent 2px) 0 0/34px 26px,radial-gradient(circle,#fff6d8 0 .8px,transparent 1.6px) 13px 9px/21px 19px'},
+ snowq:{bg:'#eaf5fb',ink:'#244663',acc:'#6aa6c9',ff:'Gowun Batang',pat:'radial-gradient(circle,rgba(106,166,201,.35) 0 1.5px,transparent 2.5px) 0 0/18px 18px'},
+ sherlock:{bg:'#d9c6a2',ink:'#2b1e12',acc:'#5a3d22',ff:'Nanum Myeongjo',pat:'repeating-linear-gradient(45deg,rgba(90,61,34,.12) 0 2px,transparent 2px 7px),repeating-linear-gradient(-45deg,rgba(90,61,34,.1) 0 2px,transparent 2px 7px)'},
+ babayaga:{bg:'#f6e2c8',ink:'#3a1d12',acc:'#b8312f',ff:'Jua',pat:'linear-gradient(45deg,#2e6b3e 25%,transparent 25% 75%,#2e6b3e 75%) 0 100%/14px 8px repeat-x'},
+ odette:{bg:'#fbf7f4',ink:'#4a3a4a',acc:'#c98aa8',ff:'Gowun Batang',pat:'radial-gradient(ellipse at 100% 0,rgba(201,138,168,.18),transparent 45%)'},
+ hansel:{bg:'#e8c597',ink:'#4a2a12',acc:'#8a4b22',ff:'Jua',pat:'radial-gradient(circle,#fff 0 2.5px,transparent 3.5px) 0 0/16px 16px'},
+ wolf:{bg:'#e6e0cc',ink:'#2b2a22',acc:'#b8312f',ff:'Do Hyeon',pat:'repeating-linear-gradient(0deg,rgba(60,70,50,.08) 0 1px,transparent 1px 9px)'},
+ sleeping:{bg:'#f9e3e6',ink:'#5a2333',acc:'#a23b55',ff:'Gowun Batang',pat:'radial-gradient(circle at 96% 12%,rgba(162,59,85,.25) 0 10px,transparent 11px)'},
+ monster:{bg:'#e9e1cf',ink:'#2e2a24',acc:'#5f6b47',ff:'Jua',pat:'linear-gradient(90deg,rgba(184,67,47,.12) 0 33%,rgba(47,127,134,.12) 33% 66%,rgba(211,155,42,.14) 66%)',stitch:1},
+ cinder:{bg:'#e5e8fb',ink:'#2b2f6b',acc:'#5a6fb0',ff:'Gowun Batang',pat:'radial-gradient(circle,rgba(255,255,255,.9) 0 1.5px,transparent 2.5px) 0 0/26px 22px'},
+ mermaid:{bg:'#fffef4',ink:'#24406a',acc:'#2f7f9e',ff:'Gaegu',pat:'repeating-linear-gradient(180deg,transparent 0 26px,rgba(47,127,158,.25) 26px 27px)',big:1},
+ rabbit:{bg:'#fbf3e2',ink:'#3a1f1f',acc:'#c0392b',ff:'Do Hyeon',pat:'repeating-conic-gradient(#c0392b 0 25%,transparent 0 50%) 0 100%/12px 12px repeat-x'},
+};
+const NAME2ID={'직녀':'gyeonu','견우':'gyeonu','빨간 모자':'wolf','늑대':'wolf','공주':'sleeping','괴물':'monster','오데트':'odette','셜록 홈즈':'sherlock'};
+Object.keys(CAST).forEach(k=>NAME2ID[CAST[k].n]=k);
+function applyTheme(el,id){const t=TH[id];
+  const n0=el.querySelector('#dlgN,.who');if(!t){el.style.cssText='';if(n0)n0.style.cssText='';el.classList.remove('themed','stitch','seal');return}
+  const st=el.style;st.setProperty('--ff',`"${t.ff}","Apple SD Gothic Neo",sans-serif`);st.background=`${t.pat},${t.bg}`;st.color=t.ink;st.borderColor=t.acc;
+  st.boxShadow=`4px 4px 0 ${t.acc}`;st.fontSize=t.big?'1.08em':'';el.classList.add('themed');el.classList.toggle('stitch',!!t.stitch);el.classList.toggle('seal',!!t.seal);
+  const n=el.querySelector('#dlgN,.who');if(n){n.style.background=t.acc;n.style.color=t.bg;n.style.fontFamily=`"${t.ff}",sans-serif`}}
+/* 친밀도 단계 */
+const LVN=['낯선 승객','말동무','길동무','단짝'],LVT=[0,2,5,9];
+const toastEl=document.createElement('div');toastEl.id='lvt';toastEl.className='paper';document.body.appendChild(toastEl);
+function lvToast(id,l){toastEl.innerHTML=`<small>친밀도 UP</small><b>${CAST[id].n}</b><span>${'♥'.repeat(l)}${'♡'.repeat(3-l)} ${LVN[l]}</span>${l===1?'<i>다음에 말 걸면 「꼬리표 이야기」가 열려요</i>':l===3?'<i>「단짝 이야기」가 열렸어요</i>':''}`;
+  toastEl.classList.remove('on');void toastEl.offsetWidth;toastEl.classList.add('on');try{blipUp()}catch(e){}}
+const _addAff=addAff;
+addAff=function(id,n){const b=lv(AFF[id]||0);_addAff(id,n);const a=lv(AFF[id]||0);if(a>b&&n>0)setTimeout(()=>lvToast(id,a),dlg.classList.contains('on')?900:200);paxTag()};
+nameTag=function(id){const p=AFF[id]||0,l=lv(p),nx=LVT[l+1];
+  dlgN.innerHTML=CAST[id].n+`<small>${'♥'.repeat(l)}${'♡'.repeat(3-l)} ${LVN[l]}</small>`;applyTheme(dlg,id);
+  let bar=dlg.querySelector('.lvbar');if(!bar){bar=document.createElement('div');bar.className='lvbar';dlg.appendChild(bar)}
+  bar.innerHTML=nx?`<i style="width:${Math.round((p-LVT[l])/(nx-LVT[l])*100)}%"></i>`:'<i style="width:100%"></i>'};
+function blipUp(){if(!AC||!sndOn)return;const o=AC.createOscillator(),g=AC.createGain();o.type='triangle';o.frequency.setValueAtTime(660,AC.currentTime);o.frequency.setValueAtTime(880,AC.currentTime+.09);
+  g.gain.setValueAtTime(.18,AC.currentTime);g.gain.exponentialRampToValueAtTime(.001,AC.currentTime+.4);o.connect(g);g.connect(MG);o.start();o.stop(AC.currentTime+.42)}
+/* 혼잣말 +1 (1분에 한 번), 함께 앉아 있기 +1 (4분마다) */
+const _talk=talk;let lastIdle={};
+talk=function(){const id=paxId;const met=LS.get('bl_met',{}),ev=LS.get('bl_ev',{}),ev3=LS.get('bl_ev3',{});
+  if(id&&met[id]&&L3[id]&&(ev[id]||!EV[id])&&lv(AFF[id]||0)>=3&&!ev3[id]){playL3(id);return}
+  _talk();if(id&&met[id]&&(ev[id]||!EV[id])&&Date.now()-(lastIdle[id]||0)>60000){lastIdle[id]=Date.now();addAff(id,1)}};
+let sitM={};setInterval(()=>{if(MODE==='seat'&&paxId&&!document.hidden&&LS.get('bl_met',{})[paxId]){sitM[paxId]=(sitM[paxId]||0)+1;if(sitM[paxId]%4===0)addAff(paxId,1)}},60000);
+const _paxTag=paxTag;
+paxTag=function(){if(!paxId)return;const id=paxId,met=LS.get('bl_met',{}),ev=LS.get('bl_ev',{}),ev3=LS.get('bl_ev3',{});
+  if(met[id]&&(ev[id]||!EV[id])&&L3[id]&&lv(AFF[id]||0)>=3&&!ev3[id]){paxT.innerHTML=CAST[id].n+' · 단짝 이야기 ♥';paxT.className='paper on ev';}else _paxTag();
+  requestAnimationFrame(paxLayout)};
+/* 단짝 이야기 */
+const L3={
+ byeol:['용궁에 돌아가면 자네 얘기를 하겠소. 육지에도 좋은 친구가 있다고.','실패해도 괜찮소 — 별주부'],
+ gilldong:['어디서든 네 자리가 있다. 이건 이 홍길동이 보증하오.','동에 번쩍, 네 편에 번쩍 — 길동'],
+ gyeonu:['(직녀) 내년 칠석에도 이 열차에서 만나요. 약속이에요.\n(견우) 자리는 우리가 맡아 두겠소.','일 년은 금방이에요 — 견우·직녀'],
+ snowq:['당신 앞에서는 조금 녹아도 괜찮을 것 같아요.','천천히, 따뜻하게 — 눈의 여왕'],
+ sherlock:['사건이 없어도 찾아와 주게. 차는 늘 준비해 두지. 우유는 나중에 붓고.','친애하는 조수에게 — S.H.'],
+ odette:['낮이든 밤이든, 당신 앞의 저는 진짜예요.','둘 다 나예요 — 오데트'],
+ wolf:['(늑대) 길을 잃으면 휘파람을 부시오. 어디서든 달려가겠소.\n(빨간 모자) 나도 같이!','한 명이면 충분해 — 늑대'],
+ sleeping:['이제는 잠드는 게 무섭지 않아요. 깨어나면 당신 같은 사람이 있을 테니까요.','천천히 가도 돼요 — 공주'],
+ monster:['이름을 정했어요. 제일 먼저 당신이 불러 주세요.\n…「아담」이에요.','처음 불러 준 사람에게 — 아담'],
+ cinder:['자정이 지나도 남는 것, 그게 진짜 저예요. 당신도 그래요.','남는 건 남아요 — 신데렐라'],
+ mermaid:['「목소리가 없어도, 당신은 제 말을 다 들어 줬어요.」','「다 들렸어요」 — 인어공주'],
+ rabbit:['늦어도 괜찮다는 그 말, 제 시계보다 정확했어요.','조금 늦어도 괜찮아 — 흰 토끼'],
+};
+const SEG_OF={};Object.entries(SEAT).forEach(([sg,id])=>{if(!SEG_OF[id])SEG_OF[id]=sg});
+function viewOf(id){const L=VIEWS[SEG_OF[id]]||VIEWS.busan;return L[0]}
+function l3Shots(id){const c=CAST[id],[line,sign]=L3[id];
+  return [{t:'title',text:'단짝 이야기',sub:c.n},{bg:W_,ch:c.img,pose:'in',fx:['glow','spk'],who:c.n,say:line},
+   {bg:W_,ch:c.img,pose:'face',fx:['glow'],who:'',narr:1,say:c.n+'이(가) 당신의 꼬리표 뒷면에 한마디를 적어 준다.\n\n「'+sign+'」'}]}
+function playL3(id){close();playScene(l3Shots(id),()=>{const e=LS.get('bl_ev3',{});e[id]=1;LS.set('bl_ev3',e);const sg=LS.get('bl_sign',{});sg[id]=L3[id][1];LS.set('bl_sign',sg);paxTag()})}
+/* 장면 대사창도 캐릭터 디자인으로 */
+const _gShow=gShow;gShow=function(s){_gShow(s);if(s.say!==undefined)applyTheme(gBox,NAME2ID[s.who]||null)};
+/* 동영상 장면 지원: {video:'img/xx.mp4'} */
+const gVid=document.createElement('video');gVid.muted=true;gVid.loop=true;gVid.playsInline=true;gVid.setAttribute('playsinline','');gVid.className='vid';G('.stage').insertBefore(gVid,gCh);
+const _gShow2=gShow;gShow=function(s){if(s.video){gVid.src=s.video;gVid.style.display='block';gVid.play().catch(()=>{})}else if(s.bg){gVid.style.display='none';gVid.pause()}_gShow2(s)};
+/* 다시 보기: 배경을 그 승객 구간 풍경으로 */
+let gBgOv=null;const _curView=curView;curView=function(){return gBgOv?'url('+gBgOv+')':_curView()};
+function replay(shots,bg){gBgOv=bg;playScene(shots.map(s=>s.choice?{...s,onPick:null}:s),()=>{gBgOv=null;albumOpen(albTab)})}
+/* 엔딩 기록 */
+const _ending=ending;ending=function(){_ending();const T=TRUNK;const iv=setInterval(()=>{if(TRUNK&&TRUNK.done){clearInterval(iv);LS.set('bl_end',{text:T.text,no:T.no,pick:T.pick,dep:T.dep,conf:Object.keys(clues()).length>=6})}},1000)};
+
+/* ---- 추억 앨범 ---- */
+const albB=document.createElement('button');albB.id='albB';albB.className='paper';albB.textContent='추억 앨범';document.body.appendChild(albB);
+const alb=document.createElement('div');alb.id='alb';alb.innerHTML='<div class="paper albC"><div class="albH"><b>추억 앨범</b><button class="albX">닫기</button></div><div class="albT"><button data-t="scene">장면</button><button data-t="pax">승객</button><button data-t="keep">기념품·한마디</button></div><div class="albB"></div></div>';document.body.appendChild(alb);
+let albTab='scene';
+albB.onclick=e=>{e.stopPropagation();albumOpen('scene')};alb.querySelector('.albX').onclick=()=>alb.classList.remove('on');
+alb.addEventListener('click',e=>{if(e.target===alb)alb.classList.remove('on')});
+alb.querySelectorAll('.albT button').forEach(b=>b.onclick=()=>albumOpen(b.dataset.t));
+function thumb(bg,ch,lock){return `<div class="th${lock?' lock':''}" style="background-image:url(${bg})">${ch?`<img src="${ch.startsWith('img/')?ch:P+ch}" alt="">`:''}${lock?'<span>?</span>':''}</div>`}
+function albumOpen(t){albTab=t;alb.classList.add('on');alb.querySelectorAll('.albT button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));
+  const box=alb.querySelector('.albB'),ev=LS.get('bl_ev',{}),ev3=LS.get('bl_ev3',{}),met=LS.get('bl_met',{}),end=LS.get('bl_end',null);
+  if(t==='scene'){let h='<div class="grid">',n=0,tot=0;
+    for(const id of MAINS.concat(['sherlock'])){const c=CAST[id];
+      if(EV[id]){tot++;const ok=ev[id];if(ok)n++;h+=`<div class="cell" ${ok?`data-r="ev:${id}"`:''}>${thumb(viewOf(id),c.img,!ok)}<em>꼬리표 이야기</em><small>${ok?c.n:'???'}</small></div>`}
+      if(L3[id]){tot++;const ok=ev3[id];if(ok)n++;h+=`<div class="cell" ${ok?`data-r="l3:${id}"`:''}>${thumb(viewOf(id),c.img,!ok)}<em>단짝 이야기</em><small>${ok?c.n:'???'}</small></div>`}}
+    tot++;if(end)n++;h+=`<div class="cell" ${end?'data-r="end"':''}>${thumb('img/v/london_1.webp','robot.webp',!end)}<em>종착역 런던</em><small>${end?'엔딩':'???'}</small></div>`;
+    h+='</div>';box.innerHTML=`<p class="cnt">모은 장면 ${n} / ${tot}</p>`+h;
+    box.querySelectorAll('[data-r]').forEach(el=>el.onclick=()=>{const r=el.dataset.r;alb.classList.remove('on');
+      if(r.startsWith('ev:')){const id=r.slice(3);replay(EV[id],viewOf(id))}
+      else if(r.startsWith('l3:')){const id=r.slice(3);replay(l3Shots(id),viewOf(id))}
+      else if(r==='end'){const E=LS.get('bl_end',{});const T0=TRUNK;TRUNK={...E,boardH:0};const save=TRUNK;ending.__replay=1;
+        _ending();TRUNK=T0;const iv=setInterval(()=>{if(!cg.classList.contains('on')){clearInterval(iv);if(T0)LS.set('bl_trunk',T0);else localStorage.removeItem('bl_trunk')}},500)}})}
+  if(t==='pax'){const ids=['byeol','gilldong','gyeonu','snowq','sherlock','babayaga','odette','hansel','wolf','sleeping','monster','cinder','mermaid','rabbit'];
+    box.innerHTML='<div class="grid pax">'+ids.map(id=>{const c=CAST[id],ok=met[id],p=AFF[id]||0,l=lv(p);
+      return `<div class="cell">${thumb(viewOf(id),c.img,!ok)}<em>${ok?c.n:'???'}</em><small>${ok?'♥'.repeat(l)+'♡'.repeat(3-l)+' '+LVN[l]:SEG.find(s=>s.id===SEG_OF[id]).name+'에서 만나요'}</small></div>`}).join('')+'</div>'}
+  if(t==='keep'){const k=LS.get('bl_keep',{}),sg=LS.get('bl_sign',{});
+    box.innerHTML='<p class="cnt">기념품 '+Object.keys(k).length+' / '+MAINS.length+'</p><div class="grid kp">'+MAINS.map(id=>k[id]?`<div class="cell kc"><div class="ic">${KEEP[id][0]}</div><em>${KEEP[id][1]}</em><small>${KEEP[id][2]}</small></div>`:`<div class="cell kc lock"><div class="ic">?</div><em>???</em><small>${CAST[id].n}의 꼬리표 이야기</small></div>`).join('')+'</div>'+
+      '<p class="cnt" style="margin-top:14px">꼬리표 뒷면의 한마디 '+Object.keys(sg).length+'</p>'+(Object.keys(sg).length?'<ul class="signs">'+Object.values(sg).map(v=>`<li>「${v}」</li>`).join('')+'</ul>':'<p class="cnt" style="opacity:.6">단짝이 되면 꼬리표에 한마디를 적어 줘요</p>')}}
 
 /* ---------- 창가 자리: 창밖 풍경 그림이 계속 지나감 ---------- */
 const V=n=>'img/v/'+n+'.webp';

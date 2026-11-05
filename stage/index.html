@@ -826,6 +826,10 @@ body.paxZ #pax::after{content:"Z z z";position:absolute;right:16%;top:14%;font:4
 #alb.book .th.pz span{position:static;color:rgba(58,42,28,.5);font:400 20px "Nanum Pen Script",sans-serif}
 #alb.book .cell em{font:400 18px/1.15 "Nanum Pen Script","Gaegu",sans-serif;color:#1f2b5a;margin-top:8px}
 #alb.book .cell small{font-size:11.5px}
+
+/* v16 선반 그림 */
+#shelf{height:70px!important;background:url(img/shelf.webp) center bottom/100% auto no-repeat;padding:0 6% 14px;box-sizing:border-box;justify-content:center!important;gap:10px!important}
+#shelf img{height:44px!important}
 </style></head><body>
 <div id="tag"><b>부산</b><span id="tagS"></span><i id="tagI"></i></div>
 <div id="dev"><span>출발 후</span><input id="devR" type="range" min="0" max="91.9" step="0.1"><span id="devV"></span></div>
@@ -3192,7 +3196,7 @@ ending=function(){const T=TRUNK;if(!T)return;let pick=0;const BGL='img/v/lostfou
    {bg:BGL,ch:null,who:'',narr:1,say:'맡긴 사람: 나 (일곱 살)\n맡기는 짐: 혼자 자는 거 무서워요\n찾는 날: 어른이 되면'},
    {bg:BGL,ch:null,who:'',narr:1,say:'(웃음이 난다. 그때는 이게 세상에서 제일 무거웠는데.)'},
    {bg:BGL,ch:P,pose:'in',who:'로봇 포터',say:'열어 보시겠습니까?'},
-   {bg:BGL,ch:null,fx:['spk','glow'],who:'',narr:1,say:'(트렁크 안에는 낡은 동화책 한 권. 찢어졌던 귀퉁이마다, 모아 온 종이 조각이 꼭 맞게 돌아가 있다.)'},
+   {bg:'img/v/book_open.webp',ch:null,fx:['spk','glow'],who:'',narr:1,say:'(트렁크 안에는 낡은 동화책 한 권. 찢어졌던 귀퉁이마다, 모아 온 종이 조각이 꼭 맞게 돌아가 있다.)'},
    {bg:BGL,ch:P,pose:'face',who:'로봇 포터',say:'사실 저는… 그 책 옆에서 같이 자던 깡통 로봇입니다. 주인님이 잠들 때까지 불을 켜 두는 게 제 일이었지요.'},
    {bg:BGL,ch:P,pose:'in',who:'로봇 포터',say:'주인님이 자라서 상자 속에 들어간 뒤로, 이 책을 지키고 있었습니다. 승객분들도 모두 기다렸고요.'},
    {bg:BGL,ch:P,pose:'in',who:'로봇 포터',say:'그리고 오늘 맡기신 짐입니다. 「{짐}」.'},
@@ -3416,7 +3420,7 @@ const shelf=document.createElement('div');shelf.id='shelf';document.body.appendC
 function shelfDraw(){const k=LS.get('bl_keep',{});const ids=Object.keys(k).filter(id=>KEEP[id]).slice(-7);const sig=ids.join(',');
   if(shelf.dataset.sig!==sig){shelf.dataset.sig=sig;shelf.innerHTML=ids.map(id=>`<button data-id="${id}" title="${KEEP[id][1]}">${itImg[id]?`<img src="${itImg[id]}" alt="">`:KEEP[id][0]}</button>`).join('');
     shelf.querySelectorAll('button').forEach(b=>b.onclick=e=>{e.stopPropagation();const it=KEEP[b.dataset.id];tip(`<b>${it[0]} ${it[1]}</b><small>${it[2]} · ${nm(b.dataset.id)}에게 받음</small>`,4500)})}
-  const H=vwLayout.h||innerHeight*.66,Y=vwLayout.y||innerHeight*.09;shelf.style.top=(Y+H*1.005-30)+'px'}
+  const H=vwLayout.h||innerHeight*.66,Y=vwLayout.y||innerHeight*.09;shelf.style.top=(Y+H*1.005-58)+'px'}
 setInterval(()=>{if(MODE!=='seat'||innerWidth<innerHeight)return;shelfDraw();
   if(paxId&&LS.get('bl_keep',{})[paxId]&&SHELF_SAY[paxId]&&!busyNow()){const s=LS.get('bl_shs',{});if(s[paxId]!==DAY()){s[paxId]=DAY();LS.set('bl_shs',s);
     const t=SHELF_SAY[paxId];setTimeout(()=>tip(`<b>${nm(paxId)}</b><small>${esc(t)}</small>`,5500),2500)}}},1500);
@@ -3602,4 +3606,14 @@ const stOf=id=>{const i=CH_OF[id];return i!==undefined&&CH[i]?CH[i].name:''};
     else if(r==='end'){const E0=LS.get('bl_end',{});const T0=TRUNK;TRUNK={...E0,boardH:0};ending.__replay=1;ending();TRUNK=T0;
       const iv=setInterval(()=>{if(!cg.classList.contains('on')){clearInterval(iv);if(T0)LS.set('bl_trunk',T0);else localStorage.removeItem('bl_trunk')}},500)}})}}
 
+
+/* ===================== v16: 미드저니 그림 연결 (엽서 · 과자의 집 풍경 · 헨젤 CG · 포터 CG · 동화책 · 선반 · 소라) ===================== */
+VIEWS.candy=[V('candy_1'),V('candy_2')];
+{const i=SEG.findIndex(x=>x.id==='castle');if(i>0&&!SEG.find(x=>x.id==='candy'))SEG.splice(i,0,{id:'candy',h:16.95,name:'과자의 집',tz:1,sky:'밤',who:'헨젤과 그레텔'})}
+CGREAL.hansel=50;CGREAL.porter=50;CGNAME.porter='로봇 포터';try{cgProbe('porter')}catch(e){}
+let cgxOn=0;{const _gn=gNext;gNext=function(){if(!cg.classList.contains('on')||gType||gWait){_gn();return}const s=gShots[gI];
+  if(s&&s.cgx){gI++;moShow(s.cgx);cgxOn=1;gShow({say:s.say,who:s.who||'',narr:s.who?0:1});return}
+  if(cgxOn){cgxOn=0;try{moHide()}catch(e){}}_gn()}}
+if(!CGNAME.hansel)CGNAME.hansel='헨젤과 그레텔';
+Object.keys(PCV).forEach(k=>{pcImg[k]='img/post/'+k+'.webp'});
 </script></body></html>

@@ -1484,7 +1484,7 @@ function gNext(){if(gType){clearInterval(gType);gType=null;gTx.textContent=gFull
   if(s.t==='title'){gBox.classList.remove('on');gTt.innerHTML='<small>'+(s.text||'')+'</small>'+s.sub;gTt.classList.add('on');gWait=1;
      gBg.style.backgroundImage=curView();gCh.style.opacity=0;setTimeout(()=>{gTt.classList.remove('on');setTimeout(()=>{gWait=null;gNext()},500)},2600);return}
   if(s.choice){gMk.style.display='none';gCs.innerHTML='';gWait=1;s.choice.forEach(([q,r],k)=>{const b=document.createElement('button');b.className='pbtn2 l';b.textContent=q;
-     b.onclick=e=>{e.stopPropagation();gCs.innerHTML='';gWait=null;if(s.onPick)s.onPick(k);if(s.cg&&typeof moShow==='function'){moShow(s.cg);const cp=CGM[s.cg]&&CGM[s.cg].cap;if(cp&&!(gShots[gI]&&gShots[gI].keepMo))gShots.splice(gI,0,{say:cp,who:'',narr:1,keepMo:1})}{const nar=/^\((?![^)]{0,5}\))/.test(r);const wh=nar?'':(s.rw||(s.me?'나':gWho.textContent));const go=()=>gShow({say:r,who:wh,narr:nar});if(s.cg){gWait=1;gBox.classList.remove('on');setTimeout(()=>{gWait=null;go()},1300)}else go()}};gCs.appendChild(b)});return}
+     b.onclick=e=>{e.stopPropagation();gCs.innerHTML='';gWait=null;if(s.onPick)s.onPick(k);if(s.cg&&typeof moShow==='function'){moShow(s.cg);const cp=CGM[s.cg]&&CGM[s.cg].cap;if(cp&&!(gShots[gI]&&gShots[gI].keepMo))gShots.splice(gI,0,{say:cp,who:'',narr:1,keepMo:1})}{const nar=/^\((?![^)]{0,5}\))/.test(r);const wh=nar?'':(s.rw||(s.me?'나':gWho.textContent));const go=()=>gShow({say:r,who:wh,narr:nar,rep:1});if(s.cg){gWait=1;gBox.classList.remove('on');setTimeout(()=>{gWait=null;go()},1300)}else go()}};gCs.appendChild(b)});return}
   if(s.clue){cg.classList.remove('itm');const c=clues();c[s.clue]=1;LS.set('bl_clue',c);gBox.classList.add('on');gWho.textContent='셜록의 단서 수첩';
      G('.fx.spk').classList.add('on');gType2('🔎 '+CLUES[s.clue]+'\n(단서 '+Object.keys(c).length+'/'+MAINS.length+')');return}
   if(s.item){const k=LS.get('bl_keep',{});k[s.item]=1;LS.set('bl_keep',k);const it=KEEP[s.item];gBox.classList.remove('on');
@@ -3487,8 +3487,8 @@ function wishBook(){const w=LS.get('bl_wish',[]).slice().reverse();const el=shee
 
 /* ================= ⑨ 표정 그림 (있으면 자동으로 씀) ================= */
 const EXOK={};{const files=[...new Set(Object.values(SP).filter(f=>!f.includes('/')))];setTimeout(()=>files.forEach(f=>['smile','sad'].forEach(x=>{const v=f.replace('.webp','_'+x+'.webp'),im=new Image();im.onload=()=>EXOK[v]=1;im.src=P+v})),12000)}
-{const _gs=gShow;gShow=function(s){if(s&&typeof s.ch==='string'&&!s.ch.includes('/')){const x=s.ex||(['💧','…','💦'].includes(s.emo)||s.pose==='face'?'sad':['♪','✨','💕','❤'].includes(s.emo)?'smile':null);
-    if(x){const v=s.ch.replace('.webp','_'+x+'.webp');if(EXOK[v])s=Object.assign({},s,{ch:v})}}_gs(s)}}
+{const _gs=gShow;gShow=function(s){const k=s&&s.sp===2?'ch2':'ch';if(s&&typeof s[k]==='string'&&!s[k].includes('/')){const x=s.ex||(['💧','…','💦'].includes(s.emo)||s.pose==='face'?'sad':['♪','✨','💕','❤'].includes(s.emo)?'smile':null);
+    if(x){const v=s[k].replace('.webp','_'+x+'.webp');if(EXOK[v])s=Object.assign({},s,{[k]:v})}}_gs(s)}}
 
 /* ================= ⑩ 런던: 부산 토끼 다시 등장 ================= */
 {const _en=ending;ending=function(){const _ps=playScene;if(LS.get('bl_met',{}).byeol){playScene=function(shots,cb){playScene=_ps;const BG='img/v/london_1.webp',R=SP.bunny;
@@ -3661,8 +3661,8 @@ let cgxOn=0;{const _gn=gNext;gNext=function(){if(!cg.classList.contains('on')||g
 if(!CGNAME.hansel)CGNAME.hansel='헨젤과 그레텔';
 Object.keys(PCV).forEach(k=>{pcImg[k]='img/post/'+k+'.webp'});
 
-const ITM={byeol:1,gilldong:1,gyeonu:1,snowq:1,sherlock:1,babayaga:1,odette:1,wolf:1,hansel:1,sleeping:1,monster:1,cinder:1,rabbit:1};
-const FOODIMG={"백 년 만의 아침 차": "f01", "사과 슈트루델": "f02", "바이에른 프레첼": "f03", "구운 사과": "f04", "따뜻한 우유": "f05", "진저브레드 지붕 조각": "f06", "잉글리시 브렉퍼스트": "f07", "애프터눈 티": "f08", "바다소금 아이스크림": "f09", "김 주먹밥": "f10", "크렘 브륄레": "f11", "양파 수프": "f12", "핫초코": "f13", "뢰스티": "f14", "프레첼": "f15", "솔랸카": "f16", "메도빅": "f17", "바이칼 허브차": "f18", "잣 파이": "f19", "사모바르 홍차": "f20", "펠메니": "f21", "칠석 밀전병": "f22", "별빛 수정과": "f23", "떡꼬치": "f24", "평양냉면": "f25", "씨앗호떡": "f26", "돼지국밥": "f27"};
+const ITM={mermaid:1,byeol:1,gilldong:1,gyeonu:1,snowq:1,sherlock:1,babayaga:1,odette:1,wolf:1,hansel:1,sleeping:1,monster:1,cinder:1,rabbit:1};
+const FOODIMG={"슈바르츠발트 케이크": "f28", "백 년 만의 아침 차": "f01", "사과 슈트루델": "f02", "바이에른 프레첼": "f03", "구운 사과": "f04", "따뜻한 우유": "f05", "진저브레드 지붕 조각": "f06", "잉글리시 브렉퍼스트": "f07", "애프터눈 티": "f08", "바다소금 아이스크림": "f09", "김 주먹밥": "f10", "크렘 브륄레": "f11", "양파 수프": "f12", "핫초코": "f13", "뢰스티": "f14", "프레첼": "f15", "솔랸카": "f16", "메도빅": "f17", "바이칼 허브차": "f18", "잣 파이": "f19", "사모바르 홍차": "f20", "펠메니": "f21", "칠석 밀전병": "f22", "별빛 수정과": "f23", "떡꼬치": "f24", "평양냉면": "f25", "씨앗호떡": "f26", "돼지국밥": "f27"};
 
 /* ===================== v18: 책은 눌러서 넘기기 ===================== */
 let turnQ=[];
@@ -3671,4 +3671,6 @@ function turnClose(){if(!turnEl.classList.contains('on')||turnEl.classList.conta
 turnEl.addEventListener('click',e=>{e.stopPropagation();turnClose()});
 addEventListener('keydown',e=>{if(turnEl.classList.contains('on')&&(e.key==='Enter'||e.key===' '||e.key==='ArrowRight')){e.preventDefault();turnClose()}});
 {const _ps=playScene;playScene=function(sh,done){if(turnEl.classList.contains('on')){turnQ.push(()=>playScene(sh,done));return}return _ps(sh,done)}}
+
+{const _gs=gShow;gShow=function(s){_gs(s);try{if(s&&s.rep&&!s.narr&&gCh&&gCh.src){const f=gCh.src.split('/').pop().replace(/_(sad|smile)\.webp$/,'.webp'),v=f.replace('.webp','_smile.webp');if(EXOK[v]&&!gCh.src.endsWith(v))gCh.src=P+v}}catch(e){}}}
 </script></body></html>

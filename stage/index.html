@@ -1041,6 +1041,78 @@ body.paxZ #pax::after{font-family:"Gowun Batang",serif!important;font-weight:700
 @media (max-width:560px){#tag .pns{gap:2px}#tag .pn{width:10px;height:10px;border-width:1.2px}#tagS{white-space:nowrap;font-size:0!important}#tagS .route{font-size:12px}}
 #coach.hold{display:none!important}
 #coach .bub p{word-break:keep-all}
+/* ===== v27 팝업북 등장 · 넘기기 ===== */
+#turn .pu.v27{--bw:min(900px,72vw);opacity:0;transition:opacity .45s ease}
+#turn.on .pu.v27{opacity:1}
+#turn.go .pu.v27{animation:none;opacity:0;transform:scale(1.04);transition:opacity .42s ease,transform .42s ease}
+#turn .pu.v27 .bkw{position:absolute;inset:0;transform-style:preserve-3d;opacity:0;transform:translate3d(calc(var(--bw) / -4),-46px,0) scale(.94);
+  transition:opacity .55s ease,transform .75s cubic-bezier(.2,.9,.25,1)}
+#turn.s1 .pu.v27 .bkw{opacity:1;transform:translate3d(calc(var(--bw) / -4),0,0)}
+#turn.s2 .pu.v27 .bkw{transform:none;transition:transform 1s cubic-bezier(.5,.05,.2,1)}
+#turn .pu.v27 .bk{width:var(--bw)}
+/* 덮인 상태: 오른쪽 반만 보이게 */
+#turn .pu.v27 .bk .cv{clip-path:inset(-60px -60px -60px calc(50% - 10px));transition:clip-path 1s cubic-bezier(.5,.05,.2,1)}
+#turn.s2 .pu.v27 .bk .cv{clip-path:inset(-60px -60px -60px -60px)}
+#turn .pu.v27 .bk .pp.L,#turn .pu.v27 .bk .gut{opacity:0;transition:opacity .3s ease .55s}
+#turn.s2 .pu.v27 .bk .pp.L,#turn.s2 .pu.v27 .bk .gut{opacity:1}
+#turn .pu.v27 .bk::after{left:50%;transition:left 1s cubic-bezier(.5,.05,.2,1)}
+#turn.s2 .pu.v27 .bk::after{left:-2px}
+/* 표지: 책등을 축으로 넘어감 */
+#turn .pu.v27 .cvr{position:absolute;left:50%;top:-14px;bottom:-18px;width:calc(50% + 16px);transform-origin:0 50%;transform-style:preserve-3d;transform:translateZ(3px) rotateY(0deg);
+  transition:transform 1.05s cubic-bezier(.55,.05,.25,1),opacity .2s linear 1.05s;pointer-events:none}
+#turn.s2 .pu.v27 .cvr{transform:translateZ(3px) rotateY(-180deg);opacity:0}
+#turn .pu.v27 .cvr>div{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:0 10px 10px 0}
+#turn .pu.v27 .cvr .f{background:linear-gradient(160deg,#7a2c1c,#4a160d 70%);box-shadow:inset 0 0 0 7px #4a170d,inset 0 0 0 9px #c9a24a,inset 0 0 0 14px #4a170d,inset 0 0 0 15px rgba(201,162,74,.6),inset 18px 0 22px rgba(0,0,0,.35);display:grid;place-items:center}
+#turn .pu.v27 .cvr .fi{text-align:center;color:#e9c97a;transform:rotate(0)}
+#turn .pu.v27 .cvr .fi small{display:block;font:400 clamp(9px,1vw,13px) "Jua",sans-serif;letter-spacing:.3em;opacity:.8}
+#turn .pu.v27 .cvr .fi b{display:block;font:700 clamp(18px,2.4vw,34px) "Gowun Batang",serif;margin:6px 0 2px;color:#f3d68e;text-shadow:0 1px 0 #2a0c06}
+#turn .pu.v27 .cvr .fi i{display:block;font:700 clamp(13px,1.5vw,20px) "Gowun Batang",serif;font-style:normal}
+#turn .pu.v27 .cvr .b{transform:rotateY(180deg);border-radius:10px 0 0 10px;background:linear-gradient(90deg,#cdb88e,#f3e8cf 25%,#f7efdb 70%,#e7d9b8);box-shadow:inset 0 0 0 14px #4f1a10}
+/* 장면 요소: 표지가 열린 뒤에 */
+#turn .pu.v27 .hd{opacity:0;transform:translateY(-10px);transition:opacity .6s ease .1s,transform .6s ease .1s}
+#turn.s1 .pu.v27 .hd{opacity:1;transform:none}
+#turn .pu.v27 .op{transition:opacity .7s ease}
+#turn .pu.v27 .op,#turn .pu.v27 .nx{opacity:0!important}
+#turn.s3 .pu.v27 .op{opacity:.95!important}
+#turn.s3 .pu.v27 .nx{opacity:.9!important}
+#turn .pu.v27 .spot{opacity:.35;transition:opacity 1.4s ease}
+#turn.up .pu.v27 .spot{opacity:1}
+/* 우체국 소인: 제목 옆, 인물과 떨어진 곳 */
+#turn .pu.v27 .hd .pmk{position:absolute;left:100%;top:-6px;margin-left:26px;width:118px;height:118px;color:#e8664c;opacity:0;transform:scale(2.2) rotate(-32deg);pointer-events:none;filter:drop-shadow(0 0 6px rgba(232,102,76,.25))}
+#turn.s3 .pu.v27 .hd .pmk{animation:pmkIn .5s cubic-bezier(.3,1.5,.5,1) forwards}
+#turn .pu.v27 .hd .pmk svg{width:100%;height:100%;display:block}
+@keyframes pmkIn{0%{opacity:0;transform:scale(2.2) rotate(-32deg)}55%{opacity:.95;transform:scale(.94) rotate(-11deg)}100%{opacity:.9;transform:scale(1) rotate(-12deg)}}
+/* 접히기: 앞쪽부터 차례로 눕는다 */
+#turn.fold .pu.v27 .pl{transition:transform .42s cubic-bezier(.5,0,.75,.4) calc((1.05s - var(--dl,0s)) * .2)!important}
+#turn.fold .pu.v27 .stg{transition:transform .35s ease!important;transform:rotateY(0)!important}
+#turn.fold .pu.v27 .bk .sh{opacity:0}
+/* 한 장 넘기기: 오른쪽 쪽이 책등을 축으로 */
+#turn .pu.v27 .flp{position:absolute;left:50%;top:0;bottom:0;width:50%;transform-origin:0 50%;transform-style:preserve-3d;transform:translateZ(1px) rotateY(0);opacity:0;pointer-events:none}
+#turn.flip .pu.v27 .flp{opacity:1;transform:translateZ(1px) rotateY(-178deg);transition:transform .74s cubic-bezier(.55,.06,.3,1)}
+#turn .pu.v27 .flp>div{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+#turn .pu.v27 .flp .f{border-radius:0 6px 6px 0;background:linear-gradient(270deg,#e7d9b8,#f7efdb 30%,#f3e8cf 75%,#cdb88e);box-shadow:inset 0 0 0 10px #f4ead3,inset 0 0 0 13px var(--ac),inset 0 0 0 16px #f4ead3,inset 0 0 0 18px var(--ac)}
+#turn .pu.v27 .flp .b{transform:rotateY(180deg);border-radius:6px 0 0 6px;background:linear-gradient(90deg,#e7d9b8,#f7efdb 30%,#f3e8cf 75%,#cdb88e);box-shadow:inset 0 0 0 10px #f4ead3,inset 0 0 0 13px var(--ac),inset 0 0 0 16px #f4ead3,inset 0 0 0 18px var(--ac)}
+#turn.flip .pu.v27 .hd,#turn.flip .pu.v27 .op,#turn.flip .pu.v27 .nx,#turn.fold .pu.v27 .nx{opacity:0!important;transition:opacity .35s ease}
+/* 오른쪽 아래 귀퉁이: 넘길 수 있다는 표시 */
+#turn .pu.v27 .crn{position:absolute;right:0;bottom:0;width:46px;height:46px;transform:translateZ(1px);border-radius:0 0 6px 0;opacity:0;transition:opacity .5s ease,width .35s ease,height .35s ease;pointer-events:none;
+  background:linear-gradient(135deg,transparent 49%,rgba(60,35,10,.25) 50%,#efe3c6 54%,#fffaf0 75%,#e5d6b4 100%);box-shadow:-3px -3px 6px rgba(60,35,10,.12)}
+#turn.s3 .pu.v27 .crn{opacity:1}
+#turn.s3:hover .pu.v27 .crn{width:74px;height:74px}
+#turn.fold .pu.v27 .crn{opacity:0}
+#turn .pu.v27 .pl{visibility:hidden}
+#turn.s2 .pu.v27 .pl{visibility:visible;transition:transform .95s cubic-bezier(.2,1.35,.4,1) var(--dl,0s),visibility 0s linear .62s}
+/* 서두르면 바로 펼침 */
+#turn.fast .pu.v27 *,#turn.fast .pu.v27{transition-duration:.28s!important;transition-delay:0s!important}
+#turn.fast .pu.v27 .hd .pmk{animation-duration:.25s!important}
+/* 열려 있는 동안 도시 스티커는 날아오지 않게(소인이 대신) */
+body:has(#turn.on) #stk{display:none!important}
+@media (max-width:700px){
+ #turn .pu.v27{--bw:80vw}
+ #turn .pu.v27 .hd .pmk{width:84px;height:84px;margin-left:14px;top:-2px}
+}
+@media (prefers-reduced-motion:reduce){#turn .pu.v27 *{transition-duration:.01s!important;animation-duration:.01s!important}}
+#turn .pu.v27 .op,#turn .pu.v27 .nx,#turn .pu.v27 .hd{z-index:6;transform-style:flat}
+#turn .pu.v27 .bkw{z-index:1}
 </style></head><body>
 <div id="tag"><b>부산</b><span id="tagS"></span><i id="tagI"></i></div>
 <div id="dev"><span>출발 후</span><input id="devR" type="range" min="0" max="91.9" step="0.1"><span id="devV"></span></div>
@@ -4107,4 +4179,51 @@ setInterval(()=>{if(!cOn)return;const blk=coachBlocked(),s=COACH[cI],gone=cI===C
 {const _cs26=coachStart;coachStart=function(rep){if(!cOn&&coachBlocked()){setTimeout(()=>coachStart(rep),1500);return}_cs26(rep)}}
 /* 마지막 단계에서 '다음 역'을 직접 누르면 튜토리얼 끝 */
 $('nextB').addEventListener('click',()=>{if(cOn&&cI===COACH.length-1)coachEnd()},true);
+/* ===================== v27: 팝업북 — 덮인 책이 내려와 펼쳐지고, 눌러서 한 장 넘기기 ===================== */
+let T27=[],turnOpened=false,turnClosing=false;
+function t27(f,ms){T27.push(setTimeout(f,ms))}
+function t27clear(){T27.forEach(clearTimeout);T27=[]}
+function pmkSVG(name,i){const d=new Date(Date.now()+9*36e5),ds=d.getUTCFullYear()+'.'+String(d.getUTCMonth()+1).padStart(2,'0')+'.'+String(d.getUTCDate()).padStart(2,'0');
+  return `<svg viewBox="0 0 120 120" aria-hidden="true"><defs><filter id="pmkR"><feTurbulence type="fractalNoise" baseFrequency="1.6" numOctaves="2" seed="${i+3}"/><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.1 1.28"/><feComposite in="SourceGraphic" operator="in"/></filter>
+   <path id="pmkA" d="M60 60 m-43 0 a43 43 0 1 1 86 0 a43 43 0 1 1 -86 0"/></defs>
+   <g filter="url(#pmkR)" fill="none" stroke="currentColor"><circle cx="60" cy="60" r="55" stroke-width="3.6"/><circle cx="60" cy="60" r="34" stroke-width="2"/>
+   <text font-family="Jua,sans-serif" font-size="12" letter-spacing="2" font-weight="700" fill="currentColor" stroke="none"><textPath href="#pmkA" startOffset="2%">BUSAN · LONDON · NIGHT TRAIN ·</textPath></text>
+   <text x="60" y="57" text-anchor="middle" font-family="Gowun Batang,serif" font-weight="700" font-size="${name.length>5?11:14}" fill="currentColor" stroke="none">${esc(name)}</text>
+   <text x="60" y="73" text-anchor="middle" font-family="Jua,sans-serif" font-size="9.5" fill="currentColor" stroke="none">${ds}</text>
+   <path d="M3 60h8M109 60h8" stroke-width="2.4"/></g></svg>`}
+pageTurn=function(i){const c=CH[i];if(!c)return;t27clear();turnOpened=false;turnClosing=false;
+  const id=c.ev[0],who=id&&CAST[id]?nm(id):'';const pg=LS.get('bl_pages',{});const got=id&&pg[id]&&PAGES[id];
+  const spr=id&&CAST[id]?((CAST[id].img.startsWith('img/')?'':P)+CAST[id].img):'';const it=id&&ITM[id]?'img/items/'+id+'.webp':'';
+  const ac=(RT&&RT[c.id]&&RT[c.id][0])||'#2f6b4a',pc=pcImg[c.id]||'',mid=MIDP[c.id];
+  const pans=[0,1,2,3,4].map(k=>{const o=k-2;return `<div class="pl pan" style="--d:${56-Math.abs(o)*7}%;--dl:${.08+Math.abs(o)*.12}s;--xb:${o*15.6}%"><div class="stg" style="--ry:${-o*24}deg;--bx:${k*25}%;--h:${[78,90,100,90,78][k]}%"></div></div>`}).join('');
+  const dust=Array.from({length:26},()=>`<i style="left:${(Math.random()*100).toFixed(1)}%;top:${(Math.random()*100).toFixed(1)}%;--s:${(1+Math.random()*2.5).toFixed(1)}px;--t:${(4+Math.random()*6).toFixed(1)}s;--o:${(Math.random()*-8).toFixed(1)}s"></i>`).join('');
+  turnEl.innerHTML=`<div class="pu v22 v23 v27" style="--ac:${ac};--pc:url(${pc})"><div class="vel"></div><div class="spot"></div><div class="dust">${dust}</div>
+    <div class="hd"><small>제 ${i+1} 장</small><b>${c.name}</b><em>${who?who+'의 이야기':''}</em><div class="pmk">${pmkSVG(c.name,i)}</div></div>
+    <div class="bkw"><div class="bk"><div class="cv"></div><div class="pp L"></div><div class="pp R"></div><div class="gut"></div>
+      <div class="sh s1"></div><div class="sh s2"></div>${pans}
+      ${mid?`<div class="pl mid2" style="--d:40%;--dl:.55s"><img class="cut" src="img/m/${mid}.webp" alt=""></div>`:''}
+      ${spr?`<div class="pl mid" style="--d:26%;--dl:.7s"><img class="cut" src="${spr}" alt=""></div>`:''}
+      ${it?`<div class="pl fr" style="--d:9%;--dl:.9s;--xb:-28%"><img class="cut" src="${it}" alt=""></div>`:''}
+      <div class="pl fr2" style="--d:11%;--dl:1s;--xb:27%"><div class="frg${got?' got':''}">${got?esc(PAGES[id]).replace(/\n/g,'<br>'):'찢겨 나간 자리'}</div></div>
+      <div class="crn"></div>
+      <div class="cvr"><div class="f"><div class="fi"><small>BUSAN → LONDON</small><b>제 ${i+1} 장</b><i>${c.name}</i></div></div><div class="b"></div></div>
+      <div class="flp"><div class="f"></div><div class="b"></div></div>
+    </div></div><p class="op">${OPEN1[c.id]||''}</p><div class="nx">눌러서 넘기기 ▸</div></div>`;
+  turnEl.classList.remove('on','go','up','s1','s2','s3','fold','flip','fast');void turnEl.offsetWidth;turnEl.classList.add('on');
+  t27(()=>turnEl.classList.add('s1'),120);
+  t27(()=>{turnEl.classList.add('s2');try{blipUp()}catch(e){}},820);
+  t27(()=>turnEl.classList.add('up'),1820);
+  t27(()=>{turnEl.classList.add('s3');try{thunk()}catch(e){}},2900);
+  t27(()=>{turnOpened=true},3100)};
+function turnFinish(){if(turnOpened)return;t27clear();turnEl.classList.add('fast','s1','s2','up','s3');t27(()=>{turnEl.classList.remove('fast');turnOpened=true},420)}
+turnClose=function(){if(!turnEl.classList.contains('on')||turnClosing)return;
+  const pu=turnEl.querySelector('.pu');
+  if(!pu||!pu.classList.contains('v27')){turnClosing=true;turnEl.classList.remove('up');turnEl.classList.add('go');setTimeout(()=>{turnEl.classList.remove('on','go');turnClosing=false;const q=turnQ;turnQ=[];q.forEach(f=>{try{f()}catch(e){}})},850);return}
+  if(!turnOpened){turnFinish();return}
+  turnClosing=true;t27clear();try{blipUp()}catch(e){}
+  turnEl.classList.add('fold');turnEl.classList.remove('up');
+  t27(()=>turnEl.classList.add('flip'),640);
+  t27(()=>turnEl.classList.add('go'),1360);
+  t27(()=>{turnEl.classList.remove('on','go','up','s1','s2','s3','fold','flip','fast');turnClosing=false;turnOpened=false;const q=turnQ;turnQ=[];q.forEach(f=>{try{f()}catch(e){}})},1790)};
+window.__t.turnClose=()=>turnClose();
 </script></body></html>

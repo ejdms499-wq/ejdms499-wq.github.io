@@ -910,6 +910,37 @@ body.seat #tkB{right:auto!important;left:18px!important}
 #turn .pu.fin .pl.back .crd{width:min(560px,46vw)}
 #turn .pu.fin .pl.fr2 .frg.lastc{width:min(360px,30vw);font:400 clamp(20px,2vw,28px)/1.3 "Nanum Pen Script","Gaegu",sans-serif;color:#1f2b5a;transform:rotate(-2deg);padding:14px 16px}
 #turn .pu.fin .lastc i{display:block;text-align:right;font-style:normal;font-size:.75em;color:#c2402f;margin-top:4px}
+
+/* ===== v22 팝업북 입체 강화 ===== */
+#turn .pu.v22{perspective:1400px;perspective-origin:calc(50% + var(--px,0)*1%) calc(26% + var(--py,0)*1%);transition:perspective-origin .6s ease-out}
+#turn .pu.v22 .desk{position:absolute;inset:0;background:
+ repeating-linear-gradient(90deg,rgba(0,0,0,.10) 0 2px,transparent 2px 140px),
+ repeating-linear-gradient(90deg,rgba(255,220,170,.035) 0 1px,transparent 1px 9px),
+ linear-gradient(180deg,#3b2414,#2a180c 60%,#1c1008)}
+#turn .pu.v22 .lamp{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 55% 60% at 30% 22%,rgba(255,206,140,.38),rgba(255,180,110,.10) 45%,transparent 70%),radial-gradient(ellipse at 50% 50%,transparent 45%,rgba(0,0,0,.65) 100%)}
+#turn .pu.v22 .bk{top:61%}
+#turn .pu.v22 .bk .cv{background:linear-gradient(180deg,#6a2618,#43150c);box-shadow:0 40px 70px rgba(0,0,0,.7),inset 0 0 0 6px #4a170d,inset 0 0 0 8px #c9a24a,inset 0 0 0 12px #4a170d,inset 0 0 0 13px rgba(201,162,74,.6)}
+#turn .pu.v22 .bk .pp{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .24 0 0 0 0 .12 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"),var(--pg)}
+#turn .pu.v22 .bk .pp.L{--pg:linear-gradient(90deg,#e7d9b8,#f7efdb 30%,#f3e8cf 75%,#cdb88e)}
+#turn .pu.v22 .bk .pp.R{--pg:linear-gradient(270deg,#e7d9b8,#f7efdb 30%,#f3e8cf 75%,#cdb88e)}
+#turn .pu.v22 .bk .gut{position:absolute;left:50%;top:0;bottom:0;width:60px;margin-left:-30px;background:linear-gradient(90deg,transparent,rgba(80,50,20,.28) 45%,rgba(60,35,10,.4) 50%,rgba(80,50,20,.28) 55%,transparent);pointer-events:none}
+#turn .pu.v22 .bk .sh{position:absolute;left:50%;border-radius:50%;background:radial-gradient(ellipse,rgba(40,20,5,.45),transparent 70%);opacity:0;transition:opacity .9s .4s;transform:translateX(-50%)}
+#turn .pu.v22 .bk .s1{bottom:52%;width:56%;height:16%}
+#turn .pu.v22 .bk .s2{bottom:22%;width:22%;height:10%}
+#turn.up .pu.v22 .bk .sh{opacity:1}
+#turn .pu.v22 .pl.back .crd{position:relative;padding:8px;box-shadow:0 10px 24px rgba(40,20,5,.45),inset 0 0 0 3px #c9a24a}
+#turn .pu.v22 .pl.back .crd .gl{position:absolute;inset:8px;background:linear-gradient(160deg,rgba(255,240,210,.25),transparent 40%,rgba(0,0,0,.18));pointer-events:none;clip-path:polygon(0 8%,12% 0,26% 6%,40% 0,50% 5%,60% 0,74% 6%,88% 0,100% 8%,100% 100%,0 100%)}
+#turn .pu.v22 .pl.wing{transform-style:preserve-3d}
+#turn .pu.v22 .pl.wing .wg{width:min(170px,14vw);height:min(300px,25vw);background:var(--pc) center/cover;border:7px solid #fffaf0;box-shadow:0 10px 20px rgba(40,20,5,.4);clip-path:polygon(0 10%,30% 0,60% 8%,100% 4%,100% 100%,0 100%)}
+#turn .pu.v22 .pl.wing.L .wg{transform-origin:100% 50%;transform:rotateY(0deg);transition:transform 1s cubic-bezier(.2,1.3,.4,1) .55s;background-position:0% 50%;filter:brightness(1.05)}
+#turn .pu.v22 .pl.wing.R .wg{transform-origin:0% 50%;transform:rotateY(0deg);transition:transform 1s cubic-bezier(.2,1.3,.4,1) .55s;background-position:100% 50%;filter:brightness(.78)}
+#turn.up .pu.v22 .pl.wing.L .wg{transform:rotateY(38deg)}
+#turn.up .pu.v22 .pl.wing.R .wg{transform:rotateY(-38deg)}
+#turn .pu.v22 .pl.mid2 img.cut{width:min(640px,54vw);height:auto;max-height:min(170px,15vw);object-fit:cover;object-position:50% 100%}
+#turn .pu.v22 .pl.mid img.cut{height:min(320px,28vw)}
+#turn .pu.v22 .hd b{font-size:clamp(34px,4vw,56px)}
+/* 도장·선물 카드는 오른쪽 위로 (인물 가리지 않게) */
+@media (min-aspect-ratio:1/1){#lvt{left:calc(100% - 190px)!important;top:150px!important;max-width:320px}}
 </style></head><body>
 <div id="tag"><b>부산</b><span id="tagS"></span><i id="tagI"></i></div>
 <div id="dev"><span>출발 후</span><input id="devR" type="range" min="0" max="91.9" step="0.1"><span id="devV"></span></div>
@@ -3800,6 +3831,122 @@ function finalPop(cb){const {on,off}=endPeople();const all=on.concat(off);const 
     </div><p class="op">다 읽으면 네가 써. 그래서, 이렇게 썼다.</p><div class="nx">눌러서 책 덮기 ▸</div></div>`;
   turnEl.classList.remove('on','go');void turnEl.offsetWidth;turnEl.classList.add('on');requestAnimationFrame(()=>requestAnimationFrame(()=>turnEl.classList.add('up')));
   try{blipUp()}catch(e){}turnQ.push(cb)}
-window.__t.fin=()=>finalPop(()=>{});
+window.__t.fin=()=>finalPop(()=>{});window.__t.tk=i=>makeTicketAt(i);window.__t.card=()=>makeCard(TRUNK||{text:'면접이 걱정돼요',pick:0});
+
+
+/* ===================== v22: 팝업북 입체 강화 · 승차권/마지막 장 카드 새 디자인 ===================== */
+const MIDP={siberia:'snow',baikal:'snow',moscow:'rus',forest:'deforest',candy:'deforest',castle:'deforest',alps:'deforest',paris:'paris',sea:'reef',london:'eng'};
+pageTurn=function(i){const c=CH[i];if(!c)return;const id=c.ev[0],who=id&&CAST[id]?nm(id):'';const pg=LS.get('bl_pages',{});const got=id&&pg[id]&&PAGES[id];
+  const spr=id&&CAST[id]?((CAST[id].img.startsWith('img/')?'':P)+CAST[id].img):'';const it=id&&ITM[id]?'img/items/'+id+'.webp':'';
+  const ac=(RT&&RT[c.id]&&RT[c.id][0])||'#2f6b4a',pc=pcImg[c.id]||'',mid=MIDP[c.id];
+  turnEl.innerHTML=`<div class="pu v22" style="--ac:${ac};--pc:url(${pc})"><div class="desk"></div><div class="lamp"></div>
+    <div class="hd"><small>제 ${i+1} 장</small><b>${c.name}</b><em>${who?who+'의 이야기':''}</em></div>
+    <div class="bk"><div class="cv"><i></i></div><div class="pp L"></div><div class="pp R"></div><div class="gut"></div>
+      <div class="sh s1"></div><div class="sh s2"></div>
+      <div class="pl back" style="--d:57%;--dl:.1s"><div class="crd"><img src="${pc}" alt=""><span class="gl"></span></div></div>
+      <div class="pl wing L" style="--d:50%;--dl:.25s;--xb:-33%"><div class="wg"></div></div>
+      <div class="pl wing R" style="--d:50%;--dl:.25s;--xb:33%"><div class="wg"></div></div>
+      ${mid?`<div class="pl mid2" style="--d:42%;--dl:.4s"><img class="cut" src="img/m/${mid}.webp" alt=""></div>`:''}
+      ${spr?`<div class="pl mid" style="--d:28%;--dl:.55s"><img class="cut" src="${spr}" alt=""></div>`:''}
+      ${it?`<div class="pl fr" style="--d:10%;--dl:.75s;--xb:-27%"><img class="cut" src="${it}" alt=""></div>`:''}
+      <div class="pl fr2" style="--d:13%;--dl:.9s;--xb:26%"><div class="frg${got?' got':''}">${got?esc(PAGES[id]).replace(/\n/g,'<br>'):'찢겨 나간 자리'}</div></div>
+    </div><p class="op">${OPEN1[c.id]||''}</p><div class="nx">눌러서 넘기기 ▸</div></div>`;
+  turnEl.classList.remove('on','go','up');void turnEl.offsetWidth;turnEl.classList.add('on');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>turnEl.classList.add('up')));try{blipUp()}catch(e){}};
+/* 마우스를 따라 살짝 기우는 시점 */
+turnEl.addEventListener('pointermove',e=>{const pu=turnEl.querySelector('.pu');if(!pu)return;const x=e.clientX/innerWidth-.5,y=e.clientY/innerHeight-.5;pu.style.setProperty('--px',(x*-14).toFixed(2));pu.style.setProperty('--py',(y*-8).toFixed(2))});
+
+/* ---------- 카드 그리기 도구 ---------- */
+function wrapW(g,t,mw){const ws=String(t).split(' ');const out=[];let l='';for(const w of ws){const tt=l?l+' '+w:w;if(g.measureText(tt).width>mw&&l){out.push(l);l=w}else l=tt}if(l)out.push(l);return out.flatMap(x=>g.measureText(x).width>mw?wrapT(g,x,mw):[x])}
+const imgP=src=>new Promise(r=>{if(!src)return r(null);const im=new Image();im.onload=()=>r(im);im.onerror=()=>r(null);im.src=src});
+function cover(g,im,x,y,w,h,fx){if(!im)return;const s=Math.max(w/im.width,h/im.height),sw=w/s,sh=h/s;g.drawImage(im,(im.width-sw)*(fx??.5),(im.height-sh)*.5,sw,sh,x,y,w,h)}
+function cutout(g,im,cx,by,h,ow){if(!im)return;const w=h*im.width/im.height;const c=document.createElement('canvas');c.width=Math.ceil(w)+ow*2+4;c.height=Math.ceil(h)+ow*2+4;const q=c.getContext('2d');
+  q.drawImage(im,ow+2,ow+2,w,h);q.globalCompositeOperation='source-in';q.fillStyle='#fffaf0';q.fillRect(0,0,c.width,c.height);
+  g.save();g.shadowColor='rgba(30,15,5,.45)';g.shadowBlur=18;g.shadowOffsetY=8;
+  for(let a=0;a<16;a++){const t=a/16*Math.PI*2;g.drawImage(c,cx-w/2-ow-2+Math.cos(t)*ow,by-h-ow-2+Math.sin(t)*ow);if(a===0){g.shadowColor='transparent'}}
+  g.restore();g.drawImage(im,cx-w/2,by-h,w,h)}
+function grain(g,x,y,w,h,a){g.save();g.globalAlpha=a||.05;g.fillStyle='#5a3d22';for(let yy=y;yy<y+h;yy+=5)g.fillRect(x,yy,w,1);g.globalAlpha=(a||.05)*1.4;for(let k=0;k<2200;k++){g.fillRect(x+Math.random()*w,y+Math.random()*h,1.5,1.5)}g.restore()}
+function desk(g){const W=1080,H=1440;g.fillStyle='#2a1a0f';g.fillRect(0,0,W,H);for(let k=0;k<14;k++){g.fillStyle=k%2?'rgba(255,220,170,.025)':'rgba(0,0,0,.08)';g.fillRect(k*80,0,80,H)}
+  g.globalAlpha=.08;g.strokeStyle='#000';for(let k=0;k<70;k++){g.beginPath();const x0=Math.random()*W;g.moveTo(x0,0);g.bezierCurveTo(x0+30,H*.3,x0-30,H*.6,x0+10,H);g.stroke()}g.globalAlpha=1;
+  const lg=g.createRadialGradient(300,240,40,420,560,1100);lg.addColorStop(0,'rgba(255,214,150,.42)');lg.addColorStop(.5,'rgba(255,190,120,.12)');lg.addColorStop(1,'rgba(0,0,0,.55)');g.fillStyle=lg;g.fillRect(0,0,W,H)}
+function rr(g,x,y,w,h,r){g.beginPath();g.moveTo(x+r,y);g.arcTo(x+w,y,x+w,y+h,r);g.arcTo(x+w,y+h,x,y+h,r);g.arcTo(x,y+h,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath()}
+const FNT='"Apple SD Gothic Neo","Noto Sans KR",sans-serif',SRF='"Gowun Batang","Nanum Myeongjo",serif',PEN='"Nanum Pen Script","Gaegu",sans-serif';
+const todayStr=()=>{const d=new Date();return d.getFullYear()+'. '+(d.getMonth()+1)+'. '+d.getDate()};
+
+/* ---------- 지역 승차권 ---------- */
+makeTicketAt=async function(i){const c=CH[i]||CH[0],id=c.id,R=RT[id]||RT.busan,T=TRUNK&&TRIP&&TRUNK.dep===TRIP.dep?TRUNK:null;card.dataset.kind='ticket';card.dataset.tk=i;
+  const pid=c.ev[0];const [pic,spr,ico]=await Promise.all([imgP(pcImg[id]),imgP(pid&&SP[pid]?P+SP[pid]:null),imgP(pid&&ITM[pid]?'img/items/'+pid+'.webp':null)]);
+  const cv=card.querySelector('canvas'),g=cv.getContext('2d');desk(g);
+  g.save();g.translate(540,730);g.rotate(-.02);const W=820,H=1240,x=-W/2,y=-H/2;
+  g.save();g.shadowColor='rgba(0,0,0,.55)';g.shadowBlur=40;g.shadowOffsetY=22;rr(g,x,y,W,H,18);g.fillStyle='#f5ecd6';g.fill();g.restore();
+  g.save();rr(g,x,y,W,H,18);g.clip();grain(g,x,y,W,H,.045);
+  // 장식 테두리
+  g.strokeStyle=R[0];g.lineWidth=6;rr(g,x+22,y+22,W-44,H-44,10);g.stroke();g.strokeStyle='#c9a24a';g.lineWidth=2;rr(g,x+34,y+34,W-68,H-68,8);g.stroke();
+  // 그림 창
+  const ix=x+60,iy=y+92,iw=W-120,ih=470;g.fillStyle='#fffaf0';g.fillRect(ix-10,iy-10,iw+20,ih+20);
+  g.save();g.beginPath();g.rect(ix,iy,iw,ih);g.clip();if(pic){cover(g,pic,ix,iy,iw,ih)}else{g.fillStyle=R[0];g.fillRect(ix,iy,iw,ih)}
+  const vg=g.createRadialGradient(ix+iw/2,iy+ih/2,ih*.3,ix+iw/2,iy+ih/2,iw*.75);vg.addColorStop(0,'rgba(0,0,0,0)');vg.addColorStop(1,'rgba(20,10,0,.45)');g.fillStyle=vg;g.fillRect(ix,iy,iw,ih);
+  g.globalAlpha=.12;g.fillStyle='#000';for(let yy=iy;yy<iy+ih;yy+=4)for(let xx=ix+((yy/4)%2)*2;xx<ix+iw;xx+=4)g.fillRect(xx,yy,1.3,1.3);g.globalAlpha=1;g.restore();
+  g.strokeStyle='#3a2a1c';g.lineWidth=2;g.strokeRect(ix,iy,iw,ih);
+  // 위 띠
+  g.fillStyle=R[0];g.fillRect(x+60,y+50,W-120,36);g.fillStyle='#f5ecd6';g.font='700 21px '+FNT;g.textAlign='left';g.fillText('부산발 런던행 · 제 '+(i+1)+' 역',x+78,y+76);g.textAlign='right';g.fillText(c.en,x+W-78,y+76);
+  // 승객 종이 인형
+  if(spr){const hh=Math.min(400,330*((HT[(SP[pid]||'').replace('.webp','')]||1.4)/1.5));cutout(g,spr,x+W-200,iy+ih+70,hh,7)}
+  // 역 이름
+  g.textAlign='left';g.fillStyle='#2b2016';g.font='700 96px '+SRF;g.fillText(c.name.length>6?c.name.slice(0,6):c.name,x+70,y+680);
+  g.font='600 25px '+FNT;g.fillStyle=R[0];g.fillText((R[2]||'')+(pid&&CAST[pid]?' · '+nm(pid)+' 탑승':''),x+74,y+726);
+  g.fillStyle='#c9a24a';g.fillRect(x+70,y+752,W-140,3);
+  const row=(yy,a,b)=>{g.textAlign='left';g.font='700 23px '+FNT;g.fillStyle='rgba(58,42,28,.55)';g.fillText(a,x+76,yy);g.textAlign='left';g.font='700 36px '+SRF;g.fillStyle='#2b2016';g.fillText(b,x+230,yy)};
+  row(y+812,'승객',MYNAME());row(y+868,'다음 역',CH[i+1]?CH[i+1].name:'종착 · 런던');row(y+924,'맡긴 짐',T?'마음의 짐 1개':'빈 트렁크');row(y+980,'날짜',todayStr()+' · '+trainNo(dep)+'호');
+  // 절취선
+  g.setLineDash([12,10]);g.lineWidth=3;g.strokeStyle='rgba(58,42,28,.6)';g.beginPath();g.moveTo(x,y+1030);g.lineTo(x+W,y+1030);g.stroke();g.setLineDash([]);
+  g.restore();
+  for(let k=0;k<2;k++){g.fillStyle='#22160d';g.beginPath();g.arc(k?x+W:x,y+1030,24,0,7);g.fill()}
+  // 아래 조각: 기념품 · 바코드
+  if(ico){g.save();g.translate(x+120,y+1135);g.rotate(-.12);const s=110;g.drawImage(ico,-s/2,-s/2*ico.height/ico.width,s,s*ico.height/ico.width);g.restore()}
+  g.fillStyle='#2b2016';for(let k=0,xx=x+W-190;xx<x+W-70;k++){const w2=(k*7%5)+2;g.fillRect(xx,y+1090,w2,60);xx+=w2+4}
+  g.textAlign='center';g.font='400 42px '+PEN;g.fillStyle='#1f2b5a';g.fillText(CH[i+1]?'다음 역에서 또 만나요':'런던역에서 짐을 찾아요',x+W/2-10,y+1130);
+  g.font='600 19px '+FNT;g.fillStyle='rgba(58,42,28,.55)';g.fillText('ejdms499-wq.github.io',x+W/2-20,y+1186);
+  // 소인
+  g.save();g.translate(x+W-135,y+880);g.rotate(-.25);g.strokeStyle=R[0];g.fillStyle=R[0];g.globalAlpha=.82;g.lineWidth=6;g.beginPath();g.arc(0,0,86,0,7);g.stroke();g.lineWidth=2.5;g.beginPath();g.arc(0,0,72,0,7);g.stroke();
+  g.textAlign='center';g.font='800 27px '+FNT;g.fillText(c.name.length>5?c.name.slice(0,5):c.name,0,9);g.font='700 15px '+FNT;g.fillText('BSN → LDN',0,-32);g.fillText(todayStr(),0,42);
+  for(let k=-3;k<=3;k++){g.lineWidth=3;g.beginPath();g.moveTo(-96,k*12);g.bezierCurveTo(-130,k*12-8,-160,k*12+8,-200,k*12);g.stroke()}g.restore();
+  g.restore();card.classList.add('on')};
+
+/* ---------- 마지막 장 카드 ---------- */
+makeCard=async function(T,hid){card.dataset.kind='end';const {on,off}=endPeople();const all=on.concat(off).slice(0,10);
+  const bgSrc=hid==='yonggung'?'img/v/sea_3.webp':hid==='eunha'?'img/cg/eunha.webp':'img/post/london.webp';
+  const [bg,...ppl]=await Promise.all([imgP(bgSrc),...all.map(id=>imgP(P+SP[id]))]);
+  const cv=card.querySelector('canvas'),g=cv.getContext('2d');desk(g);
+  const X=80,Y=60,W=920,H=1320;
+  for(let k=4;k>0;k--){g.fillStyle=k%2?'#e2d3b0':'#efe3c6';g.fillRect(X+k*5,Y+k*4,W,H)}
+  g.save();g.shadowColor='rgba(0,0,0,.5)';g.shadowBlur=36;g.shadowOffsetY=18;g.fillStyle='#f5ecd6';g.fillRect(X,Y,W,H);g.restore();
+  const pgd=g.createLinearGradient(X,0,X+W,0);pgd.addColorStop(0,'rgba(120,90,50,.22)');pgd.addColorStop(.06,'rgba(0,0,0,0)');pgd.addColorStop(.95,'rgba(0,0,0,0)');pgd.addColorStop(1,'rgba(120,90,50,.12)');g.fillStyle=pgd;g.fillRect(X,Y,W,H);grain(g,X,Y,W,H,.04);
+  g.strokeStyle='#8a5a2b';g.lineWidth=3;g.strokeRect(X+30,Y+30,W-60,H-60);g.strokeStyle='#c9a24a';g.lineWidth=1.5;g.strokeRect(X+40,Y+40,W-80,H-80);
+  const cx=X+W/2;g.textAlign='center';g.fillStyle='rgba(58,42,28,.55)';g.font='700 21px '+FNT;g.fillText('세계 동화 열세 편 · 마지막 장',cx,Y+92);
+  g.fillStyle='#2b2016';g.font='700 76px '+SRF;g.fillText(hid&&HID[hid]?HID[hid].name.split(' · ')[0]:'마지막 장',cx,Y+176);
+  g.save();g.translate(cx,Y+228);g.rotate(-.03);g.fillStyle='#c2402f';g.font='400 46px '+PEN;g.fillText('다 읽으면 네가 써.',0,0);g.restore();
+  // 그림 + 승객 줄
+  const ix=X+80,iy=Y+262,iw=W-160,ih=380;g.fillStyle='#fffaf0';g.save();g.beginPath();
+  const sc=8;g.moveTo(ix-10,iy+20);for(let k=0;k<=sc;k++){const xx=ix-10+(iw+20)*k/sc;g.lineTo(xx,iy+(k%2?-6:14))}g.lineTo(ix+iw+10,iy+ih+10);g.lineTo(ix-10,iy+ih+10);g.closePath();g.fill();g.clip();cover(g,bg,ix,iy-10,iw,ih+20);
+  const vg=g.createLinearGradient(0,iy,0,iy+ih);vg.addColorStop(.55,'rgba(0,0,0,0)');vg.addColorStop(1,'rgba(20,10,0,.35)');g.fillStyle=vg;g.fillRect(ix,iy-20,iw,ih+40);g.restore();
+  const n=ppl.filter(Boolean).length;if(n){const step=Math.min(150,(iw+40)/n);ppl.forEach((im,k)=>{if(!im)return;const id=all[k];const h=230*((HT[(SP[id]||'').replace('.webp','')]||1.4)/1.6);cutout(g,im,ix+iw/2+(k-(n-1)/2)*step,iy+ih+60,h,6)})}
+  // 꼬리표 두 장
+  const ty=Y+760;g.save();g.translate(X+250,ty+110);g.rotate(-.07);g.fillStyle='rgba(0,0,0,.22)';g.fillRect(-140,-96,290,206);g.fillStyle='#cfae74';g.beginPath();g.moveTo(-95,-104);g.lineTo(95,-104);g.lineTo(140,-70);g.lineTo(140,100);g.lineTo(-140,100);g.lineTo(-140,-70);g.closePath();g.fill();
+  g.fillStyle='#24170d';g.beginPath();g.arc(0,-78,10,0,7);g.fill();g.textAlign='center';g.fillStyle='rgba(58,42,28,.65)';g.font='700 15px '+FNT;g.fillText('스무 해 전의 꼬리표',0,-40);
+  g.fillStyle='#2f55a4';g.font='400 30px '+PEN;g.fillText('나 (일곱 살)',0,-4);g.fillStyle='#c2402f';g.font='400 34px '+PEN;g.fillText('혼자 자는 거',0,36);g.fillText('무서워요',0,72);
+  g.rotate(.22);g.strokeStyle='#2f55a4';g.fillStyle='#2f55a4';g.globalAlpha=.85;g.lineWidth=4;g.strokeRect(52,58,96,42);g.font='800 23px "Do Hyeon",'+FNT;g.fillText('찾음',100,87);g.restore();
+  g.save();g.translate(X+W-250,ty+110);g.rotate(.05);g.fillStyle='rgba(0,0,0,.22)';g.fillRect(-140,-96,290,206);g.fillStyle='#f0e2c0';g.beginPath();g.moveTo(-95,-104);g.lineTo(95,-104);g.lineTo(140,-70);g.lineTo(140,100);g.lineTo(-140,100);g.lineTo(-140,-70);g.closePath();g.fill();
+  g.fillStyle='#24170d';g.beginPath();g.arc(0,-78,10,0,7);g.fill();g.textAlign='center';g.fillStyle='rgba(58,42,28,.65)';g.font='700 15px '+FNT;g.fillText('오늘 맡긴 짐',0,-40);
+  g.fillStyle='#1f2b5a';g.font='400 32px '+PEN;wrapT(g,T&&T.text?'“'+T.text+'”':'빈 트렁크',240).slice(0,3).forEach((l,k)=>g.fillText(l,0,4+k*36));
+  g.rotate(-.18);g.strokeStyle='#b8312f';g.fillStyle='#b8312f';g.globalAlpha=.85;g.lineWidth=4;g.beginPath();g.arc(80,62,40,0,7);g.stroke();g.font='800 19px "Do Hyeon",'+FNT;
+  g.fillText(hid==='yonggung'?'바다에':hid==='eunha'?'은하수에':T&&T.pick===1?'보관 중':'가져감',80,69);g.restore();
+  // 마지막 한 줄
+  g.setLineDash([10,9]);g.lineWidth=2;g.strokeStyle='rgba(58,42,28,.45)';g.beginPath();g.moveTo(X+90,Y+1010);g.lineTo(X+W-90,Y+1010);g.stroke();g.setLineDash([]);
+  g.textAlign='center';g.fillStyle='#1f2b5a';g.font='400 60px '+PEN;const LL=wrapW(g,LS.get('bl_last','')||'오늘은 여기까지. 내일 또 쓸게.',W-220).slice(0,2);LL.forEach((l,k)=>g.fillText(l,cx,Y+1090+k*70-(LL.length-1)*28));
+  g.font='400 30px '+PEN;g.fillStyle='#c2402f';g.fillText('— '+MYNAME()+', '+todayStr(),cx,Y+1170);
+  const tr=TRAIT[topTrait()];g.fillStyle='#2b2016';g.font='700 28px '+SRF;g.fillText(MYNAME()+(iga(MYNAME())==='이'?'은 ':'는 ')+tr[0],cx,Y+1222);
+  g.font='600 20px '+FNT;g.fillStyle='rgba(58,42,28,.5)';const pgs=Object.keys(LS.get('bl_pages',{})).length;g.fillText('함께 탄 승객 '+(on.length+off.length)+'명 · 페이지 조각 '+pgs+' / 13 · ejdms499-wq.github.io',cx,Y+H-56);
+  card.classList.add('on')};
 
 </script></body></html>

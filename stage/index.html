@@ -1203,6 +1203,26 @@ body:has(#turn.on) #stk{display:none!important}
 body:is(.ink0,.ink1,.ink2) :is(#snd.on,#paxT.ev,#trk.ev){color:#f6ead0!important}
 body:is(.ink0,.ink2) #nextB.go{color:#b8432f!important}
 body.ink1 #nextB.go{color:#fff3dc!important}
+
+/* v34: 노선도 · 역 골라 가기 */
+#tag{cursor:pointer}
+#tag::after{content:'🗺 노선도 · 역 고르기 ▸';display:block;margin-top:5px;font:400 12.5px "Jua",sans-serif;color:#b8432f;letter-spacing:0}
+#rtP .rt{width:min(560px,96vw)}
+#rtP .cnt{padding:0 16px 8px;font-size:13px;opacity:.75;margin:0}
+#rtP .rt34{list-style:none;margin:0;padding:4px 14px 14px;overflow:auto;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+#rtP .rt34 button{width:100%;display:grid;grid-template-columns:28px 1fr;grid-template-rows:auto auto;column-gap:8px;align-items:center;text-align:left;background:#fbf4e2;border:1.5px solid rgba(58,42,28,.35);border-radius:8px;padding:9px 10px;cursor:pointer;color:#2b2118;font-family:inherit}
+#rtP .rt34 button:hover:not(:disabled){border-color:#b8432f;background:#fff8e8}
+#rtP .rt34 em{grid-row:1/3;width:26px;height:26px;border-radius:50%;background:#e9b65a;color:#2b2118;font:700 13px/26px "Jua",sans-serif;text-align:center;font-style:normal}
+#rtP .rt34 b{font:400 15.5px "Gowun Batang",serif;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#rtP .rt34 small{font-size:12px;opacity:.7;display:flex;justify-content:space-between;gap:6px}
+#rtP .rt34 small i{font-style:normal;font-weight:700}
+#rtP .rt34 li.dn small i{color:#5e8c8a}
+#rtP .rt34 li.left small i{color:#b8432f}
+#rtP .rt34 li.fut small i{color:#8a7a62}
+#rtP .rt34 li.here button{background:#2b2118;color:#f6ead0;border-color:#2b2118;cursor:default}
+#rtP .rt34 li.here em{background:#b8432f;color:#fff3dc}
+#rtP .rt34 button:disabled{opacity:1}
+@media (max-width:560px){#rtP .rt34{grid-template-columns:1fr}}
 </style></head><body>
 <div id="tag"><b>부산</b><span id="tagS"></span><i id="tagI"></i></div>
 <div id="dev"><span>출발 후</span><input id="devR" type="range" min="0" max="91.9" step="0.1"><span id="devV"></span></div>
@@ -4411,4 +4431,40 @@ window.__t.fin=()=>finalPop(()=>{});
   if(back&&rb&&rb.width&&getComputedStyle(back).display!=='none'){imp(back,'left',(rb.right+8)+'px');imp(back,'bottom',M+'px');imp(back,'height',rb.height+'px');imp(back,'box-sizing','border-box');imp(back,'display','inline-flex');imp(back,'align-items','center')}
   if(trk&&rn&&rn.width){imp(trk,'right',(innerWidth-rn.left+8)+'px');imp(trk,'bottom',M+'px');imp(trk,'height',rn.height+'px');imp(trk,'box-sizing','border-box')}}
  addEventListener('resize',align33);setInterval(align33,600);setTimeout(align33,300)}
+
+/* ===================== v34: 열차칸에서 본 탑승 이야기도 '본 것'으로 · 역 골라 가기 ===================== */
+{
+ const evOf=sh=>{if(typeof EV2==='undefined'||!sh)return null;for(const k in EV2)if(EV2[k]===sh)return k;return null};
+ function seen34(id){if(!TRIP)return;TRIP.seen=TRIP.seen||{};TRIP.seen[id]=1;
+   const met=LS.get('bl_met',{}),ev=LS.get('bl_ev',{});met[id]=1;ev[id]=1;const ci=CH_OF[id];
+   if(ci!==undefined)(CH[ci].side||[]).forEach(s=>met[s]=1);LS.set('bl_met',met);LS.set('bl_ev',ev);tripSave();
+   setTimeout(()=>{if(!TRIP||ci===undefined||TRIP.done[ci])return;if(CH[ci].ev.every(x=>TRIP.seen[x]))chDone(ci)},700)}
+ const _ps34=playScene;playScene=function(sh,done){const id=evOf(sh);if(!id||!TRIP)return _ps34(sh,done);
+   return _ps34(sh,function(){try{done&&done()}finally{seen34(id)}})};
+ /* 같은 탑승 이야기가 두 번 겹쳐 재생되지 않게 */
+ const _pc34=playChapter;playChapter=function(i){if(!TRIP||TRIP.done[i])return;
+   const ev0=CH[i]&&EV2[CH[i].ev[0]];if(cg.classList.contains('on')&&ev0&&gShots===ev0)return;
+   if(turnEl.classList.contains('on')&&turnQ.length)return;
+   if(playChapter.q===i&&Date.now()-playChapter.qt<4000)return;playChapter.q=i;playChapter.qt=Date.now();_pc34(i)};
+ /* 탄 승객 = 지금 역 승객 + 이야기를 마친 역의 승객 (앞뒤로 역을 골라 다녀도 안 사라지게) */
+ boarded=function(id){if(!TRIP)return false;const ci=CH_OF[id];if(ci===undefined)return false;
+   return ci===TRIP.ch||!!TRIP.done[ci]||!!(TRIP.seen&&TRIP.seen[id])};
+ function departTo(j){if(!TRIP||TRIP.tr||TRIP.fin||!CH[j]||j===TRIP.ch)return;if(MODE==='seat')goOut();
+   const i=TRIP.ch,a=hEff(),b=CH[j].h;
+   try{const lo=Math.min(a,b),hi=Math.max(a,b);SEG.filter(g=>g.h>=lo-.01&&g.h<=hi+.01).forEach(g=>{(VIEWS[g.id]||[]).forEach(u=>{const im=new Image();im.decoding='async';im.src=u})})}catch(e){}
+   TRIP.tr={a,b,t0:Date.now(),ms:Math.max(12000,Math.min(24000,Math.abs(b-a)*2600)),to:j};tripSave();
+   const d=$('depT');d.innerHTML='<b>'+CH[i].name+'역을 출발합니다</b><span>'+(j<i?'되돌아가는 길 · ':'')+CH[j].name+ro(CH[j].name)+' 갑니다</span>';
+   d.classList.remove('on');void d.offsetWidth;d.classList.add('on');try{whistle()}catch(e){}
+   focus=null;tgtD=fitD()*1.25}
+ function routeMap(){if(!TRIP||TRIP.fin)return;const el=sheet('rtP','rt'),cur=TRIP.ch,met=LS.get('bl_met',{});
+   el.querySelector('.sC').innerHTML=`<div class="albH"><b>🗺 노선도 · 역 고르기</b>${xBtn}</div>
+    <p class="cnt">${TRIP.tr?'지금은 이동 중이에요. 역에 도착한 뒤 다시 골라 주세요.':'가고 싶은 역을 누르면 열차가 그 역으로 달려가요.'}</p>
+    <ol class="rt34">${CH.map((c,k)=>{const here=k===cur,dn=!!TRIP.done[k];const who=c.ev.map(id=>met[id]?nm(id):'새 승객').join(' · ');
+      return `<li class="${here?'here':dn?'dn':k<cur?'left':'fut'}"><button data-k="${k}" ${here||TRIP.tr?'disabled':''}><em>${k+1}</em><b>${esc(c.name)}</b><small><span>${esc(who)}</span><i>${here?'지금 여기':dn?'다녀옴':k<cur?'이야기 남음':'아직 안 감'}</i></small></button></li>`}).join('')}</ol>`;
+   el.querySelectorAll('.rt34 button').forEach(b=>b.onclick=e=>{e.stopPropagation();el.classList.remove('on');departTo(+b.dataset.k)});
+   el.querySelector('.albX').onclick=()=>el.classList.remove('on');el.onclick=e=>{if(e.target===el)el.classList.remove('on')};el.classList.add('on')}
+ const tg=$('tag');if(tg)tg.addEventListener('click',e=>{e.stopPropagation();if(document.body.classList.contains('intro')||cg.classList.contains('on')||turnEl.classList.contains('on'))return;routeMap()});
+ {const _bi34=bagItems;bagItems=function(){const it=_bi34();if(TRIP&&!TRIP.fin)it.splice(0,0,['🗺','노선도 · 역 고르기','<small>'+(TRIP.ch+1)+' / '+CH.length+'</small>',routeMap]);return it}}
+ window.__t.route=routeMap;window.__t.go=departTo;
+}
 </script></body></html>

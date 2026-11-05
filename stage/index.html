@@ -873,6 +873,38 @@ body.seat #tkB{right:auto!important;left:18px!important}
 
 #nextB small.ff{font-size:.78em;opacity:.75;margin-left:6px;white-space:nowrap}
 #ann,#v14T,#mailT{transition:transform .55s cubic-bezier(.2,1.3,.4,1),margin-top .3s ease}
+
+/* ===== v20 팝업북 ===== */
+#turn .pu{position:absolute;inset:0;perspective:1500px;perspective-origin:50% 28%;animation:none}
+#turn .pu .hd{position:absolute;left:5vw;top:5vh;text-align:left;color:#f3e6c4;z-index:3;opacity:0;transform:translateY(-8px);transition:all .6s .2s}
+#turn.up .pu .hd{opacity:1;transform:none}
+#turn .pu .hd small{display:block;font:700 12px "Apple SD Gothic Neo",sans-serif;letter-spacing:.4em;opacity:.6}
+#turn .pu .hd b{display:block;font:700 clamp(28px,3.4vw,46px) "Gowun Batang","Nanum Myeongjo",serif;margin-top:4px;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+#turn .pu .hd em{display:block;font:400 22px "Nanum Pen Script","Gaegu",sans-serif;color:#f3c76a;font-style:normal;margin-top:2px}
+#turn .pu .op{position:absolute;left:50%;bottom:4vh;transform:translateX(-50%);width:min(760px,86vw);margin:0;text-align:center;color:#f3e6c4;font:600 clamp(15px,1.35vw,19px)/1.7 "Gowun Batang",serif;opacity:0;transition:opacity .8s 1.1s;text-shadow:0 2px 6px rgba(0,0,0,.6);word-break:keep-all}
+#turn.up .pu .op{opacity:.95}
+#turn .bk{position:absolute;left:50%;top:60%;width:min(1000px,84vw);height:min(520px,44vw);transform:translate(-50%,-50%) rotateX(60deg);transform-style:preserve-3d}
+#turn .bk .cv{position:absolute;inset:-14px -16px -18px;background:linear-gradient(180deg,#5a1f15,#3b130c);border-radius:10px;box-shadow:0 30px 60px rgba(0,0,0,.6);transform:translateZ(-8px)}
+#turn .bk .pp{position:absolute;top:0;bottom:0;width:50%;background:#f4ead3;box-shadow:inset 0 0 0 10px #f4ead3,inset 0 0 0 13px var(--ac),inset 0 0 0 16px #f4ead3,inset 0 0 0 18px var(--ac)}
+#turn .bk .pp::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(90,61,34,.04) 0 1px,transparent 1px 6px)}
+#turn .bk .pp.L{left:0;border-radius:6px 0 0 6px;background:linear-gradient(90deg,#efe4ca,#f6edd8 70%,#d9c8a4)}
+#turn .bk .pp.R{right:0;border-radius:0 6px 6px 0;background:linear-gradient(270deg,#efe4ca,#f6edd8 70%,#d9c8a4)}
+/* 앞쪽 종이 두께 */
+#turn .bk::after{content:"";position:absolute;left:-2px;right:-2px;bottom:-10px;height:10px;transform-origin:50% 0;transform:rotateX(-90deg);background:repeating-linear-gradient(180deg,#efe4ca 0 1px,#d6c49f 1px 2px);border-radius:0 0 4px 4px}
+/* 세워지는 종이 */
+#turn .pl{position:absolute;left:calc(50% + var(--xb,0%));bottom:var(--d);transform-origin:50% 100%;transform:translateX(-50%) rotateX(0deg);transition:transform .95s cubic-bezier(.2,1.35,.4,1) var(--dl,0s);transform-style:preserve-3d}
+#turn.up .pl{transform:translateX(-50%) rotateX(-60deg)}
+#turn .pl.back .crd{width:min(480px,40vw);aspect-ratio:3/2;padding:9px;background:#fffaf0;box-shadow:0 8px 18px rgba(40,20,5,.35);clip-path:polygon(0 8%,12% 0,26% 6%,40% 0,50% 5%,60% 0,74% 6%,88% 0,100% 8%,100% 100%,0 100%)}
+#turn .pl.back .crd img{width:100%;height:100%;object-fit:cover;display:block;clip-path:polygon(0 8%,12% 0,26% 6%,40% 0,50% 5%,60% 0,74% 6%,88% 0,100% 8%,100% 100%,0 100%)}
+#turn .pl img.cut{display:block;filter:drop-shadow(3px 0 0 #fffaf0) drop-shadow(-3px 0 0 #fffaf0) drop-shadow(0 3px 0 #fffaf0) drop-shadow(0 -3px 0 #fffaf0) drop-shadow(0 8px 10px rgba(40,20,5,.4))}
+#turn .pl.mid img.cut{height:min(330px,30vw)}
+#turn .pl.fr img.cut{height:min(110px,9vw)}
+#turn .pl.fr2 .frg{width:min(200px,17vw);padding:12px 10px;background:#fbf3df;box-shadow:0 6px 12px rgba(40,20,5,.35);font:400 clamp(15px,1.4vw,20px)/1.3 "Gaegu",sans-serif;color:#2f55a4;text-align:center;transform:rotate(-4deg);clip-path:polygon(0 4%,10% 0,22% 5%,36% 0,50% 4%,64% 0,78% 5%,90% 0,100% 4%,98% 50%,100% 96%,88% 100%,72% 95%,56% 100%,40% 96%,24% 100%,10% 95%,0 100%,2% 50%)}
+#turn .pl.fr2 .frg:not(.got){color:rgba(58,42,28,.5);background:repeating-linear-gradient(45deg,rgba(58,42,28,.07) 0 6px,transparent 6px 12px),#e6d7b6}
+#turn .pu .nx{z-index:4}
+#turn.go .pu{animation:puOut .5s ease forwards}
+@keyframes puOut{to{opacity:0}}
+@media (max-aspect-ratio:1/1){#turn .bk{top:62%;width:94vw;height:70vw}#turn .pl.back .crd{width:70vw}#turn .pl.mid img.cut{height:42vw}}
 </style></head><body>
 <div id="tag"><b>부산</b><span id="tagS"></span><i id="tagI"></i></div>
 <div id="dev"><span>출발 후</span><input id="devR" type="range" min="0" max="91.9" step="0.1"><span id="devV"></span></div>
@@ -3687,4 +3719,23 @@ addEventListener('keydown',e=>{if(turnEl.classList.contains('on')&&(e.key==='Ent
 setInterval(()=>{const seat=MODE==='seat';let y=14;const nb=$('nextB');if(seat&&nb&&nb.classList.contains('on')){const r=nb.getBoundingClientRect();if(r.height)y=r.bottom+8}
   const L=[[$('ann'),14,e=>e.classList.contains('on')],[$('v14T'),seat?84:14,e=>e.classList.contains('on')],[$('mailT'),76,e=>e.classList.contains('on')]];
   for(const [e,nat,vis] of L){if(!e)continue;if(vis(e)){e.style.marginTop=(y-nat)+'px';y+=e.offsetHeight+8}else e.style.marginTop='0px'}},250);
+
+/* ===================== v20: 도장은 장면 끝나고 · 팝업북 다음 역 ===================== */
+{let pend=null;setInterval(()=>{const t=$('lvt');if(!t)return;const busy=cg.classList.contains('on')||turnEl.classList.contains('on');
+  if(busy&&t.classList.contains('on')){pend=t.innerHTML;t.classList.remove('on')}
+  else if(!busy&&pend){const h=pend;pend=null;setTimeout(()=>{if(cg.classList.contains('on')||turnEl.classList.contains('on')){pend=h;return}t.innerHTML=h;t.classList.remove('on');void t.offsetWidth;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),5300)},700)}},150)}
+pageTurn=function(i){const c=CH[i];if(!c)return;const id=c.ev[0],who=id&&CAST[id]?nm(id):'';const pg=LS.get('bl_pages',{});const got=id&&pg[id]&&PAGES[id];
+  const spr=id&&CAST[id]?((CAST[id].img.startsWith('img/')?'':P)+CAST[id].img):'';const it=id&&ITM[id]?'img/items/'+id+'.webp':'';
+  const ac=(RT&&RT[c.id]&&RT[c.id][0])||'#2f6b4a';
+  turnEl.innerHTML=`<div class="pu" style="--ac:${ac}"><div class="hd"><small>제 ${i+1} 장</small><b>${c.name}</b><em>${who?who+'의 이야기':''}</em></div>
+    <div class="bk"><div class="cv"></div><div class="pp L"></div><div class="pp R"></div>
+      <div class="pl back" style="--d:58%;--dl:.15s"><div class="crd"><img src="${pcImg[c.id]||''}" alt=""></div></div>
+      ${spr?`<div class="pl mid" style="--d:30%;--dl:.45s"><img class="cut" src="${spr}" alt=""></div>`:''}
+      ${it?`<div class="pl fr" style="--d:10%;--dl:.7s;--xb:-27%"><img class="cut" src="${it}" alt=""></div>`:''}
+      <div class="pl fr2" style="--d:13%;--dl:.85s;--xb:26%"><div class="frg${got?' got':''}">${got?esc(PAGES[id]).replace(/\n/g,'<br>'):'찢겨 나간 자리'}</div></div>
+    </div><p class="op">${OPEN1[c.id]||''}</p><div class="nx">눌러서 넘기기 ▸</div></div>`;
+  turnEl.classList.remove('on','go');void turnEl.offsetWidth;turnEl.classList.add('on');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>turnEl.classList.add('up')));try{blipUp()}catch(e){}};
+{const _tc=turnClose;turnClose=function(){turnEl.classList.remove('up');setTimeout(_tc,350)}}
+
 </script></body></html>

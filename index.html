@@ -1187,6 +1187,9 @@ body:has(#turn.on) #stk{display:none!important}
 #turn .pu.v31 .ly.flat .lyi,#turn.up .pu.v31 .ly.flat .lyi{transform:translateX(-50%) scale(var(--s)) perspective(700px) rotateX(48deg)}
 #turn .pu.v31 .ly.flat .gs{display:none}
 #turn .pu.v31 .ly.flat{z-index:200!important}
+
+/* v32: 창가 맞은편 승객이 창틀 기념품 선반보다 앞에 (빨간 망토 이마를 선반이 가로지르던 문제) */
+#pax{z-index:4!important}
 </style></head><body>
 <div id="tag"><b>부산</b><span id="tagS"></span><i id="tagI"></i></div>
 <div id="dev"><span>출발 후</span><input id="devR" type="range" min="0" max="91.9" step="0.1"><span id="devV"></span></div>
@@ -4077,7 +4080,7 @@ function finalPop(cb){const {on,off}=endPeople();const all=on.concat(off);const 
     </div><p class="op">다 읽으면 네가 써. 그래서, 이렇게 썼다.</p><div class="nx">눌러서 책 덮기 ▸</div></div>`;
   turnEl.classList.remove('on','go');void turnEl.offsetWidth;turnEl.classList.add('on');requestAnimationFrame(()=>requestAnimationFrame(()=>turnEl.classList.add('up')));
   try{blipUp()}catch(e){}turnQ.push(cb)}
-window.__t.fin=()=>finalPop(()=>{});window.__t.coach=()=>coachStart(1);window.__t.ps=sh=>playScene(sh,()=>{});window.__t.ev=id=>playScene((typeof EV2!=='undefined'&&EV2[id])||EV[id],()=>{});window.__t.tk=i=>makeTicketAt(i);window.__t.card=()=>makeCard(TRUNK||{text:'면접이 걱정돼요',pick:0});
+window.__t.fin=()=>finalPop(()=>{});window.__t.coach=()=>coachStart(1);window.__t.pax=id=>{paxSet(id);setTimeout(()=>{try{paxLayout()}catch(e){}},300)};window.__t.ps=sh=>playScene(sh,()=>{});window.__t.ev=id=>playScene((typeof EV2!=='undefined'&&EV2[id])||EV[id],()=>{});window.__t.tk=i=>makeTicketAt(i);window.__t.card=()=>makeCard(TRUNK||{text:'면접이 걱정돼요',pick:0});
 
 
 /* ===================== v22: 팝업북 입체 강화 · 승차권/마지막 장 카드 새 디자인 ===================== */
@@ -4373,4 +4376,7 @@ window.__t.fin=()=>finalPop(()=>{});
 
 /* 팝업북·이야기가 열려 있는 동안 작은 알림은 잠시 미루기 */
 {const _tp=tip;tip=function(h,ms,cb){if(turnEl.classList.contains('on')||cg.classList.contains('on')){setTimeout(()=>tip(h,ms,cb),2500);return}_tp(h,ms,cb)}}
+
+/* v32: 팝업북이 열려 있으면 '도착 안내'는 책을 넘긴 뒤에 */
+{const _an=announce;announce=function(a,b,c,d){if(turnEl.classList.contains('on')){turnQ.push(()=>announce(a,b,c,d));return}_an(a,b,c,d)}}
 </script></body></html>

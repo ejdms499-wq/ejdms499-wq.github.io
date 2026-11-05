@@ -1113,6 +1113,24 @@ body:has(#turn.on) #stk{display:none!important}
 @media (prefers-reduced-motion:reduce){#turn .pu.v27 *{transition-duration:.01s!important;animation-duration:.01s!important}}
 #turn .pu.v27 .op,#turn .pu.v27 .nx,#turn .pu.v27 .hd{z-index:6;transform-style:flat}
 #turn .pu.v27 .bkw{z-index:1}
+
+/* ===== v29 팝업북: 가볍고 매끄럽게 ===== */
+#turn .pu.v27{perspective-origin:50% 22%!important;transition:opacity .35s ease!important}
+#turn .pu.v27 .bk{animation:none!important;transform:translate(-50%,-50%) rotateX(54deg)!important}
+#turn .pu.v27 .cvr{display:none!important}
+#turn .pu.v27 .bkw{opacity:1!important;transform:translate3d(0,70px,0)!important;transition:transform .8s cubic-bezier(.16,1,.3,1)!important}
+#turn.s1 .pu.v27 .bkw{transform:none!important}
+#turn .pu.v27 .bk .cv{clip-path:none!important;transition:none!important}
+#turn .pu.v27 .bk .pp.L,#turn .pu.v27 .bk .gut{opacity:1!important;transition:none!important}
+#turn .pu.v27 .bk::after{left:-2px!important;transition:none!important}
+#turn .pu.v27 .pl,#turn.s2 .pu.v27 .pl{visibility:visible!important}
+#turn.s2 .pu.v27 .pl{transition:transform .9s cubic-bezier(.2,1.3,.4,1) var(--dl,0s)!important}
+#turn.fold .pu.v27 .pl{transition:transform .42s cubic-bezier(.5,0,.75,.4) calc((1.05s - var(--dl,0s)) * .2)!important}
+#turn .pu.v27 .dust i:nth-child(n+15){display:none}
+#turn .pu.v27 .crn{transform:translateZ(1px) scale(1);transform-origin:100% 100%;transition:opacity .5s ease,transform .35s ease!important}
+#turn.s3:hover .pu.v27 .crn{width:46px;height:46px;transform:translateZ(1px) scale(1.6)}
+#turn .pu.v27 .spot{transition:opacity .9s ease}
+#turn.fast.s2 .pu.v27 .pl,#turn.fast .pu.v27 .bkw{transition-duration:.28s!important;transition-delay:0s!important}
 </style></head><body>
 <div id="tag"><b>부산</b><span id="tagS"></span><i id="tagI"></i></div>
 <div id="dev"><span>출발 후</span><input id="devR" type="range" min="0" max="91.9" step="0.1"><span id="devV"></span></div>
@@ -4210,11 +4228,15 @@ pageTurn=function(i){const c=CH[i];if(!c)return;t27clear();turnOpened=false;turn
       <div class="flp"><div class="f"></div><div class="b"></div></div>
     </div></div><p class="op">${OPEN1[c.id]||''}</p><div class="nx">눌러서 넘기기 ▸</div></div>`;
   turnEl.classList.remove('on','go','up','s1','s2','s3','fold','flip','fast');void turnEl.offsetWidth;turnEl.classList.add('on');
-  t27(()=>turnEl.classList.add('s1'),120);
-  t27(()=>{turnEl.classList.add('s2');try{blipUp()}catch(e){}},820);
-  t27(()=>turnEl.classList.add('up'),1820);
-  t27(()=>{turnEl.classList.add('s3');try{thunk()}catch(e){}},2900);
-  t27(()=>{turnOpened=true},3100)};
+  /* 그림을 미리 다 풀어 둔 뒤에 한 번에 시작 (중간에 덜컥거리지 않게) */
+  const run=++pageTurn.run,srcs=[...turnEl.querySelectorAll('img')].map(im=>im.src);if(pc)srcs.push(new URL(pc,location.href).href);
+  const dec=srcs.map(u=>{const im=new Image();im.src=u;return (im.decode?im.decode():Promise.resolve()).catch(()=>{})});
+  Promise.race([Promise.all(dec),new Promise(r=>setTimeout(r,900))]).then(()=>requestAnimationFrame(()=>requestAnimationFrame(()=>{if(run!==pageTurn.run||!turnEl.classList.contains('on'))return;
+    turnEl.classList.add('s1','s2');try{blipUp()}catch(e){}
+    t27(()=>turnEl.classList.add('up'),420);
+    t27(()=>{turnEl.classList.add('s3');try{thunk()}catch(e){}},1650);
+    t27(()=>{turnOpened=true},1800)})))};
+pageTurn.run=0;
 function turnFinish(){if(turnOpened)return;t27clear();turnEl.classList.add('fast','s1','s2','up','s3');t27(()=>{turnEl.classList.remove('fast');turnOpened=true},420)}
 turnClose=function(){if(!turnEl.classList.contains('on')||turnClosing)return;
   const pu=turnEl.querySelector('.pu');
@@ -4233,4 +4255,8 @@ function toArrived(){if(!TRIP)return;if(!TRIP.fin){TRIP.fin=1;tripSave()}trkShow
 /* 이미 엔딩을 본 기록이 있으면, 새로고침해도 메뉴로 */
 if(endDone()&&!TRIP.fin){TRIP.fin=1;tripSave()}
 {const x=card.querySelector('#cdX'),_old=x.onclick;x.onclick=e=>{_old&&_old(e);if(endDone()||(TRIP&&TRIP.fin))setTimeout(toArrived,350)}}
+
+/* v29: 팝업북이 떠 있는 동안 뒤의 3D 기차는 그리지 않기 · 마우스 따라 흔들기 끄기 */
+{const _ch29=cgHold;cgHold=function(){if(turnEl.classList.contains('on'))return true;return _ch29()}}
+addEventListener('pointermove',e=>{if(turnEl.classList.contains('on')&&turnEl.contains(e.target))e.stopPropagation()},true);
 </script></body></html>

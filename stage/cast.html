@@ -21,7 +21,7 @@ a{color:inherit}
 header{text-align:center;color:#f3e6c4;margin:10px 0 34px}
 header small{display:inline-block;font:400 15px "Jua",sans-serif;letter-spacing:.32em;color:#e8c47a;margin-bottom:10px}
 header h1{margin:0;font:700 clamp(30px,5vw,48px)/1.2 "Gowun Batang",serif;letter-spacing:-.01em;text-shadow:0 3px 14px rgba(0,0,0,.5)}
-header p{margin:12px 0 0;font-size:16.5px;opacity:.86;line-height:1.7}
+header p{margin:12px 0 0;word-break:keep-all;font-size:16.5px;opacity:.86;line-height:1.7}
 .back{position:fixed;left:16px;top:calc(14px + env(safe-area-inset-top));z-index:20;text-decoration:none;font:400 15px "Jua",sans-serif;color:var(--ink);background:var(--paper);padding:8px 14px;border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.4)}
 .nav{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:18px}
 .nav a{font:400 15px "Jua",sans-serif;text-decoration:none;color:#f3e6c4;border:1.5px solid rgba(243,230,196,.45);padding:6px 14px;border-radius:999px}
@@ -45,7 +45,7 @@ section{margin:0 0 70px;scroll-margin-top:20px}
 .badge::before{content:"";position:absolute;inset:7px;border-radius:50%;border:1.5px dashed rgba(255,255,255,.7)}
 .badge span{display:block;font:400 22px/1.05 "Jua",sans-serif;text-shadow:0 2px 0 rgba(0,0,0,.18)}
 .badge small{display:block;font:400 13px "Jua",sans-serif;opacity:.92;margin-top:3px}
-.ruled{margin:0;font-size:16px;line-height:32px;background:repeating-linear-gradient(transparent 0 31px,rgba(150,120,70,.35) 31px 32px);padding:0 4px 1px}
+.ruled{margin:0;word-break:keep-all;font-size:16px;line-height:32px;background:repeating-linear-gradient(transparent 0 31px,rgba(150,120,70,.35) 31px 32px);padding:0 4px 1px}
 .ruled b{font-weight:400;color:var(--red)}
 .pg h3{margin:0 0 6px 4px;font:700 26px "Gowun Batang",serif}
 .pg h3 em{font-style:normal;font:400 14px "Jua",sans-serif;color:#8a6a3a;margin-left:6px;letter-spacing:.04em}
@@ -163,15 +163,15 @@ footer .go{display:inline-block;margin-top:14px;text-decoration:none;font:400 18
   <h2 class="sec">주인공과 안내원</h2>
   <div class="book">
    <div class="pg">
-    <div class="who"><div class="mytag"><i class="str"></i><div class="card"><small>수하물 꼬리표</small><b id="myName">당신</b><q id="myJim">아직 맡기지 않은 마음의 짐</q><span class="no" id="myNo">NO. ????</span></div></div></div>
+    <div class="who"><div class="mytag"><i class="str"></i><div class="card"><small>수하물 꼬리표</small><b id="myName">플레이어</b><q id="myJim">아직 맡기지 않은 마음의 짐</q><span class="no" id="myNo">NO. ????</span></div></div></div>
     <div class="txt">
-     <div class="badge" style="--bc:#e0702e"><div><span>주인공</span><small>당신</small></div></div>
-     <h3 id="myH">당신<em>PASSENGER</em></h3>
+     <div class="badge" style="--bc:#e0702e"><div><span>주인공</span><small>플레이어</small></div></div>
+     <h3 id="myH">플레이어<em>PLAYER</em></h3>
      <p class="ruled">부산역 수하물칸에 <b>마음의 짐</b> 하나를 맡기고 런던행 밤기차에 오른 승객. 열세 개 역에서 동화 속 사람들을 만나, 그들의 짐을 잠깐씩 함께 들어 준다. 런던에 닿으면 맡긴 짐을 돌려받는다.</p>
     </div>
    </div>
    <div class="pg">
-    <div class="who"><img src="img/px/robot_cut.webp" alt="로봇 포터"></div>
+    <div class="who"><img src="img/px/robot_cut.webp" alt="로봇 포터" style="max-height:340px"></div>
     <div class="txt">
      <div class="badge" style="--bc:#2f7f86"><div><span>안내원</span><small>수하물칸</small></div></div>
      <h3>로봇 포터<em>PORTER</em></h3>
@@ -244,8 +244,7 @@ const cm=a=>a.map(([id,n,src,t])=>`<div class="cm" tabindex="0"><div class="ph">
 document.getElementById('cmK').innerHTML=cm(CMK);document.getElementById('cmW').innerHTML=cm(CMW);
 document.querySelectorAll('.cm').forEach(el=>el.addEventListener('click',()=>el.classList.toggle('say')));
 // 주인공 = 나: 이름 · 맡긴 짐
-const nm=LS.get('bl_name',''),T=LS.get('bl_trunk',null);
-if(nm){document.getElementById('myName').textContent=nm;document.getElementById('myH').firstChild.textContent=nm+' ';}
+const T=LS.get('bl_trunk',null);
 if(T&&T.text){document.getElementById('myJim').textContent=T.text;if(T.no)document.getElementById('myNo').textContent='NO. '+T.no}
 </script>
 </body></html>

@@ -4092,4 +4092,7 @@ setInterval(()=>{if(cg.classList.contains('on')&&typeof cOn!=='undefined'&&cOn){
 
 /* v24: 방송·안내가 겹치지 않게 (안내 중이면 방송은 잠시 뒤에) */
 {const _bs=bcShow;bcShow=function(){if((typeof cOn!=='undefined'&&cOn)||cg.classList.contains('on')||$('turn').classList.contains('on')){setTimeout(()=>bcShow(),4000);return}_bs()}}
+
+/* v25: 가방 메뉴에 승객 소개 */
+{const _bi25=bagItems;bagItems=function(){const it=_bi25();const k=it.findIndex(a=>a[1]==='추억 앨범');it.splice(k<0?it.length:k+1,0,['👥','승객 소개','<small>열차 사람들</small>',()=>{location.href='cast.html'}]);return it}}
 </script></body></html>

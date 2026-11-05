@@ -867,6 +867,12 @@ body.seat #tkB{right:auto!important;left:18px!important}
 #turn .nx{position:absolute;right:max(5vw,24px);bottom:max(4vh,18px);font:400 22px "Nanum Pen Script","Gaegu",sans-serif;color:#f3e6c4;opacity:.85;animation:nxB 1.6s ease-in-out infinite}
 @keyframes nxB{50%{transform:translateX(6px);opacity:.55}}
 @media (max-aspect-ratio:1/1){#turn .pg.sp{transform:translate(-50%,-50%);height:88vh}#turn .sp .lp,#turn .sp .rp{transform:none}}
+
+/* v19 칸 패널: 칸을 가리지 않게 오른쪽 위로 */
+@media (min-aspect-ratio:1/1){#carP{left:auto!important;right:18px!important;top:calc(78px + env(safe-area-inset-top))!important;bottom:auto!important;transform:translateY(-10px)!important;width:min(340px,30vw)!important}#carP.on{transform:none!important}}
+
+#nextB small.ff{font-size:.78em;opacity:.75;margin-left:6px;white-space:nowrap}
+#ann,#v14T,#mailT{transition:transform .55s cubic-bezier(.2,1.3,.4,1),margin-top .3s ease}
 </style></head><body>
 <div id="tag"><b>부산</b><span id="tagS"></span><i id="tagI"></i></div>
 <div id="dev"><span>출발 후</span><input id="devR" type="range" min="0" max="91.9" step="0.1"><span id="devV"></span></div>
@@ -1014,13 +1020,15 @@ emb.position.set(0,embTop-embH/2,0.4);
 
 /* ---------- 열차 (손그림 단면) ---------- */
 const PX=3.4/550;
+const CAR2={tail:[1800,491,.25,.70,.38],case:[1700,561,.30,.85,.28],post:[1718,486,.27,.80,.30],dome:[1800,495,.16,.66,.30],dine:[1800,492,.40,.76,.30],sleep:[1800,471,.21,.78,.31],loco:[2070,409,.6,.85,.3]};
+const cutX=(c,fx)=>{const u=c.userData,q=u.cut||[0,1];return c.position.x-u.w/2+u.w*(q[0]+fx*(q[1]-q[0]))};
 const ORDER=[['tail','꿈 보관소'],['case','탐정 사무소'],['post','우체국칸'],['dome','별 전망칸'],['dine','식당칸'],['sleep','침대칸'],['loco','기관실']];
 const train=new THREE.Group();scene.add(train);
 const cars=[];let x=0;
 for(const [k,name] of ORDER){
-  const w=(k==='loco'?2856:1640)*PX,h=(k==='loco'?680:550)*PX;
-  const p=plane(tex('car_'+k+'.webp'),w,h);p.renderOrder=6;
-  p.position.set(x+w/2,h/2-0.03,0);p.userData={k,name,w,h,ph:Math.random()*6};train.add(p);cars.push(p);x+=w-0.22;
+  const c2=CAR2[k],h=k==='loco'?3.5:3.4,w=h*c2[0]/c2[1];
+  const p=plane(tex('car2_'+k+'.webp'),w,h);p.renderOrder=6;
+  p.position.set(x+w/2,h/2-0.03,0);p.userData={k,name,w,h,ph:Math.random()*6,cut:[c2[2],c2[3]],fl:-0.03+c2[4]*h};train.add(p);cars.push(p);x+=w-0.5;
 }
 const TRAINW=x;train.position.x=-TRAINW/2;
 /* ---------- 칸 사이 연결 주름막 ---------- */
@@ -1031,8 +1039,8 @@ function bellowsTex(){const c=document.createElement('canvas');c.width=64;c.heig
   const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;return t}
 const BT=bellowsTex();
 for(let i=0;i<cars.length-1;i++){const a=cars[i],b=cars[i+1];const xm=(a.position.x+a.userData.w/2+b.position.x-b.userData.w/2)/2;
-  const m=new THREE.Mesh(new THREE.PlaneGeometry(1.4,2.62),new THREE.MeshBasicMaterial({map:BT,depthTest:false,depthWrite:false,transparent:true}));
-  m.position.set(xm,0.62+2.62/2,-0.01);m.renderOrder=5.9;train.add(m)}
+  const m=new THREE.Mesh(new THREE.PlaneGeometry(1.1,1.25),new THREE.MeshBasicMaterial({map:BT,depthTest:false,depthWrite:false,transparent:true}));
+  m.position.set(xm,1.55,-0.01);m.renderOrder=5.9;train.add(m)}
 
 /* ---------- 불빛: 칸 안에서 새어 나오는 빛 ---------- */
 function glowTex(){const c=document.createElement('canvas');c.width=c.height=128;const g=c.getContext('2d');
@@ -1050,7 +1058,7 @@ for(const c of cars){if(c.userData.k==='loco')continue;const W=c.userData.w;
 function person([file,car,fx,hgt]){
   const c=cars.find(c=>c.userData.k===car);const p=plane(tex(file),1,1);p.renderOrder=7;p.visible=false;
   const im=new Image();im.onload=()=>{p.scale.set(hgt*im.width/im.height,hgt,1);p.visible=true};im.src='img/'+file;
-  p.position.set(c.position.x-c.userData.w/2+c.userData.w*fx,0.93+hgt/2,0.05);p.userData.base=p.position.y;p.userData.ph=Math.random()*6;
+  p.position.set(cutX(c,fx),(c.userData.fl??0.93)+hgt/2,0.05);p.userData.base=p.position.y;p.userData.ph=Math.random()*6;
   train.add(p);return p;
 }
 const ppl=SCENE.ppl.map(person);
@@ -1327,7 +1335,7 @@ function pitTick(){let w=where(dep,vnow());if(w.mode==='wait'){for(const id in P
   for(const id in HOME){const on=TRIP&&boarded(id,w);let m=PIT[id];
     if(on&&!m){const [ck,fx]=HOME[id],c=cars.find(x=>x.userData.k===ck);if(!c||!CAST[id])continue;const src=(CAST[id].img.startsWith('img/')?CAST[id].img.slice(4):'px/'+CAST[id].img);
       m=plane(tex(src),1,1);m.renderOrder=7;m.visible=false;m.userData={id,ph:Math.random()*6};const im=new Image();
-      im.onload=()=>{const H=pitH(src);m.scale.set(H*im.width/im.height,H,1);m.position.set(c.position.x-c.userData.w/2+c.userData.w*fx,0.93+H/2,0.05);m.userData.base=m.position.y;m.userData.ok=1;m.visible=true};
+      im.onload=()=>{const H=pitH(src);m.scale.set(H*im.width/im.height,H,1);m.position.set(cutX(c,fx),(c.userData.fl??0.93)+H/2,0.05);m.userData.base=m.position.y;m.userData.ok=1;m.visible=true};
       im.src='img/'+src;train.add(m);PIT[id]=m;PIT_M.push(m)}
     if(m&&m.userData.ok)m.visible=!!on&&!AMB}}
 setInterval(pitTick,2000);setTimeout(pitTick,600);
@@ -1469,7 +1477,7 @@ function iris(to,ms,cb){const from=parseFloat(gIr.style.getPropertyValue('--r'))
   (function f(n){const k=Math.min(1,(n-t0)/ms),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;gIr.style.setProperty('--r',(from+(to-from)*e)+'%');if(k<1)requestAnimationFrame(f);else cb&&cb()})(t0)}
 function curView(){const e=vwEl[vwCur];const m=e&&e.style.backgroundImage;return m&&m!=='none'?m:'url(img/far.webp)'}
 function gType2(t,narr){gTx.classList.toggle('narr',!!narr);gFull=t;let i=0;clearInterval(gType);gTx.textContent='';gMk.style.display='none';
-  gType=setInterval(()=>{i++;gTx.textContent=t.slice(0,i);if(i>=t.length){clearInterval(gType);gType=null;gMk.style.display='block'}},44)}
+  gType=setInterval(()=>{i++;gTx.textContent=t.slice(0,i);if(i>=t.length){clearInterval(gType);gType=null;gMk.style.display='block'}},28)}
 function gShow(s){gIt.classList.remove('on');cg.classList.remove('itm');gTt.classList.remove('on');gCs.innerHTML='';
   if(s.bg){gBg.style.backgroundImage=s.bg==='view'?curView():'url('+s.bg+')';gBg.classList.remove('kb');void gBg.offsetWidth;gBg.classList.add('kb')}
   if(s.ch!==undefined){if(s.ch){const src=(s.ch.startsWith('../')||s.ch.startsWith('img/'))?s.ch:P+s.ch;if(!gCh.src.endsWith(src.replace(/^\.\.\//,''))){gCh.src=src;gCh.classList.remove('in');void gCh.offsetWidth;gCh.classList.add('in')}gCh.style.opacity=1}else gCh.style.opacity=0}
@@ -1482,7 +1490,7 @@ function gNext(){if(gType){clearInterval(gType);gType=null;gTx.textContent=gFull
   if(gI>=gShots.length){gEnd();return}
   const s=gShots[gI++];
   if(s.t==='title'){gBox.classList.remove('on');gTt.innerHTML='<small>'+(s.text||'')+'</small>'+s.sub;gTt.classList.add('on');gWait=1;
-     gBg.style.backgroundImage=curView();gCh.style.opacity=0;setTimeout(()=>{gTt.classList.remove('on');setTimeout(()=>{gWait=null;gNext()},500)},2600);return}
+     gBg.style.backgroundImage=curView();gCh.style.opacity=0;setTimeout(()=>{gTt.classList.remove('on');setTimeout(()=>{gWait=null;gNext()},400)},1700);return}
   if(s.choice){gMk.style.display='none';gCs.innerHTML='';gWait=1;s.choice.forEach(([q,r],k)=>{const b=document.createElement('button');b.className='pbtn2 l';b.textContent=q;
      b.onclick=e=>{e.stopPropagation();gCs.innerHTML='';gWait=null;if(s.onPick)s.onPick(k);if(s.cg&&typeof moShow==='function'){moShow(s.cg);const cp=CGM[s.cg]&&CGM[s.cg].cap;if(cp&&!(gShots[gI]&&gShots[gI].keepMo))gShots.splice(gI,0,{say:cp,who:'',narr:1,keepMo:1})}{const nar=/^\((?![^)]{0,5}\))/.test(r);const wh=nar?'':(s.rw||(s.me?'나':gWho.textContent));const go=()=>gShow({say:r,who:wh,narr:nar,rep:1});if(s.cg){gWait=1;gBox.classList.remove('on');setTimeout(()=>{gWait=null;go()},1300)}else go()}};gCs.appendChild(b)});return}
   if(s.clue){cg.classList.remove('itm');const c=clues();c[s.clue]=1;LS.set('bl_clue',c);gBox.classList.add('on');gWho.textContent='셜록의 단서 수첩';
@@ -1824,9 +1832,9 @@ function cmFrame(now){
       im.style.height=H+'px';im.style.width=W+'px';im.style.transformOrigin='50% 100%';im.style.transform=`translate(${x}px,${y}px) scale(${br}) rotate(${(1-ee)*-3}deg)`;if(!cmCur.said&&k>.24){cmCur.said=1;cmSay(cmCur.id,im)}}
     else{ // 칸 안: 바닥(0.93)에 발, 칸 오른쪽 끝 → 왼쪽 끝
       cmo.style.zIndex='';const cc=cmCur.car,w=cc.userData.w,cx=train.position.x+cc.position.x;
-      const lx=cx+w*.40-w*.80*kk,Hw=1.42*c.s;
-      cmV.set(lx,0.93,0.06).project(cam);const fy=(-cmV.y*.5+.5)*innerHeight,sx=(cmV.x*.5+.5)*innerWidth;
-      cmV.set(lx,0.93+Hw,0.06).project(cam);const ty=(-cmV.y*.5+.5)*innerHeight,H=fy-ty,W=H*cmCur.ar;
+      const q=cc.userData.cut||[.1,.9],fl=cc.userData.fl??0.93,lx=cx-w/2+w*(q[1]-(q[1]-q[0])*kk),Hw=1.42*c.s;
+      cmV.set(lx,fl,0.06).project(cam);const fy=(-cmV.y*.5+.5)*innerHeight,sx=(cmV.x*.5+.5)*innerWidth;
+      cmV.set(lx,fl+Hw,0.06).project(cam);const ty=(-cmV.y*.5+.5)*innerHeight,H=fy-ty,W=H*cmCur.ar;
       im.style.height=H+'px';im.style.width=W+'px';im.style.transform=`translate(${sx-W/2}px,${ty-bob*H*.03}px) rotate(${rot}deg)`}}
   else if(now>cmNext&&!document.hidden&&!cmBusy()&&!AMB){const w=where(dep,vnow());if(w.mode==='run'){
       const ids=Object.keys(CM).filter(id=>CM[id].segs.includes(w.seg.id));
@@ -2287,7 +2295,7 @@ function uiTick(){if(!TRIP||document.body.classList.contains('intro')){nextB.cla
     try{const w=where(dep,vnow());tagS.innerHTML='<span class="route">'+dots(TRIP.tr?TRIP.tr.to:i)+'</span>'+(w.mode==='run'?' '+w.seg.name:'')}catch(e){}
     tagI.textContent=TRIP.tr?'창밖을 보세요 · 곧 '+CH[TRIP.tr.to].name+' 도착':!TRIP.done[i]?'이 역에서 새 승객이 타요':nx?'다음 역 · '+nx.name+(CNT?' · 오늘 짐 '+CNT+'개':''):'종착역 · 트렁크를 찾을 수 있어요'}
   let show=!busy&&!AMB&&!TRIP.fin&&!carP.classList.contains('on');let txt='';
-  if(TRIP.tr){txt=CH[TRIP.tr.to].name+ro(CH[TRIP.tr.to].name)+' 가는 중…';nextB.disabled=true}
+  if(TRIP.tr){txt=CH[TRIP.tr.to].name+ro(CH[TRIP.tr.to].name)+' 가는 중… <small class="ff">▶▶ 빨리 가기</small>';nextB.disabled=false;nextB.dataset.a='ff'}
   else if(!TRIP.done[i]){txt=CAST[c.ev[0]].n+' 탑승 이야기 보기 ▶';nextB.disabled=false;nextB.dataset.a='story'}
   else if(nx){txt='다음 역으로 ▶ '+nx.name;nextB.disabled=false;nextB.dataset.a='next'}
   else{txt=TRUNK&&!TRUNK.done?'🧳 런던역 도착 · 트렁크 찾기':'🌅 런던역에서 내리기';nextB.disabled=false;nextB.dataset.a='end'}
@@ -2296,7 +2304,7 @@ setInterval(uiTick,500);
 nextB.onclick=e=>{e.stopPropagation();if(nextB.disabled||!TRIP)return;const a=nextB.dataset.a;
   if(a==='story')playChapter(TRIP.ch);else if(a==='next')departCh();else if(a==='end')finishTrip()};
 function departCh(){const i=TRIP.ch;if(!CH[i+1])return;if(MODE==='seat')goOut();
-  const a=hEff(),b=CH[i+1].h;TRIP.tr={a,b,t0:Date.now(),ms:Math.max(26000,Math.min(48000,(b-a)*9000)),to:i+1};tripSave();
+  const a=hEff(),b=CH[i+1].h;TRIP.tr={a,b,t0:Date.now(),ms:Math.max(15000,Math.min(26000,(b-a)*6000)),to:i+1};tripSave();
   const d=$('depT');d.innerHTML='<b>'+CH[i].name+'역을 출발합니다</b><span>다음 역 · '+CH[i+1].name+'</span>';d.classList.remove('on');void d.offsetWidth;d.classList.add('on');try{whistle()}catch(e){}
   focus=null;tgtD=fitD()*1.25}
 function arriveCh(i){if(!TRIP.tr)return;TRIP.tr=null;TRIP.ch=i;TRIP.hb=CH[i].h;TRIP.at=Date.now();COMP=null;TRIP.seat=null;tripSave();tgtD=fitD();
@@ -3177,7 +3185,7 @@ cars.forEach(c=>{const m=c.material;if(m&&m.fragmentShader&&m.fragmentShader.inc
   g.fillStyle='rgba(0,0,0,.45)';for(let y=6;y<128;y+=10)g.fillRect(0,y,64,3);const tG=new THREE.CanvasTexture(gw);tG.colorSpace=THREE.SRGBColorSpace;
   const sc=document.createElement('canvas');sc.width=256;sc.height=64;const s2=sc.getContext('2d');const rg=s2.createRadialGradient(128,32,4,128,32,128);rg.addColorStop(0,'rgba(0,0,0,.55)');rg.addColorStop(1,'rgba(0,0,0,0)');s2.fillStyle=rg;s2.fillRect(0,0,256,64);const tS=new THREE.CanvasTexture(sc);
   const xs=cars.map(c=>[c.position.x-c.userData.w/2,c.position.x+c.userData.w/2,c.userData.h]).sort((a,b)=>a[0]-b[0]);
-  for(let i=0;i<xs.length-1;i++){const jx=(xs[i][1]+xs[i+1][0])/2,h=Math.min(xs[i][2],xs[i+1][2])*.5;const p=plane(tG,.62,h);p.position.set(jx,h*.62+.15,-.01);p.renderOrder=5.8;train.add(p)}
+  for(let i=0;i<xs.length-1;i++){const jx=(xs[i][1]+xs[i+1][0])/2,h=1.1;const p=plane(tG,.8,h);p.position.set(jx,1.5,-.01);p.renderOrder=5.8;train.add(p)}
   const L=xs[xs.length-1][1]-xs[0][0];for(let i=0;i<cars.length;i++){const c=cars[i];const p=plane(tS,c.userData.w*1.05,.9);p.position.set(c.position.x,-.1,-.02);p.renderOrder=5.5;train.add(p)}}
 /* 팝업북 ① 오프닝: 책장 위에 누워 있던 장면이 일어선다 */
 const popEl=document.createElement('div');popEl.id='pop';document.body.appendChild(popEl);
@@ -3617,7 +3625,7 @@ pageTurn=function(i){const c=CH[i];if(!c)return;const id=c.ev[0],who=id&&CAST[id
     <svg class="d d1" viewBox="0 0 100 100" filter="url(#crayon)">${DOOD[d1]}</svg><svg class="d d2" viewBox="0 0 100 100" filter="url(#crayon)">${DOOD[d2]}</svg>
     <div class="torn${got?' got':''}">${got?'<div class="hw">'+esc(PAGES[id]).replace(/\n/g,'<br>')+'</div>':'<span>찢겨 나간 자리</span>'}</div></div></div>`;
   turnEl.classList.remove('on');void turnEl.offsetWidth;turnEl.classList.add('on');clearTimeout(pageTurn.t);pageTurn.t=0;turnEl.insertAdjacentHTML('beforeend','<div class="nx">눌러서 넘기기 ▸</div>')};
-window.__t.turn=i=>pageTurn(i);
+window.__t.turn=i=>pageTurn(i);window.__t.evc=()=>Object.fromEntries(Object.keys(EV).map(k=>[k,[EV[k].length,EV[k].filter(x=>x&&x.say).reduce((n,x)=>n+String(x.say).length,0),EV[k].filter(x=>x&&x.choice).length,EV[k].filter(x=>x&&x.game).length]]));
 
 /* ---------- ④ 우체국: 나무 우편함 벽 ---------- */
 const MB_ORD=['byeol','gilldong','gyeonu','snowq','sherlock','babayaga','odette','wolf','hansel','sleeping','monster','cinder','mermaid','rabbit'];
@@ -3673,4 +3681,10 @@ addEventListener('keydown',e=>{if(turnEl.classList.contains('on')&&(e.key==='Ent
 {const _ps=playScene;playScene=function(sh,done){if(turnEl.classList.contains('on')){turnQ.push(()=>playScene(sh,done));return}return _ps(sh,done)}}
 
 {const _gs=gShow;gShow=function(s){_gs(s);try{if(s&&s.rep&&!s.narr&&gCh&&gCh.src){const f=gCh.src.split('/').pop().replace(/_(sad|smile)\.webp$/,'.webp'),v=f.replace('.webp','_smile.webp');if(EXOK[v]&&!gCh.src.endsWith(v))gCh.src=P+v}}catch(e){}}}
+
+/* ===================== v19: 빨리 가기 · 위쪽 알림 쌓기 ===================== */
+{const _o=nextB.onclick;nextB.onclick=e=>{if(TRIP&&TRIP.tr&&nextB.dataset.a==='ff'){e.stopPropagation();TRIP.tr.t0=Math.min(TRIP.tr.t0,Date.now()-TRIP.tr.ms+1500);tripSave();try{whistle()}catch(_){}return}_o(e)}}
+setInterval(()=>{const seat=MODE==='seat';let y=14;const nb=$('nextB');if(seat&&nb&&nb.classList.contains('on')){const r=nb.getBoundingClientRect();if(r.height)y=r.bottom+8}
+  const L=[[$('ann'),14,e=>e.classList.contains('on')],[$('v14T'),seat?84:14,e=>e.classList.contains('on')],[$('mailT'),76,e=>e.classList.contains('on')]];
+  for(const [e,nat,vis] of L){if(!e)continue;if(vis(e)){e.style.marginTop=(y-nat)+'px';y+=e.offsetHeight+8}else e.style.marginTop='0px'}},250);
 </script></body></html>

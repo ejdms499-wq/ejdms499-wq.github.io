@@ -1007,7 +1007,7 @@ body.seat #tkB{right:auto!important;left:18px!important}
 #cg .gm .gc .ft.lit{background:linear-gradient(#fff6d6,#ffe6a3);box-shadow:0 0 0 3px #f2c14e,0 0 22px rgba(255,214,120,.9);transform:translateY(-6px)}
 #cg .gm .gc .ft.lit svg{filter:drop-shadow(0 0 8px rgba(255,220,140,1))}
 /* v24 글씨 위계: 제목=고운바탕 · 버튼/라벨=주아 · 본문=고운돋움 · 손글씨=개구(짧은 메모만) */
-body:is(.ink0,.ink1,.ink2) :is(#tag,.pbtn,#nextB,#bagB,#snd,#back,#trk,#tkB,#bagP button,#lvt,#depT,#paxT,#mailT,#cg .gm .gh,#coach .bub small){font-family:"Jua","Apple SD Gothic Neo",sans-serif!important;font-weight:400!important;color:#2b2118;letter-spacing:.01em}
+body:is(.ink0,.ink1,.ink2) :is(#tag,.pbtn,#nextB,#bagB,#snd,#back,#trk,#tkB,#bagP button,#lvt,#depT,#paxT,#mailT,#cg .gm .gh,#coach .bub small){font-family:"Jua","Apple SD Gothic Neo",sans-serif!important;font-weight:400!important;letter-spacing:.01em}
 body.ink2 :is(#nextB,#bagB,#snd,.pbtn){font-size:17px!important}
 body.ink2 #tag b{font-size:21px!important}
 .pbtn2{font-family:"Jua","Apple SD Gothic Neo",sans-serif;font-weight:400;font-size:15px}
@@ -1190,6 +1190,17 @@ body:has(#turn.on) #stk{display:none!important}
 
 /* v32: 창가 맞은편 승객이 창틀 기념품 선반보다 앞에 (빨간 망토 이마를 선반이 가로지르던 문제) */
 #pax{z-index:4!important}
+
+/* v33: 오른쪽 위 알림 카드(역 매점 선물·동행 도장 등)를 '내 창가 자리' 버튼 오른쪽 끝에 맞춤 */
+@media (min-aspect-ratio:1/1){
+ #lvt{left:var(--lx,calc(100% - 150px))!important;top:var(--ly,170px)!important;width:var(--lw,260px);max-width:none!important;box-sizing:border-box;padding:14px 18px!important}
+ #lvt b,#lvt span,#lvt i,#lvt small{word-break:keep-all}
+ #lvt span{line-height:1.45;margin-top:4px}
+ #lvt i{line-height:1.5}
+}
+
+/* v33: 진한 바탕 버튼은 낙서 단계(연필·볼펜)와 상관없이 밝은 글씨 */
+body:is(.ink0,.ink1,.ink2) :is(#snd.on,#paxT.ev,#trk.ev,#nextB.go){color:#f6ead0!important}
 </style></head><body>
 <div id="tag"><b>부산</b><span id="tagS"></span><i id="tagI"></i></div>
 <div id="dev"><span>출발 후</span><input id="devR" type="range" min="0" max="91.9" step="0.1"><span id="devV"></span></div>
@@ -4379,4 +4390,23 @@ window.__t.fin=()=>finalPop(()=>{});
 
 /* v32: 팝업북이 열려 있으면 '도착 안내'는 책을 넘긴 뒤에 */
 {const _an=announce;announce=function(a,b,c,d){if(turnEl.classList.contains('on')){turnQ.push(()=>announce(a,b,c,d));return}_an(a,b,c,d)}}
+
+/* 알림 카드가 뜰 때마다 버튼 위치를 재서 오른쪽 끝·간격을 맞춘다 */
+{const lv=$('lvt');const place=()=>{if(innerWidth<innerHeight)return;const sb=$('seat'),r=sb&&sb.getBoundingClientRect();
+  const W=Math.max(240,Math.min(300,(r&&r.width)||0)+0);const right=(r&&r.width)?r.right:innerWidth-14,bottom=(r&&r.height)?r.bottom:60;
+  lv.style.setProperty('--lw',Math.max(W,260)+'px');lv.style.setProperty('--lx',(right-Math.max(W,260)/2)+'px');
+  const h=lv.offsetHeight||120;lv.style.setProperty('--ly',(bottom+12+h/2)+'px')};
+  new MutationObserver(()=>{if(lv.classList.contains('on'))place()}).observe(lv,{attributes:true,attributeFilter:['class']});
+  new MutationObserver(()=>place()).observe(lv,{childList:true,subtree:true});addEventListener('resize',place);place()}
+
+/* v33: PC 화면 버튼·창 정렬 — 가장자리 14px, 서로 12px (버튼 크기를 직접 재서 맞춤) */
+{const M=14,G=12,imp=(e,k,v)=>e&&e.style.setProperty(k,v,'important');
+ function align33(){if(innerWidth<innerHeight||innerWidth<760)return;
+  const seat=$('seat'),snd=$('snd'),bag=$('bagB'),back=$('back'),car=$('carP'),tk=$('tkB'),trk=$('trk');
+  const rs=seat&&seat.getBoundingClientRect(),rn=snd&&snd.getBoundingClientRect(),rb=bag&&bag.getBoundingClientRect();
+  if(car&&rs&&rs.height){imp(car,'right',M+'px');imp(car,'left','auto');imp(car,'bottom','auto');imp(car,'top',(rs.bottom+G)+'px')}
+  if(tk&&rn&&rn.height){imp(tk,'right',M+'px');imp(tk,'left','auto');imp(tk,'bottom',(innerHeight-rn.top+G)+'px')}
+  if(back&&rb&&rb.width&&getComputedStyle(back).display!=='none'){imp(back,'left',(rb.right+8)+'px');imp(back,'bottom',M+'px');imp(back,'height',rb.height+'px');imp(back,'box-sizing','border-box');imp(back,'display','inline-flex');imp(back,'align-items','center')}
+  if(trk&&rn&&rn.width){imp(trk,'right',(innerWidth-rn.left+8)+'px');imp(trk,'bottom',M+'px');imp(trk,'height',rn.height+'px');imp(trk,'box-sizing','border-box')}}
+ addEventListener('resize',align33);setInterval(align33,600);setTimeout(align33,300)}
 </script></body></html>

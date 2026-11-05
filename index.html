@@ -1200,7 +1200,9 @@ body:has(#turn.on) #stk{display:none!important}
 }
 
 /* v33: 진한 바탕 버튼은 낙서 단계(연필·볼펜)와 상관없이 밝은 글씨 */
-body:is(.ink0,.ink1,.ink2) :is(#snd.on,#paxT.ev,#trk.ev,#nextB.go){color:#f6ead0!important}
+body:is(.ink0,.ink1,.ink2) :is(#snd.on,#paxT.ev,#trk.ev){color:#f6ead0!important}
+body:is(.ink0,.ink2) #nextB.go{color:#b8432f!important}
+body.ink1 #nextB.go{color:#fff3dc!important}
 </style></head><body>
 <div id="tag"><b>부산</b><span id="tagS"></span><i id="tagI"></i></div>
 <div id="dev"><span>출발 후</span><input id="devR" type="range" min="0" max="91.9" step="0.1"><span id="devV"></span></div>

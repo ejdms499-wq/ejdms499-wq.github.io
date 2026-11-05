@@ -1135,6 +1135,58 @@ body:has(#turn.on) #stk{display:none!important}
 /* v30: 옛 꼬리표 '찾으러 감' 도장은 '보관 중' 자리에 (글씨 가리지 않게) */
 .iOld .st3{left:auto;right:10px;bottom:14px}
 .iOldW.done .st2{opacity:0;transition:opacity .2s}
+/* ===== v31 팝업북: 평면 층 방식 ===== */
+#turn .pu.v31{perspective:none!important}
+#turn .pu.v31 .st31{position:absolute;inset:0;z-index:1;transform:translate3d(0,64px,0);transition:transform .8s cubic-bezier(.16,1,.3,1)}
+#turn.s1 .pu.v31 .st31{transform:none}
+/* 책 바닥: 혼자 기울어진 평면 (판들과 같은 3D 공간에 넣지 않음) */
+#turn .pu.v31 .b31{position:absolute;left:50%;top:60%;width:var(--W);height:calc(var(--W) * .5222);transform:translate(-50%,-50%) perspective(1100px) rotateX(54deg);transform-style:preserve-3d;z-index:1}
+@media (max-width:700px){#turn .pu.v31 .b31{top:54%}}
+#turn .pu.v31 .b31 .cv{position:absolute;inset:-14px -16px -18px;border-radius:10px;transform:translateZ(-8px);background:linear-gradient(180deg,#6a2618,#43150c);
+  box-shadow:0 50px 80px rgba(0,0,0,.75),0 0 0 1px rgba(0,0,0,.4),inset 0 0 0 6px #4a170d,inset 0 0 0 8px #c9a24a,inset 0 0 0 12px #4a170d,inset 0 0 0 13px rgba(201,162,74,.6)}
+#turn .pu.v31 .b31 .pp{position:absolute;top:0;bottom:0;width:50%;box-shadow:inset 0 0 0 10px #f3e9d0,inset 0 0 0 13px var(--ac),inset 0 0 0 16px #f3e9d0,inset 0 0 0 18px var(--ac);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .24 0 0 0 0 .12 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"),var(--pg)}
+#turn .pu.v31 .b31 .pp.L{left:0;border-radius:6px 0 0 6px;--pg:linear-gradient(90deg,#e7d9b8,#f7efdb 30%,#f3e8cf 75%,#cdb88e)}
+#turn .pu.v31 .b31 .pp.R{right:0;border-radius:0 6px 6px 0;--pg:linear-gradient(270deg,#e7d9b8,#f7efdb 30%,#f3e8cf 75%,#cdb88e)}
+#turn .pu.v31 .b31 .gut{position:absolute;left:50%;top:0;bottom:0;width:60px;margin-left:-30px;background:linear-gradient(90deg,transparent,rgba(80,50,20,.28) 45%,rgba(60,35,10,.4) 50%,rgba(80,50,20,.28) 55%,transparent);pointer-events:none}
+#turn .pu.v31 .b31::after{content:"";position:absolute;left:-2px;right:-2px;bottom:-10px;height:10px;transform-origin:50% 0;transform:rotateX(-90deg);background:repeating-linear-gradient(180deg,#efe4ca 0 1px,#d6c49f 1px 2px);border-radius:0 0 4px 4px}
+/* 일어서는 판: 각자 따로 (앞뒤 순서는 z-index로 고정) */
+#turn .pu.v31 .ly{position:absolute;width:0;height:0}
+#turn .pu.v31 .ly .lyi{position:absolute;left:0;bottom:0;transform-origin:50% 100%;will-change:transform;
+  transform:translateX(-50%) scale(var(--s)) perspective(700px) rotateX(56deg);transition:transform .9s cubic-bezier(.2,1.3,.4,1) var(--dl,0s)}
+#turn.up .pu.v31 .ly .lyi{transform:translateX(-50%) scale(var(--s)) perspective(700px) rotateX(0deg)}
+#turn.fold .pu.v31 .ly .lyi{transform:translateX(-50%) scale(var(--s)) perspective(700px) rotateX(56deg);transition:transform .42s cubic-bezier(.5,0,.75,.4) calc((1.05s - var(--dl,0s)) * .2)}
+#turn.fast .pu.v31 .ly .lyi,#turn.fast .pu.v31 .st31{transition-duration:.28s!important;transition-delay:0s!important}
+#turn.flip .pu.v31 .ly{opacity:0;transition:opacity .2s}
+/* 발밑 그림자 */
+#turn .pu.v31 .ly .gs{position:absolute;left:0;top:0;width:calc(var(--W) * var(--sw) * var(--s));height:calc(var(--W) * .045 * var(--s));transform:translate(-50%,-50%);border-radius:50%;
+  background:radial-gradient(ellipse,rgba(30,18,6,.42),transparent 70%);opacity:0;transition:opacity .6s ease calc(var(--dl,0s) + .3s)}
+#turn.up .pu.v31 .ly .gs{opacity:1}
+#turn.fold .pu.v31 .ly .gs{opacity:0;transition-delay:0s}
+/* 판 크기 (책 너비 기준) */
+#turn .pu.v31 .stg{width:calc(var(--W) * .15)!important;height:calc(var(--W) * .295)!important;transform:perspective(800px) rotateY(0deg)!important;transition:transform 1s cubic-bezier(.2,1.3,.4,1) calc(var(--dl,0s) + .3s)!important}
+#turn.up .pu.v31 .stg{transform:perspective(800px) rotateY(var(--ry))!important}
+#turn.fold .pu.v31 .stg{transform:perspective(800px) rotateY(0deg)!important;transition:transform .3s ease!important}
+#turn .pu.v31 .stg::before{border-width:calc(var(--W) * .0066)!important}
+#turn .pu.v31 img.cut{display:block;filter:drop-shadow(3px 0 0 #fffaf0) drop-shadow(-3px 0 0 #fffaf0) drop-shadow(0 3px 0 #fffaf0) drop-shadow(0 -3px 0 #fffaf0) drop-shadow(0 8px 10px rgba(40,20,5,.35))}
+#turn .pu.v31 .mid img.cut{height:calc(var(--W) * .31)}
+#turn .pu.v31 .mid2 img.cut{width:calc(var(--W) * .62);height:auto;max-height:calc(var(--W) * .15);object-fit:cover;object-position:50% 100%}
+#turn .pu.v31 .fr img.cut{height:calc(var(--W) * .12)}
+#turn .pu.v31 .frg{width:calc(var(--W) * .21);padding:calc(var(--W) * .013) calc(var(--W) * .011);background:#fbf3df;box-shadow:0 6px 12px rgba(40,20,5,.35);font:700 max(13px,calc(var(--W) * .021))/1.3 "Gaegu",sans-serif;color:#2f55a4;text-align:center;transform:rotate(-4deg);word-break:keep-all;
+  clip-path:polygon(0 4%,10% 0,22% 5%,36% 1%,50% 4%,64% 0,78% 5%,90% 1%,100% 4%,100% 96%,88% 100%,74% 95%,60% 99%,46% 96%,32% 100%,18% 95%,6% 99%,0 96%)}
+#turn .pu.v31 .frg:not(.got){color:rgba(58,42,28,.5);background:repeating-linear-gradient(45deg,rgba(58,42,28,.07) 0 6px,transparent 6px 12px),#e6d7b6}
+#turn .pu.v31 .frg.lastc{width:calc(var(--W) * .42);font:700 max(16px,calc(var(--W) * .027))/1.3 "Gaegu",sans-serif;color:#1f2b5a;transform:rotate(-2deg);padding:calc(var(--W) * .016) calc(var(--W) * .018)}
+#turn .pu.v31 .frg.lastc i{display:block;text-align:right;font-style:normal;font-size:.75em;color:#c2402f;margin-top:4px}
+#turn .pu.v31 .back .crd{position:relative;width:calc(var(--W) * .6);aspect-ratio:3/2;padding:8px;background:#fffaf0;box-shadow:0 10px 24px rgba(40,20,5,.45),inset 0 0 0 3px #c9a24a;clip-path:polygon(0 8%,12% 0,26% 6%,40% 0,50% 5%,60% 0,74% 6%,88% 0,100% 8%,100% 100%,0 100%)}
+#turn .pu.v31 .back .crd img{width:100%;height:100%;object-fit:cover;display:block;clip-path:polygon(0 8%,12% 0,26% 6%,40% 0,50% 5%,60% 0,74% 6%,88% 0,100% 8%,100% 100%,0 100%)}
+#turn .pu.v31 .back .crd .gl{position:absolute;inset:8px;background:linear-gradient(160deg,rgba(255,240,210,.25),transparent 40%,rgba(0,0,0,.18));pointer-events:none}
+/* 넘기는 종이·귀퉁이는 책 바닥 안에서 */
+#turn .pu.v31 .b31 .crn{position:absolute;right:0;bottom:0;width:46px;height:46px}
+
+/* 마지막 장 쪽지: 책 위에 눕혀 둔 채로 (승객을 가리지 않게) */
+#turn .pu.v31 .ly.flat .lyi,#turn.up .pu.v31 .ly.flat .lyi{transform:translateX(-50%) scale(var(--s)) perspective(700px) rotateX(48deg)}
+#turn .pu.v31 .ly.flat .gs{display:none}
+#turn .pu.v31 .ly.flat{z-index:200!important}
 </style></head><body>
 <div id="tag"><b>부산</b><span id="tagS"></span><i id="tagI"></i></div>
 <div id="dev"><span>출발 후</span><input id="devR" type="range" min="0" max="91.9" step="0.1"><span id="devV"></span></div>
@@ -4271,4 +4323,54 @@ gEnd=function(){try{moHide()}catch(e){}gWait=1;const sh=gShots,d0=gDone;
 
 /* v30: 오늘의 방송은 첫 이야기를 본 뒤에 (처음 탄 순간 '탑승 이야기 보기' 버튼을 가리지 않게) */
 {const _bb=bcBoot;bcBoot=function(){if(TRIP&&!TRIP.fin&&!(TRIP.done&&TRIP.done[0])){setTimeout(bcBoot,6000);return}_bb()}}
+/* ===================== v31: 팝업북을 '평면 층'으로 — 3D 겹침 계산을 없애 깜빡임·조각남 제거 ===================== */
+const POP31={P:1100,T:54*Math.PI/180};
+function pop31Size(pu){const vw=innerWidth,mob=vw<=700;const W=mob?vw*.8:Math.min(900,vw*.72);return {W,H:W*.5222,cy:mob?.54:.6}}
+function lay31(){const pu=turnEl.querySelector('.pu.v31');if(!pu)return;const st=pu.querySelector('.st31');if(!st)return;
+  const {W,H,cy}=pop31Size(pu);pu.style.setProperty('--W',W+'px');const R=pu.getBoundingClientRect(),CX=R.width/2,CY=R.height*cy;
+  const {P,T}=POP31,sn=Math.sin(T),cs=Math.cos(T);
+  st.querySelectorAll('.ly').forEach(ly=>{const x=+ly.dataset.x*W,y=H/2-(+ly.dataset.d)*H,s=P/(P-y*sn);
+    ly.style.left=(CX+x*s)+'px';ly.style.top=(CY+y*cs*s)+'px';ly.style.setProperty('--s',s.toFixed(4));ly.style.zIndex=String(10+Math.round((1-(+ly.dataset.d))*100))})}
+addEventListener('resize',lay31);
+function ly31(o){/* o:{x,d,dl,cls,html,sw} */
+  return `<div class="ly ${o.cls||''}" data-x="${o.x||0}" data-d="${o.d}" style="--dl:${o.dl||0}s;--sw:${o.sw||.16}"><i class="gs"></i><div class="lyi">${o.html}</div></div>`}
+function book31(ac){return `<div class="b31" style="--ac:${ac}"><div class="cv"></div><div class="pp L"></div><div class="pp R"></div><div class="gut"></div><div class="crn"></div><div class="flp"><div class="f"></div><div class="b"></div></div></div>`}
+function run31(withStamp){const run=++pageTurn.run,srcs=[...turnEl.querySelectorAll('img')].map(im=>im.src);const pc=getComputedStyle(turnEl.querySelector('.pu')).getPropertyValue('--pc');
+  const m=/url\(["']?([^"')]+)/.exec(pc||'');if(m)srcs.push(new URL(m[1],location.href).href);
+  const dec=srcs.map(u=>{const im=new Image();im.src=u;return (im.decode?im.decode():Promise.resolve()).catch(()=>{})});
+  lay31();
+  Promise.race([Promise.all(dec),new Promise(r=>setTimeout(r,900))]).then(()=>requestAnimationFrame(()=>{lay31();requestAnimationFrame(()=>{if(run!==pageTurn.run||!turnEl.classList.contains('on'))return;
+    turnEl.classList.add('s1','s2');try{blipUp()}catch(e){}
+    t27(()=>turnEl.classList.add('up'),420);
+    t27(()=>{turnEl.classList.add('s3');if(withStamp){try{thunk()}catch(e){}}},1650);
+    t27(()=>{turnOpened=true},1800)})}))}
+pageTurn=function(i){const c=CH[i];if(!c)return;t27clear();turnOpened=false;turnClosing=false;
+  const id=c.ev[0],who=id&&CAST[id]?nm(id):'';const pg=LS.get('bl_pages',{});const got=id&&pg[id]&&PAGES[id];
+  const spr=id&&CAST[id]?((CAST[id].img.startsWith('img/')?'':P)+CAST[id].img):'';const it=id&&ITM[id]?'img/items/'+id+'.webp':'';
+  const ac=(RT&&RT[c.id]&&RT[c.id][0])||'#2f6b4a',pc=pcImg[c.id]||'',mid=MIDP[c.id];
+  const L=[];[0,1,2,3,4].forEach(k=>{const o=k-2;L.push(ly31({cls:'pan',x:o*.156,d:.56-Math.abs(o)*.07,dl:.06+Math.abs(o)*.1,sw:.15,html:`<div class="stg" style="--ry:${-o*24}deg;--bx:${k*25}%;--h:${[78,90,100,90,78][k]}%"></div>`}))});
+  if(mid)L.push(ly31({cls:'mid2',x:0,d:.40,dl:.5,sw:.5,html:`<img class="cut" src="img/m/${mid}.webp" alt="">`}));
+  if(spr)L.push(ly31({cls:'mid',x:0,d:.26,dl:.62,sw:.18,html:`<img class="cut" src="${spr}" alt="">`}));
+  if(it)L.push(ly31({cls:'fr',x:-.28,d:.09,dl:.8,sw:.1,html:`<img class="cut" src="${it}" alt="">`}));
+  L.push(ly31({cls:'fr2',x:.27,d:.11,dl:.9,sw:.18,html:`<div class="frg${got?' got':''}">${got?esc(PAGES[id]).replace(/\n/g,'<br>'):'찢겨 나간 자리'}</div>`}));
+  const dust=Array.from({length:14},()=>`<i style="left:${(Math.random()*100).toFixed(1)}%;top:${(Math.random()*100).toFixed(1)}%;--s:${(1+Math.random()*2.5).toFixed(1)}px;--t:${(4+Math.random()*6).toFixed(1)}s;--o:${(Math.random()*-8).toFixed(1)}s"></i>`).join('');
+  turnEl.innerHTML=`<div class="pu v22 v23 v27 v31" style="--ac:${ac};--pc:url(${pc})"><div class="vel"></div><div class="spot"></div><div class="dust">${dust}</div>
+    <div class="hd"><small>제 ${i+1} 장</small><b>${c.name}</b><em>${who?who+'의 이야기':''}</em><div class="pmk">${pmkSVG(c.name,i)}</div></div>
+    <div class="st31">${book31(ac)}${L.join('')}</div><p class="op">${OPEN1[c.id]||''}</p><div class="nx">눌러서 넘기기 ▸</div></div>`;
+  turnEl.classList.remove('on','go','up','s1','s2','s3','fold','flip','fast');void turnEl.offsetWidth;turnEl.classList.add('on');run31(true)};
+pageTurn.run=pageTurn.run||0;
+finalPop=function(cb){const {on,off}=endPeople();const all=on.concat(off);const last=LS.get('bl_last','')||'오늘은 여기까지. 내일 또 쓸게.';
+  t27clear();turnOpened=false;turnClosing=false;const n=all.length,show=all.slice(0,9);
+  const L=[ly31({cls:'back',x:0,d:.62,dl:.1,sw:.55,html:`<div class="crd"><img src="img/post/london.webp" alt=""><i class="gl"></i></div>`})];
+  show.forEach((id,k)=>{const h=(HT[(SP[id]||'').replace('.webp','')]||1.4);const x=(k-(show.length-1)/2)*(show.length>6?.09:.11);
+    L.push(ly31({cls:'mb',x,d:.30+(k%2)*.06,dl:.35+k*.09,sw:.1,html:`<img class="cut" src="${P+(SP[id]||'')}" style="height:calc(var(--W) * .25 * ${(h/1.6).toFixed(2)})" alt="">`}))});
+  L.push(ly31({cls:'fr2 fin flat',x:0,d:.04,dl:.5+show.length*.09,sw:.35,html:`<div class="frg got lastc">${esc(last)}<i>— ${esc(LS.get('bl_name','')||'나')}</i></div>`}));
+  turnEl.innerHTML=`<div class="pu fin v22 v23 v27 v31" style="--ac:#8a5a2b"><div class="vel"></div><div class="spot"></div>
+    <div class="hd"><small>세계 동화 열세 편</small><b>마지막 장</b><em>함께 탄 승객 ${n}명</em></div>
+    <div class="st31">${book31('#8a5a2b')}${L.join('')}</div><p class="op">다 읽으면 네가 써. 그래서, 이렇게 썼다.</p><div class="nx">눌러서 책 덮기 ▸</div></div>`;
+  turnEl.classList.remove('on','go','up','s1','s2','s3','fold','flip','fast');void turnEl.offsetWidth;turnEl.classList.add('on');run31(false);turnQ.push(cb)};
+window.__t.fin=()=>finalPop(()=>{});
+
+/* 팝업북·이야기가 열려 있는 동안 작은 알림은 잠시 미루기 */
+{const _tp=tip;tip=function(h,ms,cb){if(turnEl.classList.contains('on')||cg.classList.contains('on')){setTimeout(()=>tip(h,ms,cb),2500);return}_tp(h,ms,cb)}}
 </script></body></html>

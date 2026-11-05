@@ -745,6 +745,87 @@ body.talk #shelf,body.amb #shelf{opacity:.0;pointer-events:none}
 #wbP .wl{overflow:auto;padding:10px 16px 16px;display:flex;flex-direction:column;gap:8px}
 #wbP .wi{display:flex;align-items:center;gap:10px;border-bottom:1.5px dashed rgba(58,42,28,.3);padding:6px 0}
 #wbP .wi span{font-size:20px}#wbP .wi p{flex:1;margin:0;font:400 21px "Nanum Pen Script",sans-serif;color:#1f2b5a}#wbP .wi small{opacity:.55;font-size:12px}
+
+/* ===== v15 ===== */
+/* 자는 승객 */
+#zP .zz{width:min(400px,90vw);padding:20px;text-align:center;align-items:center;gap:6px}
+#zP .zi{font-size:40px;animation:zzB 2.4s ease-in-out infinite}
+@keyframes zzB{50%{transform:translateY(-6px) rotate(-6deg)}}
+#zP b{font:400 26px "Nanum Pen Script",sans-serif;color:#1f2b5a}
+#zP p{margin:4px 0 8px;font:15.5px/1.6 "Gowun Batang",serif;color:#2b2620}
+#zP p.sp{font:400 23px/1.4 "Nanum Pen Script","Gaegu",sans-serif;color:#1f2b5a;background:#fffaf0;border:1.5px dashed #b9a27a;padding:12px 14px;transform:rotate(-1deg)}
+#zP small{opacity:.65;font-size:12.5px}#zP small.bd{opacity:1;color:#c2402f;font:400 17px "Nanum Pen Script",sans-serif}
+#zP .row{display:flex;gap:8px;width:100%}#zP .row button{flex:1}#zP>.sC>button{width:100%}
+body.paxZ #pax img{filter:brightness(.72) saturate(.75);transition:filter 1s}
+body.paxZ #pax::after{content:"Z z z";position:absolute;right:16%;top:14%;font:400 30px "Nanum Pen Script",sans-serif;color:#f6e9c8;text-shadow:0 2px 6px rgba(0,0,0,.6);animation:zzB 2.4s ease-in-out infinite;letter-spacing:4px}
+#ttP .tt{width:min(560px,96vw)}
+#ttP .tw{overflow:auto;padding:0 14px}
+#ttP table{width:100%;border-collapse:collapse;font-size:13px}
+#ttP th{font:400 17px "Nanum Pen Script",sans-serif;color:#1f2b5a;padding:6px 2px;border-bottom:1.5px solid #3a2a1c}
+#ttP th small{display:block;font:10.5px "Apple SD Gothic Neo",sans-serif;opacity:.55}
+#ttP td{text-align:center;padding:7px 2px;border-bottom:1px dashed rgba(58,42,28,.25);font-size:16px}
+#ttP td.n{text-align:left;font:600 12.5px "Apple SD Gothic Neo",sans-serif;white-space:nowrap;padding-right:8px}
+#ttP .now{background:rgba(231,180,58,.22)}
+#ttP td b{color:#b9a27a;font-size:18px}#ttP td b.ok{color:#c2402f}
+#ttP .ft{font-size:12px;padding:10px 16px 16px;opacity:.75}
+/* 등불 찾기 */
+#cg .gm.lanM .lan{position:absolute;inset:0;z-index:5;pointer-events:none;
+ background:radial-gradient(circle 150px at var(--x,50%) var(--y,55%),rgba(255,200,120,.10) 0,rgba(255,200,120,.04) 40%,rgba(4,8,16,0) 41%),radial-gradient(circle 160px at var(--x,50%) var(--y,55%),rgba(4,8,16,0) 0,rgba(4,8,16,0) 52%,rgba(4,8,16,.955) 100%);animation:lanF 2.2s ease-in-out infinite}
+@keyframes lanF{50%{filter:brightness(1.08)}}
+#cg .gm.lanM .gh{z-index:7}
+#cg .gm.lanM .obj{width:clamp(34px,3.4vw,46px);opacity:.92}
+#cg .gm.lanM .obj.hint{z-index:6;opacity:.35}
+#cg .gm.lanM .obj.got{z-index:6}
+/* 동화책 펼침면 */
+#turn .pg.sp{flex-direction:row;align-items:stretch;justify-content:center;padding:6vh 5vw;box-sizing:border-box;gap:0;animation:tIn .45s ease both,tAway 1.35s 2.9s cubic-bezier(.55,0,.35,1) forwards}
+#turn .sp .lp,#turn .sp .rp{flex:1;max-width:620px;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3vh 3vw;box-sizing:border-box}
+#turn .sp .gut{width:46px;flex:none;background:linear-gradient(90deg,rgba(90,61,34,0) 0,rgba(90,61,34,.22) 45%,rgba(90,61,34,.32) 50%,rgba(90,61,34,.22) 55%,rgba(90,61,34,0) 100%)}
+#turn .sp small{margin-bottom:12px}
+#turn .sp .ill{width:min(100%,380px);aspect-ratio:3/2;background-size:cover;background-position:50%;border:3px solid #3a2a1c;box-shadow:4px 4px 0 rgba(58,42,28,.25);filter:sepia(.35) saturate(.85) contrast(1.05);position:relative}
+#turn .sp .ill::after{content:"";position:absolute;inset:0;background:radial-gradient(circle,rgba(0,0,0,.12) 1px,transparent 1.6px) 0 0/4px 4px;mix-blend-mode:multiply}
+#turn .sp .op{max-width:380px;margin:20px 0 0;font:600 clamp(16px,1.5vw,21px)/1.8 "Gowun Batang","Nanum Myeongjo",serif;color:#2b2016;text-align:left;word-break:keep-all}
+#turn .sp .op::first-letter{font-size:1.6em;color:#b8312f}
+#turn .sp .lp em{align-self:flex-end;margin-top:14px;font:700 18px "Gaegu",sans-serif;color:#7a5a3a;transform:none}
+#turn .sp .stn{text-align:center;margin-bottom:auto}
+#turn .sp .stn b{display:block;font:700 clamp(30px,4vw,54px) "Gowun Batang","Nanum Myeongjo",serif}
+#turn .sp .stn i{display:block;margin-top:8px}
+#turn .sp .d{position:absolute;width:clamp(70px,8vw,120px);opacity:.85}
+#turn .sp .d1{left:8%;top:44%;transform:rotate(-12deg)}#turn .sp .d2{right:9%;top:30%;transform:rotate(9deg)}
+#turn .sp .torn{margin-top:auto;width:min(86%,340px);aspect-ratio:4/3;position:relative;display:flex;align-items:center;justify-content:center;transform:rotate(2deg);
+ clip-path:polygon(0 6%,8% 0,18% 5%,30% 1%,42% 6%,55% 0,68% 4%,80% 0,92% 5%,100% 2%,97% 18%,100% 32%,96% 47%,100% 61%,97% 76%,100% 90%,93% 100%,80% 95%,66% 100%,52% 95%,38% 100%,24% 96%,11% 100%,0 94%,3% 78%,0 63%,4% 48%,0 33%,3% 18%)}
+#turn .sp .torn:not(.got){background:repeating-linear-gradient(45deg,rgba(58,42,28,.08) 0 6px,transparent 6px 12px),#e6d7b6;box-shadow:inset 0 0 18px rgba(58,42,28,.3)}
+#turn .sp .torn span{font:400 22px "Nanum Pen Script",sans-serif;color:rgba(58,42,28,.55)}
+#turn .sp .torn.got{background:#fbf3df}
+#turn .sp .torn .hw{font:400 clamp(20px,2vw,28px)/1.3 "Gaegu",sans-serif;color:#2f55a4;text-align:center;padding:10px;transform:rotate(-3deg)}
+@media (max-aspect-ratio:1/1){#turn .pg.sp{flex-direction:column;padding:4vh 6vw}#turn .sp .gut{width:auto;height:18px}#turn .sp .d{display:none}#turn .sp .torn{width:60%}}
+/* 우편함 벽 */
+#post .mbBk{background:#3a2a1c;border:0;border-radius:999px;font:700 12.5px "Apple SD Gothic Neo",sans-serif;color:#f3e6c4;padding:6px 14px;margin:2px 16px 0;cursor:pointer}
+#post .mbw{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:0;margin:6px 14px 16px;padding:10px;background:linear-gradient(90deg,rgba(0,0,0,.06) 1px,transparent 1px) 0 0/22px 100%,#7a4f2c;border:6px solid #4a2e18;box-shadow:inset 0 0 18px rgba(0,0,0,.5),3px 4px 0 rgba(0,0,0,.2)}
+#post .mb{position:relative;border:0;background:none;padding:6px 5px 8px;cursor:default;display:flex;flex-direction:column;align-items:center;gap:4px;border-right:3px solid #4a2e18;border-bottom:3px solid #4a2e18}
+#post .mb.has{cursor:pointer}
+#post .mb .hole{position:relative;width:100%;aspect-ratio:1.35;background:linear-gradient(180deg,#24150a,#3a2414 70%);box-shadow:inset 0 6px 10px rgba(0,0,0,.7);overflow:hidden}
+#post .mb .lt{position:absolute;left:14%;right:14%;bottom:-8%;height:72%;background:#f3e6c4;border:2px solid var(--ac);transform:rotate(-4deg);box-shadow:0 -2px 4px rgba(0,0,0,.3)}
+#post .mb .lt::before{content:"";position:absolute;inset:0;background:linear-gradient(to bottom right,transparent 49%,var(--ac) 50%,transparent 51%) 0 0/50% 60% no-repeat,linear-gradient(to bottom left,transparent 49%,var(--ac) 50%,transparent 51%) 100% 0/50% 60% no-repeat;opacity:.7}
+#post .mb.un .lt{animation:mbW 1.8s ease-in-out infinite}
+@keyframes mbW{0%,100%{transform:rotate(-4deg) translateY(0)}50%{transform:rotate(3deg) translateY(-12%)}}
+#post .mb .flag{position:absolute;right:5px;top:5px;width:12px;height:12px;border-radius:50%;background:#e2442f;box-shadow:0 0 6px rgba(255,90,60,.9)}
+#post .mb .pl{background:linear-gradient(#e8c98a,#c9a05c);color:#3a2414;font:700 11.5px "Apple SD Gothic Neo",sans-serif;padding:2px 7px;border-radius:2px;box-shadow:0 1px 0 rgba(0,0,0,.4);max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#post .mb small{color:#f3e6c4;font-size:11px;opacity:.85}
+#post .mb.lock{opacity:.5}#post .mb.lock .pl{background:#8a6a4a;color:#e8d8bc}
+/* 앨범: 사진첩 */
+#alb.book .albB{background:radial-gradient(circle,rgba(58,42,28,.05) 1px,transparent 1.5px) 0 0/10px 10px,#efe4cc}
+#alb.book .grid.book{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:22px 16px;padding:6px 4px 10px}
+#alb.book .cell .th{border:6px solid #fffaf0;border-bottom-width:6px;border-radius:1px;box-shadow:0 3px 6px rgba(40,25,10,.3);outline:none}
+#alb.book .cell:nth-child(3n+1) .th{transform:rotate(-1.6deg)}#alb.book .cell:nth-child(3n+2) .th{transform:rotate(1.2deg)}#alb.book .cell:nth-child(3n) .th{transform:rotate(-.4deg)}
+#alb.book .cell.ph{position:relative}
+#alb.book .cell.ph::before,#alb.book .cell.ph::after{content:"";position:absolute;width:22px;height:22px;z-index:2;background:linear-gradient(135deg,#2b2620 50%,transparent 50%)}
+#alb.book .cell.ph::before{left:-3px;top:-3px}
+#alb.book .cell.ph::after{right:-3px;top:-3px;transform:rotate(90deg)}
+#alb.book .cell.ph:has(.pz)::before,#alb.book .cell.ph:has(.pz)::after{opacity:.25}
+#alb.book .th.pz{background:none;border:2px dashed rgba(58,42,28,.4)!important;box-shadow:none;filter:none;display:flex;align-items:center;justify-content:center}
+#alb.book .th.pz span{position:static;color:rgba(58,42,28,.5);font:400 20px "Nanum Pen Script",sans-serif}
+#alb.book .cell em{font:400 18px/1.15 "Nanum Pen Script","Gaegu",sans-serif;color:#1f2b5a;margin-top:8px}
+#alb.book .cell small{font-size:11.5px}
 </style></head><body>
 <div id="tag"><b>부산</b><span id="tagS"></span><i id="tagI"></i></div>
 <div id="dev"><span>출발 후</span><input id="devR" type="range" min="0" max="91.9" step="0.1"><span id="devV"></span></div>
@@ -3410,5 +3491,115 @@ hiddenEnding=function(h,id){const H=HID[h],T=TRUNK&&!TRUNK.done?TRUNK:null;playS
 window.__t={ann:()=>announce('도착 안내','제5역 · 바이칼 호수','LAKE BAIKAL · 새벽'),hid:h=>hiddenEnding(h,'byeol'),end:()=>ending(),board:()=>boardOpen(),chat:()=>chatOpen(CHAT[0]),bc:()=>bcShow()};
 applyTheme=function(el,id){const t=TH[id];el.style.cssText='';el.classList.remove('themed','stitch','seal');const n=el.querySelector('#dlgN,.who');if(!n)return;n.style.cssText='';
   if(t){n.style.background=t.acc;n.style.color='#fffaf0'}};
+
+
+/* ===================== v15: 시간대 열차 · 등불 찾기 · 동화책 펼침면 · 우편함 벽 · 사진첩 ===================== */
+/* ---------- ① 시간대 열차 ---------- */
+const BANDS=[['dawn','새벽',2,6],['morn','아침',6,11],['day','낮',11,17],['eve','저녁',17,21],['night','밤',21,26]];
+function bandNow(){const h=(new Date()).getHours();const hh=h<2?h+24:h;return (BANDS.find(b=>hh>=b[2]&&hh<b[3])||BANDS[4])[0]}
+const BANDN=Object.fromEntries(BANDS.map(b=>[b[0],b[1]]));const BANDH=Object.fromEntries(BANDS.map(b=>[b[0],b[2]+'~'+(b[3]%24)+'시']));
+const SCHED={
+ byeol:{z:['dawn'],sp:'morn',sl:'(등딱지 안으로 고개를 쏙 넣고 자고 있다. 쿨… 쿨…)',wk:'…어이쿠, 깜빡 졸았소. 거북은 원래 잠이 많다오.',t:'아침 바다 냄새가 제일 짜고 좋소. 거북은 아침잠이 없다오.'},
+ gilldong:{z:['day'],sp:'night',sl:'(갓을 얼굴에 덮고 잔다. 밤새 지붕을 탄 모양이다.)',wk:'…누구요! 아, 자네구려. 의적은 잠귀가 밝소.',t:'밤이 내 낮이오. 지붕 위 달빛이 제일 밝을 때지. 같이 올라가 보겠소?'},
+ gyeonu:{z:['day'],sp:'dawn',sl:'(직녀가 견우 어깨에 기대어 잠들어 있다. 새벽을 기다리느라 둘 다 밤을 새웠다.)',wk:'(직녀) …앗, 벌써 새벽이에요? 아직이구나. 다행이다.',t:'(직녀) 하늘 끝이 밝아져요. …오늘은 무섭지 않네요.\n(견우) 자네가 같이 깨어 있어서 그렇소.'},
+ snowq:{z:['day'],sp:'dawn',sl:'(눈을 감고 있다. 그녀 옆 창에만 성에꽃이 천천히 피었다 진다.)',wk:'…잠깐 눈만 감고 있었어요. 정말이에요.',t:'새벽 서리가 제일 예뻐요. 제가 만든 게 아닌데도요.'},
+ sherlock:{z:[],sp:'night',t:'밤 열한 시. 사건은 늘 이 시간에 찾아오지. 오늘은 자네가 왔군.'},
+ babayaga:{z:['morn'],sp:'night',sl:'(절구 안에 쏙 들어가 코를 곤다. 빗자루가 대신 망을 본다.)',wk:'흐흐, 마녀를 깨우다니 간도 크구먼.',t:'흐흐, 마녀는 밤에 차를 끓이지. 한 잔 하겠나? 쓰지만 잠은 잘 와.'},
+ odette:{sw:['morn','day'],sp:'eve',sl:'(창가에 하얀 백조 한 마리가 앉아 있다. 말은 못 하지만, 당신을 보고 고개를 숙인다. 해가 지면 다시 이야기할 수 있다.)',t:'해가 졌어요! 오늘 처음 하는 인사예요. 안녕하세요.'},
+ wolf:{z:['day'],sp:'night',sl:'(늑대가 몸을 둥글게 말고 낮잠을 잔다. 빨간 모자가 「쉿!」 하고 손가락을 입에 댄다.)',wk:'(늑대) …크흠. 안 잤소.\n(빨간 모자) 코 골았으면서!',t:'(늑대) 밤 숲 냄새는 내가 제일 잘 아오.\n(빨간 모자는 늑대 꼬리를 베고 잠들어 있다.)'},
+ hansel:{z:['night','dawn'],sp:'morn',sl:'(오누이가 손을 꼭 잡고 잠들어 있다. 주머니에서 빵 부스러기가 조금 흘러나왔다.)',wk:'(그레텔) 으응… 벌써 아침이에요?\n(헨젤) 아직 밤이야. 조금만 놀다 자자.',t:'(그레텔) 좋은 아침이에요!\n(헨젤) 아침엔 빵 부스러기 말고 진짜 빵을 먹어요!'},
+ sleeping:{z:['day','dawn'],sp:'morn',sl:'(…역시 자고 있다. 베개를 꼭 안고, 아주 행복한 얼굴로.)',wk:'…하암. 백 년은 안 지났죠? 다행이다.',t:'…깼어요! 오늘은 백 년 말고 딱 하룻밤만 잤어요. 대단하죠?'},
+ monster:{z:['morn'],sp:'dawn',sl:'(책을 얼굴에 덮은 채 잠들어 있다. 숨 쉴 때마다 「실낙원」이 오르락내리락한다.)',wk:'…앗, 책 읽다가 잠들었어요. 이 부분 진짜 좋거든요.',t:'다들 잘 때 책을 읽어요. 새벽엔 아무도 저를 무서워하지 않으니까요.'},
+ cinder:{z:['dawn'],sp:'night',sl:'(유리 구두를 품에 안고 잠들어 있다. 오늘은 열두 시가 지나도 아무 일도 없었다.)',wk:'…앗! 몇 시예요? 아, 괜찮구나. 이 열차에선.',t:'자정이 가까워요! …그래도 아무것도 안 사라질 거예요. 이 열차에선요.'},
+ mermaid:{z:[],sp:'morn',t:'「아침 햇빛이 바다를 뚫고 들어와요. 바다 밑에선 이게 제일 좋은 시간이에요.」'},
+ rabbit:{z:[],sp:'day',t:'오후 세 시! 차 마실 시간이에요. 오늘은 늦지 않았어요!'}};
+const isZ=id=>{const s=SCHED[id];return !!s&&(s.z||[]).includes(bandNow())};
+const isSwan=id=>{const s=SCHED[id];return !!s&&(s.sw||[]).includes(bandNow())};
+const woke={};
+function tsGot(){return LS.get('bl_tsp',{})}
+{const _tk=talk;talk=function(){const id=paxId;if(!id||!SCHED[id]){_tk();return}const S=SCHED[id],met=LS.get('bl_met',{});
+  if(isSwan(id)){const el=sheet('zP','zz');el.querySelector('.sC').innerHTML=`<div class="zi">🦢</div><p>${esc(S.sl)}</p><small>${BANDN.eve} ${BANDH.eve}에 다시 와 보세요</small><button class="pbtn2">조용히 두기</button>`;
+    el.querySelector('button').onclick=()=>el.classList.remove('on');el.classList.add('on');return}
+  if(isZ(id)&&!woke[id]){const el=sheet('zP','zz');el.querySelector('.sC').innerHTML=`<div class="zi">💤</div><b>${esc(nm(id))}</b><p>${esc(S.sl)}</p><div class="row"><button class="pbtn2 l">깨우지 않기</button><button class="pbtn2">살짝 깨우기</button></div>`;
+    const B=el.querySelectorAll('button');B[0].onclick=()=>el.classList.remove('on');B[1].onclick=()=>{el.classList.remove('on');woke[id]=1;tip(`<b>${esc(nm(id))}</b><small>${esc(S.wk).replace(/\n/g,' ')}</small>`,4500);setTimeout(()=>talk(),900)};el.classList.add('on');return}
+  const got=tsGot();if(met[id]&&S.sp===bandNow()&&!got[id]){got[id]=bandNow();LS.set('bl_tsp',got);const el=sheet('zP','zz');
+    el.querySelector('.sC').innerHTML=`<div class="zi">🕰</div><small class="bd">${BANDN[S.sp]}에만 들을 수 있는 한마디</small><b>${esc(nm(id))}</b><p class="sp">${esc(S.t).replace(/\n/g,'<br>')}</p><small>승객 시간표에 적어 두었어요 · ${Object.keys(got).length} / ${Object.keys(SCHED).length}</small><button class="pbtn2">이야기 계속하기</button>`;
+    el.querySelector('button').onclick=()=>{el.classList.remove('on');try{addAff(id,1)}catch(e){}_tk()};el.classList.add('on');return}
+  _tk()}}
+setInterval(()=>{const z=MODE==='seat'&&paxId&&((isZ(paxId)&&!woke[paxId])||isSwan(paxId));document.body.classList.toggle('paxZ',!!z)},1500);
+function timetable(){const met=LS.get('bl_met',{}),got=tsGot(),now=bandNow();const ids=Object.keys(SCHED).filter(id=>met[id]);const el=sheet('ttP','tt');
+  el.querySelector('.sC').innerHTML=`<div class="albH"><b>🕰 승객 시간표</b>${xBtn}</div><p class="cnt">지금은 <b>${BANDN[now]}</b> (${BANDH[now]}) · 모은 한마디 ${Object.keys(got).length} / ${Object.keys(SCHED).length}</p>
+   <div class="tw"><table><tr><th></th>${BANDS.map(b=>`<th class="${b[0]===now?'now':''}">${b[1]}<small>${BANDH[b[0]]}</small></th>`).join('')}</tr>
+   ${ids.length?ids.map(id=>{const S=SCHED[id];return `<tr><td class="n">${esc(nm(id))}</td>${BANDS.map(b=>{const k=b[0];const z=(S.z||[]).includes(k),sw=(S.sw||[]).includes(k),sp=S.sp===k;
+     return `<td class="${k===now?'now':''}">${sw?'🦢':z?'💤':sp?(got[id]?'<b class="ok">★</b>':'<b>☆</b>'):'·'}</td>`}).join('')}</tr>`}).join(''):'<tr><td colspan="6" class="cnt">아직 만난 승객이 없어요</td></tr>'}</table></div>
+   <p class="cnt ft">☆ 시간에 말을 걸면 그때만 하는 이야기가 있어요 · 💤 자는 중(살짝 깨울 수 있어요) · 🦢 백조라 말을 못 해요</p>`;
+  el.querySelector('.albX').onclick=()=>el.classList.remove('on');el.classList.add('on')}
+{const _bi=bagItems;bagItems=function(){const it=_bi();if(TRIP&&Object.keys(LS.get('bl_met',{})).length)it.splice(Math.min(3,it.length),0,['🕰','승객 시간표','<small>지금은 '+BANDN[bandNow()]+'</small>',timetable]);return it}}
+{const _co=carOpen;carOpen=function(c){_co(c);carP.querySelectorAll('[data-p]').forEach(b=>{const id=b.dataset.p;if(isSwan(id))b.textContent+=' 🦢';else if(isZ(id))b.textContent+=' 💤'});
+  if(c.userData.k==='loco'){const a=carP.querySelector('.v14A')||carP;const b=document.createElement('button');b.className='pbtn2';b.textContent='🕰 승객 시간표';b.onclick=e=>{e.stopPropagation();timetable()};a.appendChild(b)}}}
+BC.push(['시간 안내','이 열차의 승객들은 저마다 잠드는 시간이 다릅니다. 승객 시간표는 기관실과 가방 안에 있습니다.']);
+
+/* ---------- ② 등불 찾기 ---------- */
+function lantern(g){g.classList.add('lanM');const L=document.createElement('div');L.className='lan';g.appendChild(L);const set=(x,y)=>{L.style.setProperty('--x',x+'px');L.style.setProperty('--y',y+'px')};
+  set(innerWidth*.5,innerHeight*.55);g.addEventListener('pointermove',e=>set(e.clientX,e.clientY));g.addEventListener('pointerdown',e=>set(e.clientX,e.clientY));
+  const s=g.querySelector('.gh small');if(s)s.textContent='어두워요. 등불을 비춰 숨은 물건을 찾아보세요';
+  g.querySelectorAll('.obj').forEach(o=>{o.style.setProperty('--r',(Math.random()*50-25)+'deg')})}
+['find','clue'].forEach(k=>{const f=GAMES[k];if(f)GAMES[k]=(g,fin)=>{f(g,fin);lantern(g)}});
+
+/* ---------- ③ 다음 역: 동화책 펼침면 ---------- */
+const OPEN1={busan:'옛날 옛적 바다 깊은 곳, 용왕님이 병이 들자 거북 한 마리가 뭍으로 길을 떠났습니다.',seoul:'옛날 한양에, 아버지를 아버지라 부르지 못하는 아이가 살았습니다.',
+ ojak:'은하수 양쪽에, 일 년에 딱 하루만 만날 수 있는 두 사람이 살았습니다.',siberia:'아주 먼 북쪽, 눈이 그치지 않는 곳에 얼음으로 지은 궁전이 하나 있었습니다.',
+ baikal:'런던 베이커가 221B번지에는, 무엇이든 알아맞히는 탐정이 살았습니다.',moscow:'깊은 숲 호숫가에, 낮에는 백조가 되고 밤에만 사람이 되는 공주가 있었습니다.',
+ forest:'할머니 댁에 가는 숲길에서, 빨간 모자를 쓴 아이가 늑대를 만났습니다.',candy:'숲속에서 길을 잃은 오누이는, 과자로 지은 집 한 채를 발견했습니다.',
+ castle:'물레 바늘에 손가락을 찔린 공주는, 그날부터 백 년 동안 잠이 들었습니다.',alps:'높은 산 아래 실험실에서, 이름 없는 누군가가 처음 눈을 떴습니다.',
+ paris:'열두 시 종이 울리기 전에, 재투성이 아가씨는 무도회를 떠나야 했습니다.',sea:'바다 가장 깊은 곳에, 목소리가 가장 고운 인어 공주가 살았습니다.',
+ london:'「늦었다, 늦었어!」 회중시계를 든 흰 토끼가 굴속으로 뛰어들었습니다.'};
+const DOOD={star:'<path d="M50 8 L61 38 L93 38 L67 57 L77 88 L50 69 L23 88 L33 57 L7 38 L39 38 Z" fill="none" stroke="#e7b43a" stroke-width="5" stroke-linejoin="round"/>',
+ heart:'<path d="M50 86 C10 58 6 30 26 20 C40 13 50 26 50 32 C50 26 60 13 74 20 C94 30 90 58 50 86Z" fill="none" stroke="#d6453a" stroke-width="5"/>',
+ sun:'<circle cx="50" cy="50" r="20" fill="none" stroke="#f08a2a" stroke-width="5"/>'+[0,45,90,135,180,225,270,315].map(a=>`<path d="M${50+30*Math.cos(a*Math.PI/180)} ${50+30*Math.sin(a*Math.PI/180)} L${50+42*Math.cos(a*Math.PI/180)} ${50+42*Math.sin(a*Math.PI/180)}" stroke="#f08a2a" stroke-width="5" stroke-linecap="round"/>`).join(''),
+ train:'<path d="M10 62 h62 v-26 h-44 z M72 46 h16 v16 h-16" fill="none" stroke="#2f55a4" stroke-width="5" stroke-linejoin="round"/><circle cx="26" cy="70" r="7" fill="none" stroke="#2f55a4" stroke-width="5"/><circle cx="58" cy="70" r="7" fill="none" stroke="#2f55a4" stroke-width="5"/><path d="M84 40 q6 -12 14 -8" fill="none" stroke="#8a8a8a" stroke-width="4" stroke-linecap="round"/>',
+ moon:'<path d="M62 12 A36 36 0 1 0 88 66 A28 28 0 1 1 62 12Z" fill="none" stroke="#e7b43a" stroke-width="5"/>',
+ flower:'<circle cx="50" cy="40" r="8" fill="none" stroke="#e7b43a" stroke-width="5"/>'+[0,72,144,216,288].map(a=>`<ellipse cx="${50+16*Math.cos(a*Math.PI/180)}" cy="${40+16*Math.sin(a*Math.PI/180)}" rx="9" ry="7" fill="none" stroke="#d6457a" stroke-width="4"/>`).join('')+'<path d="M50 50 V92 M50 72 q-14 -6 -18 -16" fill="none" stroke="#3a9a4a" stroke-width="5" stroke-linecap="round"/>'};
+const DK=Object.keys(DOOD);
+const turnFx='<svg width="0" height="0" style="position:absolute"><filter id="crayon"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3"/></filter></svg>';
+pageTurn=function(i){const c=CH[i];if(!c)return;const id=c.ev[0],who=id&&CAST[id]?nm(id):'';const pg=LS.get('bl_pages',{});const got=id&&pg[id]&&PAGES[id];
+  const d1=DK[i%DK.length],d2=DK[(i*3+2)%DK.length];
+  turnEl.innerHTML=turnFx+`<div class="pg sp"><div class="lp"><small>제 ${i+1} 장</small><div class="ill" style="background-image:url(${pcImg[c.id]||''})"></div><p class="op">${OPEN1[c.id]||''}</p><em>— ${who?who+'의 이야기':c.name}</em></div>
+    <div class="gut"></div><div class="rp"><div class="stn"><b>${c.name}</b><i>${c.en}</i></div>
+    <svg class="d d1" viewBox="0 0 100 100" filter="url(#crayon)">${DOOD[d1]}</svg><svg class="d d2" viewBox="0 0 100 100" filter="url(#crayon)">${DOOD[d2]}</svg>
+    <div class="torn${got?' got':''}">${got?'<div class="hw">'+esc(PAGES[id]).replace(/\n/g,'<br>')+'</div>':'<span>찢겨 나간 자리</span>'}</div></div></div>`;
+  turnEl.classList.remove('on');void turnEl.offsetWidth;turnEl.classList.add('on');clearTimeout(pageTurn.t);pageTurn.t=setTimeout(()=>turnEl.classList.remove('on'),4300)};
+window.__t.turn=i=>pageTurn(i);
+
+/* ---------- ④ 우체국: 나무 우편함 벽 ---------- */
+const MB_ORD=['byeol','gilldong','gyeonu','snowq','sherlock','babayaga','odette','wolf','hansel','sleeping','monster','cinder','mermaid','rabbit'];
+const MTY=k=>k.includes(':pc')?'엽서 답장':k.endsWith(':l3')?'단짝 편지':k.endsWith(':off')?'작별 편지':'역을 지나며 쓴 편지';
+{const _po=postOpen;postOpen=function(t,who){_po(t);if(t!=='mail')return;const box=post.querySelector('.pB'),L=mailList(),met=LS.get('bl_met',{});
+  const by={};L.forEach(([k,v])=>{const id=k.split(':')[0];(by[id]=by[id]||[]).push([k,v])});
+  if(who&&by[who]){const th=TH[who]||{},m=MAIL[who]||{};
+    box.innerHTML=`<button class="mbBk">← 우편함으로</button><p class="cnt"><b>${esc(nm(who))}</b>에게서 온 편지 ${by[who].length}통</p><div class="envs">`+by[who].map(([k,v])=>`<button class="env${v.read?'':' un'}" data-k="${k}" style="--ac:${th.acc||'#8a5a2b'};--bg:${th.bg||'#f3e6c4'}"><span class="stp">${m.st||'✉'}</span><b>${esc(nm(who))}</b><small>${MTY(k)}</small></button>`).join('')+'</div>';
+    box.querySelector('.mbBk').onclick=()=>postOpen('mail');box.querySelectorAll('.env').forEach(b=>b.onclick=()=>letterOpen(b.dataset.k));return}
+  const un=L.filter(([k,v])=>!v.read).length;
+  box.innerHTML=`<p class="cnt">${L.length?'받은 편지 '+L.length+'통'+(un?' · 안 읽은 편지 <b>'+un+'</b>':''):'아직 받은 편지가 없어요. 승객과 함께 역을 지나면 편지가 와요.'}</p><div class="mbw">`+MB_ORD.map(id=>{const ok=met[id],n=(by[id]||[]).length,u=(by[id]||[]).filter(([k,v])=>!v.read).length;
+    return `<button class="mb${ok?'':' lock'}${n?' has':''}${u?' un':''}" ${n?`data-id="${id}"`:''}><span class="hole">${n?`<i class="lt" style="--ac:${(TH[id]||{}).acc||'#8a5a2b'}"></i>`:''}${u?'<i class="flag"></i>':''}</span><span class="pl">${ok?esc(nm(id).replace('프랑켄슈타인의 ','').replace('잠자는 숲속의 ','')):'?'}</span>${n?`<small>${n}통</small>`:''}</button>`}).join('')+'</div>';
+  box.querySelectorAll('.mb[data-id]').forEach(b=>b.onclick=()=>postOpen('mail',b.dataset.id))}}
+
+/* ---------- ⑤ 앨범: 진짜 사진첩 ---------- */
+const SCN={byeol:'종이배를 띄운 밤',gilldong:'지붕 위의 의적',gyeonu:'까치 다리',snowq:'성에꽃 창문',sherlock:'멈춘 회중시계',odette:'해 질 녘 발레',wolf:'오해받은 늑대',hansel:'빵 부스러기 길',sleeping:'백 년 만의 아침',monster:'이름 짓기',cinder:'자정의 종',mermaid:'하지 못한 말',rabbit:'차가 식을 때까지'};
+const stOf=id=>{const i=CH_OF[id];return i!==undefined&&CH[i]?CH[i].name:''};
+{const _ao=albumOpen;albumOpen=function(t){_ao(t);alb.classList.add('book');if(t!=='scene')return;const box=alb.querySelector('.albB'),ev=LS.get('bl_ev',{}),ev3=LS.get('bl_ev3',{}),end=LS.get('bl_end',null),E=LS.get('bl_endings',{});
+  const ph=(src,ch,ok,r,lab,sub)=>`<div class="cell ph" ${r&&ok?`data-r="${r}"`:''}>${ok?thumb(src,ch,0):'<div class="th pz"><span>사진 자리</span></div>'}<em>${lab}</em><small>${sub||''}</small></div>`;
+  let h='',n=0,tot=0;
+  for(const id of Object.keys(SCN)){const c=CAST[id];if(!c)continue;
+    if(EV[id]){tot++;const ok=ev[id];if(ok)n++;h+=ph(CGREAL[id+'_open']!==undefined?'img/cg/t/'+id+'_open.webp':viewOf(id),CGREAL[id+'_open']!==undefined?null:c.img,ok,'ev:'+id,stOf(id)+(ok?' · '+SCN[id]:''),ok?nm(id):'')}
+    if(L3[id]){tot++;const ok=ev3[id];if(ok)n++;h+=ph(viewOf(id),c.img,ok,'l3:'+id,ok?'단짝 · '+nm(id):'단짝',ok?'「'+String(L3[id][1]).split('—')[0].trim().replace(/\{괴물\}/g,LS.get('bl_mname','')||'괴물')+'」':'친해지면 찍을 수 있어요')}}
+  tot++;if(end)n++;h+=ph('img/v/london_1.webp','robot.webp',!!end,'end',end?'런던 · 스무 해 전의 짐':'종착역 런던',end?'엔딩':'');
+  [['yonggung','용궁','종이배 서고지기'],['eunha','은하수 역','역장이 된 날']].forEach(([k,a,b])=>{tot++;if(E[k])n++;h+=ph('img/cg/t/'+k+'.webp',null,!!E[k],null,E[k]?'숨은 엔딩 · '+a:'숨은 엔딩',E[k]?b:'')});
+  box.innerHTML=`<p class="cnt">모은 사진 ${n} / ${tot}</p><div class="grid book">${h}</div>`;
+  box.querySelectorAll('[data-r]').forEach(el=>el.onclick=()=>{const r=el.dataset.r;alb.classList.remove('on');
+    if(r.startsWith('ev:')){const id=r.slice(3);replay(EV[id],viewOf(id))}
+    else if(r.startsWith('l3:')){const id=r.slice(3);replay(l3Shots(id),viewOf(id))}
+    else if(r==='end'){const E0=LS.get('bl_end',{});const T0=TRUNK;TRUNK={...E0,boardH:0};ending.__replay=1;ending();TRUNK=T0;
+      const iv=setInterval(()=>{if(!cg.classList.contains('on')){clearInterval(iv);if(T0)LS.set('bl_trunk',T0);else localStorage.removeItem('bl_trunk')}},500)}})}}
 
 </script></body></html>

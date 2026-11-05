@@ -941,6 +941,62 @@ body.seat #tkB{right:auto!important;left:18px!important}
 #turn .pu.v22 .hd b{font-size:clamp(34px,4vw,56px)}
 /* 도장·선물 카드는 오른쪽 위로 (인물 가리지 않게) */
 @media (min-aspect-ratio:1/1){#lvt{left:calc(100% - 190px)!important;top:150px!important;max-width:320px}}
+/* ===== v23 팝업북: 밤 벨벳 + 둥근 무대 ===== */
+#turn.on{background:#070b18!important}
+#turn .pu.v23{perspective:1050px;perspective-origin:calc(50% + var(--px,0)*1.4%) calc(22% + var(--py,0)*1.2%)}
+#turn .pu.v23 .desk,#turn .pu.v23 .lamp{display:none}
+#turn .pu.v23 .vel{position:absolute;inset:0;background:
+ radial-gradient(ellipse 70% 55% at 50% 62%,#1d2a52 0,#121a36 45%,#080c1c 80%),
+ repeating-linear-gradient(115deg,rgba(255,255,255,.012) 0 2px,transparent 2px 5px)}
+#turn .pu.v23 .spot{position:absolute;inset:0;pointer-events:none;background:conic-gradient(from 180deg at 50% -8%,transparent 0 160deg,rgba(255,236,190,.10) 172deg,rgba(255,236,190,.16) 180deg,rgba(255,236,190,.10) 188deg,transparent 200deg),radial-gradient(ellipse 45% 30% at 50% 66%,rgba(255,220,160,.20),transparent 70%)}
+#turn .pu.v23 .dust{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+#turn .pu.v23 .dust i{position:absolute;width:var(--s);height:var(--s);border-radius:50%;background:#ffe9b8;opacity:.0;box-shadow:0 0 6px 1px rgba(255,220,150,.6);animation:dst var(--t) ease-in-out var(--o) infinite}
+@keyframes dst{0%,100%{opacity:0;transform:translateY(0)}50%{opacity:.75;transform:translateY(-18px)}}
+#turn .pu.v23 .hd{color:#f6ead0}
+#turn .pu.v23 .hd em{color:#f3c76a}
+#turn .pu.v23 .bk{top:60%;width:min(900px,72vw);height:min(470px,37vw);transform:translate(-50%,-50%) rotateX(54deg);animation:bkSway 9s ease-in-out infinite}
+@keyframes bkSway{0%,100%{transform:translate(-50%,-50%) rotateX(54deg) rotateZ(-.7deg)}50%{transform:translate(-50%,-50%) rotateX(54deg) rotateZ(.7deg)}}
+#turn .pu.v23 .bk .cv{box-shadow:0 50px 80px rgba(0,0,0,.75),0 0 0 1px rgba(0,0,0,.4),inset 0 0 0 6px #4a170d,inset 0 0 0 8px #c9a24a,inset 0 0 0 12px #4a170d,inset 0 0 0 13px rgba(201,162,74,.6)}
+/* 책장이 가운데로 살짝 휘어 들어감 */
+
+
+#turn.up .pu.v23 .pl{transform:translateX(-50%) rotateX(-54deg)}
+/* 둥근 무대 판 5장 */
+#turn .pu.v23 .pl.pan{transform-style:preserve-3d}
+#turn .pu.v23 .stg{width:min(142px,11.4vw);height:min(290px,23vw);display:flex;align-items:flex-end}
+#turn .pu.v23 .stg::before{content:"";display:block;width:100%;height:var(--h);background:var(--pc) var(--bx) 100%/500% auto no-repeat,#1a2340;border:6px solid #fffaf0;border-bottom:0;box-shadow:0 12px 22px rgba(0,0,0,.45);
+ clip-path:polygon(0 6%,22% 0,48% 5%,72% 0,100% 6%,100% 100%,0 100%)}
+#turn .pu.v23 .stg{transform:rotateY(0deg);transition:transform 1.1s cubic-bezier(.2,1.3,.4,1) calc(var(--dl) + .35s)}
+#turn.up .pu.v23 .stg{transform:rotateY(var(--ry))}
+#turn .pu.v23 .pl.pan:nth-of-type(odd) .stg::before{filter:brightness(.82)}
+/* 인물 받침 · 그림자 */
+#turn .pu.v23 .pl.mid{display:flex;flex-direction:column;align-items:center}
+#turn .pu.v23 .pl.mid img.cut{height:min(290px,23vw);order:1}
+#turn .pu.v23 .pl.mid .tab{order:2;width:70%;height:10px;margin-top:-6px;background:linear-gradient(#e9dcbf,#cdb88e);border-radius:0 0 4px 4px;box-shadow:0 4px 6px rgba(0,0,0,.3)}
+#turn .pu.v23 .bk .s1{bottom:46%;width:78%;height:22%;background:radial-gradient(ellipse,rgba(10,10,30,.5),transparent 70%)}
+#turn .pu.v23 .bk .s2{bottom:18%;width:26%;height:12%}
+#turn .pu.v23 .pl.mid2 img.cut{width:min(600px,48vw);max-height:min(140px,11vw)}
+#turn .pu.v23 .op{color:#e9dfc8}
+#turn .pu.v23 .nx{color:#f6ead0}
+
+/* v23b: 받침 숨김 · 책 살짝 위로 */
+#turn .pu.v23 .pl.mid .tab{display:none}
+#turn .pu.v23 .bk{top:56%}
+#turn .pu.v23 .op{bottom:18px}
+
+/* v23c: 세로 화면 */
+@media (max-width:700px){
+#turn .pu.v23 .bk{top:52%;width:86vw;height:46vw}
+#turn .pu.v23 .stg{width:15vw;height:31vw}
+#turn .pu.v23 .stg::before{border-width:3px}
+#turn .pu.v23 .pl.mid img.cut{height:32vw}
+#turn .pu.v23 .pl.mid2 img.cut{width:64vw;max-height:15vw}
+#turn .pu.v23 .pl.fr img.cut{height:12vw}
+#turn .pu.v23 .pl.fr2 .frg{width:23vw;padding:6px 5px;font-size:12px;line-height:1.25}
+#turn .pu.fin.v23 .pl.fr2 .frg.lastc{width:44vw;font-size:17px}
+#turn .pu.v23 .op{bottom:70px;font-size:14.5px}
+#turn .pu.v23 .nx{bottom:22px;right:50%;transform:translateX(50%);font-size:19px}
+}
 </style></head><body>
 <div id="tag"><b>부산</b><span id="tagS"></span><i id="tagI"></i></div>
 <div id="dev"><span>출발 후</span><input id="devR" type="range" min="0" max="91.9" step="0.1"><span id="devV"></span></div>
@@ -3948,5 +4004,23 @@ makeCard=async function(T,hid){card.dataset.kind='end';const {on,off}=endPeople(
   const tr=TRAIT[topTrait()];g.fillStyle='#2b2016';g.font='700 28px '+SRF;g.fillText(MYNAME()+(iga(MYNAME())==='이'?'은 ':'는 ')+tr[0],cx,Y+1222);
   g.font='600 20px '+FNT;g.fillStyle='rgba(58,42,28,.5)';const pgs=Object.keys(LS.get('bl_pages',{})).length;g.fillText('함께 탄 승객 '+(on.length+off.length)+'명 · 페이지 조각 '+pgs+' / 13 · ejdms499-wq.github.io',cx,Y+H-56);
   card.classList.add('on')};
+
+/* ===================== v23: 팝업북 더 입체적으로 (둥근 무대 · 밤 벨벳 배경) ===================== */
+pageTurn=function(i){const c=CH[i];if(!c)return;const id=c.ev[0],who=id&&CAST[id]?nm(id):'';const pg=LS.get('bl_pages',{});const got=id&&pg[id]&&PAGES[id];
+  const spr=id&&CAST[id]?((CAST[id].img.startsWith('img/')?'':P)+CAST[id].img):'';const it=id&&ITM[id]?'img/items/'+id+'.webp':'';
+  const ac=(RT&&RT[c.id]&&RT[c.id][0])||'#2f6b4a',pc=pcImg[c.id]||'',mid=MIDP[c.id];
+  const pans=[0,1,2,3,4].map(k=>{const o=k-2;return `<div class="pl pan" style="--d:${56-Math.abs(o)*7}%;--dl:${.08+Math.abs(o)*.12}s;--xb:${o*15.6}%"><div class="stg" style="--ry:${-o*24}deg;--bx:${k*25}%;--h:${[78,90,100,90,78][k]}%"></div></div>`}).join('');
+  const dust=Array.from({length:26},()=>`<i style="left:${(Math.random()*100).toFixed(1)}%;top:${(Math.random()*100).toFixed(1)}%;--s:${(1+Math.random()*2.5).toFixed(1)}px;--t:${(4+Math.random()*6).toFixed(1)}s;--o:${(Math.random()*-8).toFixed(1)}s"></i>`).join('');
+  turnEl.innerHTML=`<div class="pu v22 v23" style="--ac:${ac};--pc:url(${pc})"><div class="vel"></div><div class="spot"></div><div class="dust">${dust}</div>
+    <div class="hd"><small>제 ${i+1} 장</small><b>${c.name}</b><em>${who?who+'의 이야기':''}</em></div>
+    <div class="bk"><div class="cv"></div><div class="pp L"></div><div class="pp R"></div><div class="gut"></div>
+      <div class="sh s1"></div><div class="sh s2"></div>${pans}
+      ${mid?`<div class="pl mid2" style="--d:40%;--dl:.55s"><img class="cut" src="img/m/${mid}.webp" alt=""></div>`:''}
+      ${spr?`<div class="pl mid" style="--d:26%;--dl:.7s"><div class="tab"></div><img class="cut" src="${spr}" alt=""></div>`:''}
+      ${it?`<div class="pl fr" style="--d:9%;--dl:.9s;--xb:-28%"><img class="cut" src="${it}" alt=""></div>`:''}
+      <div class="pl fr2" style="--d:11%;--dl:1s;--xb:27%"><div class="frg${got?' got':''}">${got?esc(PAGES[id]).replace(/\n/g,'<br>'):'찢겨 나간 자리'}</div></div>
+    </div><p class="op">${OPEN1[c.id]||''}</p><div class="nx">눌러서 넘기기 ▸</div></div>`;
+  turnEl.classList.remove('on','go','up');void turnEl.offsetWidth;turnEl.classList.add('on');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>turnEl.classList.add('up')));try{blipUp()}catch(e){}};
 
 </script></body></html>

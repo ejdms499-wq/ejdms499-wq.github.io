@@ -830,6 +830,13 @@ body.paxZ #pax::after{content:"Z z z";position:absolute;right:16%;top:14%;font:4
 /* v16 선반 그림 */
 #shelf{height:70px!important;background:url(img/shelf.webp) center bottom/100% auto no-repeat;padding:0 6% 14px;box-sizing:border-box;justify-content:center!important;gap:10px!important}
 #shelf img{height:44px!important}
+
+/* v17 아이콘 · 음식 그림 */
+#cg .item img.icI{width:110px;height:110px;object-fit:contain;display:block;margin:0 auto 4px;filter:drop-shadow(0 3px 4px rgba(0,0,0,.25))}
+.kc img.icI{width:58px;height:58px;object-fit:contain;display:block;margin:0 auto}
+#cg .item img.dish.sq{border-radius:10px;width:min(240px,62vw)}
+#carP .mn{grid-template-columns:50px 1fr!important}
+#carP .mn span img{width:46px;height:46px;object-fit:cover;border-radius:7px;border:2px solid #3a2a1c;display:block}
 </style></head><body>
 <div id="tag"><b>부산</b><span id="tagS"></span><i id="tagI"></i></div>
 <div id="dev"><span>출발 후</span><input id="devR" type="range" min="0" max="91.9" step="0.1"><span id="devV"></span></div>
@@ -1451,7 +1458,7 @@ function gNext(){if(gType){clearInterval(gType);gType=null;gTx.textContent=gFull
   if(s.clue){cg.classList.remove('itm');const c=clues();c[s.clue]=1;LS.set('bl_clue',c);gBox.classList.add('on');gWho.textContent='셜록의 단서 수첩';
      G('.fx.spk').classList.add('on');gType2('🔎 '+CLUES[s.clue]+'\n(단서 '+Object.keys(c).length+'/'+MAINS.length+')');return}
   if(s.item){const k=LS.get('bl_keep',{});k[s.item]=1;LS.set('bl_keep',k);const it=KEEP[s.item];gBox.classList.remove('on');
-     gIt.innerHTML='<div class="ic">'+it[0]+'</div><b>'+it[1]+'</b><p>'+it[2]+'</p><p style="margin-top:8px;font-size:11px;opacity:.6">트렁크에 넣어 두었어요 · 눌러서 닫기</p>';gIt.classList.add('on');cg.classList.add('itm');return}
+     gIt.innerHTML=(ITM[s.item]?'<img class="icI" src="img/items/'+s.item+'.webp" alt="">':'<div class="ic">'+it[0]+'</div>')+'<b>'+it[1]+'</b><p>'+it[2]+'</p><p style="margin-top:8px;font-size:11px;opacity:.6">트렁크에 넣어 두었어요 · 눌러서 닫기</p>';gIt.classList.add('on');cg.classList.add('itm');return}
   if(s.fn){s.fn();return}
   gShow(s)}
 function gEnd(){gWait=1;iris(0,650,()=>{cg.classList.remove('on','lb','itm','duo');gWait=null;gBox.classList.remove('on');document.body.classList.remove('talk');const d=gDone;gDone=null;BG.force=null;setTimeout(bgmTick,0);d&&d()})}
@@ -1673,7 +1680,7 @@ function albumOpen(t){albTab=t;alb.classList.add('on');alb.querySelectorAll('.al
     box.innerHTML='<div class="grid pax">'+ids.map(id=>{const c=CAST[id],ok=met[id],p=AFF[id]||0,l=lv(p);
       return `<div class="cell">${thumb(viewOf(id),c.img,!ok)}<em>${ok?c.n:'???'}</em><small>${ok?pns(l)+' '+LVN[l]:SEG.find(s=>s.id===SEG_OF[id]).name+'에서 만나요'}</small></div>`}).join('')+'</div>'+cmh}
   if(t==='keep'){const k=LS.get('bl_keep',{}),sg=LS.get('bl_sign',{});
-    box.innerHTML='<p class="cnt">기념품 '+Object.keys(k).length+' / '+MAINS.length+'</p><div class="grid kp">'+MAINS.map(id=>k[id]?`<div class="cell kc"><div class="ic">${KEEP[id][0]}</div><em>${KEEP[id][1]}</em><small>${KEEP[id][2]}</small></div>`:`<div class="cell kc lock"><div class="ic">?</div><em>???</em><small>${CAST[id].n}의 꼬리표 이야기</small></div>`).join('')+'</div>'+
+    box.innerHTML='<p class="cnt">기념품 '+Object.keys(k).length+' / '+MAINS.length+'</p><div class="grid kp">'+MAINS.map(id=>k[id]?`<div class="cell kc">${ITM[id]?'<img class="icI" src="img/items/'+id+'.webp" alt="">':'<div class="ic">'+KEEP[id][0]+'</div>'}<em>${KEEP[id][1]}</em><small>${KEEP[id][2]}</small></div>`:`<div class="cell kc lock"><div class="ic">?</div><em>???</em><small>${CAST[id].n}의 꼬리표 이야기</small></div>`).join('')+'</div>'+
       '<p class="cnt" style="margin-top:14px">꼬리표 뒷면의 한마디 '+Object.keys(sg).length+'</p>'+(Object.keys(sg).length?'<ul class="signs">'+Object.values(sg).map(v=>`<li>「${v}」</li>`).join('')+'</ul>':'<p class="cnt" style="opacity:.6">단짝이 되면 꼬리표에 한마디를 적어 줘요</p>')}}
 
 /* ================= 첫 방문 선택 · 출발 대기 ================= */
@@ -2510,14 +2517,14 @@ probe('v/dine_in');CH.forEach(c=>probe('food/'+c.id));
 function dineBg(){const v=curView();gBg.style.backgroundImage=IMGOK['v/dine_in']?'url(img/v/dine_in.webp),'+v:v;gBg.classList.remove('kb');void gBg.offsetWidth;gBg.classList.add('kb')}
 /* 식당칸 메뉴 → 같이 먹을 승객 고르기 → 식사 장면 */
 function menuOpen(){const i=TRIP?TRIP.ch:0,M=MENU[CH[i].id];
-  carP.innerHTML=`<div class="ch"><div><b>식당칸 · ${CH[i].name} 메뉴</b><small>지금 지나는 곳의 음식이에요</small></div></div>`+M.map((d,k)=>`<button class="pbtn2 l mn" data-d="${k}"><span>${d[0]}</span><b>${d[1]}</b><small>${d[2]}</small></button>`).join('')+'<button class="pbtn2 l" data-x="1">닫기</button>';
+  carP.innerHTML=`<div class="ch"><div><b>식당칸 · ${CH[i].name} 메뉴</b><small>지금 지나는 곳의 음식이에요</small></div></div>`+M.map((d,k)=>`<button class="pbtn2 l mn" data-d="${k}"><span>${FOODIMG[d[1]]?'<img src="img/food/d/'+FOODIMG[d[1]]+'.webp" alt="">':(k===0&&IMGOK['food/'+CH[i].id]?'<img src="img/food/'+CH[i].id+'.webp" alt="">':d[0])}</span><b>${d[1]}</b><small>${d[2]}</small></button>`).join('')+'<button class="pbtn2 l" data-x="1">닫기</button>';
   carP.querySelector('[data-x]').onclick=e=>{e.stopPropagation();focus&&carOpen(focus)};
   carP.querySelectorAll('[data-d]').forEach(x=>x.onclick=e=>{e.stopPropagation();pickMate(M[+x.dataset.d])})}
 function pickMate(d){const ids=Object.keys(HOME).filter(id=>boarded(id));
   carP.innerHTML=`<div class="ch"><div><b>${d[0]} ${d[1]}</b><small>누구랑 같이 먹을까요?</small></div></div><div class="cp">`+ids.map(id=>`<button class="pbtn2 l" data-p="${id}">${CAST[id].n}</button>`).join('')+'<button class="pbtn2 l" data-p="">혼자 먹기</button></div>';
   carP.querySelectorAll('[data-p]').forEach(x=>x.onclick=e=>{e.stopPropagation();carP.classList.remove('on');eat(d,x.dataset.p)})}
 function eat(d,id){const cid=CH[TRIP?TRIP.ch:0].id,isRep=MENU[cid][0][1]===d[1]&&IMGOK['food/'+cid];const sh=[{fn:()=>{dineBg();gShow({who:'',narr:1,say:'(식당칸 창가 자리. 창밖으로 '+CH[TRIP?TRIP.ch:0].name+'의 풍경이 흐른다.)'})}},
-   {fn:()=>{gBox.classList.remove('on');gIt.innerHTML=(isRep?'<img class="dish" src="img/food/'+cid+'.webp" alt="">':'<div class="ic">'+d[0]+'</div>')+'<b>'+d[1]+'</b><p>'+d[2]+'</p><p style="margin-top:8px;font-size:11px;opacity:.6">눌러서 먹기</p>';gIt.classList.add('on');cg.classList.add('itm')}}];
+   {fn:()=>{gBox.classList.remove('on');gIt.innerHTML=(FOODIMG[d[1]]?'<img class="dish sq" src="img/food/d/'+FOODIMG[d[1]]+'.webp" alt="">':isRep?'<img class="dish" src="img/food/'+cid+'.webp" alt="">':'<div class="ic">'+d[0]+'</div>')+'<b>'+d[1]+'</b><p>'+d[2]+'</p><p style="margin-top:8px;font-size:11px;opacity:.6">눌러서 먹기</p>';gIt.classList.add('on');cg.classList.add('itm')}}];
   if(id){const L2=EAT[id]||['맛있어요.'];sh.push(L(id,null,1,CAST[id].n,L2[Math.floor(Math.random()*L2.length)],{pose:'in',emo:'♪',bg:undefined}));
     const key=id+':'+(TRIP?TRIP.ch:0)+':'+d[1],ate=LS.get('bl_ate',{});if(!ate[key]){ate[key]=1;LS.set('bl_ate',ate);sh.push({fn:()=>{addAff(id,1);gNext()}})}}
   else sh.push({ch:null,ch2:null,who:'',narr:1,say:'(혼자 먹는 밥도 나쁘지 않다. 덜컹거리는 소리가 반찬이 된다.)'});
@@ -3197,8 +3204,8 @@ ending=function(){const T=TRUNK;if(!T)return;let pick=0;const BGL='img/v/lostfou
    {bg:BGL,ch:null,who:'',narr:1,say:'(웃음이 난다. 그때는 이게 세상에서 제일 무거웠는데.)'},
    {bg:BGL,ch:P,pose:'in',who:'로봇 포터',say:'열어 보시겠습니까?'},
    {bg:'img/v/book_open.webp',ch:null,fx:['spk','glow'],who:'',narr:1,say:'(트렁크 안에는 낡은 동화책 한 권. 찢어졌던 귀퉁이마다, 모아 온 종이 조각이 꼭 맞게 돌아가 있다.)'},
-   {bg:BGL,ch:P,pose:'face',who:'로봇 포터',say:'사실 저는… 그 책 옆에서 같이 자던 깡통 로봇입니다. 주인님이 잠들 때까지 불을 켜 두는 게 제 일이었지요.'},
-   {bg:BGL,ch:P,pose:'in',who:'로봇 포터',say:'주인님이 자라서 상자 속에 들어간 뒤로, 이 책을 지키고 있었습니다. 승객분들도 모두 기다렸고요.'},
+   {cgx:'porter',who:'로봇 포터',say:'사실 저는… 그 책 옆에서 같이 자던 깡통 로봇입니다. 주인님이 잠들 때까지 불을 켜 두는 게 제 일이었지요.'},
+   {cgx:'porter',who:'로봇 포터',say:'주인님이 자라서 상자 속에 들어간 뒤로, 이 책을 지키고 있었습니다. 승객분들도 모두 기다렸고요.'},
    {bg:BGL,ch:P,pose:'in',who:'로봇 포터',say:'그리고 오늘 맡기신 짐입니다. 「{짐}」.'},
    {bg:BGL,ch:P,pose:'face',who:'로봇 포터',say:'가져가셔도 되고, 여기 맡겨 두셔도 됩니다. 스무 해 전 짐처럼요.'},
    {choice:[['가져갈게요','이제는 들고 갈 수 있을 것 같아요. 생각보다 가벼워졌어요.'],['여기 맡겨 둘게요','언젠가 찾으러 올게요. 그때는 오늘처럼 웃을 수 있을 거예요.']],onPick:k=>{pick=k}},
@@ -3610,10 +3617,13 @@ const stOf=id=>{const i=CH_OF[id];return i!==undefined&&CH[i]?CH[i].name:''};
 /* ===================== v16: 미드저니 그림 연결 (엽서 · 과자의 집 풍경 · 헨젤 CG · 포터 CG · 동화책 · 선반 · 소라) ===================== */
 VIEWS.candy=[V('candy_1'),V('candy_2')];
 {const i=SEG.findIndex(x=>x.id==='castle');if(i>0&&!SEG.find(x=>x.id==='candy'))SEG.splice(i,0,{id:'candy',h:16.95,name:'과자의 집',tz:1,sky:'밤',who:'헨젤과 그레텔'})}
-CGREAL.hansel=50;CGREAL.porter=50;CGNAME.porter='로봇 포터';try{cgProbe('porter')}catch(e){}
+CGREAL.hansel=50;CGREAL.hansel_open=50;CGREAL.porter=50;CGNAME.porter='로봇 포터';try{cgProbe('porter')}catch(e){}
 let cgxOn=0;{const _gn=gNext;gNext=function(){if(!cg.classList.contains('on')||gType||gWait){_gn();return}const s=gShots[gI];
   if(s&&s.cgx){gI++;moShow(s.cgx);cgxOn=1;gShow({say:s.say,who:s.who||'',narr:s.who?0:1});return}
   if(cgxOn){cgxOn=0;try{moHide()}catch(e){}}_gn()}}
 if(!CGNAME.hansel)CGNAME.hansel='헨젤과 그레텔';
 Object.keys(PCV).forEach(k=>{pcImg[k]='img/post/'+k+'.webp'});
+
+const ITM={byeol:1,gilldong:1,gyeonu:1,snowq:1,sherlock:1,babayaga:1,odette:1,wolf:1,hansel:1,sleeping:1,monster:1,cinder:1,rabbit:1};
+const FOODIMG={"백 년 만의 아침 차": "f01", "사과 슈트루델": "f02", "바이에른 프레첼": "f03", "구운 사과": "f04", "따뜻한 우유": "f05", "진저브레드 지붕 조각": "f06", "잉글리시 브렉퍼스트": "f07", "애프터눈 티": "f08", "바다소금 아이스크림": "f09", "김 주먹밥": "f10", "크렘 브륄레": "f11", "양파 수프": "f12", "핫초코": "f13", "뢰스티": "f14", "프레첼": "f15", "솔랸카": "f16", "메도빅": "f17", "바이칼 허브차": "f18", "잣 파이": "f19", "사모바르 홍차": "f20", "펠메니": "f21", "칠석 밀전병": "f22", "별빛 수정과": "f23", "떡꼬치": "f24", "평양냉면": "f25", "씨앗호떡": "f26", "돼지국밥": "f27"};
 </script></body></html>

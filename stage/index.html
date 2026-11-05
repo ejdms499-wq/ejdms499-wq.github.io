@@ -15,13 +15,13 @@
 html,body{margin:0;height:100%;background:#0d2230;overflow:hidden;touch-action:none;-webkit-user-select:none;user-select:none}
 canvas{display:block;width:100vw;height:100vh;height:100dvh}
 #tag{position:fixed;z-index:4;left:14px;top:calc(12px + env(safe-area-inset-top));padding:7px 12px 7px 14px;background:#f3e6c4;color:#3a2a1c;
- font:600 12px/1.35 "Apple SD Gothic Neo","Noto Sans KR",sans-serif;border:2px solid #3a2a1c;border-radius:3px;box-shadow:3px 3px 0 #3a2a1c;transform:rotate(-1.5deg)}
+ font:600 13px/1.35 "Apple SD Gothic Neo","Noto Sans KR",sans-serif;border:2px solid #3a2a1c;border-radius:3px;box-shadow:3px 3px 0 #3a2a1c;transform:rotate(-1.5deg)}
 #tag b{display:block;font-size:15px;letter-spacing:-.02em}
 #tag::before{content:"";position:absolute;left:-7px;top:50%;width:8px;height:8px;margin-top:-4px;border:2px solid #3a2a1c;border-radius:50%;background:#0d2230}
 #hint{position:fixed;left:50%;bottom:calc(52px + env(safe-area-inset-bottom));transform:translateX(-50%);color:#f6e9c8;
- font:500 12px "Apple SD Gothic Neo","Noto Sans KR",sans-serif;opacity:.85;text-shadow:0 1px 2px #000a;white-space:nowrap;transition:opacity 1s}
-#tag i{display:block;font-style:normal;font-weight:500;font-size:11px;opacity:.8;margin-top:1px}
-#dev{position:fixed;z-index:4;left:12px;right:12px;bottom:calc(40px + env(safe-area-inset-bottom));display:none;gap:8px;align-items:center;background:#f3e6c4;border:2px solid #3a2a1c;border-radius:4px;padding:6px 10px;font:600 12px 'Apple SD Gothic Neo',sans-serif;color:#3a2a1c}
+ font:500 13px "Apple SD Gothic Neo","Noto Sans KR",sans-serif;opacity:.85;text-shadow:0 1px 2px #000a;white-space:nowrap;transition:opacity 1s}
+#tag i{display:block;font-style:normal;font-weight:500;font-size:12.5px;opacity:.8;margin-top:1px}
+#dev{position:fixed;z-index:4;left:12px;right:12px;bottom:calc(40px + env(safe-area-inset-bottom));display:none;gap:8px;align-items:center;background:#f3e6c4;border:2px solid #3a2a1c;border-radius:4px;padding:6px 10px;font:600 13px 'Apple SD Gothic Neo',sans-serif;color:#3a2a1c}
 #dev input{flex:1}
 #back{position:fixed;left:14px;z-index:4;bottom:calc(14px + env(safe-area-inset-bottom));display:none;background:#f3e6c4;color:#3a2a1c;border:2px solid #3a2a1c;box-shadow:2px 2px 0 #3a2a1c;border-radius:3px;padding:6px 11px;font:700 13px "Apple SD Gothic Neo",sans-serif}
 #vig{position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse 75% 70% at 50% 55%,transparent 55%,rgba(4,14,20,.42) 100%)}
@@ -50,7 +50,7 @@ body.seat .vw{display:block}
 #ckC{width:min(420px,100%);padding:18px 18px 16px;position:relative;transform:rotate(-.6deg);animation:ckIn .5s cubic-bezier(.2,1.4,.4,1)}
 @keyframes ckIn{from{transform:translateY(40px) rotate(-3deg);opacity:0}}
 #ckC h3{margin:0 0 2px;font-size:17px;letter-spacing:-.02em}
-#ckC .sub{font-size:12px;opacity:.75;margin-bottom:12px}
+#ckC .sub{font-size:13px;opacity:.75;margin-bottom:12px}
 .porter{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px}
 .porter i{flex:none;width:64px;height:64px;border-radius:50%;border:2px solid #3a2a1c;background:url(img/zrobot.webp) 50% 18%/150% auto no-repeat #22303c}
 .porter p{margin:0;font-size:14px;line-height:1.55;background:#fffaf0;border:2px solid #3a2a1c;border-radius:10px;padding:8px 10px;position:relative}
@@ -58,7 +58,7 @@ body.seat .vw{display:block}
 #ckT::placeholder{color:#8a7b66}
 .ckRow{display:flex;gap:8px;margin-top:12px;align-items:center}
 .ckRow .pbtn2{flex:1}
-.ckSkip{background:none;border:0;color:#6b5a44;font-size:12px;text-decoration:underline;cursor:pointer;padding:6px}
+.ckSkip{background:none;border:0;color:#6b5a44;font-size:13px;text-decoration:underline;cursor:pointer;padding:6px}
 /* 트렁크 그림 */
 .trunk{width:170px;height:118px;margin:6px auto 4px;position:relative}
 .trunk .bx{position:absolute;left:0;right:0;bottom:0;height:86px;background:#a0582f;border:3px solid #3a2a1c;border-radius:10px}
@@ -68,13 +68,13 @@ body.seat .vw{display:block}
 .trunk.open .lid{transform:translateY(-6px) rotate(-14deg)}
 .trunk .hd{position:absolute;left:50%;top:-6px;width:40px;height:16px;margin-left:-20px;border:3px solid #3a2a1c;border-bottom:0;border-radius:10px 10px 0 0}
 .trunk .lk{position:absolute;left:50%;top:32px;width:16px;height:16px;margin-left:-8px;background:#e2b54a;border:3px solid #3a2a1c;border-radius:3px;z-index:2}
-.note{position:absolute;left:50%;top:-40px;width:120px;margin-left:-60px;background:#fffaf0;border:2px solid #3a2a1c;font-size:11px;line-height:1.3;padding:5px;max-height:44px;overflow:hidden;transition:all .9s cubic-bezier(.5,0,.6,1);z-index:1}
+.note{position:absolute;left:50%;top:-40px;width:120px;margin-left:-60px;background:#fffaf0;border:2px solid #3a2a1c;font-size:12.5px;line-height:1.3;padding:5px;max-height:44px;overflow:hidden;transition:all .9s cubic-bezier(.5,0,.6,1);z-index:1}
 .trunk.in .note{top:40px;transform:scale(.3);opacity:0}
-.tag{position:absolute;right:-26px;top:30px;width:84px;padding:6px 6px 6px 14px;background:#f8efd6;border:2px solid #3a2a1c;font:700 10px/1.35 "Apple SD Gothic Neo",sans-serif;transform-origin:0 50%;transform:rotate(18deg) scale(0);transition:transform .5s cubic-bezier(.2,1.6,.4,1) .2s;clip-path:polygon(10px 0,100% 0,100% 100%,10px 100%,0 50%)}
+.tag{position:absolute;right:-26px;top:30px;width:84px;padding:6px 6px 6px 14px;background:#f8efd6;border:2px solid #3a2a1c;font:700 12px/1.35 "Apple SD Gothic Neo",sans-serif;transform-origin:0 50%;transform:rotate(18deg) scale(0);transition:transform .5s cubic-bezier(.2,1.6,.4,1) .2s;clip-path:polygon(10px 0,100% 0,100% 100%,10px 100%,0 50%)}
 .tag::before{content:"";position:absolute;left:5px;top:50%;width:5px;height:5px;margin-top:-3px;border:2px solid #3a2a1c;border-radius:50%}
 .trunk.tagged .tag{transform:rotate(14deg) scale(1)}
-.tkt{margin-top:10px;border-top:2px dashed #3a2a1c;padding-top:10px;font-size:12px;display:grid;grid-template-columns:auto 1fr;gap:3px 10px}
-.tkt b{font-size:12px}
+.tkt{margin-top:10px;border-top:2px dashed #3a2a1c;padding-top:10px;font-size:13px;display:grid;grid-template-columns:auto 1fr;gap:3px 10px}
+.tkt b{font-size:13px}
 /* 트렁크 버튼 + 꼬리표 판 */
 #trk{position:fixed;right:126px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:4;display:none;padding:6px 11px;font:700 13px "Apple SD Gothic Neo",sans-serif;cursor:pointer}
 #trkP{position:fixed;left:50%;bottom:calc(60px + env(safe-area-inset-bottom));transform:translateX(-50%);width:min(440px,calc(100vw - 24px));z-index:15;padding:14px;display:none}
@@ -82,7 +82,7 @@ body.seat .vw{display:block}
 #trkP h4{margin:0 0 4px;font-size:15px}
 #trkP .w{font-size:13px;background:#fffaf0;border:2px dashed #3a2a1c;padding:8px;margin:8px 0;border-radius:3px}
 .stk{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px}
-.stk span{aspect-ratio:1;word-break:break-all;border-radius:50%;border:2px dashed #b7a687;display:flex;align-items:center;justify-content:center;text-align:center;font:700 10px/1.15 "Apple SD Gothic Neo",sans-serif;color:#b7a687;padding:3px}
+.stk span{aspect-ratio:1;word-break:break-all;border-radius:50%;border:2px dashed #b7a687;display:flex;align-items:center;justify-content:center;text-align:center;font:700 12px/1.15 "Apple SD Gothic Neo",sans-serif;color:#b7a687;padding:3px}
 .stk span.got{border:2px solid #3a2a1c;color:#fffaf0;transform:rotate(var(--r));box-shadow:inset 0 0 0 3px rgba(255,255,255,.35)}
 .stk span.now{animation:stp 1.6s infinite}
 @keyframes stp{50%{transform:rotate(var(--r)) scale(1.06)}}
@@ -109,7 +109,7 @@ body.talk #paxT{display:none!important}
 #dlgC button,#cg .chs button{font-size:15.5px;font-family:var(--ff,inherit)}
 #dlgC{display:flex;flex-direction:column;gap:6px;margin-top:8px}
 #dlgC button{text-align:left}
-#dlgM{position:absolute;right:12px;bottom:6px;font-size:11px;opacity:.6;animation:bob 1.2s infinite}
+#dlgM{position:absolute;right:12px;bottom:6px;font-size:12.5px;opacity:.6;animation:bob 1.2s infinite}
 body.talk #snd,body.talk #trk,body.talk #seat{opacity:.0;pointer-events:none}
 
 /* ===== 애니메이션 장면 (60년대 TV 만화식 리미티드 애니메이션) ===== */
@@ -147,7 +147,7 @@ body.talk #snd,body.talk #trk,body.talk #seat{opacity:.0;pointer-events:none}
 #cg .iris{position:absolute;inset:0;z-index:8;background:#050a0d;pointer-events:none;
   -webkit-mask:radial-gradient(circle at 50% 45%,transparent var(--r),#000 calc(var(--r) + 1px));mask:radial-gradient(circle at 50% 45%,transparent var(--r),#000 calc(var(--r) + 1px));--r:0%}
 #cg .ttl{position:absolute;left:50%;top:42%;transform:translate(-50%,-50%) rotate(-2deg);z-index:9;padding:12px 20px;text-align:center;font:800 20px/1.3 "Apple SD Gothic Neo",sans-serif;opacity:0;transition:opacity .5s;white-space:nowrap}
-#cg .ttl small{display:block;font-size:12px;font-weight:600;opacity:.75;letter-spacing:2px}
+#cg .ttl small{display:block;font-size:13px;font-weight:600;opacity:.75;letter-spacing:2px}
 #cg .ttl.on{opacity:1}
 #cg .box{position:absolute;left:50%;bottom:calc(10% + 6px + env(safe-area-inset-bottom));transform:translateX(-50%);width:min(640px,calc(100vw - 24px));z-index:6;padding:14px 16px 12px;cursor:pointer;display:none}
 #cg .box.on{display:block;animation:ckIn .3s}
@@ -157,14 +157,14 @@ body.talk #snd,body.talk #trk,body.talk #seat{opacity:.0;pointer-events:none}
 #cg .tx.narr{font-style:italic;opacity:.9}
 #cg .chs{display:flex;flex-direction:column;gap:6px;margin-top:8px}
 #cg .chs button{text-align:left}
-#cg .mk{position:absolute;right:12px;bottom:6px;font-size:11px;opacity:.6;animation:bob 1.2s infinite}
+#cg .mk{position:absolute;right:12px;bottom:6px;font-size:12.5px;opacity:.6;animation:bob 1.2s infinite}
 #cg .item{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(0);z-index:7;width:min(300px,80vw);padding:16px;text-align:center;transition:transform .6s cubic-bezier(.2,1.5,.4,1)}
 #cg .item.on{transform:translate(-50%,-50%) scale(1) rotate(-2deg)}
 #cg.itm .stage{filter:brightness(.35) blur(3px);transition:filter .5s}#cg .stage{transition:filter .5s}
 #cg .item b{display:block;font-size:17px;margin:6px 0 4px}
 #cg .item .ic{font-size:40px;line-height:1}
 #cg .item p{margin:0;font-size:13px;line-height:1.5}
-#cg .skip{position:absolute;right:12px;top:calc(12px + env(safe-area-inset-top));z-index:9;background:rgba(5,10,13,.5);color:#f3e6c4;border:1px solid rgba(243,230,196,.5);border-radius:3px;font:600 12px "Apple SD Gothic Neo",sans-serif;padding:5px 9px;cursor:pointer}
+#cg .skip{position:absolute;right:12px;top:calc(12px + env(safe-area-inset-top));z-index:9;background:rgba(5,10,13,.5);color:#f3e6c4;border:1px solid rgba(243,230,196,.5);border-radius:3px;font:600 13px "Apple SD Gothic Neo",sans-serif;padding:5px 9px;cursor:pointer}
 #cg .grain{position:absolute;inset:0;z-index:4;pointer-events:none;opacity:.12;mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");animation:grn .5s steps(3) infinite}
 @keyframes grn{33%{background-position:40px 70px}66%{background-position:-60px 20px}}
@@ -174,7 +174,7 @@ body.talk #snd,body.talk #trk,body.talk #seat{opacity:.0;pointer-events:none}
 #card canvas{max-width:min(420px,92vw);max-height:72vh;border:2px solid #3a2a1c;box-shadow:4px 4px 0 #000;transform:rotate(-1deg)}
 #card .row{display:flex;gap:8px}
 .stk span.clue{border-style:solid;border-color:#3a2a1c;color:#3a2a1c;background:#fffaf0}
-.clues{margin-top:10px;font-size:12px;line-height:1.5}
+.clues{margin-top:10px;font-size:13px;line-height:1.5}
 .clues li{margin:2px 0}
 .clues .no{opacity:.4}
 #paxT.ev{background:#b8432f;color:#fff6e4}
@@ -184,7 +184,7 @@ body.talk #snd,body.talk #trk,body.talk #seat{opacity:.0;pointer-events:none}
 .themed{border-width:3px!important}
 .themed.stitch{outline:2px dashed rgba(46,42,36,.55);outline-offset:-8px}
 .themed.seal::after{content:"印";position:absolute;right:12px;top:-12px;width:28px;height:28px;border-radius:4px;background:#b8312f;color:#f3ead4;font:800 15px/28px "Nanum Myeongjo",serif;text-align:center;transform:rotate(8deg)}
-#dlgN small{font-size:12px}
+#dlgN small{font-size:13px}
 .pns{display:inline-flex;gap:3px;vertical-align:-2px;margin-right:3px}
 .pn{display:inline-block;width:13px;height:13px;border-radius:50%;border:1.5px dashed currentColor;opacity:.55;box-sizing:border-box}
 .pn.on{opacity:1;border:2px solid #7a1f14;background:radial-gradient(circle,#f3e6c4 0 1.6px,transparent 2.2px),#c0392b;transform:rotate(-12deg);box-shadow:0 0 0 1px rgba(255,255,255,.35) inset}
@@ -195,10 +195,10 @@ body.talk #snd,body.talk #trk,body.talk #seat{opacity:.0;pointer-events:none}
 #lvt{position:fixed;left:50%;top:22%;z-index:35;transform:translate(-50%,-50%) scale(0);padding:14px 22px;text-align:center;pointer-events:none;opacity:0}
 #lvt.on{animation:lvt 3.2s cubic-bezier(.2,1.4,.4,1) forwards}
 @keyframes lvt{0%{transform:translate(-50%,-50%) scale(.2) rotate(-8deg);opacity:0}12%{transform:translate(-50%,-50%) scale(1.08) rotate(-2deg);opacity:1}20%,82%{transform:translate(-50%,-50%) scale(1) rotate(-2deg);opacity:1}100%{transform:translate(-50%,-60%) scale(.96) rotate(-2deg);opacity:0}}
-#lvt small{display:block;font-size:11px;letter-spacing:3px;font-weight:800;color:#b8432f}
+#lvt small{display:block;font-size:12.5px;letter-spacing:3px;font-weight:800;color:#b8432f}
 #lvt b{display:block;font-size:18px;margin:2px 0}
 #lvt span{display:block;font-size:15px;font-weight:700;color:#b8432f}
-#lvt i{display:block;font-style:normal;font-size:12px;margin-top:6px;opacity:.75}
+#lvt i{display:block;font-style:normal;font-size:13px;margin-top:6px;opacity:.75}
 #cg .vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
 #albB{position:fixed;right:232px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:4;padding:6px 11px;font:700 13px "Apple SD Gothic Neo",sans-serif;cursor:pointer}
 @media (max-width:420px){#albB{right:auto;left:14px}#trk{right:118px}}
@@ -208,18 +208,18 @@ body.talk #albB{opacity:0;pointer-events:none}
 .albC{width:min(720px,100%);max-height:88vh;display:flex;flex-direction:column;padding:0;overflow:hidden;animation:ckIn .35s}
 .albH{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 8px}
 .albH b{font-size:18px}
-.albX{background:#3a2a1c;color:#f3e6c4;border:0;border-radius:3px;padding:6px 10px;font:700 12px sans-serif;cursor:pointer}
+.albX{background:#3a2a1c;color:#f3e6c4;border:0;border-radius:3px;padding:6px 10px;font:700 13px sans-serif;cursor:pointer}
 .albT{display:flex;gap:6px;padding:0 16px 10px;border-bottom:2px dashed #3a2a1c}
 .albT button{flex:1;background:none;border:2px solid #3a2a1c;border-radius:3px;padding:7px 4px;font:700 13px "Apple SD Gothic Neo",sans-serif;color:#3a2a1c;cursor:pointer}
 .albT button.on{background:#3a2a1c;color:#f3e6c4}
 .albB{overflow:auto;padding:12px 16px 18px}
-.cnt{margin:0 0 10px;font-size:12px;font-weight:700}
+.cnt{margin:0 0 10px;font-size:13px;font-weight:700}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
 .grid.pax,.grid.kp{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}
-.cell{font-size:12px;cursor:default}
+.cell{font-size:13px;cursor:default}
 .cell[data-r]{cursor:pointer}
 .cell[data-r]:hover .th{transform:translateY(-2px) rotate(-1deg)}
-.cell em{display:block;font-style:normal;font-weight:800;margin-top:5px;font-size:12.5px}
+.cell em{display:block;font-style:normal;font-weight:800;margin-top:5px;font-size:13.5px}
 .cell small{display:block;opacity:.7;line-height:1.35}
 .th{position:relative;aspect-ratio:16/10;border:2px solid #3a2a1c;border-radius:3px;background-size:cover;background-position:50%;overflow:hidden;transition:transform .2s;box-shadow:2px 2px 0 #3a2a1c}
 .pax .th{aspect-ratio:3/4}
@@ -236,7 +236,7 @@ body.talk #albB{opacity:0;pointer-events:none}
 #wait{position:fixed;inset:0;z-index:18;display:none;background:linear-gradient(rgba(6,16,22,.15),rgba(6,16,22,.6)),url(img/v/platform.webp) 30% center/cover;align-items:center;justify-content:center;flex-direction:column;padding:16px;gap:12px}
 #wait.on{display:flex;animation:ckBg .8s}
 #wBoard{width:min(440px,100%);background:#141a1c;color:#f3c76a;border:3px solid #3a2a1c;border-radius:6px;box-shadow:4px 4px 0 #000;padding:14px 16px;font-family:"Apple SD Gothic Neo",sans-serif;text-align:center}
-#wBoard small{display:block;color:#e7dcc2;font-size:12px;letter-spacing:1px;opacity:.8}
+#wBoard small{display:block;color:#e7dcc2;font-size:13px;letter-spacing:1px;opacity:.8}
 #wBoard b{display:block;font-size:22px;margin:4px 0 2px;color:#fff3d6}
 #wBoard .cd{font:700 44px/1.1 "SF Mono",ui-monospace,Menlo,monospace;letter-spacing:2px;color:#f3c76a;text-shadow:0 0 12px rgba(243,199,106,.45);margin:8px 0 4px}
 #wBoard .st{font-size:13px;color:#e7dcc2}
@@ -247,7 +247,7 @@ body.talk #albB{opacity:0;pointer-events:none}
 #first h3{margin:0 0 4px;font-size:18px}
 #first .sub{font-size:13px;opacity:.8;margin-bottom:12px;line-height:1.5}
 .fopt{display:block;width:100%;text-align:left;margin-top:8px;padding:12px 14px;border:2px solid #3a2a1c;border-radius:4px;background:#fffaf0;cursor:pointer;font-family:inherit;color:#3a2a1c;box-shadow:2px 2px 0 #3a2a1c}
-.fopt b{display:block;font-size:15px}.fopt span{font-size:12.5px;opacity:.8;line-height:1.45;display:block;margin-top:2px}
+.fopt b{display:block;font-size:15px}.fopt span{font-size:13.5px;opacity:.8;line-height:1.45;display:block;margin-top:2px}
 .fopt.rec{background:#3a2a1c;color:#f3e6c4}
 #depT{position:fixed;left:50%;top:30%;transform:translate(-50%,-50%);z-index:36;padding:16px 26px;text-align:center;display:none;font-family:"Apple SD Gothic Neo",sans-serif}
 #depT.on{display:block;animation:lvt 4s forwards}
@@ -259,12 +259,12 @@ body.talk #albB{opacity:0;pointer-events:none}
 #ann .in{background:#141a1c;border:3px solid #3a2a1c;border-radius:6px;box-shadow:4px 4px 0 rgba(0,0,0,.6);padding:12px 16px 12px 64px;color:#f3c76a;font-family:"Apple SD Gothic Neo",sans-serif;position:relative;min-height:46px}
 #ann .bell{position:absolute;left:14px;top:50%;margin-top:-18px;width:36px;height:36px;border-radius:50%;background:#f3c76a;color:#141a1c;font:800 18px/36px sans-serif;text-align:center;animation:ring 1s ease-in-out 2}
 @keyframes ring{25%{transform:rotate(-18deg)}75%{transform:rotate(18deg)}}
-#ann small{display:block;font-size:11px;letter-spacing:2px;color:#e7dcc2;opacity:.8}
+#ann small{display:block;font-size:12.5px;letter-spacing:2px;color:#e7dcc2;opacity:.8}
 #ann b{display:block;font-size:19px;color:#fff3d6;margin:1px 0}
-#ann span{font-size:12.5px;color:#e7dcc2}
+#ann span{font-size:13.5px;color:#e7dcc2}
 #stk{position:fixed;left:50%;top:44%;z-index:35;width:150px;height:150px;margin:-75px 0 0 -75px;border-radius:50%;border:5px solid #3a2a1c;display:none;align-items:center;justify-content:center;text-align:center;color:#fffaf0;font:800 19px/1.2 "Apple SD Gothic Neo",sans-serif;box-shadow:inset 0 0 0 7px rgba(255,255,255,.35),5px 6px 0 rgba(0,0,0,.45);pointer-events:none;padding:10px;box-sizing:border-box}
 #stk.on{display:flex;animation:stkIn 2.6s cubic-bezier(.2,1.2,.4,1) forwards}
-#stk small{display:block;font-size:11px;font-weight:700;letter-spacing:1px;opacity:.85}
+#stk small{display:block;font-size:12.5px;font-weight:700;letter-spacing:1px;opacity:.85}
 @keyframes stkIn{0%{transform:scale(3) rotate(-35deg);opacity:0}14%{transform:scale(.92) rotate(-8deg);opacity:1}20%{transform:scale(1) rotate(-8deg)}70%{transform:scale(1) rotate(-8deg);opacity:1}100%{transform:translate(var(--tx),var(--ty)) scale(.18) rotate(-8deg);opacity:.2}}
 #trk.bump{animation:bump .5s}
 @keyframes bump{40%{transform:scale(1.18)}}
@@ -274,8 +274,8 @@ body.talk #albB{opacity:0;pointer-events:none}
 #cmo img{position:absolute;left:0;top:0;pointer-events:auto;cursor:pointer;transform-origin:50% 100%;filter:drop-shadow(0 2px 0 rgba(0,0,0,.25));will-change:transform}
 #cmB{position:fixed;z-index:33;max-width:min(300px,80vw);padding:10px 12px 9px;font:600 14.5px/1.55 "Apple SD Gothic Neo",sans-serif;display:none;pointer-events:none}
 #cmB.on{display:block;animation:ckIn .3s}
-#cmB b{display:block;font-size:12px;opacity:.7;margin-bottom:2px}
-#cmB i{display:block;font-style:normal;font-size:11px;color:#b8432f;font-weight:800;margin-top:5px}
+#cmB b{display:block;font-size:13px;opacity:.7;margin-bottom:2px}
+#cmB i{display:block;font-style:normal;font-size:12.5px;color:#b8432f;font-weight:800;margin-top:5px}
 #cmB::after{content:"";position:absolute;left:24px;bottom:-12px;border:7px solid transparent;border-top:10px solid #3a2a1c}
 
 #sMid,#sPole{position:fixed;left:0;right:0;pointer-events:none;display:none;background-repeat:repeat-x}
@@ -287,7 +287,7 @@ body.seat #sMid,body.seat #sPole{display:block}
 @media (max-width:420px){#ambB{bottom:calc(56px + env(safe-area-inset-bottom))}}
 body.amb #snd,body.amb #trk,body.amb #albB,body.amb #seat,body.amb #back,body.amb #hint,body.amb #paxT,body.amb #ambB{opacity:0!important;pointer-events:none!important;transition:opacity 1.2s}
 body.amb #tag{opacity:.35;transition:opacity 1.2s}
-#ambX{position:fixed;right:14px;top:calc(12px + env(safe-area-inset-top));z-index:6;display:none;background:rgba(5,10,13,.45);color:#f3e6c4;border:1px solid rgba(243,230,196,.45);border-radius:3px;font:600 12px "Apple SD Gothic Neo",sans-serif;padding:6px 10px;cursor:pointer;opacity:.0;transition:opacity .6s}
+#ambX{position:fixed;right:14px;top:calc(12px + env(safe-area-inset-top));z-index:6;display:none;background:rgba(5,10,13,.45);color:#f3e6c4;border:1px solid rgba(243,230,196,.45);border-radius:3px;font:600 13px "Apple SD Gothic Neo",sans-serif;padding:6px 10px;cursor:pointer;opacity:.0;transition:opacity .6s}
 body.amb #ambX{display:block}body.amb.wake #ambX{opacity:1}
 #reply{position:fixed;inset:0;z-index:42;display:none;align-items:center;justify-content:center;background:rgba(6,16,22,.82);padding:16px}
 #reply.on{display:flex}
@@ -298,8 +298,8 @@ body.amb #ambX{display:block}body.amb.wake #ambX{opacity:1}
 #reply .env{margin:14px auto 4px;width:220px;height:120px;position:relative;background:#e9d8b4;border:3px solid #3a2a1c;border-radius:4px}
 #reply .env::before{content:"";position:absolute;inset:0;background:linear-gradient(to bottom right,transparent 49%,#3a2a1c 49.5%,#3a2a1c 50.5%,transparent 51%),linear-gradient(to bottom left,transparent 49%,#3a2a1c 49.5%,#3a2a1c 50.5%,transparent 51%);background-size:100% 60%;background-repeat:no-repeat}
 #reply .env b{position:absolute;left:50%;top:44%;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;background:#b8432f;color:#f3e6c4;font:800 13px/44px serif;text-align:center;box-shadow:inset 0 0 0 3px rgba(255,255,255,.25)}
-#reply .env span{position:absolute;left:0;right:0;bottom:8px;text-align:center;font:700 12px "Apple SD Gothic Neo",sans-serif}
-#reply .soon{text-align:center;font:800 12px "Apple SD Gothic Neo",sans-serif;letter-spacing:3px;color:#b8432f;margin-top:6px}
+#reply .env span{position:absolute;left:0;right:0;bottom:8px;text-align:center;font:700 13px "Apple SD Gothic Neo",sans-serif}
+#reply .soon{text-align:center;font:800 13px "Apple SD Gothic Neo",sans-serif;letter-spacing:3px;color:#b8432f;margin-top:6px}
 
 /* ===== 선택 뒤 움직이는 CG ===== */
 #cg .mo{position:absolute;inset:0;z-index:4;opacity:0;pointer-events:none;transition:opacity 1.1s ease;overflow:hidden;background:#050a0d}
@@ -330,13 +330,13 @@ body.amb #ambX{display:block}body.amb.wake #ambX{opacity:1}
 
 /* ===== 우체국칸 ===== */
 #postB{position:fixed;right:330px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:4;padding:6px 11px;font:700 13px "Apple SD Gothic Neo",sans-serif;cursor:pointer}
-#postB i{font-style:normal;display:none;margin-left:5px;background:#b8432f;color:#fff6e4;border-radius:9px;padding:0 6px;font-size:11px}
+#postB i{font-style:normal;display:none;margin-left:5px;background:#b8432f;color:#fff6e4;border-radius:9px;padding:0 6px;font-size:12.5px}
 #postB.new i{display:inline-block}#postB.new{animation:bob 1.6s infinite}
 @media (max-width:420px){#postB{right:auto;left:112px;bottom:calc(56px + env(safe-area-inset-bottom))}}
 body.talk #postB,body.amb #postB{opacity:0;pointer-events:none}
 #mailT{position:fixed;left:50%;top:calc(76px + env(safe-area-inset-top));transform:translate(-50%,-160%);z-index:24;display:flex;gap:10px;align-items:center;padding:10px 16px;cursor:pointer;transition:transform .6s cubic-bezier(.2,1.3,.4,1);max-width:calc(100vw - 24px);font-family:"Apple SD Gothic Neo",sans-serif}
 #mailT{visibility:hidden;opacity:0}#mailT.on{transform:translate(-50%,0) rotate(-1deg);visibility:visible;opacity:1}
-#mailT b{font-size:22px}#mailT span{font-weight:800;font-size:14px}#mailT small{display:block;font-size:11px;opacity:.65;margin-left:auto;white-space:nowrap}
+#mailT b{font-size:22px}#mailT span{font-weight:800;font-size:14px}#mailT small{display:block;font-size:12.5px;opacity:.65;margin-left:auto;white-space:nowrap}
 #post{position:fixed;inset:0;z-index:25;background:rgba(6,16,22,.6);display:none;align-items:center;justify-content:center;padding:14px}
 #post.on{display:flex}
 #post .pC{width:min(640px,100%);max-height:88vh;display:flex;flex-direction:column;padding:0;overflow:hidden;animation:ckIn .35s}
@@ -344,9 +344,9 @@ body.talk #postB,body.amb #postB{opacity:0;pointer-events:none}
 .envs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
 .env{position:relative;aspect-ratio:1.55;border:2px solid var(--ac);border-radius:3px;background:linear-gradient(160deg,transparent 49.5%,rgba(0,0,0,.08) 50%),linear-gradient(20deg,transparent 49.5%,rgba(0,0,0,.08) 50%),var(--bg);box-shadow:3px 3px 0 var(--ac);cursor:pointer;text-align:left;padding:10px;font-family:"Apple SD Gothic Neo",sans-serif;color:#2b1e12;transition:transform .2s}
 .env:hover{transform:translateY(-2px) rotate(-1deg)}
-.env b{position:absolute;left:10px;bottom:22px;font-size:14px}.env small{position:absolute;left:10px;bottom:8px;font-size:11px;opacity:.7}
+.env b{position:absolute;left:10px;bottom:22px;font-size:14px}.env small{position:absolute;left:10px;bottom:8px;font-size:12.5px;opacity:.7}
 .env .stp{position:absolute;right:8px;top:8px;width:34px;height:40px;display:flex;align-items:center;justify-content:center;font-size:20px;background:#fffdf6;border:2px dashed var(--ac)}
-.env.un::after{content:'새 편지';position:absolute;left:8px;top:8px;background:#b8432f;color:#fff6e4;font-size:10px;font-weight:800;padding:2px 6px;border-radius:2px;transform:rotate(-4deg)}
+.env.un::after{content:'새 편지';position:absolute;left:8px;top:8px;background:#b8432f;color:#fff6e4;font-size:12px;font-weight:800;padding:2px 6px;border-radius:2px;transform:rotate(-4deg)}
 #letter{position:fixed;inset:0;z-index:26;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(6,16,22,.55)}
 #letter.on{display:flex}
 #letter .lp{position:relative;width:min(520px,100%);max-height:86vh;overflow:auto;padding:28px 26px 20px;color:var(--ink);border:2px solid var(--ac);box-shadow:6px 6px 0 var(--ac);border-radius:2px;font-family:var(--ff),"Apple SD Gothic Neo",serif;animation:ltIn .7s cubic-bezier(.2,1.1,.3,1)}
@@ -361,15 +361,15 @@ body.talk #postB,body.amb #postB{opacity:0;pointer-events:none}
 .nl{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-top:14px}
 .nt{position:relative;background:#fffbea;border:1px solid #d9c9a0;box-shadow:2px 3px 0 rgba(58,42,28,.25);padding:12px 12px 22px;transform:rotate(var(--r));font:17px/1.45 "Gaegu","Apple SD Gothic Neo",sans-serif;color:#3a2a1c}
 .nt::before{content:'';position:absolute;left:50%;top:-7px;width:44px;height:14px;transform:translateX(-50%) rotate(-3deg);background:rgba(211,155,42,.45)}
-.nt p{margin:0;word-break:break-all}.nt span{position:absolute;left:12px;bottom:5px;font:11px "Apple SD Gothic Neo",sans-serif;opacity:.55}
-.nt button{position:absolute;right:6px;bottom:3px;background:none;border:0;font:11px "Apple SD Gothic Neo",sans-serif;opacity:.45;cursor:pointer;color:#3a2a1c}
+.nt p{margin:0;word-break:break-all}.nt span{position:absolute;left:12px;bottom:5px;font:12.5px "Apple SD Gothic Neo",sans-serif;opacity:.55}
+.nt button{position:absolute;right:6px;bottom:3px;background:none;border:0;font:12.5px "Apple SD Gothic Neo",sans-serif;opacity:.45;cursor:pointer;color:#3a2a1c}
 .sos{margin:8px 0;padding:10px 12px;background:#fff2e6;border:2px solid #b8432f;border-radius:3px;font-size:13.5px;line-height:1.55;color:#3a1d12}.sos a{font-weight:800;color:#b8432f}
 
 /* ===== 인트로: 꼬리표 ===== */
 #intro{position:fixed;inset:0;z-index:45;display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:18px;
  background:radial-gradient(ellipse at 50% 30%,rgba(243,199,106,.16),transparent 55%),radial-gradient(ellipse at 50% 120%,rgba(47,127,134,.25),transparent 60%),#0b1418;font-family:"Apple SD Gothic Neo",sans-serif}
 #intro.on{display:flex}
-.iTop{text-align:center;color:#e7dcc2}.iTop small{letter-spacing:3px;font-size:11px;opacity:.6}.iTop p{margin:6px 0 0;min-height:24px;font:700 17px/1.4 "Gowun Batang","Apple SD Gothic Neo",serif;color:#f3e6c4}
+.iTop{text-align:center;color:#e7dcc2}.iTop small{letter-spacing:3px;font-size:12.5px;opacity:.6}.iTop p{margin:6px 0 0;min-height:24px;font:700 17px/1.4 "Gowun Batang","Apple SD Gothic Neo",serif;color:#f3e6c4}
 .iTagW{position:relative;padding-top:56px}
 .iStr{position:absolute;left:50%;top:0;width:2px;height:74px;background:linear-gradient(#0000,#c9b08a 30%);transform-origin:50% 0;animation:iSw 4.5s ease-in-out infinite}
 .iTag{position:relative;width:min(380px,84vw);padding:44px 22px 18px;background:repeating-linear-gradient(0deg,rgba(90,61,34,.05) 0 1px,transparent 1px 4px),#d8b98a;color:#3a2a1c;
@@ -380,14 +380,14 @@ body.talk #postB,body.amb #postB{opacity:0;pointer-events:none}
 .iHole{position:absolute;left:50%;top:14px;width:20px;height:20px;margin-left:-10px;border-radius:50%;background:#0b1418;box-shadow:0 0 0 5px #b8a27a,0 0 0 7px #8a7350;transition:box-shadow .4s,background .4s}
 .iHole.lit{background:#ffe6a8;box-shadow:0 0 0 5px #b8a27a,0 0 0 7px #8a7350,0 0 30px 12px rgba(255,214,140,.85)}
 .iHd{display:flex;justify-content:space-between;align-items:center;font:800 20px "Do Hyeon","Apple SD Gothic Neo",sans-serif;letter-spacing:1px;border-bottom:2px solid #3a2a1c;padding-bottom:6px}
-.iHd span{font-size:12px;opacity:.7}
-.iSub{font-size:11px;letter-spacing:2px;margin:6px 0 12px;opacity:.75;text-align:center}
-.iTag label{display:block;font-size:11px;font-weight:800;letter-spacing:1px;opacity:.75}
+.iHd span{font-size:13px;opacity:.7}
+.iSub{font-size:12.5px;letter-spacing:2px;margin:6px 0 12px;opacity:.75;text-align:center}
+.iTag label{display:block;font-size:12.5px;font-weight:800;letter-spacing:1px;opacity:.75}
 .iTag textarea{width:100%;height:76px;resize:none;border:0;border-bottom:1.5px dashed #3a2a1c;background:repeating-linear-gradient(180deg,transparent 0 25px,rgba(58,42,28,.28) 25px 26px);font:20px/26px "Gaegu","Apple SD Gothic Neo",sans-serif;color:#2b1e12;outline:none;padding:0;margin:4px 0 10px;box-sizing:border-box}
 .iTag textarea::placeholder{color:rgba(58,42,28,.45)}
-.iRow{display:flex;justify-content:space-between;font-size:12px}.iRow b em{font-style:normal}
+.iRow{display:flex;justify-content:space-between;font-size:13px}.iRow b em{font-style:normal}
 .iStamp{position:absolute;right:16px;bottom:34px;width:96px;height:96px;border:3px solid #b8312f;border-radius:50%;color:#b8312f;display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(-14deg) scale(2.4);opacity:0;font-family:"Do Hyeon",sans-serif;mix-blend-mode:multiply;pointer-events:none}
-.iStamp b{font-size:24px;line-height:1}.iStamp span{font-size:14px}.iStamp small{font-size:10px;letter-spacing:1px}
+.iStamp b{font-size:24px;line-height:1}.iStamp span{font-size:14px}.iStamp small{font-size:12px;letter-spacing:1px}
 .iStamp.on{animation:iSt .35s cubic-bezier(.3,1.6,.5,1) forwards}
 @keyframes iSt{to{transform:rotate(-14deg) scale(1);opacity:.9}}
 .iBtns{display:flex;flex-direction:column;align-items:center;gap:6px;width:min(380px,84vw)}
@@ -395,11 +395,11 @@ body.talk #postB,body.amb #postB{opacity:0;pointer-events:none}
 #iSos .sos{margin-top:4px}
 body.intro #tag,body.intro #snd,body.intro #seat,body.intro #ambB,body.intro #albB,body.intro #postB,body.intro #trk{opacity:0;pointer-events:none}
 
-#paxT .pg{font-size:11px;font-weight:700;opacity:.85;margin-top:3px;display:flex;align-items:center;gap:4px;justify-content:center;white-space:nowrap}
+#paxT .pg{font-size:12.5px;font-weight:700;opacity:.85;margin-top:3px;display:flex;align-items:center;gap:4px;justify-content:center;white-space:nowrap}
 .affF{position:fixed;z-index:30;transform:translate(-50%,0);font:800 14px "Apple SD Gothic Neo",sans-serif;color:#fff3d6;background:#b8432f;padding:3px 9px;border-radius:12px;pointer-events:none;animation:affF 1.6s ease-out forwards}
 @keyframes affF{0%{opacity:0;transform:translate(-50%,8px)}20%{opacity:1;transform:translate(-50%,-6px)}100%{opacity:0;transform:translate(-50%,-40px)}}
 #tkB{position:fixed;left:50%;bottom:calc(64px + env(safe-area-inset-bottom));transform:translate(-50%,30px);opacity:0;pointer-events:none;z-index:22;padding:10px 16px;font:800 15px "Apple SD Gothic Neo",sans-serif;cursor:pointer;transition:all .5s cubic-bezier(.2,1.3,.4,1)}
-#tkB small{font-weight:600;opacity:.65;margin-left:6px;font-size:12px}
+#tkB small{font-weight:600;opacity:.65;margin-left:6px;font-size:13px}
 #tkB.on{opacity:1;transform:translate(-50%,0) rotate(-1.5deg);pointer-events:auto;animation:bob 1.6s infinite 1s}
 
 /* ===== v2: 두 사람 장면 · 감정 기호 · 다음 역 버튼 · 노선표 ===== */
@@ -426,10 +426,10 @@ body.talk #nextB,body.amb #nextB,body.intro #nextB{opacity:0!important;pointer-e
 
 #carP{position:fixed;left:50%;bottom:calc(60px + env(safe-area-inset-bottom));transform:translate(-50%,20px);opacity:0;pointer-events:none;z-index:7;width:min(400px,calc(100vw - 24px));padding:12px 14px;transition:all .35s cubic-bezier(.2,1.3,.4,1);max-height:60vh;overflow:auto}
 #carP.on{opacity:1;transform:translate(-50%,0);pointer-events:auto}
-#carP .ch{display:flex;align-items:center;gap:8px;margin-bottom:8px}#carP .ch>div{flex:1;text-align:center}#carP .ch b{display:block;font-size:16px}#carP .ch small{font-size:12px;opacity:.7}
+#carP .ch{display:flex;align-items:center;gap:8px;margin-bottom:8px}#carP .ch>div{flex:1;text-align:center}#carP .ch b{display:block;font-size:16px}#carP .ch small{font-size:13px;opacity:.7}
 #carP .arw{background:none;border:2px solid #3a2a1c;border-radius:3px;width:34px;height:34px;font-size:14px;cursor:pointer;color:#3a2a1c}
 #carP>.pbtn2{width:100%;margin-top:6px}#carP .cp{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}#carP .cp .pbtn2{flex:1 1 40%;font-size:13px;padding:7px}
-#carP .mn{display:grid;grid-template-columns:34px 1fr;text-align:left;align-items:center;column-gap:8px}#carP .mn span{grid-row:span 2;font-size:26px;text-align:center}#carP .mn b{font-size:14px}#carP .mn small{font-size:11.5px;opacity:.7;font-weight:500}
+#carP .mn{display:grid;grid-template-columns:34px 1fr;text-align:left;align-items:center;column-gap:8px}#carP .mn span{grid-row:span 2;font-size:26px;text-align:center}#carP .mn b{font-size:14px}#carP .mn small{font-size:13px;opacity:.7;font-weight:500}
 body.talk #carP,body.amb #carP{opacity:0!important;pointer-events:none!important}
 @media (max-width:520px){#carP{bottom:calc(150px + env(safe-area-inset-bottom))}}
 #cg .item img.dish{width:min(220px,60vw);aspect-ratio:1;object-fit:cover;border-radius:50%;border:3px solid #3a2a1c;box-shadow:3px 3px 0 #3a2a1c;display:block;margin:0 auto 6px}
@@ -439,14 +439,14 @@ body.seat #nextB{bottom:auto;top:calc(76px + env(safe-area-inset-top))}
 /* ===== v5: 가방 하나로 · 처음 안내 ===== */
 body.bag5 #ambB,body.bag5 #albB,body.bag5 #postB,body.bag5 #trk:not(.ev){visibility:hidden!important;pointer-events:none!important}
 #bagB{position:fixed;left:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:5;padding:7px 13px;font:800 14px "Apple SD Gothic Neo",sans-serif;cursor:pointer}
-#bagB i{font-style:normal;display:none;margin-left:5px;background:#b8432f;color:#fff6e4;border-radius:9px;padding:0 6px;font-size:11px}
+#bagB i{font-style:normal;display:none;margin-left:5px;background:#b8432f;color:#fff6e4;border-radius:9px;padding:0 6px;font-size:12.5px}
 #bagB.new i{display:inline-block}#bagB.new{animation:bob 1.6s infinite}
 #bagP{position:fixed;left:14px;bottom:calc(58px + env(safe-area-inset-bottom));z-index:24;padding:6px 8px;display:none;min-width:200px;max-width:calc(100vw - 28px)}
 #bagP.on{display:block;animation:ckIn .3s}
 #bagP button{display:flex;width:100%;align-items:center;gap:9px;background:none;border:0;border-bottom:1.5px dashed rgba(58,42,28,.3);padding:11px 6px;font:700 14.5px "Apple SD Gothic Neo",sans-serif;color:#3a2a1c;text-align:left;cursor:pointer}
 #bagP button:last-child{border-bottom:0}#bagP button:active{background:rgba(58,42,28,.08)}
-#bagP button span{width:22px;text-align:center}#bagP button small{margin-left:auto;font-size:11px;opacity:.55;font-weight:600;padding-left:10px}
-#bagP button i{font-style:normal;margin-left:auto;background:#b8432f;color:#fff6e4;border-radius:9px;padding:0 7px;font-size:11px}
+#bagP button span{width:22px;text-align:center}#bagP button small{margin-left:auto;font-size:12.5px;opacity:.55;font-weight:600;padding-left:10px}
+#bagP button i{font-style:normal;margin-left:auto;background:#b8432f;color:#fff6e4;border-radius:9px;padding:0 7px;font-size:12.5px}
 body.talk #bagB,body.amb #bagB,body.intro #bagB,body.talk #bagP,body.amb #bagP{opacity:0!important;pointer-events:none!important}
 #tkB{bottom:calc(116px + env(safe-area-inset-bottom));white-space:nowrap}
 #back{left:102px;z-index:5}
@@ -457,10 +457,10 @@ body.talk #bagB,body.amb #bagB,body.intro #bagB,body.talk #bagP,body.amb #bagP{o
 #coach .hole{position:fixed;border-radius:14px;box-shadow:0 0 0 9999px rgba(8,12,16,.62);transition:all .45s cubic-bezier(.3,1.2,.4,1);pointer-events:none;outline:3px dashed rgba(243,230,196,.9);outline-offset:4px;animation:chole 1.6s ease-in-out infinite}
 @keyframes chole{50%{outline-offset:9px}}
 #coach .bub{position:fixed;left:50%;width:min(330px,calc(100vw - 32px));transform:translateX(-50%);padding:14px 16px 12px;transition:top .45s,bottom .45s}
-#coach .bub small{display:block;font-size:11px;letter-spacing:.12em;color:#b8432f;font-weight:800;margin-bottom:4px}
+#coach .bub small{display:block;font-size:12.5px;letter-spacing:.12em;color:#b8432f;font-weight:800;margin-bottom:4px}
 #coach .bub p{margin:0 0 10px;font-size:14.5px;line-height:1.6;color:#3a2a1c}
 #coach .bub div{display:flex;justify-content:space-between;align-items:center}
-#coach .bub .sk{background:none;border:0;font:600 12px "Apple SD Gothic Neo",sans-serif;opacity:.6;cursor:pointer;color:#3a2a1c}
+#coach .bub .sk{background:none;border:0;font:600 13px "Apple SD Gothic Neo",sans-serif;opacity:.6;cursor:pointer;color:#3a2a1c}
 #cg .mo.real .mi{inset:-4%}
 #cg .mo.real .mp{display:none}
 @keyframes moPan{from{background-position:var(--p0,50% 50%)}to{background-position:var(--p1,50% 50%)}}
@@ -489,7 +489,7 @@ body.talk #bagB,body.amb #bagB,body.intro #bagB,body.talk #bagP,body.amb #bagP{o
 #tkB.on{animation:glow5 3.2s ease-in-out infinite 1s!important;transform:translate(-50%,0)!important}
 #nextB{transition:opacity .9s ease,transform .9s ease!important}
 #cg .ttl{background:none!important;border:0!important;box-shadow:none!important;transform:translate(-50%,-50%)!important;color:#f3e6c4;font:700 clamp(28px,3.6vw,46px)/1.3 "Gowun Batang","Nanum Myeongjo",serif;letter-spacing:.03em;padding:0;text-shadow:0 2px 18px rgba(0,0,0,.6)}
-#cg .ttl small{font:600 clamp(11px,1vw,13px)/1 "Apple SD Gothic Neo",sans-serif;letter-spacing:.38em;opacity:.62;margin-bottom:18px}
+#cg .ttl small{font:600 clamp(12.5px,1vw,13px)/1 "Apple SD Gothic Neo",sans-serif;letter-spacing:.38em;opacity:.62;margin-bottom:18px}
 #cg .ttl::after{content:'';display:block;width:46px;height:1px;background:rgba(243,230,196,.45);margin:20px auto 0}
 #cg .ttl.on{animation:ttlIn 2.6s ease both}
 @keyframes ttlIn{from{opacity:0;letter-spacing:.12em}to{opacity:1;letter-spacing:.03em}}
@@ -501,14 +501,14 @@ body.talk #bagB,body.amb #bagB,body.intro #bagB,body.talk #bagP,body.amb #bagP{o
 /* ===== v8: 이야기 틀 (놀이 · 페이지 조각 · 별명) ===== */
 #cg .gm{position:absolute;inset:0;z-index:8;pointer-events:auto}
 #cg .gm .gh{position:absolute;left:50%;top:calc(10% + 14px);transform:translateX(-50%);padding:9px 18px;font:800 15px "Apple SD Gothic Neo",sans-serif;white-space:nowrap;text-align:center}
-#cg .gm .gh small{display:block;font-weight:600;font-size:12px;opacity:.7;margin-top:2px}
+#cg .gm .gh small{display:block;font-weight:600;font-size:13px;opacity:.7;margin-top:2px}
 #cg .gm .gc{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(420px,86vw);padding:18px 18px 14px;text-align:center}
 #cg .gm .gc h4{margin:0 0 4px;font-size:17px}#cg .gm .gc p{margin:0 0 12px;font-size:13.5px;opacity:.8}
 #cg .gm .gc input{width:100%;box-sizing:border-box;border:2px solid #3a2a1c;border-radius:4px;padding:10px 12px;font:600 15px "Gaegu","Apple SD Gothic Neo",sans-serif;background:#fffaf0;margin-bottom:10px}
 #cg .gm .gc .row{display:flex;gap:8px}#cg .gm .gc .row button{flex:1}
 #cg .gm .boat{position:absolute;left:46%;bottom:22%;width:clamp(90px,12vw,150px);animation:boatGo 4.2s ease-in forwards;filter:drop-shadow(0 6px 10px rgba(0,0,0,.35))}
 @keyframes boatGo{0%{transform:translate(0,0) rotate(-3deg);opacity:0}10%{opacity:1}30%{transform:translate(4vw,-1vh) rotate(3deg)}55%{transform:translate(12vw,-4vh) rotate(-3deg) scale(.8)}100%{transform:translate(26vw,-12vh) rotate(2deg) scale(.35);opacity:0}}
-#cg .gm .boat i{position:absolute;left:18%;right:18%;top:8%;font:700 11px/1.2 "Gaegu",sans-serif;color:#3a2a1c;text-align:center;font-style:normal;overflow:hidden;max-height:40%}
+#cg .gm .boat i{position:absolute;left:18%;right:18%;top:8%;font:700 12.5px/1.2 "Gaegu",sans-serif;color:#3a2a1c;text-align:center;font-style:normal;overflow:hidden;max-height:40%}
 #cg .gm .obj{position:absolute;width:clamp(44px,5vw,64px);cursor:pointer;transform:translate(-50%,-50%) rotate(var(--r,0deg));filter:drop-shadow(0 2px 3px rgba(0,0,0,.4));transition:transform .5s,opacity .5s}
 #cg .gm .obj.hint{animation:objH 1.4s ease-in-out infinite}
 @keyframes objH{50%{filter:drop-shadow(0 0 12px rgba(255,230,150,.95))}}
@@ -521,9 +521,9 @@ body.talk #bagB,body.amb #bagB,body.intro #bagB,body.talk #bagP,body.amb #bagP{o
 #cg .gm .brg b.on{border:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 36'%3E%3Cpath d='M4 26 Q18 10 34 16 L56 8 L44 20 Q36 30 16 30 Z' fill='%23161a22' stroke='%23f3e6c4' stroke-width='1.2'/%3E%3Cpath d='M20 18 Q30 12 38 18 Q30 24 20 22Z' fill='%23f3e6c4'/%3E%3C/svg%3E") center/contain no-repeat;animation:land .5s ease-out}
 @keyframes land{from{transform:translateY(-24px);opacity:0}}
 #cg .item.pg{background:#f4ead2!important;border:0!important;box-shadow:0 14px 40px rgba(0,0,0,.45)!important;clip-path:polygon(0 4%,8% 0,22% 3%,37% 0,52% 4%,68% 1%,84% 4%,100% 0,98% 22%,100% 46%,97% 70%,100% 96%,84% 100%,66% 97%,48% 100%,30% 97%,14% 100%,0 97%,3% 72%,0 48%,2% 24%);padding:28px 26px 22px;width:min(380px,84vw)}
-#cg .item.pg small{display:block;font:700 11px "Apple SD Gothic Neo",sans-serif;letter-spacing:.18em;color:#8a5a2b;margin-bottom:14px}
+#cg .item.pg small{display:block;font:700 12.5px "Apple SD Gothic Neo",sans-serif;letter-spacing:.18em;color:#8a5a2b;margin-bottom:14px}
 #cg .item.pg .hw{font:700 clamp(22px,2.4vw,28px)/1.45 "Gaegu","Jua",sans-serif;color:#c2402f;transform:rotate(-2.5deg);margin:4px 0 14px;text-shadow:0 0 1px rgba(194,64,47,.4)}
-#cg .item.pg p{font-size:12px;opacity:.6}
+#cg .item.pg p{font-size:13px;opacity:.6}
 #intro .iNm{display:flex;align-items:center;gap:8px;margin:0 0 8px}#intro .iNm label{margin:0;white-space:nowrap}
 #intro .iNm input{flex:1;min-width:0;border:0;border-bottom:1.5px dashed rgba(58,42,28,.45);background:transparent;font:700 15px "Gaegu","Apple SD Gothic Neo",sans-serif;color:#3a2a1c;padding:3px 2px;outline:none}
 @media (min-width:900px){
@@ -557,7 +557,7 @@ body.amb #pax,body.amb #paxT,body.amb #cmo,body.amb #cmB{opacity:0!important;poi
 .pgg{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
 .pgc{background:#f4ead2;padding:18px 14px 14px;min-height:96px;clip-path:polygon(0 6%,10% 0,30% 4%,52% 0,74% 4%,100% 0,97% 30%,100% 62%,97% 100%,70% 96%,44% 100%,20% 96%,0 100%,3% 60%);text-align:center;position:relative}
 .pgc .hw{font:700 17px/1.4 "Gaegu","Jua",sans-serif;color:#c2402f;transform:rotate(-2deg)}
-.pgc small{display:block;font-size:10.5px;letter-spacing:.1em;color:#8a5a2b;margin-bottom:6px;font-weight:700}
+.pgc small{display:block;font-size:12.5px;letter-spacing:.1em;color:#8a5a2b;margin-bottom:6px;font-weight:700}
 .pgc.no{background:#d9ccb0;opacity:.6}.pgc.no .hw{color:#8a7a62;font-size:26px}
 /* 오프닝: 스무 해 전의 꼬리표 */
 .iPair{display:flex;align-items:flex-start;justify-content:center;gap:0;transition:gap 1.2s}
@@ -571,8 +571,8 @@ body.amb #pax,body.amb #paxT,body.amb #cmo,body.amb #cmB{opacity:0!important;poi
  background:radial-gradient(ellipse at 20% 80%,rgba(120,80,30,.22),transparent 40%),radial-gradient(ellipse at 85% 25%,rgba(120,80,30,.18),transparent 35%),repeating-linear-gradient(0deg,rgba(90,61,34,.06) 0 1px,transparent 1px 4px),#cfae74;
  clip-path:polygon(18% 0,82% 0,100% 11%,100% 100%,0 100%,0 11%);filter:sepia(.2) drop-shadow(0 16px 30px rgba(0,0,0,.5))}
 .iOld .ho{position:absolute;left:50%;top:14px;width:20px;height:20px;margin-left:-10px;border-radius:50%;background:#0b1418;box-shadow:0 0 0 5px #a8905e,0 0 0 7px #7a6340}
-.iOld .pr{font:800 11px "Apple SD Gothic Neo",sans-serif;letter-spacing:.2em;opacity:.55;text-align:center;border-bottom:1.5px solid rgba(58,42,28,.4);padding-bottom:6px;margin-bottom:10px}
-.iOld dl{margin:0}.iOld dt{font:800 10.5px "Apple SD Gothic Neo",sans-serif;letter-spacing:.1em;opacity:.6;margin-top:8px}
+.iOld .pr{font:800 12.5px "Apple SD Gothic Neo",sans-serif;letter-spacing:.2em;opacity:.55;text-align:center;border-bottom:1.5px solid rgba(58,42,28,.4);padding-bottom:6px;margin-bottom:10px}
+.iOld dl{margin:0}.iOld dt{font:800 12.5px "Apple SD Gothic Neo",sans-serif;letter-spacing:.1em;opacity:.6;margin-top:8px}
 .iOld dd{margin:2px 0 0;font:700 23px/1.25 "Gaegu","Jua",sans-serif;color:#2f55a4;transform:rotate(-1.5deg);border-bottom:1.5px dashed rgba(58,42,28,.3);padding-bottom:2px}
 .iOld dd.r{color:#c2402f}
 .iOld .st2{position:absolute;right:14px;bottom:18px;padding:6px 9px;border:2.5px solid #2f55a4;color:#2f55a4;font:800 13px/1.2 "Do Hyeon","Apple SD Gothic Neo",sans-serif;transform:rotate(-12deg);opacity:.75;text-align:center;border-radius:3px}
@@ -596,7 +596,7 @@ body.ink0{--dz:var(--dz-cr)}body.ink1{--dz:var(--dz-pc)}body.ink2{--dz:var(--dz-
 body.ink0 #nextB.go{--dz:var(--dz-crR)}
 body.ink0 :is(#tag,.pbtn,#nextB,#bagB,#snd,#back,#trk,#tkB,#bagP button,#lvt,#depT,#paxT,#mailT,#cg .gm .gh,#coach .bub small){font-family:"Gaegu","Jua",sans-serif!important;font-weight:700!important}
 body.ink1 :is(#tag,.pbtn,#nextB,#bagB,#snd,#back,#trk,#tkB,#bagP button,#lvt,#depT,#paxT,#mailT,#cg .gm .gh,#coach .bub small){font-family:"Gaegu","Jua",sans-serif!important;font-weight:400!important;color:#3d3d3d}
-body.ink2 :is(#tag,.pbtn,#nextB,#bagB,#snd,#back,#trk,#tkB,#bagP button,#lvt,#depT,#paxT,#mailT,#cg .gm .gh,#coach .bub small){font-family:"Nanum Pen Script","Gaegu",sans-serif!important;font-weight:400!important;color:#1f2b5a}
+body.ink2 :is(#tag,.pbtn,#nextB,#bagB,#snd,#back,#trk,#tkB,#bagP button,#lvt,#depT,#paxT,#mailT,#cg .gm .gh,#coach .bub small){font-family:"Gaegu",sans-serif!important;font-weight:400!important;color:#1f2b5a}
 body:is(.ink0,.ink1) #nextB,body:is(.ink0,.ink1) #bagB,body:is(.ink0,.ink1) #snd,body:is(.ink0,.ink1) .pbtn{font-size:17px!important}
 body.ink2 #nextB,body.ink2 #bagB,body.ink2 #snd,body.ink2 .pbtn{font-size:21px!important}
 body:is(.ink0,.ink1) #tag b{font-size:21px!important}body.ink2 #tag b{font-size:25px!important}
@@ -623,10 +623,10 @@ body.poprise>canvas{transition:transform 1.7s cubic-bezier(.2,.95,.25,1);transfo
 #lastP{position:fixed;inset:0;z-index:46;display:none;align-items:center;justify-content:center;background:rgba(10,8,6,.72)}
 #lastP.on{display:flex}
 #lastP .pg{width:min(520px,90vw);background:#f4ead2;padding:34px 30px 24px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.5);animation:cardPop 1s cubic-bezier(.2,1,.3,1)}
-#lastP small{display:block;font:700 12px "Apple SD Gothic Neo",sans-serif;letter-spacing:.3em;opacity:.55}
+#lastP small{display:block;font:700 13px "Apple SD Gothic Neo",sans-serif;letter-spacing:.3em;opacity:.55}
 #lastP h3{margin:12px 0 4px;font:700 30px "Gowun Batang",serif;color:#3a2a1c}
 #lastP .hw{font:700 24px "Gaegu",sans-serif;color:#c2402f;transform:rotate(-2deg);margin:6px 0 18px}
-#lastP input{width:100%;box-sizing:border-box;border:0;border-bottom:2px dashed #3a2a1c;background:transparent;font:400 28px "Nanum Pen Script","Gaegu",sans-serif;color:#1f2b5a;padding:6px 4px;outline:none;text-align:center;margin-bottom:18px}
+#lastP input{width:100%;box-sizing:border-box;border:0;border-bottom:2px dashed #3a2a1c;background:transparent;font:700 23px "Gaegu",sans-serif;color:#1f2b5a;padding:6px 4px;outline:none;text-align:center;margin-bottom:18px}
 
 /* v13 */
 body.talk #tkB,body.amb #tkB,#cg.on~#tkB{opacity:0!important;pointer-events:none!important}
@@ -638,9 +638,9 @@ body.amb #mailT,body.amb #lvt{opacity:0!important;pointer-events:none!important}
 /* 도착 안내: 낙서 종이 */
 #ann .in{background:#fbf5e6!important;color:#2b2620!important;border:7px solid transparent!important;border-image:var(--dz) 16 / 7px stretch!important;border-radius:0!important;background-clip:padding-box!important;box-shadow:0 4px 12px rgba(0,0,0,.3)!important;padding:12px 18px 12px 66px!important;transform:rotate(-.8deg)}
 #ann .bell{background:#c2402f!important;color:#fffaf0!important;font-family:"Gaegu",sans-serif!important}
-#ann small{color:#c2402f!important;opacity:1!important;font:400 15px "Nanum Pen Script","Gaegu",sans-serif!important;letter-spacing:1px!important}
-#ann b{color:#1f2b5a!important;font:400 26px/1.15 "Nanum Pen Script","Gaegu",sans-serif!important;display:block}
-#ann span{color:#5a4a3a!important;font:400 17px "Nanum Pen Script","Gaegu",sans-serif!important}
+#ann small{color:#c2402f!important;opacity:1!important;font:700 15px "Gaegu",sans-serif!important;letter-spacing:1px!important}
+#ann b{color:#1f2b5a!important;font:700 21px/1.15 "Gaegu",sans-serif!important;display:block}
+#ann span{color:#5a4a3a!important;font:700 15px "Gaegu",sans-serif!important}
 /* 작은 글씨 키우기 */
 #hint{font-size:14.5px!important;bottom:calc(16px + env(safe-area-inset-bottom))!important;opacity:.92;text-shadow:0 1px 3px rgba(0,0,0,.8)}
 @media (min-width:900px) and (min-height:620px){#intro .iPair{zoom:1.3}}
@@ -648,7 +648,7 @@ body.amb #mailT,body.amb #lvt{opacity:0!important;pointer-events:none!important}
 #cg.gaming:has(.gm .gc) .ch.in{opacity:1!important}
 @media (min-aspect-ratio:1/1){#cg .gm .gc{left:27%}}
 /* 공용 */
-#v14T{width:auto!important;position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top));transform:translate(-50%,-140%) rotate(-.6deg);z-index:46;max-width:min(520px,calc(100vw - 24px));padding:10px 18px;transition:transform .55s cubic-bezier(.2,1.3,.4,1);text-align:center;font-family:"Nanum Pen Script","Gaegu",sans-serif;color:#1f2b5a}
+#v14T{width:auto!important;position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top));transform:translate(-50%,-140%) rotate(-.6deg);z-index:46;max-width:min(520px,calc(100vw - 24px));padding:10px 18px;transition:transform .55s cubic-bezier(.2,1.3,.4,1);text-align:center;font-family:"Gaegu",sans-serif;color:#1f2b5a}
 #v14T{visibility:hidden}#v14T.on{visibility:visible;transform:translate(-50%,0) rotate(-.6deg)}
 #v14T b{display:block;font-weight:400;font-size:21px;line-height:1.2}
 #v14T small{display:block;font-size:16.5px;opacity:.8;margin-top:2px}
@@ -660,15 +660,15 @@ body.amb #mailT,body.amb #lvt{opacity:0!important;pointer-events:none!important}
 /* 방송 */
 #bcP .sC.bc{flex-direction:row;align-items:center;gap:14px;padding:16px 18px;width:min(520px,94vw)}
 #bcP .bc img{width:74px;height:auto;flex:none;filter:drop-shadow(2px 3px 0 rgba(0,0,0,.18))}
-#bcP .bc small{display:block;font:400 15px "Nanum Pen Script","Gaegu",sans-serif;color:#c2402f}
-#bcP .bc b{display:block;font:400 25px "Nanum Pen Script","Gaegu",sans-serif;color:#1f2b5a}
+#bcP .bc small{display:block;font:700 15px "Gaegu",sans-serif;color:#c2402f}
+#bcP .bc b{display:block;font:700 20px "Gaegu",sans-serif;color:#1f2b5a}
 #bcP .bc p{margin:4px 0 0;font:15.5px/1.55 "Gowun Batang",serif;color:#2b2620}
 #bcP .bc .albX{align-self:flex-end;flex:none}
 /* 분실물 */
 #lostP .lostc{width:min(380px,90vw);padding:20px;text-align:center;align-items:center;gap:6px}
 #lostP .big{font-size:56px}
-#lostP b{font:400 26px "Nanum Pen Script",sans-serif;color:#1f2b5a}
-#lostP .nt{background:#fffaf0;border:1.5px dashed #b9a27a;padding:12px 14px;font:400 21px/1.35 "Nanum Pen Script",sans-serif;color:#2b2620;transform:rotate(-1.2deg);width:100%;box-sizing:border-box}
+#lostP b{font:700 21px "Gaegu",sans-serif;color:#1f2b5a}
+#lostP .nt{background:#fffaf0;border:1.5px dashed #b9a27a;padding:12px 14px;font:700 17px/1.35 "Gaegu",sans-serif;color:#2b2620;transform:rotate(-1.2deg);width:100%;box-sizing:border-box}
 #lostP .nt i{display:block;text-align:right;font-style:normal;margin-top:4px;color:#c2402f}
 #lostP small{opacity:.65;font-size:13px}
 /* 추리 보드 */
@@ -678,48 +678,48 @@ body.amb #mailT,body.amb #lvt{opacity:0!important;pointer-events:none!important}
 #boardP .str{position:absolute;left:0;top:0;pointer-events:none;z-index:2}
 #boardP .bc{position:relative;background:#f7efdc;min-height:96px;padding:16px 10px 10px;transform:rotate(var(--r));box-shadow:2px 4px 6px rgba(40,20,5,.35);text-align:center;z-index:1}
 #boardP .bc:not(.g){background:rgba(247,239,220,.35);border:2px dashed rgba(58,42,28,.4);box-shadow:none}
-#boardP .bc small{display:block;font:11px "Apple SD Gothic Neo",sans-serif;opacity:.6;margin-bottom:4px}
-#boardP .bc .hw{font:400 19px/1.25 "Gaegu",sans-serif;color:#2f55a4}
-#boardP .bc .q{font:400 36px "Gaegu",sans-serif;color:rgba(58,42,28,.45)}
+#boardP .bc small{display:block;font:12.5px "Apple SD Gothic Neo",sans-serif;opacity:.6;margin-bottom:4px}
+#boardP .bc .hw{font:700 19px/1.25 "Gaegu",sans-serif;color:#2f55a4}
+#boardP .bc .q{font:700 36px "Gaegu",sans-serif;color:rgba(58,42,28,.45)}
 #boardP .pin{position:absolute;left:50%;top:-6px;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ff8a7a,#b8312f 60%,#6d1a14);box-shadow:1px 2px 2px rgba(0,0,0,.4);z-index:3}
 #boardP .bc:not(.g) .pin{opacity:.35}
 #boardP .memo{grid-column:span 2;background:#fffef6;background-image:repeating-linear-gradient(180deg,transparent 0 21px,rgba(47,85,164,.18) 21px 22px);border-top:4px solid #c2402f;padding:12px 16px;transform:rotate(1.2deg);box-shadow:2px 4px 6px rgba(40,20,5,.35);z-index:1}
-#boardP .memo small{font:12px "Courier New",monospace;opacity:.7}
+#boardP .memo small{font:13px "Courier New",monospace;opacity:.7}
 #boardP .memo p{margin:6px 0 0;font:15.5px/22px "Courier New","Nanum Myeongjo",monospace;color:#2b2620}
 #boardP .sus{background:#2b2620;color:#f6e9c8;padding:12px;text-align:center;transform:rotate(-2deg);box-shadow:2px 4px 6px rgba(40,20,5,.4);z-index:1}
-#boardP .sus small{display:block;font-size:11px;opacity:.7;letter-spacing:1px}
-#boardP .sus b{font:400 30px "Nanum Pen Script",sans-serif;color:#f3c76a}
+#boardP .sus small{display:block;font-size:12.5px;opacity:.7;letter-spacing:1px}
+#boardP .sus b{font:700 25px "Gaegu",sans-serif;color:#f3c76a}
 /* 엽서 쓰기 */
 #post .pcS{display:flex;flex-direction:column;gap:6px;padding:4px 16px 16px}
-#post .pcS>small{font:400 17px "Nanum Pen Script","Gaegu",sans-serif;color:#c2402f;margin-top:6px}
+#post .pcS>small{font:700 15px "Gaegu",sans-serif;color:#c2402f;margin-top:6px}
 #post .pcTo{display:flex;flex-wrap:wrap;gap:6px}
 #post .chip{border:1.5px solid #3a2a1c;background:#fffaf0;border-radius:999px;padding:6px 12px;font:600 13.5px "Apple SD Gothic Neo",sans-serif;cursor:pointer;color:#2b2620}
-#post .chip i{font-style:normal;font-size:11px;opacity:.55}
+#post .chip i{font-style:normal;font-size:12.5px;opacity:.55}
 #post .chip.on{background:#1f2b5a;color:#fffaf0;border-color:#1f2b5a}
 #post .pcPic{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 8px}
 #post .pic{flex:none;width:118px;aspect-ratio:3/2;border:3px solid #fffaf0;outline:1.5px solid #3a2a1c;background-size:cover;background-position:50%;position:relative;cursor:pointer;box-shadow:2px 3px 0 rgba(0,0,0,.15)}
-#post .pic span{position:absolute;left:0;right:0;bottom:0;background:rgba(255,250,240,.88);font:600 11.5px "Apple SD Gothic Neo",sans-serif;padding:2px;color:#2b2620}
+#post .pic span{position:absolute;left:0;right:0;bottom:0;background:rgba(255,250,240,.88);font:600 13px "Apple SD Gothic Neo",sans-serif;padding:2px;color:#2b2620}
 #post .pic.on{outline:3px solid #c2402f;transform:rotate(-2deg)}
-#post .pcS textarea{height:66px;resize:none;border:0;border-bottom:1.5px dashed #3a2a1c;background:repeating-linear-gradient(180deg,transparent 0 25px,rgba(58,42,28,.25) 25px 26px);font:22px/26px "Nanum Pen Script","Gaegu",sans-serif;color:#1f2b5a;outline:none;padding:0}
+#post .pcS textarea{height:66px;resize:none;border:0;border-bottom:1.5px dashed #3a2a1c;background:repeating-linear-gradient(180deg,transparent 0 25px,rgba(58,42,28,.25) 25px 26px);font:700 18px/21px "Gaegu",sans-serif;color:#1f2b5a;outline:none;padding:0}
 #post .pcS .go{margin-top:8px}
 #post .pcSent{display:flex;flex-direction:column;align-items:center;gap:8px;padding:20px 16px 22px;text-align:center}
 #post .pcSent .card{width:220px;aspect-ratio:3/2;background-size:cover;background-position:50%;border:6px solid #fffaf0;box-shadow:3px 5px 0 rgba(0,0,0,.18);position:relative;animation:pcFly 1.1s cubic-bezier(.3,1.4,.5,1)}
 #post .pcSent .stamp{position:absolute;right:-12px;top:-12px;width:46px;height:46px;border-radius:50%;border:3px solid #c2402f;background:#fffaf0;font:22px/40px sans-serif;font-style:normal;text-align:center;transform:rotate(14deg);animation:iSt .35s .7s both cubic-bezier(.3,1.6,.5,1)}
 @keyframes pcFly{from{transform:translateY(40px) rotate(-8deg);opacity:0}to{transform:none;opacity:1}}
-#post .pcSent b{font:400 26px "Nanum Pen Script",sans-serif;color:#1f2b5a}
+#post .pcSent b{font:700 21px "Gaegu",sans-serif;color:#1f2b5a}
 #post .pcSent small{opacity:.7}
 #letter .pcQ{height:120px;background-size:cover;background-position:50%;border:5px solid #fffaf0;box-shadow:2px 3px 0 rgba(0,0,0,.15);position:relative;margin:4px 0 14px;transform:rotate(-1deg)}
-#letter .pcQ span{position:absolute;left:0;top:0;background:rgba(255,250,240,.9);font:600 11px sans-serif;padding:2px 6px}
-#letter .pcQ q{position:absolute;left:8px;right:8px;bottom:8px;background:rgba(255,250,240,.92);font:400 19px/1.25 "Nanum Pen Script",sans-serif;color:#1f2b5a;padding:4px 8px;quotes:"“" "”"}
+#letter .pcQ span{position:absolute;left:0;top:0;background:rgba(255,250,240,.9);font:600 12.5px sans-serif;padding:2px 6px}
+#letter .pcQ q{position:absolute;left:8px;right:8px;bottom:8px;background:rgba(255,250,240,.92);font:700 16px/1.25 "Gaegu",sans-serif;color:#1f2b5a;padding:4px 8px;quotes:"“" "”"}
 /* 수다 */
 #chatP .chat{width:min(440px,94vw);height:min(470px,80vh)}
 #chatP .cl{flex:1;overflow:auto;padding:14px 16px;display:flex;flex-direction:column;gap:10px;background:repeating-linear-gradient(180deg,transparent 0 27px,rgba(58,42,28,.08) 27px 28px)}
 #chatP .bb{max-width:78%;animation:ckIn .3s}
 #chatP .bb.r{align-self:flex-end;text-align:right}
-#chatP .bb small{font:700 12px "Apple SD Gothic Neo",sans-serif}
+#chatP .bb small{font:700 13px "Apple SD Gothic Neo",sans-serif}
 #chatP .bb p{margin:3px 0 0;background:#fffaf0;border:1.5px solid #3a2a1c;border-radius:14px 14px 14px 3px;padding:8px 12px;font:15px/1.5 "Gowun Batang",serif;color:#2b2620;text-align:left;box-shadow:2px 2px 0 rgba(0,0,0,.08)}
 #chatP .bb.r p{border-radius:14px 14px 3px 14px;background:#f3ead4}
-#chatP .ft{display:block;text-align:center;padding:8px;opacity:.55;font-size:12px}
+#chatP .ft{display:block;text-align:center;padding:8px;opacity:.55;font-size:13px}
 /* 창가 선반 */
 #shelf{position:fixed;left:53%;width:25%;height:46px;z-index:3;display:none;align-items:flex-end;justify-content:flex-start;gap:4px;pointer-events:auto}
 body.seat #shelf{display:flex}
@@ -737,37 +737,37 @@ body.talk #shelf,body.amb #shelf{opacity:.0;pointer-events:none}
 #wstar i::after{content:"";position:absolute;right:6px;top:4px;width:110px;height:3px;transform-origin:100% 50%;transform:rotate(-22deg);background:linear-gradient(90deg,transparent,rgba(255,245,210,.9));border-radius:3px}
 @keyframes wsF{0%{transform:translate(0,0);opacity:0}8%{opacity:1}85%{opacity:1}100%{transform:translate(-260px,105px);opacity:0}}
 #wishP .wish{width:min(400px,90vw);padding:18px;text-align:center;gap:6px}
-#wishP .wish small{font:400 16px "Nanum Pen Script",sans-serif;color:#c2402f}
-#wishP .wish b{font:400 28px "Nanum Pen Script",sans-serif;color:#1f2b5a}
-#wishP input{border:0;border-bottom:1.5px dashed #3a2a1c;background:transparent;font:22px "Nanum Pen Script","Gaegu",sans-serif;color:#1f2b5a;padding:6px 2px;outline:none;text-align:center;margin:6px 0 10px}
+#wishP .wish small{font:700 15px "Gaegu",sans-serif;color:#c2402f}
+#wishP .wish b{font:700 23px "Gaegu",sans-serif;color:#1f2b5a}
+#wishP input{border:0;border-bottom:1.5px dashed #3a2a1c;background:transparent;font:700 18px "Gaegu",sans-serif;color:#1f2b5a;padding:6px 2px;outline:none;text-align:center;margin:6px 0 10px}
 #wishP .row{display:flex;gap:8px}#wishP .row button{flex:1}
 #wbP .wbook{width:min(440px,94vw)}
 #wbP .wl{overflow:auto;padding:10px 16px 16px;display:flex;flex-direction:column;gap:8px}
 #wbP .wi{display:flex;align-items:center;gap:10px;border-bottom:1.5px dashed rgba(58,42,28,.3);padding:6px 0}
-#wbP .wi span{font-size:20px}#wbP .wi p{flex:1;margin:0;font:400 21px "Nanum Pen Script",sans-serif;color:#1f2b5a}#wbP .wi small{opacity:.55;font-size:12px}
+#wbP .wi span{font-size:20px}#wbP .wi p{flex:1;margin:0;font:700 17px "Gaegu",sans-serif;color:#1f2b5a}#wbP .wi small{opacity:.55;font-size:13px}
 
 /* ===== v15 ===== */
 /* 자는 승객 */
 #zP .zz{width:min(400px,90vw);padding:20px;text-align:center;align-items:center;gap:6px}
 #zP .zi{font-size:40px;animation:zzB 2.4s ease-in-out infinite}
 @keyframes zzB{50%{transform:translateY(-6px) rotate(-6deg)}}
-#zP b{font:400 26px "Nanum Pen Script",sans-serif;color:#1f2b5a}
+#zP b{font:700 21px "Gaegu",sans-serif;color:#1f2b5a}
 #zP p{margin:4px 0 8px;font:15.5px/1.6 "Gowun Batang",serif;color:#2b2620}
-#zP p.sp{font:400 23px/1.4 "Nanum Pen Script","Gaegu",sans-serif;color:#1f2b5a;background:#fffaf0;border:1.5px dashed #b9a27a;padding:12px 14px;transform:rotate(-1deg)}
-#zP small{opacity:.65;font-size:12.5px}#zP small.bd{opacity:1;color:#c2402f;font:400 17px "Nanum Pen Script",sans-serif}
+#zP p.sp{font:700 19px/1.4 "Gaegu",sans-serif;color:#1f2b5a;background:#fffaf0;border:1.5px dashed #b9a27a;padding:12px 14px;transform:rotate(-1deg)}
+#zP small{opacity:.65;font-size:13.5px}#zP small.bd{opacity:1;color:#c2402f;font:700 15px "Gaegu",sans-serif}
 #zP .row{display:flex;gap:8px;width:100%}#zP .row button{flex:1}#zP>.sC>button{width:100%}
 body.paxZ #pax img{filter:brightness(.72) saturate(.75);transition:filter 1s}
-body.paxZ #pax::after{content:"Z z z";position:absolute;right:16%;top:14%;font:400 30px "Nanum Pen Script",sans-serif;color:#f6e9c8;text-shadow:0 2px 6px rgba(0,0,0,.6);animation:zzB 2.4s ease-in-out infinite;letter-spacing:4px}
+body.paxZ #pax::after{content:"Z z z";position:absolute;right:16%;top:14%;font:700 25px "Gaegu",sans-serif;color:#f6e9c8;text-shadow:0 2px 6px rgba(0,0,0,.6);animation:zzB 2.4s ease-in-out infinite;letter-spacing:4px}
 #ttP .tt{width:min(560px,96vw)}
 #ttP .tw{overflow:auto;padding:0 14px}
 #ttP table{width:100%;border-collapse:collapse;font-size:13px}
-#ttP th{font:400 17px "Nanum Pen Script",sans-serif;color:#1f2b5a;padding:6px 2px;border-bottom:1.5px solid #3a2a1c}
-#ttP th small{display:block;font:10.5px "Apple SD Gothic Neo",sans-serif;opacity:.55}
+#ttP th{font:700 15px "Gaegu",sans-serif;color:#1f2b5a;padding:6px 2px;border-bottom:1.5px solid #3a2a1c}
+#ttP th small{display:block;font:12.5px "Apple SD Gothic Neo",sans-serif;opacity:.55}
 #ttP td{text-align:center;padding:7px 2px;border-bottom:1px dashed rgba(58,42,28,.25);font-size:16px}
-#ttP td.n{text-align:left;font:600 12.5px "Apple SD Gothic Neo",sans-serif;white-space:nowrap;padding-right:8px}
+#ttP td.n{text-align:left;font:600 13.5px "Apple SD Gothic Neo",sans-serif;white-space:nowrap;padding-right:8px}
 #ttP .now{background:rgba(231,180,58,.22)}
 #ttP td b{color:#b9a27a;font-size:18px}#ttP td b.ok{color:#c2402f}
-#ttP .ft{font-size:12px;padding:10px 16px 16px;opacity:.75}
+#ttP .ft{font-size:13px;padding:10px 16px 16px;opacity:.75}
 /* 등불 찾기 */
 #cg .gm.lanM .lan{position:absolute;inset:0;z-index:5;pointer-events:none;
  background:radial-gradient(circle 150px at var(--x,50%) var(--y,55%),rgba(255,200,120,.10) 0,rgba(255,200,120,.04) 40%,rgba(4,8,16,0) 41%),radial-gradient(circle 160px at var(--x,50%) var(--y,55%),rgba(4,8,16,0) 0,rgba(4,8,16,0) 52%,rgba(4,8,16,.955) 100%);animation:lanF 2.2s ease-in-out infinite}
@@ -794,12 +794,12 @@ body.paxZ #pax::after{content:"Z z z";position:absolute;right:16%;top:14%;font:4
 #turn .sp .torn{margin-top:auto;width:min(86%,340px);aspect-ratio:4/3;position:relative;display:flex;align-items:center;justify-content:center;transform:rotate(2deg);
  clip-path:polygon(0 6%,8% 0,18% 5%,30% 1%,42% 6%,55% 0,68% 4%,80% 0,92% 5%,100% 2%,97% 18%,100% 32%,96% 47%,100% 61%,97% 76%,100% 90%,93% 100%,80% 95%,66% 100%,52% 95%,38% 100%,24% 96%,11% 100%,0 94%,3% 78%,0 63%,4% 48%,0 33%,3% 18%)}
 #turn .sp .torn:not(.got){background:repeating-linear-gradient(45deg,rgba(58,42,28,.08) 0 6px,transparent 6px 12px),#e6d7b6;box-shadow:inset 0 0 18px rgba(58,42,28,.3)}
-#turn .sp .torn span{font:400 22px "Nanum Pen Script",sans-serif;color:rgba(58,42,28,.55)}
+#turn .sp .torn span{font:700 18px "Gaegu",sans-serif;color:rgba(58,42,28,.55)}
 #turn .sp .torn.got{background:#fbf3df}
-#turn .sp .torn .hw{font:400 clamp(20px,2vw,28px)/1.3 "Gaegu",sans-serif;color:#2f55a4;text-align:center;padding:10px;transform:rotate(-3deg)}
+#turn .sp .torn .hw{font:700 clamp(20px,2vw,28px)/1.3 "Gaegu",sans-serif;color:#2f55a4;text-align:center;padding:10px;transform:rotate(-3deg)}
 @media (max-aspect-ratio:1/1){#turn .pg.sp{flex-direction:column;padding:4vh 6vw}#turn .sp .gut{width:auto;height:18px}#turn .sp .d{display:none}#turn .sp .torn{width:60%}}
 /* 우편함 벽 */
-#post .mbBk{background:#3a2a1c;border:0;border-radius:999px;font:700 12.5px "Apple SD Gothic Neo",sans-serif;color:#f3e6c4;padding:6px 14px;margin:2px 16px 0;cursor:pointer}
+#post .mbBk{background:#3a2a1c;border:0;border-radius:999px;font:700 13.5px "Apple SD Gothic Neo",sans-serif;color:#f3e6c4;padding:6px 14px;margin:2px 16px 0;cursor:pointer}
 #post .mbw{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:0;margin:6px 14px 16px;padding:10px;background:linear-gradient(90deg,rgba(0,0,0,.06) 1px,transparent 1px) 0 0/22px 100%,#7a4f2c;border:6px solid #4a2e18;box-shadow:inset 0 0 18px rgba(0,0,0,.5),3px 4px 0 rgba(0,0,0,.2)}
 #post .mb{position:relative;border:0;background:none;padding:6px 5px 8px;cursor:default;display:flex;flex-direction:column;align-items:center;gap:4px;border-right:3px solid #4a2e18;border-bottom:3px solid #4a2e18}
 #post .mb.has{cursor:pointer}
@@ -809,8 +809,8 @@ body.paxZ #pax::after{content:"Z z z";position:absolute;right:16%;top:14%;font:4
 #post .mb.un .lt{animation:mbW 1.8s ease-in-out infinite}
 @keyframes mbW{0%,100%{transform:rotate(-4deg) translateY(0)}50%{transform:rotate(3deg) translateY(-12%)}}
 #post .mb .flag{position:absolute;right:5px;top:5px;width:12px;height:12px;border-radius:50%;background:#e2442f;box-shadow:0 0 6px rgba(255,90,60,.9)}
-#post .mb .pl{background:linear-gradient(#e8c98a,#c9a05c);color:#3a2414;font:700 11.5px "Apple SD Gothic Neo",sans-serif;padding:2px 7px;border-radius:2px;box-shadow:0 1px 0 rgba(0,0,0,.4);max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#post .mb small{color:#f3e6c4;font-size:11px;opacity:.85}
+#post .mb .pl{background:linear-gradient(#e8c98a,#c9a05c);color:#3a2414;font:700 13px "Apple SD Gothic Neo",sans-serif;padding:2px 7px;border-radius:2px;box-shadow:0 1px 0 rgba(0,0,0,.4);max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#post .mb small{color:#f3e6c4;font-size:12.5px;opacity:.85}
 #post .mb.lock{opacity:.5}#post .mb.lock .pl{background:#8a6a4a;color:#e8d8bc}
 /* 앨범: 사진첩 */
 #alb.book .albB{background:radial-gradient(circle,rgba(58,42,28,.05) 1px,transparent 1.5px) 0 0/10px 10px,#efe4cc}
@@ -823,9 +823,9 @@ body.paxZ #pax::after{content:"Z z z";position:absolute;right:16%;top:14%;font:4
 #alb.book .cell.ph::after{right:-3px;top:-3px;transform:rotate(90deg)}
 #alb.book .cell.ph:has(.pz)::before,#alb.book .cell.ph:has(.pz)::after{opacity:.25}
 #alb.book .th.pz{background:none;border:2px dashed rgba(58,42,28,.4)!important;box-shadow:none;filter:none;display:flex;align-items:center;justify-content:center}
-#alb.book .th.pz span{position:static;color:rgba(58,42,28,.5);font:400 20px "Nanum Pen Script",sans-serif}
-#alb.book .cell em{font:400 18px/1.15 "Nanum Pen Script","Gaegu",sans-serif;color:#1f2b5a;margin-top:8px}
-#alb.book .cell small{font-size:11.5px}
+#alb.book .th.pz span{position:static;color:rgba(58,42,28,.5);font:700 16px "Gaegu",sans-serif}
+#alb.book .cell em{font:700 15px/1.15 "Gaegu",sans-serif;color:#1f2b5a;margin-top:8px}
+#alb.book .cell small{font-size:13px}
 
 /* v16 선반 그림 */
 #shelf{height:70px!important;background:url(img/shelf.webp) center bottom/100% auto no-repeat;padding:0 6% 14px;box-sizing:border-box;justify-content:center!important;gap:10px!important}
@@ -864,7 +864,7 @@ body.seat #tkB{right:auto!important;left:18px!important}
 #turn.go .sp .rp{transform:rotateY(-172deg);opacity:.2}
 #turn.go .pg.sp{animation:bkOut .85s ease forwards}
 @keyframes bkOut{0%,45%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) rotateX(16deg) scale(1.04)}}
-#turn .nx{position:absolute;right:max(5vw,24px);bottom:max(4vh,18px);font:400 22px "Nanum Pen Script","Gaegu",sans-serif;color:#f3e6c4;opacity:.85;animation:nxB 1.6s ease-in-out infinite}
+#turn .nx{position:absolute;right:max(5vw,24px);bottom:max(4vh,18px);font:700 18px "Gaegu",sans-serif;color:#f3e6c4;opacity:.85;animation:nxB 1.6s ease-in-out infinite}
 @keyframes nxB{50%{transform:translateX(6px);opacity:.55}}
 @media (max-aspect-ratio:1/1){#turn .pg.sp{transform:translate(-50%,-50%);height:88vh}#turn .sp .lp,#turn .sp .rp{transform:none}}
 
@@ -878,9 +878,9 @@ body.seat #tkB{right:auto!important;left:18px!important}
 #turn .pu{position:absolute;inset:0;perspective:1500px;perspective-origin:50% 28%;animation:none}
 #turn .pu .hd{position:absolute;left:5vw;top:5vh;text-align:left;color:#f3e6c4;z-index:3;opacity:0;transform:translateY(-8px);transition:all .6s .2s}
 #turn.up .pu .hd{opacity:1;transform:none}
-#turn .pu .hd small{display:block;font:700 12px "Apple SD Gothic Neo",sans-serif;letter-spacing:.4em;opacity:.6}
+#turn .pu .hd small{display:block;font:700 13px "Apple SD Gothic Neo",sans-serif;letter-spacing:.4em;opacity:.6}
 #turn .pu .hd b{display:block;font:700 clamp(28px,3.4vw,46px) "Gowun Batang","Nanum Myeongjo",serif;margin-top:4px;text-shadow:0 2px 8px rgba(0,0,0,.5)}
-#turn .pu .hd em{display:block;font:400 22px "Nanum Pen Script","Gaegu",sans-serif;color:#f3c76a;font-style:normal;margin-top:2px}
+#turn .pu .hd em{display:block;font:700 18px "Gaegu",sans-serif;color:#f3c76a;font-style:normal;margin-top:2px}
 #turn .pu .op{position:absolute;left:50%;bottom:4vh;transform:translateX(-50%);width:min(760px,86vw);margin:0;text-align:center;color:#f3e6c4;font:600 clamp(15px,1.35vw,19px)/1.7 "Gowun Batang",serif;opacity:0;transition:opacity .8s 1.1s;text-shadow:0 2px 6px rgba(0,0,0,.6);word-break:keep-all}
 #turn.up .pu .op{opacity:.95}
 #turn .bk{position:absolute;left:50%;top:60%;width:min(1000px,84vw);height:min(520px,44vw);transform:translate(-50%,-50%) rotateX(60deg);transform-style:preserve-3d}
@@ -899,7 +899,7 @@ body.seat #tkB{right:auto!important;left:18px!important}
 #turn .pl img.cut{display:block;filter:drop-shadow(3px 0 0 #fffaf0) drop-shadow(-3px 0 0 #fffaf0) drop-shadow(0 3px 0 #fffaf0) drop-shadow(0 -3px 0 #fffaf0) drop-shadow(0 8px 10px rgba(40,20,5,.4))}
 #turn .pl.mid img.cut{height:min(330px,30vw)}
 #turn .pl.fr img.cut{height:min(110px,9vw)}
-#turn .pl.fr2 .frg{width:min(200px,17vw);padding:12px 10px;background:#fbf3df;box-shadow:0 6px 12px rgba(40,20,5,.35);font:400 clamp(15px,1.4vw,20px)/1.3 "Gaegu",sans-serif;color:#2f55a4;text-align:center;transform:rotate(-4deg);clip-path:polygon(0 4%,10% 0,22% 5%,36% 0,50% 4%,64% 0,78% 5%,90% 0,100% 4%,98% 50%,100% 96%,88% 100%,72% 95%,56% 100%,40% 96%,24% 100%,10% 95%,0 100%,2% 50%)}
+#turn .pl.fr2 .frg{width:min(200px,17vw);padding:12px 10px;background:#fbf3df;box-shadow:0 6px 12px rgba(40,20,5,.35);font:700 clamp(15px,1.4vw,20px)/1.3 "Gaegu",sans-serif;color:#2f55a4;text-align:center;transform:rotate(-4deg);clip-path:polygon(0 4%,10% 0,22% 5%,36% 0,50% 4%,64% 0,78% 5%,90% 0,100% 4%,98% 50%,100% 96%,88% 100%,72% 95%,56% 100%,40% 96%,24% 100%,10% 95%,0 100%,2% 50%)}
 #turn .pl.fr2 .frg:not(.got){color:rgba(58,42,28,.5);background:repeating-linear-gradient(45deg,rgba(58,42,28,.07) 0 6px,transparent 6px 12px),#e6d7b6}
 #turn .pu .nx{z-index:4}
 #turn.go .pu{animation:puOut .5s ease forwards}
@@ -908,7 +908,7 @@ body.seat #tkB{right:auto!important;left:18px!important}
 
 /* v21 마지막 장 팝업 */
 #turn .pu.fin .pl.back .crd{width:min(560px,46vw)}
-#turn .pu.fin .pl.fr2 .frg.lastc{width:min(360px,30vw);font:400 clamp(20px,2vw,28px)/1.3 "Nanum Pen Script","Gaegu",sans-serif;color:#1f2b5a;transform:rotate(-2deg);padding:14px 16px}
+#turn .pu.fin .pl.fr2 .frg.lastc{width:min(360px,30vw);font:700 clamp(16px,2vw,23px)/1.3 "Gaegu",sans-serif;color:#1f2b5a;transform:rotate(-2deg);padding:14px 16px}
 #turn .pu.fin .lastc i{display:block;text-align:right;font-style:normal;font-size:.75em;color:#c2402f;margin-top:4px}
 
 /* ===== v22 팝업북 입체 강화 ===== */
@@ -992,11 +992,53 @@ body.seat #tkB{right:auto!important;left:18px!important}
 #turn .pu.v23 .pl.mid img.cut{height:32vw}
 #turn .pu.v23 .pl.mid2 img.cut{width:64vw;max-height:15vw}
 #turn .pu.v23 .pl.fr img.cut{height:12vw}
-#turn .pu.v23 .pl.fr2 .frg{width:23vw;padding:6px 5px;font-size:12px;line-height:1.25}
+#turn .pu.v23 .pl.fr2 .frg{width:23vw;padding:6px 5px;font-size:13px;line-height:1.25}
 #turn .pu.fin.v23 .pl.fr2 .frg.lastc{width:44vw;font-size:17px}
 #turn .pu.v23 .op{bottom:70px;font-size:14.5px}
 #turn .pu.v23 .nx{bottom:22px;right:50%;transform:translateX(50%);font-size:19px}
 }
+/* v24 깃털 카드 */
+#cg .gm .gc .fts{display:flex;justify-content:center;gap:12px;margin:4px 0 6px}
+#cg .gm .gc .ft{width:88px;height:128px;border:2px solid #3a2a1c;border-radius:10px;background:linear-gradient(#fffdf6,#efe4cb);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:8px 0;transition:transform .2s,box-shadow .2s,background .2s}
+#cg .gm .gc .ft svg{height:84px;width:auto;transition:filter .2s}
+#cg .gm .gc .ft span{font:700 14px "Gowun Batang",serif;color:#3a2a1c}
+#cg .gm .gc .ft:hover{transform:translateY(-3px)}
+#cg .gm .gc .ft.wait{cursor:default}
+#cg .gm .gc .ft.lit{background:linear-gradient(#fff6d6,#ffe6a3);box-shadow:0 0 0 3px #f2c14e,0 0 22px rgba(255,214,120,.9);transform:translateY(-6px)}
+#cg .gm .gc .ft.lit svg{filter:drop-shadow(0 0 8px rgba(255,220,140,1))}
+/* v24 글씨 위계: 제목=고운바탕 · 버튼/라벨=주아 · 본문=고운돋움 · 손글씨=개구(짧은 메모만) */
+body:is(.ink0,.ink1,.ink2) :is(#tag,.pbtn,#nextB,#bagB,#snd,#back,#trk,#tkB,#bagP button,#lvt,#depT,#paxT,#mailT,#cg .gm .gh,#coach .bub small){font-family:"Jua","Apple SD Gothic Neo",sans-serif!important;font-weight:400!important;color:#2b2118;letter-spacing:.01em}
+body.ink2 :is(#nextB,#bagB,#snd,.pbtn){font-size:17px!important}
+body.ink2 #tag b{font-size:21px!important}
+.pbtn2{font-family:"Jua","Apple SD Gothic Neo",sans-serif;font-weight:400;font-size:15px}
+#cg .tx,#dlgT,#coach .bub p,.sC p,#cg .gm .gc p,#cg .item p,#ann span{font-family:"Gowun Dodum","Apple SD Gothic Neo",sans-serif;letter-spacing:-.005em}
+#cg .tx{font-size:19.5px;line-height:1.7}
+#dlgT{font-size:18px;line-height:1.7}
+#dlgC button,#cg .chs button{font-family:"Gowun Dodum","Apple SD Gothic Neo",sans-serif;font-size:16.5px;font-weight:700}
+.sC p{font-size:15.5px;line-height:1.65}
+#cg .gm .gc p{font-size:15px}
+#cg .gm .gc h4{font:700 19px "Gowun Batang",serif}
+#dlgN,#cg .who{font-family:"Jua","Apple SD Gothic Neo",sans-serif;font-weight:400}
+
+#cg.gaming .ch2{opacity:0!important}
+#cg .gm .gc .ft img{height:80px;width:auto;transition:filter .2s;pointer-events:none}
+#cg .gm .gc .ft.lit img{filter:drop-shadow(0 0 10px rgba(255,214,120,1)) brightness(1.08)}
+@media (min-aspect-ratio:1/1){#cg .gm .gc:has(.fts){left:26%;width:min(400px,40vw)}}
+
+#cg.gaming .ch2,#cg.gaming:has(.gm .gc) .ch.ch2.in{opacity:0!important;transition:none!important}
+@media (min-aspect-ratio:1/1){#cg.gaming:has(.gm .gc .fts) .ch:not(.ch2){left:64%!important}}
+/* v24 창 제목 = 고운바탕, 작은 라벨 = 주아, 손글씨는 메모 내용에만 */
+:is(#bcP .bc b,#lostP b,#boardP .sus b,#post .pcSent b,#wishP .wish b,#zP b,#ann b,#bcP b){font-family:"Gowun Batang","Nanum Myeongjo",serif!important;font-weight:700!important;font-size:21px!important;line-height:1.3!important;letter-spacing:-.01em}
+:is(#bcP .bc small,#ann small,#post .pcS>small,#wishP .wish small,#zP small.bd,#ttP th,#alb.book .th.pz span,#turn .pu .hd em,#turn .sp .torn span,#v14T){font-family:"Jua","Apple SD Gothic Neo",sans-serif!important;font-weight:400!important;font-size:14.5px!important;letter-spacing:.02em}
+#ann span{font-family:"Gowun Dodum","Apple SD Gothic Neo",sans-serif!important;font-weight:400!important;font-size:15.5px!important}
+#zP p.sp,#lostP .nt,#letter .pcQ q,#wbP .wi p{font-family:"Gaegu",sans-serif!important;font-weight:700!important;font-size:19px!important;line-height:1.45!important}
+#turn .nx{font-family:"Jua",sans-serif!important;font-size:17px!important}
+body.paxZ #pax::after{font-family:"Gowun Batang",serif!important;font-weight:700!important;font-size:22px!important}
+#cg .tx.narr{font-style:normal!important;color:#5b4631}
+
+@media (max-width:560px){body:is(.ink0,.ink1,.ink2) #tag b{font-size:17px!important}#tag{max-width:calc(100vw - 168px);box-sizing:border-box}#tag i{font-size:12px}#tagS{font-size:11px}}
+
+@media (max-width:560px){#tag .pns{gap:2px}#tag .pn{width:10px;height:10px;border-width:1.2px}#tagS{white-space:nowrap;font-size:0!important}#tagS .route{font-size:12px}}
 </style></head><body>
 <div id="tag"><b>부산</b><span id="tagS"></span><i id="tagI"></i></div>
 <div id="dev"><span>출발 후</span><input id="devR" type="range" min="0" max="91.9" step="0.1"><span id="devV"></span></div>
@@ -1021,7 +1063,7 @@ const SCENE={
   far:{img:'far.webp',w:1904,h:640,hz:414,moonU:.805,moonAt:.74,fold:110},
   mid:{img:'mid.webp',w:1904,h:438,z:-70,hgt:26,topBelowHz:.0,tint:[.9,.9,.96],fx:{haze:.3,sat:.75,bri:.84}},
   emb:{img:'emb.webp',w:2176,h:310,rail:57,sea:288,scale:.0095,fx:{haze:.12,sat:.6,bri:.62}},
-  ppl:[['pf_p02.webp','dine',.62,1.32]]
+  ppl:[]
 };
 /* ======================================================================= */
 const LOWP=/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent)||innerWidth<700;
@@ -1152,7 +1194,7 @@ const cars=[];let x=0;
 for(const [k,name] of ORDER){
   const c2=CAR2[k],h=k==='loco'?3.5:3.4,w=h*c2[0]/c2[1];
   const p=plane(tex('car2_'+k+'.webp'),w,h);p.renderOrder=6;
-  p.position.set(x+w/2,h/2-0.03,0);p.userData={k,name,w,h,ph:Math.random()*6,cut:[c2[2],c2[3]],fl:-0.03+c2[4]*h};train.add(p);cars.push(p);x+=w-0.5;
+  p.position.set(x+w/2,h/2-0.12,0);p.userData={k,name,w,h,ph:Math.random()*6,cut:[c2[2],c2[3]],fl:-0.12+c2[4]*h};train.add(p);cars.push(p);x+=w-0.5;
 }
 const TRAINW=x;train.position.x=-TRAINW/2;
 /* ---------- 칸 사이 연결 주름막 ---------- */
@@ -1620,7 +1662,7 @@ function gNext(){if(gType){clearInterval(gType);gType=null;gTx.textContent=gFull
   if(s.clue){cg.classList.remove('itm');const c=clues();c[s.clue]=1;LS.set('bl_clue',c);gBox.classList.add('on');gWho.textContent='셜록의 단서 수첩';
      G('.fx.spk').classList.add('on');gType2('🔎 '+CLUES[s.clue]+'\n(단서 '+Object.keys(c).length+'/'+MAINS.length+')');return}
   if(s.item){const k=LS.get('bl_keep',{});k[s.item]=1;LS.set('bl_keep',k);const it=KEEP[s.item];gBox.classList.remove('on');
-     gIt.innerHTML=(ITM[s.item]?'<img class="icI" src="img/items/'+s.item+'.webp" alt="">':'<div class="ic">'+it[0]+'</div>')+'<b>'+it[1]+'</b><p>'+it[2]+'</p><p style="margin-top:8px;font-size:11px;opacity:.6">트렁크에 넣어 두었어요 · 눌러서 닫기</p>';gIt.classList.add('on');cg.classList.add('itm');return}
+     gIt.innerHTML=(ITM[s.item]?'<img class="icI" src="img/items/'+s.item+'.webp" alt="">':'<div class="ic">'+it[0]+'</div>')+'<b>'+it[1]+'</b><p>'+it[2]+'</p><p style="margin-top:8px;font-size:12.5px;opacity:.6">트렁크에 넣어 두었어요 · 눌러서 닫기</p>';gIt.classList.add('on');cg.classList.add('itm');return}
   if(s.fn){s.fn();return}
   gShow(s)}
 function gEnd(){gWait=1;iris(0,650,()=>{cg.classList.remove('on','lb','itm','duo');gWait=null;gBox.classList.remove('on');document.body.classList.remove('talk');const d=gDone;gDone=null;BG.force=null;setTimeout(bgmTick,0);d&&d()})}
@@ -1693,7 +1735,7 @@ if(Q.has('card')&&TRUNK)setTimeout(()=>makeCard(TRUNK),800);
 
 /* ================= 캐릭터별 대사창 · 친밀도 단계 · 단짝 이야기 · 추억 앨범 ================= */
 (function(){const l=document.createElement('link');l.rel='stylesheet';
-  l.href='https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Batang:wght@400;700&family=Gaegu:wght@400;700&family=Nanum+Myeongjo:wght@400;800&family=Do+Hyeon&display=swap';document.head.appendChild(l)})();
+  l.href='https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&family=Gowun+Batang:wght@400;700&family=Gaegu:wght@400;700&family=Nanum+Myeongjo:wght@400;800&family=Do+Hyeon&display=swap';document.head.appendChild(l)})();
 const TH={
  byeol:{bg:'#dff1ec',ink:'#123c3a',acc:'#2f7f86',ff:'Jua',pat:'radial-gradient(circle at 10px -4px,transparent 9px,#2f7f86 10px 12px,transparent 13px) 0 100%/20px 12px repeat-x'},
  gilldong:{bg:'#f3ead4',ink:'#1d1a17',acc:'#1d1a17',ff:'Nanum Myeongjo',pat:'linear-gradient(90deg,#b8312f,#b8312f) 0 0/7px 100% no-repeat',seal:1},
@@ -2693,7 +2735,7 @@ function pickMate(d){const ids=Object.keys(HOME).filter(id=>boarded(id));
   carP.innerHTML=`<div class="ch"><div><b>${d[0]} ${d[1]}</b><small>누구랑 같이 먹을까요?</small></div></div><div class="cp">`+ids.map(id=>`<button class="pbtn2 l" data-p="${id}">${CAST[id].n}</button>`).join('')+'<button class="pbtn2 l" data-p="">혼자 먹기</button></div>';
   carP.querySelectorAll('[data-p]').forEach(x=>x.onclick=e=>{e.stopPropagation();carP.classList.remove('on');eat(d,x.dataset.p)})}
 function eat(d,id){const cid=CH[TRIP?TRIP.ch:0].id,isRep=MENU[cid][0][1]===d[1]&&IMGOK['food/'+cid];const sh=[{fn:()=>{dineBg();gShow({who:'',narr:1,say:'(식당칸 창가 자리. 창밖으로 '+CH[TRIP?TRIP.ch:0].name+'의 풍경이 흐른다.)'})}},
-   {fn:()=>{gBox.classList.remove('on');gIt.innerHTML=(FOODIMG[d[1]]?'<img class="dish sq" src="img/food/d/'+FOODIMG[d[1]]+'.webp" alt="">':isRep?'<img class="dish" src="img/food/'+cid+'.webp" alt="">':'<div class="ic">'+d[0]+'</div>')+'<b>'+d[1]+'</b><p>'+d[2]+'</p><p style="margin-top:8px;font-size:11px;opacity:.6">눌러서 먹기</p>';gIt.classList.add('on');cg.classList.add('itm')}}];
+   {fn:()=>{gBox.classList.remove('on');gIt.innerHTML=(FOODIMG[d[1]]?'<img class="dish sq" src="img/food/d/'+FOODIMG[d[1]]+'.webp" alt="">':isRep?'<img class="dish" src="img/food/'+cid+'.webp" alt="">':'<div class="ic">'+d[0]+'</div>')+'<b>'+d[1]+'</b><p>'+d[2]+'</p><p style="margin-top:8px;font-size:12.5px;opacity:.6">눌러서 먹기</p>';gIt.classList.add('on');cg.classList.add('itm')}}];
   if(id){const L2=EAT[id]||['맛있어요.'];sh.push(L(id,null,1,CAST[id].n,L2[Math.floor(Math.random()*L2.length)],{pose:'in',emo:'♪',bg:undefined}));
     const key=id+':'+(TRIP?TRIP.ch:0)+':'+d[1],ate=LS.get('bl_ate',{});if(!ate[key]){ate[key]=1;LS.set('bl_ate',ate);sh.push({fn:()=>{addAff(id,1);gNext()}})}}
   else sh.push({ch:null,ch2:null,who:'',narr:1,say:'(혼자 먹는 밥도 나쁘지 않다. 덜컹거리는 소리가 반찬이 된다.)'});
@@ -2727,7 +2769,7 @@ function frame(now){
     if(pmK){const MZ=-48,Hm=vh(fitD()-MZ)*.30,tile=Hm*pmAR,WW=tile*4;const yb=Math.min(-0.6,eye+(0.25-eye)*(dist-MZ)/(dist-0.4)-0.2);pmid.scale.set(WW,Hm,1);pmid.position.set(camX,yb+Hm/2,MZ);
       pmid.material.uniforms.rep.value=4;pmid.material.uniforms.haze.value=.22+Math.max(0,(22-dist)/22)*.3;pmid.material.opacity=1;pmid.visible=MODE!=='seat'&&dist>14;pmid.material.uniforms.off.value=(((camX-WW/2+travel*.55)/tile)%1+1)%1}}
   pv.set(camX,SEA+0.25+MD.embY,MD.embZ).project(cam);nearWater.material.uniforms.cut.value=pv.y*.5+.5;
-  for(const c of cars)c.position.y=c.userData.h/2-0.03+Math.sin(t*9+c.userData.ph)*0.012;
+  for(const c of cars)c.position.y=c.userData.h/2-0.12+Math.sin(t*9+c.userData.ph)*0.012;
   for(const [b,sp,ph] of glows){const f=1+Math.sin(t*1.7+ph)*.05+Math.sin(t*7.3+ph*2)*.025;b.material.opacity=.22*f;sp.material.opacity=.4*f}
   for(const p of ppl)p.position.y=p.userData.base+Math.abs(Math.sin(t*2.2+p.userData.ph))*0.03;
   for(const m of PIT_M)if(m.userData.ok)m.position.y=m.userData.base+Math.sin(t*1.6+m.userData.ph)*0.012;
@@ -3887,7 +3929,7 @@ function finalPop(cb){const {on,off}=endPeople();const all=on.concat(off);const 
     </div><p class="op">다 읽으면 네가 써. 그래서, 이렇게 썼다.</p><div class="nx">눌러서 책 덮기 ▸</div></div>`;
   turnEl.classList.remove('on','go');void turnEl.offsetWidth;turnEl.classList.add('on');requestAnimationFrame(()=>requestAnimationFrame(()=>turnEl.classList.add('up')));
   try{blipUp()}catch(e){}turnQ.push(cb)}
-window.__t.fin=()=>finalPop(()=>{});window.__t.tk=i=>makeTicketAt(i);window.__t.card=()=>makeCard(TRUNK||{text:'면접이 걱정돼요',pick:0});
+window.__t.fin=()=>finalPop(()=>{});window.__t.ev=id=>playScene((typeof EV2!=='undefined'&&EV2[id])||EV[id],()=>{});window.__t.tk=i=>makeTicketAt(i);window.__t.card=()=>makeCard(TRUNK||{text:'면접이 걱정돼요',pick:0});
 
 
 /* ===================== v22: 팝업북 입체 강화 · 승차권/마지막 장 카드 새 디자인 ===================== */
@@ -4023,4 +4065,31 @@ pageTurn=function(i){const c=CH[i];if(!c)return;const id=c.ev[0],who=id&&CAST[id
   turnEl.classList.remove('on','go','up');void turnEl.offsetWidth;turnEl.classList.add('on');
   requestAnimationFrame(()=>requestAnimationFrame(()=>turnEl.classList.add('up')));try{blipUp()}catch(e){}};
 
+/* v24: 오데트 깃털 놀이 — 종이 카드 위에서, 막히지 않게 */
+gGame=function(kind){gWait=1;gBox.classList.remove('on');cg.classList.add('gaming');cg.classList.remove('duo');try{gCh2.style.opacity=0}catch(e){}cg.querySelectorAll('.gm').forEach(x=>x.remove());const g=document.createElement('div');g.className='gm';cg.appendChild(g);let done=false;
+  const fin=()=>{if(done)return;done=true;g.style.transition='opacity .6s';g.style.opacity=0;g.style.pointerEvents='none';cg.classList.remove('gaming');setTimeout(()=>{g.remove();gWait=null;gNext()},600)};
+  g.addEventListener('click',e=>e.stopPropagation());window.__fin=fin;try{(GAMES[kind]||(()=>fin()))(g,fin)}catch(e){console.warn(e);fin()}};
+GAMES.feather=function(g,fin){const seq=[0,1,2].sort(()=>Math.random()-.5);let step=0,busy=true,miss=0;
+  g.innerHTML=gcard('<h4>오데트의 춤 따라 하기</h4><p class="m">빛나는 깃털 순서를 잘 보세요</p><div class="fts">'+[0,1,2].map(i=>'<button class="ft" data-i="'+i+'"><img src="img/items/odette.webp" alt="" style="transform:rotate('+[-14,0,14][i]+'deg)"><span>'+['하나','둘','셋'][i]+'</span></button>').join('')+'</div>');
+  const F=[...g.querySelectorAll('.ft')],m=g.querySelector('.m');
+  const flash=(i,ms)=>{F[i].classList.add('lit');setTimeout(()=>F[i].classList.remove('lit'),ms)};
+  const show=()=>{busy=true;step=0;F.forEach(f=>f.classList.add('wait'));const gap=miss?1050:820;m.textContent='빛나는 깃털 순서를 잘 보세요';
+    seq.forEach((v,k)=>setTimeout(()=>flash(v,gap-260),600+k*gap));setTimeout(()=>{busy=false;F.forEach(f=>f.classList.remove('wait'));m.textContent='이제 같은 순서로 눌러 보세요'},600+seq.length*gap)};
+  const win=t=>{busy=true;m.textContent=t;F.forEach(f=>f.classList.add('lit'));setTimeout(fin,1100)};
+  F.forEach((f,i)=>f.onclick=e=>{e.stopPropagation();if(busy)return;flash(i,280);
+    if(i===seq[step]){step++;try{blipUp()}catch(e){}if(step>=seq.length)win('완벽해요!')}
+    else{miss++;if(miss>=2){win('괜찮아요, 같이 추면 돼요!')}else{m.textContent='괜찮아요, 한 번 더 천천히 보여 줄게요';busy=true;setTimeout(show,900)}}});
+  setTimeout(show,400)};
+/* 대화가 멈춘 것처럼 보일 때 두 번 누르면 다시 이어지게 */
+{let stuck=0;cg.addEventListener('click',()=>{if(!cg.classList.contains('on'))return;
+  const real=cg.querySelector('.gm')||gCs.children.length||gTt.classList.contains('on')||gIt.classList.contains('on')||gType;
+  if(gWait&&!real){stuck++;if(stuck>=2){stuck=0;gWait=null;cg.classList.remove('gaming');gNext()}}else stuck=0},true)}
+/* v24: 장면(대화)이 열려 있는 동안 다른 창이 위를 덮지 않게 */
+function v24Clear(){try{if(cOn){coach.classList.remove('on');cOn=false}}catch(e){}
+  document.querySelectorAll('.v14S.on').forEach(x=>x.classList.remove('on'));try{v14T.classList.remove('on')}catch(e){}try{$('ann').classList.remove('on')}catch(e){}}
+{const _ps24=playScene;playScene=function(sh,dn){v24Clear();_ps24(sh,dn)}}
+setInterval(()=>{if(cg.classList.contains('on')&&typeof cOn!=='undefined'&&cOn){coach.classList.remove('on');cOn=false}},400);
+
+/* v24: 방송·안내가 겹치지 않게 (안내 중이면 방송은 잠시 뒤에) */
+{const _bs=bcShow;bcShow=function(){if((typeof cOn!=='undefined'&&cOn)||cg.classList.contains('on')||$('turn').classList.contains('on')){setTimeout(()=>bcShow(),4000);return}_bs()}}
 </script></body></html>

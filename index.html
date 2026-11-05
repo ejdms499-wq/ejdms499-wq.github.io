@@ -1975,7 +1975,7 @@ function renderWait(){if(TRIP&&!TRIP.fin){hideWait();return}
   const arrived=!!TRIP;
   if(arrived){$('wBoard').innerHTML=`<small>LONDON · 종착역</small><b>런던에 도착했어요</b><div class="st" style="margin-top:6px">열세 개의 역, 수고 많았어요.${LS.get('bl_end',null)?'<br>맡겼던 마음의 짐은 트렁크와 함께 돌려받았어요.':''}</div>`;
     if(renderWait.b!=='a'){renderWait.b='a';
-      $('wBtns').innerHTML=(LS.get('bl_end',null)?'<button class="pbtn2" id="wRp">✉ 셜록의 엽서 보기</button>':'')+'<button class="pbtn2'+(LS.get('bl_end',null)?' l':'')+'" id="wAg">새 새 짐 맡기고 다시 타기</button><button class="pbtn2 l" id="wStay">런던 창밖 조금 더 보기</button>';
+      $('wBtns').innerHTML=(LS.get('bl_end',null)?'<button class="pbtn2" id="wRp">✉ 셜록의 엽서 보기</button>':'')+'<button class="pbtn2'+(LS.get('bl_end',null)?' l':'')+'" id="wAg">새 짐 맡기고 다시 타기</button><button class="pbtn2 l" id="wStay">런던 창밖 조금 더 보기</button>';
       const r=$('wRp');if(r)r.onclick=()=>showReply();
       $('wAg').onclick=()=>{TRIP=null;localStorage.removeItem('bl_trip');if(TRUNK&&TRUNK.done){TRUNK=null;localStorage.removeItem('bl_trunk')}dep=NOTRIP();curSeg=null;if(MODE==='seat')goOut();hideWait();trkShow();showIntro()};
       $('wStay').onclick=()=>{hideWait();trkShow()}}
@@ -4226,4 +4226,11 @@ turnClose=function(){if(!turnEl.classList.contains('on')||turnClosing)return;
   t27(()=>turnEl.classList.add('go'),1360);
   t27(()=>{turnEl.classList.remove('on','go','up','s1','s2','s3','fold','flip','fast');turnClosing=false;turnOpened=false;const q=turnQ;turnQ=[];q.forEach(f=>{try{f()}catch(e){}})},1790)};
 window.__t.turnClose=()=>turnClose();
+
+/* v28: 엔딩을 다 보면 '다시 타기' 메뉴로 */
+function endDone(){const E=LS.get('bl_end',null);return !!(TRIP&&E&&E.dep===TRIP.dep)}
+function toArrived(){if(!TRIP)return;if(!TRIP.fin){TRIP.fin=1;tripSave()}trkShow();if(MODE==='seat'){try{goOut()}catch(e){}}if(!waitEl.classList.contains('on'))showArrived()}
+/* 이미 엔딩을 본 기록이 있으면, 새로고침해도 메뉴로 */
+if(endDone()&&!TRIP.fin){TRIP.fin=1;tripSave()}
+{const x=card.querySelector('#cdX'),_old=x.onclick;x.onclick=e=>{_old&&_old(e);if(endDone()||(TRIP&&TRIP.fin))setTimeout(toArrived,350)}}
 </script></body></html>

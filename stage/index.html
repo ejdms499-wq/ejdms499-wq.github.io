@@ -905,6 +905,11 @@ body.seat #tkB{right:auto!important;left:18px!important}
 #turn.go .pu{animation:puOut .5s ease forwards}
 @keyframes puOut{to{opacity:0}}
 @media (max-aspect-ratio:1/1){#turn .bk{top:62%;width:94vw;height:70vw}#turn .pl.back .crd{width:70vw}#turn .pl.mid img.cut{height:42vw}}
+
+/* v21 마지막 장 팝업 */
+#turn .pu.fin .pl.back .crd{width:min(560px,46vw)}
+#turn .pu.fin .pl.fr2 .frg.lastc{width:min(360px,30vw);font:400 clamp(20px,2vw,28px)/1.3 "Nanum Pen Script","Gaegu",sans-serif;color:#1f2b5a;transform:rotate(-2deg);padding:14px 16px}
+#turn .pu.fin .lastc i{display:block;text-align:right;font-style:normal;font-size:.75em;color:#c2402f;margin-top:4px}
 </style></head><body>
 <div id="tag"><b>부산</b><span id="tagS"></span><i id="tagI"></i></div>
 <div id="dev"><span>출발 후</span><input id="devR" type="range" min="0" max="91.9" step="0.1"><span id="devV"></span></div>
@@ -3316,7 +3321,7 @@ makeCard=function(T,hid){card.dataset.kind='end';const cv=card.querySelector('ca
   g.textAlign='center';g.fillStyle='#1f2b5a';g.font='400 70px '+PEN;const LL=wrapT(g,LS.get('bl_last','')||'오늘은 여기까지. 내일 또 쓸게.',W-180).slice(0,3);LL.forEach((l,k)=>g.fillText(l,cx,Y+780+k*78-(LL.length-1)*30));
   g.fillStyle='#3a2a1c';g.font='600 24px '+F;g.globalAlpha=.6;g.fillText('— '+MYNAME()+', 지금',cx,Y+780+LL.length*78-(LL.length-1)*30+10);g.globalAlpha=1;
   // 마음결 · 승객 한마디
-  const tr=TRAIT[topTrait()];g.font='700 36px '+S;g.fillText(MYNAME()+'은(는) '+tr[0],cx,Y+1080);
+  const tr=TRAIT[topTrait()];g.font='700 36px '+S;g.fillText(MYNAME()+(iga(MYNAME())==='이'?'은 ':'는 ')+tr[0],cx,Y+1080);
   g.font='600 26px '+F;g.globalAlpha=.75;g.fillText('“'+tr[2]+'” — '+tr[1],cx,Y+1130);g.globalAlpha=1;
   const met=Object.keys(LS.get('bl_met',{})).length,pgs=Object.keys(LS.get('bl_pages',{})).length;g.font='600 22px '+F;g.globalAlpha=.55;g.fillText('함께 탄 승객 '+met+'명 · 페이지 조각 '+pgs+' / 13 · ejdms499-wq.github.io',cx,Y+H-50);g.globalAlpha=1;
   card.classList.add('on')};
@@ -3737,5 +3742,64 @@ pageTurn=function(i){const c=CH[i];if(!c)return;const id=c.ev[0],who=id&&CAST[id
   turnEl.classList.remove('on','go');void turnEl.offsetWidth;turnEl.classList.add('on');
   requestAnimationFrame(()=>requestAnimationFrame(()=>turnEl.classList.add('up')));try{blipUp()}catch(e){}};
 {const _tc=turnClose;turnClose=function(){turnEl.classList.remove('up');setTimeout(_tc,350)}}
+
+
+/* ===================== v21: 새 엔딩 (커튼콜 · 트렁크 · 고백 · 마지막 장 팝업 · 아침) ===================== */
+const CURTAIN={byeol:'허허, 끝까지 같이 왔구려. 이야기 보따리가 터지겠소.',gilldong:'자리가 없다고 한 말은 취소하겠소. 이 열차에 내 자리가 있었으니.',
+ gyeonu:'(직녀) 일 년은 금방이에요.\n(견우) 그때도 이 자리에서 기다리겠소.',snowq:'이제 손을 잡아도 안 얼어요. …한 번 잡아 봐도 돼요?',
+ sherlock:'사건 해결일세. 그리고 새 사건이 하나 생겼지. 「다음엔 어디로 가나」.',babayaga:'흐흐, 잘 가게, 젊은이. 길은 쓸면 나는 법이야.',
+ odette:'아침이 와도 안 무서워요. 백조여도 손은 흔들 수 있으니까요.',wolf:'(늑대) 지름길은 내가 아오. 언제든 부르시오.\n(빨간 모자) 우리가 바래다줄게요!',
+ hansel:'(헨젤) 이번엔 길을 잃어도 괜찮아요.\n(그레텔) 같이 찾아 줄 사람이 생겼으니까!',sleeping:'저 하나도 안 졸았어요. 끝까지 다 봤어요!',
+ monster:'「{괴물}」. 제 이름으로 인사할게요. 고마웠어요.',cinder:'열두 시가 지나도 다 여기 있었어요. 당신도요.',
+ mermaid:'「목소리 없이도 다 전해졌죠? 안녕, 안녕, 안녕.」',rabbit:'늦지 않았어요! 아니, 늦었어도 괜찮았어요!'};
+const C_ORD=['byeol','gilldong','gyeonu','snowq','sherlock','babayaga','odette','wolf','hansel','sleeping','monster','cinder','mermaid','rabbit'];
+function endPeople(){const met=LS.get('bl_met',{});const left=(TRIP&&TRIP.left)||{};return {on:C_ORD.filter(id=>met[id]&&!left[id]),off:C_ORD.filter(id=>met[id]&&left[id])}}
+ending=function(){const rep=ending.__replay;ending.__replay=0;const T=TRUNK;if(!T)return;let pick=0;
+  const BGL='img/v/lostfound.webp',BGP='img/v/london_2.webp',BGA='img/v/london_1.webp',R=SP.bunny,P0='robot.webp';
+  const {on,off}=endPeople();const pg=Object.keys(LS.get('bl_pages',{})).length;const sg=Object.values(LS.get('bl_sign',{}));const tr=TRAIT[topTrait()];
+  const S=[{t:'title',text:'종착역',sub:'런던'},
+   {bg:BGA,ch:null,ch2:null,who:'',narr:1,say:'(새벽 다섯 시 반. 안개 낀 런던역에 열차가 천천히 멈춘다. 기적이 길게 한 번 울린다.)'}];
+  if(LS.get('bl_met',{}).byeol)S.push({bg:BGA,ch:R,who:'토끼',say:'부산에서 본 손님이죠? 거북 아저씨는요? 간 보여 주려고 여기까지 따라왔는데!',emo:'♪'},
+   {bg:BGA,ch:R,who:'',narr:1,say:'(토끼가 주머니에서 진주 조개를 꺼낸다. 「토끼에게. 간은 됐소. 다음엔 그냥 놀러 오시오. — 별주부」)'},
+   {bg:BGA,ch:R,who:'토끼',say:'…흥. 그 말 하려고 런던까지 편지를 보내요? 용궁 가는 길이나 물어봐야겠다.',emo:'💢'});
+  if(on.length){S.push({bg:BGP,ch:null,ch2:null,who:'',narr:1,say:'(승강장에 내리자, 함께 탄 승객들이 한 줄로 서 있다. 아무도 먼저 가지 않는다.)'});
+    const sm=f=>{if(!f||f.includes('/'))return f;const v=f.replace('.webp','_smile.webp');return EXOK[v]?v:f};const SM=o=>Object.assign(o,{ch:sm(o.ch),ch2:sm(o.ch2)});
+    for(let k=0;k<on.length;k+=2){const a=on[k],b=on[k+1];S.push(SM(L(a,b||null,1,nm(a),CURTAIN[a],{bg:BGP})));if(b)S.push(SM(L(a,b,2,nm(b),CURTAIN[b],{bg:BGP})))}}
+  if(off.length)S.push({bg:BGP,ch:null,ch2:null,who:'',narr:1,say:'(먼저 내린 '+off.map(nm).join(', ')+'의 편지도 승강장 벤치 위에 놓여 있다. 「잘 도착했지요?」)'});
+  S.push({bg:BGL,ch:P0,pose:'in',fx:['glow'],who:'로봇 포터',say:'런던역 수하물 보관소입니다. {이름님}, 짐을 두 개 찾으러 오셨지요.'},
+   {bg:BGL,ch:null,who:'',narr:1,say:'(포터가 선반 맨 위에서 작은 트렁크 하나를 내린다. 손잡이에 낡은 꼬리표가 달려 있다.)'},
+   {bg:BGL,ch:null,who:'',narr:1,say:'맡긴 사람: 나 (일곱 살)\n맡기는 짐: 혼자 자는 거 무서워요\n찾는 날: 어른이 되면'},
+   {bg:BGL,ch:null,who:'',narr:1,say:'(웃음이 난다. 그때는 이게 세상에서 제일 무거웠는데.)'},
+   {bg:'img/v/book_open.webp',ch:null,fx:['spk','glow'],who:'',narr:1,say:'(트렁크 안에는 낡은 동화책 한 권.)'},
+   {bg:'img/v/book_open.webp',ch:null,fx:['spk'],who:'',narr:1,say:pg>=13?'(모아 온 열세 조각이 찢어진 귀퉁이마다 꼭 맞게 돌아간다. 책이 처음으로 온전해진다.)':'(모아 온 '+pg+'조각이 제자리를 찾아 들어간다. 아직 비어 있는 귀퉁이가 '+(13-pg)+'곳 남았다. 다음에 다시 와서 채워도 된다.)'},
+   {cgx:'porter',who:'로봇 포터',say:'사실 저는… 그 책 옆에서 같이 자던 깡통 로봇입니다. 주인님이 잠들 때까지 불을 켜 두는 게 제 일이었지요.'},
+   {cgx:'porter',who:'로봇 포터',say:'혼자 자는 게 무서운 밤마다, 주인님은 책 속 친구들한테 말을 걸었습니다. 「울지 마」, 「같이 자자」, 「형이라고 불러 줄게」.'},
+   {cgx:'porter',who:'로봇 포터',say:'그 낙서들이 승객분들의 짐을 조금씩 덜어 줬어요. 이번 여행은… 스무 해 만에 온 답장이었습니다.'},
+   {bg:BGL,ch:P0,pose:'in',who:'로봇 포터',say:'그리고 오늘 맡기신 짐입니다. 「{짐}」.'});
+  if(sg.length)S.push({bg:BGL,ch:null,who:'',narr:1,say:'(꼬리표를 뒤집으니 사인이 '+sg.length+'개 적혀 있다.)\n'+sg.slice(0,3).map(x=>'「'+String(x).replace(/\{괴물\}/g,LS.get('bl_mname','')||'괴물')+'」').join('\n')});
+  S.push({bg:BGL,ch:P0,pose:'in',who:'로봇 포터',say:'이번 여행에서 {이름님}은 「'+tr[0]+'」이었습니다. '+tr[1]+' 승객이 그러더군요. 「'+tr[2]+'」'},
+   {bg:BGL,ch:P0,pose:'face',who:'로봇 포터',say:'이 짐은 가져가셔도 되고, 여기 맡겨 두셔도 됩니다. 스무 해 전 짐처럼요.'},
+   {choice:[['가져갈게요','이제는 들고 갈 수 있을 것 같아요. 생각보다 가벼워졌어요.'],['여기 맡겨 둘게요','언젠가 찾으러 올게요. 그때는 오늘처럼 웃을 수 있을 거예요.']],onPick:k=>{pick=k},me:1},
+   {bg:BGL,ch:P0,pose:'in',fx:['glow'],who:'로봇 포터',say:'알겠습니다. …아, 하나 더. 책의 마지막 장은 비어 있습니다. 귀퉁이에 「다 읽으면 네가 써」라고 적혀 있지요.'});
+  playScene(S,()=>{if(rep)return;T.done=1;T.pick=pick;LS.set('bl_trunk',T);LS.set('bl_end',{text:T.text,no:T.no,pick,dep:T.dep});trkShow();
+    lastLine(()=>finalPop(()=>playScene(epilogue(pick),()=>makeCard(T))))})};
+function epilogue(pick){return [
+  {bg:'img/v/book_open.webp',ch:null,ch2:null,who:'',narr:1,fx:['glow'],say:'(책을 덮는다. 표지에 낡은 금박 글씨가 반짝인다. 「세계 동화 열세 편」.)'},
+  {bg:'img/v/book_open.webp',ch:null,who:'',narr:1,say:'(눈을 뜨니, 창밖이 밝아 오고 있다. 머리맡에 그 동화책이 놓여 있다. 귀퉁이에 내 글씨가 한 줄 늘어 있다.)'},
+  {bg:'img/v/book_open.webp',ch:null,who:'',narr:1,say:pick===1?'(오늘의 짐은 런던역에 맡겨 두었다. 이상하게 어깨가 가볍다.)':'(오늘의 짐은 같이 들고 왔다. 이상하게 생각보다 가볍다.)'},
+  {bg:'img/v/book_open.webp',ch:null,who:'',narr:1,fx:['spk'],say:'(어디선가 아주 작게, 기적 소리가 들린다.)\n「다음에 무거운 밤이 오면, 언제든 다시 타세요. — 로봇 포터」'}]}
+/* 마지막 장: 함께 탄 승객이 전부 일어서는 팝업 */
+function finalPop(cb){const {on,off}=endPeople();const all=on.concat(off);const last=LS.get('bl_last','')||'오늘은 여기까지. 내일 또 쓸게.';
+  const n=all.length,show=all.slice(0,9);
+  const ppl=show.map((id,k)=>{const h=(HT[(SP[id]||'').replace('.webp','')]||1.4);const x=(k-(show.length-1)/2)*(show.length>6?9:11);
+    return `<div class="pl mb" style="--d:${30+(k%2)*6}%;--dl:${.35+k*.09}s;--xb:${x}%"><img class="cut" src="${P+(SP[id]||'')}" style="height:calc(min(250px,22vw) * ${(h/1.6).toFixed(2)})" alt=""></div>`}).join('');
+  turnEl.innerHTML=`<div class="pu fin" style="--ac:#8a5a2b"><div class="hd"><small>세계 동화 열세 편</small><b>마지막 장</b><em>함께 탄 승객 ${n}명</em></div>
+    <div class="bk"><div class="cv"></div><div class="pp L"></div><div class="pp R"></div>
+      <div class="pl back" style="--d:62%;--dl:.1s"><div class="crd"><img src="img/post/london.webp" alt=""></div></div>${ppl}
+      <div class="pl fr2" style="--d:8%;--dl:${.5+show.length*.09}s;--xb:0%"><div class="frg got lastc">${esc(last)}<i>— ${esc(LS.get('bl_name','')||'나')}</i></div></div>
+    </div><p class="op">다 읽으면 네가 써. 그래서, 이렇게 썼다.</p><div class="nx">눌러서 책 덮기 ▸</div></div>`;
+  turnEl.classList.remove('on','go');void turnEl.offsetWidth;turnEl.classList.add('on');requestAnimationFrame(()=>requestAnimationFrame(()=>turnEl.classList.add('up')));
+  try{blipUp()}catch(e){}turnQ.push(cb)}
+window.__t.fin=()=>finalPop(()=>{});
 
 </script></body></html>

@@ -1131,6 +1131,10 @@ body:has(#turn.on) #stk{display:none!important}
 #turn.s3:hover .pu.v27 .crn{width:46px;height:46px;transform:translateZ(1px) scale(1.6)}
 #turn .pu.v27 .spot{transition:opacity .9s ease}
 #turn.fast.s2 .pu.v27 .pl,#turn.fast .pu.v27 .bkw{transition-duration:.28s!important;transition-delay:0s!important}
+
+/* v30: 옛 꼬리표 '찾으러 감' 도장은 '보관 중' 자리에 (글씨 가리지 않게) */
+.iOld .st3{left:auto;right:10px;bottom:14px}
+.iOldW.done .st2{opacity:0;transition:opacity .2s}
 </style></head><body>
 <div id="tag"><b>부산</b><span id="tagS"></span><i id="tagI"></i></div>
 <div id="dev"><span>출발 후</span><input id="devR" type="range" min="0" max="91.9" step="0.1"><span id="devV"></span></div>
@@ -1565,9 +1569,9 @@ function paxLayout(){if(!paxImg)return;const W=innerWidth,H=innerHeight,mob=W/H<
   const IW=mob?816:1344,IH=mob?1456:896,s=Math.max(W/IW,H/IH),ox=(W-IW*s)/2,oy=(H-IH*s)/2;
   const C=mob?{x:590,seat:1200,h:470}:{x:1205,seat:800,h:500};
   const fh=C.h*s,fw=fh*paxAR,top=(C.seat-C.h*.64)*s+oy;
-  Object.assign(paxBox.style,{left:(C.x*s+ox-fw/2)+'px',top:top+'px',width:fw+'px',height:(C.h*.64*s)+'px'});
+  let pxL=C.x*s+ox-fw/2;if(!mob&&pxL+fw>W-8)pxL=W-8-fw;Object.assign(paxBox.style,{left:pxL+'px',top:top+'px',width:fw+'px',height:(C.h*.64*s)+'px'});
   paxImg.style.height=fh+'px';paxImg.style.top='0px';
-  const tw=paxT.offsetWidth||120,figL=C.x*s+ox-fw/2;
+  const tw=paxT.offsetWidth||120,figL=pxL;
   const th=paxT.offsetHeight||32;Object.assign(paxT.style,{left:Math.max(8,Math.min(W-tw-8,figL+fw/2-tw/2))+'px',top:Math.max(64,top-th-10)+'px'})}
 addEventListener('resize',paxLayout);
 function paxSet(id){if(id===paxId)return;paxId=id;const c=CAST[id];
@@ -1738,7 +1742,7 @@ function gType2(t,narr){gTx.classList.toggle('narr',!!narr);gFull=t;let i=0;clea
   gType=setInterval(()=>{i++;gTx.textContent=t.slice(0,i);if(i>=t.length){clearInterval(gType);gType=null;gMk.style.display='block'}},28)}
 function gShow(s){gIt.classList.remove('on');cg.classList.remove('itm');gTt.classList.remove('on');gCs.innerHTML='';
   if(s.bg){gBg.style.backgroundImage=s.bg==='view'?curView():'url('+s.bg+')';gBg.classList.remove('kb');void gBg.offsetWidth;gBg.classList.add('kb')}
-  if(s.ch!==undefined){if(s.ch){const src=(s.ch.startsWith('../')||s.ch.startsWith('img/'))?s.ch:P+s.ch;if(!gCh.src.endsWith(src.replace(/^\.\.\//,''))){gCh.src=src;gCh.classList.remove('in');void gCh.offsetWidth;gCh.classList.add('in')}gCh.style.opacity=1}else gCh.style.opacity=0}
+  if(s.ch!==undefined){if(s.ch){const src=(s.ch.startsWith('../')||s.ch.startsWith('img/'))?s.ch:P+s.ch;if(!gCh.src.endsWith(src.replace(/^\.\.\//,''))){const bn=u=>String(u).split('/').pop().replace(/_(sad|smile)\.webp$/,'.webp'),same=gCh.src&&bn(gCh.src)===bn(src)&&gCh.style.opacity!=='0';gCh.src=src;if(!same){gCh.classList.remove('in');void gCh.offsetWidth;gCh.classList.add('in')}}gCh.style.opacity=1}else gCh.style.opacity=0}
   gCh.classList.toggle('face',s.pose==='face');gCh.classList.toggle('side',s.pose==='side');
   for(const f of ['glow','lines','spk','snow'])G('.fx.'+f).classList.toggle('on',!!(s.fx&&s.fx.includes(f)));
   if(s.shake){cg.classList.remove('shake');void cg.offsetWidth;cg.classList.add('shake')}
@@ -2363,7 +2367,7 @@ const CH=[
  {id:'paris',name:'파리',en:'PARIS',h:20.05,ev:['cinder'],sn:['🧁','마카롱','분홍, 하늘, 레몬색.']},
  {id:'sea',name:'해저터널',en:'UNDERSEA TUNNEL',h:21.5,ev:['mermaid'],sn:['🍬','소금 캐러멜','바다 소금을 넣은 캐러멜.']},
  {id:'london',name:'런던',en:'LONDON',h:22.35,ev:['rabbit'],sn:['🍞','스콘','잼과 크림을 듬뿍.']}];
-{const fi=CH.findIndex(c=>c.id==='forest');const F=CH[fi];F.ev=['wolf'];F.side=[];delete F.h2;
+{const fi=CH.findIndex(c=>c.id==='forest');const F=CH[fi];F.ev=['wolf'];F.side=[];delete F.h2;F.name='검은 숲';
   CH.splice(fi+1,0,{id:'candy',name:'과자의 집',en:'GINGERBREAD HOUSE',h:17.0,ev:['hansel'],sn:['🍪','진저브레드 조각','과자 집 처마에서 떼어 온 한 조각.']},
     {id:'castle',name:'노이슈반슈타인',en:'NEUSCHWANSTEIN',h:17.62,ev:['sleeping'],sn:['🍎','구운 사과','성 부엌에서 막 꺼낸 따뜻한 사과.']})}
 const CH_OF={};CH.forEach((c,i)=>{c.ev.forEach(id=>CH_OF[id]=i);(c.side||[]).forEach(id=>CH_OF[id]=i)});
@@ -2501,7 +2505,7 @@ gCh2.addEventListener('load',duoFit);addEventListener('resize',duoFit);gCh.addEv
 function emoAt(im,e){gEmo.textContent=e;gEmo.className='emo';if(!e||!im)return;const r=im.getBoundingClientRect();if(!r.width)return;
   gEmo.style.left=(r.left+r.width*(im===gCh&&cg.classList.contains('duo')?.3:.72))+'px';gEmo.style.top=(r.top+r.height*.04)+'px';void gEmo.offsetWidth;gEmo.className='emo on'}
 const _gShowV2=gShow;gShow=function(s){
-  if(s.ch2!==undefined){if(s.ch2){const src=srcOf(s.ch2);if(!gCh2.src.endsWith(src)){gCh2.src=src;gCh2.classList.remove('in');void gCh2.offsetWidth;gCh2.classList.add('in')}gCh2.style.opacity=1;cg.classList.add('duo')}
+  if(s.ch2!==undefined){if(s.ch2){const src=srcOf(s.ch2);if(!gCh2.src.endsWith(src)){const bn=u=>String(u).split('/').pop().replace(/_(sad|smile)\.webp$/,'.webp'),same=gCh2.src&&bn(gCh2.src)===bn(src)&&gCh2.style.opacity!=='0';gCh2.src=src;if(!same){gCh2.classList.remove('in');void gCh2.offsetWidth;gCh2.classList.add('in')}}gCh2.style.opacity=1;cg.classList.add('duo')}
     else{gCh2.style.opacity=0;cg.classList.remove('duo')}}
   else if(s.ch!==undefined){gCh2.style.opacity=0;cg.classList.remove('duo')}
   _gShowV2(s);duoFit();
@@ -4021,7 +4025,7 @@ function finalPop(cb){const {on,off}=endPeople();const all=on.concat(off);const 
     </div><p class="op">다 읽으면 네가 써. 그래서, 이렇게 썼다.</p><div class="nx">눌러서 책 덮기 ▸</div></div>`;
   turnEl.classList.remove('on','go');void turnEl.offsetWidth;turnEl.classList.add('on');requestAnimationFrame(()=>requestAnimationFrame(()=>turnEl.classList.add('up')));
   try{blipUp()}catch(e){}turnQ.push(cb)}
-window.__t.fin=()=>finalPop(()=>{});window.__t.coach=()=>coachStart(1);window.__t.ev=id=>playScene((typeof EV2!=='undefined'&&EV2[id])||EV[id],()=>{});window.__t.tk=i=>makeTicketAt(i);window.__t.card=()=>makeCard(TRUNK||{text:'면접이 걱정돼요',pick:0});
+window.__t.fin=()=>finalPop(()=>{});window.__t.coach=()=>coachStart(1);window.__t.ps=sh=>playScene(sh,()=>{});window.__t.ev=id=>playScene((typeof EV2!=='undefined'&&EV2[id])||EV[id],()=>{});window.__t.tk=i=>makeTicketAt(i);window.__t.card=()=>makeCard(TRUNK||{text:'면접이 걱정돼요',pick:0});
 
 
 /* ===================== v22: 팝업북 입체 강화 · 승차권/마지막 장 카드 새 디자인 ===================== */
@@ -4259,4 +4263,12 @@ if(endDone()&&!TRIP.fin){TRIP.fin=1;tripSave()}
 /* v29: 팝업북이 떠 있는 동안 뒤의 3D 기차는 그리지 않기 · 마우스 따라 흔들기 끄기 */
 {const _ch29=cgHold;cgHold=function(){if(turnEl.classList.contains('on'))return true;return _ch29()}}
 addEventListener('pointermove',e=>{if(turnEl.classList.contains('on')&&turnEl.contains(e.target))e.stopPropagation()},true);
+
+/* v30: 이야기가 끝나며 닫히는 중에 다음 이야기가 시작돼도, 새 이야기를 닫아 버리지 않게 */
+gEnd=function(){try{moHide()}catch(e){}gWait=1;const sh=gShots,d0=gDone;
+  iris(0,650,()=>{if(gShots!==sh){if(gDone===d0)gDone=null;d0&&d0();return}
+    cg.classList.remove('on','lb','itm','duo');gWait=null;gBox.classList.remove('on');document.body.classList.remove('talk');const d=gDone;gDone=null;BG.force=null;setTimeout(bgmTick,0);d&&d()})};
+
+/* v30: 오늘의 방송은 첫 이야기를 본 뒤에 (처음 탄 순간 '탑승 이야기 보기' 버튼을 가리지 않게) */
+{const _bb=bcBoot;bcBoot=function(){if(TRIP&&!TRIP.fin&&!(TRIP.done&&TRIP.done[0])){setTimeout(bcBoot,6000);return}_bb()}}
 </script></body></html>
